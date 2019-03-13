@@ -1,0 +1,32 @@
+<config>
+  
+  <static>
+    <entity type ="0" life ="100">
+      <sprite>textures/buildings/sprite_core.png</sprite>
+      <animations>
+        <idle speed="5.0F">
+          <frame x="45" y="52" width="147" height="129"/>
+        </idle>
+        <death speed="1.0F" loop="false">
+          <frame x="45" y="861" width="147" height="128"/>
+        </death>
+        <destroyed speed="5.0F" loop="false">
+          <frame x="0" y="0" width="0" height="0"/>
+        </destroyed>
+      </animations>
+    </entity>
+  </static>
+  
+  <dynamic>
+    <entity type ="1">
+      <animations>
+        <idle speed="5.0F">
+          <frame x="17" y="36" width="94" height="92"/>
+          <frame x="143" y="35" width="98" height="92"/>
+          <frame x="270" y="33" width="101" height="92"/>
+        </idle>
+      </animations>
+    </entity>
+  </dynamic>
+  
+</config>

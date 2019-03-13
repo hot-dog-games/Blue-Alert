@@ -7,6 +7,8 @@
 #include "Render.h"
 #include "Window.h"
 #include "Map.h"
+#include "EntityManager.h"
+#include "Entity.h"
 #include "PathFinding.h"
 #include "TestingScene.h"
 
@@ -34,6 +36,8 @@ bool TestingScene::Start()
 	}
 
 	debug_tex = App->tex->Load("maps/path2.png");
+
+	test_core = App->entity_manager->CreateEntity(EntityType::CORE, { 0,0 });
 
 	return true;
 }
@@ -87,6 +91,9 @@ bool TestingScene::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		App->render->camera.x -= 1;
+
+	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+		test_core->DecreaseLife(5);
 
 	App->map->Draw();
 

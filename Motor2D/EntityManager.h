@@ -5,10 +5,15 @@
 #include "p2Point.h"
 
 class Entity;
+struct Card;
 
 enum EntityType {
-	BUILDING,
-	TROOP
+	CORE,
+	G_I,
+	SNIPER,
+	NAVY_SEAL,
+	GRIZZLY
+	//...
 };
 
 class EntityManager : public Module
@@ -27,10 +32,11 @@ public:
 	bool CleanUp();
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;
-	bool CreateEntity(EntityType type, fPoint position, Card* card = nullptr);
+	Entity* CreateEntity(EntityType type, fPoint position, Card* card = nullptr);
 	bool DeleteEntity(Entity* entity);
 
 private:
+	pugi::xml_document entity_file;
 	pugi::xml_node entity_configs;
 	int id_count = 0;
 	bool draw_path = false;

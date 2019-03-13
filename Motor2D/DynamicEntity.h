@@ -1,16 +1,15 @@
 #ifndef _DYNAMIC_ENTITY_
 #define _DYNAMIC_ENTITY_
 
-#include "Animation.h"
 #include "Entity.h"
 
 struct Card;
 
 enum DynamicState {
-	IDLE,
-	MOVING,
-	ATTACKING,
-	DYING
+	DYNAMIC_IDLE,
+	DYNAMIC_MOVING,
+	DYNAMIC_ATTACKING,
+	DYNAMIC_DYING
 };
 
 enum EntiyDirection {
@@ -44,8 +43,6 @@ public:
 protected:
 	DynamicState state;
 	EntiyDirection direction;
-	std::vector<Animation> animations;
-	SDL_Rect current_frame;
 	Card* entity_card;
 };
 

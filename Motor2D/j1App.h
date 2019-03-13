@@ -17,6 +17,7 @@ class Textures;
 class Audio;
 class SceneManager;
 class Map;
+class EntityManager;
 class Pathfinding;
 class CardManager;
 
@@ -91,6 +92,7 @@ public:
 	Map*			map;
 	Pathfinding*	pathfinding;
 	CardManager*	card_manager;
+	EntityManager*	entity_manager;
 
 private:
 
