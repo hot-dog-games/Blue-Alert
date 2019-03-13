@@ -1,8 +1,10 @@
+#include "p2Log.h"
 #include "j1App.h"
 #include "Render.h"
 #include "Textures.h"
 #include "Input.h"
 #include "DynamicEntity.h"
+#include "StaticEntity.h"
 #include "CardManager.h"
 #include "EntityManager.h"
 
@@ -19,6 +21,12 @@ EntityManager::~EntityManager()
 
 bool EntityManager::Awake(pugi::xml_node &)
 {
+	pugi::xml_parse_result result = entity_file.load_file("xml/entities.xml");
+
+	if (result == NULL)
+		LOG("Could not load entity xml. pugi error: %s", result.description());
+	else
+		entity_configs = entity_file.child("config");
 	return true;
 }
 
@@ -83,27 +91,42 @@ bool EntityManager::Save(pugi::xml_node &) const
 	return true;
 }
 
-bool EntityManager::CreateEntity(EntityType type, fPoint position, Card* card)
+Entity* EntityManager::CreateEntity(EntityType type, fPoint position, Card* card)
 {
 	std::string id = std::to_string(id_count);
 	switch (type)
 	{
-	case EntityType::TROOP:
+	case EntityType::G_I:
 	{
 		id += "_" + card->name;
 		DynamicEntity* entity = new DynamicEntity();
-		entity->SetCard(card);
+		((DynamicEntity*)entity)->SetCard(card);
 		entities.push_back(entity);
+		return entity;
 	}
 		break;
-	case EntityType::BUILDING:
-		//TODO
+	case EntityType::CORE:
+	{
+		id += "_CORE";
+		StaticEntity* entity = new StaticEntity();
+
+		// Prepare entity 
+		entity->position = position;
+		pugi::xml_node entity_node = entity_configs.child("static").find_child_by_attribute("type", std::to_string((int)type).c_str());
+		entity->LoadAnimations(entity_node);
+		entity->SetMaxLife(entity_node.attribute("life").as_uint());
+		entity->LoadSprite(entity_node.child("sprite").child_value());
+
+		entities.push_back(entity);
+
+		return entity;
+	}
 		break;
 	}
 
 	id_count++;
 
-	return true;
+	return nullptr;
 }
 
 bool EntityManager::DeleteEntity(Entity * entity)

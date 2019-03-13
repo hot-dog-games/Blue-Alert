@@ -28,9 +28,6 @@ bool CardManager::CleanUp()
 
 bool CardManager::PostUpdate()
 {
-	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
-		test_card = DeleteCard(test_card);
-
 	if (to_delete)
 	{
 		for (std::list<Card*>::iterator card = cards.begin(); card != cards.end(); ++card)
@@ -46,10 +43,10 @@ bool CardManager::PostUpdate()
 
 bool CardManager::Awake(pugi::xml_node& conf)
 {
-	pugi::xml_parse_result result = config_file.load_file("cards.xml");
+	pugi::xml_parse_result result = config_file.load_file("xml/cards.xml");
 
 	if (result == NULL)
-		LOG("Could not load map xml file config.xml. pugi error: %s", result.description());
+		LOG("Could not card xml file. pugi error: %s", result.description());
 	else
 		card_configs = config_file.child("config");
 
@@ -64,7 +61,7 @@ bool CardManager::Start()
 	return true;
 }
 
-Card* CardManager::CreateCard(CardType type)
+Card* CardManager::CreateCard(EntityType type)
 {
 	Card* card = new Card;
 	card->type = type;

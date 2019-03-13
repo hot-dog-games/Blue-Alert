@@ -4,19 +4,12 @@
 #include "p2Defs.h"
 #include "Module.h"
 #include "Animation.h"
+#include "EntityManager.h"
 
 enum AttackType {
 	BASIC,
 	AOE,
 	PIERCING
-};
-
-enum CardType {
-	G_I,
-	SNIPER,
-	NAVY_SEAL,
-	GRIZZLY
-	//...
 };
 
 struct CardScaling {
@@ -44,7 +37,7 @@ struct CardInfo {
 	std::string sprite;
 };
 struct Card {
-	CardType type;
+	EntityType type;
 	CardInfo info;
 
 	std::string name;
@@ -66,7 +59,7 @@ public:
 	bool Load(pugi::xml_node&) { return true; }
 	bool Save(pugi::xml_node&) const { return true; }
 
-	Card* CreateCard(CardType type);
+	Card* CreateCard(EntityType type);
 	Card* DeleteCard(Card* card);
 
 private:

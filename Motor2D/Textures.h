@@ -31,7 +31,6 @@ public:
 	void				GetSize(const SDL_Texture* texture, uint& width, uint& height) const;
 
 public:
-
 	std::list<SDL_Texture*>	textures;
 };
 
