@@ -21,6 +21,7 @@ bool CardManager::CleanUp()
 {
 	for (std::list<Card*>::iterator card = cards.begin(); card != cards.end(); ++card)
 	{
+		App->tex->UnLoad((*card)->sprite_path);
 		card = cards.erase(card);
 	}
 	return true;
@@ -33,7 +34,10 @@ bool CardManager::PostUpdate()
 		for (std::list<Card*>::iterator card = cards.begin(); card != cards.end(); ++card)
 		{
 			if ((*card)->to_delete)
+			{
+				App->tex->UnLoad((*card)->sprite_path);
 				card = cards.erase(card);
+			}				
 		}
 
 		to_delete = false;
@@ -55,7 +59,6 @@ bool CardManager::Awake(pugi::xml_node& conf)
 
 bool CardManager::Start()
 {
-	test_card = CreateCard(G_I);
 	return true;
 }
 
@@ -65,9 +68,9 @@ Card* CardManager::CreateCard(EntityType type)
 	card->type = type;
 	card->level = 0;
 
-	//TODO look for info in xml with position same as type.
 	pugi::xml_node card_node = card_configs.find_child_by_attribute("type", std::to_string((int)type).c_str());
 	card->name = card_node.child("name").child_value();
+	card->sprite_path = card_node.child("sprite").child_value();
 
 	cards.push_back(card);
 

@@ -66,11 +66,3 @@ void Entity::LoadAnimations(pugi::xml_node anim_config)
 		animations.push_back(anim);
 	}
 }
-
-bool Entity::CleanUp()
-{
-	if(sprite)
-		App->tex->UnLoad(sprite);
-
-	return true;
-}

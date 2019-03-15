@@ -34,14 +34,16 @@ struct CardInfo {
 	uint unit_number;
 	bool armored;
 
-	std::string sprite;
+
 };
 struct Card {
 	EntityType type;
 	CardInfo info;
 
-	std::string name;
 	uint level;
+	std::string name;
+	std::string sprite_path;
+
 	bool to_delete = false;
 };
 
@@ -66,8 +68,6 @@ private:
 	pugi::xml_document config_file;
 	pugi::xml_node card_configs;
 	std::list<Card*> cards;
-
-	Card* test_card;
 };
 
 #endif // _CARD_MANAGER_H_

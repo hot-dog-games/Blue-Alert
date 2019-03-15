@@ -14,7 +14,7 @@ DynamicEntity::~DynamicEntity()
 {
 }
 
-DynamicEntity::DynamicEntity(pugi::xml_node config, fPoint position, Card* card): Entity(config,position)
+DynamicEntity::DynamicEntity(pugi::xml_node config, fPoint position, Card* card): Entity(config, position)
 {
 	entity_card = card;
 }
