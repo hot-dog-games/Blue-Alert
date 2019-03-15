@@ -43,7 +43,6 @@ struct Card {
 	std::string name;
 	uint level;
 	bool to_delete = false;
-	std::vector<Animation> animations;
 };
 
 class CardManager : public Module

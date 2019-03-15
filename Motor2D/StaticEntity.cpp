@@ -10,6 +10,11 @@ StaticEntity::StaticEntity()
 	state = STATIC_IDLE;
 }
 
+StaticEntity::StaticEntity(pugi::xml_node entity_node, fPoint position) : Entity(entity_node, position)
+{
+	SetMaxLife(entity_node.attribute("life").as_uint());
+}
+
 
 StaticEntity::~StaticEntity()
 {
@@ -34,25 +39,6 @@ bool StaticEntity::PostUpdate()
 	return true;
 }
 
-
-void StaticEntity::LoadAnimations(pugi::xml_node anim_config)
-{
-	//load animations
-	pugi::xml_node animation;
-	for (animation = anim_config.child("animations").first_child(); animation; animation = animation.next_sibling())
-	{
-		Animation anim;
-		pugi::xml_node frame;
-		for (frame = animation.child("frame"); frame; frame = frame.next_sibling("frame"))
-		{
-			anim.PushBack({ frame.attribute("x").as_int(), frame.attribute("y").as_int(), frame.attribute("width").as_int(), frame.attribute("height").as_int() });
-		}
-		anim.speed = animation.attribute("speed").as_float();
-		anim.loop = animation.attribute("loop").as_bool(true);
-
-		animations.push_back(anim);
-	}
-}
 
 void StaticEntity::Die()
 {

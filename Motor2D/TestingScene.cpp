@@ -95,7 +95,7 @@ bool TestingScene::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 		test_core->DecreaseLife(5);
 
-	App->map->Draw();
+
 
 
 	// Debug pathfinding ------------------------------
@@ -123,6 +123,8 @@ bool TestingScene::PostUpdate()
 {
 	bool ret = true;
 
+	App->map->Draw();
+
 	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
 
@@ -133,6 +135,9 @@ bool TestingScene::PostUpdate()
 bool TestingScene::CleanUp()
 {
 	LOG("Freeing scene");
+
+	App->tex->UnLoad(debug_tex);
+	App->entity_manager->DeleteEntity(test_core);
 
 	return true;
 }

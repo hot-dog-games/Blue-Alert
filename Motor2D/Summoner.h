@@ -10,7 +10,6 @@ class Summoner : public Entity
 public:
 	Summoner();
 	~Summoner();
-	bool CleanUp() { return true; }
 	Deck* deck;
 
 private:

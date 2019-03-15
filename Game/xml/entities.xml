@@ -1,6 +1,5 @@
 <config>
   
-  <static>
     <entity type ="0" life ="100">
       <sprite>textures/buildings/sprite_core.png</sprite>
       <animations>
@@ -15,10 +14,9 @@
         </destroyed>
       </animations>
     </entity>
-  </static>
   
-  <dynamic>
     <entity type ="1">
+      <sprite>textures/units/sprite_gi.png</sprite>
       <animations>
         <idle speed="5.0F">
           <frame x="17" y="36" width="94" height="92"/>
@@ -27,6 +25,5 @@
         </idle>
       </animations>
     </entity>
-  </dynamic>
   
 </config>
