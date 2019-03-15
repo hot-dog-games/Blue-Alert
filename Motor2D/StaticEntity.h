@@ -14,6 +14,7 @@ class StaticEntity : public Entity
 {
 public:
 	StaticEntity();
+	StaticEntity(pugi::xml_node entity_node, fPoint position);
 	~StaticEntity();
 
 	virtual bool PreUpdate() { return true; };
@@ -21,8 +22,8 @@ public:
 	virtual bool PostUpdate();
 	virtual bool CleanUp() { return true; };
 
-	virtual void LoadAnimations(pugi::xml_node anim_config);
 	virtual void Die();
+
 private:
 	Static_State state;
 };

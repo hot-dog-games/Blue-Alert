@@ -46,7 +46,7 @@ bool CardManager::Awake(pugi::xml_node& conf)
 	pugi::xml_parse_result result = config_file.load_file("xml/cards.xml");
 
 	if (result == NULL)
-		LOG("Could not card xml file. pugi error: %s", result.description());
+		LOG("Could not load card xml file. pugi error: %s", result.description());
 	else
 		card_configs = config_file.child("config");
 
@@ -55,8 +55,6 @@ bool CardManager::Awake(pugi::xml_node& conf)
 
 bool CardManager::Start()
 {
-	CreateCard(G_I);
-	CreateCard(G_I);
 	test_card = CreateCard(G_I);
 	return true;
 }

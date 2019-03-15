@@ -39,7 +39,6 @@ private:
 	pugi::xml_document entity_file;
 	pugi::xml_node entity_configs;
 	int id_count = 0;
-	bool draw_path = false;
 };
 
 #endif //_ENTITYMANAGER_H_
