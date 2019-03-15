@@ -10,6 +10,7 @@
 #include "EntityManager.h"
 #include "Entity.h"
 #include "PathFinding.h"
+#include "CardManager.h"
 #include "TestingScene.h"
 
 
@@ -38,6 +39,7 @@ bool TestingScene::Start()
 	debug_tex = App->tex->Load("maps/path2.png");
 
 	test_core = App->entity_manager->CreateEntity(EntityType::CORE, { 0,0 });
+	test_card = App->card_manager->CreateCard(EntityType::G_I);
 
 	return true;
 }
@@ -74,6 +76,9 @@ bool TestingScene::PreUpdate()
 // Called each loop iteration
 bool TestingScene::Update(float dt)
 {
+	int x, y;
+	App->input->GetMousePosition(x, y);
+
 	if (App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
 		App->LoadGame("save_game.xml");
 
@@ -95,12 +100,11 @@ bool TestingScene::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 		test_core->DecreaseLife(5);
 
-
+	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+		App->entity_manager->CreateEntity(test_card->type, { (float)x,(float)y }, test_card);
 
 
 	// Debug pathfinding ------------------------------
-	int x, y;
-	App->input->GetMousePosition(x, y);
 	iPoint p = App->render->ScreenToWorld(x, y);
 	p = App->map->WorldToMap(p.x, p.y);
 	p = App->map->MapToWorld(p.x, p.y);
