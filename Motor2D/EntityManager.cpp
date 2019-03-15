@@ -100,8 +100,7 @@ Entity* EntityManager::CreateEntity(EntityType type, fPoint position, Card* card
 	{
 		id += "_" + card->name;
 
-		DynamicEntity* entity = new DynamicEntity();
-		((DynamicEntity*)entity)->SetCard(card);
+		DynamicEntity* entity = new DynamicEntity(entity_node, position, card);
 		entities.push_back(entity);
 		return entity;
 	}

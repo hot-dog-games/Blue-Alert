@@ -28,17 +28,16 @@ class DynamicEntity : public Entity
 public:
 	DynamicEntity();
 	~DynamicEntity();
+	DynamicEntity(pugi::xml_node config, fPoint position, Card* card);
 
 	virtual bool PreUpdate() { return true; };
-	virtual bool Update(float dt) { return true; };
-	virtual bool PostUpdate() { return true; };
+	virtual bool Update(float dt);
+	virtual bool PostUpdate();
 	virtual bool CleanUp() { return true; };
 
 	virtual void Die() {};
 	virtual void Move() {};
 	virtual void Attack() {};
-
-	void SetCard(Card* card);
 
 protected:
 	DynamicState state;

@@ -19,9 +19,7 @@
       <sprite>textures/units/sprite_gi.png</sprite>
       <animations>
         <idle speed="5.0F">
-          <frame x="17" y="36" width="94" height="92"/>
-          <frame x="143" y="35" width="98" height="92"/>
-          <frame x="270" y="33" width="101" height="92"/>
+          <frame x="345" y="1851" width="15" height="33"/>
         </idle>
       </animations>
     </entity>
