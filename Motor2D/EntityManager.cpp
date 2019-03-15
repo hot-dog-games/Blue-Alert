@@ -94,31 +94,29 @@ Entity* EntityManager::CreateEntity(EntityType type, fPoint position, Card* card
 	std::string id = std::to_string(id_count);
 	pugi::xml_node entity_node = entity_configs.find_child_by_attribute("type", std::to_string((int)type).c_str());
 
-	switch (type)
-	{
-	case EntityType::G_I:
-	{
-		id += "_" + card->name;
+	id += "_" + card->name;
 
-		DynamicEntity* entity = new DynamicEntity(entity_node, position, card);
-		entities.push_back(entity);
-		return entity;
-	}
-		break;
-	case EntityType::CORE:
-	{
-		id += "_CORE";
-
-		StaticEntity* entity = new StaticEntity(entity_node, position);
-		entities.push_back(entity);
-		return entity;
-	}
-		break;
-	}
+	DynamicEntity* entity = new DynamicEntity(entity_node, position, card);
+	entities.push_back(entity);
 
 	id_count++;
 
-	return nullptr;
+	return entity;
+}
+
+Entity* EntityManager::CreateEntity(EntityType type, fPoint position)
+{
+	std::string id = std::to_string(id_count);
+	pugi::xml_node entity_node = entity_configs.find_child_by_attribute("type", std::to_string((int)type).c_str());
+
+	id += "_CORE";
+
+	StaticEntity* entity = new StaticEntity(entity_node, position);
+	entities.push_back(entity);
+
+	id_count++;
+
+	return entity;
 }
 
 bool EntityManager::DeleteEntity(Entity* entity)

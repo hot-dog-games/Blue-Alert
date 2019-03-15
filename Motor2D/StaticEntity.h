@@ -20,7 +20,7 @@ public:
 	virtual bool PreUpdate() { return true; };
 	virtual bool Update(float dt);
 	virtual bool PostUpdate();
-	virtual bool CleanUp() { return true; };
+	virtual bool CleanUp();
 
 	virtual void Die();
 

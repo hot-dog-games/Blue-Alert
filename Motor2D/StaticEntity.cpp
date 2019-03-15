@@ -1,5 +1,6 @@
 #include "j1App.h"
 #include "Render.h"
+#include "Textures.h"
 
 #include "StaticEntity.h"
 
@@ -32,6 +33,14 @@ bool StaticEntity::Update(float dt)
 	return true;
 }
 
+bool StaticEntity::CleanUp()
+{
+	if(sprite)
+		App->tex->UnLoad(sprite);
+
+	return true;
+}
+
 bool StaticEntity::PostUpdate()
 {
 	App->render->Blit(sprite, position.x, position.y, &current_frame);
@@ -44,3 +53,4 @@ void StaticEntity::Die()
 {
 	state = STATIC_DIE;
 }
+

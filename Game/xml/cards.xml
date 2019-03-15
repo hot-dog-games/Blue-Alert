@@ -5,5 +5,6 @@
            attack_speed="10" range="5" energy="2"
            units ="4" attack_type="1" armored="false"/>
     <icon></icon>
+    <sprite>textures/units/sprite_gi.png</sprite>
   </card>
 </config>

@@ -85,7 +85,7 @@ SDL_Texture* const Textures::Load(const char* path)
 	return texture;
 }
 
-// Unload texture
+// Unload texture by SDL_Texture
 bool Textures::UnLoad(SDL_Texture* texture)
 {
 	std::map<std::string, SDL_Texture*>::iterator item;
@@ -103,6 +103,21 @@ bool Textures::UnLoad(SDL_Texture* texture)
 	return false;
 }
 
+// Unload texture by path
+bool Textures::UnLoad(std::string path)
+{
+	std::map<std::string, SDL_Texture*>::iterator item = textures.find(path);
+
+	if (item->second)
+	{
+		SDL_DestroyTexture(item->second);
+		textures.erase(item);
+		return true;
+	}
+
+	return false;
+}
+
 // Translate a surface into a texture
 SDL_Texture* const Textures::LoadSurface(SDL_Surface* surface, const char* path)
 {
@@ -114,7 +129,7 @@ SDL_Texture* const Textures::LoadSurface(SDL_Surface* surface, const char* path)
 	}
 	else
 	{
-		textures.insert({ path,texture });
+		textures.insert({path,texture});
 	}
 
 	return texture;

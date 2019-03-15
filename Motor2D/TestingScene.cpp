@@ -142,6 +142,7 @@ bool TestingScene::CleanUp()
 
 	App->tex->UnLoad(debug_tex);
 	App->entity_manager->DeleteEntity(test_core);
+	App->tex->UnLoad(test_card->sprite_path);
 
 	return true;
 }
