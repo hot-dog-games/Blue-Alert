@@ -28,6 +28,8 @@ public:
 	// Called before quitting
 	virtual bool CleanUp();
 
+	virtual bool GUIEvent(UIElement* element, GUI_Event gui_event) { return true; };
+
 private:
 	SDL_Texture* debug_tex;
 };

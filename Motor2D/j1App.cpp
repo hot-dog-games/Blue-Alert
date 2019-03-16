@@ -13,7 +13,10 @@
 #include "Map.h"
 #include "Pathfinding.h"
 #include "CardManager.h"
+#include "GUI.h"
+#include "Fonts.h"
 #include "j1App.h"
+
 
 // Constructor
 j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
@@ -30,6 +33,8 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	map = new Map();
 	pathfinding = new Pathfinding();
 	card_manager = new CardManager();
+	gui = new Gui();
+	fonts = new Fonts();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -41,6 +46,8 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(pathfinding);
 	AddModule(scene_manager);
 	AddModule(card_manager);
+	AddModule(gui);
+	AddModule(fonts);
 
 	// render last to swap buffer
 	AddModule(render);

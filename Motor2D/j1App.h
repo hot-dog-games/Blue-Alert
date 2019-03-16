@@ -19,6 +19,8 @@ class SceneManager;
 class Map;
 class Pathfinding;
 class CardManager;
+class Gui;
+class Fonts;
 
 class j1App
 {
@@ -91,6 +93,8 @@ public:
 	Map*			map;
 	Pathfinding*	pathfinding;
 	CardManager*	card_manager;
+	Gui*			gui;
+	Fonts*			fonts;
 
 private:
 
