@@ -158,26 +158,10 @@ bool Map::CleanUp()
 	LOG("Unloading map");
 
 	// Remove all tilesets
-	std::list<TileSet*>::iterator item;
-	item = data.tilesets.begin();
-
-	while(item != data.tilesets.end())
-	{
-		item = data.tilesets.erase(item);
-		++item;
-	}
-	data.tilesets.clear();
+	while (!data.tilesets.empty()) delete data.tilesets.front(), data.tilesets.pop_front();
 
 	// Remove all layers
-	std::list<MapLayer*>::iterator item2;
-	item2 = data.layers.begin();
-
-	while(item2 != data.layers.end())
-	{
-		item2 = data.layers.erase(item2);
-		++item2;
-	}
-	data.layers.clear();
+	while (!data.layers.empty()) delete data.layers.front(), data.layers.pop_front();
 
 	// Clean up the pugui tree
 	map_file.reset();

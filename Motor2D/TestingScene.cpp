@@ -111,6 +111,9 @@ bool TestingScene::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 		test_summoner->UseCard(CardNumber::CN_FIRST, { float(x),float(y) });
 
+	if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
+		App->entity_manager->DeleteEntity(test_summoner);
+
 	if (App->input->GetKey(SDL_SCANCODE_8) == KEY_DOWN)
 		App->transition_manager->CreateFadeTransition(1.5F, false, 0, Pink);
 

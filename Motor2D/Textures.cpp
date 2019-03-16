@@ -66,7 +66,7 @@ SDL_Texture* const Textures::Load(const char* path)
 
 	std::map<std::string, SDL_Texture*>::iterator item = textures.find(path);
 	
-	if (!item->second)
+	if (item == textures.end())
 	{
 		SDL_Surface* surface = IMG_Load(path);
 
@@ -109,7 +109,7 @@ bool Textures::UnLoad(std::string path)
 {
 	std::map<std::string, SDL_Texture*>::iterator item = textures.find(path);
 
-	if (item->second)
+	if (item != textures.end())
 	{
 		SDL_DestroyTexture(item->second);
 		textures.erase(item);

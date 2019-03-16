@@ -12,7 +12,6 @@ Entity::Entity()
 
 Entity::~Entity()
 {
-	App->tex->UnLoad(sprite);
 }
 
 Entity::Entity(pugi::xml_node entity_node, fPoint position)
