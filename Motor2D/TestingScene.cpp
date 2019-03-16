@@ -104,6 +104,19 @@ bool TestingScene::Update(float dt)
 		App->entity_manager->CreateEntity(test_card->type, { (float)x,(float)y }, test_card);
 
 
+	
+	return true;
+}
+
+// Called each loop iteration
+bool TestingScene::PostUpdate()
+{
+	bool ret = true;
+
+	App->map->Draw();
+
+	int x, y;
+	x = y = 0;
 	// Debug pathfinding ------------------------------
 	iPoint p = App->render->ScreenToWorld(x, y);
 	p = App->map->WorldToMap(p.x, p.y);
@@ -119,15 +132,6 @@ bool TestingScene::Update(float dt)
 		App->render->Blit(debug_tex, pos.x, pos.y);
 	}
 
-	return true;
-}
-
-// Called each loop iteration
-bool TestingScene::PostUpdate()
-{
-	bool ret = true;
-
-	App->map->Draw();
 
 	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
