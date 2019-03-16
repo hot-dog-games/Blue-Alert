@@ -6,6 +6,8 @@
 
 struct SDL_Texture;
 class Entity;
+class Summoner;
+
 struct Card;
 
 class TestingScene :
@@ -33,7 +35,7 @@ public:
 private:
 	SDL_Texture* debug_tex;
 	Entity* test_core;
-	Card* test_card;
+	Summoner* test_summoner;
 };
 
 #endif
