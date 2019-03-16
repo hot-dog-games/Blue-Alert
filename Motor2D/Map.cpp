@@ -1,10 +1,12 @@
+#include <math.h>
+
 #include "p2Defs.h"
 #include "p2Log.h"
 #include "j1App.h"
 #include "Render.h"
 #include "Textures.h"
 #include "Map.h"
-#include <math.h>
+
 
 Map::Map() : Module(), map_loaded(false)
 {
@@ -161,7 +163,7 @@ bool Map::CleanUp()
 
 	while(item != data.tilesets.end())
 	{
-		RELEASE(*item);
+		item = data.tilesets.erase(item);
 		++item;
 	}
 	data.tilesets.clear();
@@ -172,7 +174,7 @@ bool Map::CleanUp()
 
 	while(item2 != data.layers.end())
 	{
-		RELEASE(*item2);
+		item2 = data.layers.erase(item2);
 		++item2;
 	}
 	data.layers.clear();
@@ -370,7 +372,9 @@ bool Map::LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set)
 	}
 	else
 	{
-		set->texture = App->tex->Load(PATH(folder.c_str(), image.attribute("source").as_string()));
+		std::string path = folder + image.attribute("source").as_string();
+
+		set->texture = App->tex->Load(path.c_str());
 		int w, h;
 		SDL_QueryTexture(set->texture, NULL, NULL, &w, &h);
 		set->tex_width = image.attribute("width").as_int();

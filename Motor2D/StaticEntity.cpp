@@ -1,3 +1,5 @@
+#include "p2Log.h"
+
 #include "j1App.h"
 #include "Render.h"
 #include "Textures.h"
@@ -19,6 +21,7 @@ StaticEntity::StaticEntity(pugi::xml_node entity_node, fPoint position) : Entity
 
 StaticEntity::~StaticEntity()
 {
+	LOG("destructor called");
 }
 
 bool StaticEntity::Update(float dt)

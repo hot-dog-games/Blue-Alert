@@ -5,7 +5,9 @@
 #include "Input.h"
 #include "DynamicEntity.h"
 #include "StaticEntity.h"
+#include "Summoner.h"
 #include "CardManager.h"
+#include "Deck.h"
 #include "EntityManager.h"
 
 
@@ -68,11 +70,10 @@ bool EntityManager::PostUpdate()
 
 bool EntityManager::CleanUp()
 {
-	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
-	{
-		(*entity)->CleanUp();
-		entity = entities.erase(entity);
-	}
+	LOG("entity manager cleanup");
+
+	while (!entities.empty()) delete entities.front(), entities.pop_front();
+
 	entities.clear();
 	id_count = 0;
 
@@ -119,9 +120,27 @@ Entity* EntityManager::CreateEntity(EntityType type, fPoint position)
 	return entity;
 }
 
+Summoner* EntityManager::CreateSummoner(Deck * deck)
+{
+	std::string id = std::to_string(id_count);
+	pugi::xml_node entity_node = entity_configs.find_child_by_attribute("type", std::to_string((int)SUMMONER).c_str());
+
+	id += "_SUMMONER";
+
+	Summoner* entity = new Summoner();
+	entity->SetDeck(deck);
+	entity->SetMaxEnergy(entity_node.attribute("energy").as_uint());
+	entities.push_back(entity);
+
+	id_count++;
+
+	return entity;
+}
+
 bool EntityManager::DeleteEntity(Entity* entity)
 {
 	entity->CleanUp();
 	entities.remove(entity);
+
 	return true;
 }
