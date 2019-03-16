@@ -4,33 +4,16 @@
 //This is the module that Marc will do on his research?
 
 #include "Module.h"
-#include "Timer.h"
-#include "p2Point.h"
-#include "SDL\include\SDL_rect.h"
+#include "Transition.h"
 
 class TransitionManager :
 	public Module
 {
+public:
 
-	enum class TransitionType {
-		FADE,
-		ZOOM
-	};
-
-	enum class TransitionState {
-		NONE,
-		ENTERING,
-		EXITING
-	};
 
 private:
-	TransitionType type;
-	TransitionState state;
-
-	float transition_time;
-	Timer* current_time = nullptr;
-
-	int scene_to_transition;
+	std::list<Transition*> active_transitions;
 
 	//Util variables for diverse transitions
 	SDL_Rect screen;
@@ -55,12 +38,8 @@ public:
 
 	//--------------------------------
 
-	void ChangeSceneWithFade(Timer time);
-	void FadeIn();
-	void FadeOut();
-
-	void Zoom(iPoint position, uint quantity = 4);
-
+	void CreateTransition(Transition::TransitionType type, float transition_time, bool is_scene_change = false, int scene_to_transition = 0);
+	void DestroyTransition(Transition* transition_to_destroy);
 };
 
 #endif

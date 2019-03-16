@@ -25,14 +25,6 @@ bool TransitionManager::Start()
 {
 	LOG("Starting Transition Manager");
 
-	uint width = 0U;
-	uint height = 0U;
-
-	App->win->GetWindowSize(width, height);
-
-	screen = { 0, 0, (int)width, (int)height };
-	SDL_SetRenderDrawBlendMode(App->render->renderer, SDL_BLENDMODE_BLEND);
-
 	return true;
 }
 
@@ -44,22 +36,9 @@ bool TransitionManager::PreUpdate()
 
 bool TransitionManager::Update(float dt)
 {
-	switch (state)
+	for each(Transition* t in active_transitions)
 	{
-	case TransitionState::ENTERING:
-	{
-
-	} break;
-
-	case TransitionState::EXITING:
-	{
-
-	} break;
-
-	case TransitionState::NONE:
-	{
-
-	} break;
+		t->Update();
 	}
 
 	return true;
@@ -67,12 +46,9 @@ bool TransitionManager::Update(float dt)
 
 bool TransitionManager::PostUpdate()
 {
-	switch (type)
+	for each(Transition* t in active_transitions)
 	{
-	case TransitionType::FADE: {
-
-
-	}break;
+		t->PostUpdate();
 	}
 
 	return true;
@@ -84,9 +60,12 @@ bool TransitionManager::CleanUp()
 	return true;
 }
 
-void TransitionManager::ChangeSceneWithFade(Timer time)
+void TransitionManager::CreateTransition(Transition::TransitionType type, float transition_time, bool is_scene_change, int scene_to_transition)
 {
-	state = TransitionState::ENTERING;
-	current_time->Start();
-	transition_time = time.ReadSec();
+	active_transitions.push_back(new Transition(type, transition_time, is_scene_change, scene_to_transition));
+}
+
+void TransitionManager::DestroyTransition(Transition * transition_to_destroy)
+{
+	active_transitions.remove(transition_to_destroy);
 }

@@ -70,6 +70,7 @@
     <ClCompile Include="TransitionManager.cpp">
       <Filter>Engine\Modules</Filter>
     </ClCompile>
+    <ClCompile Include="Transition.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="p2Defs.h">
@@ -156,6 +157,7 @@
     <ClInclude Include="TransitionManager.h">
       <Filter>Engine\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="Transition.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
