@@ -57,7 +57,7 @@ public:
 
 	//---Specific transitions methods-------
 
-	void DrawFadeRect();
+	void DrawFadeRect(float alpha_value);
 };
 
 #endif // _TRANSITION_H_

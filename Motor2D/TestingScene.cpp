@@ -8,6 +8,7 @@
 #include "Window.h"
 #include "Map.h"
 #include "PathFinding.h"
+#include "TransitionManager.h"
 #include "TestingScene.h"
 
 
@@ -87,6 +88,9 @@ bool TestingScene::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		App->render->camera.x -= 1;
+
+	if (App->input->GetKey(SDL_SCANCODE_8) == KEY_DOWN)
+		App->transition_manager->CreateTransition(Transition::TransitionType::FADE, 2);
 
 	App->map->Draw();
 
