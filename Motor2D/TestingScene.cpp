@@ -11,6 +11,7 @@
 #include "Entity.h"
 #include "Summoner.h"
 #include "PathFinding.h"
+#include "TransitionManager.h"
 #include "CardManager.h"
 #include "Deck.h"
 #include "TestingScene.h"
@@ -109,6 +110,11 @@ bool TestingScene::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 		test_summoner->UseCard(CardNumber::CN_FIRST, { float(x),float(y) });
+
+	if (App->input->GetKey(SDL_SCANCODE_8) == KEY_DOWN)
+		App->transition_manager->CreateFadeTransition(1.5F, false, 0, Pink);
+
+	App->map->Draw();
 
 
 	

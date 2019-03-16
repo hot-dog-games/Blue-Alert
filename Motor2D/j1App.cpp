@@ -14,6 +14,7 @@
 #include "Pathfinding.h"
 #include "EntityManager.h"
 #include "CardManager.h"
+#include "TransitionManager.h"
 #include "j1App.h"
 
 // Constructor
@@ -32,6 +33,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	pathfinding = new Pathfinding();
 	card_manager = new CardManager();
 	entity_manager = new EntityManager();
+	transition_manager = new TransitionManager();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -44,6 +46,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(card_manager);
 	AddModule(entity_manager);
 	AddModule(pathfinding);
+	AddModule(transition_manager);
 
 
 	// render last to swap buffer
