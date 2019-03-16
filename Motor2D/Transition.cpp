@@ -48,6 +48,11 @@ void Transition::PreUpdate()
 
 void Transition::Update()
 {
+
+}
+
+void Transition::PostUpdate()
+{
 	switch (state)
 	{
 	case Transition::TransitionState::NONE:
@@ -64,10 +69,6 @@ void Transition::Update()
 	default:
 		break;
 	}
-}
-
-void Transition::PostUpdate()
-{
 }
 
 Transition::TransitionState Transition::GetState()
