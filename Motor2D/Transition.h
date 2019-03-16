@@ -4,6 +4,7 @@
 #include "Timer.h"
 #include "p2Point.h"
 #include "SDL\include\SDL_rect.h"
+#include "Color.h"
 
 class Transition
 {
@@ -22,8 +23,8 @@ public:
 	};
 
 private:
-	TransitionType m_type;
-	TransitionState m_state;
+	TransitionType type;
+	TransitionState state;
 
 	float transition_time;
 	Timer* current_time = nullptr;
@@ -33,6 +34,7 @@ private:
 
 	//---Specific transitions variables-------
 	SDL_Rect screen;
+	Color color;
 
 public:
 
@@ -45,9 +47,12 @@ public:
 	void Update();
 	void PostUpdate();
 
+	//------Getters & Setters------
+
 	TransitionState GetState();
 	void SetState(TransitionState state);
 	TransitionType GetType();
+	void SetColor(Color color);
 
 	//---------------------------
 

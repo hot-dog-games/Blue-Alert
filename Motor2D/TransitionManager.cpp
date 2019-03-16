@@ -65,6 +65,12 @@ void TransitionManager::CreateTransition(Transition::TransitionType type, float 
 	active_transitions.push_back(new Transition(type, transition_time, is_scene_change, scene_to_transition));
 }
 
+void TransitionManager::CreateFadeTransition(float transition_time, bool is_scene_change, int scene_to_transition, Color color)
+{
+	active_transitions.push_back(new Transition(Transition::TransitionType::FADE, transition_time, is_scene_change, scene_to_transition));
+	active_transitions.back()->SetColor(color);
+}
+
 void TransitionManager::DestroyTransition(Transition * transition_to_destroy)
 {
 	active_transitions.remove(transition_to_destroy);

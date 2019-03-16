@@ -13,7 +13,7 @@ Transition::Transition()
 
 Transition::Transition(TransitionType type, float time, bool is_scene_change, int scene_to_change)
 {
-	m_type = type;
+	this->type = type;
 	transition_time = time;
 	this->is_scene_change = is_scene_change;
 	this->scene_to_change = scene_to_change;
@@ -39,7 +39,7 @@ void Transition::OnCreate()
 	current_time = new Timer();
 	current_time->Start();
 
-	m_state = TransitionState::ENTERING;
+	state = TransitionState::ENTERING;
 }
 
 void Transition::PreUpdate()
@@ -48,7 +48,7 @@ void Transition::PreUpdate()
 
 void Transition::Update()
 {
-	switch (m_state)
+	switch (state)
 	{
 	case Transition::TransitionState::NONE:
 		break;
@@ -84,9 +84,14 @@ Transition::TransitionType Transition::GetType()
 	return TransitionType();
 }
 
+void Transition::SetColor(Color color)
+{
+	this->color = color;
+}
+
 void Transition::Entering()
 {
-	switch (m_type)
+	switch (type)
 	{
 	case Transition::TransitionType::FADE: {
 
@@ -95,7 +100,7 @@ void Transition::Entering()
 
 		if (current_time->ReadSec() >= transition_time)
 		{
-			m_state = TransitionState::ACTION;
+			state = TransitionState::ACTION;
 		}
 	}break;
 
@@ -110,7 +115,7 @@ void Transition::Action()
 {
 	current_time->Stop();
 
-	switch (m_type)
+	switch (type)
 	{
 	case Transition::TransitionType::FADE:
 		DrawFadeRect(255.0F);
@@ -127,14 +132,14 @@ void Transition::Action()
 	}
 
 	transition_time += transition_time;
-	m_state = TransitionState::EXITING;
+	state = TransitionState::EXITING;
 }
 
 void Transition::Exiting()
 {
 	current_time->Resume();
 
-	switch (m_type)
+	switch (type)
 	{
 	case Transition::TransitionType::FADE: {
 
@@ -143,7 +148,7 @@ void Transition::Exiting()
 
 		if (current_time->ReadSec() >= transition_time)
 		{
-			m_state = TransitionState::NONE;
+			state = TransitionState::NONE;
 			App->transition_manager->DestroyTransition(this);
 		}
 	}break;
@@ -161,6 +166,6 @@ void Transition::DrawFadeRect(float alpha_value)
 	if (alpha_value > 255)alpha_value = 255;
 	if (alpha_value < 0)alpha_value = 0;
 
-	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, alpha_value);
+	SDL_SetRenderDrawColor(App->render->renderer, color.r, color.g, color.b, alpha_value);
 	SDL_RenderFillRect(App->render->renderer, &screen);
 }

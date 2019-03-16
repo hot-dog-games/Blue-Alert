@@ -5,6 +5,7 @@
 
 #include "Module.h"
 #include "Transition.h"
+#include "Color.h"
 
 class TransitionManager :
 	public Module
@@ -39,6 +40,8 @@ public:
 	//--------------------------------
 
 	void CreateTransition(Transition::TransitionType type, float transition_time, bool is_scene_change = false, int scene_to_transition = 0);
+	void CreateFadeTransition(float transition_time, bool is_scene_change = false, int scene_to_transition = 0, Color color = {0, 0, 0, 255});
+	void CreateZoomTransition(float transition_time, bool is_scene_change = false, int scene_to_transition = 0);
 	void DestroyTransition(Transition* transition_to_destroy);
 };
 

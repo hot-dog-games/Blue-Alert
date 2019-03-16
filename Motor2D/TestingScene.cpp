@@ -90,7 +90,7 @@ bool TestingScene::Update(float dt)
 		App->render->camera.x -= 1;
 
 	if (App->input->GetKey(SDL_SCANCODE_8) == KEY_DOWN)
-		App->transition_manager->CreateTransition(Transition::TransitionType::FADE, 1.5F);
+		App->transition_manager->CreateFadeTransition(1.5F, false, 0, Pink);
 
 	App->map->Draw();
 
