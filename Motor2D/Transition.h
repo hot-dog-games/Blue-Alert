@@ -34,7 +34,12 @@ private:
 
 	//---Specific transitions variables-------
 	SDL_Rect screen;
+
+	//Fade
 	Color color;
+
+	//Zoom
+	float scale;
 
 public:
 
