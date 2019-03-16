@@ -68,4 +68,5 @@ void TransitionManager::CreateTransition(Transition::TransitionType type, float 
 void TransitionManager::DestroyTransition(Transition * transition_to_destroy)
 {
 	active_transitions.remove(transition_to_destroy);
+	delete transition_to_destroy;
 }

@@ -24,6 +24,7 @@ Transition::Transition(TransitionType type, float time, bool is_scene_change, in
 
 Transition::~Transition()
 {
+	delete current_time;
 }
 
 void Transition::OnCreate()
@@ -85,17 +86,19 @@ Transition::TransitionType Transition::GetType()
 
 void Transition::Entering()
 {
-	float normalized_alpha = floor(current_time->ReadSec()*(255.0F / transition_time));
-
 	switch (m_type)
 	{
-	case Transition::TransitionType::FADE:
+	case Transition::TransitionType::FADE: {
+
+		float normalized_alpha = floor(current_time->ReadSec()*(255.0F / transition_time));
+		DrawFadeRect(normalized_alpha);
+
 		if (current_time->ReadSec() >= transition_time)
 		{
 			m_state = TransitionState::ACTION;
 		}
-		DrawFadeRect(normalized_alpha);
-		break;
+	}break;
+
 	case Transition::TransitionType::ZOOM:
 		break;
 	default:
@@ -131,24 +134,26 @@ void Transition::Exiting()
 {
 	current_time->Resume();
 
-	float normalized_alpha = floor((transition_time - current_time->ReadSec())*(255.0F / transition_time));
-
 	switch (m_type)
 	{
-	case Transition::TransitionType::FADE:
+	case Transition::TransitionType::FADE: {
+
+		float normalized_alpha = floor((transition_time - current_time->ReadSec())*(255.0F / transition_time));
+		DrawFadeRect(normalized_alpha);
+
 		if (current_time->ReadSec() >= transition_time)
 		{
 			m_state = TransitionState::NONE;
 			App->transition_manager->DestroyTransition(this);
 		}
-		break;
+	}break;
+
 	case Transition::TransitionType::ZOOM:
 		break;
 	default:
 		break;
 	}
 
-	DrawFadeRect(normalized_alpha);
 }
 
 void Transition::DrawFadeRect(float alpha_value)
