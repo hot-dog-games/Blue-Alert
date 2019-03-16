@@ -77,6 +77,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CardManager.cpp" />
+    <ClCompile Include="Color.cpp" />
     <ClCompile Include="Deck.cpp" />
     <ClCompile Include="DynamicEntity.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -96,12 +97,14 @@
     <ClCompile Include="TestingScene.cpp" />
     <ClCompile Include="Textures.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="Transition.cpp" />
     <ClCompile Include="TransitionManager.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="PugiXml\src\pugixml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CardManager.h" />
+    <ClInclude Include="Color.h" />
     <ClInclude Include="Deck.h" />
     <ClInclude Include="DynamicEntity.h" />
     <ClInclude Include="Entity.h" />
@@ -125,6 +128,7 @@
     <ClInclude Include="TestingScene.h" />
     <ClInclude Include="Textures.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="Transition.h" />
     <ClInclude Include="TransitionManager.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="PugiXml\src\pugiconfig.hpp" />

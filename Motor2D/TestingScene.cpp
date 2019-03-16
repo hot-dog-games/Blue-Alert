@@ -10,6 +10,7 @@
 #include "EntityManager.h"
 #include "Entity.h"
 #include "PathFinding.h"
+#include "TransitionManager.h"
 #include "CardManager.h"
 #include "TestingScene.h"
 
@@ -102,6 +103,11 @@ bool TestingScene::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 		App->entity_manager->CreateEntity(test_card->type, { (float)x,(float)y }, test_card);
+
+	if (App->input->GetKey(SDL_SCANCODE_8) == KEY_DOWN)
+		App->transition_manager->CreateFadeTransition(1.5F, false, 0, Pink);
+
+	App->map->Draw();
 
 
 	

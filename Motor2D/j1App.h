@@ -20,6 +20,7 @@ class Map;
 class EntityManager;
 class Pathfinding;
 class CardManager;
+class TransitionManager;
 
 class j1App
 {
@@ -93,6 +94,7 @@ public:
 	Pathfinding*	pathfinding;
 	CardManager*	card_manager;
 	EntityManager*	entity_manager;
+	TransitionManager* transition_manager;
 
 private:
 

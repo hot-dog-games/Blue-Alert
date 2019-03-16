@@ -70,6 +70,10 @@
     <ClCompile Include="TransitionManager.cpp">
       <Filter>Engine\Modules</Filter>
     </ClCompile>
+    <ClCompile Include="Transition.cpp">
+      <Filter>Engine\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Color.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="p2Defs.h">
@@ -155,6 +159,12 @@
     </ClInclude>
     <ClInclude Include="TransitionManager.h">
       <Filter>Engine\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Transition.h">
+      <Filter>Engine\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>Engine\Others</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
