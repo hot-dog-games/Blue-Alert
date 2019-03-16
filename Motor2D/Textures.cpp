@@ -46,11 +46,11 @@ bool Textures::Start()
 bool Textures::CleanUp()
 {
 	LOG("Freeing textures and Image library");
-	std::list<SDL_Texture*>::iterator item;
+	std::map<std::string, SDL_Texture*>::iterator item;
 
 	for(item = textures.begin(); item != textures.end(); ++item)
 	{
-		SDL_DestroyTexture(*item);
+		SDL_DestroyTexture(item->second);
 	}
 
 	textures.clear();
@@ -62,31 +62,39 @@ bool Textures::CleanUp()
 SDL_Texture* const Textures::Load(const char* path)
 {
 	SDL_Texture* texture = NULL;
-	SDL_Surface* surface = IMG_Load(path);
 
-	if(surface == NULL)
+	std::map<std::string, SDL_Texture*>::iterator item = textures.find(path);
+	
+	if (!item->second)
 	{
-		LOG("Could not load surface with path: %s. IMG_Load: %s", path, IMG_GetError());
+		SDL_Surface* surface = IMG_Load(path);
+
+		if (surface == NULL)
+		{
+			LOG("Could not load surface with path: %s. IMG_Load: %s", path, IMG_GetError());
+		}
+		else
+		{
+			texture = LoadSurface(surface, path);
+			SDL_FreeSurface(surface);
+		}
 	}
 	else
-	{
-		texture = LoadSurface(surface);
-		SDL_FreeSurface(surface);
-	}
+		texture = item->second;
 
 	return texture;
 }
 
-// Unload texture
+// Unload texture by SDL_Texture
 bool Textures::UnLoad(SDL_Texture* texture)
 {
-	std::list<SDL_Texture*>::iterator item;
+	std::map<std::string, SDL_Texture*>::iterator item;
 
 	for(item = textures.begin(); item != textures.end(); ++item)
 	{
-		if(texture == *item)
+		if(texture == item->second)
 		{
-			SDL_DestroyTexture(*item);
+			SDL_DestroyTexture(item->second);
 			textures.erase(item);
 			return true;
 		}
@@ -95,8 +103,23 @@ bool Textures::UnLoad(SDL_Texture* texture)
 	return false;
 }
 
+// Unload texture by path
+bool Textures::UnLoad(std::string path)
+{
+	std::map<std::string, SDL_Texture*>::iterator item = textures.find(path);
+
+	if (item->second)
+	{
+		SDL_DestroyTexture(item->second);
+		textures.erase(item);
+		return true;
+	}
+
+	return false;
+}
+
 // Translate a surface into a texture
-SDL_Texture* const Textures::LoadSurface(SDL_Surface* surface)
+SDL_Texture* const Textures::LoadSurface(SDL_Surface* surface, const char* path)
 {
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(App->render->renderer, surface);
 
@@ -106,7 +129,7 @@ SDL_Texture* const Textures::LoadSurface(SDL_Surface* surface)
 	}
 	else
 	{
-		textures.push_back(texture);
+		textures.insert({path,texture});
 	}
 
 	return texture;
