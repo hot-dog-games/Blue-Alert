@@ -4,6 +4,8 @@
 #include "UIElement.h"
 #include "UIImage.h"
 
+enum ScrollType;
+
 class UIScrollBar : public UIElement
 {
 public:

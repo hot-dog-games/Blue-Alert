@@ -1,7 +1,7 @@
-#include "UIImage.h"
-#include "Render.h"
 #include "j1App.h"
-
+#include "Render.h"
+#include "GUI.h"
+#include "UIImage.h"
 UIImage::UIImage(iPoint pos, SDL_Rect rect, bool image)
 {
 	rect_box = { pos.x,pos.y,rect.w,rect.h };

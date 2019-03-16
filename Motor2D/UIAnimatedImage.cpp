@@ -1,9 +1,10 @@
-#include "UIAnimatedImage.h"
 #include "p2Defs.h"
 #include "p2Log.h"
 #include "j1App.h"
 #include "Window.h"
 #include "Render.h"
+#include "GUI.h"
+#include "UIAnimatedImage.h"
 
 UIAnimatedImage::UIAnimatedImage(iPoint pos, SDL_Rect * rect, int total_sprites, int speed)
 {

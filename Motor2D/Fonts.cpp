@@ -1,16 +1,16 @@
+#include "SDL\include\SDL.h"
+#include "SDL_ttf/include/SDL_ttf.h"
+#pragma comment( lib, "SDL_ttf/libx86/SDL2_ttf.lib" )
+
 #include "p2Defs.h"
 #include "p2Log.h"
 #include "j1App.h"
 #include "Textures.h"
 #include "Fonts.h"
 
-#include "SDL\include\SDL.h"
-#include "SDL_ttf/include/SDL_ttf.h"
-#pragma comment( lib, "SDL_ttf/libx86/SDL2_ttf.lib" )
-
 Fonts::Fonts() : Module()
 {
-	//name.create("fonts");
+	name = "fonts";
 }
 
 // Destructor

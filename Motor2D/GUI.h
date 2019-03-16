@@ -2,16 +2,16 @@
 #define __GUI_H__
 
 #include "Module.h"
-#include "Timer.h"
-#include "Animation.h"
 #include "p2Point.h"
-#include "SDL/include/SDL.h"
-#include "UIElement.h"
 
 #define CURSOR_WIDTH 2
 
+struct SDL_Rect;
+struct SDL_Color;
+struct SDL_Texture;
+
 class _TTF_Font;
-class Timer;
+class UIElement;
 class UIImage;
 class UIButton;
 class UIScrollBar;

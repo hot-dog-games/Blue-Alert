@@ -3,8 +3,7 @@
 
 
 #include "UIImage.h"
-#include "SDL/include/SDL.h"
-#include "Module.h"
+#include "Animation.h"
 
 class UIAnimatedImage : public UIImage
 {

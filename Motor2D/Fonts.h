@@ -7,7 +7,6 @@
 #define DEFAULT_FONT "fonts/open_sans/OpenSans-Regular.ttf"
 #define DEFAULT_FONT_SIZE 12
 
-struct SDL_Texture;
 struct _TTF_Font;
 
 class Fonts : public Module

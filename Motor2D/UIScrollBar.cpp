@@ -1,3 +1,4 @@
+#include "GUI.h"
 #include "UIScrollBar.h"
 
 UIScrollBar::UIScrollBar(iPoint pos, ScrollType type)
