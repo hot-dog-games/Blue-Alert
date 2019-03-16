@@ -26,11 +26,10 @@ void Deck::CleanUp()
 		if (cards[i])
 		{
 			App->tex->UnLoad(cards[i]->sprite_path);
-			if(delete_cards)
-				cards[i]->to_delete = true;
+			if (delete_cards)
+				App->card_manager->DeleteCard(cards[i]);
 		}
 	}
-	delete[] cards;
 }
 
 void Deck::AddCard(Card* card)

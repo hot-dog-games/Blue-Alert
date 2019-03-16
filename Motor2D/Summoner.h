@@ -24,9 +24,6 @@ public:
 	void SetMaxEnergy(uint energy);
 
 private:
-	void DecreaseEnergy(uint energy);
-
-private:
 	Deck* deck;
 
 	uint max_energy;

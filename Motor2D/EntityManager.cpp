@@ -141,6 +141,7 @@ bool EntityManager::DeleteEntity(Entity* entity)
 {
 	entity->CleanUp();
 	entities.remove(entity);
+	delete entity;
 
 	return true;
 }
