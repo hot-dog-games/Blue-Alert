@@ -56,11 +56,13 @@ UIButton::UIButton(iPoint position, bool is_interactable)
 {
 	interactable = is_interactable;
 	rect_box = { position.x, position.y, 180,89 };
+
 	anim = new SDL_Rect[4];
-	anim[0] = { 2461,524,180,89 };
-	anim[1] = { 2650,524,180,89 };
-	anim[2] = { 2839,524,180,89 };
-	anim[3] = { 3029,524,180,89 };
+	anim[0] = { 0,0,60,48 };
+	anim[1] = { 60,0,60,48 };
+	anim[2] = { 0,48,60,48 };
+	anim[3] = { 0,0,60,48 };
+
 	rect_sprite = anim[interactable ? 0 : 3];
 
 	sound = App->audio->LoadFx("fx_button.wav");

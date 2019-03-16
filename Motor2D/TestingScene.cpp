@@ -8,6 +8,8 @@
 #include "Window.h"
 #include "Map.h"
 #include "PathFinding.h"
+#include "UIButton.h"
+#include "GUI.h"
 #include "TestingScene.h"
 
 
@@ -34,6 +36,9 @@ bool TestingScene::Start()
 	}
 
 	debug_tex = App->tex->Load("maps/path2.png");
+	ui_background = App->tex->Load("ui/background.png");
+
+	unit_button = App->gui->CreateButton({0,0});
 
 	return true;
 }
@@ -64,6 +69,8 @@ bool TestingScene::PreUpdate()
 		}
 	}
 
+	
+
 	return true;
 }
 
@@ -89,6 +96,8 @@ bool TestingScene::Update(float dt)
 		App->render->camera.x -= 1;
 
 	App->map->Draw();
+
+	App->render->Blit(ui_background, 755, 0, NULL, 0.0f);
 
 
 	// Debug pathfinding ------------------------------

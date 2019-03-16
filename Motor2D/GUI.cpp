@@ -14,7 +14,7 @@
 #include "UIButton.h"
 #include "UILabel.h"
 #include "UIScrollBar.h"
-#include "Gui.h"
+#include "GUI.h"
 
 Gui::Gui() : Module()
 {
@@ -39,7 +39,7 @@ bool Gui::Awake(pugi::xml_node& conf)
 // Called before the first frame
 bool Gui::Start()
 {
-	//atlas = App->tex->Load(atlas_file_name.GetString());
+	atlas = App->tex->Load("ui/button.png");
 
 	return true;
 }

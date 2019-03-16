@@ -30,7 +30,6 @@ enum ScrollType {
 };
 
 
-
 // ---------------------------------------------------
 class Gui : public Module
 {
