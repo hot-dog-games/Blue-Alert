@@ -41,9 +41,10 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(audio);
 	AddModule(map);
 	AddModule(scene_manager);
+	AddModule(card_manager);
 	AddModule(entity_manager);
 	AddModule(pathfinding);
-	AddModule(card_manager);
+
 
 	// render last to swap buffer
 	AddModule(render);

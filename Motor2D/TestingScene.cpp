@@ -9,8 +9,10 @@
 #include "Map.h"
 #include "EntityManager.h"
 #include "Entity.h"
+#include "Summoner.h"
 #include "PathFinding.h"
 #include "CardManager.h"
+#include "Deck.h"
 #include "TestingScene.h"
 
 
@@ -38,8 +40,13 @@ bool TestingScene::Start()
 
 	debug_tex = App->tex->Load("maps/path2.png");
 
+
+	Deck* test_deck = new Deck();
+	test_deck->delete_cards = true;
+	test_deck->AddCard(App->card_manager->CreateCard(EntityType::G_I));
+
 	test_core = App->entity_manager->CreateEntity(EntityType::CORE, { 0,0 });
-	test_card = App->card_manager->CreateCard(EntityType::G_I);
+	test_summoner = App->entity_manager->CreateSummoner(test_deck);
 
 	return true;
 }
@@ -101,7 +108,7 @@ bool TestingScene::Update(float dt)
 		test_core->DecreaseLife(5);
 
 	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
-		App->entity_manager->CreateEntity(test_card->type, { (float)x,(float)y }, test_card);
+		test_summoner->UseCard(CardNumber::CN_FIRST, { float(x),float(y) });
 
 
 	
@@ -115,9 +122,9 @@ bool TestingScene::PostUpdate()
 
 	App->map->Draw();
 
-	int x, y;
-	x = y = 0;
 	// Debug pathfinding ------------------------------
+	int x, y;
+	App->input->GetMousePosition(x, y);
 	iPoint p = App->render->ScreenToWorld(x, y);
 	p = App->map->WorldToMap(p.x, p.y);
 	p = App->map->MapToWorld(p.x, p.y);
@@ -145,8 +152,6 @@ bool TestingScene::CleanUp()
 	LOG("Freeing scene");
 
 	App->tex->UnLoad(debug_tex);
-	App->entity_manager->DeleteEntity(test_core);
-	App->tex->UnLoad(test_card->sprite_path);
 
 	return true;
 }

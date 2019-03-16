@@ -64,6 +64,9 @@ public:
 	Card* DeleteCard(Card* card);
 
 private:
+	void LoadCardStats(Card* card, pugi::xml_node stats_node);
+
+private:
 	bool to_delete = false;
 	pugi::xml_document config_file;
 	pugi::xml_node card_configs;

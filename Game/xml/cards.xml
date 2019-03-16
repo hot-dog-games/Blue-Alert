@@ -1,7 +1,7 @@
 <config>
   <card type ="1">
     <name>G.I</name>
-    <stats damage="5" defense="5" movement="7"
+    <stats life="50" damage="5" defense="5" movement="7"
            attack_speed="10" range="5" energy="2"
            units ="4" attack_type="1" armored="false"/>
     <icon></icon>
