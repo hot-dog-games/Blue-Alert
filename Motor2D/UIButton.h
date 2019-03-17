@@ -3,13 +3,15 @@
 
 #include"UIElement.h"
 
+enum ButtonType;
 
 class UIButton : public UIElement
 {
 public:
-	UIButton(iPoint pos, bool is_interactable = true);
+	UIButton(iPoint pos, ButtonType type, bool is_interactable = true);
 	~UIButton();
 
+	ButtonType type;
 	SDL_Rect* anim;
 	int sound;
 

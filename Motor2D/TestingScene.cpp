@@ -38,7 +38,8 @@ bool TestingScene::Start()
 	debug_tex = App->tex->Load("maps/path2.png");
 	ui_background = App->tex->Load("ui/background.png");
 
-	unit_button = App->gui->CreateButton({0,0});
+	unit_button = App->gui->CreateButton({0,0}, B_GI);
+	App->gui->CreateButton({ 400,600 }, B_NAVY_SEAL);
 
 	return true;
 }

@@ -3,6 +3,7 @@
 #include "Render.h"
 #include "GUI.h"
 #include "UIButton.h"
+#include "p2Log.h"
 
 UIButton::~UIButton()
 {
@@ -52,17 +53,40 @@ bool UIButton::CleanUp()
 	return true;
 }
 
-UIButton::UIButton(iPoint position, bool is_interactable)
+UIButton::UIButton(iPoint position, ButtonType type, bool is_interactable)
 {
 	interactable = is_interactable;
 	rect_box = { position.x, position.y, 180,89 };
 
 	anim = new SDL_Rect[4];
-	anim[0] = { 0,0,60,48 };
-	anim[1] = { 60,0,60,48 };
-	anim[2] = { 0,48,60,48 };
-	anim[3] = { 0,0,60,48 };
+	switch (type) {
+	case B_GI:
+		anim[0] = { 0,0,62,50 };
+		anim[1] = { 62,0,62,50 };
+		anim[2] = { 0,50,62,50 };
+		anim[3] = { 0,0,62,50 };
+		break;
 
+	case B_NAVY_SEAL:
+		anim[0] = { 124,0,62,50 };
+		anim[1] = { 188,0,62,50 };
+		anim[2] = { 124,50,62,50 };
+		anim[3] = { 0,0,62,50 };
+		break;
+
+	case B_SNIPER:
+		anim[0] = { 250,0,62,50 };
+		anim[1] = { 313,0,62,50 };
+		anim[2] = { 250,50,62,50 };
+		anim[3] = { 0,0,62,50 };
+		break;
+
+	default:
+		LOG("Unit Type Incorrect!");
+		break;
+	}
+	
+	this->type = type;
 	rect_sprite = anim[interactable ? 0 : 3];
 
 	sound = App->audio->LoadFx("fx_button.wav");

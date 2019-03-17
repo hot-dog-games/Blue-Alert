@@ -184,9 +184,9 @@ UILabel* Gui::CreateLabel(iPoint pos, std::string path, int size, std::string te
 	return label;
 }
 
-UIButton* Gui::CreateButton(iPoint pos, UIElement* parent, bool is_interactable)
+UIButton* Gui::CreateButton(iPoint pos, ButtonType type, UIElement* parent, bool is_interactable)
 {
-	UIButton* button = new UIButton(pos, is_interactable);
+	UIButton* button = new UIButton(pos, type, is_interactable);
 	button->parent = parent;
 	elements.push_back(button);
 
