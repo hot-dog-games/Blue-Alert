@@ -6,6 +6,10 @@
 
 struct SDL_Texture;
 struct UIButton;
+class Entity;
+class Summoner;
+
+struct Card;
 
 class TestingScene :
 	public Scene
@@ -36,6 +40,8 @@ private:
 	SDL_Texture*	ui_background;
 
 	UIButton*		unit_button;
+	Entity* test_core;
+	Summoner* test_summoner;
 };
 
 #endif

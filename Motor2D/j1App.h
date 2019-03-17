@@ -17,10 +17,12 @@ class Textures;
 class Audio;
 class SceneManager;
 class Map;
+class EntityManager;
 class Pathfinding;
 class CardManager;
 class Gui;
 class Fonts;
+class TransitionManager;
 
 class j1App
 {
@@ -95,6 +97,8 @@ public:
 	CardManager*	card_manager;
 	Gui*			gui;
 	Fonts*			fonts;
+	EntityManager*	entity_manager;
+	TransitionManager* transition_manager;
 
 private:
 

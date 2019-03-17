@@ -70,8 +70,14 @@
     <ClCompile Include="TransitionManager.cpp">
       <Filter>Engine\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="GUI.cpp">
+    <ClCompile Include="Transition.cpp">
+      <Filter>Engine\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
       <Filter>Engine\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Color.cpp">
+      <Filter>Engine\Others</Filter>
     </ClCompile>
     <ClCompile Include="UIAnimatedImage.cpp">
       <Filter>Engine\UI</Filter>
@@ -90,6 +96,9 @@
     </ClCompile>
     <ClCompile Include="UIScrollBar.cpp">
       <Filter>Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI.cpp">
+      <Filter>Engine\Modules</Filter>
     </ClCompile>
     <ClCompile Include="Fonts.cpp">
       <Filter>Engine\Modules</Filter>
@@ -180,7 +189,13 @@
     <ClInclude Include="TransitionManager.h">
       <Filter>Engine\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="GUI.h">
+    <ClInclude Include="Transition.h">
+      <Filter>Engine\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>Engine\Others</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
       <Filter>Engine\Modules</Filter>
     </ClInclude>
     <ClInclude Include="UIAnimatedImage.h">
@@ -200,6 +215,9 @@
     </ClInclude>
     <ClInclude Include="UIScrollBar.h">
       <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI.h">
+      <Filter>Engine\Modules</Filter>
     </ClInclude>
     <ClInclude Include="Fonts.h">
       <Filter>Engine\Modules</Filter>
@@ -228,7 +246,7 @@
       <UniqueIdentifier>{a8bfab6a-5472-4969-943e-861a8b493f08}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\UI">
-      <UniqueIdentifier>{f154b7b4-4f68-4dac-9512-53542209e45e}</UniqueIdentifier>
+      <UniqueIdentifier>{0c1a3d65-12ba-4279-a61c-87d5af448eed}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
