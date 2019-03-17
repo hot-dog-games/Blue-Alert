@@ -22,6 +22,7 @@ public:
 	void UseCard(CardNumber number, fPoint position);
 	void SetDeck(Deck* new_deck);
 	void SetMaxEnergy(uint energy);
+	Card* GetCard(CardNumber card_num) const;
 
 private:
 	Deck* deck;

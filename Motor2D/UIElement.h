@@ -15,7 +15,6 @@ protected:
 
 public:
 	bool hovered = false;
-	bool clicked = false;
 	bool interactable = false;
 	bool dragable = false;
 	bool enabled = true;

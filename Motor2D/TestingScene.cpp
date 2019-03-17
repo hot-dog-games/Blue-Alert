@@ -11,6 +11,7 @@
 #include "Entity.h"
 #include "Summoner.h"
 #include "PathFinding.h"
+#include "UIAnimatedImage.h"
 #include "UIButton.h"
 #include "GUI.h"
 #include "TransitionManager.h"
@@ -44,16 +45,14 @@ bool TestingScene::Start()
 	debug_tex = App->tex->Load("maps/path2.png");
 	ui_background = App->tex->Load("ui/background.png");
 
-	unit_button = App->gui->CreateButton({0,0}, B_GI);
-	App->gui->CreateButton({ 400,600 }, B_NAVY_SEAL);
-
-
 	Deck* test_deck = new Deck();
 	test_deck->delete_cards = true;
 	test_deck->AddCard(App->card_manager->CreateCard(EntityType::G_I));
 
 	test_core = App->entity_manager->CreateEntity(EntityType::CORE, { 0,0 });
 	test_summoner = App->entity_manager->CreateSummoner(test_deck);
+
+	unit_button = App->gui->CreateButton({ 0,0 }, test_summoner->GetCard(CardNumber::CN_FIRST)->button.anim);
 
 	return true;
 }
@@ -168,6 +167,29 @@ bool TestingScene::CleanUp()
 	LOG("Freeing scene");
 
 	App->tex->UnLoad(debug_tex);
+
+	return true;
+}
+
+bool TestingScene::GUIEvent(UIElement * element, GUI_Event gui_event)
+{
+	int x, y;
+	App->input->GetMousePosition(x, y);
+
+	if (gui_event == GUI_Event::LEFT_CLICK_DOWN) {
+		if (element == unit_button) {
+			current_drag = App->gui->CreateAnimatedImage({ x,y }, &test_summoner->GetCard(CardNumber::CN_FIRST)->button.drag, 1, 1);
+			current_drag->interactable = true;
+			current_drag->dragable = true;
+		}
+	}
+	else if (gui_event == GUI_Event::LEFT_CLICK_UP) {
+		if (element == current_drag) {
+			test_summoner->UseCard(CardNumber::CN_FIRST, { float(x),float(y) });
+			App->gui->DeleteElement(current_drag);
+			current_drag = nullptr;
+		}
+	}
 
 	return true;
 }

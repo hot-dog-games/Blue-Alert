@@ -3,15 +3,13 @@
 
 #include"UIElement.h"
 
-enum ButtonType;
 
 class UIButton : public UIElement
 {
 public:
-	UIButton(iPoint pos, ButtonType type, bool is_interactable = true);
+	UIButton(iPoint pos, SDL_Rect* sprite_rect, bool is_interactable = true);
 	~UIButton();
 
-	ButtonType type;
 	SDL_Rect* anim;
 	int sound;
 
@@ -20,7 +18,6 @@ public:
 	void OnMouseHover();
 	void OnMouseRelease();
 	void OnMouseExit();
-	bool IsOnClick();
 	void SetLocked(bool value);
 	bool CleanUp();
 };

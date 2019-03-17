@@ -23,7 +23,6 @@ void UIButton::OnMouseClick()
 {
 	rect_sprite = anim[2];
 	App->audio->PlayFx(sound);
-	clicked = true;
 }
 
 void UIButton::OnMouseHover()
@@ -34,17 +33,11 @@ void UIButton::OnMouseHover()
 void UIButton::OnMouseRelease()
 {
 	rect_sprite = anim[1];
-	clicked = false;
 }
 
 void UIButton::OnMouseExit()
 {
 	rect_sprite = anim[0];
-}
-
-bool UIButton::IsOnClick()
-{
-	return clicked;
 }
 
 void UIButton::SetLocked(bool value)
@@ -60,40 +53,17 @@ bool UIButton::CleanUp()
 	return true;
 }
 
-UIButton::UIButton(iPoint position, ButtonType type, bool is_interactable)
+UIButton::UIButton(iPoint position, SDL_Rect* sprite_rect, bool is_interactable)
 {
 	interactable = is_interactable;
-	rect_box = { position.x, position.y, 62,50 };
+	rect_box = { position.x, position.y, sprite_rect[0].w,sprite_rect[0].h };
 
 	anim = new SDL_Rect[4];
-	switch (type) {
-	case B_GI:
-		anim[0] = { 0,0,62,50 };
-		anim[1] = { 62,0,62,50 };
-		anim[2] = { 0,50,62,50 };
-		anim[3] = { 0,0,62,50 };
-		break;
+	anim[0] = sprite_rect[0];
+	anim[1] = sprite_rect[1];
+	anim[2] = sprite_rect[2];
+	anim[3] = sprite_rect[3];
 
-	case B_NAVY_SEAL:
-		anim[0] = { 124,0,62,50 };
-		anim[1] = { 188,0,62,50 };
-		anim[2] = { 124,50,62,50 };
-		anim[3] = { 0,0,62,50 };
-		break;
-
-	case B_SNIPER:
-		anim[0] = { 250,0,62,50 };
-		anim[1] = { 313,0,62,50 };
-		anim[2] = { 250,50,62,50 };
-		anim[3] = { 0,0,62,50 };
-		break;
-
-	default:
-		LOG("Unit Type Incorrect!");
-		break;
-	}
-	
-	this->type = type;
 	rect_sprite = anim[interactable ? 0 : 3];
 
 	sound = App->audio->LoadFx("fx_button.wav");

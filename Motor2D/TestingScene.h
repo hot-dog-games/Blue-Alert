@@ -6,6 +6,7 @@
 
 struct SDL_Texture;
 struct UIButton;
+struct UIAnimatedImage;
 class Entity;
 class Summoner;
 
@@ -33,7 +34,7 @@ public:
 	// Called before quitting
 	virtual bool CleanUp();
 
-	virtual bool GUIEvent(UIElement* element, GUI_Event gui_event) { return true; };
+	virtual bool GUIEvent(UIElement* element, GUI_Event gui_event);
 
 private:
 	SDL_Texture*	debug_tex;
@@ -42,6 +43,8 @@ private:
 	UIButton*		unit_button;
 	Entity* test_core;
 	Summoner* test_summoner;
+
+	UIAnimatedImage* current_drag;
 };
 
 #endif

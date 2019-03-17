@@ -61,6 +61,7 @@ bool Gui::PreUpdate()
 		{
 			if (!current_element->hovered)
 			{
+				
 				current_element->OnMouseHover();
 				App->scene_manager->current_scene->GUIEvent(current_element, MOUSE_OVER);
 				current_element->hovered = true;
@@ -184,9 +185,9 @@ UILabel* Gui::CreateLabel(iPoint pos, std::string path, int size, std::string te
 	return label;
 }
 
-UIButton* Gui::CreateButton(iPoint pos, ButtonType type, UIElement* parent, bool is_interactable)
+UIButton* Gui::CreateButton(iPoint pos, SDL_Rect* sprite_rect, UIElement* parent, bool is_interactable)
 {
-	UIButton* button = new UIButton(pos, type, is_interactable);
+	UIButton* button = new UIButton(pos, sprite_rect, is_interactable);
 	button->parent = parent;
 	elements.push_back(button);
 
@@ -209,6 +210,13 @@ UIAnimatedImage* Gui::CreateAnimatedImage(iPoint pos, SDL_Rect * rect, int total
 	image->parent = parent;
 	elements.push_back(image);
 	return image;
+}
+
+void Gui::DeleteElement(UIElement * element)
+{
+	element->CleanUp();
+	elements.remove(element);
+	delete element;
 }
 
 void Gui::EnableElement(UIElement* element)

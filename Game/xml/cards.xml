@@ -4,7 +4,14 @@
     <stats life="50" damage="5" defense="5" movement="7"
            attack_speed="10" range="5" energy="2"
            units ="4" attack_type="1" armored="false"/>
-    <icon></icon>
     <sprite>textures/units/sprite_gi.png</sprite>
+    
+    <button>
+      <frame x="0" y="0" width="62" height="50"/>
+      <frame x="62" y="0" width="62" height="50"/>
+      <frame x="0" y="50" width="62" height="50"/>
+      <frame x="0" y="0" width="62" height="50"/>
+      <unit_drag x="45" y="52" width="147" height="129"/>
+    </button>
   </card>
 </config>

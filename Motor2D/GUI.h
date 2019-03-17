@@ -29,18 +29,6 @@ enum ScrollType {
 	HORIZONTAL
 };
 
-enum ButtonType {
-	B_GI,
-	B_NAVY_SEAL,
-	B_SNIPER,
-	ROBOT_TANK,
-	RHINO_TANK,
-	GRIZZLY_TANK,
-	HARRIER,
-	NITE_HAWK,
-	BLACK_EAGLE
-};
-
 
 // ---------------------------------------------------
 class Gui : public Module
@@ -73,16 +61,15 @@ public:
 	// Gui creation functions
 	UIImage* CreateImage(iPoint pos, SDL_Rect rect, UIElement* parent = nullptr, bool image = true);
 	UILabel* CreateLabel(iPoint pos, std::string path, int size, std::string text, SDL_Color color, int max_width = 0, UIElement* parent = nullptr);
-	UIButton* CreateButton(iPoint pos, ButtonType type, UIElement* parent = nullptr, bool is_interactable = true);
+	UIButton* CreateButton(iPoint pos, SDL_Rect* sprite_rect, UIElement* parent = nullptr, bool is_interactable = true);
 	UIScrollBar* CreateScrollBar(iPoint pos, float min, float max, ScrollType type = VERTICAL, UIElement* parent = nullptr);
-	UIAnimatedImage* CreateAnimatedImage(iPoint pos, SDL_Rect * rect, int total_sprites, int speed, UIElement* parent);
+	UIAnimatedImage* CreateAnimatedImage(iPoint pos, SDL_Rect * rect, int total_sprites, int speed, UIElement* parent = nullptr);
+
+	void DeleteElement(UIElement* element);
 
 	UIElement* GetElementUnderMouse();
 	void EnableElement(UIElement* element);
 	void DisableElement(UIElement* element);
-
-
-
 
 	SDL_Texture* GetAtlas() const;
 

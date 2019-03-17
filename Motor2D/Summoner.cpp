@@ -46,3 +46,11 @@ void Summoner::SetMaxEnergy(uint energy)
 	max_energy = energy;
 	current_energy = max_energy;
 }
+
+Card * Summoner::GetCard(CardNumber card_num) const
+{
+	if (deck->cards[card_num]) {
+		return deck->cards[card_num];
+	}
+		return nullptr;
+}
