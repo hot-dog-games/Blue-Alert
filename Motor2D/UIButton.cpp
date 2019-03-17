@@ -23,6 +23,7 @@ void UIButton::OnMouseClick()
 {
 	rect_sprite = anim[2];
 	App->audio->PlayFx(sound);
+	clicked = true;
 }
 
 void UIButton::OnMouseHover()
@@ -33,11 +34,17 @@ void UIButton::OnMouseHover()
 void UIButton::OnMouseRelease()
 {
 	rect_sprite = anim[1];
+	clicked = false;
 }
 
 void UIButton::OnMouseExit()
 {
 	rect_sprite = anim[0];
+}
+
+bool UIButton::IsOnClick()
+{
+	return clicked;
 }
 
 void UIButton::SetLocked(bool value)
@@ -56,7 +63,7 @@ bool UIButton::CleanUp()
 UIButton::UIButton(iPoint position, ButtonType type, bool is_interactable)
 {
 	interactable = is_interactable;
-	rect_box = { position.x, position.y, 180,89 };
+	rect_box = { position.x, position.y, 62,50 };
 
 	anim = new SDL_Rect[4];
 	switch (type) {

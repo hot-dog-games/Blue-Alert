@@ -20,6 +20,7 @@ public:
 	void OnMouseHover();
 	void OnMouseRelease();
 	void OnMouseExit();
+	bool IsOnClick();
 	void SetLocked(bool value);
 	bool CleanUp();
 };
