@@ -5,6 +5,10 @@
 #include "p2Point.h"
 
 struct SDL_Texture;
+class Entity;
+class Summoner;
+
+struct Card;
 
 class TestingScene :
 	public Scene
@@ -30,6 +34,8 @@ public:
 
 private:
 	SDL_Texture* debug_tex;
+	Entity* test_core;
+	Summoner* test_summoner;
 };
 
 #endif

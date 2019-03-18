@@ -70,6 +70,15 @@
     <ClCompile Include="TransitionManager.cpp">
       <Filter>Engine\Modules</Filter>
     </ClCompile>
+    <ClCompile Include="Transition.cpp">
+      <Filter>Engine\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Engine\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Color.cpp">
+      <Filter>Engine\Others</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="p2Defs.h">
@@ -154,6 +163,15 @@
       <Filter>Engine\Modules</Filter>
     </ClInclude>
     <ClInclude Include="TransitionManager.h">
+      <Filter>Engine\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Transition.h">
+      <Filter>Engine\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>Engine\Others</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
       <Filter>Engine\Modules</Filter>
     </ClInclude>
   </ItemGroup>

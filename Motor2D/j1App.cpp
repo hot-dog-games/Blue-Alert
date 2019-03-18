@@ -12,7 +12,9 @@
 #include "SceneManager.h"
 #include "Map.h"
 #include "Pathfinding.h"
+#include "EntityManager.h"
 #include "CardManager.h"
+#include "TransitionManager.h"
 #include "j1App.h"
 
 // Constructor
@@ -30,6 +32,8 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	map = new Map();
 	pathfinding = new Pathfinding();
 	card_manager = new CardManager();
+	entity_manager = new EntityManager();
+	transition_manager = new TransitionManager();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -38,9 +42,12 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(tex);
 	AddModule(audio);
 	AddModule(map);
-	AddModule(pathfinding);
 	AddModule(scene_manager);
 	AddModule(card_manager);
+	AddModule(entity_manager);
+	AddModule(pathfinding);
+	AddModule(transition_manager);
+
 
 	// render last to swap buffer
 	AddModule(render);
@@ -144,7 +151,7 @@ pugi::xml_node j1App::LoadConfig(pugi::xml_document& config_file) const
 {
 	pugi::xml_node ret;
 
-	pugi::xml_parse_result result = config_file.load_file("config.xml");
+	pugi::xml_parse_result result = config_file.load_file("xml/config.xml");
 
 	if(result == NULL)
 		LOG("Could not load map xml file config.xml. pugi error: %s", result.description());

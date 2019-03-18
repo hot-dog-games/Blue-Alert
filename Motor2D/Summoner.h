@@ -5,15 +5,27 @@
 
 class Deck;
 
+enum CardNumber{
+	CN_FIRST,
+	CN_SECOND,
+	CN_THIRD,
+	CN_FOURTH
+};
+
 class Summoner : public Entity
 {
 public:
 	Summoner();
 	~Summoner();
-	bool CleanUp() { return true; }
-	Deck* deck;
+	
+	bool CleanUp();
+	void UseCard(CardNumber number, fPoint position);
+	void SetDeck(Deck* new_deck);
+	void SetMaxEnergy(uint energy);
 
 private:
+	Deck* deck;
+
 	uint max_energy;
 	uint current_energy;
 	uint energy_regen;

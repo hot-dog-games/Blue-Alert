@@ -17,8 +17,10 @@ class Textures;
 class Audio;
 class SceneManager;
 class Map;
+class EntityManager;
 class Pathfinding;
 class CardManager;
+class TransitionManager;
 
 class j1App
 {
@@ -91,6 +93,8 @@ public:
 	Map*			map;
 	Pathfinding*	pathfinding;
 	CardManager*	card_manager;
+	EntityManager*	entity_manager;
+	TransitionManager* transition_manager;
 
 private:
 

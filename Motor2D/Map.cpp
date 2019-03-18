@@ -1,10 +1,12 @@
+#include <math.h>
+
 #include "p2Defs.h"
 #include "p2Log.h"
 #include "j1App.h"
 #include "Render.h"
 #include "Textures.h"
 #include "Map.h"
-#include <math.h>
+
 
 Map::Map() : Module(), map_loaded(false)
 {
@@ -156,26 +158,10 @@ bool Map::CleanUp()
 	LOG("Unloading map");
 
 	// Remove all tilesets
-	std::list<TileSet*>::iterator item;
-	item = data.tilesets.begin();
-
-	while(item != data.tilesets.end())
-	{
-		RELEASE(*item);
-		++item;
-	}
-	data.tilesets.clear();
+	while (!data.tilesets.empty()) delete data.tilesets.front(), data.tilesets.pop_front();
 
 	// Remove all layers
-	std::list<MapLayer*>::iterator item2;
-	item2 = data.layers.begin();
-
-	while(item2 != data.layers.end())
-	{
-		RELEASE(*item2);
-		++item2;
-	}
-	data.layers.clear();
+	while (!data.layers.empty()) delete data.layers.front(), data.layers.pop_front();
 
 	// Clean up the pugui tree
 	map_file.reset();
@@ -370,7 +356,9 @@ bool Map::LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set)
 	}
 	else
 	{
-		set->texture = App->tex->Load(PATH(folder.c_str(), image.attribute("source").as_string()));
+		std::string path = folder + image.attribute("source").as_string();
+
+		set->texture = App->tex->Load(path.c_str());
 		int w, h;
 		SDL_QueryTexture(set->texture, NULL, NULL, &w, &h);
 		set->tex_width = image.attribute("width").as_int();

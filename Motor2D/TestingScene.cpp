@@ -7,7 +7,13 @@
 #include "Render.h"
 #include "Window.h"
 #include "Map.h"
+#include "EntityManager.h"
+#include "Entity.h"
+#include "Summoner.h"
 #include "PathFinding.h"
+#include "TransitionManager.h"
+#include "CardManager.h"
+#include "Deck.h"
 #include "TestingScene.h"
 
 
@@ -34,6 +40,14 @@ bool TestingScene::Start()
 	}
 
 	debug_tex = App->tex->Load("maps/path2.png");
+
+
+	Deck* test_deck = new Deck();
+	test_deck->delete_cards = true;
+	test_deck->AddCard(App->card_manager->CreateCard(EntityType::G_I));
+
+	test_core = App->entity_manager->CreateEntity(EntityType::CORE, { 0,0 });
+	test_summoner = App->entity_manager->CreateSummoner(test_deck);
 
 	return true;
 }
@@ -70,6 +84,9 @@ bool TestingScene::PreUpdate()
 // Called each loop iteration
 bool TestingScene::Update(float dt)
 {
+	int x, y;
+	App->input->GetMousePosition(x, y);
+
 	if (App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
 		App->LoadGame("save_game.xml");
 
@@ -88,8 +105,28 @@ bool TestingScene::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		App->render->camera.x -= 1;
 
-	App->map->Draw();
+	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+		test_core->DecreaseLife(5);
 
+	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+		test_summoner->UseCard(CardNumber::CN_FIRST, { float(x),float(y) });
+
+	if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
+		App->entity_manager->DeleteEntity(test_summoner);
+
+	if (App->input->GetKey(SDL_SCANCODE_8) == KEY_DOWN)
+		App->transition_manager->CreateFadeTransition(1.5F, false, 0, Pink);
+
+	
+	return true;
+}
+
+// Called each loop iteration
+bool TestingScene::PostUpdate()
+{
+	bool ret = true;
+
+	App->map->Draw();
 
 	// Debug pathfinding ------------------------------
 	int x, y;
@@ -108,13 +145,6 @@ bool TestingScene::Update(float dt)
 		App->render->Blit(debug_tex, pos.x, pos.y);
 	}
 
-	return true;
-}
-
-// Called each loop iteration
-bool TestingScene::PostUpdate()
-{
-	bool ret = true;
 
 	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
@@ -126,6 +156,8 @@ bool TestingScene::PostUpdate()
 bool TestingScene::CleanUp()
 {
 	LOG("Freeing scene");
+
+	App->tex->UnLoad(debug_tex);
 
 	return true;
 }
