@@ -77,6 +77,12 @@ void TransitionManager::CreateZoomTransition(float transition_time, bool is_scen
 	active_transitions.back()->SetScale(scale);
 }
 
+void TransitionManager::CreateCameraTranslation(float transition_time, iPoint origin, iPoint destination)
+{
+	active_transitions.push_back(new Transition(Transition::TransitionType::TRANSLATION, transition_time));
+	active_transitions.back()->SetOriginAndDestination(origin, destination);
+}
+
 void TransitionManager::DestroyTransition(Transition * transition_to_destroy)
 {
 	active_transitions.remove(transition_to_destroy);

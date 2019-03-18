@@ -95,38 +95,39 @@ void Transition::Entering()
 	switch (type)
 	{
 	case Transition::TransitionType::FADE: {
-
 		float normalized_alpha = floor(current_time->ReadSec()*(255.0F / transition_time));
 		DrawFadeRect(normalized_alpha);
-
-		if (current_time->ReadSec() >= transition_time)
-		{
-			state = TransitionState::ACTION;
-		}
 	}break;
 
 	case Transition::TransitionType::ZOOM: {
-		float normalized_scale_increment = current_time->ReadSec()*(target_scale / transition_time) + normal_scale;
-		SDL_RenderSetScale(App->render->renderer, normalized_scale_increment, normalized_scale_increment);
-		LOG("scale: %f", normalized_scale_increment);
+		float normalized_scale = current_time->ReadSec()*(target_scale / transition_time) + normal_scale;
+		SDL_RenderSetScale(App->render->renderer, normalized_scale, normalized_scale);
 
-		//Get the shift necessary to re-align the view.
-		float shift_x = App->render->camera.x - normalized_scale_increment * 0.5F;
-		float shift_y = App->render->camera.y - normalized_scale_increment * 0.5F;
+		LOG("camera w, h %i , %i", App->render->camera.x, App->render->camera.y);
 
-		//Update the view position
-		App->render->camera.x = (int)shift_x;
-		App->render->camera.y = (int)shift_y;
 
-		if (current_time->ReadSec() >= transition_time)
-		{
-			state = TransitionState::ACTION;
-		}
-	}
-		break;
+	}break;
+
+	case Transition::TransitionType::TRANSLATION: {
+
+		float percent = current_time->ReadSec()*(1 / transition_time);
+		
+		float step_x = origin.x + percent * (destination.x - origin.x);
+		float step_y = origin.y + percent * (destination.y - origin.y);
+
+		App->render->camera.x = step_x;
+		App->render->camera.y = step_y;
+
+	}break;
 	default:
 		break;
 	}
+
+	if (current_time->ReadSec() >= transition_time)
+	{
+		state = TransitionState::ACTION;
+	}
+
 }
 
 void Transition::Action()
@@ -165,11 +166,6 @@ void Transition::Exiting()
 		float normalized_alpha = floor((transition_time - current_time->ReadSec())*(255.0F / transition_time));
 		DrawFadeRect(normalized_alpha);
 
-		if (current_time->ReadSec() >= transition_time)
-		{
-			state = TransitionState::NONE;
-			App->transition_manager->DestroyTransition(this);
-		}
 	}break;
 
 	case Transition::TransitionType::ZOOM: {
@@ -178,15 +174,16 @@ void Transition::Exiting()
 		current_scale = normal_scale;
 		SDL_RenderSetScale(App->render->renderer, normal_scale, normal_scale);
 
-		if (current_time->ReadSec() >= transition_time)
-		{
-			state = TransitionState::NONE;
-			App->transition_manager->DestroyTransition(this);
-		}
-
 	}break;
 	default:
 		break;
+	}
+
+
+	if (current_time->ReadSec() >= transition_time)
+	{
+		state = TransitionState::NONE;
+		App->transition_manager->DestroyTransition(this);
 	}
 
 }
@@ -203,4 +200,10 @@ void Transition::DrawFadeRect(float alpha_value)
 void Transition::SetScale(int scale)
 {
 	target_scale = scale;
+}
+
+void Transition::SetOriginAndDestination(iPoint origin, iPoint destination)
+{
+	this->origin = origin;
+	this->destination = destination;
 }

@@ -42,6 +42,7 @@ public:
 	void CreateTransition(Transition::TransitionType type, float transition_time, bool is_scene_change = false, int scene_to_transition = 0);
 	void CreateFadeTransition(float transition_time, bool is_scene_change = false, int scene_to_transition = 0, Color color = {0, 0, 0, 255});
 	void CreateZoomTransition(float transition_time, bool is_scene_change = false, int scene_to_transition = 0, float scale = 2);
+	void CreateCameraTranslation(float transition_time, iPoint origin, iPoint destination);
 	void DestroyTransition(Transition* transition_to_destroy);
 };
 

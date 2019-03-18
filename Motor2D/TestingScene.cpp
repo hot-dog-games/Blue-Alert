@@ -115,11 +115,12 @@ bool TestingScene::Update(float dt)
 		App->entity_manager->DeleteEntity(test_summoner);
 
 	if (App->input->GetKey(SDL_SCANCODE_8) == KEY_DOWN) {
-		App->transition_manager->CreateZoomTransition(2.0F, false, 0, 4.0F);
-		App->transition_manager->CreateFadeTransition(2.0F, false, 0, White);
+		App->transition_manager->CreateZoomTransition(3.0f, false, 0, 4);
+		App->transition_manager->CreateFadeTransition(3.0f, false, 0, White);
+		//App->transition_manager->CreateCameraTranslation(2, { App->render->camera.x , App->render->camera.x }, { 100, 200 });
 	}
+		
 
-	
 	return true;
 }
 

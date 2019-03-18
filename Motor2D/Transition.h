@@ -19,7 +19,8 @@ private:
 public:
 	enum class TransitionType {
 		FADE,
-		ZOOM
+		ZOOM,
+		TRANSLATION
 	};
 
 private:
@@ -43,6 +44,10 @@ private:
 	float target_scale;
 	float normal_scale = 1;
 
+	//CameraTranslation
+	iPoint origin;
+	iPoint destination;
+
 public:
 
 	Transition();
@@ -61,7 +66,7 @@ public:
 	TransitionType GetType();
 	void SetColor(Color color);
 
-	//---------------------------
+	//-----Update process-------
 
 	void Entering();
 	void Action();
@@ -71,6 +76,7 @@ public:
 
 	void DrawFadeRect(float alpha_value);
 	void SetScale(int scale);
+	void SetOriginAndDestination(iPoint origin, iPoint destination);
 };
 
 #endif // _TRANSITION_H_
