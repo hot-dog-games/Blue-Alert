@@ -115,7 +115,7 @@ bool TestingScene::Update(float dt)
 		App->entity_manager->DeleteEntity(test_summoner);
 
 	if (App->input->GetKey(SDL_SCANCODE_8) == KEY_DOWN)
-		App->transition_manager->CreateFadeTransition(1.5F, false, 0, Pink);
+		App->transition_manager->CreateFadeTransition(4, false, 0, White);
 
 	
 	return true;

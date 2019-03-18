@@ -39,7 +39,9 @@ private:
 	Color color;
 
 	//Zoom
-	float scale;
+	float current_scale;
+	float scale_increment = 0.1F;
+	float target_scale;
 
 public:
 
@@ -68,6 +70,7 @@ public:
 	//---Specific transitions methods-------
 
 	void DrawFadeRect(float alpha_value);
+	void SetScale(int scale);
 };
 
 #endif // _TRANSITION_H_

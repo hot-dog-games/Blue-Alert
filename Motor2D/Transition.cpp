@@ -105,7 +105,14 @@ void Transition::Entering()
 		}
 	}break;
 
-	case Transition::TransitionType::ZOOM:
+	case Transition::TransitionType::ZOOM: {
+		current_scale += scale_increment;
+		
+		if (current_scale >= target_scale) 
+		{
+			state = TransitionState::ACTION;
+		}
+	}
 		break;
 	default:
 		break;
@@ -155,6 +162,8 @@ void Transition::Exiting()
 	}break;
 
 	case Transition::TransitionType::ZOOM:
+		current_scale -= scale_increment;
+
 		break;
 	default:
 		break;
@@ -169,4 +178,9 @@ void Transition::DrawFadeRect(float alpha_value)
 
 	SDL_SetRenderDrawColor(App->render->renderer, color.r, color.g, color.b, alpha_value);
 	SDL_RenderFillRect(App->render->renderer, &screen);
+}
+
+void Transition::SetScale(int scale)
+{
+	target_scale = scale;
 }

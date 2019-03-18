@@ -71,6 +71,12 @@ void TransitionManager::CreateFadeTransition(float transition_time, bool is_scen
 	active_transitions.back()->SetColor(color);
 }
 
+void TransitionManager::CreateZoomTransition(float transition_time, bool is_scene_change, int scene_to_transition, float scale)
+{
+	active_transitions.push_back(new Transition(Transition::TransitionType::ZOOM, transition_time, is_scene_change, scene_to_transition));
+	active_transitions.back()->SetScale(scale);
+}
+
 void TransitionManager::DestroyTransition(Transition * transition_to_destroy)
 {
 	active_transitions.remove(transition_to_destroy);
