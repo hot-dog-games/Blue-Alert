@@ -40,8 +40,8 @@ private:
 
 	//Zoom
 	float current_scale;
-	float scale_increment = 0.1F;
 	float target_scale;
+	float normal_scale = 1;
 
 public:
 

@@ -106,9 +106,19 @@ void Transition::Entering()
 	}break;
 
 	case Transition::TransitionType::ZOOM: {
-		current_scale += scale_increment;
-		
-		if (current_scale >= target_scale) 
+		float normalized_scale_increment = current_time->ReadSec()*(target_scale / transition_time) + normal_scale;
+		SDL_RenderSetScale(App->render->renderer, normalized_scale_increment, normalized_scale_increment);
+		LOG("scale: %f", normalized_scale_increment);
+
+		//Get the shift necessary to re-align the view.
+		float shift_x = App->render->camera.x - normalized_scale_increment * 0.5F;
+		float shift_y = App->render->camera.y - normalized_scale_increment * 0.5F;
+
+		//Update the view position
+		App->render->camera.x = (int)shift_x;
+		App->render->camera.y = (int)shift_y;
+
+		if (current_time->ReadSec() >= transition_time)
 		{
 			state = TransitionState::ACTION;
 		}
@@ -129,6 +139,7 @@ void Transition::Action()
 		DrawFadeRect(255.0F);
 		break;
 	case Transition::TransitionType::ZOOM:
+		SDL_RenderSetScale(App->render->renderer, target_scale, target_scale);
 		break;
 	default:
 		break;
@@ -161,10 +172,19 @@ void Transition::Exiting()
 		}
 	}break;
 
-	case Transition::TransitionType::ZOOM:
-		current_scale -= scale_increment;
+	case Transition::TransitionType::ZOOM: {
+		/*float normalized_scale_increment = (transition_time - current_time->ReadSec())*(target_scale / transition_time);*/
 
-		break;
+		current_scale = normal_scale;
+		SDL_RenderSetScale(App->render->renderer, normal_scale, normal_scale);
+
+		if (current_time->ReadSec() >= transition_time)
+		{
+			state = TransitionState::NONE;
+			App->transition_manager->DestroyTransition(this);
+		}
+
+	}break;
 	default:
 		break;
 	}
