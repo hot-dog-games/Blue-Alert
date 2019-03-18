@@ -76,6 +76,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Buff.cpp" />
+    <ClCompile Include="BuffSourceManager.cpp" />
     <ClCompile Include="CardManager.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Deck.cpp" />
@@ -93,6 +95,7 @@
     <ClCompile Include="PerfTimer.cpp" />
     <ClCompile Include="Render.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="Stat.cpp" />
     <ClCompile Include="StaticEntity.cpp" />
     <ClCompile Include="Summoner.cpp" />
     <ClCompile Include="TestingScene.cpp" />
@@ -104,6 +107,8 @@
     <ClCompile Include="PugiXml\src\pugixml.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Buff.h" />
+    <ClInclude Include="BuffSourceManager.h" />
     <ClInclude Include="CardManager.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Deck.h" />
@@ -125,6 +130,7 @@
     <ClInclude Include="p2Point.h" />
     <ClInclude Include="Render.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="Stat.h" />
     <ClInclude Include="StaticEntity.h" />
     <ClInclude Include="Summoner.h" />
     <ClInclude Include="TestingScene.h" />
