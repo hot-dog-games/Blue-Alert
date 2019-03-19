@@ -7,10 +7,10 @@
     <sprite>textures/units/sprite_gi.png</sprite>
     
     <button>
-      <frame x="0" y="0" width="62" height="50"/>
-      <frame x="62" y="0" width="62" height="50"/>
-      <frame x="0" y="50" width="62" height="50"/>
-      <frame x="0" y="0" width="62" height="50"/>
+      <frame x="0" y="0" width="100" height="80"/>
+      <frame x="100" y="0" width="100" height="80"/>
+      <frame x="0" y="80" width="100" height="80"/>
+      <frame x="0" y="0" width="100" height="80"/>
       <unit_drag x="45" y="52" width="147" height="129"/>
     </button>
   </card>

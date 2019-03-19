@@ -83,10 +83,9 @@ bool Gui::PreUpdate()
 					//drag
 					if (current_element->dragable)
 					{
-						iPoint pos = current_element->GetLocalPos();
-						int x_movement, y_movement;
-						App->input->GetMouseMotion(x_movement, y_movement);
-						current_element->SetLocalPos(pos.x + x_movement, pos.y + y_movement);
+						iPoint mouse_pos;
+						App->input->GetMousePosition(mouse_pos.x, mouse_pos.y);
+						current_element->SetLocalPos(mouse_pos.x - current_element->GetLocalRect().w/2, mouse_pos.y - current_element->GetLocalRect().h / 2);
 
 						if (current_element->parent_limit && current_element->parent)
 						{
