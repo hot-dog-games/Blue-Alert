@@ -30,13 +30,6 @@ void Zoom::Entering()
 	LOG("scale increment %f", scale_increment);
 }
 
-void Zoom::Action()
-{
-	Transition::Action();
-
-	SDL_RenderSetScale(App->render->renderer, target_scale, target_scale);
-}
-
 void Zoom::Exiting()
 {
 	Transition::Exiting();

@@ -15,8 +15,6 @@ public:
 	~CameraTranslation();
 
 	void Entering();
-	void Action();
-	void Exiting();
 
 	void SetOriginAndDestination(iPoint origin, iPoint destination);
 

@@ -30,16 +30,6 @@ void CameraTranslation::Entering()
 	App->render->camera.y = step_y;
 }
 
-void CameraTranslation::Action()
-{
-	Transition::Action();
-}
-
-void CameraTranslation::Exiting()
-{
-	Transition::Exiting();
-}
-
 void CameraTranslation::SetOriginAndDestination(iPoint origin, iPoint destination)
 {
 	this->origin = origin;

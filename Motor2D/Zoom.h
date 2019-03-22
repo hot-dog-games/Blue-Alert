@@ -14,7 +14,6 @@ public:
 	~Zoom();
 
 	void Entering();
-	void Action();
 	void Exiting();
 
 	void SetTargetScale(int target_scale);
