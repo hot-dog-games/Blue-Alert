@@ -58,9 +58,6 @@
     <ClCompile Include="DynamicEntity.cpp">
       <Filter>Engine\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="Summoner.cpp">
-      <Filter>Engine\Entities</Filter>
-    </ClCompile>
     <ClCompile Include="Deck.cpp">
       <Filter>Engine\Others</Filter>
     </ClCompile>
@@ -88,6 +85,7 @@
     <ClCompile Include="BuffSourceManager.cpp">
       <Filter>Engine\Modules</Filter>
     </ClCompile>
+    <ClCompile Include="Core.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="p2Defs.h">
@@ -162,9 +160,6 @@
     <ClInclude Include="DynamicEntity.h">
       <Filter>Engine\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="Summoner.h">
-      <Filter>Engine\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="Deck.h">
       <Filter>Engine\Others</Filter>
     </ClInclude>
@@ -192,6 +187,7 @@
     <ClInclude Include="BuffSourceManager.h">
       <Filter>Engine\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="Core.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

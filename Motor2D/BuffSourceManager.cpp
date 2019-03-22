@@ -14,7 +14,7 @@ BuffSourceManager::~BuffSourceManager()
 
 bool BuffSourceManager::Awake(pugi::xml_node &)
 {
-	pugi::xml_parse_result result = buff_config.load_file("xml/entities.xml");
+	pugi::xml_parse_result result = buff_config.load_file("xml/buffs.xml");
 
 	if (result == NULL)
 		LOG("Could not load entity xml. pugi error: %s", result.description());

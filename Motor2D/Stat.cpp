@@ -49,10 +49,6 @@ void Stat::CalculateStat()
 {
 	final_value = base_value;
 
-	//TODO 1: Calculate the final stat value as explained
-	//   - First add all flat (additive) buffs
-	//   - Then add all percent (multiplicative) buffs
-
 	//1. Apply addtive buffs
 	for (std::vector<Buff*>::iterator iter = additive_buffs.begin(); iter != additive_buffs.end(); ++iter)
 	{

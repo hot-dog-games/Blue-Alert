@@ -80,6 +80,7 @@
     <ClCompile Include="BuffSourceManager.cpp" />
     <ClCompile Include="CardManager.cpp" />
     <ClCompile Include="Color.cpp" />
+    <ClCompile Include="Core.cpp" />
     <ClCompile Include="Deck.cpp" />
     <ClCompile Include="DynamicEntity.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -97,7 +98,6 @@
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Stat.cpp" />
     <ClCompile Include="StaticEntity.cpp" />
-    <ClCompile Include="Summoner.cpp" />
     <ClCompile Include="TestingScene.cpp" />
     <ClCompile Include="Textures.cpp" />
     <ClCompile Include="Timer.cpp" />
@@ -111,6 +111,7 @@
     <ClInclude Include="BuffSourceManager.h" />
     <ClInclude Include="CardManager.h" />
     <ClInclude Include="Color.h" />
+    <ClInclude Include="Core.h" />
     <ClInclude Include="Deck.h" />
     <ClInclude Include="DynamicEntity.h" />
     <ClInclude Include="Entity.h" />
@@ -132,7 +133,6 @@
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Stat.h" />
     <ClInclude Include="StaticEntity.h" />
-    <ClInclude Include="Summoner.h" />
     <ClInclude Include="TestingScene.h" />
     <ClInclude Include="Textures.h" />
     <ClInclude Include="Timer.h" />

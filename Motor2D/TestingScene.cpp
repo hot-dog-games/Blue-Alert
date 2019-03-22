@@ -9,7 +9,7 @@
 #include "Map.h"
 #include "EntityManager.h"
 #include "Entity.h"
-#include "Summoner.h"
+#include "Core.h"
 #include "PathFinding.h"
 #include "TransitionManager.h"
 #include "CardManager.h"
@@ -46,8 +46,7 @@ bool TestingScene::Start()
 	test_deck->delete_cards = true;
 	test_deck->AddCard(App->card_manager->CreateCard(EntityType::G_I));
 
-	test_core = App->entity_manager->CreateEntity(EntityType::CORE, { 0,0 });
-	test_summoner = App->entity_manager->CreateSummoner(test_deck);
+	test_core = App->entity_manager->CreateCore(EntityType::CORE, { 0,0 }, test_deck);
 
 	return true;
 }
@@ -109,10 +108,7 @@ bool TestingScene::Update(float dt)
 		test_core->DecreaseLife(5);
 
 	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
-		test_summoner->UseCard(CardNumber::CN_FIRST, { float(x),float(y) });
-
-	if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
-		App->entity_manager->DeleteEntity(test_summoner);
+		test_core->UseCard(Core::CardNumber::FIRST, { float(x),float(y) });
 
 	if (App->input->GetKey(SDL_SCANCODE_8) == KEY_DOWN)
 		App->transition_manager->CreateFadeTransition(1.5F, false, 0, Pink);
