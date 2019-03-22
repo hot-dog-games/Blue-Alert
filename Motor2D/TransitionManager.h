@@ -4,8 +4,8 @@
 //This is the module that Marc will do on his research?
 
 #include "Module.h"
-#include "Transition.h"
 #include "Color.h"
+#include "Transition.h"
 
 class TransitionManager :
 	public Module
@@ -39,9 +39,8 @@ public:
 
 	//--------------------------------
 
-	void CreateTransition(Transition::TransitionType type, float transition_time, bool is_scene_change = false, int scene_to_transition = 0);
-	void CreateFadeTransition(float transition_time, bool is_scene_change = false, int scene_to_transition = 0, Color color = {0, 0, 0, 255});
-	void CreateZoomTransition(float transition_time, bool is_scene_change = false, int scene_to_transition = 0, float scale = 2);
+	void CreateFadeTransition(float transition_time, bool is_scene_change = false, int scene_to_transition = 0, Color color = Black);
+	void CreateZoomTransition(float transition_time, float scale = 2);
 	void CreateCameraTranslation(float transition_time, iPoint origin, iPoint destination);
 	void DestroyTransition(Transition* transition_to_destroy);
 };
