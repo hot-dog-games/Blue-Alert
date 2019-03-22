@@ -40,9 +40,10 @@ private:
 	Color color;
 
 	//Zoom
-	float current_scale;
+	float current_scale = 1;
 	float target_scale;
 	float normal_scale = 1;
+
 
 	//CameraTranslation
 	iPoint origin;
