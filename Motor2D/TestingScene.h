@@ -6,7 +6,7 @@
 
 struct SDL_Texture;
 struct UIButton;
-struct UIAnimatedImage;
+struct UIImage;
 class Entity;
 class Summoner;
 
@@ -48,7 +48,7 @@ private:
 	Entity* test_core;
 	Summoner* test_summoner;
 
-	UIAnimatedImage* current_drag;
+	UIImage* current_drag;
 };
 
 #endif

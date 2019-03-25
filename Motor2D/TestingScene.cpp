@@ -183,10 +183,20 @@ bool TestingScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 
 	if (gui_event == GUI_Event::LEFT_CLICK_DOWN) {
 		if (element == unit_button_one) {
-			current_drag = App->gui->CreateAnimatedImage({ x,y }, &test_summoner->GetCard(CardNumber::CN_FIRST)->button.drag, 1, 1);
-			current_drag->interactable = true;
-			current_drag->dragable = true;
+			current_drag = App->gui->CreateImage({ x,y }, test_summoner->GetCard(CardNumber::CN_FIRST)->button.drag);
+			
 		}
+		else if (element == unit_button_two) {
+			current_drag = App->gui->CreateImage({ x,y }, test_summoner->GetCard(CardNumber::CN_SECOND)->button.drag);
+		}
+		else if (element == unit_button_three) {
+			current_drag = App->gui->CreateImage({ x,y }, test_summoner->GetCard(CardNumber::CN_THIRD)->button.drag);
+		}
+		else if (element == unit_button_four) {
+			current_drag = App->gui->CreateImage({ x,y }, test_summoner->GetCard(CardNumber::CN_FOURTH)->button.drag);
+		}
+		current_drag->interactable = true;
+		current_drag->dragable = true;
 	}
 	else if (gui_event == GUI_Event::LEFT_CLICK_UP) {
 		if (element == current_drag) {
@@ -194,6 +204,22 @@ bool TestingScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			App->gui->DeleteElement(current_drag);
 			current_drag = nullptr;
 		}
+		else if (element == unit_button_two) {
+			test_summoner->UseCard(CardNumber::CN_SECOND, { float(x),float(y) });
+			App->gui->DeleteElement(current_drag);
+			current_drag = nullptr;
+		}
+		else if (element == unit_button_three) {
+			test_summoner->UseCard(CardNumber::CN_THIRD, { float(x),float(y) });
+			App->gui->DeleteElement(current_drag);
+			current_drag = nullptr;
+		}
+		else if (element == unit_button_four) {
+			test_summoner->UseCard(CardNumber::CN_FOURTH, { float(x),float(y) });
+			App->gui->DeleteElement(current_drag);
+			current_drag = nullptr;
+		}
+		
 	}
 
 	return true;
