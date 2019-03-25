@@ -59,6 +59,9 @@ bool TestingScene::Start()
 	unit_button_two = App->gui->CreateButton({ 890, 365 }, test_summoner->GetCard(CardNumber::CN_SECOND)->button.anim);
 	unit_button_three = App->gui->CreateButton({ 790, 445 }, test_summoner->GetCard(CardNumber::CN_THIRD)->button.anim);
 	unit_button_four = App->gui->CreateButton({ 890, 445 }, test_summoner->GetCard(CardNumber::CN_FOURTH)->button.anim);
+
+	App->gui->CreateBar({ 0,0 }, { 601,0,24,277 });
+
 	return true;
 }
 
@@ -199,7 +202,7 @@ bool TestingScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 		current_drag->dragable = true;
 	}
 	else if (gui_event == GUI_Event::LEFT_CLICK_UP) {
-		if (element == current_drag) {
+		/*if (element == current_drag) {
 			test_summoner->UseCard(CardNumber::CN_FIRST, { float(x),float(y) });
 			App->gui->DeleteElement(current_drag);
 			current_drag = nullptr;
@@ -218,7 +221,7 @@ bool TestingScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			test_summoner->UseCard(CardNumber::CN_FOURTH, { float(x),float(y) });
 			App->gui->DeleteElement(current_drag);
 			current_drag = nullptr;
-		}
+		}*/
 		
 	}
 

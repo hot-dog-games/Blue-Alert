@@ -103,6 +103,9 @@
     <ClCompile Include="Fonts.cpp">
       <Filter>Engine\Modules</Filter>
     </ClCompile>
+    <ClCompile Include="UIBar.cpp">
+      <Filter>Engine\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="p2Defs.h">
@@ -221,6 +224,9 @@
     </ClInclude>
     <ClInclude Include="Fonts.h">
       <Filter>Engine\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="UIBar.h">
+      <Filter>Engine\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

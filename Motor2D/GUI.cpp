@@ -14,6 +14,7 @@
 #include "UIButton.h"
 #include "UILabel.h"
 #include "UIScrollBar.h"
+#include "UIBar.h"
 #include "GUI.h"
 
 Gui::Gui() : Module()
@@ -209,6 +210,14 @@ UIAnimatedImage* Gui::CreateAnimatedImage(iPoint pos, SDL_Rect * rect, int total
 	image->parent = parent;
 	elements.push_back(image);
 	return image;
+}
+
+UIBar * Gui::CreateBar(iPoint pos, SDL_Rect rect, UIElement * parent)
+{
+	UIBar* bar = new UIBar(pos, rect, parent);
+	bar->parent = parent;
+	elements.push_back(bar);
+	return bar;
 }
 
 void Gui::DeleteElement(UIElement * element)

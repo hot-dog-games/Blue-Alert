@@ -103,6 +103,7 @@
     <ClCompile Include="Transition.cpp" />
     <ClCompile Include="TransitionManager.cpp" />
     <ClCompile Include="UIAnimatedImage.cpp" />
+    <ClCompile Include="UIBar.cpp" />
     <ClCompile Include="UIButton.cpp" />
     <ClCompile Include="UIElement.cpp" />
     <ClCompile Include="UIImage.cpp" />
@@ -143,6 +144,7 @@
     <ClInclude Include="Transition.h" />
     <ClInclude Include="TransitionManager.h" />
     <ClInclude Include="UIAnimatedImage.h" />
+    <ClInclude Include="UIBar.h" />
     <ClInclude Include="UIButton.h" />
     <ClInclude Include="UIElement.h" />
     <ClInclude Include="UIImage.h" />
