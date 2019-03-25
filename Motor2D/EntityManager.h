@@ -15,7 +15,12 @@ enum EntityType {
 	G_I,
 	SNIPER,
 	NAVY_SEAL,
-	GRIZZLY
+	GRIZZLY,
+	ROBOT,
+	PRISM,
+	NIGHTHAWK,
+	HARRIER,
+	BLACK_EAGLE
 	//...
 };
 

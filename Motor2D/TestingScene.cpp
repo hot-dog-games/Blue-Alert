@@ -48,12 +48,17 @@ bool TestingScene::Start()
 	Deck* test_deck = new Deck();
 	test_deck->delete_cards = true;
 	test_deck->AddCard(App->card_manager->CreateCard(EntityType::G_I));
+	test_deck->AddCard(App->card_manager->CreateCard(EntityType::ROBOT));
+	test_deck->AddCard(App->card_manager->CreateCard(EntityType::NAVY_SEAL));
+	test_deck->AddCard(App->card_manager->CreateCard(EntityType::HARRIER));
 
 	test_core = App->entity_manager->CreateEntity(EntityType::CORE, { 0,0 });
 	test_summoner = App->entity_manager->CreateSummoner(test_deck);
 
-	unit_button = App->gui->CreateButton({ 0,0 }, test_summoner->GetCard(CardNumber::CN_FIRST)->button.anim);
-
+	unit_button_one = App->gui->CreateButton({ 790, 365 }, test_summoner->GetCard(CardNumber::CN_FIRST)->button.anim);
+	unit_button_two = App->gui->CreateButton({ 890, 365 }, test_summoner->GetCard(CardNumber::CN_SECOND)->button.anim);
+	unit_button_three = App->gui->CreateButton({ 790, 445 }, test_summoner->GetCard(CardNumber::CN_THIRD)->button.anim);
+	unit_button_four = App->gui->CreateButton({ 890, 445 }, test_summoner->GetCard(CardNumber::CN_FOURTH)->button.anim);
 	return true;
 }
 
@@ -177,7 +182,7 @@ bool TestingScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 	App->input->GetMousePosition(x, y);
 
 	if (gui_event == GUI_Event::LEFT_CLICK_DOWN) {
-		if (element == unit_button) {
+		if (element == unit_button_one) {
 			current_drag = App->gui->CreateAnimatedImage({ x,y }, &test_summoner->GetCard(CardNumber::CN_FIRST)->button.drag, 1, 1);
 			current_drag->interactable = true;
 			current_drag->dragable = true;

@@ -1,9 +1,9 @@
 <config>
   <card type ="1">
-    <name>G.I</name>
+    <name>GI</name>
     <stats life="50" damage="5" defense="5" movement="7"
            attack_speed="10" range="5" energy="2"
-           units ="4" attack_type="1" armored="false"/>
+           units ="4" attack_type="0" armored="false"/>
     <sprite>textures/units/sprite_gi.png</sprite>
     
     <button>
@@ -11,7 +11,136 @@
       <frame x="100" y="0" width="100" height="80"/>
       <frame x="0" y="80" width="100" height="80"/>
       <frame x="0" y="0" width="100" height="80"/>
-      <unit_drag x="45" y="52" width="147" height="129"/>
+      <unit_drag x="0" y="0" width="100" height="80"/>
     </button>
   </card>
+  
+  <card type ="2">
+    <name>Sniper</name>
+    <stats life="50" damage="40" defense="3" movement="5"
+           attack_speed="4" range="8" energy="4"
+           units ="2" attack_type="2" armored="false"/>
+    <sprite>textures/units/sprite_gi.png</sprite>
+
+    <button>
+      <frame x="400" y="0" width="100" height="80"/>
+      <frame x="500" y="0" width="100" height="80"/>
+      <frame x="400" y="80" width="100" height="80"/>
+      <frame x="0" y="0" width="100" height="80"/>
+      <unit_drag x="400" y="0" width="100" height="80"/>
+    </button>
+  </card>
+
+  <card type ="3">
+    <name>Navy_Seal</name>
+    <stats life="70" damage="20" defense="7" movement="5"
+           attack_speed="5" range="4" energy="2"
+           units ="2" attack_type="1" armored="false"/>
+    <sprite>textures/units/sprite_gi.png</sprite>
+
+    <button>
+      <frame x="200" y="0" width="100" height="80"/>
+      <frame x="300" y="0" width="100" height="80"/>
+      <frame x="200" y="80" width="100" height="80"/>
+      <frame x="0" y="0" width="100" height="80"/>
+      <unit_drag x="200" y="0" width="100" height="80"/>
+    </button>
+  </card>
+
+  <card type ="4">
+    <name>Grizzly_Tank</name>
+    <stats life="120" damage="100" defense="10" movement="5"
+           attack_speed="2" range="5" energy="2"
+           units ="1" attack_type="2" armored="true"/>
+    <sprite>textures/units/sprite_gi.png</sprite>
+
+    <button>
+      <frame x="400" y="160" width="100" height="80"/>
+      <frame x="500" y="160" width="100" height="80"/>
+      <frame x="400" y="240" width="100" height="80"/>
+      <frame x="0" y="0" width="100" height="80"/>
+      <unit_drag x="400" y="160" width="100" height="80"/>
+    </button>
+  </card>
+
+  <card type ="5">
+    <name>Robot_Tank</name>
+    <stats life="60" damage="7" defense="5" movement="8"
+           attack_speed="8" range="5" energy="2"
+           units ="3" attack_type="0" armored="true"/>
+    <sprite>textures/units/sprite_gi.png</sprite>
+
+    <button>
+      <frame x="0" y="160" width="100" height="80"/>
+      <frame x="100" y="160" width="100" height="80"/>
+      <frame x="0" y="240" width="100" height="80"/>
+      <frame x="0" y="0" width="100" height="80"/>
+      <unit_drag x="0" y="160" width="100" height="80"/>
+    </button>
+  </card>
+
+  <card type ="6">
+    <name>Prism_Tank</name>
+    <stats life="100" damage="40" defense="8" movement="4"
+           attack_speed="5" range="5" energy="2"
+           units ="1" attack_type="1" armored="true"/>
+    <sprite>textures/units/sprite_gi.png</sprite>
+
+    <button>
+      <frame x="200" y="160" width="100" height="80"/>
+      <frame x="300" y="160" width="100" height="80"/>
+      <frame x="200" y="240" width="100" height="80"/>
+      <frame x="0" y="0" width="100" height="80"/>
+      <unit_drag x="400" y="160" width="100" height="80"/>
+    </button>
+  </card>
+
+  <card type ="7">
+    <name>Nighthawk</name>
+    <stats life="100" damage="6" defense="6" movement="7"
+           attack_speed="9" range="5" energy="2"
+           units ="3" attack_type="0" armored="false"/>
+    <sprite>textures/units/sprite_gi.png</sprite>
+
+    <button>
+      <frame x="200" y="320" width="100" height="80"/>
+      <frame x="300" y="320" width="100" height="80"/>
+      <frame x="200" y="400" width="100" height="80"/>
+      <frame x="0" y="0" width="100" height="80"/>
+      <unit_drag x="200" y="320" width="100" height="80"/>
+    </button>
+  </card>
+
+  <card type ="8">
+    <name>Harrrier</name>
+    <stats life="80" damage="70" defense="3" movement="8"
+           attack_speed="4" range="5" energy="2"
+           units ="2" attack_type="1" armored="true"/>
+    <sprite>textures/units/sprite_gi.png</sprite>
+
+    <button>
+      <frame x="0" y="320" width="100" height="80"/>
+      <frame x="100" y="320" width="100" height="80"/>
+      <frame x="0" y="400" width="100" height="80"/>
+      <frame x="0" y="0" width="100" height="80"/>
+      <unit_drag x="0" y="320" width="100" height="80"/>
+    </button>
+  </card>
+
+  <card type ="9">
+    <name>Black_Eagle</name>
+    <stats life="70" damage="150" defense="4" movement="10"
+           attack_speed="2" range="5" energy="2"
+           units ="1" attack_type="2" armored="false"/>
+    <sprite>textures/units/sprite_gi.png</sprite>
+
+    <button>
+      <frame x="400" y="320" width="100" height="80"/>
+      <frame x="500" y="320" width="100" height="80"/>
+      <frame x="400" y="400" width="100" height="80"/>
+      <frame x="0" y="0" width="100" height="80"/>
+      <unit_drag x="400" y="320" width="100" height="80"/>
+    </button>
+  </card>
+  
 </config>

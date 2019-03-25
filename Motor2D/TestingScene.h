@@ -40,7 +40,11 @@ private:
 	SDL_Texture*	debug_tex;
 	SDL_Texture*	ui_background;
 
-	UIButton*		unit_button;
+	UIButton*		unit_button_one;
+	UIButton*		unit_button_two;
+	UIButton*		unit_button_three;
+	UIButton*		unit_button_four;
+
 	Entity* test_core;
 	Summoner* test_summoner;
 
