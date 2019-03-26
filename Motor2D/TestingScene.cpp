@@ -13,6 +13,7 @@
 #include "PathFinding.h"
 #include "UIAnimatedImage.h"
 #include "UIButton.h"
+#include "UIBar.h"
 #include "GUI.h"
 #include "TransitionManager.h"
 #include "CardManager.h"
@@ -60,7 +61,7 @@ bool TestingScene::Start()
 	unit_button_three = App->gui->CreateButton({ 790, 445 }, test_summoner->GetCard(CardNumber::CN_THIRD)->button.anim);
 	unit_button_four = App->gui->CreateButton({ 890, 445 }, test_summoner->GetCard(CardNumber::CN_FOURTH)->button.anim);
 
-	App->gui->CreateBar({ 0,0 }, { 601,0,24,277 });
+	energy_bar = App->gui->CreateBar({ 0,0 }, { 601,0,24,277 });
 
 	return true;
 }
@@ -131,6 +132,12 @@ bool TestingScene::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_8) == KEY_DOWN)
 		App->transition_manager->CreateFadeTransition(1.5F, false, 0, Pink);
+
+	if (App->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
+		energy_bar->LossPoint();
+
+	if (App->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN)
+		energy_bar->GainPoint();
 
 	
 	return true;

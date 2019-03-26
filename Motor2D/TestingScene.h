@@ -9,6 +9,7 @@ struct UIButton;
 struct UIImage;
 class Entity;
 class Summoner;
+class UIBar;
 
 struct Card;
 
@@ -44,6 +45,7 @@ private:
 	UIButton*		unit_button_two;
 	UIButton*		unit_button_three;
 	UIButton*		unit_button_four;
+	UIBar*			energy_bar;
 
 	Entity* test_core;
 	Summoner* test_summoner;

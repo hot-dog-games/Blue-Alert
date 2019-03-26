@@ -9,6 +9,8 @@ public:
 	UIBar(iPoint pos, SDL_Rect sprite_rect, bool is_interactable = true);
 	~UIBar();
 
+	void LossPoint();
+	void GainPoint();
 	bool UIBlit();
 
 	//bool CleanUp();

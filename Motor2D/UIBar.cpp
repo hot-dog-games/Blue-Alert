@@ -12,6 +12,20 @@ UIBar::UIBar(iPoint pos, SDL_Rect sprite_rect, bool is_interactable)
 	rect_sprite = sprite_rect;
 }
 
+void UIBar::LossPoint()
+{
+	uint height = rect_box.h / 100;
+	rect_sprite.h -= height;
+	rect_box.y += height;
+}
+
+void UIBar::GainPoint()
+{
+	uint height = rect_box.h / 100;
+	rect_sprite.h += height;
+	rect_box.y -= height;
+}
+
 bool UIBar::UIBlit()
 {
 	iPoint screen_pos = GetScreenPos();
