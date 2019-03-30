@@ -5,8 +5,7 @@
 #include "p2Point.h"
 
 struct SDL_Texture;
-class Entity;
-class Summoner;
+class Core;
 
 struct Card;
 
@@ -34,8 +33,7 @@ public:
 
 private:
 	SDL_Texture* debug_tex;
-	Entity* test_core;
-	Summoner* test_summoner;
+	Core* test_core;
 };
 
 #endif

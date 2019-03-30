@@ -4,9 +4,8 @@
 #include "Textures.h"
 #include "Input.h"
 #include "DynamicEntity.h"
-#include "StaticEntity.h"
-#include "Summoner.h"
 #include "CardManager.h"
+#include "Core.h"
 #include "Deck.h"
 #include "EntityManager.h"
 
@@ -105,32 +104,16 @@ Entity* EntityManager::CreateEntity(EntityType type, fPoint position, Card* card
 	return entity;
 }
 
-Entity* EntityManager::CreateEntity(EntityType type, fPoint position)
+Core* EntityManager::CreateCore(EntityType type, fPoint position, Deck* deck)
 {
 	std::string id = std::to_string(id_count);
 	pugi::xml_node entity_node = entity_configs.find_child_by_attribute("type", std::to_string((int)type).c_str());
 
 	id += "_CORE";
 
-	StaticEntity* entity = new StaticEntity(entity_node, position);
+	Core* entity = new Core(entity_node, position);
 	entities.push_back(entity);
-
-	id_count++;
-
-	return entity;
-}
-
-Summoner* EntityManager::CreateSummoner(Deck * deck)
-{
-	std::string id = std::to_string(id_count);
-	pugi::xml_node entity_node = entity_configs.find_child_by_attribute("type", std::to_string((int)NONE).c_str());
-
-	id += "_SUMMONER";
-
-	Summoner* entity = new Summoner();
 	entity->SetDeck(deck);
-	entity->SetMaxEnergy(entity_node.attribute("energy").as_uint());
-	entities.push_back(entity);
 
 	id_count++;
 

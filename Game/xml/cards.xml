@@ -1,9 +1,17 @@
 <config>
   <card type ="1">
     <name>G.I</name>
-    <stats life="50" damage="5" defense="5" movement="7"
-           attack_speed="10" range="5" energy="2"
-           units ="4" attack_type="1" armored="false"/>
+    <combat attack_type="1" armored="false"/>
+    <stats>
+      <stat stat="health" value ="50"/>
+      <stat stat="damage" value ="5"/>
+      <stat stat="defense" value ="5"/>
+      <stat stat="movement" value ="7"/>
+      <stat stat="attack_speed" value ="10"/>
+      <stat stat="range" value ="5"/>
+      <stat stat="energy_cost" value ="2"/>
+      <stat stat="units" value ="4"/>
+    </stats>
     <icon></icon>
     <sprite>textures/units/sprite_gi.png</sprite>
   </card>

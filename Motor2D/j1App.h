@@ -21,6 +21,7 @@ class EntityManager;
 class Pathfinding;
 class CardManager;
 class TransitionManager;
+class BuffSourceManager;
 
 class j1App
 {
@@ -95,6 +96,7 @@ public:
 	CardManager*	card_manager;
 	EntityManager*	entity_manager;
 	TransitionManager* transition_manager;
+	BuffSourceManager* buff;
 
 private:
 

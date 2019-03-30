@@ -5,7 +5,7 @@
 #include "p2Point.h"
 
 class Entity;
-class Summoner;
+class Core;
 struct Card;
 class Deck;
 
@@ -36,8 +36,7 @@ public:
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;
 	Entity* CreateEntity(EntityType type, fPoint position, Card* card);
-	Entity* CreateEntity(EntityType type, fPoint position);
-	Summoner* CreateSummoner(Deck* deck);
+	Core* CreateCore(EntityType type, fPoint position, Deck* deck);
 	bool DeleteEntity(Entity* entity);
 
 private:
