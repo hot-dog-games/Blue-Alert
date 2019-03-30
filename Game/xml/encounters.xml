@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<encounter_tree>
+  <encounter name="land" ai_difficulty="1">
+    <deck>
+      <card type="1"></card>
+      <card type="1"></card>
+      <card type="1"></card>
+      <card type="1"></card>
+    </deck>
+  </encounter>
+  <encounter name="aerial" ai_difficulty="1">
+    <deck>
+      <card type="1"></card>
+      <card type="1"></card>
+      <card type="1"></card>
+      <card type="1"></card>
+    </deck>
+  </encounter>
+  <encounter name="infantry" ai_difficulty="1">
+    <deck>
+      <card type="1"></card>
+      <card type="1"></card>
+      <card type="1"></card>
+      <card type="1"></card>
+    </deck>
+  </encounter>
+  <encounter name="store" ai_difficulty="1">
+    <deck>
+      <card type="1"></card>
+      <card type="1"></card>
+      <card type="1"></card>
+      <card type="1"></card>
+    </deck>
+  </encounter>
+</encounter_tree>

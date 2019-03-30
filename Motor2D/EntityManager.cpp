@@ -123,7 +123,7 @@ Entity* EntityManager::CreateEntity(EntityType type, fPoint position)
 Summoner* EntityManager::CreateSummoner(Deck * deck)
 {
 	std::string id = std::to_string(id_count);
-	pugi::xml_node entity_node = entity_configs.find_child_by_attribute("type", std::to_string((int)SUMMONER).c_str());
+	pugi::xml_node entity_node = entity_configs.find_child_by_attribute("type", std::to_string((int)NONE).c_str());
 
 	id += "_SUMMONER";
 

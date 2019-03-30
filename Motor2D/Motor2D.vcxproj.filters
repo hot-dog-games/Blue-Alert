@@ -88,6 +88,8 @@
     <ClCompile Include="CameraTranslation.cpp">
       <Filter>Engine\Transitions</Filter>
     </ClCompile>
+    <ClCompile Include="EncounterTree.cpp" />
+    <ClCompile Include="EncounterNode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="p2Defs.h">
@@ -192,6 +194,8 @@
     <ClInclude Include="CameraTranslation.h">
       <Filter>Engine\Transitions</Filter>
     </ClInclude>
+    <ClInclude Include="EncounterTree.h" />
+    <ClInclude Include="EncounterNode.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

@@ -10,7 +10,7 @@ struct Card;
 class Deck;
 
 enum EntityType {
-	SUMMONER = -1,
+	NONE = -1,
 	CORE,
 	G_I,
 	SNIPER,
