@@ -1,0 +1,30 @@
+<config>
+	<source name="health_1">
+	  <buff stat="health" value ="20" type ="additive"/>
+	</source>
+	
+	<source name="health_2">
+	  <buff stat="health" value ="20" type ="additive"/>
+	</source>
+
+	<source name="energy_1">
+	  <buff stat="energy" value ="2" type ="additive"/>
+	</source>
+	
+	<source name="energy_2">
+	  <buff stat="energy" value ="4" type ="additive"/>
+	</source>
+
+	<source name="energy_regen_1">
+	  <buff stat="energy_regen" value ="0.2" type ="additive"/>
+	</source>
+
+	<source name="energy_regen_2">
+	  <buff stat="energy_regen" value ="0.4" type ="additive"/>
+	</source>
+	
+	<source name="energy_regen_3">
+	  <buff stat="energy_regen" value ="0.6" type ="additive"/>
+	</source>
+	
+ </config>

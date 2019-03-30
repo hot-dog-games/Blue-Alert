@@ -15,7 +15,7 @@ StaticEntity::StaticEntity()
 
 StaticEntity::StaticEntity(pugi::xml_node entity_node, fPoint position) : Entity(entity_node, position)
 {
-	SetMaxLife(entity_node.attribute("life").as_uint());
+
 }
 
 

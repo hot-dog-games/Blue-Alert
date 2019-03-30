@@ -1,8 +1,14 @@
 <config>
-  <entity type ="-1" energy="10"/>
   
-  <entity type ="0" life ="100">
-    <sprite>textures/buildings/sprite_core.png</sprite>
+  <entity type ="0">
+    <stats>
+      <stat stat="health" value ="1000"/>
+      <stat stat="energy" value ="10"/>
+      <stat stat="energy_regen" value ="1"/>
+    </stats>
+    
+    <!-- TODO HAVE DIFFERENT SPRITES FOR CORE TYPE-->
+    <sprite>textures/buildings/sprite_core.png</sprite>    
     <animations>
       <idle speed="5.0F">
         <frame x="45" y="52" width="147" height="129"/>
@@ -14,6 +20,7 @@
         <frame x="0" y="0" width="0" height="0"/>
       </destroyed>
     </animations>
+  
   </entity>
   
   <entity type ="1">
