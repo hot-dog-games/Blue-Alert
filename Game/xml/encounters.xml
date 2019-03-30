@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
 <encounter_tree>
-  <encounter name="land" ai_difficulty="1">
+  <encounter id="0" name="start" ai_difficulty="1">
     <deck>
       <card type="1"></card>
       <card type="1"></card>
@@ -9,7 +9,7 @@
       <card type="1"></card>
     </deck>
   </encounter>
-  <encounter name="aerial" ai_difficulty="1">
+  <encounter id="1" name="land" ai_difficulty="1">
     <deck>
       <card type="1"></card>
       <card type="1"></card>
@@ -17,7 +17,7 @@
       <card type="1"></card>
     </deck>
   </encounter>
-  <encounter name="infantry" ai_difficulty="1">
+  <encounter id="2" name="aerial" ai_difficulty="1">
     <deck>
       <card type="1"></card>
       <card type="1"></card>
@@ -25,7 +25,15 @@
       <card type="1"></card>
     </deck>
   </encounter>
-  <encounter name="store" ai_difficulty="1">
+  <encounter id="3" name="infantry" ai_difficulty="1">
+    <deck>
+      <card type="1"></card>
+      <card type="1"></card>
+      <card type="1"></card>
+      <card type="1"></card>
+    </deck>
+  </encounter>
+  <encounter id="4" name="store" ai_difficulty="1">
     <deck>
       <card type="1"></card>
       <card type="1"></card>

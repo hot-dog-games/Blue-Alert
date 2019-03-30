@@ -5,6 +5,7 @@
 
 EncounterNode::EncounterNode()
 {
+
 }
 
 
@@ -29,6 +30,7 @@ EncounterNode * EncounterNode::GetParent() const
 
 EncounterNode * EncounterNode::AddChild(EncounterNode * child)
 {
+	child->parent = this;
 	children.push_back(child);
 	return child;
 }
