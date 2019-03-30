@@ -1,4 +1,7 @@
 #include "TransitionManager.h"
+#include "Fade.h"
+#include "Zoom.h"
+#include "CameraTranslation.h"
 #include "j1App.h"
 #include "Render.h"
 #include "Window.h"
@@ -60,15 +63,19 @@ bool TransitionManager::CleanUp()
 	return true;
 }
 
-void TransitionManager::CreateTransition(Transition::TransitionType type, float transition_time, bool is_scene_change, int scene_to_transition)
-{
-	active_transitions.push_back(new Transition(type, transition_time, is_scene_change, scene_to_transition));
-}
-
 void TransitionManager::CreateFadeTransition(float transition_time, bool is_scene_change, int scene_to_transition, Color color)
 {
-	active_transitions.push_back(new Transition(Transition::TransitionType::FADE, transition_time, is_scene_change, scene_to_transition));
-	active_transitions.back()->SetColor(color);
+	active_transitions.push_back(new Fade(transition_time, is_scene_change, scene_to_transition, color));
+}
+
+void TransitionManager::CreateZoomTransition(float transition_time, float scale)
+{
+	active_transitions.push_back(new Zoom(transition_time, scale));
+}
+
+void TransitionManager::CreateCameraTranslation(float transition_time, iPoint origin, iPoint destination)
+{
+	active_transitions.push_back(new CameraTranslation(transition_time, origin, destination));
 }
 
 void TransitionManager::DestroyTransition(Transition * transition_to_destroy)
