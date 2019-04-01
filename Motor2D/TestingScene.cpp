@@ -60,8 +60,8 @@ bool TestingScene::Start()
 	unit_button_two = App->gui->CreateButton({ 890, 365 }, test_summoner->GetCard(CardNumber::CN_SECOND)->button.anim);
 	unit_button_three = App->gui->CreateButton({ 790, 445 }, test_summoner->GetCard(CardNumber::CN_THIRD)->button.anim);
 	unit_button_four = App->gui->CreateButton({ 890, 445 }, test_summoner->GetCard(CardNumber::CN_FOURTH)->button.anim);
-
-	energy_bar = App->gui->CreateBar({ 764, 358 }, { 601,0,16,274 }, 10);
+	
+	/*energy_bar = App->gui->CreateBar({ 764, 358 }, { 601,0,16,274 }, &test_summoner->GetCurrentEnergy(), test_summoner->GetMaxEnergy());*/
 
 	return true;
 }
@@ -90,18 +90,6 @@ bool TestingScene::PreUpdate()
 			origin = p;
 			origin_selected = true;
 		}
-	}
-
-	//Bar Logic
-	if (energy_bar->GetCurrentValue() <= energy_bar->GetMaxValue() && energy_timer.ReadMs() > 1500)
-	{
-		energy_bar->IncreaseBar(1);
-		energy_timer.Start();
-	}
-
-	if(energy_bar->GetCurrentValue() >= energy_bar->GetMaxValue())
-	{
-		energy_timer.Start();
 	}
 
 	return true;
@@ -215,7 +203,7 @@ bool TestingScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 
 		current_drag->interactable = true;
 		current_drag->dragable = true;
-		energy_bar->DecreaseBar(test_summoner->GetCard(card_num)->info.energy_cost);
+
 	}
 	else if (gui_event == GUI_Event::LEFT_CLICK_UP) {
 		/*if (element == current_drag) {
