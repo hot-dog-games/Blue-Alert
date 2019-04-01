@@ -37,7 +37,7 @@ EncounterNode * EncounterNode::GetParent() const
 EncounterNode * EncounterNode::AddChild(EncounterNode * child)
 {
 	child->SetParent(this);
-	child->SetPosition({ position.x, position.y - 50 });
+	child->SetPosition({ position.x + (rand() % 200 - 100), position.y - 100 });
 	children.push_back(child);
 	return child;
 }
@@ -50,6 +50,11 @@ std::vector<EncounterNode*> EncounterNode::GetChildren() const
 void EncounterNode::SetPosition(iPoint position)
 {
 	this->position = position;
+}
+
+iPoint EncounterNode::GetPosition()
+{
+	return position;
 }
 
 

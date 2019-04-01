@@ -35,6 +35,7 @@ public:
 	std::vector<EncounterNode*> GetChildren() const;
 
 	void SetPosition(iPoint position);
+	iPoint GetPosition();
 
 	void LoadEncounterInfo(pugi::xml_node encounter_node);
 

@@ -4,6 +4,8 @@
 #include "Scene.h"
 #include "p2Point.h"
 #include "EncounterTree.h"
+#include "UIButton.h"
+#include "UIImage.h"
 
 
 struct SDL_Texture;
@@ -30,10 +32,19 @@ public:
 	// Called before quitting
 	virtual bool CleanUp();
 
+	void CreateNodeButtons();
+
+	virtual bool GUIEvent(UIElement* element, GUI_Event gui_event);
+
 private:
 	SDL_Texture * background;
+	UIImage * node_image = nullptr;
 
-	EncounterTree* level = nullptr;
+	EncounterTree* encounter_tree = nullptr;
+	std::vector<UIButton*> node_buttons;
+	SDL_Rect node_rect;
+
+	EncounterNode* current_node = nullptr;
 };
 
 #endif

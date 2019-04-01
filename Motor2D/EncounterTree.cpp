@@ -22,6 +22,7 @@ EncounterTree * EncounterTree::CreateTree()
 	EncounterNode* start_encounter = new EncounterNode();
 	start_encounter->LoadEncounterInfo(GetXmlEncounterNodeById(0)); //Start node creation
 	start_encounter->visited = true;
+	start_encounter->SetPosition({ 500, 500 });
 	map_encounters.push_back(start_encounter);
 
 	EncounterNode* infantry_encounter = new EncounterNode();
@@ -49,6 +50,8 @@ EncounterTree * EncounterTree::CreateTree()
 	aerial_encounter->AddChild(infantry_encounter_02);
 	map_encounters.push_back(infantry_encounter_02);
 
+
+
 	LOG("NODES", map_encounters.size());
 
 	return this;
@@ -64,6 +67,11 @@ bool EncounterTree::LoadDocument()
 		encounter_tree = encounters.child("encounter_tree");
 
 	return true;
+}
+
+std::vector<EncounterNode*> EncounterTree::GetNodes()
+{
+	return map_encounters;
 }
 
 pugi::xml_node EncounterTree::GetXmlEncounterNodeById(int id)

@@ -20,6 +20,8 @@ public:
 	EncounterTree* CreateTree();
 	bool LoadDocument();
 
+	std::vector<EncounterNode*> GetNodes();
+
 	pugi::xml_node GetXmlEncounterNodeById(int id);
 };
 
