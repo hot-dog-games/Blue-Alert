@@ -61,7 +61,7 @@ bool TestingScene::Start()
 	unit_button_three = App->gui->CreateButton({ 790, 445 }, test_summoner->GetCard(CardNumber::CN_THIRD)->button.anim);
 	unit_button_four = App->gui->CreateButton({ 890, 445 }, test_summoner->GetCard(CardNumber::CN_FOURTH)->button.anim);
 
-	energy_bar = App->gui->CreateBar({ 0,0 }, { 601,0,24,277 }, 10);
+	energy_bar = App->gui->CreateBar({ 764, 358 }, { 601,0,16,274 }, 10);
 
 	return true;
 }
@@ -92,7 +92,17 @@ bool TestingScene::PreUpdate()
 		}
 	}
 
-	
+	//Bar Logic
+	if (energy_bar->GetCurrentValue() <= energy_bar->GetMaxValue() && energy_timer.ReadMs() > 1500)
+	{
+		energy_bar->IncreaseBar(1);
+		energy_timer.Start();
+	}
+
+	if(energy_bar->GetCurrentValue() >= energy_bar->GetMaxValue())
+	{
+		energy_timer.Start();
+	}
 
 	return true;
 }
@@ -132,9 +142,6 @@ bool TestingScene::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_8) == KEY_DOWN)
 		App->transition_manager->CreateFadeTransition(1.5F, false, 0, Pink);
-
-	if (App->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN)
-		energy_bar->IncreaseBar();
 
 	
 	return true;

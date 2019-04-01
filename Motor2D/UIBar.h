@@ -10,13 +10,16 @@ public:
 	~UIBar();
 
 	void DecreaseBar(uint value);
-	void IncreaseBar();
+	void IncreaseBar(uint value);
 	bool UIBlit();
 
+	uint GetMaxValue() const;
+	uint GetCurrentValue() const;
 	//bool CleanUp();
 
 private:
 	uint max_value = 0;
+	uint current_value = 0;
 
 };
 

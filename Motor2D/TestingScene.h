@@ -3,6 +3,7 @@
 
 #include "Scene.h"
 #include "p2Point.h"
+#include "PerfTimer.h"
 
 struct SDL_Texture;
 struct UIButton;
@@ -54,6 +55,8 @@ private:
 
 	uint max_energy;
 	uint current_energy;
+
+	PerfTimer energy_timer;
 };
 
 #endif
