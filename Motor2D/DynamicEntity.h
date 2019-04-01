@@ -1,16 +1,15 @@
 #ifndef _DYNAMIC_ENTITY_
 #define _DYNAMIC_ENTITY_
 
-#include "Animation.h"
 #include "Entity.h"
 
 struct Card;
 
 enum DynamicState {
-	IDLE,
-	MOVING,
-	ATTACKING,
-	DYING
+	DYNAMIC_IDLE,
+	DYNAMIC_MOVING,
+	DYNAMIC_ATTACKING,
+	DYNAMIC_DYING
 };
 
 enum EntiyDirection {
@@ -29,23 +28,20 @@ class DynamicEntity : public Entity
 public:
 	DynamicEntity();
 	~DynamicEntity();
+	DynamicEntity(pugi::xml_node config, fPoint position, Card* card);
 
 	virtual bool PreUpdate() { return true; };
-	virtual bool Update(float dt) { return true; };
-	virtual bool PostUpdate() { return true; };
+	virtual bool Update(float dt);
+	virtual bool PostUpdate();
 	virtual bool CleanUp() { return true; };
 
 	virtual void Die() {};
 	virtual void Move() {};
 	virtual void Attack() {};
 
-	void SetCard(Card* card);
-
 protected:
 	DynamicState state;
 	EntiyDirection direction;
-	std::vector<Animation> animations;
-	SDL_Rect current_frame;
 	Card* entity_card;
 };
 

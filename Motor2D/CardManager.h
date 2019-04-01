@@ -1,22 +1,19 @@
 #ifndef _CARD_MANAGER_H_
 #define _CARD_MANAGER_H_
 
+#include <map>
+
 #include "p2Defs.h"
 #include "Module.h"
 #include "Animation.h"
+#include "EntityManager.h"
+
+class Stat;
 
 enum AttackType {
 	BASIC,
 	AOE,
 	PIERCING
-};
-
-enum CardType {
-	G_I,
-	SNIPER,
-	NAVY_SEAL,
-	GRIZZLY
-	//...
 };
 
 struct CardScaling {
@@ -31,26 +28,20 @@ struct CardInfo {
 	AttackType attack_type;
 	CardScaling scaling;
 
-	uint life;
-	uint defense;
-	uint movement_speed;
-	uint attack_damage;
-	uint attack_speed;
-	uint range;
-	uint energy_cost;
-	uint unit_number;
+	std::map<std::string, Stat*> stats;
 	bool armored;
 
-	std::string sprite;
+
 };
 struct Card {
-	CardType type;
+	EntityType type;
 	CardInfo info;
 
-	std::string name;
 	uint level;
+	std::string name;
+	std::string sprite_path;
+
 	bool to_delete = false;
-	std::vector<Animation> animations;
 };
 
 class CardManager : public Module
@@ -66,16 +57,17 @@ public:
 	bool Load(pugi::xml_node&) { return true; }
 	bool Save(pugi::xml_node&) const { return true; }
 
-	Card* CreateCard(CardType type);
+	Card* CreateCard(EntityType type);
 	Card* DeleteCard(Card* card);
+
+private:
+	void LoadCardStats(Card* card, pugi::xml_node stats_node);
 
 private:
 	bool to_delete = false;
 	pugi::xml_document config_file;
 	pugi::xml_node card_configs;
 	std::list<Card*> cards;
-
-	Card* test_card;
 };
 
 #endif // _CARD_MANAGER_H_

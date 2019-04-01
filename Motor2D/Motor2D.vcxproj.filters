@@ -58,9 +58,6 @@
     <ClCompile Include="DynamicEntity.cpp">
       <Filter>Engine\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="Summoner.cpp">
-      <Filter>Engine\Entities</Filter>
-    </ClCompile>
     <ClCompile Include="Deck.cpp">
       <Filter>Engine\Others</Filter>
     </ClCompile>
@@ -69,6 +66,34 @@
     </ClCompile>
     <ClCompile Include="TransitionManager.cpp">
       <Filter>Engine\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Engine\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Color.cpp">
+      <Filter>Engine\Others</Filter>
+    </ClCompile>
+    <ClCompile Include="Buff.cpp">
+      <Filter>Engine\Others</Filter>
+    </ClCompile>
+    <ClCompile Include="Stat.cpp">
+      <Filter>Engine\Others</Filter>
+    </ClCompile>
+    <ClCompile Include="BuffSourceManager.cpp">
+      <Filter>Engine\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Core.cpp" />
+    <ClCompile Include="Transition.cpp">
+      <Filter>Engine\Transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="Zoom.cpp">
+      <Filter>Engine\Transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="Fade.cpp">
+      <Filter>Engine\Transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraTranslation.cpp">
+      <Filter>Engine\Transitions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -144,9 +169,6 @@
     <ClInclude Include="DynamicEntity.h">
       <Filter>Engine\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="Summoner.h">
-      <Filter>Engine\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="Deck.h">
       <Filter>Engine\Others</Filter>
     </ClInclude>
@@ -155,6 +177,34 @@
     </ClInclude>
     <ClInclude Include="TransitionManager.h">
       <Filter>Engine\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>Engine\Others</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Engine\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Buff.h">
+      <Filter>Engine\Others</Filter>
+    </ClInclude>
+    <ClInclude Include="Stat.h">
+      <Filter>Engine\Others</Filter>
+    </ClInclude>
+    <ClInclude Include="BuffSourceManager.h">
+      <Filter>Engine\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Core.h" />
+    <ClInclude Include="Transition.h">
+      <Filter>Engine\Transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="Zoom.h">
+      <Filter>Engine\Transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="Fade.h">
+      <Filter>Engine\Transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraTranslation.h">
+      <Filter>Engine\Transitions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -178,6 +228,9 @@
     </Filter>
     <Filter Include="Engine\Others">
       <UniqueIdentifier>{a8bfab6a-5472-4969-943e-861a8b493f08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Transitions">
+      <UniqueIdentifier>{c28106c4-fa11-42a3-a3b1-7e4c15fe8610}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

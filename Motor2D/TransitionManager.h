@@ -4,10 +4,22 @@
 //This is the module that Marc will do on his research?
 
 #include "Module.h"
+#include "Color.h"
+#include "Transition.h"
 
 class TransitionManager :
 	public Module
 {
+public:
+
+
+private:
+	std::list<Transition*> active_transitions;
+
+	//Util variables for diverse transitions
+	SDL_Rect screen;
+
+
 public:
 	TransitionManager();
 	~TransitionManager();
@@ -25,6 +37,12 @@ public:
 	// Called before quitting
 	virtual bool CleanUp();
 
+	//--------------------------------
+
+	void CreateFadeTransition(float transition_time, bool is_scene_change = false, int scene_to_transition = 0, Color color = Black);
+	void CreateZoomTransition(float transition_time, float scale = 2);
+	void CreateCameraTranslation(float transition_time, iPoint origin, iPoint destination);
+	void DestroyTransition(Transition* transition_to_destroy);
 };
 
 #endif

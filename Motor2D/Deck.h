@@ -1,9 +1,9 @@
 #ifndef _DECK_H_
 #define _DECK_H_
 
-#include <vector>
-
 struct Card;
+
+const uint MAX_CARDS = 4;
 
 class Deck
 {
@@ -11,15 +11,16 @@ public:
 	Deck();
 	~Deck();
 
-	void AddCard();
-	void RemoveCard();
-	void UpgradeCard();
+	void CleanUp();
+	void AddCard(Card* card);
+	void RemoveCard(uint position);
 
-private:
-	std::vector<Card*> card_list;
+	Card* cards[MAX_CARDS];
+
+	bool delete_cards = false;
 };
 
-#endif // !_DECK_H_
+#endif // _DECK_H_
 
 
 
