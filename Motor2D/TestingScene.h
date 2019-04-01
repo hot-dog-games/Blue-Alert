@@ -51,6 +51,9 @@ private:
 	Summoner* test_summoner;
 
 	UIImage* current_drag;
+
+	uint max_energy;
+	uint current_energy;
 };
 
 #endif

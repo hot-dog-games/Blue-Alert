@@ -5,6 +5,7 @@
 #include "CardManager.h"
 #include "Deck.h"
 #include "Summoner.h"
+#include "SceneManager.h"
 
 
 
@@ -45,6 +46,11 @@ void Summoner::SetMaxEnergy(uint energy)
 {
 	max_energy = energy;
 	current_energy = max_energy;
+}
+
+uint const Summoner::GetMaxEnergy()
+{
+	return max_energy;
 }
 
 Card * Summoner::GetCard(CardNumber card_num) const

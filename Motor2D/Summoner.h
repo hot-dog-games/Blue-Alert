@@ -4,8 +4,11 @@
 #include "Entity.h"
 
 class Deck;
+struct Card;
 
 enum CardNumber{
+	CN_UNKOWN = -1,
+	
 	CN_FIRST,
 	CN_SECOND,
 	CN_THIRD,
@@ -22,6 +25,7 @@ public:
 	void UseCard(CardNumber number, fPoint position);
 	void SetDeck(Deck* new_deck);
 	void SetMaxEnergy(uint energy);
+	uint const GetMaxEnergy();
 	Card* GetCard(CardNumber card_num) const;
 
 private:

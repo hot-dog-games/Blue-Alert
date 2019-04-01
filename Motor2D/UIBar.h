@@ -6,14 +6,17 @@
 class UIBar : public UIElement 
 {
 public:
-	UIBar(iPoint pos, SDL_Rect sprite_rect, bool is_interactable = true);
+	UIBar(iPoint pos, SDL_Rect sprite_rect, uint max, bool is_interactable = true);
 	~UIBar();
 
-	void LossPoint();
-	void GainPoint();
+	void DecreaseBar(uint value);
+	void IncreaseBar();
 	bool UIBlit();
 
 	//bool CleanUp();
+
+private:
+	uint max_value = 0;
 
 };
 

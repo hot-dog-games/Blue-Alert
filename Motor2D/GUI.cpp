@@ -212,9 +212,9 @@ UIAnimatedImage* Gui::CreateAnimatedImage(iPoint pos, SDL_Rect * rect, int total
 	return image;
 }
 
-UIBar * Gui::CreateBar(iPoint pos, SDL_Rect rect, UIElement * parent)
+UIBar * Gui::CreateBar(iPoint pos, SDL_Rect rect, uint max, UIElement * parent)
 {
-	UIBar* bar = new UIBar(pos, rect, parent);
+	UIBar* bar = new UIBar(pos, rect, max, parent);
 	bar->parent = parent;
 	elements.push_back(bar);
 	return bar;

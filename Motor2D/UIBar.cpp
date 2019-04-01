@@ -2,24 +2,25 @@
 #include "Render.h"
 #include "GUI.h"
 #include "UIBar.h"
-#include "Color.h"
+#include "Summoner.h"
 
-UIBar::UIBar(iPoint pos, SDL_Rect sprite_rect, bool is_interactable)
+UIBar::UIBar(iPoint pos, SDL_Rect sprite_rect, uint max, bool is_interactable)
 {
 	interactable = is_interactable;
 	rect_box = { pos.x, pos.y, sprite_rect.w,sprite_rect.h };
 
 	rect_sprite = sprite_rect;
+	max_value = max;
 }
 
-void UIBar::LossPoint()
+void UIBar::DecreaseBar(uint value)
 {
-	uint height = rect_box.h / 100;
-	rect_sprite.h -= height;
+	uint height = (rect_box.h / max_value) * value;
+	rect_sprite.h -= height ;
 	rect_box.y += height;
 }
 
-void UIBar::GainPoint()
+void UIBar::IncreaseBar()
 {
 	uint height = rect_box.h / 100;
 	rect_sprite.h += height;

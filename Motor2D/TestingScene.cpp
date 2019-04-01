@@ -49,7 +49,7 @@ bool TestingScene::Start()
 	Deck* test_deck = new Deck();
 	test_deck->delete_cards = true;
 	test_deck->AddCard(App->card_manager->CreateCard(EntityType::G_I));
-	test_deck->AddCard(App->card_manager->CreateCard(EntityType::ROBOT));
+	test_deck->AddCard(App->card_manager->CreateCard(EntityType::SNIPER));
 	test_deck->AddCard(App->card_manager->CreateCard(EntityType::NAVY_SEAL));
 	test_deck->AddCard(App->card_manager->CreateCard(EntityType::HARRIER));
 
@@ -61,7 +61,7 @@ bool TestingScene::Start()
 	unit_button_three = App->gui->CreateButton({ 790, 445 }, test_summoner->GetCard(CardNumber::CN_THIRD)->button.anim);
 	unit_button_four = App->gui->CreateButton({ 890, 445 }, test_summoner->GetCard(CardNumber::CN_FOURTH)->button.anim);
 
-	energy_bar = App->gui->CreateBar({ 0,0 }, { 601,0,24,277 });
+	energy_bar = App->gui->CreateBar({ 0,0 }, { 601,0,24,277 }, 10);
 
 	return true;
 }
@@ -133,11 +133,8 @@ bool TestingScene::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_8) == KEY_DOWN)
 		App->transition_manager->CreateFadeTransition(1.5F, false, 0, Pink);
 
-	if (App->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
-		energy_bar->LossPoint();
-
 	if (App->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN)
-		energy_bar->GainPoint();
+		energy_bar->IncreaseBar();
 
 	
 	return true;
@@ -192,21 +189,26 @@ bool TestingScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 	App->input->GetMousePosition(x, y);
 
 	if (gui_event == GUI_Event::LEFT_CLICK_DOWN) {
+		CardNumber card_num = CardNumber::CN_UNKOWN;
+
 		if (element == unit_button_one) {
-			current_drag = App->gui->CreateImage({ x,y }, test_summoner->GetCard(CardNumber::CN_FIRST)->button.drag);
-			
+			card_num = CardNumber::CN_FIRST;
 		}
 		else if (element == unit_button_two) {
-			current_drag = App->gui->CreateImage({ x,y }, test_summoner->GetCard(CardNumber::CN_SECOND)->button.drag);
+			card_num = CardNumber::CN_SECOND;
 		}
 		else if (element == unit_button_three) {
-			current_drag = App->gui->CreateImage({ x,y }, test_summoner->GetCard(CardNumber::CN_THIRD)->button.drag);
+			card_num = CardNumber::CN_THIRD;
 		}
 		else if (element == unit_button_four) {
-			current_drag = App->gui->CreateImage({ x,y }, test_summoner->GetCard(CardNumber::CN_FOURTH)->button.drag);
+			card_num = CardNumber::CN_FOURTH;
 		}
+
+		current_drag = App->gui->CreateImage({ x,y }, test_summoner->GetCard(card_num)->button.drag);
+
 		current_drag->interactable = true;
 		current_drag->dragable = true;
+		energy_bar->DecreaseBar(test_summoner->GetCard(card_num)->info.energy_cost);
 	}
 	else if (gui_event == GUI_Event::LEFT_CLICK_UP) {
 		/*if (element == current_drag) {
