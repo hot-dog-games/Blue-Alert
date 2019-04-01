@@ -17,7 +17,7 @@ public:
 	EncounterTree();
 	~EncounterTree();
 
-	EncounterTree* CreateMap();
+	EncounterTree* CreateTree();
 	bool LoadDocument();
 
 	pugi::xml_node GetXmlEncounterNodeById(int id);

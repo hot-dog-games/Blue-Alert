@@ -26,7 +26,9 @@ StrategyMap::~StrategyMap()
 bool StrategyMap::Start()
 {
 	level = new EncounterTree();
-	level->CreateMap();
+	level->CreateTree();
+
+	background = App->tex->Load("textures/strategy_scene/background.png");
 
 	return true;
 }
@@ -58,6 +60,8 @@ bool StrategyMap::PostUpdate()
 	bool ret = true;
 
 	App->map->Draw();
+	App->render->Blit(background, 0, 0);
+	App->render->camera.y = -300;
 
 	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
@@ -70,7 +74,7 @@ bool StrategyMap::CleanUp()
 {
 	LOG("Freeing scene");
 
-	App->tex->UnLoad(debug_tex);
+	App->tex->UnLoad(background);
 
 	return true;
 }

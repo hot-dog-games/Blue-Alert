@@ -2,6 +2,7 @@
 #include <vector>
 #include "p2Defs.h"
 #include "PugiXml\src\pugixml.hpp"
+#include "p2Point.h"
 
 struct Encounter {
 	std::string name = ""; // indica el tipo de edificio que es.
@@ -20,8 +21,11 @@ protected:
 	//------Encounter-----
 	Encounter* encounter = nullptr;
 
+	iPoint position = {0,0};
+
 public:
 	EncounterNode();
+	EncounterNode(iPoint position);
 	~EncounterNode();
 
 	void SetParent(EncounterNode * parent);
@@ -30,6 +34,7 @@ public:
 	EncounterNode * AddChild(EncounterNode * child);
 	std::vector<EncounterNode*> GetChildren() const;
 
+	void SetPosition(iPoint position);
 
 	void LoadEncounterInfo(pugi::xml_node encounter_node);
 

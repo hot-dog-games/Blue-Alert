@@ -31,7 +31,8 @@ public:
 	virtual bool CleanUp();
 
 private:
-	SDL_Texture * debug_tex;
+	SDL_Texture * background;
+
 	EncounterTree* level = nullptr;
 };
 

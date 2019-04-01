@@ -8,6 +8,12 @@ EncounterNode::EncounterNode()
 	encounter = new Encounter();
 }
 
+EncounterNode::EncounterNode(iPoint position)
+{
+	encounter = new Encounter();
+	this->position = position;
+}
+
 
 EncounterNode::~EncounterNode()
 {
@@ -31,6 +37,7 @@ EncounterNode * EncounterNode::GetParent() const
 EncounterNode * EncounterNode::AddChild(EncounterNode * child)
 {
 	child->SetParent(this);
+	child->SetPosition({ position.x, position.y - 50 });
 	children.push_back(child);
 	return child;
 }
@@ -38,6 +45,11 @@ EncounterNode * EncounterNode::AddChild(EncounterNode * child)
 std::vector<EncounterNode*> EncounterNode::GetChildren() const
 {
 	return children;
+}
+
+void EncounterNode::SetPosition(iPoint position)
+{
+	this->position = position;
 }
 
 

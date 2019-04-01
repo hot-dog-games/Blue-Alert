@@ -13,7 +13,7 @@ EncounterTree::~EncounterTree()
 
 }
 
-EncounterTree * EncounterTree::CreateMap()
+EncounterTree * EncounterTree::CreateTree()
 {
 	LoadDocument();
 
