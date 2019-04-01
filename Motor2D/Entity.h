@@ -9,6 +9,7 @@
 #include "PugiXml\src\pugixml.hpp"
 
 struct SDL_Texture;
+class Stat;
 
 enum Faction {
 	AMERICAN,
@@ -43,5 +44,8 @@ protected:
 	uint max_life;
 	uint current_life;
 	Faction faction;
+
+	std::map<std::string, Stat*> stats;
+
 };
 #endif // _ENTITY_H_

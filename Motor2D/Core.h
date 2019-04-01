@@ -7,7 +7,6 @@
 #include "StaticEntity.h"
 
 class Deck;
-class Stat;
 
 
 class Core : public StaticEntity
@@ -26,6 +25,8 @@ public:
 	Core(pugi::xml_node entity_config, fPoint position);
 	~Core();
 
+	bool Update(float dt);
+
 	bool CleanUp();
 
 	void UseCard(CardNumber number, fPoint position);
@@ -38,8 +39,8 @@ public:
 private:
 	Deck* deck;
 
-	std::map<std::string, Stat*> stats;
-	Stat* energy;
+	PerfTimer energy_timer;
+
 };
 
 #endif // _CORE_H_

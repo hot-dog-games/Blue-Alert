@@ -24,6 +24,7 @@ public:
 	float GetValue();
 	float GetMaxValue();
 	void DecreaseStat(float value);
+	void IncreaseStat(float value);
 };
 
 #endif // !_STAT_H_
