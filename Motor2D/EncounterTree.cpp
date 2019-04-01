@@ -29,10 +29,25 @@ EncounterTree * EncounterTree::CreateMap()
 	start_encounter->AddChild(infantry_encounter);
 	map_encounters.push_back(infantry_encounter);
 
+	EncounterNode* land_encounter = new EncounterNode();
+	land_encounter->LoadEncounterInfo(GetXmlEncounterNodeById(1));
+	infantry_encounter->AddChild(land_encounter);
+	map_encounters.push_back(land_encounter);
+
+	EncounterNode* aerial_encounter_02 = new EncounterNode();
+	aerial_encounter_02->LoadEncounterInfo(GetXmlEncounterNodeById(2));
+	infantry_encounter->AddChild(aerial_encounter_02);
+	map_encounters.push_back(aerial_encounter_02);
+
 	EncounterNode* aerial_encounter = new EncounterNode();
 	aerial_encounter->LoadEncounterInfo(GetXmlEncounterNodeById(2)); 
 	start_encounter->AddChild(aerial_encounter);
 	map_encounters.push_back(aerial_encounter);
+
+	EncounterNode* infantry_encounter_02 = new EncounterNode();
+	infantry_encounter_02->LoadEncounterInfo(GetXmlEncounterNodeById(3));
+	aerial_encounter->AddChild(infantry_encounter_02);
+	map_encounters.push_back(infantry_encounter_02);
 
 	LOG("NODES", map_encounters.size());
 

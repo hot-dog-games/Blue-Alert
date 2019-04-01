@@ -47,8 +47,6 @@ bool TestingScene::Start()
 	test_deck->AddCard(App->card_manager->CreateCard(EntityType::G_I));
 
 	test_core = App->entity_manager->CreateCore(EntityType::CORE, { 0,0 }, test_deck);
-	level = new EncounterTree();
-	level->CreateMap();
 
 	return true;
 }

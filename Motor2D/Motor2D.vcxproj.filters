@@ -97,6 +97,9 @@
     </ClCompile>
     <ClCompile Include="EncounterTree.cpp" />
     <ClCompile Include="EncounterNode.cpp" />
+    <ClCompile Include="StrategyMap.cpp">
+      <Filter>Engine\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="p2Defs.h">
@@ -210,6 +213,9 @@
     </ClInclude>
     <ClInclude Include="EncounterTree.h" />
     <ClInclude Include="EncounterNode.h" />
+    <ClInclude Include="StrategyMap.h">
+      <Filter>Engine\Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
