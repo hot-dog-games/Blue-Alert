@@ -74,3 +74,11 @@ float Stat::GetMaxValue()
 {
 	return max_value;
 }
+
+void Stat::DecreaseStat(float value)
+{
+	base_value -= value;
+	CalculateStat();
+	if (base_value < 0)
+		base_value = 0;
+}

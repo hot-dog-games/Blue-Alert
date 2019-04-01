@@ -39,7 +39,7 @@ private:
 	Deck* deck;
 
 	std::map<std::string, Stat*> stats;
-	uint current_energy;
+	Stat* energy;
 };
 
 #endif // _CORE_H_

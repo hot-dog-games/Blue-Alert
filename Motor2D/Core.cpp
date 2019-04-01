@@ -19,7 +19,7 @@ Core::Core(pugi::xml_node entity_config, fPoint position): StaticEntity(entity_c
 			new Stat(iter.attribute("value").as_int())));
 	}
 
-	current_energy = stats.find("energy")->second->GetValue();
+	energy = stats.find("energy")->second;
 }
 
 Core::~Core()
@@ -37,10 +37,10 @@ bool Core::CleanUp()
 void Core::UseCard(CardNumber number, fPoint position)
 {
 	uint energy_cost = deck->cards[(int)number]->info.stats.find("energy_cost")->second->GetValue();
-	if (current_energy >= energy_cost)
+	if (energy->GetValue() >= energy_cost)
 	{
 		App->entity_manager->CreateEntity(deck->cards[(int)number]->type, position, deck->cards[(int)number]);
-		current_energy -= energy_cost;
+		energy->DecreaseStat(energy_cost);
 	}
 }
 

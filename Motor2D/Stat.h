@@ -23,6 +23,7 @@ public:
 	void CalculateStat();
 	float GetValue();
 	float GetMaxValue();
+	void DecreaseStat(float value);
 };
 
 #endif // !_STAT_H_
