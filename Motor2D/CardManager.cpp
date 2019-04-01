@@ -73,7 +73,7 @@ Card* CardManager::CreateCard(EntityType type)
 	card->sprite_path = card_node.child("sprite").child_value();
 
 	LoadCardStats(card, card_node.child("stats"));
-
+	LoadCardButton(card, card_node.child("button"));
 	cards.push_back(card);
 
 	return card;
@@ -101,5 +101,25 @@ void CardManager::LoadCardStats(Card* card, pugi::xml_node stats_node)
 
 	card->info.attack_type = (AttackType)stats_node.attribute("attack_type").as_uint();
 	card->info.armored = stats_node.attribute("armored").as_bool();
+}
+
+void CardManager::LoadCardButton(Card * card, pugi::xml_node button_node)
+{
+	uint anim_num = 0;
+	for (pugi::xml_node animation = button_node.child("frame"); animation; animation = animation.next_sibling())
+	{
+		
+		card->button.anim[anim_num].x = animation.attribute("x").as_uint();
+		card->button.anim[anim_num].y = animation.attribute("y").as_uint();
+		card->button.anim[anim_num].w = animation.attribute("width").as_uint();
+		card->button.anim[anim_num].h = animation.attribute("height").as_uint();
+
+		anim_num++;
+	}
+
+	card->button.drag.x = button_node.child("unit_drag").attribute("x").as_uint();
+	card->button.drag.y = button_node.child("unit_drag").attribute("y").as_uint();
+	card->button.drag.w = button_node.child("unit_drag").attribute("width").as_uint();
+	card->button.drag.h = button_node.child("unit_drag").attribute("height").as_uint();
 }
 
