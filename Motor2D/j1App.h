@@ -23,6 +23,7 @@ class CardManager;
 class Gui;
 class Fonts;
 class TransitionManager;
+class BuffSourceManager;
 
 class j1App
 {
@@ -99,6 +100,7 @@ public:
 	Fonts*			fonts;
 	EntityManager*	entity_manager;
 	TransitionManager* transition_manager;
+	BuffSourceManager* buff;
 
 private:
 

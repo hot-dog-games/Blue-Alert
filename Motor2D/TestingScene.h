@@ -3,14 +3,13 @@
 
 #include "Scene.h"
 #include "p2Point.h"
-#include "PerfTimer.h"
 
 struct SDL_Texture;
 struct UIButton;
 struct UIImage;
 class Entity;
-class Summoner;
 class UIBar;
+class Core;
 
 struct Card;
 
@@ -48,15 +47,12 @@ private:
 	UIButton*		unit_button_four;
 	UIBar*			energy_bar;
 
-	Entity* test_core;
-	Summoner* test_summoner;
-
 	UIImage* current_drag;
 
 	uint max_energy;
 	uint current_energy;
 
-	PerfTimer energy_timer;
+	Core* test_core;
 };
 
 #endif

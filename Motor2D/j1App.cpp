@@ -16,6 +16,7 @@
 #include "CardManager.h"
 #include "GUI.h"
 #include "Fonts.h"
+#include "BuffSourceManager.h"
 #include "TransitionManager.h"
 #include "j1App.h"
 
@@ -39,6 +40,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	fonts = new Fonts();
 	entity_manager = new EntityManager();
 	transition_manager = new TransitionManager();
+	buff = new BuffSourceManager();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -54,7 +56,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(pathfinding);
 	AddModule(transition_manager);
 	AddModule(gui);
-
+	AddModule(buff);
 
 	// render last to swap buffer
 	AddModule(render);

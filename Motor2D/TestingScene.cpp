@@ -9,7 +9,7 @@
 #include "Map.h"
 #include "EntityManager.h"
 #include "Entity.h"
-#include "Summoner.h"
+#include "Core.h"
 #include "PathFinding.h"
 #include "UIAnimatedImage.h"
 #include "UIButton.h"
@@ -53,8 +53,7 @@ bool TestingScene::Start()
 	test_deck->AddCard(App->card_manager->CreateCard(EntityType::NAVY_SEAL));
 	test_deck->AddCard(App->card_manager->CreateCard(EntityType::HARRIER));
 
-	test_core = App->entity_manager->CreateEntity(EntityType::CORE, { 0,0 });
-	test_summoner = App->entity_manager->CreateSummoner(test_deck);
+	test_core = App->entity_manager->CreateCore(EntityType::CORE, { 0,0 }, test_deck);
 
 	unit_button_one = App->gui->CreateButton({ 790, 365 }, test_summoner->GetCard(CardNumber::CN_FIRST)->button.anim);
 	unit_button_two = App->gui->CreateButton({ 890, 365 }, test_summoner->GetCard(CardNumber::CN_SECOND)->button.anim);
@@ -123,15 +122,15 @@ bool TestingScene::Update(float dt)
 		test_core->DecreaseLife(5);
 
 	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
-		test_summoner->UseCard(CardNumber::CN_FIRST, { float(x),float(y) });
+		test_core->UseCard(Core::CardNumber::FIRST, { float(x),float(y) });
 
-	if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
-		App->entity_manager->DeleteEntity(test_summoner);
+	if (App->input->GetKey(SDL_SCANCODE_8) == KEY_DOWN) {
+		App->transition_manager->CreateFadeTransition(3.0f, false, 0, White);
+		App->transition_manager->CreateZoomTransition(3.0f);
+		//App->transition_manager->CreateCameraTranslation(3.0f, { App->render->camera.x, App->render->camera.y }, { 0, 0 });
+	}
+		
 
-	if (App->input->GetKey(SDL_SCANCODE_8) == KEY_DOWN)
-		App->transition_manager->CreateFadeTransition(1.5F, false, 0, Pink);
-
-	
 	return true;
 }
 
