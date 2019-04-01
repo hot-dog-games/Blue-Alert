@@ -5,7 +5,7 @@
 
 EncounterNode::EncounterNode()
 {
-
+	encounter = new Encounter();
 }
 
 
@@ -30,7 +30,7 @@ EncounterNode * EncounterNode::GetParent() const
 
 EncounterNode * EncounterNode::AddChild(EncounterNode * child)
 {
-	child->parent = this;
+	child->SetParent(this);
 	children.push_back(child);
 	return child;
 }
@@ -44,7 +44,7 @@ std::vector<EncounterNode*> EncounterNode::GetChildren() const
 void EncounterNode::LoadEncounterInfo(pugi::xml_node encounter_node)
 {
 	encounter->name = encounter_node.attribute("name").as_string();
-	encounter->ai_difficulty = encounter_node.attribute("ai_difficulti").as_uint();
+	encounter->ai_difficulty = encounter_node.attribute("ai_difficulty").as_int();
 
 	pugi::xml_node deck_node = encounter_node.child("deck");
 

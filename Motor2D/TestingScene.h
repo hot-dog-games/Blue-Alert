@@ -3,6 +3,7 @@
 
 #include "Scene.h"
 #include "p2Point.h"
+#include "EncounterTree.h"
 
 struct SDL_Texture;
 class Core;
@@ -34,6 +35,7 @@ public:
 private:
 	SDL_Texture* debug_tex;
 	Core* test_core;
+	EncounterTree* level = nullptr;
 };
 
 #endif

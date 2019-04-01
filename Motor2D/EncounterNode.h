@@ -4,8 +4,8 @@
 #include "PugiXml\src\pugixml.hpp"
 
 struct Encounter {
-	std::string name; // indica el tipo de edificio que es.
-	int ai_difficulty;
+	std::string name = ""; // indica el tipo de edificio que es.
+	int ai_difficulty = 0;
 	int deck[4];
 	//BUFF
 };
@@ -17,10 +17,8 @@ protected:
 	EncounterNode* parent;
 	std::vector<EncounterNode*> children;
 
-	bool visited = false;
-
 	//------Encounter-----
-	Encounter* encounter;
+	Encounter* encounter = nullptr;
 
 public:
 	EncounterNode();
@@ -38,5 +36,8 @@ public:
 	//-----Emcounter Accessors-----
 	std::string EncounterNode::GetEncounterName() const;
 
+public:
+
+	bool visited = false;
 
 };

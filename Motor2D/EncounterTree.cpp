@@ -21,17 +21,20 @@ EncounterTree * EncounterTree::CreateMap()
 
 	EncounterNode* start_encounter = new EncounterNode();
 	start_encounter->LoadEncounterInfo(GetXmlEncounterNodeById(0)); //Start node creation
+	start_encounter->visited = true;
 	map_encounters.push_back(start_encounter);
 
 	EncounterNode* infantry_encounter = new EncounterNode();
 	infantry_encounter->LoadEncounterInfo(GetXmlEncounterNodeById(3)); 
-	map_encounters.push_back(infantry_encounter);
 	start_encounter->AddChild(infantry_encounter);
+	map_encounters.push_back(infantry_encounter);
 
 	EncounterNode* aerial_encounter = new EncounterNode();
 	aerial_encounter->LoadEncounterInfo(GetXmlEncounterNodeById(2)); 
-	map_encounters.push_back(aerial_encounter);
 	start_encounter->AddChild(aerial_encounter);
+	map_encounters.push_back(aerial_encounter);
+
+	LOG("NODES", map_encounters.size());
 
 	return this;
 }
@@ -43,7 +46,7 @@ bool EncounterTree::LoadDocument()
 	if (result == NULL)
 		LOG("Could not load card xml file. pugi error: %s", result.description());
 	else
-		encounter_tree = encounters.child("config");
+		encounter_tree = encounters.child("encounter_tree");
 
 	return true;
 }
