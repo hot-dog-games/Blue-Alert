@@ -55,12 +55,12 @@ bool TestingScene::Start()
 
 	test_core = App->entity_manager->CreateCore(EntityType::CORE, { 0,0 }, test_deck);
 
-	unit_button_one = App->gui->CreateButton({ 790, 365 }, test_summoner->GetCard(CardNumber::CN_FIRST)->button.anim);
-	unit_button_two = App->gui->CreateButton({ 890, 365 }, test_summoner->GetCard(CardNumber::CN_SECOND)->button.anim);
-	unit_button_three = App->gui->CreateButton({ 790, 445 }, test_summoner->GetCard(CardNumber::CN_THIRD)->button.anim);
-	unit_button_four = App->gui->CreateButton({ 890, 445 }, test_summoner->GetCard(CardNumber::CN_FOURTH)->button.anim);
+	unit_button_one = App->gui->CreateButton({ 790, 365 }, test_core->GetCard(Core::CardNumber::CN_FIRST)->button.anim);
+	unit_button_two = App->gui->CreateButton({ 890, 365 }, test_core->GetCard(Core::CardNumber::CN_SECOND)->button.anim);
+	unit_button_three = App->gui->CreateButton({ 790, 445 }, test_core->GetCard(Core::CardNumber::CN_THIRD)->button.anim);
+	unit_button_four = App->gui->CreateButton({ 890, 445 }, test_core->GetCard(Core::CardNumber::CN_FOURTH)->button.anim);
 	
-	/*energy_bar = App->gui->CreateBar({ 764, 358 }, { 601,0,16,274 }, &test_summoner->GetCurrentEnergy(), test_summoner->GetMaxEnergy());*/
+	energy_bar = App->gui->CreateBar({ 764, 358 }, { 601,0,16,274 }, test_core->GetEnergy());
 
 	return true;
 }
@@ -122,7 +122,7 @@ bool TestingScene::Update(float dt)
 		test_core->DecreaseLife(5);
 
 	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
-		test_core->UseCard(Core::CardNumber::FIRST, { float(x),float(y) });
+		test_core->UseCard(Core::CardNumber::CN_FIRST, { float(x),float(y) });
 
 	if (App->input->GetKey(SDL_SCANCODE_8) == KEY_DOWN) {
 		App->transition_manager->CreateFadeTransition(3.0f, false, 0, White);
@@ -183,48 +183,50 @@ bool TestingScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 	App->input->GetMousePosition(x, y);
 
 	if (gui_event == GUI_Event::LEFT_CLICK_DOWN) {
-		CardNumber card_num = CardNumber::CN_UNKOWN;
+		Core::CardNumber card_num = Core::CardNumber::CN_UNKNOWN;
 
 		if (element == unit_button_one) {
-			card_num = CardNumber::CN_FIRST;
+			card_num = Core::CardNumber::CN_FIRST;
 		}
 		else if (element == unit_button_two) {
-			card_num = CardNumber::CN_SECOND;
+			card_num = Core::CardNumber::CN_SECOND;
 		}
 		else if (element == unit_button_three) {
-			card_num = CardNumber::CN_THIRD;
+			card_num = Core::CardNumber::CN_THIRD;
 		}
 		else if (element == unit_button_four) {
-			card_num = CardNumber::CN_FOURTH;
+			card_num = Core::CardNumber::CN_FOURTH;
 		}
 
-		current_drag = App->gui->CreateImage({ x,y }, test_summoner->GetCard(card_num)->button.drag);
+		if (card_num != Core::CardNumber::CN_UNKNOWN) {
+			current_drag = App->gui->CreateImage({ x - 40,y - 50 }, test_core->GetCard(card_num)->button.drag);
 
-		current_drag->interactable = true;
-		current_drag->dragable = true;
+			current_drag->interactable = true;
+			current_drag->dragable = true;
+		}
 
 	}
 	else if (gui_event == GUI_Event::LEFT_CLICK_UP) {
-		/*if (element == current_drag) {
-			test_summoner->UseCard(CardNumber::CN_FIRST, { float(x),float(y) });
+		if (element == current_drag) {
+			test_core->UseCard(Core::CardNumber::CN_FIRST, { float(x),float(y) });
 			App->gui->DeleteElement(current_drag);
 			current_drag = nullptr;
 		}
 		else if (element == unit_button_two) {
-			test_summoner->UseCard(CardNumber::CN_SECOND, { float(x),float(y) });
+			test_core->UseCard(Core::CardNumber::CN_SECOND, { float(x),float(y) });
 			App->gui->DeleteElement(current_drag);
 			current_drag = nullptr;
 		}
 		else if (element == unit_button_three) {
-			test_summoner->UseCard(CardNumber::CN_THIRD, { float(x),float(y) });
+			test_core->UseCard(Core::CardNumber::CN_THIRD, { float(x),float(y) });
 			App->gui->DeleteElement(current_drag);
 			current_drag = nullptr;
 		}
 		else if (element == unit_button_four) {
-			test_summoner->UseCard(CardNumber::CN_FOURTH, { float(x),float(y) });
+			test_core->UseCard(Core::CardNumber::CN_FOURTH, { float(x),float(y) });
 			App->gui->DeleteElement(current_drag);
 			current_drag = nullptr;
-		}*/
+		}
 		
 	}
 

@@ -9,7 +9,8 @@
 
 Stat::Stat(float base) :
 	base_value(base),
-	final_value(base)
+	final_value(base),
+	max_value(base)
 {
 }
 
@@ -67,4 +68,9 @@ void Stat::CalculateStat()
 float Stat::GetValue()
 {
 	return final_value;
+}
+
+float Stat::GetMaxValue()
+{
+	return max_value;
 }

@@ -10,6 +10,7 @@ class Buff;
 class Stat {
 private:
 	float final_value;
+	float max_value;
 	std::vector<Buff*> additive_buffs;
 	std::vector<Buff*> multiplicative_buffs;
 
@@ -21,6 +22,7 @@ public:
 	void RemoveBuff(uint source_id);
 	void CalculateStat();
 	float GetValue();
+	float GetMaxValue();
 };
 
 #endif // !_STAT_H_

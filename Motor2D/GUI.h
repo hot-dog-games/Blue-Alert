@@ -18,6 +18,7 @@ class UIScrollBar;
 class UIAnimatedImage;
 class UILabel;
 class UIBar;
+class Stat;
 
 enum GUI_Event {
 	LEFT_CLICK_DOWN,
@@ -65,7 +66,7 @@ public:
 	UIButton* CreateButton(iPoint pos, SDL_Rect* sprite_rect, UIElement* parent = nullptr, bool is_interactable = true);
 	UIScrollBar* CreateScrollBar(iPoint pos, float min, float max, ScrollType type = VERTICAL, UIElement* parent = nullptr);
 	UIAnimatedImage* CreateAnimatedImage(iPoint pos, SDL_Rect * rect, int total_sprites, int speed, UIElement* parent = nullptr);
-	UIBar* CreateBar(iPoint pos, SDL_Rect rect, uint* extern_value, uint max, UIElement* parent = nullptr);
+	UIBar* CreateBar(iPoint pos, SDL_Rect rect, Stat* value, UIElement* parent = nullptr);
 
 	void DeleteElement(UIElement* element);
 

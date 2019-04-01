@@ -2,22 +2,21 @@
 #include "Render.h"
 #include "GUI.h"
 #include "UIBar.h"
-#include "Summoner.h"
+#include "Stat.h"
 
-UIBar::UIBar(iPoint pos, SDL_Rect sprite_rect, uint* current, uint max, bool is_interactable)
+UIBar::UIBar(iPoint pos, SDL_Rect sprite_rect, Stat* value, bool is_interactable)
 {
 	interactable = is_interactable;
 	rect_box = { pos.x, pos.y, sprite_rect.w,sprite_rect.h };
 
 	rect_sprite = sprite_rect;
-	max_value = max;
-	current_value = max_value;
-	current_extern_value = current;
+	bar_value = value;
+	current_value = value->GetValue();
 }
 
 void UIBar::DecreaseBar(uint value)
 {
-	uint height = (rect_box.h / max_value) * value;
+	uint height = (rect_box.h / bar_value->GetMaxValue()) * value;
 	rect_sprite.h -= height;
 	rect_box.y += height;
 	current_value -= value;
@@ -25,7 +24,7 @@ void UIBar::DecreaseBar(uint value)
 
 void UIBar::IncreaseBar(uint value)
 {
-	uint height = (rect_box.h / max_value) * value;
+	uint height = (rect_box.h / bar_value->GetMaxValue()) * value;
 	rect_sprite.h += height;
 	rect_box.y -= height;
 	current_value += value;
@@ -43,23 +42,13 @@ bool UIBar::UIBlit()
 
 bool UIBar::Update(float dt)
 {
-	if (*current_extern_value > current_value) {
-		IncreaseBar(*current_extern_value - current_value);
+	if (bar_value->GetValue() > current_value) {
+		IncreaseBar(bar_value->GetValue() - current_value);
 	}
-	else if (*current_extern_value < current_value) {
-		DecreaseBar(current_value - *current_extern_value);
+	else if (bar_value->GetValue() < current_value) {
+		DecreaseBar(current_value - bar_value->GetValue());
 	}
 		
 
 	return true;
-}
-
-uint UIBar::GetMaxValue() const
-{
-	return max_value;
-}
-
-uint UIBar::GetCurrentValue() const
-{
-	return current_value;
 }

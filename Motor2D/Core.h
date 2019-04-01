@@ -13,11 +13,13 @@ class Stat;
 class Core : public StaticEntity
 {
 public:
-	enum class CardNumber {
-		FIRST,
-		SECOND,
-		THIRD,
-		FOURTH
+	enum CardNumber {
+		CN_UNKNOWN = -1,
+
+		CN_FIRST,
+		CN_SECOND,
+		CN_THIRD,
+		CN_FOURTH
 	};
 
 public:
@@ -28,6 +30,9 @@ public:
 
 	void UseCard(CardNumber number, fPoint position);
 	void SetDeck(Deck* new_deck);
+	Card* GetCard(CardNumber card_num) const;
+
+	Stat* GetEnergy() const;
 
 
 private:
