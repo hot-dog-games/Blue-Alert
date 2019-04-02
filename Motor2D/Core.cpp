@@ -27,6 +27,8 @@ Core::~Core()
 
 bool Core::Update(float dt)
 {
+	StaticEntity::Update(dt);
+
 	if (energy_timer.ReadMs() > 1000) {
 		stats.find("energy")->second->IncreaseStat(stats.find("energy_regen")->second->GetValue());
 		energy_timer.Start();

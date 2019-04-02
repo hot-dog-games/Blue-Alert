@@ -123,7 +123,7 @@ bool TestingScene::Update(float dt)
 		test_core->DecreaseLife(5);
 
 	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
-		test_core->UseCard(CardNumber::CN_FIRST, {(float)p.x, (float)p.y});
+		test_core->UseCard(Core::CardNumber::CN_FIRST, {(float)p.x, (float)p.y});
 
 	if (App->input->GetKey(SDL_SCANCODE_8) == KEY_DOWN) {
 		App->transition_manager->CreateFadeTransition(3.0f, false, 0, White);
@@ -149,7 +149,6 @@ bool TestingScene::PostUpdate()
 	App->input->GetMousePosition(x, y);
 	iPoint p = App->render->ScreenToWorld(x, y);
 	p = App->map->WorldToMap(p.x, p.y);
-	LOG("casilla %i %i", p.x, p.y);
 	p = App->map->MapToWorld(p.x, p.y);
 
 	App->render->Blit(debug_tex, p.x, p.y);
