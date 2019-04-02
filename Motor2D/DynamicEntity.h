@@ -40,9 +40,9 @@ public:
 	virtual void Attack() {};
 
 protected:
-	DynamicState state;
-	EntiyDirection direction;
-	Card* entity_card;
+	DynamicState state = DYNAMIC_IDLE;
+	EntiyDirection direction = UP;
+	Card* entity_card = nullptr;
 };
 
 #endif // !_DYNAMIC_ENTITY_

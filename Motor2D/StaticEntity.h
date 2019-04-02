@@ -25,7 +25,7 @@ public:
 	virtual void Die();
 
 private:
-	Static_State state;
+	Static_State state = STATIC_IDLE;
 };
 
 #endif // _STATIC_ENTITY_H_

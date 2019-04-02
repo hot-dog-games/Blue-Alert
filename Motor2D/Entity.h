@@ -40,7 +40,7 @@ public:
 protected:
 	std::vector<Animation> animations;
 	SDL_Rect current_frame;
-	SDL_Texture* sprite;
+	SDL_Texture* sprite = nullptr;
 	uint max_life;
 	uint current_life;
 	Faction faction;

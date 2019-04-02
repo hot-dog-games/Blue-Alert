@@ -37,7 +37,7 @@ public:
 
 
 private:
-	Deck* deck;
+	Deck* deck = nullptr;
 
 	PerfTimer energy_timer;
 
