@@ -3,6 +3,7 @@
 #include "Textures.h"
 #include "Input.h"
 #include "p2Log.h"
+#include "Stat.h"
 #include "CardManager.h"
 
 
@@ -72,7 +73,7 @@ Card* CardManager::CreateCard(EntityType type)
 	card->sprite_path = card_node.child("sprite").child_value();
 
 	LoadCardStats(card, card_node.child("stats"));
-
+	LoadCardButton(card, card_node.child("button"));
 	cards.push_back(card);
 
 	return card;
@@ -88,15 +89,37 @@ Card* CardManager::DeleteCard(Card* card)
 
 void CardManager::LoadCardStats(Card* card, pugi::xml_node stats_node)
 {
-	card->info.life = stats_node.attribute("life").as_uint();
-	card->info.attack_damage = stats_node.attribute("damage").as_uint();
-	card->info.defense = stats_node.attribute("defense").as_uint();
-	card->info.movement_speed = stats_node.attribute("movement").as_uint();
-	card->info.attack_speed = stats_node.attribute("attack_speed").as_uint();
-	card->info.range = stats_node.attribute("range").as_uint();
-	card->info.energy_cost = stats_node.attribute("energy").as_uint();
-	card->info.unit_number = stats_node.attribute("units").as_uint();
+	for (pugi::xml_node iter = stats_node.child("stat"); iter; iter = iter.next_sibling("stat"))
+	{
+		std::string stat_name = iter.attribute("stat").as_string();
+
+		//Create the stat
+		card->info.stats.insert(std::pair<std::string, Stat*>(
+			stat_name,
+			new Stat(iter.attribute("value").as_int())));
+	}
+
 	card->info.attack_type = (AttackType)stats_node.attribute("attack_type").as_uint();
 	card->info.armored = stats_node.attribute("armored").as_bool();
+}
+
+void CardManager::LoadCardButton(Card * card, pugi::xml_node button_node)
+{
+	uint anim_num = 0;
+	for (pugi::xml_node animation = button_node.child("frame"); animation; animation = animation.next_sibling())
+	{
+		
+		card->button.anim[anim_num].x = animation.attribute("x").as_uint();
+		card->button.anim[anim_num].y = animation.attribute("y").as_uint();
+		card->button.anim[anim_num].w = animation.attribute("width").as_uint();
+		card->button.anim[anim_num].h = animation.attribute("height").as_uint();
+
+		anim_num++;
+	}
+
+	card->button.drag.x = button_node.child("unit_drag").attribute("x").as_uint();
+	card->button.drag.y = button_node.child("unit_drag").attribute("y").as_uint();
+	card->button.drag.w = button_node.child("unit_drag").attribute("width").as_uint();
+	card->button.drag.h = button_node.child("unit_drag").attribute("height").as_uint();
 }
 

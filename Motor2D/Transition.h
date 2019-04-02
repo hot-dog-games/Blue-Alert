@@ -16,58 +16,31 @@ private:
 		EXITING
 	};
 
-public:
-	enum class TransitionType {
-		FADE,
-		ZOOM
-	};
-
-private:
-	TransitionType type;
+protected:
 	TransitionState state;
 
 	float transition_time;
 	Timer* current_time = nullptr;
 
-	bool is_scene_change = false;
-	int scene_to_change = 0;
-
-	//---Specific transitions variables-------
-	SDL_Rect screen;
-
-	//Fade
-	Color color;
-
-	//Zoom
-	float scale;
 
 public:
 
 	Transition();
-	Transition(TransitionType type, float time, bool is_scene_change = false, int scene_to_change = 0);
+	Transition(float transition_time);
 	~Transition();
 
-	void OnCreate();
+
 	void PreUpdate();
 	void Update();
 	void PostUpdate();
 
-	//------Getters & Setters------
+	//-----Update process-------
 
-	TransitionState GetState();
-	void SetState(TransitionState state);
-	TransitionType GetType();
-	void SetColor(Color color);
-
-	//---------------------------
-
-	void Entering();
-	void Action();
-	void Exiting();
+	virtual void Entering();
+	virtual void Action();
+	virtual void Exiting();
 
 	//---Specific transitions methods-------
-
-	void DrawFadeRect(float alpha_value);
 };
 
 #endif // _TRANSITION_H_

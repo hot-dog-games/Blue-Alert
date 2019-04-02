@@ -20,7 +20,10 @@ class Map;
 class EntityManager;
 class Pathfinding;
 class CardManager;
+class Gui;
+class Fonts;
 class TransitionManager;
+class BuffSourceManager;
 
 class j1App
 {
@@ -93,8 +96,11 @@ public:
 	Map*			map;
 	Pathfinding*	pathfinding;
 	CardManager*	card_manager;
+	Gui*			gui;
+	Fonts*			fonts;
 	EntityManager*	entity_manager;
 	TransitionManager* transition_manager;
+	BuffSourceManager* buff;
 
 private:
 

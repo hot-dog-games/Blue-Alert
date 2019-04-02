@@ -9,8 +9,12 @@
 #include "Map.h"
 #include "EntityManager.h"
 #include "Entity.h"
-#include "Summoner.h"
+#include "Core.h"
 #include "PathFinding.h"
+#include "UIAnimatedImage.h"
+#include "UIButton.h"
+#include "UIBar.h"
+#include "GUI.h"
 #include "TransitionManager.h"
 #include "CardManager.h"
 #include "Deck.h"
@@ -40,14 +44,23 @@ bool TestingScene::Start()
 	}
 
 	debug_tex = App->tex->Load("maps/path2.png");
-
+	ui_background = App->tex->Load("ui/background.png");
 
 	Deck* test_deck = new Deck();
 	test_deck->delete_cards = true;
 	test_deck->AddCard(App->card_manager->CreateCard(EntityType::G_I));
+	test_deck->AddCard(App->card_manager->CreateCard(EntityType::SNIPER));
+	test_deck->AddCard(App->card_manager->CreateCard(EntityType::NAVY_SEAL));
+	test_deck->AddCard(App->card_manager->CreateCard(EntityType::HARRIER));
 
-	test_core = App->entity_manager->CreateEntity(EntityType::CORE, { 0,0 });
-	test_summoner = App->entity_manager->CreateSummoner(test_deck);
+	test_core = App->entity_manager->CreateCore(EntityType::CORE, { 0,0 }, test_deck);
+
+	unit_button_one = App->gui->CreateButton({ 790, 365 }, test_core->GetCard(Core::CardNumber::CN_FIRST)->button.anim);
+	unit_button_two = App->gui->CreateButton({ 890, 365 }, test_core->GetCard(Core::CardNumber::CN_SECOND)->button.anim);
+	unit_button_three = App->gui->CreateButton({ 790, 445 }, test_core->GetCard(Core::CardNumber::CN_THIRD)->button.anim);
+	unit_button_four = App->gui->CreateButton({ 890, 445 }, test_core->GetCard(Core::CardNumber::CN_FOURTH)->button.anim);
+	
+	energy_bar = App->gui->CreateBar({ 764, 358 }, { 601,0,16,274 }, test_core->GetEnergy());
 
 	return true;
 }
@@ -110,15 +123,15 @@ bool TestingScene::Update(float dt)
 		test_core->DecreaseLife(5);
 
 	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
-		test_summoner->UseCard(CardNumber::CN_FIRST, {(float)p.x, (float)p.y});
+		test_core->UseCard(CardNumber::CN_FIRST, {(float)p.x, (float)p.y});
 
-	if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
-		App->pathfinding->CreatePath({ 0,0 }, { 5,5 });
+	if (App->input->GetKey(SDL_SCANCODE_8) == KEY_DOWN) {
+		App->transition_manager->CreateFadeTransition(3.0f, false, 0, White);
+		App->transition_manager->CreateZoomTransition(3.0f);
+		//App->transition_manager->CreateCameraTranslation(3.0f, { App->render->camera.x, App->render->camera.y }, { 0, 0 });
+	}
+		
 
-	if (App->input->GetKey(SDL_SCANCODE_8) == KEY_DOWN)
-		App->transition_manager->CreateFadeTransition(1.5F, false, 0, Pink);
-
-	
 	return true;
 }
 
@@ -128,6 +141,8 @@ bool TestingScene::PostUpdate()
 	bool ret = true;
 
 	App->map->Draw();
+
+	App->render->Blit(ui_background, 755, 0, NULL, 0.0f);
 
 	// Debug pathfinding ------------------------------
 	int x, y;
@@ -160,6 +175,62 @@ bool TestingScene::CleanUp()
 	LOG("Freeing scene");
 
 	App->tex->UnLoad(debug_tex);
+
+	return true;
+}
+
+bool TestingScene::GUIEvent(UIElement * element, GUI_Event gui_event)
+{
+	int x, y;
+	App->input->GetMousePosition(x, y);
+
+	if (gui_event == GUI_Event::LEFT_CLICK_DOWN) {
+		Core::CardNumber card_num = Core::CardNumber::CN_UNKNOWN;
+
+		if (element == unit_button_one) {
+			card_num = Core::CardNumber::CN_FIRST;
+		}
+		else if (element == unit_button_two) {
+			card_num = Core::CardNumber::CN_SECOND;
+		}
+		else if (element == unit_button_three) {
+			card_num = Core::CardNumber::CN_THIRD;
+		}
+		else if (element == unit_button_four) {
+			card_num = Core::CardNumber::CN_FOURTH;
+		}
+
+		if (card_num != Core::CardNumber::CN_UNKNOWN) {
+			current_drag = App->gui->CreateImage({ x - 40,y - 50 }, test_core->GetCard(card_num)->button.drag);
+
+			current_drag->interactable = true;
+			current_drag->dragable = true;
+		}
+
+	}
+	else if (gui_event == GUI_Event::LEFT_CLICK_UP) {
+		if (element == current_drag) {
+			test_core->UseCard(Core::CardNumber::CN_FIRST, { float(x),float(y) });
+			App->gui->DeleteElement(current_drag);
+			current_drag = nullptr;
+		}
+		else if (element == unit_button_two) {
+			test_core->UseCard(Core::CardNumber::CN_SECOND, { float(x),float(y) });
+			App->gui->DeleteElement(current_drag);
+			current_drag = nullptr;
+		}
+		else if (element == unit_button_three) {
+			test_core->UseCard(Core::CardNumber::CN_THIRD, { float(x),float(y) });
+			App->gui->DeleteElement(current_drag);
+			current_drag = nullptr;
+		}
+		else if (element == unit_button_four) {
+			test_core->UseCard(Core::CardNumber::CN_FOURTH, { float(x),float(y) });
+			App->gui->DeleteElement(current_drag);
+			current_drag = nullptr;
+		}
+		
+	}
 
 	return true;
 }

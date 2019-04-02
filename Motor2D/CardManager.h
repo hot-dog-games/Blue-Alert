@@ -1,10 +1,14 @@
 #ifndef _CARD_MANAGER_H_
 #define _CARD_MANAGER_H_
 
+#include <map>
+
 #include "p2Defs.h"
 #include "Module.h"
 #include "Animation.h"
 #include "EntityManager.h"
+
+class Stat;
 
 enum AttackType {
 	BASIC,
@@ -24,21 +28,22 @@ struct CardInfo {
 	AttackType attack_type;
 	CardScaling scaling;
 
-	uint life;
-	uint defense;
-	uint movement_speed;
-	uint attack_damage;
-	uint attack_speed;
-	uint range;
-	uint energy_cost;
-	uint unit_number;
+	std::map<std::string, Stat*> stats;
 	bool armored;
 
 
 };
+
+struct CardButton {
+	SDL_Rect anim[3];
+	SDL_Rect drag;
+
+};
+
 struct Card {
 	EntityType type;
 	CardInfo info;
+	CardButton button;
 
 	uint level;
 	std::string name;
@@ -65,6 +70,7 @@ public:
 
 private:
 	void LoadCardStats(Card* card, pugi::xml_node stats_node);
+	void LoadCardButton(Card* card, pugi::xml_node button_node);
 
 private:
 	bool to_delete = false;
