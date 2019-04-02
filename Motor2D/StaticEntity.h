@@ -14,7 +14,7 @@ class StaticEntity : public Entity
 {
 public:
 	StaticEntity();
-	StaticEntity(pugi::xml_node entity_node, fPoint position);
+	StaticEntity(pugi::xml_node entity_node, fPoint position, Faction faction);
 	~StaticEntity();
 
 	virtual bool PreUpdate() { return true; };

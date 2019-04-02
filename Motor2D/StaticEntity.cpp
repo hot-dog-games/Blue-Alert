@@ -13,7 +13,7 @@ StaticEntity::StaticEntity()
 	state = STATIC_IDLE;
 }
 
-StaticEntity::StaticEntity(pugi::xml_node entity_node, fPoint position) : Entity(entity_node, position)
+StaticEntity::StaticEntity(pugi::xml_node entity_node, fPoint position, Faction faction) : Entity(entity_node, position, faction)
 {
 
 }

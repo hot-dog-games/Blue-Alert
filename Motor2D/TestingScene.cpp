@@ -53,7 +53,7 @@ bool TestingScene::Start()
 	test_deck->AddCard(App->card_manager->CreateCard(EntityType::NAVY_SEAL));
 	test_deck->AddCard(App->card_manager->CreateCard(EntityType::HARRIER));
 
-	test_core = App->entity_manager->CreateCore(EntityType::CORE, { 0,0 }, test_deck);
+	test_core = App->entity_manager->CreateCore(EntityType::CORE, { 0,0 }, test_deck, FACTION_RUSSIAN);
 
 	unit_button_one = App->gui->CreateButton({ 790, 365 }, test_core->GetCard(Core::CardNumber::CN_FIRST)->button.anim);
 	unit_button_two = App->gui->CreateButton({ 890, 365 }, test_core->GetCard(Core::CardNumber::CN_SECOND)->button.anim);
@@ -165,6 +165,10 @@ bool TestingScene::PostUpdate()
 	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
 
+
+	if (current_drag)
+		current_drag->GetScreenPos();
+
 	return ret;
 }
 
@@ -200,10 +204,12 @@ bool TestingScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 		}
 
 		if (card_num != Core::CardNumber::CN_UNKNOWN) {
-			current_drag = App->gui->CreateImage({ x - 40,y - 50 }, test_core->GetCard(card_num)->button.drag);
+			current_drag = App->gui->CreateImage({ 0,0}, test_core->GetCard(card_num)->button.drag, element);
 
 			current_drag->interactable = true;
 			current_drag->dragable = true;
+			current_drag->clipping = false;
+			current_drag->parent_limit = false;
 		}
 
 	}

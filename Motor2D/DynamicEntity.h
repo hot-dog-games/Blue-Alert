@@ -28,7 +28,7 @@ class DynamicEntity : public Entity
 public:
 	DynamicEntity();
 	~DynamicEntity();
-	DynamicEntity(pugi::xml_node config, fPoint position, Card* card);
+	DynamicEntity(pugi::xml_node config, fPoint position, Card* card, Faction faction);
 
 	virtual bool PreUpdate() { return true; };
 	virtual bool Update(float dt);

@@ -14,7 +14,6 @@ class Core : public StaticEntity
 public:
 	enum CardNumber {
 		CN_UNKNOWN = -1,
-
 		CN_FIRST,
 		CN_SECOND,
 		CN_THIRD,
@@ -22,7 +21,7 @@ public:
 	};
 
 public:
-	Core(pugi::xml_node entity_config, fPoint position);
+	Core(pugi::xml_node entity_config, fPoint position, Faction faction);
 	~Core();
 
 	bool Update(float dt);
@@ -37,6 +36,7 @@ public:
 
 
 private:
+	const uint ENEGY_TICK_RATE = 1000;
 	Deck* deck = nullptr;
 
 	PerfTimer energy_timer;

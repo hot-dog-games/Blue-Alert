@@ -5,9 +5,7 @@
 #include "Stat.h"
 #include "Core.h"
 
-
-
-Core::Core(pugi::xml_node entity_config, fPoint position): StaticEntity(entity_config, position)
+Core::Core(pugi::xml_node entity_config, fPoint position, Faction faction): StaticEntity(entity_config, position, faction)
 {
 	for (pugi::xml_node iter = entity_config.child("stats").child("stat"); iter; iter = iter.next_sibling("stat"))
 	{
@@ -29,7 +27,7 @@ bool Core::Update(float dt)
 {
 	StaticEntity::Update(dt);
 
-	if (energy_timer.ReadMs() > 1000) {
+	if (energy_timer.ReadMs() > ENEGY_TICK_RATE) {
 		stats.find("energy")->second->IncreaseStat(stats.find("energy_regen")->second->GetValue());
 		energy_timer.Start();
 	}
@@ -50,7 +48,7 @@ void Core::UseCard(CardNumber number, fPoint position)
 	uint energy_cost = deck->cards[(int)number]->info.stats.find("energy_cost")->second->GetValue();
 	if (stats.find("energy")->second->GetValue() >= energy_cost)
 	{
-		App->entity_manager->CreateEntity(deck->cards[(int)number]->type, position, deck->cards[(int)number]);
+		App->entity_manager->CreateEntity(deck->cards[(int)number]->type, position, deck->cards[(int)number], faction);
 		stats.find("energy")->second->DecreaseStat(energy_cost);
 	}
 }
