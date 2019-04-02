@@ -29,7 +29,7 @@ TestingScene::~TestingScene()
 // Called before the first frame
 bool TestingScene::Start()
 {
-	if (App->map->Load("iso_walk.tmx") == true)
+	if (App->map->Load("test.tmx") == true)
 	{
 		int w, h;
 		uchar* data = NULL;
