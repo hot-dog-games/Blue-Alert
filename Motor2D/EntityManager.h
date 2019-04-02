@@ -8,13 +8,19 @@ class Entity;
 class Core;
 struct Card;
 class Deck;
+enum Faction;
 
 enum EntityType {
 	CORE,
 	G_I,
 	SNIPER,
 	NAVY_SEAL,
-	GRIZZLY
+	GRIZZLY,
+	ROBOT,
+	PRISM,
+	NIGHTHAWK,
+	HARRIER,
+	BLACK_EAGLE
 	//...
 };
 
@@ -34,8 +40,8 @@ public:
 	bool CleanUp();
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;
-	Entity* CreateEntity(EntityType type, fPoint position, Card* card);
-	Core* CreateCore(EntityType type, fPoint position, Deck* deck);
+	Entity* CreateEntity(EntityType type, fPoint position, Card* card, Faction faction);
+	Core* CreateCore(EntityType type, fPoint position, Deck* deck, Faction faction);
 	bool DeleteEntity(Entity* entity);
 
 private:

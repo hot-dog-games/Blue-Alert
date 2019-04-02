@@ -9,17 +9,20 @@
 #include "PugiXml\src\pugixml.hpp"
 
 struct SDL_Texture;
+class Stat;
 
 enum Faction {
-	AMERICAN,
-	RUSSIAN
+	FACTION_NONE = -1,
+	FACTION_RUSSIAN,
+	FACTION_AMERICAN,
+
 };
 
 class Entity
 {
 public:
 	Entity();
-	Entity(pugi::xml_node entity_node, fPoint position);
+	Entity(pugi::xml_node entity_node, fPoint position, Faction faction);
 	~Entity();
 
 	virtual bool PreUpdate() { return true; };
@@ -30,18 +33,21 @@ public:
 	void DecreaseLife(float damage);
 	void SetMaxLife(uint new_life);
 	void LoadAnimations(pugi::xml_node anim_config);
-	void LoadSprite(std::string sprite_path);
+	void LoadSprite(pugi::xml_node node);
 	virtual void Die() {};
 
 public:
 	fPoint position;
+	Faction faction;
 
 protected:
 	std::vector<Animation> animations;
 	SDL_Rect current_frame;
-	SDL_Texture* sprite;
+	SDL_Texture* sprite = nullptr;
 	uint max_life;
 	uint current_life;
-	Faction faction;
+
+	std::map<std::string, Stat*> stats;
+
 };
 #endif // _ENTITY_H_

@@ -73,6 +73,33 @@
     <ClCompile Include="Color.cpp">
       <Filter>Engine\Others</Filter>
     </ClCompile>
+    <ClCompile Include="UIAnimatedImage.cpp">
+      <Filter>Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIButton.cpp">
+      <Filter>Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIElement.cpp">
+      <Filter>Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIImage.cpp">
+      <Filter>Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UILabel.cpp">
+      <Filter>Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIScrollBar.cpp">
+      <Filter>Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI.cpp">
+      <Filter>Engine\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Fonts.cpp">
+      <Filter>Engine\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="UIBar.cpp">
+      <Filter>Engine\UI</Filter>
+    </ClCompile>
     <ClCompile Include="Buff.cpp">
       <Filter>Engine\Others</Filter>
     </ClCompile>
@@ -82,7 +109,6 @@
     <ClCompile Include="BuffSourceManager.cpp">
       <Filter>Engine\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Core.cpp" />
     <ClCompile Include="Transition.cpp">
       <Filter>Engine\Transitions</Filter>
     </ClCompile>
@@ -94,6 +120,9 @@
     </ClCompile>
     <ClCompile Include="CameraTranslation.cpp">
       <Filter>Engine\Transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="Core.cpp">
+      <Filter>Engine\Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -184,6 +213,33 @@
     <ClInclude Include="GameManager.h">
       <Filter>Engine\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="UIAnimatedImage.h">
+      <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIButton.h">
+      <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIElement.h">
+      <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIImage.h">
+      <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UILabel.h">
+      <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIScrollBar.h">
+      <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI.h">
+      <Filter>Engine\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Fonts.h">
+      <Filter>Engine\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="UIBar.h">
+      <Filter>Engine\UI</Filter>
+    </ClInclude>
     <ClInclude Include="Buff.h">
       <Filter>Engine\Others</Filter>
     </ClInclude>
@@ -193,7 +249,6 @@
     <ClInclude Include="BuffSourceManager.h">
       <Filter>Engine\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="Core.h" />
     <ClInclude Include="Transition.h">
       <Filter>Engine\Transitions</Filter>
     </ClInclude>
@@ -205,6 +260,9 @@
     </ClInclude>
     <ClInclude Include="CameraTranslation.h">
       <Filter>Engine\Transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="Core.h">
+      <Filter>Engine\Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -228,6 +286,9 @@
     </Filter>
     <Filter Include="Engine\Others">
       <UniqueIdentifier>{a8bfab6a-5472-4969-943e-861a8b493f08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\UI">
+      <UniqueIdentifier>{0c1a3d65-12ba-4279-a61c-87d5af448eed}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\Transitions">
       <UniqueIdentifier>{c28106c4-fa11-42a3-a3b1-7e4c15fe8610}</UniqueIdentifier>
