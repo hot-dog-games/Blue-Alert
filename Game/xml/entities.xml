@@ -32,6 +32,9 @@
         <idle speed="5.0F">
           <frame x="345" y="1851" width="15" height="33"/>
         </idle>
+		 <moving speed="5.0F">
+          <frame x="345" y="1851" width="15" height="33"/>
+        </moving>
       </animations>
     </info>
   </entity>

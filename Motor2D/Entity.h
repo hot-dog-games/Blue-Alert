@@ -10,6 +10,7 @@
 
 struct SDL_Texture;
 class Stat;
+enum EntityType;
 
 enum Faction {
 	FACTION_NONE = -1,
@@ -39,6 +40,7 @@ public:
 public:
 	fPoint position;
 	Faction faction;
+	EntityType type;
 
 protected:
 	std::vector<Animation> animations;

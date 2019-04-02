@@ -153,11 +153,11 @@ bool TestingScene::PostUpdate()
 
 	App->render->Blit(debug_tex, p.x, p.y);
 
-	const std::vector<iPoint>* path = App->pathfinding->GetLastPath();
+	const std::vector<iPoint> path = App->pathfinding->GetLastPath();
 
-	for (uint i = 0; i < path->size(); ++i)
+	for (uint i = 0; i < path.size(); ++i)
 	{
-		iPoint pos = App->map->MapToWorld(path->at(i).x, path->at(i).y);
+		iPoint pos = App->map->MapToWorld(path.at(i).x, path.at(i).y);
 		App->render->Blit(debug_tex, pos.x, pos.y);
 	}
 
