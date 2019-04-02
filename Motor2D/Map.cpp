@@ -125,8 +125,7 @@ iPoint Map::WorldToMap(int x, int y) const
 		ret.y = y / data.tile_height;
 	}
 	else if(data.type == MAPTYPE_ISOMETRIC)
-	{
-		
+	{		
 		float half_width = data.tile_width * 0.5f;
 		float half_height = data.tile_height * 0.5f;
 		ret.x = int( (x / half_width + y / half_height) / 2) - 1;
