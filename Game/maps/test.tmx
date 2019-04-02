@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="isometric" renderorder="right-down" width="15" height="15" tilewidth="62" tileheight="31" nextobjectid="1">
+<map version="1.0" tiledversion="1.1.5" orientation="isometric" renderorder="right-down" width="15" height="15" tilewidth="62" tileheight="31" infinite="0" nextobjectid="1">
  <tileset firstgid="1" name="Grass FlatTiles Spritesheet" tilewidth="61" tileheight="30" tilecount="260" columns="13">
+  <grid orientation="orthogonal" width="60" height="30"/>
   <image source="../sprites/Enviroment/Grass/flatTiles/Grass FlatTiles Spritesheet.png" trans="ff0000" width="800" height="600"/>
  </tileset>
  <layer name="Capa de Patrones 1" width="15" height="15">
