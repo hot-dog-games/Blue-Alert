@@ -59,9 +59,9 @@ uchar Pathfinding::GetTileAt(const iPoint& pos) const
 }
 
 // To request all tiles involved in the last generated path
-const std::vector<iPoint>* Pathfinding::GetLastPath() const
+const std::vector<iPoint> Pathfinding::GetLastPath() const
 {
-	return &last_path;
+	return last_path;
 }
 
 // PathList ------------------------------------------------------------------------
@@ -190,7 +190,6 @@ int Pathfinding::CreatePath(const iPoint& origin, const iPoint& destination)
 	last_path.clear();
 	// TODO 1: if origin or destination are not walkable, return -1
 	if (!IsWalkable(origin) || !IsWalkable(destination)) return -1;
-
 	// TODO 2: Create two lists: open, close
 	// Add the origin tile to open
 	// Iterate while we have tile in the open list

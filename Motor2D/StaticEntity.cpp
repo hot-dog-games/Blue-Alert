@@ -46,7 +46,8 @@ bool StaticEntity::CleanUp()
 
 bool StaticEntity::PostUpdate()
 {
-	App->render->Blit(sprite, position.x, position.y, &current_frame);
+	fPoint render_position = { position.x - current_frame.w / 2, position.y - current_frame.h };
+	App->render->Blit(sprite, render_position.x, render_position.y, &current_frame);
 
 	return true;
 }

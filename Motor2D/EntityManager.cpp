@@ -97,6 +97,8 @@ Entity* EntityManager::CreateEntity(EntityType type, fPoint position, Card* card
 	id += "_" + card->name;
 
 	DynamicEntity* entity = new DynamicEntity(entity_node, position, card, faction);
+	entity->type = type;
+	entity->Start();
 	entities.push_back(entity);
 
 	id_count++;
@@ -113,11 +115,24 @@ Core* EntityManager::CreateCore(EntityType type, fPoint position, Deck* deck, Fa
 
 	Core* entity = new Core(entity_node, position, faction);
 	entities.push_back(entity);
+	entity->Start();
 	entity->SetDeck(deck);
 
 	id_count++;
 
 	return entity;
+}
+
+fPoint EntityManager::GetCorePosition(Faction faction)
+{
+	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
+	{
+		if((*entity)->faction != faction && (*entity)->type == CORE)
+		{
+			return (*entity)->position;
+		}
+	}
+	return {0,0};
 }
 
 bool EntityManager::DeleteEntity(Entity* entity)
