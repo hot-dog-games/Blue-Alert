@@ -42,6 +42,7 @@ public:
 	bool Save(pugi::xml_node&) const;
 	Entity* CreateEntity(EntityType type, fPoint position, Card* card, Faction faction);
 	Core* CreateCore(EntityType type, fPoint position, Deck* deck, Faction faction);
+	fPoint GetCorePosition(Faction faction);
 	bool DeleteEntity(Entity* entity);
 
 private:

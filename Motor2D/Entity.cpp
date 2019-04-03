@@ -24,7 +24,6 @@ Entity::Entity(pugi::xml_node entity_node, fPoint position, Faction faction)
 	LoadAnimations(entity_node);
 }
 
-
 void Entity::DecreaseLife(float damage)
 {
 	if (current_life > 0)

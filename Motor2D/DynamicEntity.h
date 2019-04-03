@@ -30,19 +30,26 @@ public:
 	~DynamicEntity();
 	DynamicEntity(pugi::xml_node config, fPoint position, Card* card, Faction faction);
 
-	virtual bool PreUpdate() { return true; };
+	virtual bool PreUpdate();
 	virtual bool Update(float dt);
 	virtual bool PostUpdate();
 	virtual bool CleanUp() { return true; };
+	virtual bool Start();
 
-	virtual void Die() {};
-	virtual void Move() {};
-	virtual void Attack() {};
 
 protected:
+	void CalcDirection();
+	void CheckDestination();
+	virtual void Die() {};
+	virtual void Move(float dt);
+	virtual void Attack() {};
+protected:
 	DynamicState state = DYNAMIC_IDLE;
+	int current_point = 0;
+	int previous_point = 0;
 	EntiyDirection direction = UP;
 	Card* entity_card = nullptr;
+	std::vector<iPoint> path;
 };
 
 #endif // !_DYNAMIC_ENTITY_

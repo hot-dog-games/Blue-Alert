@@ -46,6 +46,8 @@ bool TestingScene::Start()
 	debug_tex = App->tex->Load("maps/path2.png");
 	ui_background = App->tex->Load("ui/background.png");
 
+	App->render->camera.x = (App->map->data.width*App->map->data.tile_width*0.5)*0.5 - 100;
+
 	Deck* test_deck = new Deck();
 	test_deck->delete_cards = true;
 	test_deck->AddCard(App->card_manager->CreateCard(EntityType::G_I));
@@ -53,7 +55,8 @@ bool TestingScene::Start()
 	test_deck->AddCard(App->card_manager->CreateCard(EntityType::NAVY_SEAL));
 	test_deck->AddCard(App->card_manager->CreateCard(EntityType::HARRIER));
 
-	test_core = App->entity_manager->CreateCore(EntityType::CORE, { 0,0 }, test_deck, FACTION_RUSSIAN);
+	test_core = App->entity_manager->CreateCore(EntityType::CORE, { 0,700 }, test_deck, FACTION_RUSSIAN);
+	App->entity_manager->CreateCore(EntityType::CORE, { 0,200 }, test_deck, FACTION_AMERICAN);
 
 	unit_button_one = App->gui->CreateButton({ 790, 365 }, test_core->GetCard(Core::CardNumber::CN_FIRST)->button.anim);
 	unit_button_two = App->gui->CreateButton({ 890, 365 }, test_core->GetCard(Core::CardNumber::CN_SECOND)->button.anim);
@@ -153,11 +156,11 @@ bool TestingScene::PostUpdate()
 
 	App->render->Blit(debug_tex, p.x, p.y);
 
-	const std::vector<iPoint>* path = App->pathfinding->GetLastPath();
+	const std::vector<iPoint> path = App->pathfinding->GetLastPath();
 
-	for (uint i = 0; i < path->size(); ++i)
+	for (uint i = 0; i < path.size(); ++i)
 	{
-		iPoint pos = App->map->MapToWorld(path->at(i).x, path->at(i).y);
+		iPoint pos = App->map->MapToWorld(path.at(i).x, path.at(i).y);
 		App->render->Blit(debug_tex, pos.x, pos.y);
 	}
 
@@ -214,23 +217,24 @@ bool TestingScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 
 	}
 	else if (gui_event == GUI_Event::LEFT_CLICK_UP) {
+		iPoint point = App->render->ScreenToWorld(x, y);
 		if (element == current_drag) {
-			test_core->UseCard(Core::CardNumber::CN_FIRST, { float(x),float(y) });
+			test_core->UseCard(Core::CardNumber::CN_FIRST, { float(point.x),float(point.y) });
 			App->gui->DeleteElement(current_drag);
 			current_drag = nullptr;
 		}
 		else if (element == unit_button_two) {
-			test_core->UseCard(Core::CardNumber::CN_SECOND, { float(x),float(y) });
+			test_core->UseCard(Core::CardNumber::CN_SECOND, { float(point.x),float(point.y) });
 			App->gui->DeleteElement(current_drag);
 			current_drag = nullptr;
 		}
 		else if (element == unit_button_three) {
-			test_core->UseCard(Core::CardNumber::CN_THIRD, { float(x),float(y) });
+			test_core->UseCard(Core::CardNumber::CN_THIRD, { float(point.x),float(point.y) });
 			App->gui->DeleteElement(current_drag);
 			current_drag = nullptr;
 		}
 		else if (element == unit_button_four) {
-			test_core->UseCard(Core::CardNumber::CN_FOURTH, { float(x),float(y) });
+			test_core->UseCard(Core::CardNumber::CN_FOURTH, { float(point.x),float(point.y) });
 			App->gui->DeleteElement(current_drag);
 			current_drag = nullptr;
 		}

@@ -10,6 +10,7 @@
 
 struct SDL_Texture;
 class Stat;
+enum EntityType;
 
 enum Faction {
 	FACTION_NONE = -1,
@@ -29,6 +30,7 @@ public:
 	virtual bool Update(float dt) { return true; };
 	virtual bool PostUpdate() { return true; };
 	virtual bool CleanUp() { return true; };
+	virtual bool Start() { return true; };
 
 	void DecreaseLife(float damage);
 	void SetMaxLife(uint new_life);
@@ -37,8 +39,9 @@ public:
 	virtual void Die() {};
 
 public:
-	fPoint position;
 	Faction faction;
+	EntityType type;
+	fPoint position;
 
 protected:
 	std::vector<Animation> animations;
