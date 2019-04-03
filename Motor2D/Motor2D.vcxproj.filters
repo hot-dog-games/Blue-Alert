@@ -109,7 +109,6 @@
     <ClCompile Include="BuffSourceManager.cpp">
       <Filter>Engine\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Core.cpp" />
     <ClCompile Include="Transition.cpp">
       <Filter>Engine\Transitions</Filter>
     </ClCompile>
@@ -126,6 +125,8 @@
     <ClCompile Include="EncounterNode.cpp" />
     <ClCompile Include="StrategyMap.cpp">
       <Filter>Engine\Scenes</Filter>
+    <ClCompile Include="Core.cpp">
+      <Filter>Engine\Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -252,7 +253,6 @@
     <ClInclude Include="BuffSourceManager.h">
       <Filter>Engine\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="Core.h" />
     <ClInclude Include="Transition.h">
       <Filter>Engine\Transitions</Filter>
     </ClInclude>
@@ -269,6 +269,8 @@
     <ClInclude Include="EncounterNode.h" />
     <ClInclude Include="StrategyMap.h">
       <Filter>Engine\Scenes</Filter>
+    <ClInclude Include="Core.h">
+      <Filter>Engine\Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

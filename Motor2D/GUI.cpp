@@ -87,7 +87,7 @@ bool Gui::PreUpdate()
 					{
 						iPoint mouse_pos;
 						App->input->GetMousePosition(mouse_pos.x, mouse_pos.y);
-						current_element->SetLocalPos(mouse_pos.x - current_element->GetLocalRect().w/2, mouse_pos.y - current_element->GetLocalRect().h / 2);
+						current_element->SetScreenPos(mouse_pos.x - current_element->GetLocalRect().w/2, mouse_pos.y - current_element->GetLocalRect().h / 2);
 
 						if (current_element->parent_limit && current_element->parent)
 						{

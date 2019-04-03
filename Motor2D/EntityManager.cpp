@@ -89,14 +89,14 @@ bool EntityManager::Save(pugi::xml_node&) const
 	return true;
 }
 
-Entity* EntityManager::CreateEntity(EntityType type, fPoint position, Card* card)
+Entity* EntityManager::CreateEntity(EntityType type, fPoint position, Card* card, Faction faction)
 {
 	std::string id = std::to_string(id_count);
 	pugi::xml_node entity_node = entity_configs.find_child_by_attribute("type", std::to_string((int)type).c_str());
 
 	id += "_" + card->name;
 
-	DynamicEntity* entity = new DynamicEntity(entity_node, position, card);
+	DynamicEntity* entity = new DynamicEntity(entity_node, position, card, faction);
 	entities.push_back(entity);
 
 	id_count++;
@@ -104,14 +104,14 @@ Entity* EntityManager::CreateEntity(EntityType type, fPoint position, Card* card
 	return entity;
 }
 
-Core* EntityManager::CreateCore(EntityType type, fPoint position, Deck* deck)
+Core* EntityManager::CreateCore(EntityType type, fPoint position, Deck* deck, Faction faction)
 {
 	std::string id = std::to_string(id_count);
 	pugi::xml_node entity_node = entity_configs.find_child_by_attribute("type", std::to_string((int)type).c_str());
 
 	id += "_CORE";
 
-	Core* entity = new Core(entity_node, position);
+	Core* entity = new Core(entity_node, position, faction);
 	entities.push_back(entity);
 	entity->SetDeck(deck);
 

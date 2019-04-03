@@ -14,11 +14,14 @@ Entity::~Entity()
 {
 }
 
-Entity::Entity(pugi::xml_node entity_node, fPoint position)
+Entity::Entity(pugi::xml_node entity_node, fPoint position, Faction faction)
 {
+	this->faction = faction;
 	this->position = position;
+
+	entity_node = entity_node.find_child_by_attribute("faction", std::to_string((int)faction).c_str());
+	LoadSprite(entity_node);
 	LoadAnimations(entity_node);
-	LoadSprite(entity_node.child("sprite").child_value());
 }
 
 
@@ -42,8 +45,9 @@ void Entity::SetMaxLife(uint new_life)
 	current_life = max_life;
 }
 
-void Entity::LoadSprite(std::string sprite_path)
+void Entity::LoadSprite(pugi::xml_node node)
 {
+	std::string sprite_path = node.child("sprite").child_value();
 	sprite = App->tex->Load(sprite_path.c_str());
 }
 

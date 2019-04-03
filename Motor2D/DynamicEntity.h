@@ -28,7 +28,7 @@ class DynamicEntity : public Entity
 public:
 	DynamicEntity();
 	~DynamicEntity();
-	DynamicEntity(pugi::xml_node config, fPoint position, Card* card);
+	DynamicEntity(pugi::xml_node config, fPoint position, Card* card, Faction faction);
 
 	virtual bool PreUpdate() { return true; };
 	virtual bool Update(float dt);
@@ -40,9 +40,9 @@ public:
 	virtual void Attack() {};
 
 protected:
-	DynamicState state;
-	EntiyDirection direction;
-	Card* entity_card;
+	DynamicState state = DYNAMIC_IDLE;
+	EntiyDirection direction = UP;
+	Card* entity_card = nullptr;
 };
 
 #endif // !_DYNAMIC_ENTITY_
