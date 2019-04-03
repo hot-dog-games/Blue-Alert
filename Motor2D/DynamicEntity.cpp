@@ -29,6 +29,24 @@ bool DynamicEntity::PostUpdate()
 	return true;
 }
 
+bool DynamicEntity::Start()
+{
+	fPoint core_position = App->entity_manager->GetCorePosition(faction);
+	iPoint core_map_position = App->map->WorldToMap((int)core_position.x, (int)core_position.y);
+	iPoint map_position = App->map->WorldToMap(position.x, position.y);
+
+	App->pathfinding->CreatePath({ map_position.x, map_position.y }, { core_map_position.x , core_map_position.y });
+	path = App->pathfinding->GetLastPath();
+	state = DYNAMIC_MOVING;
+
+	for (std::vector<iPoint>::iterator point = path.begin(); point != path.end(); ++point)
+	{
+		*point = App->map->MapToWorld((*point).x, (*point).y);
+	}
+
+	return true;
+}
+
 bool DynamicEntity::PreUpdate()
 {
 
@@ -38,7 +56,7 @@ bool DynamicEntity::PreUpdate()
 		break;
 	case DYNAMIC_MOVING:
 		CheckDestination();
-		CalcDirection();
+		CalcDirection();	
 
 		break;
 	case DYNAMIC_ATTACKING:
@@ -56,11 +74,7 @@ bool DynamicEntity::Update(float dt)
 	{
 		case DYNAMIC_IDLE:
 		{
-			fPoint core_position = App->entity_manager->GetCorePosition(faction);
-			iPoint map_position = App->map->WorldToMap(position.x, position.y);
-			App->pathfinding->CreatePath({ (int)map_position.x,(int)map_position.y }, { (int)core_position.x ,(int)core_position.y });
-			path = App->pathfinding->GetLastPath();
-			state = DYNAMIC_MOVING;
+
 		}
 		break;
 		case DYNAMIC_MOVING:
@@ -87,38 +101,35 @@ bool DynamicEntity::Update(float dt)
 
 void DynamicEntity::CalcDirection()
 {
-	map_position = App->map->WorldToMap(position.x, position.y);
-	if (map_position.x < path[current_point].x)
+	if (position.x < path[current_point].x)
 	{
 		direction = RIGHT;
-		if (map_position.y < path[current_point].y)
+		if (position.y < path[current_point].y)
 		{
 			direction = DOWN_RIGHT;
 		}
-		else if (map_position.y > path[current_point].y)
+		else if (position.y > path[current_point].y)
 		{
 			direction = UP_RIGHT;
 		}
 	}
-	else if (map_position.x > path[current_point].x)
+	else if (position.x > path[current_point].x)
 	{
 		direction = LEFT;
-		if (map_position.y < path[current_point].y)
+		if (position.y < path[current_point].y)
 		{
 			direction = DOWN_LEFT;
 		}
-		else if (map_position.y > path[current_point].y)
+		else if (position.y > path[current_point].y)
 		{
 			direction = UP_LEFT;
 		}
 	}
-	else if (map_position.y < path[current_point].y && direction != RIGHT && direction != LEFT && direction != UP_RIGHT 
-		&& direction != UP_LEFT && direction != DOWN_RIGHT && direction != DOWN_LEFT)
+	else if (position.y < path[current_point].y)
 	{
 		direction =	DOWN;
 	}
-	else if (map_position.y > path[current_point].y && direction != RIGHT && direction != LEFT && direction != UP_RIGHT
-		&& direction != UP_LEFT && direction != DOWN_RIGHT && direction != DOWN_LEFT)
+	else if (position.y > path[current_point].y)
 	{
 		direction = UP;
 	}
@@ -126,56 +137,37 @@ void DynamicEntity::CalcDirection()
 
 void DynamicEntity::CheckDestination()
 {
-	map_position = App->map->WorldToMap(position.x, position.y);
-	bool reached_x = (path[previous_point].x <= path[current_point].x && path[current_point].x <= map_position.x)
-		|| (path[previous_point].x >= path[current_point].x && path[current_point].x >= map_position.x);
+	bool reached_x = (path[previous_point].x <= path[current_point].x && path[current_point].x <= position.x)
+		|| (path[previous_point].x >= path[current_point].x && path[current_point].x >= position.x);
 
-	bool reached_y = (path[previous_point].y <= path[current_point].y && path[current_point].y <= map_position.y)
-		|| (path[previous_point].y >= path[current_point].y && path[current_point].y >= map_position.y);
+	bool reached_y = (path[previous_point].y <= path[current_point].y && path[current_point].y <= position.y)
+		|| (path[previous_point].y >= path[current_point].y && path[current_point].y >= position.y);
 
 	if (reached_x && reached_y)
 	{
 		previous_point = current_point;
 		current_point++;
-		if (current_point > path.size())
+		if (current_point >= path.size())
 			state = DYNAMIC_IDLE;
 	}
 }
 
 void DynamicEntity::Move(float dt)
 {
-	float speed = entity_card->info.stats.find("movement")->second->GetValue()*10;
-	
-	switch (direction)
-	{
-	case UP:
-		position.y -= speed*dt;
-		break;
-	case DOWN:
-		position.y += speed * dt;
-		break;
-	case LEFT:
-		position.x -= speed * dt;
-		break;
-	case RIGHT:
-		position.x += speed * dt;
-		break;
-	case UP_RIGHT:
-		position.y -= speed * dt;
-		position.x += speed * dt;
-		break;
-	case UP_LEFT:
-		position.y -= speed * dt;
-		position.x -= speed * dt;
-		break;
-	case DOWN_RIGHT:
-		position.y += speed * dt;
-		position.x += speed * dt;
-		break;
-	case DOWN_LEFT:
-		position.y += speed * dt;
-		position.x -= speed * dt;
-		break;
+	fPoint move_pos = { path[current_point].x - position.x, path[current_point].y - position.y };
+
+	float m = sqrtf(pow(move_pos.x, 2.0f) + pow(move_pos.y, 2.0f));
+
+	if (m > 0.0f) {
+		move_pos.x /= m;
+		move_pos.y /= m;
 	}
+
+	float speed = entity_card->info.stats.find("movement")->second->GetValue() * 10;
+	move_pos.x *= speed * dt;
+	move_pos.y *= speed * dt;
+
+	position.x += move_pos.x;
+	position.y += move_pos.y;
 	
 }

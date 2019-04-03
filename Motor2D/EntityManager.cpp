@@ -98,6 +98,7 @@ Entity* EntityManager::CreateEntity(EntityType type, fPoint position, Card* card
 
 	DynamicEntity* entity = new DynamicEntity(entity_node, position, card, faction);
 	entity->type = type;
+	entity->Start();
 	entities.push_back(entity);
 
 	id_count++;
@@ -114,6 +115,7 @@ Core* EntityManager::CreateCore(EntityType type, fPoint position, Deck* deck, Fa
 
 	Core* entity = new Core(entity_node, position, faction);
 	entities.push_back(entity);
+	entity->Start();
 	entity->SetDeck(deck);
 
 	id_count++;

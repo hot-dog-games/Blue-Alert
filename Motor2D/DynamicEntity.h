@@ -34,7 +34,7 @@ public:
 	virtual bool Update(float dt);
 	virtual bool PostUpdate();
 	virtual bool CleanUp() { return true; };
-
+	virtual bool Start();
 
 
 protected:
@@ -47,7 +47,6 @@ protected:
 	DynamicState state = DYNAMIC_IDLE;
 	int current_point = 0;
 	int previous_point = 0;
-	iPoint map_position = {0,0};
 	EntiyDirection direction = UP;
 	Card* entity_card = nullptr;
 	std::vector<iPoint> path;

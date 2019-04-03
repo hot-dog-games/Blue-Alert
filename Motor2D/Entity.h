@@ -30,6 +30,7 @@ public:
 	virtual bool Update(float dt) { return true; };
 	virtual bool PostUpdate() { return true; };
 	virtual bool CleanUp() { return true; };
+	virtual bool Start() { return true; };
 
 	void DecreaseLife(float damage);
 	void SetMaxLife(uint new_life);
