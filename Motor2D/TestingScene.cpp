@@ -46,6 +46,8 @@ bool TestingScene::Start()
 	debug_tex = App->tex->Load("maps/path2.png");
 	ui_background = App->tex->Load("ui/background.png");
 
+	App->render->camera.x = (App->map->data.width*App->map->data.tile_width*0.5)*0.5 - 100;
+
 	Deck* test_deck = new Deck();
 	test_deck->delete_cards = true;
 	test_deck->AddCard(App->card_manager->CreateCard(EntityType::G_I));
@@ -216,8 +218,6 @@ bool TestingScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 	}
 	else if (gui_event == GUI_Event::LEFT_CLICK_UP) {
 		iPoint point = App->render->ScreenToWorld(x, y);
-		/*point = App->map->WorldToMap(x, y);
-		point = App->map->MapToWorld(point.x, point.y);*/
 		if (element == current_drag) {
 			test_core->UseCard(Core::CardNumber::CN_FIRST, { float(point.x),float(point.y) });
 			App->gui->DeleteElement(current_drag);

@@ -24,7 +24,8 @@ DynamicEntity::DynamicEntity(pugi::xml_node config, fPoint position, Card* card,
 
 bool DynamicEntity::PostUpdate()
 {
-	App->render->Blit(sprite, position.x, position.y, &current_frame);
+	fPoint render_position = {position.x - (current_frame.w * 0.5f), position.y - current_frame.h };
+	App->render->Blit(sprite, render_position.x, render_position.y, &current_frame);
 
 	return true;
 }
@@ -42,6 +43,7 @@ bool DynamicEntity::Start()
 	for (std::vector<iPoint>::iterator point = path.begin(); point != path.end(); ++point)
 	{
 		*point = App->map->MapToWorld((*point).x, (*point).y);
+		*point = { (*point).x + (int)(App->map->data.tile_width * 0.5), (*point).y + (int)(App->map->data.tile_height * 0.5) };
 	}
 
 	return true;
@@ -49,7 +51,7 @@ bool DynamicEntity::Start()
 
 bool DynamicEntity::PreUpdate()
 {
-
+	
 	switch (state)
 	{
 	case DYNAMIC_IDLE:

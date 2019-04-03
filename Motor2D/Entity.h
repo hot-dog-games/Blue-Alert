@@ -39,9 +39,9 @@ public:
 	virtual void Die() {};
 
 public:
-	fPoint position;
 	Faction faction;
 	EntityType type;
+	fPoint position;
 
 protected:
 	std::vector<Animation> animations;
