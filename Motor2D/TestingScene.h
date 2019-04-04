@@ -3,7 +3,6 @@
 
 #include "Scene.h"
 #include "p2Point.h"
-#include "EncounterTree.h"
 
 struct SDL_Texture;
 struct UIButton;

@@ -32,11 +32,6 @@ bool Core::Update(float dt)
 		energy_timer.Start();
 	}
 
-	if (state == STATIC_DIE && animations[state].isDone())
-	{
-		state = STATIC_DESTROYED;
-	}
-
 	return true;
 }
 
