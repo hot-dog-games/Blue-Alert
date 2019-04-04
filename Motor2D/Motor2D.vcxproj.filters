@@ -4,9 +4,6 @@
     <ClCompile Include="Entity.cpp">
       <Filter>Engine\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="EntityManager.cpp">
-      <Filter>Engine\Entities</Filter>
-    </ClCompile>
     <ClCompile Include="Core.cpp">
       <Filter>Engine\Entities</Filter>
     </ClCompile>
@@ -139,12 +136,12 @@
     <ClCompile Include="Deck.cpp">
       <Filter>Engine\Tools</Filter>
     </ClCompile>
+    <ClCompile Include="EntityManager.cpp">
+      <Filter>Engine\Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
-      <Filter>Engine\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="EntityManager.h">
       <Filter>Engine\Entities</Filter>
     </ClInclude>
     <ClInclude Include="DynamicEntity.h">
@@ -293,6 +290,9 @@
     </ClInclude>
     <ClInclude Include="Deck.h">
       <Filter>Engine\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityManager.h">
+      <Filter>Engine\Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

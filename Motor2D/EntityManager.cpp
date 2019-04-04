@@ -116,6 +116,7 @@ Core* EntityManager::CreateCore(EntityType type, fPoint position, Deck* deck, Fa
 
 	Core* entity = new Core(entity_node, position, faction);
 	entities.push_back(entity);
+	entity->type = type;
 	entity->Start();
 	entity->SetDeck(deck);
 
