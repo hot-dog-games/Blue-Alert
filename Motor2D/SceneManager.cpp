@@ -1,9 +1,6 @@
 #include "TestingScene.h"
-<<<<<<< HEAD
 #include "MapMenuScene.h"
-=======
 #include "StrategyMap.h"
->>>>>>> parent of ee7c7ac... Revert "Merge branch 'develop' into PanelUI"
 #include "SceneManager.h"
 
 
@@ -21,11 +18,7 @@ SceneManager::~SceneManager()
 
 bool SceneManager::Awake(pugi::xml_node &)
 {
-<<<<<<< HEAD
-	current_scene = new MapMenuScene();
-=======
 	current_scene = new StrategyMap();
->>>>>>> parent of ee7c7ac... Revert "Merge branch 'develop' into PanelUI"
 	return true;
 }
 
