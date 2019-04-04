@@ -34,11 +34,24 @@ public:
 
 	virtual bool GUIEvent(UIElement* element, GUI_Event gui_event);
 
+	void HideMenu();
+
 private:
-	SDL_Texture * background;
 
 	EncounterTree* encounter_tree = nullptr;
 	EncounterNode* current_node = nullptr;
+
+	SDL_Texture*	background;
+
+
+	UIImage* banner;
+	UIImage* options;
+	UILabel* health;
+	UILabel* gold;
+	UILabel* energy;
+	UIButton* settings_button;
+	UIButton* menu_button;
+	UIImage* main_panel;
 };
 
 #endif
