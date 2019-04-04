@@ -4,6 +4,7 @@
 #include "Textures.h"
 #include "Input.h"
 #include "DynamicEntity.h"
+#include "StrategyBuilding.h"
 #include "CardManager.h"
 #include "Core.h"
 #include "Deck.h"
@@ -117,6 +118,22 @@ Core* EntityManager::CreateCore(EntityType type, fPoint position, Deck* deck, Fa
 	entities.push_back(entity);
 	entity->Start();
 	entity->SetDeck(deck);
+
+	id_count++;
+
+	return entity;
+}
+
+StrategyBuilding* EntityManager::CreateStrategyBuilding(EntityType type, fPoint position, Faction faction)
+{
+	std::string id = std::to_string(id_count);
+	pugi::xml_node entity_node = entity_configs.find_child_by_attribute("type", std::to_string((int)type).c_str());
+
+	id += "_TESTSTRATEGYBUILDING";
+
+	StrategyBuilding* entity = new StrategyBuilding(entity_node, position, faction);
+	entities.push_back(entity);
+	entity->Start();
 
 	id_count++;
 

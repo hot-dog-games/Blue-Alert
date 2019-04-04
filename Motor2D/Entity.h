@@ -2,6 +2,7 @@
 #define _ENTITY_H_
 
 #include <vector>
+#include <map>
 
 #include "p2Defs.h"
 #include "p2Point.h"

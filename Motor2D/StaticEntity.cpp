@@ -26,10 +26,6 @@ StaticEntity::~StaticEntity()
 
 bool StaticEntity::Update(float dt)
 {
-	if (state == STATIC_DIE && animations[state].isDone())
-	{
-		state = STATIC_DESTROYED;
-	}
 
 	current_frame = animations[state].GetCurrentFrame(dt);
 
