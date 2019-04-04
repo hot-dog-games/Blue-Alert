@@ -913,15 +913,12 @@
    <tile gid="133"/>
   </data>
  </layer>
- <layer name="Navigation" width="30" height="30">
+ <layer name="Colisions" width="30" height="30">
   <properties>
    <property name="Navigation" type="int" value="1"/>
    <property name="Nodraw" type="int" value="1"/>
   </properties>
   <data>
-   <tile gid="262"/>
-   <tile gid="262"/>
-   <tile gid="262"/>
    <tile/>
    <tile/>
    <tile/>
@@ -949,9 +946,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="262"/>
-   <tile gid="262"/>
-   <tile gid="262"/>
    <tile/>
    <tile/>
    <tile/>
@@ -979,9 +973,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="262"/>
-   <tile gid="262"/>
-   <tile gid="262"/>
    <tile/>
    <tile/>
    <tile/>
@@ -1756,9 +1747,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="262"/>
-   <tile gid="262"/>
-   <tile gid="262"/>
    <tile/>
    <tile/>
    <tile/>
@@ -1786,9 +1774,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="262"/>
-   <tile gid="262"/>
-   <tile gid="262"/>
    <tile/>
    <tile/>
    <tile/>
@@ -1816,9 +1801,24 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="262"/>
-   <tile gid="262"/>
-   <tile gid="262"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
   </data>
  </layer>
 </map>

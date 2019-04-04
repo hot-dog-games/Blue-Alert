@@ -1,4 +1,5 @@
 #include "TestingScene.h"
+#include "StrategyMap.h"
 #include "SceneManager.h"
 
 
@@ -16,7 +17,7 @@ SceneManager::~SceneManager()
 
 bool SceneManager::Awake(pugi::xml_node &)
 {
-	current_scene = new TestingScene();
+	current_scene = new StrategyMap();
 	return true;
 }
 
@@ -66,12 +67,15 @@ bool SceneManager::Save(pugi::xml_node &xml) const
 void SceneManager::ChangeScene(int new_scene)
 {
 	current_scene->CleanUp();
+	delete current_scene;
+	current_scene = nullptr;
 
 	switch (new_scene)
 	{
 	case MENU:
 		break;
 	case MAP:
+		current_scene = new StrategyMap();
 		break;
 	case COMBAT:
 		break;

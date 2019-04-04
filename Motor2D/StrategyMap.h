@@ -1,25 +1,21 @@
-#ifndef _TESTING_SCENE_H_
-#define _TESTING_SCENE_H_
+#ifndef _STRATEGY_MAP_H_
+#define _STRATEGY_MAP_H_
 
 #include "Scene.h"
 #include "p2Point.h"
 #include "EncounterTree.h"
+#include "UIButton.h"
+#include "UIImage.h"
+
 
 struct SDL_Texture;
-struct UIButton;
-struct UIImage;
-class Entity;
-class UIBar;
-class Core;
 
-struct Card;
-
-class TestingScene :
+class StrategyMap :
 	public Scene
 {
 public:
-	TestingScene();
-	~TestingScene();
+	StrategyMap();
+	~StrategyMap();
 
 	// Called before the first frame
 	virtual bool Start();
@@ -39,21 +35,11 @@ public:
 	virtual bool GUIEvent(UIElement* element, GUI_Event gui_event);
 
 private:
-	SDL_Texture*	debug_tex;
-	SDL_Texture*	ui_background;
+	SDL_Texture * background;
 
-	UIButton*		unit_button_one;
-	UIButton*		unit_button_two;
-	UIButton*		unit_button_three;
-	UIButton*		unit_button_four;
-	UIBar*			energy_bar;
-
-	UIImage* current_drag;
-
-	uint max_energy;
-	uint current_energy;
-
-	Core* test_core;
+	EncounterTree* encounter_tree = nullptr;
+	EncounterNode* current_node = nullptr;
 };
 
 #endif
+

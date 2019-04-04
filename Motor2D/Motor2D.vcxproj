@@ -14,7 +14,7 @@
     <ProjectGuid>{2AF9969B-F202-497B-AF30-7BEF9CE8005E}</ProjectGuid>
     <RootNamespace>programacio_2</RootNamespace>
     <ProjectName>Development - Class 8 Handout</ProjectName>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -41,7 +41,9 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <TargetName>$(ProjectName)</TargetName>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -84,6 +86,8 @@
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Deck.cpp" />
     <ClCompile Include="DynamicEntity.cpp" />
+    <ClCompile Include="EncounterNode.cpp" />
+    <ClCompile Include="EncounterTree.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="Fonts.cpp" />
@@ -102,6 +106,8 @@
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Stat.cpp" />
     <ClCompile Include="StaticEntity.cpp" />
+    <ClCompile Include="StrategyBuilding.cpp" />
+    <ClCompile Include="StrategyMap.cpp" />
     <ClCompile Include="TestingScene.cpp" />
     <ClCompile Include="Textures.cpp" />
     <ClCompile Include="Timer.cpp" />
@@ -127,6 +133,8 @@
     <ClInclude Include="Core.h" />
     <ClInclude Include="Deck.h" />
     <ClInclude Include="DynamicEntity.h" />
+    <ClInclude Include="EncounterNode.h" />
+    <ClInclude Include="EncounterTree.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityManager.h" />
     <ClInclude Include="Animation.h" />
@@ -149,6 +157,8 @@
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Stat.h" />
     <ClInclude Include="StaticEntity.h" />
+    <ClInclude Include="StrategyBuilding.h" />
+    <ClInclude Include="StrategyMap.h" />
     <ClInclude Include="TestingScene.h" />
     <ClInclude Include="Textures.h" />
     <ClInclude Include="Timer.h" />

@@ -8,9 +8,11 @@ class Entity;
 class Core;
 struct Card;
 class Deck;
+class StrategyBuilding;
 enum Faction;
 
 enum EntityType {
+	NONE = -1,
 	CORE,
 	G_I,
 	SNIPER,
@@ -20,7 +22,8 @@ enum EntityType {
 	PRISM,
 	NIGHTHAWK,
 	HARRIER,
-	BLACK_EAGLE
+	BLACK_EAGLE,
+	TESTSTRATEGYBUILDING
 	//...
 };
 
@@ -42,6 +45,8 @@ public:
 	bool Save(pugi::xml_node&) const;
 	Entity* CreateEntity(EntityType type, fPoint position, Card* card, Faction faction);
 	Core* CreateCore(EntityType type, fPoint position, Deck* deck, Faction faction);
+	StrategyBuilding* CreateStrategyBuilding(EntityType type, fPoint position, Faction faction);
+	fPoint GetCorePosition(Faction faction);
 	bool DeleteEntity(Entity* entity);
 
 private:
