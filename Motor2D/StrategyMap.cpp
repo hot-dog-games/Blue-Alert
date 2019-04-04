@@ -44,6 +44,32 @@ bool StrategyMap::Start()
 
 	current_node->GetEntity()->SetInRange(true);
 
+	//UI
+
+	background = App->tex->Load("ui/Background_Select_Level.png");
+
+	uint w, h;
+	App->win->GetWindowSize(w, h);
+
+	main_panel = App->gui->CreateImage({ 0,0 }, { 0, 0, (int)w, (int)h }, nullptr, false);
+	banner = App->gui->CreateImage({ 4,5 }, { 1,769,1017,83 }, main_panel);
+	SDL_Rect settings_rect[3];
+	settings_rect[0] = { 0,481,59,51 };
+	settings_rect[1] = { 60,481,58,51 };
+	settings_rect[2] = { 119,481,58,51 };
+
+	SDL_Rect menu_rect[3];
+	menu_rect[0] = { 0,533,220,51 };
+	menu_rect[1] = { 0,585,220,51 };
+	menu_rect[2] = { 0,585,220,51 };
+
+	settings_button = App->gui->CreateButton({ 50,700 }, settings_rect, main_panel);
+	menu_button = App->gui->CreateButton({ 700,700 }, menu_rect, main_panel);
+
+	gold = App->gui->CreateLabel({ 90, 30 }, "ui/Fonts/command_and_conquer___logo_font_by_dexistor371-d6k2yvb.ttf", 20, "GOLD", { 0,0,0,0 }, 0, main_panel);
+	energy = App->gui->CreateLabel({ 450, 30 }, "ui/Fonts/command_and_conquer___logo_font_by_dexistor371-d6k2yvb.ttf", 20, "ENERGY", { 0,0,0,0 },0, main_panel);
+	health = App->gui->CreateLabel({ 860, 30 }, "ui/Fonts/command_and_conquer___logo_font_by_dexistor371-d6k2yvb.ttf", 20, "HEALTH", { 0,0,0,0 }, 0, main_panel);
+
 	return true;
 }
 
@@ -59,8 +85,8 @@ bool StrategyMap::Update(float dt)
 {
 
 	if (App->input->GetKey(SDL_SCANCODE_8) == KEY_DOWN) {
-		App->transition_manager->CreateFadeTransition(3.0f, true, 3, White);
-		App->transition_manager->CreateZoomTransition(3.0f);
+		App->transition_manager->CreateFadeTransition(2.0f, true, 3, White);
+		App->transition_manager->CreateZoomTransition(2.0f);
 		//App->transition_manager->CreateCameraTranslation(3.0f, { App->render->camera.x, App->render->camera.y }, { 0, 0 });
 	}
 
@@ -121,11 +147,17 @@ bool StrategyMap::GUIEvent(UIElement * element, GUI_Event gui_event)
 		{
 			if (element == current_node->GetChildren()[i]->GetButton())
 			{
-				App->transition_manager->CreateFadeTransition(3.0f, true, 3, White);
-				App->transition_manager->CreateZoomTransition(3.0f);
+				App->gui->DisableElement(main_panel);
+				App->transition_manager->CreateFadeTransition(2.0f, true, 3, White);
+				App->transition_manager->CreateZoomTransition(2.0f);
 			}
 		}
 	}
 
 	return true;
+}
+
+void StrategyMap::HideMenu()
+{
+
 }

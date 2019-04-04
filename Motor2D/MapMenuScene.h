@@ -1,21 +1,25 @@
-#ifndef _STRATEGY_MAP_H_
-#define _STRATEGY_MAP_H_
+#ifndef _MAP_MENU_SCENE_H_
+#define _MAP_MENU_SCENE_H_
 
 #include "Scene.h"
 #include "p2Point.h"
-#include "EncounterTree.h"
-#include "UIButton.h"
-#include "UIImage.h"
-
 
 struct SDL_Texture;
+struct UIButton;
+struct UIImage;
+struct UILabel;
+class Entity;
+class Summoner;
+class UIBar;
 
-class StrategyMap :
+struct Card;
+
+class MapMenuScene :
 	public Scene
 {
 public:
-	StrategyMap();
-	~StrategyMap();
+	MapMenuScene();
+	~MapMenuScene();
 
 	// Called before the first frame
 	virtual bool Start();
@@ -34,15 +38,9 @@ public:
 
 	virtual bool GUIEvent(UIElement* element, GUI_Event gui_event);
 
-	void HideMenu();
-
 private:
-
-	EncounterTree* encounter_tree = nullptr;
-	EncounterNode* current_node = nullptr;
-
 	SDL_Texture*	background;
-
+	
 
 	UIImage* banner;
 	UIImage* options;
@@ -51,8 +49,7 @@ private:
 	UILabel* energy;
 	UIButton* settings_button;
 	UIButton* menu_button;
-	UIImage* main_panel;
+
 };
 
 #endif
-

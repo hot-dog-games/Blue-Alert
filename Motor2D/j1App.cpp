@@ -54,8 +54,8 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(fonts);
 	AddModule(entity_manager);
 	AddModule(pathfinding);
-	AddModule(transition_manager);
 	AddModule(gui);
+	AddModule(transition_manager);
 	AddModule(buff);
 
 	// render last to swap buffer
