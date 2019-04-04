@@ -106,6 +106,7 @@
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Stat.cpp" />
     <ClCompile Include="StaticEntity.cpp" />
+    <ClCompile Include="StrategyBuilding.cpp" />
     <ClCompile Include="StrategyMap.cpp" />
     <ClCompile Include="TestingScene.cpp" />
     <ClCompile Include="Textures.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Stat.h" />
     <ClInclude Include="StaticEntity.h" />
+    <ClInclude Include="StrategyBuilding.h" />
     <ClInclude Include="StrategyMap.h" />
     <ClInclude Include="TestingScene.h" />
     <ClInclude Include="Textures.h" />
