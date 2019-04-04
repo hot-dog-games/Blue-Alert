@@ -63,58 +63,60 @@ bool Gui::PreUpdate()
 		{
 			if (!current_element->hovered)
 			{
-				
 				current_element->OnMouseHover();
 				App->scene_manager->current_scene->GUIEvent(current_element, MOUSE_OVER);
 				current_element->hovered = true;
 			}
-			else
+		}
+		if (current_element->hovered)
+		{
+			if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
 			{
-				if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
+				current_element->OnMouseClick();
+				App->scene_manager->current_scene->GUIEvent(current_element, LEFT_CLICK_DOWN);
+				current_element->clicked = true;
+			}
+			else if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP)
+			{
+				current_element->OnMouseRelease();
+				App->scene_manager->current_scene->GUIEvent(current_element, LEFT_CLICK_UP);
+				current_element->clicked = false;
+			}
+			else if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
+			{
+				//drag
+				if (current_element->dragable)
 				{
-					current_element->OnMouseClick();
-					App->scene_manager->current_scene->GUIEvent(current_element, LEFT_CLICK_DOWN);
-				}
-				else if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP)
-				{
-					current_element->OnMouseRelease();
-					App->scene_manager->current_scene->GUIEvent(current_element, LEFT_CLICK_UP);
-				}
-				else if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
-				{
-					//drag
-					if (current_element->dragable)
+					iPoint mouse_pos;
+					App->input->GetMousePosition(mouse_pos.x, mouse_pos.y);
+					current_element->SetScreenPos(mouse_pos.x - current_element->GetLocalRect().w / 2, mouse_pos.y - current_element->GetLocalRect().h / 2);
+
+					if (current_element->parent_limit && current_element->parent)
 					{
-						iPoint mouse_pos;
-						App->input->GetMousePosition(mouse_pos.x, mouse_pos.y);
-						current_element->SetScreenPos(mouse_pos.x - current_element->GetLocalRect().w/2, mouse_pos.y - current_element->GetLocalRect().h / 2);
+						SDL_Rect element_rect = current_element->GetScreenRect();
+						SDL_Rect parent_rect = current_element->parent->GetScreenRect();
 
-						if (current_element->parent_limit && current_element->parent)
-						{
-							SDL_Rect element_rect = current_element->GetScreenRect();
-							SDL_Rect parent_rect = current_element->parent->GetScreenRect();
+						if (element_rect.x < parent_rect.x)
+							element_rect.x = parent_rect.x;
+						else if (element_rect.x + element_rect.w > parent_rect.x + parent_rect.w)
+							element_rect.x = (parent_rect.x + parent_rect.w) - element_rect.w;
+						if (element_rect.y < parent_rect.y)
+							element_rect.y = parent_rect.y;
+						else if (element_rect.y + element_rect.h > parent_rect.y + parent_rect.h)
+							element_rect.y = (parent_rect.y + parent_rect.h) - element_rect.h;
 
-							if (element_rect.x < parent_rect.x)
-								element_rect.x = parent_rect.x;
-							else if (element_rect.x + element_rect.w > parent_rect.x + parent_rect.w)
-								element_rect.x = (parent_rect.x + parent_rect.w) - element_rect.w;
-							if (element_rect.y < parent_rect.y)
-								element_rect.y = parent_rect.y;
-							else if (element_rect.y + element_rect.h > parent_rect.y + parent_rect.h)
-								element_rect.y = (parent_rect.y + parent_rect.h) - element_rect.h;
-
-							current_element->SetScreenPos(element_rect.x, element_rect.y);
-						}
+						current_element->SetScreenPos(element_rect.x, element_rect.y);
 					}
 				}
 			}
+			if (!current_element->clicked && selected_element != current_element)
+			{
+				current_element->OnMouseExit();
+				App->scene_manager->current_scene->GUIEvent(current_element, MOUSE_EXIT);
+				current_element->hovered = false;
+			}
 		}
-		else if (current_element->hovered)
-		{
-			current_element->OnMouseExit();
-			App->scene_manager->current_scene->GUIEvent(current_element, MOUSE_EXIT);
-			current_element->hovered = false;
-		}
+		
 	}
 	return true;
 }

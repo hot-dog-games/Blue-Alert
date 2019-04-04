@@ -1,310 +1,297 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="j1App.cpp" />
-    <ClCompile Include="Core.cpp">
-      <Filter>Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="DynamicEntity.cpp">
-      <Filter>Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="StaticEntity.cpp">
-      <Filter>Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="Audio.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="BuffSourceManager.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="CardManager.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="EntityManager.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="Fonts.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="GameManager.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="GUI.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="Input.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="Map.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="Pathfinding.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="Render.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="Textures.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="TransitionManager.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="Window.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="StrategyMap.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="TestingScene.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="Buff.cpp">
-      <Filter>Others</Filter>
-    </ClCompile>
-    <ClCompile Include="Color.cpp">
-      <Filter>Others</Filter>
-    </ClCompile>
-    <ClCompile Include="Deck.cpp">
-      <Filter>Others</Filter>
-    </ClCompile>
     <ClCompile Include="p2Log.cpp">
-      <Filter>Others</Filter>
-    </ClCompile>
-    <ClCompile Include="PerfTimer.cpp">
-      <Filter>Others</Filter>
-    </ClCompile>
-    <ClCompile Include="Stat.cpp">
-      <Filter>Others</Filter>
-    </ClCompile>
-    <ClCompile Include="Timer.cpp">
-      <Filter>Others</Filter>
-    </ClCompile>
-    <ClCompile Include="CameraTranslation.cpp">
-      <Filter>Transitions</Filter>
-    </ClCompile>
-    <ClCompile Include="Fade.cpp">
-      <Filter>Transitions</Filter>
-    </ClCompile>
-    <ClCompile Include="Zoom.cpp">
-      <Filter>Transitions</Filter>
-    </ClCompile>
-    <ClCompile Include="Transition.cpp">
-      <Filter>Transitions</Filter>
-    </ClCompile>
-    <ClCompile Include="EncounterNode.cpp">
-      <Filter>Others</Filter>
-    </ClCompile>
-    <ClCompile Include="EncounterTree.cpp">
-      <Filter>Others</Filter>
+      <Filter>Engine\Others</Filter>
     </ClCompile>
     <ClCompile Include="PugiXml\src\pugixml.cpp">
-      <Filter>Tools\PugiXML</Filter>
+      <Filter>Engine\Tools\PuguiXML</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Engine\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio.cpp">
+      <Filter>Engine\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Engine\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Pathfinding.cpp">
+      <Filter>Engine\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Render.cpp">
+      <Filter>Engine\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Textures.cpp">
+      <Filter>Engine\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Engine\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="j1App.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Engine\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="TestingScene.cpp">
+      <Filter>Engine\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="PerfTimer.cpp">
+      <Filter>Engine\Others</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Engine\Others</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityManager.cpp">
+      <Filter>Engine\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Engine\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticEntity.cpp">
+      <Filter>Engine\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="DynamicEntity.cpp">
+      <Filter>Engine\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Deck.cpp">
+      <Filter>Engine\Others</Filter>
+    </ClCompile>
+    <ClCompile Include="CardManager.cpp">
+      <Filter>Engine\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="TransitionManager.cpp">
+      <Filter>Engine\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Engine\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Color.cpp">
+      <Filter>Engine\Others</Filter>
     </ClCompile>
     <ClCompile Include="UIAnimatedImage.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="UIBar.cpp">
-      <Filter>UI</Filter>
+      <Filter>Engine\UI</Filter>
     </ClCompile>
     <ClCompile Include="UIButton.cpp">
-      <Filter>UI</Filter>
+      <Filter>Engine\UI</Filter>
     </ClCompile>
     <ClCompile Include="UIElement.cpp">
-      <Filter>UI</Filter>
+      <Filter>Engine\UI</Filter>
     </ClCompile>
     <ClCompile Include="UIImage.cpp">
-      <Filter>UI</Filter>
+      <Filter>Engine\UI</Filter>
     </ClCompile>
     <ClCompile Include="UILabel.cpp">
-      <Filter>UI</Filter>
+      <Filter>Engine\UI</Filter>
     </ClCompile>
     <ClCompile Include="UIScrollBar.cpp">
-      <Filter>UI</Filter>
+      <Filter>Engine\UI</Filter>
     </ClCompile>
-    <ClCompile Include="StrategyBuilding.cpp">
-      <Filter>Entities</Filter>
+    <ClCompile Include="GUI.cpp">
+      <Filter>Engine\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Fonts.cpp">
+      <Filter>Engine\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="UIBar.cpp">
+      <Filter>Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Buff.cpp">
+      <Filter>Engine\Others</Filter>
+    </ClCompile>
+    <ClCompile Include="Stat.cpp">
+      <Filter>Engine\Others</Filter>
+    </ClCompile>
+    <ClCompile Include="BuffSourceManager.cpp">
+      <Filter>Engine\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Transition.cpp">
+      <Filter>Engine\Transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="Zoom.cpp">
+      <Filter>Engine\Transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="Fade.cpp">
+      <Filter>Engine\Transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraTranslation.cpp">
+      <Filter>Engine\Transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="Core.cpp">
+      <Filter>Engine\Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="j1App.h" />
-    <ClInclude Include="Module.h" />
-    <ClInclude Include="Core.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="DynamicEntity.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="StaticEntity.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Audio.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="BuffSourceManager.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="CardManager.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="EntityManager.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="Fonts.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="GameManager.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="GUI.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="Input.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="Map.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="Pathfinding.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="Render.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneManager.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="Textures.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="TransitionManager.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="Window.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="StrategyMap.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="TestingScene.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Animation.h">
-      <Filter>Others</Filter>
-    </ClInclude>
-    <ClInclude Include="Buff.h">
-      <Filter>Others</Filter>
-    </ClInclude>
-    <ClInclude Include="Color.h">
-      <Filter>Others</Filter>
-    </ClInclude>
-    <ClInclude Include="Deck.h">
-      <Filter>Others</Filter>
-    </ClInclude>
     <ClInclude Include="p2Defs.h">
-      <Filter>Others</Filter>
-    </ClInclude>
-    <ClInclude Include="p2Point.h">
-      <Filter>Others</Filter>
+      <Filter>Engine\Others</Filter>
     </ClInclude>
     <ClInclude Include="p2Log.h">
-      <Filter>Others</Filter>
+      <Filter>Engine\Others</Filter>
     </ClInclude>
-    <ClInclude Include="PerfTimer.h">
-      <Filter>Others</Filter>
-    </ClInclude>
-    <ClInclude Include="Stat.h">
-      <Filter>Others</Filter>
-    </ClInclude>
-    <ClInclude Include="Timer.h">
-      <Filter>Others</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraTranslation.h">
-      <Filter>Transitions</Filter>
-    </ClInclude>
-    <ClInclude Include="Fade.h">
-      <Filter>Transitions</Filter>
-    </ClInclude>
-    <ClInclude Include="Zoom.h">
-      <Filter>Transitions</Filter>
-    </ClInclude>
-    <ClInclude Include="Transition.h">
-      <Filter>Transitions</Filter>
-    </ClInclude>
-    <ClInclude Include="EncounterTree.h">
-      <Filter>Others</Filter>
-    </ClInclude>
-    <ClInclude Include="EncounterNode.h">
-      <Filter>Others</Filter>
+    <ClInclude Include="p2Point.h">
+      <Filter>Engine\Others</Filter>
     </ClInclude>
     <ClInclude Include="PugiXml\src\pugiconfig.hpp">
-      <Filter>Tools\PugiXML</Filter>
+      <Filter>Engine\Tools\PuguiXML</Filter>
     </ClInclude>
     <ClInclude Include="PugiXml\src\pugixml.hpp">
-      <Filter>Tools\PugiXML</Filter>
+      <Filter>Engine\Tools\PuguiXML</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Engine\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio.h">
+      <Filter>Engine\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Engine\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Pathfinding.h">
+      <Filter>Engine\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Render.h">
+      <Filter>Engine\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Textures.h">
+      <Filter>Engine\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Engine\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Engine\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Module.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="j1App.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Engine\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="TestingScene.h">
+      <Filter>Engine\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="PerfTimer.h">
+      <Filter>Engine\Others</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Engine\Others</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityManager.h">
+      <Filter>Engine\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Engine\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Engine\Others</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticEntity.h">
+      <Filter>Engine\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="DynamicEntity.h">
+      <Filter>Engine\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Deck.h">
+      <Filter>Engine\Others</Filter>
+    </ClInclude>
+    <ClInclude Include="CardManager.h">
+      <Filter>Engine\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="TransitionManager.h">
+      <Filter>Engine\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>Engine\Others</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Engine\Modules</Filter>
     </ClInclude>
     <ClInclude Include="UIAnimatedImage.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="UIBar.h">
-      <Filter>UI</Filter>
+      <Filter>Engine\UI</Filter>
     </ClInclude>
     <ClInclude Include="UIButton.h">
-      <Filter>UI</Filter>
+      <Filter>Engine\UI</Filter>
     </ClInclude>
     <ClInclude Include="UIElement.h">
-      <Filter>UI</Filter>
+      <Filter>Engine\UI</Filter>
     </ClInclude>
     <ClInclude Include="UIImage.h">
-      <Filter>UI</Filter>
+      <Filter>Engine\UI</Filter>
     </ClInclude>
     <ClInclude Include="UILabel.h">
-      <Filter>UI</Filter>
+      <Filter>Engine\UI</Filter>
     </ClInclude>
     <ClInclude Include="UIScrollBar.h">
-      <Filter>UI</Filter>
+      <Filter>Engine\UI</Filter>
     </ClInclude>
-    <ClInclude Include="StrategyBuilding.h">
-      <Filter>Entities</Filter>
+    <ClInclude Include="GUI.h">
+      <Filter>Engine\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Fonts.h">
+      <Filter>Engine\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="UIBar.h">
+      <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Buff.h">
+      <Filter>Engine\Others</Filter>
+    </ClInclude>
+    <ClInclude Include="Stat.h">
+      <Filter>Engine\Others</Filter>
+    </ClInclude>
+    <ClInclude Include="BuffSourceManager.h">
+      <Filter>Engine\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Transition.h">
+      <Filter>Engine\Transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="Zoom.h">
+      <Filter>Engine\Transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="Fade.h">
+      <Filter>Engine\Transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraTranslation.h">
+      <Filter>Engine\Transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="Core.h">
+      <Filter>Engine\Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Entities">
-      <UniqueIdentifier>{e5b8885f-c709-4261-87e7-374c96955b49}</UniqueIdentifier>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{cb944693-b9d0-484c-bad2-02d5a7cdbec6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scenes">
-      <UniqueIdentifier>{f8e95871-4423-4870-a0da-761070c9b23b}</UniqueIdentifier>
+    <Filter Include="Engine\Tools">
+      <UniqueIdentifier>{42c748be-4a37-49de-970f-5be811d06b38}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Modules">
-      <UniqueIdentifier>{35f733bc-acd7-457f-8417-221ffa26910b}</UniqueIdentifier>
+    <Filter Include="Engine\Tools\PuguiXML">
+      <UniqueIdentifier>{7cb78d67-17cc-45eb-af97-e2106becce7b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Others">
-      <UniqueIdentifier>{72c0c6e9-f1ad-42ad-80b7-94a24bce21f2}</UniqueIdentifier>
+    <Filter Include="Engine\Scenes">
+      <UniqueIdentifier>{e07660eb-d36f-4cc9-af59-324d31c2f2f6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Tools">
-      <UniqueIdentifier>{bb5d8a7c-6b6c-41a8-b5f5-b1b8eb56f5ef}</UniqueIdentifier>
+    <Filter Include="Engine\Modules">
+      <UniqueIdentifier>{244722d1-90ce-423d-8e7a-556211865a32}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Tools\PugiXML">
-      <UniqueIdentifier>{0a6d72e9-caba-4128-bb4c-5518ad85b21c}</UniqueIdentifier>
+    <Filter Include="Engine\Entities">
+      <UniqueIdentifier>{338e006b-c57e-4409-84f8-1710e6559e51}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Transitions">
-      <UniqueIdentifier>{8c16ec69-5bc4-4c84-afe0-e6e893f84dee}</UniqueIdentifier>
+    <Filter Include="Engine\Others">
+      <UniqueIdentifier>{a8bfab6a-5472-4969-943e-861a8b493f08}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI">
-      <UniqueIdentifier>{649c3c1e-7dc0-497c-a4f1-9efdd3a67582}</UniqueIdentifier>
+    <Filter Include="Engine\UI">
+      <UniqueIdentifier>{0c1a3d65-12ba-4279-a61c-87d5af448eed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Transitions">
+      <UniqueIdentifier>{c28106c4-fa11-42a3-a3b1-7e4c15fe8610}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
