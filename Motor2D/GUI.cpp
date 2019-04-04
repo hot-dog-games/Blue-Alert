@@ -41,7 +41,7 @@ bool Gui::Awake(pugi::xml_node& conf)
 // Called before the first frame
 bool Gui::Start()
 {
-	atlas = App->tex->Load("ui/button.png");
+	atlas = App->tex->Load("ui/atlas.png");
 
 	return true;
 }

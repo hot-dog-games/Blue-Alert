@@ -100,6 +100,9 @@
     <ClCompile Include="UIBar.cpp">
       <Filter>Engine\UI</Filter>
     </ClCompile>
+    <ClCompile Include="MapMenuScene.cpp">
+      <Filter>Engine\Scenes</Filter>
+    </ClCompile>
     <ClCompile Include="Buff.cpp">
       <Filter>Engine\Others</Filter>
     </ClCompile>
@@ -239,6 +242,9 @@
     </ClInclude>
     <ClInclude Include="UIBar.h">
       <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="MapMenuScene.h">
+      <Filter>Engine\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Buff.h">
       <Filter>Engine\Others</Filter>
