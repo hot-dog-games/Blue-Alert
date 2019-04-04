@@ -6,7 +6,9 @@
 enum Static_State {
 	STATIC_IDLE,
 	STATIC_DIE,
-	STATIC_DESTROYED
+	STATIC_DESTROYED,
+	STATIC_HOVERED = 1,
+	STATIC_OFF = 2
 };
 
 
@@ -24,7 +26,7 @@ public:
 
 	virtual void Die();
 
-private:
+protected:
 	Static_State state = STATIC_IDLE;
 };
 
