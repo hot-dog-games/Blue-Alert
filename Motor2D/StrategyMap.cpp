@@ -32,12 +32,9 @@ bool StrategyMap::Start()
 	encounter_tree->CreateTree();
 	current_node = encounter_tree->GetNodes().front();
 
-	App->render->camera.x = (App->map->data.width*App->map->data.tile_width*0.5)*0.5 - 100;
-	App->render->camera.y = -1000;
+	App->render->camera.x = 0;
+	App->render->camera.y = 0;
 
-	node_rect = { 600, 420, 47, 57 };
-
-	CreateNodeButtons();
 
 	return true;
 }
@@ -103,30 +100,17 @@ bool StrategyMap::CleanUp()
 	LOG("Freeing scene");
 
 	App->tex->UnLoad(background);
-	for each (UIButton* b in node_buttons)
-	{
-		delete b;
-	}
 
 	return true;
-}
-
-void StrategyMap::CreateNodeButtons()
-{
-	for each (EncounterNode* n in encounter_tree->GetNodes())
-	{
-		node_buttons.push_back(App->gui->CreateButton(n->GetPosition(), &node_rect));
-	}
 }
 
 bool StrategyMap::GUIEvent(UIElement * element, GUI_Event gui_event)
 {
 	if (gui_event == GUI_Event::LEFT_CLICK_DOWN) {
-		if (element == node_buttons[2])
-		{
-			App->transition_manager->CreateFadeTransition(3.0f, true, 3, White);
-			App->transition_manager->CreateZoomTransition(3.0f);
-		}
+
+		App->transition_manager->CreateFadeTransition(3.0f, true, 3, White);
+		App->transition_manager->CreateZoomTransition(3.0f);
+
 	}
 
 	return true;

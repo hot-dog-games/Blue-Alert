@@ -5,14 +5,10 @@ class StrategyBuilding :
 	public StaticEntity
 {
 public:
-	enum class State {
-		INRANGE,
-		HIGHLIGHTED,
-		OFFRANGE
-	};
-
-	StrategyBuilding();
+	StrategyBuilding(pugi::xml_node entity_node, fPoint position, Faction faction);
 	~StrategyBuilding();
+
+	virtual bool Update(float dt);
 
 };
 

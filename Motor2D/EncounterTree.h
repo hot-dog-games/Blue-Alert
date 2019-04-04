@@ -5,6 +5,7 @@
 #include "PugiXml\src\pugixml.hpp"
 #include "EncounterNode.h"
 
+
 class EncounterTree
 {
 private:
@@ -23,5 +24,6 @@ public:
 	std::vector<EncounterNode*> GetNodes();
 
 	pugi::xml_node GetXmlEncounterNodeById(int id);
+
 };
 

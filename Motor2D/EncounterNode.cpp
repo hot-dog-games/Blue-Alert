@@ -1,19 +1,15 @@
-#include "EncounterNode.h"
 #include "j1App.h"
-
+#include "GUI.h"
+#include "EntityManager.h"
+#include "Entity.h"
+#include "EncounterNode.h"
 
 
 EncounterNode::EncounterNode()
 {
 	encounter = new Encounter();
+	button_rect = { 800, 800, 147, 127 };
 }
-
-EncounterNode::EncounterNode(iPoint position)
-{
-	encounter = new Encounter();
-	this->position = position;
-}
-
 
 EncounterNode::~EncounterNode()
 {
@@ -36,8 +32,14 @@ EncounterNode * EncounterNode::GetParent() const
 
 EncounterNode * EncounterNode::AddChild(EncounterNode * child)
 {
+	if (children.size() == 0)
+	{
+		child->SetPosition({ position.x - rand() % 150 + (-100), position.y - 200 });
+	}
+	else {
+		child->SetPosition({ children.back()->position.x + 300, children.back()->position.y });
+	}
 	child->SetParent(this);
-	child->SetPosition({ position.x + (rand() % 200 - 100), position.y - 100 });
 	children.push_back(child);
 	return child;
 }
@@ -47,12 +49,12 @@ std::vector<EncounterNode*> EncounterNode::GetChildren() const
 	return children;
 }
 
-void EncounterNode::SetPosition(iPoint position)
+void EncounterNode::SetPosition(fPoint position)
 {
 	this->position = position;
 }
 
-iPoint EncounterNode::GetPosition()
+fPoint EncounterNode::GetPosition()
 {
 	return position;
 }
@@ -72,4 +74,17 @@ void EncounterNode::LoadEncounterInfo(pugi::xml_node encounter_node)
 		encounter->deck[i] = it->attribute("type").as_uint();
 		i++;
 	}
+
+	CreateNodeButton();
+	CreateNodeEntity();
+}
+
+void EncounterNode::CreateNodeEntity()
+{
+	entity = App->entity_manager->CreateStrategyBuilding(TESTSTRATEGYBUILDING, { position.x, position.y }, visited? FACTION_RUSSIAN : FACTION_AMERICAN);
+}
+
+void EncounterNode::CreateNodeButton()
+{
+	button = App->gui->CreateButton({ (int)position.x, (int)position.y }, &button_rect);
 }

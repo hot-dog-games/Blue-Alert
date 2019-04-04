@@ -4,6 +4,9 @@
 #include "PugiXml\src\pugixml.hpp"
 #include "p2Point.h"
 
+class UIButton;
+class StrategyBuilding;
+
 struct Encounter {
 	std::string name = ""; // indica el tipo de edificio que es.
 	int ai_difficulty = 0;
@@ -21,11 +24,14 @@ protected:
 	//------Encounter-----
 	Encounter* encounter = nullptr;
 
-	iPoint position = {0,0};
+	fPoint position = {0,0};
+
+	UIButton* button;
+	SDL_Rect button_rect;
+	StrategyBuilding* entity;
 
 public:
 	EncounterNode();
-	EncounterNode(iPoint position);
 	~EncounterNode();
 
 	void SetParent(EncounterNode * parent);
@@ -34,13 +40,17 @@ public:
 	EncounterNode * AddChild(EncounterNode * child);
 	std::vector<EncounterNode*> GetChildren() const;
 
-	void SetPosition(iPoint position);
-	iPoint GetPosition();
+	void SetPosition(fPoint position);
+	fPoint GetPosition();
 
 	void LoadEncounterInfo(pugi::xml_node encounter_node);
+	void CreateNodeEntity();
+	void CreateNodeButton();
 
 	//-----Emcounter Accessors-----
 	std::string EncounterNode::GetEncounterName() const;
+
+	SDL_Rect node_rect;
 
 public:
 

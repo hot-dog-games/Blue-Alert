@@ -36,9 +36,28 @@
         </destroyed>
       </animations>
     </info>
-
+  </entity>
+  
+  
+  <entity type ="10">
+	
+    <info faction="1">
+      <sprite>sprites/Builidngs/testing.png</sprite>
+      <animations>
+        <inrange speed="0.0F">
+          <frame x="24" y="12" width="147" height="127"/>
+        </inrange>
+		    <highlight speed="0.0F">
+		      <frame x="24" y="389" width="147" height="127"/>
+		    </highlight>
+		    <offrange speed="0.0F">
+		      <frame x="19" y="206" width="157" height="137"/>
+		    </offrange>
+      </animations>     
+    </info>
 
   </entity>
+
   
   <entity type ="1">
     <info faction ="0">
@@ -53,5 +72,6 @@
       </animations>
     </info>
   </entity>
+  
   
 </config>
