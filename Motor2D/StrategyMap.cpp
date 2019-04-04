@@ -52,16 +52,16 @@ bool StrategyMap::Start()
 	App->win->GetWindowSize(w, h);
 
 	main_panel = App->gui->CreateImage({ 0,0 }, { 0, 0, (int)w, (int)h }, nullptr, false);
-	banner = App->gui->CreateImage({ 4,5 }, { 1063,0,1017,83 });
+	banner = App->gui->CreateImage({ 4,5 }, { 1,769,1017,83 }, main_panel);
 	SDL_Rect settings_rect[3];
-	settings_rect[0] = { 1063,201,59,51 };
-	settings_rect[1] = { 1188,201,58,51 };
-	settings_rect[2] = { 1312,201,58,51 };
+	settings_rect[0] = { 0,481,59,51 };
+	settings_rect[1] = { 60,481,58,51 };
+	settings_rect[2] = { 119,481,58,51 };
 
 	SDL_Rect menu_rect[3];
-	menu_rect[0] = { 1061,333,220,51 };
-	menu_rect[1] = { 1324,333,220,51 };
-	menu_rect[2] = { 1616,333,220,51 };
+	menu_rect[0] = { 0,533,220,51 };
+	menu_rect[1] = { 0,585,220,51 };
+	menu_rect[2] = { 0,585,220,51 };
 
 	settings_button = App->gui->CreateButton({ 50,700 }, settings_rect, main_panel);
 	menu_button = App->gui->CreateButton({ 700,700 }, menu_rect, main_panel);
