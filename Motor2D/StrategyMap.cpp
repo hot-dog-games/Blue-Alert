@@ -85,8 +85,8 @@ bool StrategyMap::Update(float dt)
 {
 
 	if (App->input->GetKey(SDL_SCANCODE_8) == KEY_DOWN) {
-		App->transition_manager->CreateFadeTransition(3.0f, true, 3, White);
-		App->transition_manager->CreateZoomTransition(3.0f);
+		App->transition_manager->CreateFadeTransition(2.0f, true, 3, White);
+		App->transition_manager->CreateZoomTransition(2.0f);
 		//App->transition_manager->CreateCameraTranslation(3.0f, { App->render->camera.x, App->render->camera.y }, { 0, 0 });
 	}
 
@@ -148,8 +148,8 @@ bool StrategyMap::GUIEvent(UIElement * element, GUI_Event gui_event)
 			if (element == current_node->GetChildren()[i]->GetButton())
 			{
 				App->gui->DisableElement(main_panel);
-				App->transition_manager->CreateFadeTransition(3.0f, true, 3, White);
-				App->transition_manager->CreateZoomTransition(3.0f);
+				App->transition_manager->CreateFadeTransition(2.0f, true, 3, White);
+				App->transition_manager->CreateZoomTransition(2.0f);
 			}
 		}
 	}
