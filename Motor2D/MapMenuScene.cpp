@@ -9,7 +9,6 @@
 #include "Map.h"
 #include "EntityManager.h"
 #include "Entity.h"
-#include "Summoner.h"
 #include "PathFinding.h"
 #include "UIAnimatedImage.h"
 #include "UIButton.h"
