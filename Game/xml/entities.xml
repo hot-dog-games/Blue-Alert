@@ -72,6 +72,48 @@
       </animations>
     </info>
   </entity>
+
+  <entity type ="2">
+    <info faction ="0">
+      <sprite>textures/units/sprite_gi.png</sprite>
+      <animations>
+        <idle speed="5.0F">
+          <frame x="345" y="1851" width="15" height="33"/>
+        </idle>
+        <moving speed="5.0F">
+          <frame x="345" y="1851" width="15" height="33"/>
+        </moving>
+      </animations>
+    </info>
+  </entity>
+
+  <entity type ="3">
+    <info faction ="0">
+      <sprite>textures/units/sprite_gi.png</sprite>
+      <animations>
+        <idle speed="5.0F">
+          <frame x="345" y="1851" width="15" height="33"/>
+        </idle>
+        <moving speed="5.0F">
+          <frame x="345" y="1851" width="15" height="33"/>
+        </moving>
+      </animations>
+    </info>
+  </entity>
+
+  <entity type ="8">
+    <info faction ="0">
+      <sprite>textures/units/sprite_gi.png</sprite>
+      <animations>
+        <idle speed="5.0F">
+          <frame x="345" y="1851" width="15" height="33"/>
+        </idle>
+        <moving speed="5.0F">
+          <frame x="345" y="1851" width="15" height="33"/>
+        </moving>
+      </animations>
+    </info>
+  </entity>
   
   
 </config>

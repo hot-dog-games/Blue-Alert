@@ -11,8 +11,17 @@ struct UIImage;
 class Entity;
 class UIBar;
 class Core;
+enum CardNumber;
 
 struct Card;
+
+enum CardNumber {
+	CN_UNKNOWN = -1,
+	CN_FIRST,
+	CN_SECOND,
+	CN_THIRD,
+	CN_FOURTH
+};
 
 class TestingScene :
 	public Scene
@@ -39,6 +48,10 @@ public:
 	virtual bool GUIEvent(UIElement* element, GUI_Event gui_event);
 
 private:
+	void CreateDrag(int num, UIElement* element);
+	void ReleaseDrag();
+
+private:
 	SDL_Texture*	debug_tex;
 	SDL_Texture*	ui_background;
 
@@ -49,6 +62,7 @@ private:
 	UIBar*			energy_bar;
 
 	UIImage* current_drag;
+	int card_num;
 
 	uint max_energy;
 	uint current_energy;
