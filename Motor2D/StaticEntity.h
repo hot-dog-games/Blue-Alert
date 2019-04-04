@@ -26,7 +26,7 @@ public:
 
 	virtual void Die();
 
-private:
+protected:
 	Static_State state = STATIC_IDLE;
 };
 

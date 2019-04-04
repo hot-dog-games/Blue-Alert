@@ -10,5 +10,9 @@ public:
 
 	virtual bool Update(float dt);
 
+	void SetInRange(bool in_range);
+
+	bool in_range = false;
+
 };
 

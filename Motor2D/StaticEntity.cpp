@@ -26,10 +26,6 @@ StaticEntity::~StaticEntity()
 
 bool StaticEntity::Update(float dt)
 {
-	if (state == STATIC_DIE && animations[state].isDone())
-	{
-		state = STATIC_DESTROYED;
-	}
 
 	current_frame = animations[state].GetCurrentFrame(dt);
 
@@ -48,6 +44,9 @@ bool StaticEntity::PostUpdate()
 {
 	fPoint render_position = { position.x - current_frame.w / 2, position.y - current_frame.h };
 	App->render->Blit(sprite, render_position.x, render_position.y, &current_frame);
+
+	LOG("state %i", state);
+	LOG("RECT %i %i %i %i", current_frame.x, current_frame.y, current_frame.w, current_frame.h);
 
 	return true;
 }

@@ -47,6 +47,9 @@ public:
 	void CreateNodeEntity();
 	void CreateNodeButton();
 
+	UIButton* GetButton();
+	StrategyBuilding* GetEntity();
+
 	//-----Emcounter Accessors-----
 	std::string EncounterNode::GetEncounterName() const;
 

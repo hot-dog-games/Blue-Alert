@@ -1,6 +1,7 @@
 #include "j1App.h"
 #include "GUI.h"
 #include "TransitionManager.h"
+#include "EntityManager.h"
 #include "EncounterTree.h"
 
 
@@ -76,4 +77,21 @@ pugi::xml_node EncounterTree::GetXmlEncounterNodeById(int id)
 	pugi::xml_node encounter;
 	encounter = encounter_tree.find_child_by_attribute("id", std::to_string((int)id).c_str());
 	return encounter;
+}
+
+void EncounterTree::UpdateTree()
+{
+
+}
+
+void EncounterTree::CleanTree()
+{
+	for each (EncounterNode* en in map_encounters)
+	{
+		if(en->GetEntity() != nullptr)App->entity_manager->DeleteEntity((Entity*)en->GetEntity());
+		App->gui->DeleteElement((UIElement*)en->GetButton());
+		delete en;
+	}
+
+	delete this;
 }

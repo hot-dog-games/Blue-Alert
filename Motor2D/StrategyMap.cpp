@@ -11,8 +11,10 @@
 #include "TransitionManager.h"
 #include "CardManager.h"
 #include "Deck.h"
-#include "StrategyMap.h"
 #include "GUI.h"
+#include "EncounterNode.h"
+#include "StrategyBuilding.h"
+#include "StrategyMap.h"
 
 StrategyMap::StrategyMap() : Scene()
 {
@@ -35,6 +37,12 @@ bool StrategyMap::Start()
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
+	for (int i = 0; i < current_node->GetChildren().size(); i++)
+	{
+		current_node->GetChildren()[i]->GetEntity()->SetInRange(true);
+	}
+
+	current_node->GetEntity()->SetInRange(true);
 
 	return true;
 }
@@ -55,7 +63,6 @@ bool StrategyMap::Update(float dt)
 		App->transition_manager->CreateZoomTransition(3.0f);
 		//App->transition_manager->CreateCameraTranslation(3.0f, { App->render->camera.x, App->render->camera.y }, { 0, 0 });
 	}
-
 
 	return true;
 }
@@ -100,6 +107,7 @@ bool StrategyMap::CleanUp()
 	LOG("Freeing scene");
 
 	App->tex->UnLoad(background);
+	encounter_tree->CleanTree();
 
 	return true;
 }
@@ -108,9 +116,14 @@ bool StrategyMap::GUIEvent(UIElement * element, GUI_Event gui_event)
 {
 	if (gui_event == GUI_Event::LEFT_CLICK_DOWN) {
 
-		App->transition_manager->CreateFadeTransition(3.0f, true, 3, White);
-		App->transition_manager->CreateZoomTransition(3.0f);
-
+		for (int i = 0; i < current_node->GetChildren().size(); i++)
+		{
+			if (element == current_node->GetChildren()[i]->GetButton())
+			{
+				App->transition_manager->CreateFadeTransition(3.0f, true, 3, White);
+				App->transition_manager->CreateZoomTransition(3.0f);
+			}
+		}
 	}
 
 	return true;

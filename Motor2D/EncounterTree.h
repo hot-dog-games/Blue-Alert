@@ -25,5 +25,9 @@ public:
 
 	pugi::xml_node GetXmlEncounterNodeById(int id);
 
+	void UpdateTree();
+
+	void CleanTree();
+
 };
 

@@ -86,5 +86,15 @@ void EncounterNode::CreateNodeEntity()
 
 void EncounterNode::CreateNodeButton()
 {
-	button = App->gui->CreateButton({ (int)position.x, (int)position.y }, &button_rect);
+	button = App->gui->CreateButton({ (int)position.x - 72, (int)position.y -127}, &button_rect);
+}
+
+UIButton * EncounterNode::GetButton()
+{
+	return button;
+}
+
+StrategyBuilding * EncounterNode::GetEntity()
+{
+	return entity;
 }
