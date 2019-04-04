@@ -121,13 +121,13 @@
     <ClCompile Include="CameraTranslation.cpp">
       <Filter>Engine\Transitions</Filter>
     </ClCompile>
-    <ClCompile Include="EncounterTree.cpp" />
-    <ClCompile Include="EncounterNode.cpp" />
-    <ClCompile Include="StrategyMap.cpp">
       <Filter>Engine\Scenes</Filter>
     <ClCompile Include="Core.cpp">
       <Filter>Engine\Entities</Filter>
     </ClCompile>
+	<ClCompile Include="EncounterTree.cpp"/>
+    <ClCompile Include="EncounterNode.cpp"/>
+    <ClCompile Include="StrategyMap.cpp"/>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="p2Defs.h">
@@ -265,13 +265,14 @@
     <ClInclude Include="CameraTranslation.h">
       <Filter>Engine\Transitions</Filter>
     </ClInclude>
-    <ClInclude Include="EncounterTree.h" />
-    <ClInclude Include="EncounterNode.h" />
     <ClInclude Include="StrategyMap.h">
       <Filter>Engine\Scenes</Filter>
+	</ClInclude>
     <ClInclude Include="Core.h">
       <Filter>Engine\Entities</Filter>
     </ClInclude>
+	<ClInclude Include="EncounterTree.h" />
+    <ClInclude Include="EncounterNode.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
