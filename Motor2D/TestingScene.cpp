@@ -47,6 +47,7 @@ bool TestingScene::Start()
 	ui_background = App->tex->Load("ui/background.png");
 
 	App->render->camera.x = (App->map->data.width*App->map->data.tile_width*0.5)*0.5 - 100;
+	App->render->camera.y = 0;
 
 	Deck* test_deck = new Deck();
 	test_deck->delete_cards = true;
