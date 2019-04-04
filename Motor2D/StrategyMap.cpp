@@ -108,6 +108,7 @@ bool StrategyMap::CleanUp()
 
 	App->tex->UnLoad(background);
 	encounter_tree->CleanTree();
+	App->entity_manager->CleanUp();
 
 	return true;
 }

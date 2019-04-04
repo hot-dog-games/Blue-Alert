@@ -88,8 +88,8 @@ void EncounterTree::CleanTree()
 {
 	for each (EncounterNode* en in map_encounters)
 	{
-		if(en->GetEntity() != nullptr)App->entity_manager->DeleteEntity((Entity*)en->GetEntity());
-		App->gui->DeleteElement((UIElement*)en->GetButton());
+		//if(en->GetEntity() != nullptr)App->entity_manager->DeleteEntity((Entity*)en->GetEntity());
+		//App->gui->DeleteElement((UIElement*)en->GetButton());
 		delete en;
 	}
 
