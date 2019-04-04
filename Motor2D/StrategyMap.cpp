@@ -135,7 +135,6 @@ bool StrategyMap::CleanUp()
 	App->tex->UnLoad(background);
 	encounter_tree->CleanTree();
 	App->entity_manager->CleanUp();
-	App->gui->DeleteElement(main_panel);
 
 	return true;
 }

@@ -8,7 +8,7 @@
 EncounterNode::EncounterNode()
 {
 	encounter = new Encounter();
-	button_rect = { 800, 800, 147, 127 };
+	button_rect = { 1000, 1000, 147, 127 };
 }
 
 EncounterNode::~EncounterNode()
