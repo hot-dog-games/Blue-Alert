@@ -43,12 +43,12 @@ bool Core::CleanUp()
 	return true;
 }
 
-void Core::UseCard(CardNumber number, fPoint position)
+void Core::UseCard(int number, fPoint position)
 {
-	uint energy_cost = deck->cards[(int)number]->info.stats.find("energy_cost")->second->GetValue();
+	uint energy_cost = deck->cards[number]->info.stats.find("energy_cost")->second->GetValue();
 	if (stats.find("energy")->second->GetValue() >= energy_cost)
 	{
-		App->entity_manager->CreateEntity(deck->cards[(int)number]->type, position, deck->cards[(int)number], faction);
+		App->entity_manager->CreateEntity(deck->cards[number]->type, position, deck->cards[number], faction);
 		stats.find("energy")->second->DecreaseStat(energy_cost);
 	}
 }
@@ -58,7 +58,7 @@ void Core::SetDeck(Deck* new_deck)
 	deck = new_deck;
 }
 
-Card * Core::GetCard(CardNumber card_num) const
+Card * Core::GetCard(int card_num) const
 {
 	if (deck->cards[card_num]) {
 		return deck->cards[card_num];
