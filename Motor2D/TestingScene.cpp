@@ -218,6 +218,7 @@ void TestingScene::CreateDrag(int num, UIElement* element)
 	current_drag->dragable = true;
 	current_drag->clipping = false;
 	current_drag->parent_limit = false;
+	current_drag->clicked = true;
 }
 
 void TestingScene::ReleaseDrag()
