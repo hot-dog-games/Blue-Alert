@@ -3,17 +3,24 @@
 
 #include "UIElement.h"
 
+class Stat;
+
 class UIBar : public UIElement 
 {
 public:
-	UIBar(iPoint pos, SDL_Rect sprite_rect, bool is_interactable = true);
+	UIBar(iPoint pos, SDL_Rect sprite_rect, Stat* value, bool is_interactable = true);
 	~UIBar();
 
-	void LossPoint();
-	void GainPoint();
+	void DecreaseBar(uint value);
+	void IncreaseBar(uint value);
 	bool UIBlit();
+	bool Update(float dt);
 
 	//bool CleanUp();
+
+private:
+	Stat* bar_value = nullptr;
+	uint current_value = 0;
 
 };
 

@@ -5,12 +5,12 @@
 #include "p2Point.h"
 
 class Entity;
-class Summoner;
+class Core;
 struct Card;
 class Deck;
+enum Faction;
 
 enum EntityType {
-	SUMMONER = -1,
 	CORE,
 	G_I,
 	SNIPER,
@@ -40,9 +40,9 @@ public:
 	bool CleanUp();
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;
-	Entity* CreateEntity(EntityType type, fPoint position, Card* card);
-	Entity* CreateEntity(EntityType type, fPoint position);
-	Summoner* CreateSummoner(Deck* deck);
+	Entity* CreateEntity(EntityType type, fPoint position, Card* card, Faction faction);
+	Core* CreateCore(EntityType type, fPoint position, Deck* deck, Faction faction);
+	fPoint GetCorePosition(Faction faction);
 	bool DeleteEntity(Entity* entity);
 
 private:

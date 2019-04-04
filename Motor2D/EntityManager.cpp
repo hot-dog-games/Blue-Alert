@@ -4,9 +4,8 @@
 #include "Textures.h"
 #include "Input.h"
 #include "DynamicEntity.h"
-#include "StaticEntity.h"
-#include "Summoner.h"
 #include "CardManager.h"
+#include "Core.h"
 #include "Deck.h"
 #include "EntityManager.h"
 
@@ -90,14 +89,16 @@ bool EntityManager::Save(pugi::xml_node&) const
 	return true;
 }
 
-Entity* EntityManager::CreateEntity(EntityType type, fPoint position, Card* card)
+Entity* EntityManager::CreateEntity(EntityType type, fPoint position, Card* card, Faction faction)
 {
 	std::string id = std::to_string(id_count);
 	pugi::xml_node entity_node = entity_configs.find_child_by_attribute("type", std::to_string((int)type).c_str());
 
 	id += "_" + card->name;
 
-	DynamicEntity* entity = new DynamicEntity(entity_node, position, card);
+	DynamicEntity* entity = new DynamicEntity(entity_node, position, card, faction);
+	entity->type = type;
+	entity->Start();
 	entities.push_back(entity);
 
 	id_count++;
@@ -105,36 +106,33 @@ Entity* EntityManager::CreateEntity(EntityType type, fPoint position, Card* card
 	return entity;
 }
 
-Entity* EntityManager::CreateEntity(EntityType type, fPoint position)
+Core* EntityManager::CreateCore(EntityType type, fPoint position, Deck* deck, Faction faction)
 {
 	std::string id = std::to_string(id_count);
 	pugi::xml_node entity_node = entity_configs.find_child_by_attribute("type", std::to_string((int)type).c_str());
 
 	id += "_CORE";
 
-	StaticEntity* entity = new StaticEntity(entity_node, position);
+	Core* entity = new Core(entity_node, position, faction);
 	entities.push_back(entity);
+	entity->Start();
+	entity->SetDeck(deck);
 
 	id_count++;
 
 	return entity;
 }
 
-Summoner* EntityManager::CreateSummoner(Deck * deck)
+fPoint EntityManager::GetCorePosition(Faction faction)
 {
-	std::string id = std::to_string(id_count);
-	pugi::xml_node entity_node = entity_configs.find_child_by_attribute("type", std::to_string((int)SUMMONER).c_str());
-
-	id += "_SUMMONER";
-
-	Summoner* entity = new Summoner();
-	entity->SetDeck(deck);
-	entity->SetMaxEnergy(entity_node.attribute("energy").as_uint());
-	entities.push_back(entity);
-
-	id_count++;
-
-	return entity;
+	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
+	{
+		if((*entity)->faction != faction && (*entity)->type == CORE)
+		{
+			return (*entity)->position;
+		}
+	}
+	return {0,0};
 }
 
 bool EntityManager::DeleteEntity(Entity* entity)

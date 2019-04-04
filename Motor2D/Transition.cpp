@@ -1,9 +1,6 @@
 #include "Transition.h"
 #include "TransitionManager.h"
-#include "SceneManager.h"
 #include "j1App.h"
-#include "Render.h"
-#include "Window.h"
 #include "p2Log.h"
 
 
@@ -11,35 +8,22 @@ Transition::Transition()
 {
 }
 
-Transition::Transition(TransitionType type, float time, bool is_scene_change, int scene_to_change)
+Transition::Transition(float transition_time)
 {
-	this->type = type;
-	transition_time = time;
-	this->is_scene_change = is_scene_change;
-	this->scene_to_change = scene_to_change;
-
-	OnCreate();
-}
-
-
-Transition::~Transition()
-{
-	delete current_time;
-}
-
-void Transition::OnCreate()
-{
-	uint width, height;
-
-	App->win->GetWindowSize(width, height);
-	screen = { 0, 0, (int)width, (int)height};
-	SDL_SetRenderDrawBlendMode(App->render->renderer, SDL_BLENDMODE_BLEND);
+	this->transition_time = transition_time;
 
 	//start timer
 	current_time = new Timer();
 	current_time->Start();
 
 	state = TransitionState::ENTERING;
+
+}
+
+
+Transition::~Transition()
+{
+	delete current_time;
 }
 
 void Transition::PreUpdate()
@@ -71,66 +55,17 @@ void Transition::PostUpdate()
 	}
 }
 
-Transition::TransitionState Transition::GetState()
-{
-	return TransitionState();
-}
-
-void Transition::SetState(TransitionState state)
-{
-}
-
-Transition::TransitionType Transition::GetType()
-{
-	return TransitionType();
-}
-
-void Transition::SetColor(Color color)
-{
-	this->color = color;
-}
-
 void Transition::Entering()
 {
-	switch (type)
+	if (current_time->ReadSec() >= transition_time)
 	{
-	case Transition::TransitionType::FADE: {
-
-		float normalized_alpha = floor(current_time->ReadSec()*(255.0F / transition_time));
-		DrawFadeRect(normalized_alpha);
-
-		if (current_time->ReadSec() >= transition_time)
-		{
-			state = TransitionState::ACTION;
-		}
-	}break;
-
-	case Transition::TransitionType::ZOOM:
-		break;
-	default:
-		break;
+		state = TransitionState::ACTION;
 	}
 }
 
 void Transition::Action()
 {
 	current_time->Stop();
-
-	switch (type)
-	{
-	case Transition::TransitionType::FADE:
-		DrawFadeRect(255.0F);
-		break;
-	case Transition::TransitionType::ZOOM:
-		break;
-	default:
-		break;
-	}
-
-	if (is_scene_change)
-	{
-		App->scene_manager->ChangeScene(scene_to_change);
-	}
 
 	transition_time += transition_time;
 	state = TransitionState::EXITING;
@@ -140,33 +75,9 @@ void Transition::Exiting()
 {
 	current_time->Resume();
 
-	switch (type)
+	if (current_time->ReadSec() >= transition_time)
 	{
-	case Transition::TransitionType::FADE: {
-
-		float normalized_alpha = floor((transition_time - current_time->ReadSec())*(255.0F / transition_time));
-		DrawFadeRect(normalized_alpha);
-
-		if (current_time->ReadSec() >= transition_time)
-		{
-			state = TransitionState::NONE;
-			App->transition_manager->DestroyTransition(this);
-		}
-	}break;
-
-	case Transition::TransitionType::ZOOM:
-		break;
-	default:
-		break;
+		state = TransitionState::NONE;
+		App->transition_manager->DestroyTransition(this);
 	}
-
-}
-
-void Transition::DrawFadeRect(float alpha_value)
-{
-	if (alpha_value > 255)alpha_value = 255;
-	if (alpha_value < 0)alpha_value = 0;
-
-	SDL_SetRenderDrawColor(App->render->renderer, color.r, color.g, color.b, alpha_value);
-	SDL_RenderFillRect(App->render->renderer, &screen);
 }

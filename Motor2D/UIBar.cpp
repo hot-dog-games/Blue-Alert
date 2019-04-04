@@ -2,28 +2,32 @@
 #include "Render.h"
 #include "GUI.h"
 #include "UIBar.h"
-#include "Color.h"
+#include "Stat.h"
 
-UIBar::UIBar(iPoint pos, SDL_Rect sprite_rect, bool is_interactable)
+UIBar::UIBar(iPoint pos, SDL_Rect sprite_rect, Stat* value, bool is_interactable)
 {
 	interactable = is_interactable;
 	rect_box = { pos.x, pos.y, sprite_rect.w,sprite_rect.h };
 
 	rect_sprite = sprite_rect;
+	bar_value = value;
+	current_value = value->GetValue();
 }
 
-void UIBar::LossPoint()
+void UIBar::DecreaseBar(uint value)
 {
-	uint height = rect_box.h / 100;
+	uint height = (rect_box.h / bar_value->GetMaxValue()) * value;
 	rect_sprite.h -= height;
 	rect_box.y += height;
+	current_value -= value;
 }
 
-void UIBar::GainPoint()
+void UIBar::IncreaseBar(uint value)
 {
-	uint height = rect_box.h / 100;
+	uint height = (rect_box.h / bar_value->GetMaxValue()) * value;
 	rect_sprite.h += height;
 	rect_box.y -= height;
+	current_value += value;
 }
 
 bool UIBar::UIBlit()
@@ -33,5 +37,18 @@ bool UIBar::UIBlit()
 		App->render->Blit(App->gui->GetAtlas(), screen_pos.x, screen_pos.y, &rect_sprite, 0.0F, 0.0, INT_MAX, INT_MAX, &parent->GetScreenRect());
 	else
 		App->render->Blit(App->gui->GetAtlas(), screen_pos.x, screen_pos.y, &rect_sprite, 0.0F, 0.0, INT_MAX, INT_MAX);
+	return true;
+}
+
+bool UIBar::Update(float dt)
+{
+	if (bar_value->GetValue() > current_value) {
+		IncreaseBar(bar_value->GetValue() - current_value);
+	}
+	else if (bar_value->GetValue() < current_value) {
+		DecreaseBar(current_value - bar_value->GetValue());
+	}
+		
+
 	return true;
 }

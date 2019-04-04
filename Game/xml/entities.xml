@@ -1,28 +1,99 @@
 <config>
-  <entity type ="-1" energy="10"/>
   
-  <entity type ="0" life ="100">
-    <sprite>textures/buildings/sprite_core.png</sprite>
-    <animations>
-      <idle speed="5.0F">
-        <frame x="45" y="52" width="147" height="129"/>
-      </idle>
-      <death speed="1.0F" loop="false">
-        <frame x="45" y="861" width="147" height="128"/>
-      </death>
-      <destroyed speed="5.0F" loop="false">
-        <frame x="0" y="0" width="0" height="0"/>
-      </destroyed>
-    </animations>
+  <entity type ="0">
+    <stats>
+      <stat stat="health" value ="1000"/>
+      <stat stat="energy" value ="10"/>
+      <stat stat="energy_regen" value ="1"/>
+    </stats>
+
+    <info faction="0">
+      <sprite>textures/buildings/sprite_core.png</sprite>
+      <animations>
+        <idle speed="5.0F">
+          <frame x="45" y="52" width="147" height="129"/>
+        </idle>
+        <death speed="1.0F" loop="false">
+          <frame x="45" y="861" width="147" height="128"/>
+        </death>
+        <destroyed speed="5.0F" loop="false">
+          <frame x="0" y="0" width="0" height="0"/>
+        </destroyed>
+      </animations>     
+    </info>
+
+    <info faction="1">
+      <sprite>textures/buildings/sprite_core.png</sprite>
+      <animations>
+        <idle speed="5.0F">
+          <frame x="45" y="52" width="147" height="129"/>
+        </idle>
+        <death speed="1.0F" loop="false">
+          <frame x="45" y="861" width="147" height="128"/>
+        </death>
+        <destroyed speed="5.0F" loop="false">
+          <frame x="0" y="0" width="0" height="0"/>
+        </destroyed>
+      </animations>
+    </info>
+
+
   </entity>
   
   <entity type ="1">
-    <sprite>textures/units/sprite_gi.png</sprite>
-    <animations>
-      <idle speed="5.0F">
-        <frame x="345" y="1851" width="15" height="33"/>
-      </idle>
-    </animations>
+    <info faction ="0">
+      <sprite>textures/units/sprite_gi.png</sprite>
+      <animations>
+        <idle speed="5.0F">
+          <frame x="345" y="1851" width="15" height="33"/>
+        </idle>
+		 <moving speed="5.0F">
+          <frame x="345" y="1851" width="15" height="33"/>
+        </moving>
+      </animations>
+    </info>
+  </entity>
+
+  <entity type ="2">
+    <info faction ="0">
+      <sprite>textures/units/sprite_gi.png</sprite>
+      <animations>
+        <idle speed="5.0F">
+          <frame x="345" y="1851" width="15" height="33"/>
+        </idle>
+        <moving speed="5.0F">
+          <frame x="345" y="1851" width="15" height="33"/>
+        </moving>
+      </animations>
+    </info>
+  </entity>
+
+  <entity type ="3">
+    <info faction ="0">
+      <sprite>textures/units/sprite_gi.png</sprite>
+      <animations>
+        <idle speed="5.0F">
+          <frame x="345" y="1851" width="15" height="33"/>
+        </idle>
+        <moving speed="5.0F">
+          <frame x="345" y="1851" width="15" height="33"/>
+        </moving>
+      </animations>
+    </info>
+  </entity>
+
+  <entity type ="8">
+    <info faction ="0">
+      <sprite>textures/units/sprite_gi.png</sprite>
+      <animations>
+        <idle speed="5.0F">
+          <frame x="345" y="1851" width="15" height="33"/>
+        </idle>
+        <moving speed="5.0F">
+          <frame x="345" y="1851" width="15" height="33"/>
+        </moving>
+      </animations>
+    </info>
   </entity>
   
 </config>
