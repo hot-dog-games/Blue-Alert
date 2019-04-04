@@ -7,6 +7,7 @@
 struct SDL_Texture;
 struct UIButton;
 struct UIImage;
+struct UILabel;
 class Entity;
 class Summoner;
 class UIBar;
@@ -38,14 +39,17 @@ public:
 	virtual bool GUIEvent(UIElement* element, GUI_Event gui_event);
 
 private:
-	SDL_Texture*	debug_tex;
-	SDL_Texture*	ui_background;
+	SDL_Texture*	background;
+	
 
+	UIImage* banner;
+	UIImage* options;
+	UILabel* health;
+	UILabel* gold;
+	UILabel* energy;
+	UIButton* settings_button;
+	UIButton* menu_button;
 
-	Entity* test_core;
-	Summoner* test_summoner;
-
-	UIImage* current_drag;
 };
 
 #endif
