@@ -17,6 +17,7 @@ public:
 	bool hovered = false;
 	bool interactable = false;
 	bool dragable = false;
+	bool clicked = false;
 	bool enabled = true;
 	//TODO
 	bool clipping = true; //Zona que se pinta es el rectangulo del padre.

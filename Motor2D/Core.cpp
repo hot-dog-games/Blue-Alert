@@ -5,9 +5,7 @@
 #include "Stat.h"
 #include "Core.h"
 
-
-
-Core::Core(pugi::xml_node entity_config, fPoint position): StaticEntity(entity_config, position)
+Core::Core(pugi::xml_node entity_config, fPoint position, Faction faction): StaticEntity(entity_config, position, faction)
 {
 	for (pugi::xml_node iter = entity_config.child("stats").child("stat"); iter; iter = iter.next_sibling("stat"))
 	{
@@ -27,9 +25,16 @@ Core::~Core()
 
 bool Core::Update(float dt)
 {
-	if (energy_timer.ReadMs() > 1000) {
+	StaticEntity::Update(dt);
+
+	if (energy_timer.ReadMs() > ENEGY_TICK_RATE) {
 		stats.find("energy")->second->IncreaseStat(stats.find("energy_regen")->second->GetValue());
 		energy_timer.Start();
+	}
+
+	if (state == STATIC_DIE && animations[state].isDone())
+	{
+		state = STATIC_DESTROYED;
 	}
 
 	return true;
@@ -43,12 +48,12 @@ bool Core::CleanUp()
 	return true;
 }
 
-void Core::UseCard(CardNumber number, fPoint position)
+void Core::UseCard(int number, fPoint position)
 {
-	uint energy_cost = deck->cards[(int)number]->info.stats.find("energy_cost")->second->GetValue();
+	uint energy_cost = deck->cards[number]->info.stats.find("energy_cost")->second->GetValue();
 	if (stats.find("energy")->second->GetValue() >= energy_cost)
 	{
-		App->entity_manager->CreateEntity(deck->cards[(int)number]->type, position, deck->cards[(int)number]);
+		App->entity_manager->CreateEntity(deck->cards[number]->type, position, deck->cards[number], faction);
 		stats.find("energy")->second->DecreaseStat(energy_cost);
 	}
 }
@@ -58,7 +63,7 @@ void Core::SetDeck(Deck* new_deck)
 	deck = new_deck;
 }
 
-Card * Core::GetCard(CardNumber card_num) const
+Card * Core::GetCard(int card_num) const
 {
 	if (deck->cards[card_num]) {
 		return deck->cards[card_num];

@@ -6,7 +6,9 @@
 enum Static_State {
 	STATIC_IDLE,
 	STATIC_DIE,
-	STATIC_DESTROYED
+	STATIC_DESTROYED,
+	STATIC_HOVERED = 1,
+	STATIC_OFF = 2
 };
 
 
@@ -14,7 +16,7 @@ class StaticEntity : public Entity
 {
 public:
 	StaticEntity();
-	StaticEntity(pugi::xml_node entity_node, fPoint position);
+	StaticEntity(pugi::xml_node entity_node, fPoint position, Faction faction);
 	~StaticEntity();
 
 	virtual bool PreUpdate() { return true; };
@@ -24,8 +26,8 @@ public:
 
 	virtual void Die();
 
-private:
-	Static_State state;
+protected:
+	Static_State state = STATIC_IDLE;
 };
 
 #endif // _STATIC_ENTITY_H_

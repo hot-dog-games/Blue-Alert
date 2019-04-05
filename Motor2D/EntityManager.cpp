@@ -4,6 +4,7 @@
 #include "Textures.h"
 #include "Input.h"
 #include "DynamicEntity.h"
+#include "StrategyBuilding.h"
 #include "CardManager.h"
 #include "Core.h"
 #include "Deck.h"
@@ -89,14 +90,16 @@ bool EntityManager::Save(pugi::xml_node&) const
 	return true;
 }
 
-Entity* EntityManager::CreateEntity(EntityType type, fPoint position, Card* card)
+Entity* EntityManager::CreateEntity(EntityType type, fPoint position, Card* card, Faction faction)
 {
 	std::string id = std::to_string(id_count);
 	pugi::xml_node entity_node = entity_configs.find_child_by_attribute("type", std::to_string((int)type).c_str());
 
 	id += "_" + card->name;
 
-	DynamicEntity* entity = new DynamicEntity(entity_node, position, card);
+	DynamicEntity* entity = new DynamicEntity(entity_node, position, card, faction);
+	entity->type = type;
+	entity->Start();
 	entities.push_back(entity);
 
 	id_count++;
@@ -104,20 +107,49 @@ Entity* EntityManager::CreateEntity(EntityType type, fPoint position, Card* card
 	return entity;
 }
 
-Core* EntityManager::CreateCore(EntityType type, fPoint position, Deck* deck)
+Core* EntityManager::CreateCore(EntityType type, fPoint position, Deck* deck, Faction faction)
 {
 	std::string id = std::to_string(id_count);
 	pugi::xml_node entity_node = entity_configs.find_child_by_attribute("type", std::to_string((int)type).c_str());
 
 	id += "_CORE";
 
-	Core* entity = new Core(entity_node, position);
+	Core* entity = new Core(entity_node, position, faction);
 	entities.push_back(entity);
+	entity->Start();
 	entity->SetDeck(deck);
 
 	id_count++;
 
 	return entity;
+}
+
+StrategyBuilding* EntityManager::CreateStrategyBuilding(EntityType type, fPoint position, Faction faction)
+{
+	std::string id = std::to_string(id_count);
+	pugi::xml_node entity_node = entity_configs.find_child_by_attribute("type", std::to_string((int)type).c_str());
+
+	id += "_TESTSTRATEGYBUILDING";
+
+	StrategyBuilding* entity = new StrategyBuilding(entity_node, position, faction);
+	entities.push_back(entity);
+	entity->Start();
+
+	id_count++;
+
+	return entity;
+}
+
+fPoint EntityManager::GetCorePosition(Faction faction)
+{
+	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
+	{
+		if((*entity)->faction != faction && (*entity)->type == CORE)
+		{
+			return (*entity)->position;
+		}
+	}
+	return {0,0};
 }
 
 bool EntityManager::DeleteEntity(Entity* entity)
