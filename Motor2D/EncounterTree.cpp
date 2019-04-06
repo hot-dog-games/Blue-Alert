@@ -2,6 +2,8 @@
 #include "GUI.h"
 #include "TransitionManager.h"
 #include "EntityManager.h"
+#include "Render.h"
+#include "StrategyBuilding.h"
 #include "EncounterTree.h"
 
 
@@ -71,6 +73,52 @@ std::vector<EncounterNode*> EncounterTree::GetNodes()
 {
 	return map_encounters;
 }
+
+EncounterNode * EncounterTree::GetCurrentNode()
+{
+	return current_node;
+}
+
+void EncounterTree::SetCurrentNode(EncounterNode * current_node)
+{
+	this->current_node = current_node;
+}
+
+void EncounterTree::DrawTreeLines()
+{
+	for each (EncounterNode* n in map_encounters)
+	{
+		if (n->GetChildren().size() != 0)
+		{
+			if (n != current_node)
+			{
+				for (int i = 0; i < n->GetChildren().size(); i++)
+				{
+					App->render->DrawLine(n->GetPosition().x, n->GetPosition().y, n->GetChildren()[i]->GetPosition().x, n->GetChildren()[i]->GetPosition().y, 255, 0, 0);
+				}
+			}
+			else {
+				for (int i = 0; i < n->GetChildren().size(); i++)
+				{
+					App->render->DrawLine(n->GetPosition().x, n->GetPosition().y, n->GetChildren()[i]->GetPosition().x, n->GetChildren()[i]->GetPosition().y, 0, 255, 0);
+				}
+			}
+		}
+	}
+}
+
+void EncounterTree::UpdateTreeState()
+{
+	current_node = map_encounters.front();
+
+	for (int i = 0; i < current_node->GetChildren().size(); i++)
+	{
+		current_node->GetChildren()[i]->GetEntity()->SetInRange(true);
+	}
+
+	current_node->GetEntity()->SetInRange(true);
+}
+
 
 pugi::xml_node EncounterTree::GetXmlEncounterNodeById(int id)
 {

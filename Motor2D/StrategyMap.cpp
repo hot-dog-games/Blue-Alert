@@ -14,6 +14,7 @@
 #include "GUI.h"
 #include "EncounterNode.h"
 #include "StrategyBuilding.h"
+#include "GameManager.h"
 #include "StrategyMap.h"
 
 StrategyMap::StrategyMap() : Scene()
@@ -30,19 +31,10 @@ bool StrategyMap::Start()
 {
 	App->map->Load("strategy_map.tmx");
 
-	encounter_tree = new EncounterTree();
-	encounter_tree->CreateTree();
-	current_node = encounter_tree->GetNodes().front();
-
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
-	for (int i = 0; i < current_node->GetChildren().size(); i++)
-	{
-		current_node->GetChildren()[i]->GetEntity()->SetInRange(true);
-	}
-
-	current_node->GetEntity()->SetInRange(true);
+	App->game_manager->GetEncounterTree()->UpdateTreeState();
 
 	//UI
 	uint w, h;
@@ -80,12 +72,6 @@ bool StrategyMap::PreUpdate()
 // Called each loop iteration
 bool StrategyMap::Update(float dt)
 {
-
-	if (App->input->GetKey(SDL_SCANCODE_8) == KEY_DOWN) {
-		App->transition_manager->CreateFadeTransition(2.0f, true, 3, White);
-		App->transition_manager->CreateZoomTransition(2.0f);
-	}
-
 	return true;
 }
 
@@ -99,25 +85,7 @@ bool StrategyMap::PostUpdate()
 	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
 
-	for each (EncounterNode* n in encounter_tree->GetNodes())
-	{
-		if (n->GetChildren().size() != 0)
-		{
-			if (n != current_node)
-			{
-				for (int i = 0; i < n->GetChildren().size(); i++)
-				{
-					App->render->DrawLine(n->GetPosition().x, n->GetPosition().y, n->GetChildren()[i]->GetPosition().x, n->GetChildren()[i]->GetPosition().y, 255, 0, 0);
-				}
-			}
-			else {
-				for (int i = 0; i < n->GetChildren().size(); i++)
-				{
-					App->render->DrawLine(n->GetPosition().x, n->GetPosition().y, n->GetChildren()[i]->GetPosition().x, n->GetChildren()[i]->GetPosition().y, 0, 255, 0);
-				}
-			}
-		}
-	}
+	App->game_manager->GetEncounterTree()->DrawTreeLines();
 
 	return ret;
 }
@@ -127,7 +95,7 @@ bool StrategyMap::CleanUp()
 {
 	LOG("Freeing scene");
 
-	encounter_tree->CleanTree();
+	App->entity_manager->CleanUp();
 
 	return true;
 }
@@ -136,15 +104,17 @@ bool StrategyMap::GUIEvent(UIElement * element, GUI_Event gui_event)
 {
 	if (gui_event == GUI_Event::LEFT_CLICK_DOWN) {
 
-		for (int i = 0; i < current_node->GetChildren().size(); i++)
+		for (int i = 0; i < App->game_manager->GetEncounterTree()->GetCurrentNode()->GetChildren().size(); i++)
 		{
-			if (element == current_node->GetChildren()[i]->GetButton())
+			if (element == App->game_manager->GetEncounterTree()->GetCurrentNode()->GetChildren()[i]->GetButton())
 			{
+				App->transition_manager->CreateFadeTransition(3.0f, true, 3, White);
+				App->transition_manager->CreateZoomTransition(3.0f);
+				App->game_manager->GetEncounterTree()->SetCurrentNode(App->game_manager->GetEncounterTree()->GetCurrentNode()->GetChildren()[i]);
 				App->gui->DisableElement(main_panel);
-				App->transition_manager->CreateFadeTransition(2.0f, true, 3, White);
-				App->transition_manager->CreateZoomTransition(2.0f);
 			}
 		}
+
 	}
 
 	return true;

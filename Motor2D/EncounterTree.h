@@ -11,6 +11,8 @@ class EncounterTree
 private:
 	std::vector<EncounterNode*> map_encounters;
 
+	EncounterNode* current_node = nullptr;
+
 	pugi::xml_document encounters;
 	pugi::xml_node encounter_tree;
 
@@ -22,6 +24,12 @@ public:
 	bool LoadDocument();
 
 	std::vector<EncounterNode*> GetNodes();
+
+	EncounterNode* GetCurrentNode();
+	void SetCurrentNode(EncounterNode* current_node);
+
+	void DrawTreeLines();
+	void UpdateTreeState();
 
 	pugi::xml_node GetXmlEncounterNodeById(int id);
 

@@ -18,6 +18,7 @@
 #include "Fonts.h"
 #include "BuffSourceManager.h"
 #include "TransitionManager.h"
+#include "GameManager.h"
 #include "j1App.h"
 
 
@@ -41,6 +42,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	entity_manager = new EntityManager();
 	transition_manager = new TransitionManager();
 	buff = new BuffSourceManager();
+	game_manager = new GameManager();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -49,6 +51,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(tex);
 	AddModule(audio);
 	AddModule(map);
+	AddModule(game_manager);
 	AddModule(scene_manager);
 	AddModule(card_manager);
 	AddModule(fonts);

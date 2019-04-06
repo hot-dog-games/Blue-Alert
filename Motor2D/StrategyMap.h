@@ -35,10 +35,6 @@ public:
 	virtual bool GUIEvent(UIElement* element, GUI_Event gui_event);
 
 private:
-	EncounterTree* encounter_tree = nullptr;
-	EncounterNode* current_node = nullptr;
-
-private:
 	UIImage* banner;
 	UIImage* options;
 	UILabel* health;
