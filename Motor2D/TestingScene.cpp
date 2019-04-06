@@ -58,7 +58,6 @@ bool TestingScene::Start()
 
 	test_core = App->entity_manager->CreateCore(EntityType::CORE, { 0,700 }, test_deck, FACTION_RUSSIAN);
 	App->entity_manager->CreateCore(EntityType::CORE, { 0,200 }, test_deck, FACTION_AMERICAN);
-	App->entity_manager->CreateStrategyBuilding(EntityType::TESTSTRATEGYBUILDING, { 50,400}, FACTION_AMERICAN);
 
 	unit_button_one = App->gui->CreateButton({ 790, 365 }, test_core->GetCard(CN_FIRST)->button.anim);
 	unit_button_two = App->gui->CreateButton({ 890, 365 }, test_core->GetCard(CN_SECOND)->button.anim);

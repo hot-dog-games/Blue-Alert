@@ -22,14 +22,6 @@ DynamicEntity::DynamicEntity(pugi::xml_node config, fPoint position, Card* card,
 	entity_card = card;
 }
 
-bool DynamicEntity::PostUpdate()
-{
-	fPoint render_position = {position.x - (current_frame.w * 0.5f), position.y - current_frame.h };
-	App->render->Blit(sprite, render_position.x, render_position.y, &current_frame);
-
-	return true;
-}
-
 bool DynamicEntity::Start()
 {
 	fPoint core_position = App->entity_manager->GetCorePosition(faction);
@@ -58,7 +50,8 @@ bool DynamicEntity::PreUpdate()
 		break;
 	case DYNAMIC_MOVING:
 		CheckDestination();
-		CalcDirection();	
+		CalcDirection();
+		CheckEnemies();
 
 		break;
 	case DYNAMIC_ATTACKING:
@@ -66,6 +59,18 @@ bool DynamicEntity::PreUpdate()
 	case DYNAMIC_DYING:
 		break;
 	}
+
+	return true;
+}
+
+bool DynamicEntity::PostUpdate()
+{
+	fPoint render_position = { position.x - (current_frame.w * 0.5f), position.y - current_frame.h };
+	App->render->Blit(sprite, render_position.x, render_position.y, &current_frame);
+
+
+	//Range debug 
+	App->render->DrawCircle(position.x, position.y, entity_card->info.stats.find("range")->second->GetValue()*App->map->data.tile_height, 255, 0, 0);
 
 	return true;
 }
@@ -172,4 +177,17 @@ void DynamicEntity::Move(float dt)
 	position.x += move_pos.x;
 	position.y += move_pos.y;
 	
+}
+
+void DynamicEntity::CheckEnemies()
+{
+	Entity* closest_entity = nullptr;
+	float distance = 10000.0f;
+	App->entity_manager->FindClosestEnemy(position, faction, closest_entity, distance);
+
+	if (distance < entity_card->info.stats.find("range")->second->GetValue()*App->map->data.tile_height)
+	{
+		objective = closest_entity;
+		state = DYNAMIC_ATTACKING;
+	}
 }
