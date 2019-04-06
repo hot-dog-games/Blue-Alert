@@ -110,7 +110,7 @@ void EncounterTree::DrawTreeLines()
 
 void EncounterTree::UpdateTreeState()
 {
-	SetCurrentNode(map_encounters.front());
+	if(!current_node)SetCurrentNode(map_encounters.front());
 
 	for (int i = 0; i < current_node->GetChildren().size(); i++)
 	{

@@ -334,7 +334,12 @@ const char* j1App::GetOrganization() const
 
 void j1App::PauseGame()
 {
-	paused = !paused;
+	paused = true;
+}
+
+void j1App::ResumeGame()
+{
+	paused = false;
 }
 
 // Load / Save
