@@ -31,6 +31,8 @@ public:
 	void DrawTreeLines();
 	void UpdateTreeState();
 
+	void CreateAllNodes();
+
 	pugi::xml_node GetXmlEncounterNodeById(int id);
 
 	void UpdateTree();

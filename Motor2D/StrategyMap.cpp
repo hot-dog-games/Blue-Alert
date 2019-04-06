@@ -30,10 +30,12 @@ StrategyMap::~StrategyMap()
 bool StrategyMap::Start()
 {
 	App->map->Load("strategy_map.tmx");
+	App->ResumeGame();
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
+	App->game_manager->GetEncounterTree()->CreateAllNodes();
 	App->game_manager->GetEncounterTree()->UpdateTreeState();
 
 	//UI
@@ -58,6 +60,7 @@ bool StrategyMap::Start()
 	gold = App->gui->CreateLabel({ 90, 30 }, "ui/Fonts/command_and_conquer___logo_font_by_dexistor371-d6k2yvb.ttf", 20, "GOLD", { 0,0,0,0 }, 0, main_panel);
 	energy = App->gui->CreateLabel({ 450, 30 }, "ui/Fonts/command_and_conquer___logo_font_by_dexistor371-d6k2yvb.ttf", 20, "ENERGY", { 0,0,0,0 },0, main_panel);
 	health = App->gui->CreateLabel({ 860, 30 }, "ui/Fonts/command_and_conquer___logo_font_by_dexistor371-d6k2yvb.ttf", 20, "HEALTH", { 0,0,0,0 }, 0, main_panel);
+
 
 	return true;
 }
@@ -95,8 +98,6 @@ bool StrategyMap::CleanUp()
 {
 	LOG("Freeing scene");
 
-	App->entity_manager->CleanUp();
-
 	return true;
 }
 
@@ -108,8 +109,9 @@ bool StrategyMap::GUIEvent(UIElement * element, GUI_Event gui_event)
 		{
 			if (element == App->game_manager->GetEncounterTree()->GetCurrentNode()->GetChildren()[i]->GetButton())
 			{
-				App->transition_manager->CreateFadeTransition(3.0f, true, 3, White);
-				App->transition_manager->CreateZoomTransition(3.0f);
+				App->transition_manager->CreateFadeTransition(2.0f, true, 3, White);
+				App->transition_manager->CreateZoomTransition(2.0f);
+				//App->transition_manager->CreateCameraTranslation(2.0f, { App->render->camera.x, App->render->camera.y }, { (int)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetPosition().x, (int)(int)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetPosition().y});
 				App->game_manager->GetEncounterTree()->SetCurrentNode(App->game_manager->GetEncounterTree()->GetCurrentNode()->GetChildren()[i]);
 				App->gui->DisableElement(main_panel);
 			}

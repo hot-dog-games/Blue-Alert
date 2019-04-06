@@ -28,7 +28,6 @@ EncounterTree * EncounterTree::CreateTree()
 	EncounterNode* start_encounter = new EncounterNode();
 	start_encounter->SetPosition({ 500, 700 });
 	start_encounter->LoadEncounterInfo(GetXmlEncounterNodeById(0)); //Start node creation
-	start_encounter->visited = true;
 	map_encounters.push_back(start_encounter);
 
 	EncounterNode* infantry_encounter = new EncounterNode();
@@ -82,6 +81,8 @@ EncounterNode * EncounterTree::GetCurrentNode()
 void EncounterTree::SetCurrentNode(EncounterNode * current_node)
 {
 	this->current_node = current_node;
+	this->current_node->GetEntity()->im_current_building = true;
+	this->current_node->visited = true;
 }
 
 void EncounterTree::DrawTreeLines()
@@ -109,7 +110,7 @@ void EncounterTree::DrawTreeLines()
 
 void EncounterTree::UpdateTreeState()
 {
-	current_node = map_encounters.front();
+	if(!current_node)SetCurrentNode(map_encounters.front());
 
 	for (int i = 0; i < current_node->GetChildren().size(); i++)
 	{
@@ -117,6 +118,14 @@ void EncounterTree::UpdateTreeState()
 	}
 
 	current_node->GetEntity()->SetInRange(true);
+}
+
+void EncounterTree::CreateAllNodes()
+{
+	for each (EncounterNode* en in map_encounters)
+	{
+		en->CreateNode();
+	}
 }
 
 

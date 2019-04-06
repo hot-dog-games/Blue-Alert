@@ -42,7 +42,7 @@ bool GameManager::PostUpdate()
 	return true;
 }
 
-EncounterTree * GameManager::GetEncounterTree()
+EncounterTree* GameManager::GetEncounterTree()
 {
 	return encounter_tree;
 }
