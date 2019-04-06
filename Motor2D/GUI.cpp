@@ -223,28 +223,33 @@ UIBar * Gui::CreateBar(iPoint pos, SDL_Rect rect, Stat* value, UIElement * paren
 	return bar;
 }
 
-void Gui::DeleteElement(UIElement * element)
+void Gui::DeleteElement(UIElement* ele)
 {
-	element->CleanUp();
-	elements.remove(element);
-	delete element;
-}
-
-void Gui::EnableElement(UIElement* element)
-{
-	element->SetEnabled(true);
 	for (std::list<UIElement*>::iterator element = elements.begin(); element != elements.end(); ++element)
 	{
-		if ((*element)->parent && (*element)->parent == (*element))
+		if ((*element)->parent && (*element)->parent == ele)
+			DeleteElement(*element);
+	}
+	ele->CleanUp();
+	elements.remove(ele);
+	delete ele;
+}
+
+void Gui::EnableElement(UIElement* ele)
+{
+	ele->SetEnabled(true);
+	for (std::list<UIElement*>::iterator element = elements.begin(); element != elements.end(); ++element)
+	{
+		if ((*element)->parent && (*element)->parent == ele)
 			EnableElement(*element);
 	}
 }
-void Gui::DisableElement(UIElement* element)
+void Gui::DisableElement(UIElement* ele)
 {
-	element->SetEnabled(false);
+	ele->SetEnabled(false);
 	for (std::list<UIElement*>::iterator element = elements.begin(); element != elements.end(); ++element)
 	{
-		if ((*element)->parent && (*element)->parent == (*element))
+		if ((*element)->parent && (*element)->parent == ele)
 			DisableElement(*element);
 	}
 }

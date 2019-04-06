@@ -36,6 +36,29 @@ bool StrategyMap::Start()
 
 	App->game_manager->GetEncounterTree()->UpdateTreeState();
 
+	//UI
+	uint w, h;
+	App->win->GetWindowSize(w, h);
+
+	main_panel = App->gui->CreateImage({ 0,0 }, { 0, 0, (int)w, (int)h }, nullptr, false);
+	banner = App->gui->CreateImage({ 4,5 }, { 1,769,1017,83 }, main_panel);
+	SDL_Rect settings_rect[3];
+	settings_rect[0] = { 0,481,59,51 };
+	settings_rect[1] = { 60,481,58,51 };
+	settings_rect[2] = { 119,481,58,51 };
+
+	SDL_Rect menu_rect[3];
+	menu_rect[0] = { 0,533,220,51 };
+	menu_rect[1] = { 0,585,220,51 };
+	menu_rect[2] = { 0,585,220,51 };
+
+	settings_button = App->gui->CreateButton({ 50,700 }, settings_rect, main_panel);
+	menu_button = App->gui->CreateButton({ 700,700 }, menu_rect, main_panel);
+
+	gold = App->gui->CreateLabel({ 90, 30 }, "ui/Fonts/command_and_conquer___logo_font_by_dexistor371-d6k2yvb.ttf", 20, "GOLD", { 0,0,0,0 }, 0, main_panel);
+	energy = App->gui->CreateLabel({ 450, 30 }, "ui/Fonts/command_and_conquer___logo_font_by_dexistor371-d6k2yvb.ttf", 20, "ENERGY", { 0,0,0,0 },0, main_panel);
+	health = App->gui->CreateLabel({ 860, 30 }, "ui/Fonts/command_and_conquer___logo_font_by_dexistor371-d6k2yvb.ttf", 20, "HEALTH", { 0,0,0,0 }, 0, main_panel);
+
 	return true;
 }
 
@@ -58,7 +81,6 @@ bool StrategyMap::PostUpdate()
 	bool ret = true;
 
 	App->map->Draw();
-	App->render->Blit(background, 0, 0);
 
 	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
@@ -73,7 +95,6 @@ bool StrategyMap::CleanUp()
 {
 	LOG("Freeing scene");
 
-	App->tex->UnLoad(background);
 	App->entity_manager->CleanUp();
 
 	return true;
@@ -90,6 +111,7 @@ bool StrategyMap::GUIEvent(UIElement * element, GUI_Event gui_event)
 				App->transition_manager->CreateFadeTransition(3.0f, true, 3, White);
 				App->transition_manager->CreateZoomTransition(3.0f);
 				App->game_manager->GetEncounterTree()->SetCurrentNode(App->game_manager->GetEncounterTree()->GetCurrentNode()->GetChildren()[i]);
+				App->gui->DisableElement(main_panel);
 			}
 		}
 

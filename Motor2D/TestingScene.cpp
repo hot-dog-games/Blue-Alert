@@ -19,6 +19,7 @@
 #include "CardManager.h"
 #include "Deck.h"
 #include "TestingScene.h"
+#include "UIImage.h"
 
 
 TestingScene::TestingScene() : Scene()
@@ -44,7 +45,6 @@ bool TestingScene::Start()
 	}
 
 	debug_tex = App->tex->Load("maps/path2.png");
-	ui_background = App->tex->Load("ui/background.png");
 
 	App->render->camera.x = (App->map->data.width*App->map->data.tile_width*0.5)*0.5 - 100;
 	App->render->camera.y = 0;
@@ -59,10 +59,11 @@ bool TestingScene::Start()
 	test_core = App->entity_manager->CreateCore(EntityType::CORE, { 0,700 }, test_deck, FACTION_RUSSIAN);
 	test_enemy_core = App->entity_manager->CreateCore(EntityType::CORE, { 0,200 }, test_deck, FACTION_AMERICAN);
 
-	unit_button_one = App->gui->CreateButton({ 790, 365 }, test_core->GetCard(CN_FIRST)->button.anim);
-	unit_button_two = App->gui->CreateButton({ 890, 365 }, test_core->GetCard(CN_SECOND)->button.anim);
-	unit_button_three = App->gui->CreateButton({ 790, 445 }, test_core->GetCard(CN_THIRD)->button.anim);
-	unit_button_four = App->gui->CreateButton({ 890, 445 }, test_core->GetCard(CN_FOURTH)->button.anim);
+	unit_panel = App->gui->CreateImage({ 755,0 }, { 619,0,269,768 });
+	unit_button_one = App->gui->CreateButton({ 35, 365 }, test_core->GetCard(CN_FIRST)->button.anim, unit_panel);
+	unit_button_two = App->gui->CreateButton({ 135, 365 }, test_core->GetCard(CN_SECOND)->button.anim, unit_panel);
+	unit_button_three = App->gui->CreateButton({ 35, 445 }, test_core->GetCard(CN_THIRD)->button.anim, unit_panel);
+	unit_button_four = App->gui->CreateButton({ 135, 445 }, test_core->GetCard(CN_FOURTH)->button.anim, unit_panel);
 	
 	energy_bar = App->gui->CreateBar({ 764, 358 }, { 601,0,16,274 }, test_core->GetEnergy());
 
@@ -149,8 +150,6 @@ bool TestingScene::PostUpdate()
 	bool ret = true;
 
 	App->map->Draw();
-
-	App->render->Blit(ui_background, 755, 0, NULL, 0.0f);
 
 	// Debug pathfinding ------------------------------
 	int x, y;
