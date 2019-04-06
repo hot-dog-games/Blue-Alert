@@ -42,7 +42,7 @@ protected:
 	void CheckDestination();
 	virtual void Die() {};
 	virtual void Move(float dt);
-	virtual void Attack() {};
+	virtual void Attack();
 	void CheckEnemies();
 
 protected:
@@ -51,6 +51,7 @@ protected:
 	EntiyDirection direction = UP;
 
 	Entity* objective = nullptr;
+	PerfTimer attack_timer;
 
 	//Pathfinding
 	std::vector<iPoint> path;

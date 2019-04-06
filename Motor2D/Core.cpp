@@ -27,7 +27,7 @@ bool Core::Update(float dt)
 {
 	StaticEntity::Update(dt);
 
-	if (energy_timer.ReadMs() > ENEGY_TICK_RATE) {
+	if (energy_timer.ReadMs() >= SECOND_MS) {
 		stats.find("energy")->second->IncreaseStat(stats.find("energy_regen")->second->GetValue());
 		energy_timer.Start();
 	}

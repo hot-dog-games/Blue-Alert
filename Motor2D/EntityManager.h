@@ -50,7 +50,7 @@ public:
 	bool DeleteEntity(Entity* entity);
 
 	fPoint GetCorePosition(Faction faction);
-	void FindClosestEnemy(fPoint position, Faction faction, Entity* closest_entity, float &distance);
+	void FindClosestEnemy(fPoint position, Faction faction, Entity* &closest_entity, float &distance);
 
 private:
 	pugi::xml_document entity_file;

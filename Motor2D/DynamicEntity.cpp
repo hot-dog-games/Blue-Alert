@@ -1,3 +1,4 @@
+#include "p2Log.h"
 #include "j1App.h"
 #include "Render.h"
 #include "CardManager.h"
@@ -91,7 +92,7 @@ bool DynamicEntity::Update(float dt)
 		break;
 		case DYNAMIC_ATTACKING:
 		{
-
+			Attack();
 		}
 		break;
 		case DYNAMIC_DYING:
@@ -189,5 +190,16 @@ void DynamicEntity::CheckEnemies()
 	{
 		objective = closest_entity;
 		state = DYNAMIC_ATTACKING;
+	}
+}
+
+
+void DynamicEntity::Attack()
+{
+	if (attack_timer.ReadMs() >= SECOND_MS / entity_card->info.stats.find("attack_speed")->second->GetValue() )
+	{
+		LOG("BANBANG");
+		objective->DecreaseLife(entity_card->info.stats.find("damage")->second->GetValue());
+		attack_timer.Start();
 	}
 }

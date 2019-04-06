@@ -152,7 +152,7 @@ fPoint EntityManager::GetCorePosition(Faction faction)
 	return {0,0};
 }
 
-void EntityManager::FindClosestEnemy(fPoint position, Faction faction, Entity* closest_entity, float &distance)
+void EntityManager::FindClosestEnemy(fPoint position, Faction faction, Entity* &closest_entity, float &distance)
 {
 	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
 	{
