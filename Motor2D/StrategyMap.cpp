@@ -95,7 +95,6 @@ bool StrategyMap::PostUpdate()
 	bool ret = true;
 
 	App->map->Draw();
-	App->render->Blit(background, 0, 0);
 
 	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
@@ -128,9 +127,7 @@ bool StrategyMap::CleanUp()
 {
 	LOG("Freeing scene");
 
-	App->tex->UnLoad(background);
 	encounter_tree->CleanTree();
-	App->entity_manager->CleanUp();
 
 	return true;
 }

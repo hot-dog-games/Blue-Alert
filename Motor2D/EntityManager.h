@@ -49,8 +49,6 @@ public:
 	StrategyBuilding* CreateStrategyBuilding(EntityType type, fPoint position, Faction faction);
 	fPoint GetCorePosition(Faction faction);
 	bool DeleteEntity(Entity* entity);
-
-	fPoint GetCorePosition(Faction faction);
 	void FindClosestEnemy(fPoint position, Faction faction, Entity* &closest_entity, float &distance);
 
 private:
