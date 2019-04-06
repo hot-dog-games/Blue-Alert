@@ -23,8 +23,7 @@ enum CardNumber {
 	CN_FOURTH
 };
 
-class TestingScene :
-	public Scene
+class TestingScene : public Scene
 {
 public:
 	TestingScene();
@@ -68,6 +67,7 @@ private:
 	uint current_energy;
 
 	Core* test_core;
+	Core* test_enemy_core;
 };
 
 #endif

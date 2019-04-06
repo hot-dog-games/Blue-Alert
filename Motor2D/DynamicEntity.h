@@ -9,7 +9,8 @@ enum DynamicState {
 	DYNAMIC_IDLE,
 	DYNAMIC_MOVING,
 	DYNAMIC_ATTACKING,
-	DYNAMIC_DYING
+	DYNAMIC_DYING,
+	DYNAMIC_DEAD
 };
 
 enum EntiyDirection {
@@ -40,7 +41,7 @@ public:
 protected:
 	void CalcDirection();
 	void CheckDestination();
-	virtual void Die() {};
+	virtual void Die();
 	virtual void Move(float dt);
 	virtual void Attack();
 	void CheckEnemies();

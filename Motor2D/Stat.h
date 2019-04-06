@@ -11,6 +11,7 @@ class Stat {
 private:
 	float final_value;
 	float max_value;
+	float final_max_value;
 	std::vector<Buff*> additive_buffs;
 	std::vector<Buff*> multiplicative_buffs;
 

@@ -57,7 +57,7 @@ bool TestingScene::Start()
 	test_deck->AddCard(App->card_manager->CreateCard(EntityType::HARRIER));
 
 	test_core = App->entity_manager->CreateCore(EntityType::CORE, { 0,700 }, test_deck, FACTION_RUSSIAN);
-	App->entity_manager->CreateCore(EntityType::CORE, { 0,200 }, test_deck, FACTION_AMERICAN);
+	test_enemy_core = App->entity_manager->CreateCore(EntityType::CORE, { 0,200 }, test_deck, FACTION_AMERICAN);
 
 	unit_button_one = App->gui->CreateButton({ 790, 365 }, test_core->GetCard(CN_FIRST)->button.anim);
 	unit_button_two = App->gui->CreateButton({ 890, 365 }, test_core->GetCard(CN_SECOND)->button.anim);
@@ -128,6 +128,10 @@ bool TestingScene::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 		test_core->UseCard(CN_FIRST, {(float)p.x, (float)p.y});
+
+	if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
+		test_enemy_core->UseCard(CN_FIRST, { (float)p.x, (float)p.y });
+
 
 	if (App->input->GetKey(SDL_SCANCODE_8) == KEY_DOWN) {
 		App->transition_manager->CreateFadeTransition(3.0f, false, 0, White);

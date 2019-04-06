@@ -21,6 +21,8 @@ DynamicEntity::~DynamicEntity()
 DynamicEntity::DynamicEntity(pugi::xml_node config, fPoint position, Card* card, Faction faction): Entity(config, position, faction)
 {
 	entity_card = card;
+	std::string stat_name = "health";
+	stats.insert({ "health", new Stat(card->info.stats.find("health")->second->GetMaxValue())});
 }
 
 bool DynamicEntity::Start()
@@ -55,14 +57,18 @@ bool DynamicEntity::PreUpdate()
 		CheckEnemies();
 		break;
 	case DYNAMIC_ATTACKING:
-
 		if (!objective->IsAlive())
 		{
 			state = DYNAMIC_MOVING;
 			objective = nullptr;
+			CheckEnemies();
 		}
 		break;
 	case DYNAMIC_DYING:
+		if (animations[state].isDone())
+		{
+			state = DYNAMIC_DEAD;
+		}
 		break;
 	}
 
@@ -206,4 +212,11 @@ void DynamicEntity::Attack()
 		objective->DecreaseLife(entity_card->info.stats.find("damage")->second->GetValue());
 		attack_timer.Start();
 	}
+}
+
+void DynamicEntity::Die()
+{
+	state = DYNAMIC_DYING;
+	objective = nullptr;
+	path.clear();
 }
