@@ -9,7 +9,8 @@ enum DynamicState {
 	DYNAMIC_IDLE,
 	DYNAMIC_MOVING,
 	DYNAMIC_ATTACKING,
-	DYNAMIC_DYING
+	DYNAMIC_DYING,
+	DYNAMIC_DEAD
 };
 
 enum EntiyDirection {
@@ -40,16 +41,23 @@ public:
 protected:
 	void CalcDirection();
 	void CheckDestination();
-	virtual void Die() {};
+	virtual void Die();
 	virtual void Move(float dt);
-	virtual void Attack() {};
+	virtual void Attack();
+	void CheckEnemies();
+
 protected:
+	Card * entity_card = nullptr;
 	DynamicState state = DYNAMIC_IDLE;
+	EntiyDirection direction = UP;
+
+	Entity* objective = nullptr;
+	PerfTimer attack_timer;
+
+	//Pathfinding
+	std::vector<iPoint> path;
 	int current_point = 0;
 	int previous_point = 0;
-	EntiyDirection direction = UP;
-	Card* entity_card = nullptr;
-	std::vector<iPoint> path;
 };
 
 #endif // !_DYNAMIC_ENTITY_

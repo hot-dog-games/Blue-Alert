@@ -34,7 +34,9 @@ public:
 	virtual bool Start() { return true; };
 
 	void DecreaseLife(float damage);
-	void SetMaxLife(uint new_life);
+	bool IsAlive();
+
+protected:
 	void LoadAnimations(pugi::xml_node anim_config);
 	void LoadSprite(pugi::xml_node node);
 	virtual void Die() {};
@@ -48,8 +50,6 @@ protected:
 	std::vector<Animation> animations;
 	SDL_Rect current_frame;
 	SDL_Texture* sprite = nullptr;
-	uint max_life;
-	uint current_life;
 
 	std::map<std::string, Stat*> stats;
 

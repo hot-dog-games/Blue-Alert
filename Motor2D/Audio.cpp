@@ -15,7 +15,9 @@ Audio::Audio() : Module()
 
 // Destructor
 Audio::~Audio()
-{}
+{
+
+}
 
 // Called before render is available
 bool Audio::Awake(pugi::xml_node& config)
