@@ -11,6 +11,7 @@ struct UIImage;
 class Entity;
 class UIBar;
 class Core;
+class UIButton;
 enum CardNumber;
 
 struct Card;
@@ -52,8 +53,8 @@ private:
 
 private:
 	SDL_Texture*	debug_tex;
-	SDL_Texture*	ui_background;
 
+	UIImage*		unit_panel;
 	UIButton*		unit_button_one;
 	UIButton*		unit_button_two;
 	UIButton*		unit_button_three;
