@@ -36,9 +36,6 @@ public:
 
 private:
 	SDL_Texture * background;
-
-	EncounterTree* encounter_tree = nullptr;
-	EncounterNode* current_node = nullptr;
 };
 
 #endif

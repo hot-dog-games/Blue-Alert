@@ -25,7 +25,6 @@ public:
 
 	Stat* GetEnergy() const;
 
-
 private:
 	Deck* deck = nullptr;
 

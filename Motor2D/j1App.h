@@ -24,6 +24,7 @@ class Gui;
 class Fonts;
 class TransitionManager;
 class BuffSourceManager;
+class GameManager;
 
 class j1App
 {
@@ -101,6 +102,7 @@ public:
 	EntityManager*	entity_manager;
 	TransitionManager* transition_manager;
 	BuffSourceManager* buff;
+	GameManager* game_manager;
 
 private:
 

@@ -18,7 +18,7 @@ SceneManager::~SceneManager()
 
 bool SceneManager::Awake(pugi::xml_node &)
 {
-	current_scene = new TestingScene();
+	current_scene = new StrategyMap();
 	return true;
 }
 
