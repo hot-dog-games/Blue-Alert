@@ -52,6 +52,14 @@ private:
 	void ReleaseDrag();
 
 private:
+	enum class BattleSceneState {
+		SETUP,
+		FIGHT,
+		WIN,
+		LOSE
+	};
+	BattleSceneState state = BattleSceneState::FIGHT;
+
 	SDL_Texture*	debug_tex;
 
 	UIImage*		unit_panel;

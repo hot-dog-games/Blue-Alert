@@ -42,6 +42,14 @@ bool Core::Update(float dt)
 
 bool Core::CleanUp()
 {
+	std::map<std::string, Stat*>::iterator item;
+	for (item = stats.begin(); item != stats.end(); ++item)
+	{
+		delete item->second;
+		stats.erase(item);
+	}
+	stats.clear();
+
 	deck->CleanUp();
 	delete deck;
 
