@@ -82,6 +82,7 @@ EncounterNode * EncounterTree::GetCurrentNode()
 void EncounterTree::SetCurrentNode(EncounterNode * current_node)
 {
 	this->current_node = current_node;
+	this->current_node->GetEntity()->im_current_building = true;
 }
 
 void EncounterTree::DrawTreeLines()
@@ -109,7 +110,7 @@ void EncounterTree::DrawTreeLines()
 
 void EncounterTree::UpdateTreeState()
 {
-	current_node = map_encounters.front();
+	SetCurrentNode(map_encounters.front());
 
 	for (int i = 0; i < current_node->GetChildren().size(); i++)
 	{
@@ -117,6 +118,14 @@ void EncounterTree::UpdateTreeState()
 	}
 
 	current_node->GetEntity()->SetInRange(true);
+}
+
+void EncounterTree::CreateAllNodes()
+{
+	for each (EncounterNode* en in map_encounters)
+	{
+		en->CreateNode();
+	}
 }
 
 
