@@ -28,7 +28,6 @@ EncounterTree * EncounterTree::CreateTree()
 	EncounterNode* start_encounter = new EncounterNode();
 	start_encounter->SetPosition({ 500, 700 });
 	start_encounter->LoadEncounterInfo(GetXmlEncounterNodeById(0)); //Start node creation
-	start_encounter->visited = true;
 	map_encounters.push_back(start_encounter);
 
 	EncounterNode* infantry_encounter = new EncounterNode();
@@ -83,6 +82,7 @@ void EncounterTree::SetCurrentNode(EncounterNode * current_node)
 {
 	this->current_node = current_node;
 	this->current_node->GetEntity()->im_current_building = true;
+	this->current_node->visited = true;
 }
 
 void EncounterTree::DrawTreeLines()
