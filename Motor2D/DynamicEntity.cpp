@@ -196,8 +196,9 @@ void DynamicEntity::CheckEnemies()
 	Entity* closest_entity = nullptr;
 	float distance = 10000.0f;
 	App->entity_manager->FindClosestEnemy(position, faction, closest_entity, distance);
+	LOG("distance to closest is %f radius is %f", distance, entity_card->info.stats.find("range")->second->GetValue()*App->map->data.tile_height);
 
-	if (distance < entity_card->info.stats.find("range")->second->GetValue()*App->map->data.tile_height && closest_entity->IsAlive())
+	if (distance <= entity_card->info.stats.find("range")->second->GetValue()* App->map->data.tile_height && closest_entity->IsAlive())
 	{
 		objective = closest_entity;
 		state = DYNAMIC_ATTACKING;

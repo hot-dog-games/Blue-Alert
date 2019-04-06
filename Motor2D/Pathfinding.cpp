@@ -198,7 +198,7 @@ int Pathfinding::CreatePath(const iPoint& origin, const iPoint& destination)
 
 	PathNode node_origin;
 	node_origin.g = 0;
-	node_origin.h = origin.DistanceManhattan(destination);
+	node_origin.h = origin.DistanceNoSqrt(destination);
 	node_origin.pos = origin;
 	node_origin.parent = nullptr;
 

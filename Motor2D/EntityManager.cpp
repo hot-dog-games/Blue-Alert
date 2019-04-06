@@ -158,7 +158,7 @@ void EntityManager::FindClosestEnemy(fPoint position, Faction faction, Entity* &
 	{
 		if ((*entity)->faction != faction)
 		{
-			float tmp_distance = position.DistanceManhattan((*entity)->position);
+			float tmp_distance = position.DistanceTo((*entity)->position);
 			if (tmp_distance < distance)
 			{
 				distance = tmp_distance;
