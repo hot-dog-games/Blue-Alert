@@ -34,7 +34,9 @@ public:
 	virtual bool Start() { return true; };
 
 	void DecreaseLife(float damage);
-	void SetMaxLife(uint new_life);
+	bool IsAlive();
+
+protected:
 	void LoadAnimations(pugi::xml_node anim_config);
 	void LoadSprite(pugi::xml_node node);
 	virtual void Die() {};

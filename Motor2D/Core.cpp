@@ -63,7 +63,7 @@ void Core::SetDeck(Deck* new_deck)
 	deck = new_deck;
 }
 
-Card * Core::GetCard(int card_num) const
+Card* Core::GetCard(int card_num) const
 {
 	if (deck->cards[card_num]) {
 		return deck->cards[card_num];
@@ -71,7 +71,7 @@ Card * Core::GetCard(int card_num) const
 	return nullptr;
 }
 
-Stat * Core::GetEnergy() const
+Stat* Core::GetEnergy() const
 {	
 	return stats.find("energy")->second;
 }

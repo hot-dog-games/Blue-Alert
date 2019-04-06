@@ -12,7 +12,6 @@
 
 StrategyBuilding::StrategyBuilding(pugi::xml_node entity_node, fPoint position, Faction faction) : StaticEntity(entity_node, position, faction)
 {
-	LOG("HOLAEXISTO");
 }
 
 

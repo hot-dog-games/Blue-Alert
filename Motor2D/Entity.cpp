@@ -27,7 +27,14 @@ Entity::Entity(pugi::xml_node entity_node, fPoint position, Faction faction)
 void Entity::DecreaseLife(float damage)
 {
 	stats.find("health")->second->DecreaseStat(damage);
+	if (stats.find("health")->second->GetValue() <= 0)
+		Die();
+
 	LOG("current life is: %f", stats.find("health")->second->GetValue());
+}
+bool Entity::IsAlive()
+{
+	return (stats.find("health")->second->GetValue() > 0);
 }
 void Entity::LoadSprite(pugi::xml_node node)
 {

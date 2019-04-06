@@ -19,7 +19,7 @@
           <frame x="45" y="861" width="147" height="128"/>
         </death>
         <destroyed speed="5.0F" loop="false">
-          <frame x="0" y="0" width="0" height="0"/>
+          <frame x="45" y="861" width="147" height="128"/>
         </destroyed>
       </animations>     
     </info>
@@ -34,7 +34,7 @@
           <frame x="45" y="861" width="147" height="128"/>
         </death>
         <destroyed speed="5.0F" loop="false">
-          <frame x="0" y="0" width="0" height="0"/>
+          <frame x="45" y="861" width="147" height="128"/>
         </destroyed>
       </animations>
     </info>

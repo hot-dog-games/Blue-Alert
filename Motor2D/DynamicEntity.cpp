@@ -53,9 +53,14 @@ bool DynamicEntity::PreUpdate()
 		CheckDestination();
 		CalcDirection();
 		CheckEnemies();
-
 		break;
 	case DYNAMIC_ATTACKING:
+
+		if (!objective->IsAlive())
+		{
+			state = DYNAMIC_MOVING;
+			objective = nullptr;
+		}
 		break;
 	case DYNAMIC_DYING:
 		break;
@@ -186,7 +191,7 @@ void DynamicEntity::CheckEnemies()
 	float distance = 10000.0f;
 	App->entity_manager->FindClosestEnemy(position, faction, closest_entity, distance);
 
-	if (distance < entity_card->info.stats.find("range")->second->GetValue()*App->map->data.tile_height)
+	if (distance < entity_card->info.stats.find("range")->second->GetValue()*App->map->data.tile_height && closest_entity->IsAlive())
 	{
 		objective = closest_entity;
 		state = DYNAMIC_ATTACKING;
@@ -198,7 +203,6 @@ void DynamicEntity::Attack()
 {
 	if (attack_timer.ReadMs() >= SECOND_MS / entity_card->info.stats.find("attack_speed")->second->GetValue() )
 	{
-		LOG("BANBANG");
 		objective->DecreaseLife(entity_card->info.stats.find("damage")->second->GetValue());
 		attack_timer.Start();
 	}
