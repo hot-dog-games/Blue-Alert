@@ -95,8 +95,6 @@ bool StrategyMap::CleanUp()
 {
 	LOG("Freeing scene");
 
-	App->entity_manager->CleanUp();
-
 	return true;
 }
 
