@@ -25,7 +25,10 @@ Gui::Gui() : Module()
 
 // Destructor
 Gui::~Gui()
-{}
+{
+	App->tex->UnLoad(atlas);
+	atlas = nullptr;
+}
 
 // Called before render is available
 bool Gui::Awake(pugi::xml_node& conf)
@@ -163,8 +166,6 @@ bool Gui::CleanUp()
 		(*element)->CleanUp();
 	}
 	elements.clear();
-	App->tex->UnLoad(atlas);
-	atlas = nullptr;
 
 	return true;
 }
