@@ -329,6 +329,11 @@ const char* j1App::GetOrganization() const
 	return organization.c_str();
 }
 
+void j1App::PauseGame()
+{
+	paused = !paused;
+}
+
 // Load / Save
 void j1App::LoadGame(const char* file)
 {

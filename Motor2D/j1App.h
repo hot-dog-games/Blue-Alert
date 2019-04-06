@@ -56,6 +56,7 @@ public:
 	const char* GetTitle() const;
 	const char* GetOrganization() const;
 
+	void PauseGame();
 	void LoadGame(const char* file);
 	void SaveGame(const char* file) const;
 	void GetSaveGames(std::list<std::string>& list_to_fill) const;

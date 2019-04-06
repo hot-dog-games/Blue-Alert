@@ -221,3 +221,16 @@ void DynamicEntity::Die()
 	objective = nullptr;
 	path.clear();
 }
+
+bool DynamicEntity::CleanUp()
+{
+	std::map<std::string, Stat*>::iterator item;
+	for (item = stats.begin(); item != stats.end(); ++item)
+	{
+		delete item->second;
+		stats.erase(item);
+	}
+	stats.clear();
+
+	return true;
+}
