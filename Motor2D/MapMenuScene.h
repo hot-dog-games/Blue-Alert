@@ -47,6 +47,7 @@ private:
 	UILabel* health;
 	UILabel* gold;
 	UILabel* energy;
+	UILabel* text_menu;
 	UIButton* settings_button;
 	UIButton* menu_button;
 

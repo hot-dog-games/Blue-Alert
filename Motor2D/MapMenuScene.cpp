@@ -9,7 +9,7 @@
 #include "Map.h"
 #include "EntityManager.h"
 #include "Entity.h"
-#include "Summoner.h"
+//#include "Summoner.h"
 #include "PathFinding.h"
 #include "UIAnimatedImage.h"
 #include "UIButton.h"
@@ -49,6 +49,8 @@ bool MapMenuScene::Start()
 	gold = App->gui->CreateLabel({ 90, 30 }, "ui/Fonts/command_and_conquer___logo_font_by_dexistor371-d6k2yvb.ttf", 20, "GOLD", { 0,0,0,0 });
 	energy = App->gui->CreateLabel({ 450, 30 }, "ui/Fonts/command_and_conquer___logo_font_by_dexistor371-d6k2yvb.ttf", 20, "ENERGY", { 0,0,0,0 });
 	health = App->gui->CreateLabel({ 860, 30 }, "ui/Fonts/command_and_conquer___logo_font_by_dexistor371-d6k2yvb.ttf", 20, "HEALTH", { 0,0,0,0 });
+	text_menu = App->gui->CreateLabel({ 760, 710 }, "ui/Fonts/command_and_conquer___logo_font_by_dexistor371-d6k2yvb.ttf", 20, "MENU", { 0,0,0,0 });
+
 	return false;
 }
 
