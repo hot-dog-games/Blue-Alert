@@ -29,7 +29,7 @@ StrategyMap::~StrategyMap()
 // Called before the first frame
 bool StrategyMap::Start()
 {
-	App->map->Load("strategy_map.tmx");
+	App->map->Load("Nodes Map.tmx");
 	App->ResumeGame();
 
 	App->render->camera.x = 0;
@@ -68,13 +68,24 @@ bool StrategyMap::Start()
 // Called each loop iteration
 bool StrategyMap::PreUpdate()
 {
+	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+		App->render->camera.y += 10;
 
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+		App->render->camera.y -= 10;
+
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+		App->render->camera.x += 10;
+
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+		App->render->camera.x -= 10;
 	return true;
 }
 
 // Called each loop iteration
 bool StrategyMap::Update(float dt)
 {
+
 	return true;
 }
 
