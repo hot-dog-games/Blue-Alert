@@ -55,6 +55,8 @@ protected:
 	EntiyDirection direction = UP;
 	fPoint direction_vector = { 1.0f, 1.0f };
 
+	const float SNAP_RANGE = 5.0f;
+
 	Entity* objective = nullptr;
 	PerfTimer attack_timer;
 

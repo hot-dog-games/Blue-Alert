@@ -196,13 +196,21 @@ void DynamicEntity::CheckDestination()
 void DynamicEntity::Move(float dt)
 {
 	fPoint movement_vector = direction_vector;
-	float speed = entity_card->info.stats.find("movement")->second->GetValue() * 10;
+	float speed = entity_card->info.stats.find("movement")->second->GetValue();
 	movement_vector.x *= speed * dt;
 	movement_vector.y *= speed * dt;
 
-	position.x += movement_vector.x;
-	position.y += movement_vector.y;
-	
+	fPoint end_position = { position.x + movement_vector.x, position.y + movement_vector.y };
+
+	if (end_position.DistanceNoSqrt({ (float)path[current_point].x, (float)path[current_point].y }) < SNAP_RANGE)
+	{
+		position = { (float)path[current_point].x, (float)path[current_point].y };
+	}
+	else
+	{
+		position.x += movement_vector.x;
+		position.y += movement_vector.y;
+	}
 }
 
 bool DynamicEntity::CheckEnemies()
@@ -314,5 +322,33 @@ void DynamicEntity::MovementAnimationCheck() {
 	}
 }
 void DynamicEntity::AttackingAnimationCheck() {
-	current_animation = &animations.find("attacking")->second;
+	switch (direction)
+	{
+	case UP:
+		current_animation = &animations.find("attacking_up")->second;
+		break;
+	case DOWN:
+		current_animation = &animations.find("attacking_down")->second;
+		break;
+	case LEFT:
+		current_animation = &animations.find("attacking_left")->second;
+		break;
+	case RIGHT:
+		current_animation = &animations.find("attacking_right")->second;
+		break;
+	case UP_RIGHT:
+		current_animation = &animations.find("attacking_up_right")->second;
+		break;
+	case UP_LEFT:
+		current_animation = &animations.find("attacking_up_left")->second;
+		break;
+	case DOWN_RIGHT:
+		current_animation = &animations.find("attacking_down_right")->second;
+		break;
+	case DOWN_LEFT:
+		current_animation = &animations.find("attacking_down_left")->second;
+		break;
+	default:
+		break;
+	}
 }
