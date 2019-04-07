@@ -154,11 +154,11 @@
         </animation>
         <animation speed="5.0F" name="attacking_up_left">
           <frame x="103" y="865" width="20" height="29"/>
-          <frame x="185" y="867" width="16" height="27"/>
-          <frame x="262" y="867" width="17" height="27"/>
-          <frame x="339" y="867" width="18" height="27"/>
-          <frame x="417" y="866" width="17" height="28"/>
-          <frame x="495" y="867" width="18" height="27"/>
+          <frame x="181" y="865" width="20" height="29"/>
+          <frame x="259" y="865" width="20" height="29"/>
+          <frame x="337" y="865" width="20" height="29"/>
+          <frame x="414" y="865" width="20" height="29"/>
+          <frame x="493" y="865" width="20" height="29"/>
         </animation>
         <animation speed="5.0F" name="attacking_left">
           <frame x="565" y="868" width="25" height="27"/>
