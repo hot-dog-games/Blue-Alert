@@ -133,7 +133,6 @@ bool DynamicEntity::Update(float dt)
 
 void DynamicEntity::CalcDirection()
 {
-	LOG("direction is x=%f y=%f", direction_vector.x, direction_vector.y);
 	if (direction_vector.x > 0)
 	{
 		direction = RIGHT;
@@ -218,9 +217,8 @@ bool DynamicEntity::CheckEnemies()
 	Entity* closest_entity = nullptr;
 	float distance = 10000.0f;
 	App->entity_manager->FindClosestEnemy(position, faction, closest_entity, distance);
-	LOG("distance to closest is %f radius is %f", distance, entity_card->info.stats.find("range")->second->GetValue()*App->map->data.tile_height);
 
-	if (distance <= entity_card->info.stats.find("range")->second->GetValue()* App->map->data.tile_height && closest_entity->IsAlive())
+	if (distance <= entity_card->info.stats.find("range")->second->GetValue()* App->map->data.tile_height)
 	{
 		objective = closest_entity;
 		fPoint objective_direction = { objective->position.x - position.x, objective->position.y - position.y };
@@ -351,4 +349,6 @@ void DynamicEntity::AttackingAnimationCheck() {
 	default:
 		break;
 	}
+
+	current_animation->speed = current_animation->GetFrameAmount() * entity_card->info.stats.find("attack_speed")->second->GetValue();
 }

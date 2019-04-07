@@ -157,7 +157,7 @@ void EntityManager::FindClosestEnemy(fPoint position, Faction faction, Entity* &
 {
 	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
 	{
-		if ((*entity)->faction != faction)
+		if ((*entity)->faction != faction && (*entity)->IsAlive())
 		{
 			float tmp_distance = position.DistanceTo((*entity)->position);
 			if (tmp_distance < distance)
