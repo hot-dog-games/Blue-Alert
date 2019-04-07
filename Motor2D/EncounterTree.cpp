@@ -3,6 +3,7 @@
 #include "TransitionManager.h"
 #include "EntityManager.h"
 #include "Render.h"
+#include "Map.h"
 #include "StrategyBuilding.h"
 #include "EncounterTree.h"
 
@@ -31,9 +32,8 @@ EncounterTree * EncounterTree::CreateTree()
 	for (int i = 0; i < map_encounters.size(); i++)
 	{
 		pugi::xml_node node = map01_nodes.find_child_by_attribute("id", std::to_string((int)i).c_str());
-		iPoint world_position = App->render->ScreenToWorld(node.attribute("x").as_int(),  node.attribute("y").as_int());
-		map_encounters[i]->SetPosition({(float)world_position.x, (float)world_position.y});
-		map_encounters[i]->SetEncounterName(node.attribute("type").as_string());
+		map_encounters[i]->SetPosition({ node.attribute("x").as_float(),  node.attribute("y").as_float() });
+		map_encounters[i]->SetEncounterType(node.attribute("type").as_int());
 		for (pugi::xml_node child = node.first_child(); child; child = child.next_sibling())
 		{
 			map_encounters[i]->AddChild(map_encounters[child.attribute("id").as_int()]);
@@ -92,13 +92,17 @@ void EncounterTree::DrawTreeLines()
 			{
 				for (int i = 0; i < n->GetChildren().size(); i++)
 				{
-					App->render->DrawLine(n->GetPosition().x, n->GetPosition().y, n->GetChildren()[i]->GetPosition().x, n->GetChildren()[i]->GetPosition().y, 255, 0, 0);
+					iPoint parent_world_position = App->map->MapToWorld(n->GetPosition().x, n->GetPosition().y);
+					iPoint child_world_position = App->map->MapToWorld(n->GetChildren()[i]->GetPosition().x, n->GetChildren()[i]->GetPosition().y);
+					App->render->DrawLine(parent_world_position.x, parent_world_position.y, child_world_position.x, child_world_position.y, 255, 0, 0);
 				}
 			}
 			else {
 				for (int i = 0; i < n->GetChildren().size(); i++)
 				{
-					App->render->DrawLine(n->GetPosition().x, n->GetPosition().y, n->GetChildren()[i]->GetPosition().x, n->GetChildren()[i]->GetPosition().y, 0, 255, 0);
+					iPoint parent_world_position = App->map->MapToWorld(n->GetPosition().x, n->GetPosition().y);
+					iPoint child_world_position = App->map->MapToWorld(n->GetChildren()[i]->GetPosition().x, n->GetChildren()[i]->GetPosition().y);
+					App->render->DrawLine(parent_world_position.x, parent_world_position.y, child_world_position.x, child_world_position.y, 0, 255, 0);
 				}
 			}
 		}

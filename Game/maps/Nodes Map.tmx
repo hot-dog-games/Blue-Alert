@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="isometric" renderorder="right-down" width="50" height="50" tilewidth="60" tileheight="30" infinite="0" nextlayerid="8" nextobjectid="16">
+<map version="1.2" tiledversion="1.2.3" orientation="isometric" renderorder="right-down" width="50" height="50" tilewidth="60" tileheight="30" infinite="0" nextlayerid="8" nextobjectid="26">
  <tileset firstgid="1" name="Grass FlatTiles Spritesheet" tilewidth="60" tileheight="29" spacing="1" margin="1" tilecount="260" columns="13">
   <image source="../sprites/Environment/Grass/flatTiles/Grass FlatTiles Spritesheet.png" width="800" height="600"/>
  </tileset>
@@ -15049,51 +15049,4 @@
    <tile/>
   </data>
  </layer>
- <objectgroup id="7" name="NodePositions">
-  <object id="1" x="1449" y="1451">
-   <point/>
-  </object>
-  <object id="2" x="1271" y="1033">
-   <point/>
-  </object>
-  <object id="3" x="1119" y="1361">
-   <point/>
-  </object>
-  <object id="4" x="823" y="1365">
-   <point/>
-  </object>
-  <object id="5" x="818" y="910">
-   <point/>
-  </object>
-  <object id="6" x="461" y="971">
-   <point/>
-  </object>
-  <object id="7" x="160" y="1092">
-   <point/>
-  </object>
-  <object id="8" x="159" y="613">
-   <point/>
-  </object>
-  <object id="9" x="644" y="616">
-   <point/>
-  </object>
-  <object id="10" x="1034" y="614">
-   <point/>
-  </object>
-  <object id="11" x="1120" y="192">
-   <point/>
-  </object>
-  <object id="12" x="730" y="310">
-   <point/>
-  </object>
-  <object id="13" x="492" y="132">
-   <point/>
-  </object>
-  <object id="14" x="345" y="375">
-   <point/>
-  </object>
-  <object id="15" x="66" y="66">
-   <point/>
-  </object>
- </objectgroup>
 </map>

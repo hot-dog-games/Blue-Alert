@@ -8,7 +8,7 @@ class UIButton;
 class StrategyBuilding;
 
 struct Encounter {
-	std::string name = ""; // indica el tipo de edificio que es.
+	int type = 10; // indica el tipo de edificio que es.
 	int ai_difficulty = 0;
 	int deck[4];
 	//BUFF
@@ -54,8 +54,8 @@ public:
 	StrategyBuilding* GetEntity();
 
 	//-----Emcounter Accessors-----
-	std::string EncounterNode::GetEncounterName() const;
-	void SetEncounterName(std::string name);
+	int EncounterNode::GetEncounterType() const;
+	void SetEncounterType(int type);
 
 	SDL_Rect node_rect;
 

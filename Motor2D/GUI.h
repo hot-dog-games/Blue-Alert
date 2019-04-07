@@ -84,6 +84,8 @@ private:
 	//scaling
 
 	bool debug_draw = false;
+
+	bool is_world_ui = false;
 };
 
 #endif // __j1GUI_H__
