@@ -96,7 +96,7 @@ Entity* EntityManager::CreateEntity(EntityType type, fPoint position, Card* card
 	pugi::xml_node entity_node = entity_configs.find_child_by_attribute("type", std::to_string((int)type).c_str());
 
 	id += "_" + card->name;
-
+	
 	DynamicEntity* entity = new DynamicEntity(entity_node, position, card, faction);
 	entity->type = type;
 	entity->Start();
@@ -158,6 +158,23 @@ void EntityManager::FindClosestEnemy(fPoint position, Faction faction, Entity* &
 	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
 	{
 		if ((*entity)->faction != faction && (*entity)->IsAlive())
+		{
+			float tmp_distance = position.DistanceTo((*entity)->position);
+			if (tmp_distance < distance)
+			{
+				distance = tmp_distance;
+				closest_entity = (*entity);
+			}
+		}
+	}
+}
+
+
+void EntityManager::FindClosestAllie(fPoint position, Faction faction, Entity* &closest_entity, float &distance)
+{
+	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
+	{
+		if ((*entity)->faction == faction && (*entity)->IsAlive() && (*entity)->position != position)
 		{
 			float tmp_distance = position.DistanceTo((*entity)->position);
 			if (tmp_distance < distance)

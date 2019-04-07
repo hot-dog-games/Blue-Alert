@@ -48,6 +48,7 @@ protected:
 	virtual void Move(float dt);
 	virtual void Attack();
 	bool CheckEnemies();
+	bool CheckAllies();
 
 protected:
 	Card * entity_card = nullptr;
@@ -62,6 +63,7 @@ protected:
 
 	//Pathfinding
 	std::vector<iPoint> path;
+	SDL_Rect pivot;
 	int current_point = 0;
 	int previous_point = 0;
 };
