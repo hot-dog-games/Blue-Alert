@@ -88,7 +88,6 @@ void EncounterNode::CreateNodeButton()
 {
 	iPoint world_position = App->map->MapToWorld(position.x, position.y);
 	button = App->gui->CreateButton({(int)world_position.x - 72, (int)world_position.y -127}, &button_rect);
-	button->is_world_ui = true;
 }
 
 void EncounterNode::CreateNode()
