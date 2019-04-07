@@ -1,4 +1,5 @@
 #include "j1App.h"
+#include "Render.h"
 #include "Textures.h"
 #include "p2Log.h"
 #include "Stat.h"
@@ -22,6 +23,13 @@ Entity::Entity(pugi::xml_node entity_node, fPoint position, Faction faction)
 	entity_node = entity_node.find_child_by_attribute("faction", std::to_string((int)faction).c_str());
 	LoadSprite(entity_node);
 	LoadAnimations(entity_node);
+}
+
+bool Entity::PostUpdate()
+{
+	Draw();
+
+	return true;
 }
 
 void Entity::DecreaseLife(float damage)
@@ -56,7 +64,14 @@ void Entity::LoadAnimations(pugi::xml_node anim_config)
 		}
 		anim.speed = animation.attribute("speed").as_float();
 		anim.loop = animation.attribute("loop").as_bool(true);
+		std::string animation_name = animation.attribute("name").as_string();
 
-		animations.push_back(anim);
+		animations.insert({ animation_name, anim });
 	}
+}
+
+void Entity::Draw()
+{
+	fPoint render_position = { position.x - current_frame.w*0.5f, position.y - current_frame.h };
+	App->render->Blit(sprite, render_position.x, render_position.y, &current_frame);
 }

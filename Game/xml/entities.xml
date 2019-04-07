@@ -12,83 +12,142 @@
     <info faction="0">
       <sprite>textures/buildings/sprite_core.png</sprite>
       <animations>
-        <idle speed="5.0F">
+        <animation speed="5.0F" name="idle">
           <frame x="45" y="52" width="147" height="129"/>
-        </idle>
-        <death speed="1.0F" loop="false">
+        </animation>
+        <animation speed="1.0F" loop="false" name="death">
           <frame x="45" y="861" width="147" height="128"/>
-        </death>
-        <destroyed speed="5.0F" loop="false">
+        </animation>
+        <animation speed="5.0F" loop="false" name="destroyed">
           <frame x="45" y="861" width="147" height="128"/>
-        </destroyed>
+        </animation>
       </animations>     
     </info>
-
     <info faction="1">
       <sprite>textures/buildings/sprite_core.png</sprite>
       <animations>
-        <idle speed="5.0F">
+        <animation speed="5.0F" name="idle">
           <frame x="45" y="52" width="147" height="129"/>
-        </idle>
-        <death speed="1.0F" loop="false">
+        </animation>
+        <animation speed="5.0F" loop ="false" name="death">
           <frame x="45" y="861" width="147" height="128"/>
-        </death>
-        <destroyed speed="5.0F" loop="false">
+        </animation>
+        <animation speed="5.0F" loop="false" name="destroyed">
           <frame x="45" y="861" width="147" height="128"/>
-        </destroyed>
+        </animation>
       </animations>
     </info>
   </entity>
-  
-  
+   
   <entity type ="10">
     <info faction="0">
       <sprite>sprites/Buildings/testing.png</sprite>
       <animations>
-        <inrange speed="0.0F">
+        <animation speed="0.0F" name="in_range">
           <frame x="24" y="12" width="147" height="127"/>
-        </inrange>
-        <highlight speed="0.0F">
+        </animation>
+        <animation speed="0.0F" name="highlight">
           <frame x="19" y="206" width="157" height="137"/>
-        </highlight>
-        <offrange speed="0.0F">
+        </animation>
+        <animation speed="0.0F" name="off_range">
           <frame x="24" y="389" width="147" height="127"/>
-        </offrange>
+        </animation>
       </animations>
     </info>
     <info faction="1">
       <sprite>sprites/Buildings/testing.png</sprite>
       <animations>
-        <inrange speed="0.0F">
+        <animation speed="0.0F" name="in_range">
           <frame x="24" y="12" width="147" height="127"/>
-        </inrange>
-		<highlight speed="0.0F">
-		      <frame x="19" y="206" width="157" height="137"/>
-	    </highlight>
-		<offrange speed="0.0F">
-		  <frame x="24" y="389" width="147" height="127"/>
-		</offrange>
-      </animations>     
+        </animation>
+        <animation speed="0.0F" name="highlight">
+          <frame x="19" y="206" width="157" height="137"/>
+        </animation>
+        <animation speed="0.0F" name="off_range">
+          <frame x="24" y="389" width="147" height="127"/>
+        </animation>
+      </animations>
     </info>
 
   </entity>
   
   <!--DYNAMIC ENTITIES-->
-  
+  <!--GI-->
   <entity type ="1">
     <info faction ="0">
       <sprite>textures/units/sprite_gi.png</sprite>
       <animations>
-        <idle speed="5.0F">
+        <animation speed="5.0F" name="idle">
           <frame x="345" y="1851" width="15" height="33"/>
-        </idle>
-		    <moving speed="5.0F">
-          <frame x="345" y="1851" width="15" height="33"/>
-        </moving>
-        <attacking speed="5.0F">
+        </animation>
+        <animation speed="5.0F" name="moving_up">
+          <frame x="655" y="9" width="16" height="28"/>
+          <frame x="733" y="8" width="16" height="28"/>
+          <frame x="811" y="8" width="16" height="28"/>
+          <frame x="889" y="9" width="15" height="28"/>
+          <frame x="967" y="9" width="15" height="27"/>
+          <frame x="31" y="75" width="16" height="26"/>
+        </animation>
+        <animation speed="5.0F" name="moving_up_left">
+          <frame x="107" y="76" width="17" height="27"/>
+          <frame x="186" y="75" width="16" height="27"/>
+          <frame x="264" y="75" width="15" height="28"/>
+          <frame x="341" y="76" width="17" height="27"/>
+          <frame x="421" y="75" width="14" height="28"/>
+          <frame x="498" y="75" width="15" height="27"/>
+        </animation>
+        <animation speed="5.0F" name="moving_left">
+          <frame x="575" y="76" width="17" height="27"/>
+          <frame x="655" y="76" width="13" height="27"/>
+          <frame x="732" y="76" width="13" height="27"/>
+          <frame x="809" y="77" width="16" height="26"/>
+          <frame x="889" y="76" width="13" height="27"/>
+          <frame x="966" y="76" width="13" height="27"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down_left">
+          <frame x="29" y="143" width="17" height="27"/>
+          <frame x="109" y="142" width="13" height="27"/>
+          <frame x="185" y="143" width="16" height="26"/>
+          <frame x="263" y="143" width="17" height="27"/>
+          <frame x="341" y="142" width="16" height="27"/>
+          <frame x="420" y="142" width="14" height="27"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down">
+          <frame x="498" y="143" width="16" height="27"/>
+          <frame x="576" y="143" width="16" height="26"/>
+          <frame x="654" y="143" width="16" height="26"/>
+          <frame x="732" y="144" width="16" height="26"/>
+          <frame x="810" y="143" width="16" height="26"/>
+          <frame x="888" y="143" width="16" height="26"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down_right">
+          <frame x="966" y="143" width="18" height="27"/>
+          <frame x="31" y="208" width="15" height="27"/>
+          <frame x="110" y="208" width="15" height="27"/>
+          <frame x="187" y="209" width="17" height="27"/>
+          <frame x="266" y="208" width="13" height="27"/>
+          <frame x="343" y="208" width="15" height="27"/>
+        </animation>
+        <animation speed="5.0F" name="moving_right">
+          <frame x="421" y="208" width="17" height="27"/>
+          <frame x="501" y="208" width="12" height="27"/>
+          <frame x="579" y="208" width="13" height="27"/>
+          <frame x="655" y="209" width="17" height="26"/>
+          <frame x="735" y="208" width="12" height="27"/>
+          <frame x="814" y="208" width="12" height="27"/>
+        </animation>
+        <animation speed="5.0F" name="moving_up_right">
+          <frame x="889" y="208" width="17" height="27"/>
+          <frame x="968" y="207" width="14" height="28"/>
+          <frame x="32" y="273" width="15" height="27"/>
+          <frame x="109" y="274" width="17" height="27"/>
+          <frame x="188" y="273" width="15" height="27"/>
+          <frame x="266" y="273" width="15" height="28"/>
+        </animation>
+        <animation speed="5.0F" name="attacking">
           <frame x="569" y="1795" width="31" height="27"/>
-        </attacking>
-        <dying speed="10.0F" loop="false">
+        </animation>
+        <animation speed="10.0F" loop="false" name="dying">
           <frame x="344" y="670" width="19" height="27"/>
           <frame x="419" y="668" width="25" height="31"/>
           <frame x="494" y="669" width="30" height="27"/>
@@ -98,26 +157,88 @@
           <frame x="817" y="667" width="24" height="26"/>
           <frame x="896" y="672" width="30" height="20"/>
           <frame x="974" y="674" width="32" height="18"/>
-        </dying>
-        <dead speed="5.0F" loop="false">
+        </animation>
+        <animation speed="5.0F" loop="false" name="dead">
           <frame x="974" y="674" width="32" height="18"/>
-        </dead>
+        </animation>
       </animations>
     </info>
     
+    <!--GI-->
     <info faction ="1">
       <sprite>textures/units/sprite_gi.png</sprite>
       <animations>
-        <idle speed="5.0F">
+        <animation speed="5.0F" name="idle">
           <frame x="345" y="1851" width="15" height="33"/>
-        </idle>
-        <moving speed="5.0F">
-          <frame x="345" y="1851" width="15" height="33"/>
-        </moving>
-        <attacking speed="5.0F">
+        </animation>
+        <animation speed="5.0F" name="moving_up">
+          <frame x="655" y="9" width="16" height="28"/>
+          <frame x="733" y="8" width="16" height="28"/>
+          <frame x="811" y="8" width="16" height="28"/>
+          <frame x="889" y="9" width="15" height="28"/>
+          <frame x="967" y="9" width="15" height="27"/>
+          <frame x="31" y="75" width="16" height="26"/>
+        </animation>
+        <animation speed="5.0F" name="moving_up_left">
+          <frame x="107" y="76" width="17" height="27"/>
+          <frame x="186" y="75" width="16" height="27"/>
+          <frame x="264" y="75" width="15" height="28"/>
+          <frame x="341" y="76" width="17" height="27"/>
+          <frame x="421" y="75" width="14" height="28"/>
+          <frame x="498" y="75" width="15" height="27"/>
+        </animation>
+        <animation speed="5.0F" name="moving_left">
+          <frame x="575" y="76" width="17" height="27"/>
+          <frame x="655" y="76" width="13" height="27"/>
+          <frame x="732" y="76" width="13" height="27"/>
+          <frame x="809" y="77" width="16" height="26"/>
+          <frame x="889" y="76" width="13" height="27"/>
+          <frame x="966" y="76" width="13" height="27"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down_left">
+          <frame x="29" y="143" width="17" height="27"/>
+          <frame x="109" y="142" width="13" height="27"/>
+          <frame x="185" y="143" width="16" height="26"/>
+          <frame x="263" y="143" width="17" height="27"/>
+          <frame x="341" y="142" width="16" height="27"/>
+          <frame x="420" y="142" width="14" height="27"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down">
+          <frame x="498" y="143" width="16" height="27"/>
+          <frame x="576" y="143" width="16" height="26"/>
+          <frame x="654" y="143" width="16" height="26"/>
+          <frame x="732" y="144" width="16" height="26"/>
+          <frame x="810" y="143" width="16" height="26"/>
+          <frame x="888" y="143" width="16" height="26"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down_right">
+          <frame x="966" y="143" width="18" height="27"/>
+          <frame x="31" y="208" width="15" height="27"/>
+          <frame x="110" y="208" width="15" height="27"/>
+          <frame x="187" y="209" width="17" height="27"/>
+          <frame x="266" y="208" width="13" height="27"/>
+          <frame x="343" y="208" width="15" height="27"/>
+        </animation>
+        <animation speed="5.0F" name="moving_right">
+          <frame x="421" y="208" width="17" height="27"/>
+          <frame x="501" y="208" width="12" height="27"/>
+          <frame x="579" y="208" width="13" height="27"/>
+          <frame x="655" y="209" width="17" height="26"/>
+          <frame x="735" y="208" width="12" height="27"/>
+          <frame x="814" y="208" width="12" height="27"/>
+        </animation>
+        <animation speed="5.0F" name="moving_up_right">
+          <frame x="889" y="208" width="17" height="27"/>
+          <frame x="968" y="207" width="14" height="28"/>
+          <frame x="32" y="273" width="15" height="27"/>
+          <frame x="109" y="274" width="17" height="27"/>
+          <frame x="188" y="273" width="15" height="27"/>
+          <frame x="266" y="273" width="15" height="28"/>
+        </animation>
+        <animation speed="5.0F" name="attacking">
           <frame x="569" y="1795" width="31" height="27"/>
-        </attacking>
-        <dying speed="10.0F" loop="false">
+        </animation>
+        <animation speed="10.0F" loop="false" name="dying">
           <frame x="344" y="670" width="19" height="27"/>
           <frame x="419" y="668" width="25" height="31"/>
           <frame x="494" y="669" width="30" height="27"/>
@@ -127,65 +248,291 @@
           <frame x="817" y="667" width="24" height="26"/>
           <frame x="896" y="672" width="30" height="20"/>
           <frame x="974" y="674" width="32" height="18"/>
-        </dying>
-        <dead speed="5.0F" loop="false">
+        </animation>
+        <animation speed="5.0F" loop="false" name="dead">
           <frame x="974" y="674" width="32" height="18"/>
-        </dead>
+        </animation>
       </animations>
-    </info>
-    
+    </info>   
   </entity>
-
+  
+  <!--SNIPER-->
   <entity type ="2">
     <info faction ="0">
       <sprite>textures/units/sprite_gi.png</sprite>
       <animations>
-        <idle speed="5.0F">
+        <animation speed="5.0F" name="idle">
           <frame x="345" y="1851" width="15" height="33"/>
-        </idle>
-        <moving speed="5.0F">
-          <frame x="345" y="1851" width="15" height="33"/>
-        </moving>
-        <attacking speed="5.0F">
+        </animation>
+        <animation speed="5.0F" name="moving_up">
+          <frame x="655" y="9" width="16" height="28"/>
+          <frame x="733" y="8" width="16" height="28"/>
+          <frame x="811" y="8" width="16" height="28"/>
+          <frame x="889" y="9" width="15" height="28"/>
+          <frame x="967" y="9" width="15" height="27"/>
+          <frame x="31" y="75" width="16" height="26"/>
+        </animation>
+        <animation speed="5.0F" name="moving_up_left">
+          <frame x="107" y="76" width="17" height="27"/>
+          <frame x="186" y="75" width="16" height="27"/>
+          <frame x="264" y="75" width="15" height="28"/>
+          <frame x="341" y="76" width="17" height="27"/>
+          <frame x="421" y="75" width="14" height="28"/>
+          <frame x="498" y="75" width="15" height="27"/>
+        </animation>
+        <animation speed="5.0F" name="moving_left">
+          <frame x="575" y="76" width="17" height="27"/>
+          <frame x="655" y="76" width="13" height="27"/>
+          <frame x="732" y="76" width="13" height="27"/>
+          <frame x="809" y="77" width="16" height="26"/>
+          <frame x="889" y="76" width="13" height="27"/>
+          <frame x="966" y="76" width="13" height="27"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down_left">
+          <frame x="29" y="143" width="17" height="27"/>
+          <frame x="109" y="142" width="13" height="27"/>
+          <frame x="185" y="143" width="16" height="26"/>
+          <frame x="263" y="143" width="17" height="27"/>
+          <frame x="341" y="142" width="16" height="27"/>
+          <frame x="420" y="142" width="14" height="27"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down">
+          <frame x="498" y="143" width="16" height="27"/>
+          <frame x="576" y="143" width="16" height="26"/>
+          <frame x="654" y="143" width="16" height="26"/>
+          <frame x="732" y="144" width="16" height="26"/>
+          <frame x="810" y="143" width="16" height="26"/>
+          <frame x="888" y="143" width="16" height="26"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down_right">
+          <frame x="966" y="143" width="18" height="27"/>
+          <frame x="31" y="208" width="15" height="27"/>
+          <frame x="110" y="208" width="15" height="27"/>
+          <frame x="187" y="209" width="17" height="27"/>
+          <frame x="266" y="208" width="13" height="27"/>
+          <frame x="343" y="208" width="15" height="27"/>
+        </animation>
+        <animation speed="5.0F" name="moving_right">
+          <frame x="421" y="208" width="17" height="27"/>
+          <frame x="501" y="208" width="12" height="27"/>
+          <frame x="579" y="208" width="13" height="27"/>
+          <frame x="655" y="209" width="17" height="26"/>
+          <frame x="735" y="208" width="12" height="27"/>
+          <frame x="814" y="208" width="12" height="27"/>
+        </animation>
+        <animation speed="5.0F" name="moving_up_right">
+          <frame x="889" y="208" width="17" height="27"/>
+          <frame x="968" y="207" width="14" height="28"/>
+          <frame x="32" y="273" width="15" height="27"/>
+          <frame x="109" y="274" width="17" height="27"/>
+          <frame x="188" y="273" width="15" height="27"/>
+          <frame x="266" y="273" width="15" height="28"/>
+        </animation>
+        <animation speed="5.0F" name="attacking">
           <frame x="569" y="1795" width="31" height="27"/>
-        </attacking>
-      </animations>
-    </info>
-  </entity>
-
-  <entity type ="3">
-    <info faction ="0">
-      <sprite>textures/units/sprite_gi.png</sprite>
-      <animations>
-        <idle speed="5.0F">
-          <frame x="345" y="1851" width="15" height="33"/>
-        </idle>
-        <moving speed="5.0F">
-          <frame x="345" y="1851" width="15" height="33"/>
-        </moving>
-        <attacking speed="5.0F">
-          <frame x="569" y="1795" width="31" height="27"/>
-        </attacking>
-      </animations>
-    </info>
-  </entity>
-
-  <entity type ="8">
-    <info faction ="0">
-      <sprite>textures/units/sprite_gi.png</sprite>
-      <animations>
-        <idle speed="5.0F">
-          <frame x="345" y="1851" width="15" height="33"/>
-        </idle>
-        <moving speed="5.0F">
-          <frame x="345" y="1851" width="15" height="33"/>
-        </moving>
-        <attacking speed="5.0F">
-          <frame x="569" y="1795" width="31" height="27"/>
-        </attacking>
+        </animation>
+        <animation speed="10.0F" loop="false" name="dying">
+          <frame x="344" y="670" width="19" height="27"/>
+          <frame x="419" y="668" width="25" height="31"/>
+          <frame x="494" y="669" width="30" height="27"/>
+          <frame x="572" y="668" width="29" height="29"/>
+          <frame x="659" y="665" width="18" height="32"/>
+          <frame x="741" y="666" width="15" height="27"/>
+          <frame x="817" y="667" width="24" height="26"/>
+          <frame x="896" y="672" width="30" height="20"/>
+          <frame x="974" y="674" width="32" height="18"/>
+        </animation>
+        <animation speed="5.0F" loop="false" name="dead">
+          <frame x="974" y="674" width="32" height="18"/>
+        </animation>
       </animations>
     </info>
   </entity>
   
+  <!--NAVI_SEAL-->
+  <entity type ="3">
+    <info faction ="0">
+      <sprite>textures/units/sprite_gi.png</sprite>
+      <animations>
+        <animation speed="5.0F" name="idle">
+          <frame x="345" y="1851" width="15" height="33"/>
+        </animation>
+        <animation speed="5.0F" name="moving_up">
+          <frame x="655" y="9" width="16" height="28"/>
+          <frame x="733" y="8" width="16" height="28"/>
+          <frame x="811" y="8" width="16" height="28"/>
+          <frame x="889" y="9" width="15" height="28"/>
+          <frame x="967" y="9" width="15" height="27"/>
+          <frame x="31" y="75" width="16" height="26"/>
+        </animation>
+        <animation speed="5.0F" name="moving_up_left">
+          <frame x="107" y="76" width="17" height="27"/>
+          <frame x="186" y="75" width="16" height="27"/>
+          <frame x="264" y="75" width="15" height="28"/>
+          <frame x="341" y="76" width="17" height="27"/>
+          <frame x="421" y="75" width="14" height="28"/>
+          <frame x="498" y="75" width="15" height="27"/>      
+        </animation>
+        <animation speed="5.0F" name="moving_left">
+          <frame x="575" y="76" width="17" height="27"/>
+          <frame x="655" y="76" width="13" height="27"/>
+          <frame x="732" y="76" width="13" height="27"/>
+          <frame x="809" y="77" width="16" height="26"/>
+          <frame x="889" y="76" width="13" height="27"/>
+          <frame x="966" y="76" width="13" height="27"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down_left">
+          <frame x="29" y="143" width="17" height="27"/>
+          <frame x="109" y="142" width="13" height="27"/>
+          <frame x="185" y="143" width="16" height="26"/>
+          <frame x="263" y="143" width="17" height="27"/>
+          <frame x="341" y="142" width="16" height="27"/>
+          <frame x="420" y="142" width="14" height="27"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down">
+          <frame x="498" y="143" width="16" height="27"/>
+          <frame x="576" y="143" width="16" height="26"/>
+          <frame x="654" y="143" width="16" height="26"/>
+          <frame x="732" y="144" width="16" height="26"/>
+          <frame x="810" y="143" width="16" height="26"/>
+          <frame x="888" y="143" width="16" height="26"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down_right">
+          <frame x="966" y="143" width="18" height="27"/>
+          <frame x="31" y="208" width="15" height="27"/>
+          <frame x="110" y="208" width="15" height="27"/>
+          <frame x="187" y="209" width="17" height="27"/>
+          <frame x="266" y="208" width="13" height="27"/>
+          <frame x="343" y="208" width="15" height="27"/>
+        </animation>
+        <animation speed="5.0F" name="moving_right">
+          <frame x="421" y="208" width="17" height="27"/>
+          <frame x="501" y="208" width="12" height="27"/>
+          <frame x="579" y="208" width="13" height="27"/>
+          <frame x="655" y="209" width="17" height="26"/>
+          <frame x="735" y="208" width="12" height="27"/>
+          <frame x="814" y="208" width="12" height="27"/>
+        </animation>
+        <animation speed="5.0F" name="moving_up_right">
+          <frame x="889" y="208" width="17" height="27"/>
+          <frame x="968" y="207" width="14" height="28"/>
+          <frame x="32" y="273" width="15" height="27"/>
+          <frame x="109" y="274" width="17" height="27"/>
+          <frame x="188" y="273" width="15" height="27"/>
+          <frame x="266" y="273" width="15" height="28"/>
+        </animation>
+        <animation speed="5.0F" name="attacking">
+          <frame x="569" y="1795" width="31" height="27"/>
+        </animation>
+        <animation speed="10.0F" loop="false" name="dying">
+          <frame x="344" y="670" width="19" height="27"/>
+          <frame x="419" y="668" width="25" height="31"/>
+          <frame x="494" y="669" width="30" height="27"/>
+          <frame x="572" y="668" width="29" height="29"/>
+          <frame x="659" y="665" width="18" height="32"/>
+          <frame x="741" y="666" width="15" height="27"/>
+          <frame x="817" y="667" width="24" height="26"/>
+          <frame x="896" y="672" width="30" height="20"/>
+          <frame x="974" y="674" width="32" height="18"/>
+        </animation>
+        <animation speed="5.0F" loop="false" name="dead">
+          <frame x="974" y="674" width="32" height="18"/>
+        </animation>
+      </animations>
+    </info>
+  </entity>
+  
+  <!--HARRIER-->
+  <entity type ="8">
+    <info faction ="0">
+      <sprite>textures/units/sprite_gi.png</sprite>
+      <animations>
+        <animation speed="5.0F" name="idle">
+          <frame x="345" y="1851" width="15" height="33"/>
+        </animation>
+        <animation speed="5.0F" name="moving_up">
+          <frame x="655" y="9" width="16" height="28"/>
+          <frame x="733" y="8" width="16" height="28"/>
+          <frame x="811" y="8" width="16" height="28"/>
+          <frame x="889" y="9" width="15" height="28"/>
+          <frame x="967" y="9" width="15" height="27"/>
+          <frame x="31" y="75" width="16" height="26"/>
+        </animation>
+        <animation speed="5.0F" name="moving_up_left">
+          <frame x="107" y="76" width="17" height="27"/>
+          <frame x="186" y="75" width="16" height="27"/>
+          <frame x="264" y="75" width="15" height="28"/>
+          <frame x="341" y="76" width="17" height="27"/>
+          <frame x="421" y="75" width="14" height="28"/>
+          <frame x="498" y="75" width="15" height="27"/>
+        </animation>
+        <animation speed="5.0F" name="moving_left">
+          <frame x="575" y="76" width="17" height="27"/>
+          <frame x="655" y="76" width="13" height="27"/>
+          <frame x="732" y="76" width="13" height="27"/>
+          <frame x="809" y="77" width="16" height="26"/>
+          <frame x="889" y="76" width="13" height="27"/>
+          <frame x="966" y="76" width="13" height="27"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down_left">
+          <frame x="29" y="143" width="17" height="27"/>
+          <frame x="109" y="142" width="13" height="27"/>
+          <frame x="185" y="143" width="16" height="26"/>
+          <frame x="263" y="143" width="17" height="27"/>
+          <frame x="341" y="142" width="16" height="27"/>
+          <frame x="420" y="142" width="14" height="27"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down">
+          <frame x="498" y="143" width="16" height="27"/>
+          <frame x="576" y="143" width="16" height="26"/>
+          <frame x="654" y="143" width="16" height="26"/>
+          <frame x="732" y="144" width="16" height="26"/>
+          <frame x="810" y="143" width="16" height="26"/>
+          <frame x="888" y="143" width="16" height="26"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down_right">
+          <frame x="966" y="143" width="18" height="27"/>
+          <frame x="31" y="208" width="15" height="27"/>
+          <frame x="110" y="208" width="15" height="27"/>
+          <frame x="187" y="209" width="17" height="27"/>
+          <frame x="266" y="208" width="13" height="27"/>
+          <frame x="343" y="208" width="15" height="27"/>
+        </animation>
+        <animation speed="5.0F" name="moving_right">
+          <frame x="421" y="208" width="17" height="27"/>
+          <frame x="501" y="208" width="12" height="27"/>
+          <frame x="579" y="208" width="13" height="27"/>
+          <frame x="655" y="209" width="17" height="26"/>
+          <frame x="735" y="208" width="12" height="27"/>
+          <frame x="814" y="208" width="12" height="27"/>
+        </animation>
+        <animation speed="5.0F" name="moving_up_right">
+          <frame x="889" y="208" width="17" height="27"/>
+          <frame x="968" y="207" width="14" height="28"/>
+          <frame x="32" y="273" width="15" height="27"/>
+          <frame x="109" y="274" width="17" height="27"/>
+          <frame x="188" y="273" width="15" height="27"/>
+          <frame x="266" y="273" width="15" height="28"/>
+        </animation>
+        <animation speed="5.0F" name="attacking">
+          <frame x="569" y="1795" width="31" height="27"/>
+        </animation>
+        <animation speed="10.0F" loop="false" name="dying">
+          <frame x="344" y="670" width="19" height="27"/>
+          <frame x="419" y="668" width="25" height="31"/>
+          <frame x="494" y="669" width="30" height="27"/>
+          <frame x="572" y="668" width="29" height="29"/>
+          <frame x="659" y="665" width="18" height="32"/>
+          <frame x="741" y="666" width="15" height="27"/>
+          <frame x="817" y="667" width="24" height="26"/>
+          <frame x="896" y="672" width="30" height="20"/>
+          <frame x="974" y="674" width="32" height="18"/>
+        </animation>
+        <animation speed="5.0F" loop="false" name="dead">
+          <frame x="974" y="674" width="32" height="18"/>
+        </animation>
+      </animations>
+    </info>
+  </entity>
   
 </config>

@@ -29,7 +29,7 @@ public:
 
 	virtual bool PreUpdate() { return true; };
 	virtual bool Update(float dt) { return true; };
-	virtual bool PostUpdate() { return true; };
+	virtual bool PostUpdate();
 	virtual bool CleanUp() { return true; };
 	virtual bool Start() { return true; };
 
@@ -40,6 +40,7 @@ protected:
 	void LoadAnimations(pugi::xml_node anim_config);
 	void LoadSprite(pugi::xml_node node);
 	virtual void Die() {};
+	virtual void Draw();
 
 public:
 	Faction faction;
@@ -47,7 +48,8 @@ public:
 	fPoint position;
 
 protected:
-	std::vector<Animation> animations;
+	std::map<std::string, Animation> animations;
+	Animation* current_animation;
 	SDL_Rect current_frame;
 	SDL_Texture* sprite = nullptr;
 

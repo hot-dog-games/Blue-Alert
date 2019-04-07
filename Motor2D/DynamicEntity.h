@@ -41,15 +41,19 @@ public:
 protected:
 	void CalcDirection();
 	void CheckDestination();
+	virtual void AnimationCheck();
+	virtual void MovementAnimationCheck();
+	virtual void AttackingAnimationCheck();
 	virtual void Die();
 	virtual void Move(float dt);
 	virtual void Attack();
-	void CheckEnemies();
+	bool CheckEnemies();
 
 protected:
 	Card * entity_card = nullptr;
 	DynamicState state = DYNAMIC_IDLE;
 	EntiyDirection direction = UP;
+	fPoint direction_vector = { 1.0f, 1.0f };
 
 	Entity* objective = nullptr;
 	PerfTimer attack_timer;

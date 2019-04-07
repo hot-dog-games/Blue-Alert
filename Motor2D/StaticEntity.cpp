@@ -24,14 +24,6 @@ StaticEntity::~StaticEntity()
 	LOG("destructor called");
 }
 
-bool StaticEntity::Update(float dt)
-{
-
-	current_frame = animations[state].GetCurrentFrame(dt);
-
-	return true;
-}
-
 bool StaticEntity::CleanUp()
 {
 	if(sprite)
@@ -40,17 +32,10 @@ bool StaticEntity::CleanUp()
 	return true;
 }
 
-bool StaticEntity::PostUpdate()
-{
-	fPoint render_position = { position.x - current_frame.w*0.5f, position.y - current_frame.h };
-	App->render->Blit(sprite, render_position.x, render_position.y, &current_frame);
-
-	return true;
-}
-
 
 void StaticEntity::Die()
 {
 	state = STATIC_DIE;
+	current_animation = &animations.find("die")->second;
 }
 
