@@ -20,8 +20,7 @@ public:
 	~StaticEntity();
 
 	virtual bool PreUpdate() { return true; };
-	virtual bool Update(float dt);
-	virtual bool PostUpdate();
+	virtual bool Update(float dt) { return true; };
 	virtual bool CleanUp();
 
 	virtual void Die();

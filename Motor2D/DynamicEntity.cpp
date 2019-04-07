@@ -34,6 +34,7 @@ bool DynamicEntity::Start()
 	App->pathfinding->CreatePath({ map_position.x, map_position.y }, { core_map_position.x , core_map_position.y });
 	path = App->pathfinding->GetLastPath();
 	state = DYNAMIC_MOVING;
+	current_animation = &animations.find("moving_up")->second;
 
 	for (std::vector<iPoint>::iterator point = path.begin(); point != path.end(); ++point)
 	{
@@ -46,41 +47,52 @@ bool DynamicEntity::Start()
 
 bool DynamicEntity::PreUpdate()
 {
-	
 	switch (state)
 	{
 	case DYNAMIC_IDLE:
 		break;
 	case DYNAMIC_MOVING:
-		CheckDestination();
-		CalcDirection();
-		CheckEnemies();
+		if (CheckEnemies())
+			state = DYNAMIC_ATTACKING;
+		else 
+			CheckDestination();
 		break;
 	case DYNAMIC_ATTACKING:
 		if (!objective->IsAlive())
 		{
-			state = DYNAMIC_MOVING;
 			objective = nullptr;
-			CheckEnemies();
+			if (CheckEnemies())
+				state = DYNAMIC_ATTACKING;
+			else 
+				state = DYNAMIC_MOVING;
+		}
+		else
+		{
+			fPoint objective_direction = { objective->position.x - position.x, objective->position.y - position.y };
+			float m = sqrtf(pow(objective_direction.x, 2.0f) + pow(objective_direction.y, 2.0f));
+			if (m > 0.0f) {
+				objective_direction.x /= m;
+				objective_direction.y /= m;
+			}
+
+			direction_vector = { objective_direction.x, objective_direction.y };
 		}
 		break;
 	case DYNAMIC_DYING:
-		if (animations[state].isDone())
-		{
+		if (current_animation->isDone())
 			state = DYNAMIC_DEAD;
-		}
 		break;
 	}
+
+	CalcDirection();
+	AnimationCheck();
 
 	return true;
 }
 
 bool DynamicEntity::PostUpdate()
 {
-	fPoint render_position = { position.x - (current_frame.w * 0.5f), position.y - current_frame.h };
-	App->render->Blit(sprite, render_position.x, render_position.y, &current_frame);
-
-
+	Draw();
 	//Range debug 
 	App->render->DrawCircle(position.x, position.y, entity_card->info.stats.find("range")->second->GetValue()*App->map->data.tile_height, 255, 0, 0);
 
@@ -113,42 +125,43 @@ bool DynamicEntity::Update(float dt)
 		break;
 	}
 
-	current_frame = animations[state].GetCurrentFrame(dt);
+	if (current_animation)
+		current_frame = current_animation->GetCurrentFrame(dt);
 
 	return true;
 }
 
 void DynamicEntity::CalcDirection()
 {
-	if (position.x < path[current_point].x)
+	if (direction_vector.x > 0)
 	{
 		direction = RIGHT;
-		if (position.y < path[current_point].y)
+		if (direction_vector.y > 0)
 		{
 			direction = DOWN_RIGHT;
 		}
-		else if (position.y > path[current_point].y)
+		else if (direction_vector.y < 0)
 		{
 			direction = UP_RIGHT;
 		}
 	}
-	else if (position.x > path[current_point].x)
+	else if (direction_vector.x < 0)
 	{
 		direction = LEFT;
-		if (position.y < path[current_point].y)
+		if (direction_vector.y > 0)
 		{
 			direction = DOWN_LEFT;
 		}
-		else if (position.y > path[current_point].y)
+		else if (direction_vector.y < 0)
 		{
 			direction = UP_LEFT;
 		}
 	}
-	else if (position.y < path[current_point].y)
+	else if (direction_vector.y > 0)
 	{
 		direction =	DOWN;
 	}
-	else if (position.y > path[current_point].y)
+	else if (direction_vector.y < 0)
 	{
 		direction = UP;
 	}
@@ -169,40 +182,57 @@ void DynamicEntity::CheckDestination()
 		if (current_point >= path.size())
 			state = DYNAMIC_IDLE;
 	}
-}
 
-void DynamicEntity::Move(float dt)
-{
 	fPoint move_pos = { path[current_point].x - position.x, path[current_point].y - position.y };
-
 	float m = sqrtf(pow(move_pos.x, 2.0f) + pow(move_pos.y, 2.0f));
-
 	if (m > 0.0f) {
 		move_pos.x /= m;
 		move_pos.y /= m;
 	}
-
-	float speed = entity_card->info.stats.find("movement")->second->GetValue() * 10;
-	move_pos.x *= speed * dt;
-	move_pos.y *= speed * dt;
-
-	position.x += move_pos.x;
-	position.y += move_pos.y;
-	
+	direction_vector = { move_pos.x, move_pos.y };
 }
 
-void DynamicEntity::CheckEnemies()
+void DynamicEntity::Move(float dt)
+{
+	fPoint movement_vector = direction_vector;
+	float speed = entity_card->info.stats.find("movement")->second->GetValue();
+	movement_vector.x *= speed * dt;
+	movement_vector.y *= speed * dt;
+
+	fPoint end_position = { position.x + movement_vector.x, position.y + movement_vector.y };
+
+	if (end_position.DistanceNoSqrt({ (float)path[current_point].x, (float)path[current_point].y }) < SNAP_RANGE)
+	{
+		position = { (float)path[current_point].x, (float)path[current_point].y };
+	}
+	else
+	{
+		position.x += movement_vector.x;
+		position.y += movement_vector.y;
+	}
+}
+
+bool DynamicEntity::CheckEnemies()
 {
 	Entity* closest_entity = nullptr;
 	float distance = 10000.0f;
 	App->entity_manager->FindClosestEnemy(position, faction, closest_entity, distance);
-	LOG("distance to closest is %f radius is %f", distance, entity_card->info.stats.find("range")->second->GetValue()*App->map->data.tile_height);
 
-	if (distance <= entity_card->info.stats.find("range")->second->GetValue()* App->map->data.tile_height && closest_entity->IsAlive())
+	if (distance <= entity_card->info.stats.find("range")->second->GetValue()* App->map->data.tile_height)
 	{
 		objective = closest_entity;
-		state = DYNAMIC_ATTACKING;
+		fPoint objective_direction = { objective->position.x - position.x, objective->position.y - position.y };
+		float m = sqrtf(pow(objective_direction.x, 2.0f) + pow(objective_direction.y, 2.0f));
+		if (m > 0.0f) {
+			objective_direction.x /= m;
+			objective_direction.y /= m;
+		}
+
+		direction_vector = { objective_direction.x, objective_direction.y };
+		return true;
 	}
+
+	return false;
 }
 
 
@@ -218,6 +248,7 @@ void DynamicEntity::Attack()
 void DynamicEntity::Die()
 {
 	state = DYNAMIC_DYING;
+	current_animation = &animations.find("dying")->second;
 	objective = nullptr;
 	path.clear();
 }
@@ -233,4 +264,91 @@ bool DynamicEntity::CleanUp()
 	stats.clear();
 
 	return true;
+}
+
+void DynamicEntity::AnimationCheck() {
+	switch (state)
+	{
+	case DYNAMIC_IDLE:
+		current_animation = &animations.find("idle")->second;
+		break;
+	case DYNAMIC_MOVING:
+		MovementAnimationCheck();
+		break;
+	case DYNAMIC_ATTACKING:
+		AttackingAnimationCheck();
+		break;
+	case DYNAMIC_DYING:
+		current_animation = &animations.find("dying")->second;
+		break;
+	case DYNAMIC_DEAD:
+		current_animation = &animations.find("dead")->second;
+		break;
+	default:
+		break;
+	}
+}
+void DynamicEntity::MovementAnimationCheck() {
+	switch (direction)
+	{
+	case UP:
+		current_animation = &animations.find("moving_up")->second;
+		break;
+	case DOWN:
+		current_animation = &animations.find("moving_down")->second;
+		break;
+	case LEFT:
+		current_animation = &animations.find("moving_left")->second;
+		break;
+	case RIGHT:
+		current_animation = &animations.find("moving_right")->second;
+		break;
+	case UP_RIGHT:
+		current_animation = &animations.find("moving_up_right")->second;
+		break;
+	case UP_LEFT:
+		current_animation = &animations.find("moving_up_left")->second;
+		break;
+	case DOWN_RIGHT:
+		current_animation = &animations.find("moving_down_right")->second;
+		break;
+	case DOWN_LEFT:
+		current_animation = &animations.find("moving_down_left")->second;
+		break;
+	default:
+		break;
+	}
+}
+void DynamicEntity::AttackingAnimationCheck() {
+	switch (direction)
+	{
+	case UP:
+		current_animation = &animations.find("attacking_up")->second;
+		break;
+	case DOWN:
+		current_animation = &animations.find("attacking_down")->second;
+		break;
+	case LEFT:
+		current_animation = &animations.find("attacking_left")->second;
+		break;
+	case RIGHT:
+		current_animation = &animations.find("attacking_right")->second;
+		break;
+	case UP_RIGHT:
+		current_animation = &animations.find("attacking_up_right")->second;
+		break;
+	case UP_LEFT:
+		current_animation = &animations.find("attacking_up_left")->second;
+		break;
+	case DOWN_RIGHT:
+		current_animation = &animations.find("attacking_down_right")->second;
+		break;
+	case DOWN_LEFT:
+		current_animation = &animations.find("attacking_down_left")->second;
+		break;
+	default:
+		break;
+	}
+
+	current_animation->speed = current_animation->GetFrameAmount() * entity_card->info.stats.find("attack_speed")->second->GetValue();
 }

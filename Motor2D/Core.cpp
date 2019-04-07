@@ -17,6 +17,7 @@ Core::Core(pugi::xml_node entity_config, fPoint position, Faction faction): Stat
 			new Stat(iter.attribute("value").as_int())));
 	}
 
+	current_animation = &animations.find("idle")->second;
 }
 
 Core::~Core()
@@ -25,17 +26,19 @@ Core::~Core()
 
 bool Core::Update(float dt)
 {
-	StaticEntity::Update(dt);
-
 	if (energy_timer.ReadMs() >= SECOND_MS) {
 		stats.find("energy")->second->IncreaseStat(stats.find("energy_regen")->second->GetValue());
 		energy_timer.Start();
 	}
 
-	if (state == STATIC_DIE && animations[state].isDone())
+	if (state == STATIC_DIE && current_animation->isDone())
 	{
 		state = STATIC_DESTROYED;
+		current_animation = &animations.find("destroyed")->second;
 	}
+
+	if (current_animation)
+		current_frame = current_animation->GetCurrentFrame(dt);
 
 	return true;
 }
