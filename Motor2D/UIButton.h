@@ -20,8 +20,6 @@ public:
 	void OnMouseExit();
 	void SetLocked(bool value);
 	bool CleanUp();
-
-	bool is_world_ui = false;
 };
 
 #endif // !UI_BUTTON_H

@@ -25,9 +25,11 @@ bool StrategyBuilding::Update(float dt)
 
 	App->input->GetMousePosition(mouse_x, mouse_y);
 
+	iPoint mouse_world = App->render->ScreenToWorld(mouse_x, mouse_y);
+
 	if (in_range)
 	{
-		if (mouse_x > position.x - current_frame.w / 2 && mouse_x < position.x + current_frame.w / 2 && mouse_y < position.y && mouse_y > position.y - current_frame.h)
+		if (mouse_world.x > position.x - current_frame.w / 2 && mouse_world.x < position.x + current_frame.w / 2 && mouse_world.y < position.y && mouse_world.y > position.y - current_frame.h)
 		{
 			if (!im_current_building)
 			{

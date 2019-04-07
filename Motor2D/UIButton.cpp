@@ -14,18 +14,10 @@ bool UIButton::UIBlit()
 	iPoint screen_pos = GetScreenPos();
 	if (clipping && parent)
 	{
-		if (!is_world_ui)App->render->Blit(App->gui->GetAtlas(), screen_pos.x, screen_pos.y, &rect_sprite, 0.0F, 0.0, INT_MAX, INT_MAX, &parent->GetScreenRect());
-		else {
-			iPoint world_position = App->render->ScreenToWorld(screen_pos.x, screen_pos.y);
-			App->render->Blit(App->gui->GetAtlas(), world_position.x, world_position.y, &rect_sprite, 1.0F, 0.0, INT_MAX, INT_MAX, &parent->GetScreenRect());
-		}
+		App->render->Blit(App->gui->GetAtlas(), screen_pos.x, screen_pos.y, &rect_sprite, 0.0F, 0.0, INT_MAX, INT_MAX, &parent->GetScreenRect());
 	}
 	else {
-		if (!is_world_ui)App->render->Blit(App->gui->GetAtlas(), screen_pos.x, screen_pos.y, &rect_sprite, 0.0F, 0.0, INT_MAX, INT_MAX);
-		else {
-			iPoint world_position = App->render->ScreenToWorld(screen_pos.x, screen_pos.y);
-			App->render->Blit(App->gui->GetAtlas(), world_position.x, world_position.y, &rect_sprite, 1.0F, 0.0, INT_MAX, INT_MAX);
-		}
+		App->render->Blit(App->gui->GetAtlas(), screen_pos.x, screen_pos.y, &rect_sprite, 0.0F, 0.0, INT_MAX, INT_MAX);
 	}
 	return true;
 }
