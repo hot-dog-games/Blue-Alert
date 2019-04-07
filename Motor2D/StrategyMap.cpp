@@ -32,9 +32,6 @@ bool StrategyMap::Start()
 	App->map->Load("Nodes Map.tmx");
 	App->ResumeGame();
 
-	App->render->camera.x = 0;
-	App->render->camera.y = 0;
-
 	App->game_manager->GetEncounterTree()->CreateAllNodes();
 	App->game_manager->GetEncounterTree()->UpdateTreeState();
 
@@ -60,6 +57,11 @@ bool StrategyMap::Start()
 	gold = App->gui->CreateLabel({ 90, 30 }, "ui/Fonts/command_and_conquer___logo_font_by_dexistor371-d6k2yvb.ttf", 20, "GOLD", { 0,0,0,0 }, 0, main_panel);
 	energy = App->gui->CreateLabel({ 450, 30 }, "ui/Fonts/command_and_conquer___logo_font_by_dexistor371-d6k2yvb.ttf", 20, "ENERGY", { 0,0,0,0 },0, main_panel);
 	health = App->gui->CreateLabel({ 860, 30 }, "ui/Fonts/command_and_conquer___logo_font_by_dexistor371-d6k2yvb.ttf", 20, "HEALTH", { 0,0,0,0 }, 0, main_panel);
+
+	iPoint world_position = App->map->MapToWorld((int)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetPosition().x, (int)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetPosition().y);
+	iPoint camera_position = App->render->WorldToScreen(world_position.x, world_position.y);
+	App->render->camera.x = camera_position.x - App->render->camera.w/2;
+	App->render->camera.y = -camera_position.y + App->render->camera.h;
 
 
 	return true;

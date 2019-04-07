@@ -5,6 +5,7 @@
 #include "Render.h"
 #include "Map.h"
 #include "UIButton.h"
+#include "StrategyBuilding.h"
 #include "EncounterNode.h"
 
 
@@ -82,6 +83,7 @@ void EncounterNode::CreateNodeEntity()
 {
 	iPoint world_position = App->map->MapToWorld(position.x, position.y);
 	entity = App->entity_manager->CreateStrategyBuilding((EntityType)encounter->type, { (float)world_position.x, (float)world_position.y }, visited? FACTION_RUSSIAN : FACTION_AMERICAN);
+	entity->m_node = this;
 }
 
 void EncounterNode::CreateNodeButton()

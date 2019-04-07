@@ -1,6 +1,8 @@
 #pragma once
 #include "StaticEntity.h"
 
+class EncounterNode;
+
 class StrategyBuilding :
 	public StaticEntity
 {
@@ -15,7 +17,7 @@ public:
 	bool in_range = false;
 	bool im_current_building = false;
 
-private:
+	EncounterNode* m_node = nullptr;
 
 };
 
