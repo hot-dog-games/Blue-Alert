@@ -63,6 +63,7 @@ void Entity::LoadAnimations(pugi::xml_node anim_config)
 			anim.PushBack({ frame.attribute("x").as_int(), frame.attribute("y").as_int(), frame.attribute("width").as_int(), frame.attribute("height").as_int() });
 		}
 		anim.speed = animation.attribute("speed").as_float();
+		anim.base_speed = anim.speed;
 		anim.loop = animation.attribute("loop").as_bool(true);
 		std::string animation_name = animation.attribute("name").as_string();
 

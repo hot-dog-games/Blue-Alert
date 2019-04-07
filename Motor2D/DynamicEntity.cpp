@@ -318,6 +318,8 @@ void DynamicEntity::MovementAnimationCheck() {
 	default:
 		break;
 	}
+
+	current_animation->speed = (entity_card->info.stats.find("movement")->second->GetValue() * current_animation->base_speed) / entity_card->info.stats.find("movement")->second->GetBaseValue();
 }
 void DynamicEntity::AttackingAnimationCheck() {
 	switch (direction)

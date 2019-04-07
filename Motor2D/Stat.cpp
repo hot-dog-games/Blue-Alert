@@ -94,3 +94,8 @@ void Stat::IncreaseStat(float value)
 		base_value = max_value;
 	CalculateStat();
 }
+
+float Stat::GetBaseValue()
+{
+	return base_value;
+}
