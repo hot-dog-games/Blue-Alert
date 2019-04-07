@@ -2,11 +2,13 @@
 #include "GUI.h"
 #include "EntityManager.h"
 #include "Entity.h"
+#include "Render.h"
 #include "EncounterNode.h"
 
 
-EncounterNode::EncounterNode()
+EncounterNode::EncounterNode(int id)
 {
+	this->id = id;
 	encounter = new Encounter();
 	button_rect = { 1000, 1000, 147, 127 };
 }
@@ -20,25 +22,23 @@ std::string EncounterNode::GetEncounterName() const
 	return encounter->name;
 }
 
-void EncounterNode::SetParent(EncounterNode * parent)
+void EncounterNode::SetEncounterName(std::string name)
 {
-	this->parent = parent;
+	encounter->name = name;
 }
 
-EncounterNode * EncounterNode::GetParent() const
+void EncounterNode::SetParent(EncounterNode * parent)
 {
-	return parent;
+	parents.push_back(parent);
+}
+
+std::vector<EncounterNode*> EncounterNode::GetParents() const
+{
+	return parents;
 }
 
 EncounterNode * EncounterNode::AddChild(EncounterNode * child)
 {
-	if (children.size() == 0)
-	{
-		child->SetPosition({ position.x - rand() % 150 + (-100), position.y - 200 });
-	}
-	else {
-		child->SetPosition({ children.back()->position.x + 300, children.back()->position.y });
-	}
 	child->SetParent(this);
 	children.push_back(child);
 	return child;
@@ -83,7 +83,7 @@ void EncounterNode::CreateNodeEntity()
 
 void EncounterNode::CreateNodeButton()
 {
-	button = App->gui->CreateButton({ (int)position.x - 72, (int)position.y -127}, &button_rect);
+	button = App->gui->CreateButton({(int)position.x - 72, (int)position.y -127}, &button_rect);
 }
 
 void EncounterNode::CreateNode()

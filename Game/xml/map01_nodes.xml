@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<map01_nodes size="15">
+	<node id="0" x="1450" y="1450" type="start">
+		<children id="1"/>
+		<children id="2"/>
+	</node>
+	<node id="1" x="1120" y="1360" type="Land">
+		<children id="3"/>
+	</node>
+	<node id="2" x="1270" y="1035" type="Infantry">
+		<children id="4"/>
+		<children id="5"/>
+	</node>
+	<node id="3" x="825" y="1365" type="Aerial">
+		<children id="6"/>
+		<children id="7"/>
+	</node>
+	<node id="4" x="820" y="910" type="Gold">
+		<children id="7"/>
+	</node>
+	<node id="5" x="1035" y="615" type="Store">
+		<children id="8"/>
+		<children id="9"/>
+		<children id="10"/>
+	</node>
+	<node id="6" x="160" y="1090" type="Land">
+		<children id="11"/>
+	</node>
+	<node id="7" x="460" y="970" type="Store">
+		<children id="11"/>
+		<children id="12"/>
+	</node>
+	<node id="8" x="650" y="615" type="Gold">
+		<children id="12"/>
+	</node>
+	<node id="9" x="730" y="310" type="Infantry">
+		<children id="13"/>
+	</node>
+	<node id="10" x="1120" y="190" type="Aerial">
+		<children id="13"/>
+	</node>
+	<node id="11" x="160" y="615" type="Infantry">
+		<children id="14"/>
+	</node>
+	<node id="12" x="345" y="375" type="Aerial">
+		<children id="14"/>
+	</node>
+	<node id="13" x="490" y="130" type="Land">
+		<children id="14"/>
+	</node>
+	<node id="14" x="65" y="65" type="Boss">
+	</node>
+</map01_nodes>

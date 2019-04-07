@@ -18,8 +18,10 @@ struct Encounter {
 class EncounterNode
 {
 protected:
-	EncounterNode* parent;
+	std::vector<EncounterNode*> parents;
 	std::vector<EncounterNode*> children;
+
+	int id = 0;
 
 	//------Encounter-----
 	Encounter* encounter = nullptr;
@@ -31,11 +33,11 @@ protected:
 	StrategyBuilding* entity;
 
 public:
-	EncounterNode();
+	EncounterNode(int id);
 	~EncounterNode();
 
 	void SetParent(EncounterNode * parent);
-	EncounterNode * GetParent() const;
+	std::vector<EncounterNode*> GetParents() const;
 
 	EncounterNode * AddChild(EncounterNode * child);
 	std::vector<EncounterNode*> GetChildren() const;
@@ -53,6 +55,7 @@ public:
 
 	//-----Emcounter Accessors-----
 	std::string EncounterNode::GetEncounterName() const;
+	void SetEncounterName(std::string name);
 
 	SDL_Rect node_rect;
 

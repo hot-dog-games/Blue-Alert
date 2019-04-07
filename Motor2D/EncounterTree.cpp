@@ -21,34 +21,24 @@ EncounterTree::~EncounterTree()
 
 EncounterTree * EncounterTree::CreateTree()
 {
-	LoadDocument();
+	LoadDocuments();
 
-	// 0 - start, 1 - land, 2 - aerial, 3 - infantry
+	for (int i = 0; i < map01_nodes.attribute("size").as_int(); i++)
+	{
+		map_encounters.push_back(new EncounterNode(i));
+	}
 
-	EncounterNode* start_encounter = new EncounterNode();
-	start_encounter->SetPosition({ 500, 700 });
-	start_encounter->LoadEncounterInfo(GetXmlEncounterNodeById(0)); //Start node creation
-	map_encounters.push_back(start_encounter);
-
-	EncounterNode* infantry_encounter = new EncounterNode();
-	start_encounter->AddChild(infantry_encounter);
-	infantry_encounter->LoadEncounterInfo(GetXmlEncounterNodeById(3));
-	map_encounters.push_back(infantry_encounter);
-
-	EncounterNode* land_encounter = new EncounterNode();
-	infantry_encounter->AddChild(land_encounter);
-	land_encounter->LoadEncounterInfo(GetXmlEncounterNodeById(1));
-	map_encounters.push_back(land_encounter);
-
-	EncounterNode* aerial_encounter_02 = new EncounterNode();
-	infantry_encounter->AddChild(aerial_encounter_02);
-	aerial_encounter_02->LoadEncounterInfo(GetXmlEncounterNodeById(2));
-	map_encounters.push_back(aerial_encounter_02);
-
-	EncounterNode* aerial_encounter = new EncounterNode();
-	start_encounter->AddChild(aerial_encounter);
-	aerial_encounter->LoadEncounterInfo(GetXmlEncounterNodeById(2)); 
-	map_encounters.push_back(aerial_encounter);
+	for (int i = 0; i < map_encounters.size(); i++)
+	{
+		pugi::xml_node node = map01_nodes.find_child_by_attribute("id", std::to_string((int)i).c_str());
+		iPoint world_position = App->render->ScreenToWorld(node.attribute("x").as_int(),  node.attribute("y").as_int());
+		map_encounters[i]->SetPosition({(float)world_position.x, (float)world_position.y});
+		map_encounters[i]->SetEncounterName(node.attribute("type").as_string());
+		for (pugi::xml_node child = node.first_child(); child; child = child.next_sibling())
+		{
+			map_encounters[i]->AddChild(map_encounters[child.attribute("id").as_int()]);
+		}
+	}
 
 
 	LOG("NODES", map_encounters.size());
@@ -56,7 +46,7 @@ EncounterTree * EncounterTree::CreateTree()
 	return this;
 }
 
-bool EncounterTree::LoadDocument()
+bool EncounterTree::LoadDocuments()
 {
 	pugi::xml_parse_result result = encounters.load_file("xml/encounters.xml");
 
@@ -64,6 +54,13 @@ bool EncounterTree::LoadDocument()
 		LOG("Could not load card xml file. pugi error: %s", result.description());
 	else
 		encounter_tree = encounters.child("encounter_tree");
+
+	result = nodes_01.load_file("xml/map01_nodes.xml");
+
+	if (result == NULL)
+		LOG("Could not load card xml file. pugi error: %s", result.description());
+	else
+		map01_nodes = nodes_01.child("map01_nodes");
 
 	return true;
 }
