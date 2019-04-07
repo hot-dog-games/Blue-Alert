@@ -37,7 +37,8 @@ bool Core::Update(float dt)
 		current_animation = &animations.find("destroyed")->second;
 	}
 
-	current_frame = current_animation->GetCurrentFrame(dt);
+	if (current_animation)
+		current_frame = current_animation->GetCurrentFrame(dt);
 
 	return true;
 }

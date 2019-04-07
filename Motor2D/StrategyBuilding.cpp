@@ -47,7 +47,8 @@ bool StrategyBuilding::Update(float dt)
 		current_animation = &animations.find("off_range")->second;
 	}
 
-	current_frame = current_animation->GetCurrentFrame(dt);
+	if(current_animation)
+		current_frame = current_animation->GetCurrentFrame(dt);
 
 	return true;
 }

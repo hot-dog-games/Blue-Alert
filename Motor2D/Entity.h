@@ -49,7 +49,7 @@ public:
 
 protected:
 	std::map<std::string, Animation> animations;
-	Animation* current_animation;
+	Animation* current_animation = nullptr;
 	SDL_Rect current_frame;
 	SDL_Texture* sprite = nullptr;
 

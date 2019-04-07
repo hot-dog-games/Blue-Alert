@@ -125,7 +125,8 @@ bool DynamicEntity::Update(float dt)
 		break;
 	}
 
-	current_frame = current_animation->GetCurrentFrame(dt);
+	if (current_animation)
+		current_frame = current_animation->GetCurrentFrame(dt);
 
 	return true;
 }
