@@ -1,3 +1,4 @@
+#include "p2Log.h"
 #include "j1App.h"
 #include "Render.h"
 #include "CardManager.h"
@@ -20,14 +21,8 @@ DynamicEntity::~DynamicEntity()
 DynamicEntity::DynamicEntity(pugi::xml_node config, fPoint position, Card* card, Faction faction): Entity(config, position, faction)
 {
 	entity_card = card;
-}
-
-bool DynamicEntity::PostUpdate()
-{
-	fPoint render_position = {position.x - (current_frame.w * 0.5f), position.y - current_frame.h };
-	App->render->Blit(sprite, render_position.x, render_position.y, &current_frame);
-
-	return true;
+	std::string stat_name = "health";
+	stats.insert({ "health", new Stat(card->info.stats.find("health")->second->GetMaxValue())});
 }
 
 bool DynamicEntity::Start()
@@ -58,14 +53,36 @@ bool DynamicEntity::PreUpdate()
 		break;
 	case DYNAMIC_MOVING:
 		CheckDestination();
-		CalcDirection();	
-
+		CalcDirection();
+		CheckEnemies();
 		break;
 	case DYNAMIC_ATTACKING:
+		if (!objective->IsAlive())
+		{
+			state = DYNAMIC_MOVING;
+			objective = nullptr;
+			CheckEnemies();
+		}
 		break;
 	case DYNAMIC_DYING:
+		if (animations[state].isDone())
+		{
+			state = DYNAMIC_DEAD;
+		}
 		break;
 	}
+
+	return true;
+}
+
+bool DynamicEntity::PostUpdate()
+{
+	fPoint render_position = { position.x - (current_frame.w * 0.5f), position.y - current_frame.h };
+	App->render->Blit(sprite, render_position.x, render_position.y, &current_frame);
+
+
+	//Range debug 
+	App->render->DrawCircle(position.x, position.y, entity_card->info.stats.find("range")->second->GetValue()*App->map->data.tile_height, 255, 0, 0);
 
 	return true;
 }
@@ -86,7 +103,7 @@ bool DynamicEntity::Update(float dt)
 		break;
 		case DYNAMIC_ATTACKING:
 		{
-
+			Attack();
 		}
 		break;
 		case DYNAMIC_DYING:
@@ -172,4 +189,48 @@ void DynamicEntity::Move(float dt)
 	position.x += move_pos.x;
 	position.y += move_pos.y;
 	
+}
+
+void DynamicEntity::CheckEnemies()
+{
+	Entity* closest_entity = nullptr;
+	float distance = 10000.0f;
+	App->entity_manager->FindClosestEnemy(position, faction, closest_entity, distance);
+	LOG("distance to closest is %f radius is %f", distance, entity_card->info.stats.find("range")->second->GetValue()*App->map->data.tile_height);
+
+	if (distance <= entity_card->info.stats.find("range")->second->GetValue()* App->map->data.tile_height && closest_entity->IsAlive())
+	{
+		objective = closest_entity;
+		state = DYNAMIC_ATTACKING;
+	}
+}
+
+
+void DynamicEntity::Attack()
+{
+	if (attack_timer.ReadMs() >= SECOND_MS / entity_card->info.stats.find("attack_speed")->second->GetValue() )
+	{
+		objective->DecreaseLife(entity_card->info.stats.find("damage")->second->GetValue());
+		attack_timer.Start();
+	}
+}
+
+void DynamicEntity::Die()
+{
+	state = DYNAMIC_DYING;
+	objective = nullptr;
+	path.clear();
+}
+
+bool DynamicEntity::CleanUp()
+{
+	std::map<std::string, Stat*>::iterator item;
+	for (item = stats.begin(); item != stats.end(); ++item)
+	{
+		delete item->second;
+		stats.erase(item);
+	}
+	stats.clear();
+
+	return true;
 }

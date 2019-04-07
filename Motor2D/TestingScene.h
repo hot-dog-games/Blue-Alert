@@ -11,6 +11,7 @@ struct UIImage;
 class Entity;
 class UIBar;
 class Core;
+class UIButton;
 enum CardNumber;
 
 struct Card;
@@ -23,8 +24,7 @@ enum CardNumber {
 	CN_FOURTH
 };
 
-class TestingScene :
-	public Scene
+class TestingScene : public Scene
 {
 public:
 	TestingScene();
@@ -52,9 +52,17 @@ private:
 	void ReleaseDrag();
 
 private:
-	SDL_Texture*	debug_tex;
-	SDL_Texture*	ui_background;
+	enum class BattleSceneState {
+		SETUP,
+		FIGHT,
+		WIN,
+		LOSE
+	};
+	BattleSceneState state = BattleSceneState::FIGHT;
 
+	SDL_Texture*	debug_tex;
+
+	UIImage*		unit_panel;
 	UIButton*		unit_button_one;
 	UIButton*		unit_button_two;
 	UIButton*		unit_button_three;
@@ -68,6 +76,7 @@ private:
 	uint current_energy;
 
 	Core* test_core;
+	Core* test_enemy_core;
 };
 
 #endif

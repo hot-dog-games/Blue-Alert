@@ -244,6 +244,11 @@ bool Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uin
 	{
 		points[i].x = (int)(x + radius * cos(i * factor));
 		points[i].y = (int)(y + radius * sin(i * factor));
+		if (use_camera)
+		{
+			points[i].x = (int)(camera.x + points[i].x * scale);
+			points[i].y = (int)(camera.y + points[i].y * scale);
+		}
 	}
 
 	result = SDL_RenderDrawPoints(renderer, points, 360);

@@ -25,9 +25,7 @@ public:
 
 	Stat* GetEnergy() const;
 
-
 private:
-	const uint ENEGY_TICK_RATE = 1000;
 	Deck* deck = nullptr;
 
 	PerfTimer energy_timer;

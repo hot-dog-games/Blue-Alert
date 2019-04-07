@@ -10,7 +10,8 @@
 Stat::Stat(float base) :
 	base_value(base),
 	final_value(base),
-	max_value(base)
+	max_value(base),
+	final_max_value(base)
 {
 }
 
@@ -49,11 +50,13 @@ void Stat::RemoveBuff(uint source_id)
 void Stat::CalculateStat()
 {
 	final_value = base_value;
+	final_max_value = max_value;
 
 	//1. Apply addtive buffs
 	for (std::vector<Buff*>::iterator iter = additive_buffs.begin(); iter != additive_buffs.end(); ++iter)
 	{
 		final_value += (*iter)->GetValue();
+		final_max_value += (*iter)->GetValue();
 	}
 
 	//2. Add multiplicative buffs and calculate the percentage
@@ -63,6 +66,7 @@ void Stat::CalculateStat()
 		totalMult += (*iter)->GetValue();
 	}
 	final_value += totalMult * final_value;
+	final_max_value += totalMult * final_max_value;
 }
 
 float Stat::GetValue()
@@ -72,7 +76,7 @@ float Stat::GetValue()
 
 float Stat::GetMaxValue()
 {
-	return max_value;
+	return final_max_value;
 }
 
 void Stat::DecreaseStat(float value)

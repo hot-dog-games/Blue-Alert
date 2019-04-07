@@ -24,6 +24,7 @@ class Gui;
 class Fonts;
 class TransitionManager;
 class BuffSourceManager;
+class GameManager;
 
 class j1App
 {
@@ -56,6 +57,8 @@ public:
 	const char* GetTitle() const;
 	const char* GetOrganization() const;
 
+	void PauseGame();
+	void ResumeGame();
 	void LoadGame(const char* file);
 	void SaveGame(const char* file) const;
 	void GetSaveGames(std::list<std::string>& list_to_fill) const;
@@ -101,6 +104,7 @@ public:
 	EntityManager*	entity_manager;
 	TransitionManager* transition_manager;
 	BuffSourceManager* buff;
+	GameManager* game_manager;
 
 private:
 

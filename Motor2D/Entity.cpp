@@ -1,7 +1,7 @@
 #include "j1App.h"
 #include "Textures.h"
 #include "p2Log.h"
-
+#include "Stat.h"
 #include "Entity.h"
 
 
@@ -26,24 +26,16 @@ Entity::Entity(pugi::xml_node entity_node, fPoint position, Faction faction)
 
 void Entity::DecreaseLife(float damage)
 {
-	if (current_life > 0)
-	{
-		current_life -= damage;
-		if (current_life <= 0)
-		{
-			Die();
-			current_life = 0;
-		}
-		LOG("current life is: %i", current_life);
-	}	
-}
+	stats.find("health")->second->DecreaseStat(damage);
+	if (stats.find("health")->second->GetValue() <= 0)
+		Die();
 
-void Entity::SetMaxLife(uint new_life)
+	LOG("current life is: %f", stats.find("health")->second->GetValue());
+}
+bool Entity::IsAlive()
 {
-	max_life = new_life;
-	current_life = max_life;
+	return (stats.find("health")->second->GetValue() > 0);
 }
-
 void Entity::LoadSprite(pugi::xml_node node)
 {
 	std::string sprite_path = node.child("sprite").child_value();

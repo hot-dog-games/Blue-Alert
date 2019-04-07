@@ -15,10 +15,12 @@
 #include "UIButton.h"
 #include "UIBar.h"
 #include "GUI.h"
+#include "SceneManager.h"
 #include "TransitionManager.h"
 #include "CardManager.h"
 #include "Deck.h"
 #include "TestingScene.h"
+#include "UIImage.h"
 
 
 TestingScene::TestingScene() : Scene()
@@ -44,7 +46,6 @@ bool TestingScene::Start()
 	}
 
 	debug_tex = App->tex->Load("maps/path2.png");
-	ui_background = App->tex->Load("ui/background.png");
 
 	App->render->camera.x = (App->map->data.width*App->map->data.tile_width*0.5)*0.5 - 100;
 	App->render->camera.y = 0;
@@ -57,12 +58,13 @@ bool TestingScene::Start()
 	test_deck->AddCard(App->card_manager->CreateCard(EntityType::HARRIER));
 
 	test_core = App->entity_manager->CreateCore(EntityType::CORE, { 0,700 }, test_deck, FACTION_RUSSIAN);
-	App->entity_manager->CreateCore(EntityType::CORE, { 0,200 }, test_deck, FACTION_AMERICAN);
+	test_enemy_core = App->entity_manager->CreateCore(EntityType::CORE, { 0,200 }, test_deck, FACTION_AMERICAN);
 
-	unit_button_one = App->gui->CreateButton({ 790, 365 }, test_core->GetCard(CN_FIRST)->button.anim);
-	unit_button_two = App->gui->CreateButton({ 890, 365 }, test_core->GetCard(CN_SECOND)->button.anim);
-	unit_button_three = App->gui->CreateButton({ 790, 445 }, test_core->GetCard(CN_THIRD)->button.anim);
-	unit_button_four = App->gui->CreateButton({ 890, 445 }, test_core->GetCard(CN_FOURTH)->button.anim);
+	unit_panel = App->gui->CreateImage({ 755,0 }, { 619,0,269,768 });
+	unit_button_one = App->gui->CreateButton({ 35, 365 }, test_core->GetCard(CN_FIRST)->button.anim, unit_panel);
+	unit_button_two = App->gui->CreateButton({ 135, 365 }, test_core->GetCard(CN_SECOND)->button.anim, unit_panel);
+	unit_button_three = App->gui->CreateButton({ 35, 445 }, test_core->GetCard(CN_THIRD)->button.anim, unit_panel);
+	unit_button_four = App->gui->CreateButton({ 135, 445 }, test_core->GetCard(CN_FOURTH)->button.anim, unit_panel);
 	
 	energy_bar = App->gui->CreateBar({ 764, 358 }, { 601,0,16,274 }, test_core->GetEnergy());
 
@@ -101,10 +103,6 @@ bool TestingScene::PreUpdate()
 // Called each loop iteration
 bool TestingScene::Update(float dt)
 {
-	int x, y;
-	App->input->GetMousePosition(x, y);
-	iPoint p = App->render->ScreenToWorld(x, y);
-
 	if (App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
 		App->LoadGame("save_game.xml");
 
@@ -112,29 +110,68 @@ bool TestingScene::Update(float dt)
 		App->SaveGame("save_game.xml");
 
 	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-		App->render->camera.y += 1;
+		App->render->camera.y += 10 * dt;
 
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-		App->render->camera.y -= 1;
+		App->render->camera.y -= 10 * dt;
 
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-		App->render->camera.x += 1;
+		App->render->camera.x += 10 * dt;
 
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-		App->render->camera.x -= 1;
+		App->render->camera.x -= 10 * dt;
 
-	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
-		test_core->DecreaseLife(5);
 
-	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
-		test_core->UseCard(CN_FIRST, {(float)p.x, (float)p.y});
-
-	if (App->input->GetKey(SDL_SCANCODE_8) == KEY_DOWN) {
-		App->transition_manager->CreateFadeTransition(3.0f, false, 0, White);
-		App->transition_manager->CreateZoomTransition(3.0f);
-		//App->transition_manager->CreateCameraTranslation(3.0f, { App->render->camera.x, App->render->camera.y }, { 0, 0 });
+	switch (state)
+	{
+	case TestingScene::BattleSceneState::SETUP:
+	{
+		//TODO TIMER ANIMATION ETC ETC
 	}
-		
+		break;
+	case TestingScene::BattleSceneState::FIGHT:
+	{
+		int x, y;
+		App->input->GetMousePosition(x, y);
+		iPoint p = App->render->ScreenToWorld(x, y);
+
+		if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+			test_core->DecreaseLife(5);
+
+		if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+			test_core->UseCard(CN_FIRST, { (float)p.x, (float)p.y });
+
+		if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
+			test_enemy_core->UseCard(CN_FIRST, { (float)p.x, (float)p.y });
+
+
+		if (!test_core->IsAlive())
+		{
+			state = BattleSceneState::LOSE;
+			App->PauseGame();
+		}
+		else if (!test_enemy_core->IsAlive())
+		{
+			state = BattleSceneState::WIN;
+			App->PauseGame();
+		}
+	}
+		break;
+	case TestingScene::BattleSceneState::WIN:
+	{
+		if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
+			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
+	}
+		break;
+	case TestingScene::BattleSceneState::LOSE:
+	{
+		if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
+			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
+	}
+		break;
+	default:
+		break;
+	}
 
 	return true;
 }
@@ -145,8 +182,6 @@ bool TestingScene::PostUpdate()
 	bool ret = true;
 
 	App->map->Draw();
-
-	App->render->Blit(ui_background, 755, 0, NULL, 0.0f);
 
 	// Debug pathfinding ------------------------------
 	int x, y;

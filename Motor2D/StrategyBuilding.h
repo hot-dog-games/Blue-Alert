@@ -13,6 +13,9 @@ public:
 	void SetInRange(bool in_range);
 
 	bool in_range = false;
+	bool im_current_building = false;
+
+private:
 
 };
 

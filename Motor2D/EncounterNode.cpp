@@ -8,7 +8,7 @@
 EncounterNode::EncounterNode()
 {
 	encounter = new Encounter();
-	button_rect = { 800, 800, 147, 127 };
+	button_rect = { 1000, 1000, 147, 127 };
 }
 
 EncounterNode::~EncounterNode()
@@ -74,9 +74,6 @@ void EncounterNode::LoadEncounterInfo(pugi::xml_node encounter_node)
 		encounter->deck[i] = it->attribute("type").as_uint();
 		i++;
 	}
-
-	CreateNodeButton();
-	CreateNodeEntity();
 }
 
 void EncounterNode::CreateNodeEntity()
@@ -87,6 +84,12 @@ void EncounterNode::CreateNodeEntity()
 void EncounterNode::CreateNodeButton()
 {
 	button = App->gui->CreateButton({ (int)position.x - 72, (int)position.y -127}, &button_rect);
+}
+
+void EncounterNode::CreateNode()
+{
+	CreateNodeEntity();
+	CreateNodeButton();
 }
 
 UIButton * EncounterNode::GetButton()
