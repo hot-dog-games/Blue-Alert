@@ -42,7 +42,7 @@ bool StaticEntity::CleanUp()
 
 bool StaticEntity::PostUpdate()
 {
-	fPoint render_position = { position.x - current_frame.w / 2, position.y - current_frame.h };
+	fPoint render_position = { position.x - current_frame.w*0.5f, position.y - current_frame.h };
 	App->render->Blit(sprite, render_position.x, render_position.y, &current_frame);
 
 	return true;

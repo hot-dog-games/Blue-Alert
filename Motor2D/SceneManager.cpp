@@ -1,3 +1,6 @@
+#include "j1App.h"
+#include "EntityManager.h"
+#include "GUI.h"
 #include "TestingScene.h"
 #include "MapMenuScene.h"
 #include "StrategyMap.h"
@@ -68,6 +71,8 @@ bool SceneManager::Save(pugi::xml_node &xml) const
 void SceneManager::ChangeScene(int new_scene)
 {
 	current_scene->CleanUp();
+	App->entity_manager->CleanUp();
+	App->gui->CleanUp();
 	delete current_scene;
 	current_scene = nullptr;
 

@@ -46,6 +46,7 @@ public:
 	void LoadEncounterInfo(pugi::xml_node encounter_node);
 	void CreateNodeEntity();
 	void CreateNodeButton();
+	void CreateNode();
 
 	UIButton* GetButton();
 	StrategyBuilding* GetEntity();

@@ -12,7 +12,6 @@
 
 StrategyBuilding::StrategyBuilding(pugi::xml_node entity_node, fPoint position, Faction faction) : StaticEntity(entity_node, position, faction)
 {
-	LOG("HOLAEXISTO");
 }
 
 
@@ -32,7 +31,7 @@ bool StrategyBuilding::Update(float dt)
 	{
 		if (mouse_x > position.x - current_frame.w / 2 && mouse_x < position.x + current_frame.w / 2 && mouse_y < position.y && mouse_y > position.y - current_frame.h)
 		{
-			state = STATIC_HOVERED;
+			if(!im_current_building)state = STATIC_HOVERED;
 		}
 		else state = STATIC_IDLE;
 	}
