@@ -21,8 +21,8 @@ void Zoom::Entering()
 	float normalized_scale = current_time->ReadSec()*(target_scale / transition_time) + normal_scale;
 	float scale_increment = normalized_scale - current_scale;
 
-	App->render->camera.x -= scale_increment * ((App->render->camera.w*0.5f) / current_scale);
-	App->render->camera.y -= scale_increment * ((App->render->camera.h*0.5f) / current_scale);
+	App->render->camera.x -= scale_increment * ((App->render->camera.w*0.3f) / current_scale);
+	App->render->camera.y -= scale_increment * ((App->render->camera.h*0.3f) / current_scale);
 
 	current_scale = normalized_scale;
 	SDL_RenderSetScale(App->render->renderer, normalized_scale, normalized_scale);
