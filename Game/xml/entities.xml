@@ -55,6 +55,24 @@
       </animations>
     </info>
     <info faction="1">
+      <sprite>sprites/BuildingNodes/Infantry.png</sprite>
+      <animations>
+        <animation speed="0.0F" name="in_range">
+          <frame x="6" y="6" width="167" height="137"/>
+        </animation>
+        <animation speed="0.0F" name="highlight">
+          <frame x="0" y="149" width="180" height="163"/>
+        </animation>
+        <animation speed="0.0F" name="off_range">
+          <frame x="6" y="320" width="167" height="137"/>
+        </animation>
+      </animations>
+    </info>
+
+  </entity>
+  
+  <entity type ="11">
+    <info faction="0">
       <sprite>sprites/Buildings/testing.png</sprite>
       <animations>
         <animation speed="0.0F" name="in_range">
@@ -68,9 +86,119 @@
         </animation>
       </animations>
     </info>
+    <info faction="1">
+      <sprite>sprites/BuildingNodes/AerialBuilding.png</sprite>
+      <animations>
+        <animation speed="0.0F" name="in_range">
+          <frame x="9" y="6" width="174" height="107"/>
+        </animation>
+        <animation speed="0.0F" name="highlight">
+          <frame x="0" y="133" width="192" height="124"/>
+        </animation>
+        <animation speed="0.0F" name="off_range">
+          <frame x="9" y="280" width="174" height="107"/>
+        </animation>
+      </animations>
+    </info>
 
   </entity>
   
+  <entity type ="12">
+    <info faction="0">
+      <sprite>sprites/Buildings/testing.png</sprite>
+      <animations>
+        <animation speed="0.0F" name="in_range">
+          <frame x="24" y="12" width="147" height="127"/>
+        </animation>
+        <animation speed="0.0F" name="highlight">
+          <frame x="19" y="206" width="157" height="137"/>
+        </animation>
+        <animation speed="0.0F" name="off_range">
+          <frame x="24" y="389" width="147" height="127"/>
+        </animation>
+      </animations>
+    </info>
+    <info faction="1">
+      <sprite>sprites/BuildingNodes/LandBuillding.png</sprite>
+      <animations>
+        <animation speed="0.0F" name="in_range">
+          <frame x="11" y="8" width="223" height="174"/>
+        </animation>
+        <animation speed="0.0F" name="highlight">
+          <frame x="0" y="189" width="246" height="198"/>
+        </animation>
+        <animation speed="0.0F" name="off_range">
+          <frame x="11" y="401" width="223" height="174"/>
+        </animation>
+      </animations>
+    </info>
+
+  </entity>
+  
+    <entity type ="13">
+    <info faction="0">
+      <sprite>sprites/Buildings/testing.png</sprite>
+      <animations>
+        <animation speed="0.0F" name="in_range">
+          <frame x="24" y="12" width="147" height="127"/>
+        </animation>
+        <animation speed="0.0F" name="highlight">
+          <frame x="19" y="206" width="157" height="137"/>
+        </animation>
+        <animation speed="0.0F" name="off_range">
+          <frame x="24" y="389" width="147" height="127"/>
+        </animation>
+      </animations>
+    </info>
+    <info faction="1">
+      <sprite>sprites/BuildingNodes/Gold.png</sprite>
+      <animations>
+        <animation speed="0.0F" name="in_range">
+          <frame x="0" y="3" width="238" height="210"/>
+        </animation>
+        <animation speed="0.0F" name="highlight">
+          <frame x="0" y="220" width="238" height="231"/>
+        </animation>
+        <animation speed="0.0F" name="off_range">
+          <frame x="0" y="469" width="238" height="210"/>
+        </animation>
+      </animations>
+    </info>
+
+  </entity>
+  
+    <entity type ="14">
+    <info faction="0">
+      <sprite>sprites/Buildings/testing.png</sprite>
+      <animations>
+        <animation speed="0.0F" name="in_range">
+          <frame x="24" y="12" width="147" height="127"/>
+        </animation>
+        <animation speed="0.0F" name="highlight">
+          <frame x="19" y="206" width="157" height="137"/>
+        </animation>
+        <animation speed="0.0F" name="off_range">
+          <frame x="24" y="389" width="147" height="127"/>
+        </animation>
+      </animations>
+    </info>
+    <info faction="1">
+      <sprite>sprites/BuildingNodes/Store.png</sprite>
+      <animations>
+        <animation speed="0.0F" name="in_range">
+          <frame x="15" y="8" width="212" height="209"/>
+        </animation>
+        <animation speed="0.0F" name="highlight">
+          <frame x="3" y="230" width="236" height="232"/>
+        </animation>
+        <animation speed="0.0F" name="off_range">
+          <frame x="15" y="479" width="212" height="209"/>
+        </animation>
+      </animations>
+    </info>
+
+  </entity>
+
   <!--DYNAMIC ENTITIES-->
   <!--GI-->
   <entity type ="1">

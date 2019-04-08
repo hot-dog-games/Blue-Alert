@@ -1,9 +1,7 @@
 #include "p2Log.h"
-
 #include "j1App.h"
 #include "Render.h"
 #include "Textures.h"
-
 #include "StaticEntity.h"
 
 

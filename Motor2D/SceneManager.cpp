@@ -4,6 +4,7 @@
 #include "TestingScene.h"
 #include "MapMenuScene.h"
 #include "StrategyMap.h"
+#include "Map.h"
 #include "SceneManager.h"
 
 
@@ -73,6 +74,7 @@ void SceneManager::ChangeScene(int new_scene)
 	current_scene->CleanUp();
 	App->entity_manager->CleanUp();
 	App->gui->CleanUp();
+	App->map->CleanUp();
 	delete current_scene;
 	current_scene = nullptr;
 

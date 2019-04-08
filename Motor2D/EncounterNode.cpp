@@ -2,11 +2,16 @@
 #include "GUI.h"
 #include "EntityManager.h"
 #include "Entity.h"
+#include "Render.h"
+#include "Map.h"
+#include "UIButton.h"
+#include "StrategyBuilding.h"
 #include "EncounterNode.h"
 
 
-EncounterNode::EncounterNode()
+EncounterNode::EncounterNode(int id)
 {
+	this->id = id;
 	encounter = new Encounter();
 	button_rect = { 1000, 1000, 147, 127 };
 }
@@ -15,30 +20,28 @@ EncounterNode::~EncounterNode()
 {
 }
 
-std::string EncounterNode::GetEncounterName() const
+int EncounterNode::GetEncounterType() const
 {
-	return encounter->name;
+	return encounter->type;
+}
+
+void EncounterNode::SetEncounterType(int type)
+{
+	encounter->type = type;
 }
 
 void EncounterNode::SetParent(EncounterNode * parent)
 {
-	this->parent = parent;
+	parents.push_back(parent);
 }
 
-EncounterNode * EncounterNode::GetParent() const
+std::vector<EncounterNode*> EncounterNode::GetParents() const
 {
-	return parent;
+	return parents;
 }
 
 EncounterNode * EncounterNode::AddChild(EncounterNode * child)
 {
-	if (children.size() == 0)
-	{
-		child->SetPosition({ position.x - rand() % 150 + (-100), position.y - 200 });
-	}
-	else {
-		child->SetPosition({ children.back()->position.x + 300, children.back()->position.y });
-	}
 	child->SetParent(this);
 	children.push_back(child);
 	return child;
@@ -62,7 +65,7 @@ fPoint EncounterNode::GetPosition()
 
 void EncounterNode::LoadEncounterInfo(pugi::xml_node encounter_node)
 {
-	encounter->name = encounter_node.attribute("name").as_string();
+	encounter->type = encounter_node.attribute("name").as_int();
 	encounter->ai_difficulty = encounter_node.attribute("ai_difficulty").as_int();
 
 	pugi::xml_node deck_node = encounter_node.child("deck");
@@ -78,18 +81,13 @@ void EncounterNode::LoadEncounterInfo(pugi::xml_node encounter_node)
 
 void EncounterNode::CreateNodeEntity()
 {
-	entity = App->entity_manager->CreateStrategyBuilding(TESTSTRATEGYBUILDING, { position.x, position.y }, visited? FACTION_RUSSIAN : FACTION_AMERICAN);
-}
-
-void EncounterNode::CreateNodeButton()
-{
-	button = App->gui->CreateButton({ (int)position.x - 72, (int)position.y -127}, &button_rect);
+	iPoint world_position = App->map->MapToWorld(position.x, position.y);
+	entity = App->entity_manager->CreateStrategyBuilding((EntityType)encounter->type, { (float)world_position.x, (float)world_position.y }, visited? FACTION_RUSSIAN : FACTION_AMERICAN);
 }
 
 void EncounterNode::CreateNode()
 {
 	CreateNodeEntity();
-	CreateNodeButton();
 }
 
 UIButton * EncounterNode::GetButton()
