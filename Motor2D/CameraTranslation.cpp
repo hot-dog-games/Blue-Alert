@@ -9,7 +9,7 @@ CameraTranslation::CameraTranslation(float transition_time, iPoint origin, iPoin
 	this->origin = origin;
 	this->destination = destination;
 
-	distance = origin.DistanceManhattan(destination);
+	distance = origin.DistanceTo(destination);
 }
 
 CameraTranslation::~CameraTranslation()
@@ -23,8 +23,10 @@ void CameraTranslation::Entering()
 
 	float percent = current_time->ReadSec()*(1 / transition_time);
 
-	float step_x = origin.x + percent * distance;
-	float step_y = origin.y + percent * distance;
+	LOG("percent %f", percent);
+
+	float step_x = percent * distance;
+	float step_y = percent * distance;
 
 	App->render->camera.x = step_x;
 	App->render->camera.y = step_y;
