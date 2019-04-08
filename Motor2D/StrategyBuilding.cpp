@@ -42,7 +42,7 @@ bool StrategyBuilding::Update(float dt)
 				if (App->input->GetMouseButtonDown(1)) {
 					App->transition_manager->CreateFadeTransition(2.0f, true, 3, White);
 					App->transition_manager->CreateZoomTransition(2.0f);
-					App->game_manager->GetEncounterTree()->SetCurrentNode(m_node);
+					App->game_manager->GetEncounterTree()->SetCurrentNodeByEntity(this);
 					
 				}
 			}

@@ -17,9 +17,6 @@ public:
 
 	bool in_range = false;
 	bool im_current_building = false;
-
-	EncounterNode* m_node = nullptr;
-
 };
 
 #endif
