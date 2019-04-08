@@ -15,7 +15,7 @@
         <animation speed="5.0F" name="idle">
           <frame x="45" y="52" width="147" height="129"/>
         </animation>
-        <animation speed="1.0F" loop="false" name="death">
+        <animation speed="1.0F" loop="false" name="die">
           <frame x="45" y="861" width="147" height="128"/>
         </animation>
         <animation speed="5.0F" loop="false" name="destroyed">
@@ -29,7 +29,7 @@
         <animation speed="5.0F" name="idle">
           <frame x="45" y="52" width="147" height="129"/>
         </animation>
-        <animation speed="5.0F" loop ="false" name="death">
+        <animation speed="5.0F" loop ="false" name="die">
           <frame x="45" y="861" width="147" height="128"/>
         </animation>
         <animation speed="5.0F" loop="false" name="destroyed">
