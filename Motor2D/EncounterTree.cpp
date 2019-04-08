@@ -111,14 +111,14 @@ void EncounterTree::DrawTreeLines()
 
 void EncounterTree::UpdateTreeState()
 {
-	if(!current_node)SetCurrentNode(map_encounters.front());
+	if (!current_node) {
+		SetCurrentNode(map_encounters.front());
+	}
 
 	for (int i = 0; i < current_node->GetChildren().size(); i++)
 	{
 		current_node->GetChildren()[i]->GetEntity()->SetInRange(true);
 	}
-
-	current_node->GetEntity()->SetInRange(true);
 }
 
 void EncounterTree::CreateAllNodes()

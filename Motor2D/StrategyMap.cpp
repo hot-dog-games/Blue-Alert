@@ -61,8 +61,8 @@ bool StrategyMap::Start()
 	iPoint world_position = App->map->MapToWorld((int)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetPosition().x, (int)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetPosition().y);
 	iPoint camera_position = App->render->WorldToScreen(world_position.x, world_position.y);
 	
-	App->render->camera.x = -camera_position.x + w/1.4;
-	App->render->camera.y = -camera_position.y + h/1.1;
+	App->render->camera.x = -camera_position.x + w/2;
+	App->render->camera.y = -camera_position.y + h;
 
 
 	return true;
