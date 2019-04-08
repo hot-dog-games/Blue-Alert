@@ -86,16 +86,9 @@ void EncounterNode::CreateNodeEntity()
 	entity->m_node = this;
 }
 
-void EncounterNode::CreateNodeButton()
-{
-	iPoint world_position = App->map->MapToWorld(position.x, position.y);
-	button = App->gui->CreateButton({(int)world_position.x - 72, (int)world_position.y -127}, &button_rect);
-}
-
 void EncounterNode::CreateNode()
 {
 	CreateNodeEntity();
-	CreateNodeButton();
 }
 
 UIButton * EncounterNode::GetButton()
