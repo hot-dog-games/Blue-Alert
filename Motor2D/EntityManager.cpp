@@ -194,3 +194,33 @@ bool EntityManager::DeleteEntity(Entity* entity)
 
 	return true;
 }
+
+UnitGroup::UnitGroup(Entity * unit)
+{}
+
+UnitGroup::UnitGroup(std::vector<Entity*> units)
+{
+	units = this->units;
+}
+
+UnitGroup::~UnitGroup()
+{}
+
+bool UnitGroup::CreateGroup(int units, EntityType type, fPoint position, Card * card, Faction faction)
+{
+	return false;
+}
+
+
+
+bool UnitGroup::AddUnit(Entity * singleUnit)
+{
+	units.push_back(singleUnit);
+	return true;
+}
+
+bool UnitGroup::RemoveUnit(Entity * singleUnit)
+{
+	return true;
+}
+

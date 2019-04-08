@@ -68,6 +68,8 @@ protected:
 	int previous_point = 0;
 };
 
+
+
 #endif // !_DYNAMIC_ENTITY_
 
 

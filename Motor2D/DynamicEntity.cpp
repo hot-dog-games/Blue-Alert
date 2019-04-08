@@ -185,10 +185,10 @@ void DynamicEntity::CheckDestination()
 			state = DYNAMIC_IDLE;
 	}
 	fPoint move_pos;
-	if (CheckAllies())
+	/*if (CheckAllies())
 	{
 		move_pos = { path[current_point].x - position.x - 20, path[current_point].y - position.y };
-	}else
+	}else*/
 	move_pos = { path[current_point].x - position.x, path[current_point].y - position.y };
 	
 	float m = sqrtf(pow(move_pos.x, 2.0f) + pow(move_pos.y, 2.0f));

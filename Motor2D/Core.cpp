@@ -65,6 +65,10 @@ void Core::UseCard(int number, fPoint position)
 	if (stats.find("energy")->second->GetValue() >= energy_cost)
 	{
 		int group_size = deck->cards[number]->info.stats.find("units")->second->GetValue();
+		if (group_size > 1)
+		{
+			UnitGroup
+		}
 		for (int i = 0; i < group_size; i++)
 		{
 			if (i == 1)
