@@ -2,7 +2,6 @@
 #define _CORE_H_
 
 #include <map>
-
 #include "p2Defs.h"
 #include "StaticEntity.h"
 

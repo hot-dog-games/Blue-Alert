@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _ENCOUNTER_TREE_H_
+#define _ENCOUNTER_TREE_H_
 
 #include "p2Defs.h"
 #include "p2Log.h"
@@ -16,12 +17,15 @@ private:
 	pugi::xml_document encounters;
 	pugi::xml_node encounter_tree;
 
+	pugi::xml_document nodes_01;
+	pugi::xml_node map01_nodes;
+
 public:
 	EncounterTree();
 	~EncounterTree();
 
 	EncounterTree* CreateTree();
-	bool LoadDocument();
+	bool LoadDocuments();
 
 	std::vector<EncounterNode*> GetNodes();
 
@@ -39,5 +43,8 @@ public:
 
 	void CleanTree();
 
+	void SetCurrentNodeByEntity(StrategyBuilding* entity);
+
 };
 
+#endif

@@ -162,6 +162,8 @@ bool Map::CleanUp()
 	// Remove all layers
 	while (!data.layers.empty()) delete data.layers.front(), data.layers.pop_front();
 
+
+
 	// Clean up the pugui tree
 	map_file.reset();
 

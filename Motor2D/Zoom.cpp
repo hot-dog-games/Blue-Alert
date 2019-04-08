@@ -26,8 +26,6 @@ void Zoom::Entering()
 
 	current_scale = normalized_scale;
 	SDL_RenderSetScale(App->render->renderer, normalized_scale, normalized_scale);
-
-	LOG("scale increment %f", scale_increment);
 }
 
 void Zoom::Exiting()

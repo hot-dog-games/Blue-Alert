@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _ENCOUNTER_NODE_H_
+#define _ENCOUNTER_NODE_H_
+
 #include <vector>
 #include "p2Defs.h"
 #include "PugiXml\src\pugixml.hpp"
@@ -8,7 +10,7 @@ class UIButton;
 class StrategyBuilding;
 
 struct Encounter {
-	std::string name = ""; // indica el tipo de edificio que es.
+	int type = 10; // indica el tipo de edificio que es.
 	int ai_difficulty = 0;
 	int deck[4];
 	//BUFF
@@ -18,8 +20,10 @@ struct Encounter {
 class EncounterNode
 {
 protected:
-	EncounterNode* parent;
+	std::vector<EncounterNode*> parents;
 	std::vector<EncounterNode*> children;
+
+	int id = 0;
 
 	//------Encounter-----
 	Encounter* encounter = nullptr;
@@ -31,11 +35,11 @@ protected:
 	StrategyBuilding* entity;
 
 public:
-	EncounterNode();
+	EncounterNode(int id);
 	~EncounterNode();
 
 	void SetParent(EncounterNode * parent);
-	EncounterNode * GetParent() const;
+	std::vector<EncounterNode*> GetParents() const;
 
 	EncounterNode * AddChild(EncounterNode * child);
 	std::vector<EncounterNode*> GetChildren() const;
@@ -45,14 +49,14 @@ public:
 
 	void LoadEncounterInfo(pugi::xml_node encounter_node);
 	void CreateNodeEntity();
-	void CreateNodeButton();
 	void CreateNode();
 
 	UIButton* GetButton();
 	StrategyBuilding* GetEntity();
 
 	//-----Emcounter Accessors-----
-	std::string EncounterNode::GetEncounterName() const;
+	int EncounterNode::GetEncounterType() const;
+	void SetEncounterType(int type);
 
 	SDL_Rect node_rect;
 
@@ -61,3 +65,5 @@ public:
 	bool visited = false;
 
 };
+
+#endif // !_ENCOUNTER_NODE_H_
