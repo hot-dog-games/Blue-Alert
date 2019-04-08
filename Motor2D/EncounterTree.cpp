@@ -153,3 +153,11 @@ void EncounterTree::CleanTree()
 
 	delete this;
 }
+
+void EncounterTree::SetCurrentNodeByEntity(StrategyBuilding * entity)
+{
+	for each (EncounterNode* en in map_encounters)
+	{
+		if (en->GetEntity() == entity) current_node = en;
+	}
+}

@@ -120,18 +120,6 @@ bool StrategyMap::GUIEvent(UIElement * element, GUI_Event gui_event)
 {
 	if (gui_event == GUI_Event::LEFT_CLICK_DOWN) {
 
-		for (int i = 0; i < App->game_manager->GetEncounterTree()->GetCurrentNode()->GetChildren().size(); i++)
-		{
-			if (element == App->game_manager->GetEncounterTree()->GetCurrentNode()->GetChildren()[i]->GetButton())
-			{
-				App->transition_manager->CreateFadeTransition(2.0f, true, 3, White);
-				App->transition_manager->CreateZoomTransition(2.0f);
-				//App->transition_manager->CreateCameraTranslation(2.0f, { App->render->camera.x, App->render->camera.y }, { (int)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetPosition().x, (int)(int)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetPosition().y});
-				App->game_manager->GetEncounterTree()->SetCurrentNode(App->game_manager->GetEncounterTree()->GetCurrentNode()->GetChildren()[i]);
-				App->gui->DisableElement(main_panel);
-			}
-		}
-
 	}
 
 	return true;
