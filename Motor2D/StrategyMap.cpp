@@ -59,11 +59,9 @@ bool StrategyMap::Start()
 	health = App->gui->CreateLabel({ 860, 30 }, "ui/Fonts/command_and_conquer___logo_font_by_dexistor371-d6k2yvb.ttf", 20, "HEALTH", { 0,0,0,0 }, 0, main_panel);
 
 	iPoint world_position = App->map->MapToWorld((int)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetPosition().x, (int)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetPosition().y);
-	iPoint camera_position = App->render->WorldToScreen(world_position.x, world_position.y);
 	
-
-	App->render->camera.x = -camera_position.x + w * 0.5;
-	App->render->camera.y = -camera_position.y + h;
+	App->render->camera.x = -world_position.x + w * 0.5;
+	App->render->camera.y = -world_position.y + h;
 
 
 	return true;
