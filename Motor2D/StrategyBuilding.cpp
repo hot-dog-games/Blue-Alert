@@ -42,7 +42,7 @@ bool StrategyBuilding::Update(float dt)
 				if (App->input->GetMouseButtonDown(1)) {
 					App->transition_manager->CreateFadeTransition(2.0f, true, 3, White);
 					App->transition_manager->CreateZoomTransition(2.0f);
-					App->transition_manager->CreateCameraTranslation(2.0f, { App->render->camera.x, App->render->camera.y }, { mouse_x, mouse_y});
+					App->transition_manager->CreateCameraTranslation(2.0f, { mouse_x, mouse_y});
 					App->game_manager->GetEncounterTree()->SetCurrentNodeByEntity(this);
 					
 				}

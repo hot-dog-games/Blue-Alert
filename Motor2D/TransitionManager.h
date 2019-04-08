@@ -41,7 +41,7 @@ public:
 
 	void CreateFadeTransition(float transition_time, bool is_scene_change = false, int scene_to_transition = 0, Color color = Black);
 	void CreateZoomTransition(float transition_time, float scale = 2);
-	void CreateCameraTranslation(float transition_time, iPoint origin, iPoint destination);
+	void CreateCameraTranslation(float transition_time, iPoint destination);
 	void DestroyTransition(Transition* transition_to_destroy);
 };
 
