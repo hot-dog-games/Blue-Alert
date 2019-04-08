@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _ENCOUNTER_TREE_H_
+#define _ENCOUNTER_TREE_H_
 
 #include "p2Defs.h"
 #include "p2Log.h"
@@ -44,3 +45,4 @@ public:
 
 };
 
+#endif

@@ -1,10 +1,11 @@
-#pragma once
+#ifndef _STRATEGY_BUILDING_H_
+#define _STRATEGY_BUILDING_H_
+
 #include "StaticEntity.h"
 
 class EncounterNode;
 
-class StrategyBuilding :
-	public StaticEntity
+class StrategyBuilding : public StaticEntity
 {
 public:
 	StrategyBuilding(pugi::xml_node entity_node, fPoint position, Faction faction);
@@ -21,3 +22,4 @@ public:
 
 };
 
+#endif

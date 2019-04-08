@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _ENCOUNTER_NODE_H_
+#define _ENCOUNTER_NODE_H_
+
 #include <vector>
 #include "p2Defs.h"
 #include "PugiXml\src\pugixml.hpp"
@@ -63,3 +65,5 @@ public:
 	bool visited = false;
 
 };
+
+#endif // !_ENCOUNTER_NODE_H_
