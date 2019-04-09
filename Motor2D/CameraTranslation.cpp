@@ -11,8 +11,8 @@ CameraTranslation::CameraTranslation(float transition_time, iPoint destination) 
 	uint w, h;
 	App->win->GetWindowSize(w, h);
 
-	origin = { App->render->camera.x, -App->render->camera.y };
-	this->destination = { (int)(-destination.x + w * 0.5), (int)(-destination.y + h * 0.5) };
+	origin = { App->render->camera.x, App->render->camera.y };
+	this->destination = {(int)(destination.x + w * 0.5), -(int)(destination.y + h * 0.5)};
 }
 
 CameraTranslation::~CameraTranslation()
@@ -23,17 +23,20 @@ CameraTranslation::~CameraTranslation()
 void CameraTranslation::Entering()
 {
 	Transition::Entering();
+	LOG("ORIGIN %i , %i  :  DESTINATION %i , %i", origin.x, origin.y, destination.x, destination.y);
+
 
 	float percent = current_time->ReadSec()*(1 / transition_time);
 
 	LOG("percent %f", percent);
-	App->render->DrawLine(origin.x, origin.y, destination.x, destination.y, 0, 0, 255, 255, false);
-	float step_x = origin.x + percent * (destination.x - origin.x);
-	float step_y = origin.y + percent * (destination.y - origin.y);
+	float step_x = (origin.x + percent * (destination.x - origin.x));
+	float step_y = (origin.y + percent * (destination.y - origin.y));
 
 
 	App->render->camera.x = step_x;
 	App->render->camera.y = step_y;
+
+	LOG("Step %f , %f", step_x, step_y);
 }
 
 void CameraTranslation::SetOriginAndDestination(iPoint origin, iPoint destination)
