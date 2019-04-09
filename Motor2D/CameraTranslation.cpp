@@ -29,14 +29,14 @@ void CameraTranslation::Entering()
 	float percent = current_time->ReadSec()*(1 / transition_time);
 
 	LOG("percent %f", percent);
-	float step_x = (origin.x + percent * (destination.x - origin.x));
-	float step_y = (origin.y + percent * (destination.y - origin.y));
+
+	iPoint step = Lerp(percent, origin, destination);
 
 
-	App->render->camera.x = step_x;
-	App->render->camera.y = step_y;
+	App->render->camera.x = step.x;
+	App->render->camera.y = step.y;
 
-	LOG("Step %f , %f", step_x, step_y);
+	LOG("Step %f , %f", step.x, step.y);
 }
 
 void CameraTranslation::SetOriginAndDestination(iPoint origin, iPoint destination)
