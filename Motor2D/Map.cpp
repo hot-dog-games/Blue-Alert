@@ -6,6 +6,8 @@
 #include "Render.h"
 #include "Textures.h"
 #include "Map.h"
+#include "Brofiler/Brofiler.h"
+
 
 
 Map::Map() : Module(), map_loaded(false)
@@ -30,6 +32,8 @@ bool Map::Awake(pugi::xml_node& config)
 
 void Map::Draw()
 {
+	BROFILER_CATEGORY("MapDraw", Profiler::Color::Crimson);
+
 	if(map_loaded == false)
 		return;
 
@@ -173,6 +177,8 @@ bool Map::CleanUp()
 // Load new map
 bool Map::Load(const char* file_name)
 {
+	BROFILER_CATEGORY("NewMapLoad", Profiler::Color::DodgerBlue);
+
 	bool ret = true;
 	std::string tmp_string = folder + file_name;
 

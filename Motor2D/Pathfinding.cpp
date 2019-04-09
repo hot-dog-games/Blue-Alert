@@ -2,6 +2,7 @@
 #include "p2Log.h"
 #include "j1App.h"
 #include "Pathfinding.h"
+#include "Brofiler/Brofiler.h"
 
 Pathfinding::Pathfinding() : Module(), map(NULL), last_path(DEFAULT_PATH_LENGTH),width(0), height(0)
 {
@@ -117,6 +118,9 @@ PathNode::PathNode(const PathNode& node) : g(node.g), h(node.h), pos(node.pos), 
 // ----------------------------------------------------------------------------------
 uint PathNode::FindWalkableAdjacents(PathList& list_to_fill) const
 {
+	BROFILER_CATEGORY("PathfindingFindWalkable", Profiler::Color::Purple);
+
+
 	iPoint cell;
 	uint before = list_to_fill.list.size();
 
@@ -187,6 +191,10 @@ int PathNode::CalculateF(const iPoint& destination)
 // ----------------------------------------------------------------------------------
 int Pathfinding::CreatePath(const iPoint& origin, const iPoint& destination)
 {
+
+	BROFILER_CATEGORY("CreatePath", Profiler::Color::Tan);
+
+
 	last_path.clear();
 	// TODO 1: if origin or destination are not walkable, return -1
 	if (!IsWalkable(origin) || !IsWalkable(destination)) return -1;

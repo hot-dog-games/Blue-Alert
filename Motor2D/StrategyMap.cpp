@@ -16,6 +16,7 @@
 #include "StrategyBuilding.h"
 #include "GameManager.h"
 #include "StrategyMap.h"
+#include "Brofiler/Brofiler.h"
 
 StrategyMap::StrategyMap() : Scene()
 {
@@ -29,6 +30,8 @@ StrategyMap::~StrategyMap()
 // Called before the first frame
 bool StrategyMap::Start()
 {
+	BROFILER_CATEGORY("SMStart", Profiler::Color::Red);
+
 	App->map->Load("Nodes Map.tmx");
 	App->ResumeGame();
 
@@ -87,7 +90,7 @@ bool StrategyMap::PreUpdate()
 // Called each loop iteration
 bool StrategyMap::Update(float dt)
 {
-
+	BROFILER_CATEGORY("SMUpdate", Profiler::Color::Green);
 	return true;
 }
 
