@@ -65,28 +65,9 @@ void Core::UseCard(int number, fPoint position)
 	if (stats.find("energy")->second->GetValue() >= energy_cost)
 	{
 		int group_size = deck->cards[number]->info.stats.find("units")->second->GetValue();
-		if (group_size > 1)
-		{
-			UnitGroup
-		}
-		for (int i = 0; i < group_size; i++)
-		{
-			if (i == 1)
-			{
-				position.x = position.x + 10;
-				position.y = position.y + 10;
-			}
-			else if (i == 2)
-			{
-				position.x = position.x - 10;
-				position.y = position.y + 10;
-			}
-			else if (i == 3)
-			{
-				position.y = position.y + 20;
-			}
-			App->entity_manager->CreateEntity(deck->cards[number]->type, position, deck->cards[number], faction);
-		}
+		
+
+		App->entity_manager->CreateGroup(group_size,deck->cards[number]->type, position, deck->cards[number], faction);
 		stats.find("energy")->second->DecreaseStat(energy_cost);
 	}
 }

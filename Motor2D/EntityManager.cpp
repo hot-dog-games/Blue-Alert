@@ -195,32 +195,25 @@ bool EntityManager::DeleteEntity(Entity* entity)
 	return true;
 }
 
-UnitGroup::UnitGroup(Entity * unit)
-{}
-
-UnitGroup::UnitGroup(std::vector<Entity*> units)
-{
-	units = this->units;
-}
-
-UnitGroup::~UnitGroup()
-{}
-
-bool UnitGroup::CreateGroup(int units, EntityType type, fPoint position, Card * card, Faction faction)
-{
-	return false;
-}
-
-
-
-bool UnitGroup::AddUnit(Entity * singleUnit)
-{
-	units.push_back(singleUnit);
-	return true;
-}
-
-bool UnitGroup::RemoveUnit(Entity * singleUnit)
-{
-	return true;
-}
+//bool EntityManager::CreateGroup(int units, EntityType type, fPoint position, Card * card, Faction faction)
+//{
+//	for (int i = 0; i < units; i++)
+//	{
+//		if (i == 1)
+//		{
+//			position.x = position.x + 10;
+//			position.y = position.y + 10;
+//		}
+//		else if (i == 2)
+//		{
+//			position.x = position.x - 10;
+//			position.y = position.y + 10;
+//		}
+//		else if (i == 3)
+//		{
+//			position.y = position.y + 20;
+//		}
+//		App->entity_manager->CreateEntity(deck->cards[number]->type, position, deck->cards[number], faction);
+//	}
+//}
 

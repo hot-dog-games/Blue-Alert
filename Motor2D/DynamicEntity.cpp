@@ -6,6 +6,7 @@
 #include "Stat.h"
 #include "Map.h"
 #include "DynamicEntity.h"
+#include "Movement.h"
 
 
 
@@ -265,6 +266,11 @@ void DynamicEntity::Attack()
 		objective->DecreaseLife(entity_card->info.stats.find("damage")->second->GetValue());
 		attack_timer.Start();
 	}
+}
+
+SingleUnit* DynamicEntity::GetSingleUnit()
+{
+	return singleUnit;
 }
 
 void DynamicEntity::Die()

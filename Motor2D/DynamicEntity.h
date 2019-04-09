@@ -4,6 +4,7 @@
 #include "Entity.h"
 
 struct Card;
+struct SingleUnit;
 
 enum DynamicState {
 	DYNAMIC_IDLE,
@@ -36,7 +37,11 @@ public:
 	virtual bool PostUpdate();
 	virtual bool CleanUp();
 	virtual bool Start();
-
+	SingleUnit* GetSingleUnit();
+	void SetUnitDirection(EntiyDirection unitDirection);
+	EntiyDirection GetUnitDirection();
+	void SetUnitDirectionByValue(fPoint unitDirection);
+	fPoint GetUnitDirectionByValue() const;
 
 protected:
 	void CalcDirection();
@@ -55,6 +60,7 @@ protected:
 	DynamicState state = DYNAMIC_IDLE;
 	EntiyDirection direction = UP;
 	fPoint direction_vector = { 1.0f, 1.0f };
+	SingleUnit * singleUnit = nullptr;
 
 	const float SNAP_RANGE = 5.0f;
 
