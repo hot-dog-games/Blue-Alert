@@ -40,6 +40,9 @@ public:
 	virtual void Action();
 	virtual void Exiting();
 
+	float LerpValue(float percent, float start, float end);
+	iPoint Lerp(float percent, iPoint origin, iPoint destination);
+
 	//---Specific transitions methods-------
 };
 
