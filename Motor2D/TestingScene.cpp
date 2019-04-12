@@ -20,6 +20,9 @@
 #include "CardManager.h"
 #include "Deck.h"
 #include "TestingScene.h"
+#include "GameManager.h"
+#include "EncounterTree.h"
+#include "EncounterNode.h"
 #include "UIImage.h"
 
 
@@ -50,6 +53,13 @@ bool TestingScene::Start()
 	App->render->camera.x = (App->map->data.width*App->map->data.tile_width*0.5)*0.5 - 100;
 	App->render->camera.y = 0;
 
+	Deck* enemy_deck = new Deck();
+	enemy_deck->delete_cards = true;
+	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterDeck()[0]));
+	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterDeck()[1]));
+	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterDeck()[2]));
+	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterDeck()[3]));
+
 	Deck* test_deck = new Deck();
 	test_deck->delete_cards = true;
 	test_deck->AddCard(App->card_manager->CreateCard(EntityType::G_I));
@@ -57,8 +67,8 @@ bool TestingScene::Start()
 	test_deck->AddCard(App->card_manager->CreateCard(EntityType::NAVY_SEAL));
 	test_deck->AddCard(App->card_manager->CreateCard(EntityType::HARRIER));
 
-	test_core = App->entity_manager->CreateCore(EntityType::CORE, { 0,700 }, test_deck, FACTION_RUSSIAN);
-	test_enemy_core = App->entity_manager->CreateCore(EntityType::CORE, { 0,200 }, test_deck, FACTION_AMERICAN);
+	test_core = App->entity_manager->CreateCore(1, { 30,750 }, test_deck, FACTION_RUSSIAN);
+	test_enemy_core = App->entity_manager->CreateCore(App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterType(), { 0,200 }, enemy_deck, FACTION_AMERICAN);
 
 	unit_panel = App->gui->CreateImage({ 755,0 }, { 619,0,269,768 });
 	unit_button_one = App->gui->CreateButton({ 35, 365 }, test_core->GetCard(CN_FIRST)->button.anim, unit_panel);

@@ -58,6 +58,8 @@ public:
 	int EncounterNode::GetEncounterType() const;
 	void SetEncounterType(int type);
 
+	std::vector<int> GetEncounterDeck();
+
 	SDL_Rect node_rect;
 
 public:

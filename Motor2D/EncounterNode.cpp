@@ -31,6 +31,11 @@ void EncounterNode::SetEncounterType(int type)
 	encounter->type = type;
 }
 
+std::vector<int> EncounterNode::GetEncounterDeck()
+{
+	return encounter->deck;
+}
+
 void EncounterNode::SetParent(EncounterNode * parent)
 {
 	parents.push_back(parent);
