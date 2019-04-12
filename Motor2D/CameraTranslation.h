@@ -11,7 +11,7 @@ private:
 	float distance;
 	iPoint direction;
 public:
-	CameraTranslation(float transition_time, iPoint origin, iPoint destination);
+	CameraTranslation(float transition_time, iPoint destination);
 	~CameraTranslation();
 
 	void Entering();
