@@ -9,6 +9,7 @@
 #include "Core.h"
 #include "Deck.h"
 #include "EntityManager.h"
+#include "Brofiler/Brofiler.h"
 
 
 
@@ -40,6 +41,8 @@ bool EntityManager::Start()
 
 bool EntityManager::Update(float dt)
 {
+	BROFILER_CATEGORY("EMUpdate", Profiler::Color::Plum);
+
 	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
 	{
 		(*entity)->Update(dt);
@@ -92,6 +95,9 @@ bool EntityManager::Save(pugi::xml_node&) const
 
 Entity* EntityManager::CreateEntity(EntityType type, fPoint position, Card* card, Faction faction)
 {
+
+	BROFILER_CATEGORY("CreateEntity", Profiler::Color::Gold);
+
 	std::string id = std::to_string(id_count);
 	pugi::xml_node entity_node = entity_configs.find_child_by_attribute("type", std::to_string((int)type).c_str());
 
