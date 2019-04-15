@@ -99,7 +99,8 @@ Entity* EntityManager::CreateEntity(EntityType type, fPoint position, Card* card
 	BROFILER_CATEGORY("CreateEntity", Profiler::Color::Gold);
 
 	std::string id = std::to_string(id_count);
-	pugi::xml_node entity_node = entity_configs.find_child_by_attribute("type", std::to_string((int)type).c_str());
+	pugi::xml_node entity_node = entity_configs.find_child_by_attribute("type",
+		std::to_string((int)type).c_str()).find_child_by_attribute("faction", std::to_string((int)faction).c_str());
 
 	id += "_" + card->name;
 
@@ -113,16 +114,26 @@ Entity* EntityManager::CreateEntity(EntityType type, fPoint position, Card* card
 	return entity;
 }
 
-Core* EntityManager::CreateCore(EntityType type, fPoint position, Deck* deck, Faction faction)
+Core* EntityManager::CreateCore(uint core_type, fPoint position, Deck* deck, Faction faction)
 {
 	std::string id = std::to_string(id_count);
-	pugi::xml_node entity_node = entity_configs.find_child_by_attribute("type", std::to_string((int)type).c_str());
+	pugi::xml_node entity_node = entity_configs.find_child_by_attribute("type", std::to_string((int)CORE).c_str());
+	pugi::xml_node stats_node = entity_node.child("stats");
+	pugi::xml_node info;
+
+	if (faction == FACTION_AMERICAN)
+	{
+		info = entity_node.find_child_by_attribute("faction", std::to_string((int)FACTION_AMERICAN).c_str()).find_child_by_attribute("core_type", std::to_string((int)core_type).c_str());
+	}
+	else {
+		info = entity_node.find_child_by_attribute("faction", std::to_string((int)FACTION_RUSSIAN).c_str());
+	}
 
 	id += "_CORE";
 
-	Core* entity = new Core(entity_node, position, faction);
+	Core* entity = new Core(info, position, faction, stats_node);
 	entities.push_back(entity);
-	entity->type = type;
+	entity->type = CORE;
 	entity->Start();
 	entity->SetDeck(deck);
 
@@ -134,7 +145,8 @@ Core* EntityManager::CreateCore(EntityType type, fPoint position, Deck* deck, Fa
 StrategyBuilding* EntityManager::CreateStrategyBuilding(EntityType type, fPoint position, Faction faction)
 {
 	std::string id = std::to_string(id_count);
-	pugi::xml_node entity_node = entity_configs.find_child_by_attribute("type", std::to_string((int)type).c_str());
+	pugi::xml_node entity_node = entity_configs.find_child_by_attribute("type",
+		std::to_string((int)type).c_str()).find_child_by_attribute("faction", std::to_string((int)faction).c_str());
 
 	id += "_TESTSTRATEGYBUILDING";
 

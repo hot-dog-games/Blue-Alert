@@ -38,6 +38,7 @@ EncounterTree * EncounterTree::CreateTree()
 		{
 			map_encounters[i]->AddChild(map_encounters[child.attribute("id").as_int()]);
 		}
+		map_encounters[i]->FillEncounterDeck();
 	}
 
 

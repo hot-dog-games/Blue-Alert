@@ -5,9 +5,9 @@
 #include "Stat.h"
 #include "Core.h"
 
-Core::Core(pugi::xml_node entity_config, fPoint position, Faction faction): StaticEntity(entity_config, position, faction)
+Core::Core(pugi::xml_node entity_config, fPoint position, Faction faction, pugi::xml_node stats_node): StaticEntity(entity_config, position, faction)
 {
-	for (pugi::xml_node iter = entity_config.child("stats").child("stat"); iter; iter = iter.next_sibling("stat"))
+	for (pugi::xml_node iter = stats_node.child("stat"); iter; iter = iter.next_sibling("stat"))
 	{
 		std::string stat_name = iter.attribute("stat").as_string();
 
