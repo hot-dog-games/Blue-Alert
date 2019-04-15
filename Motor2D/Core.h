@@ -3,10 +3,11 @@
 
 #include <map>
 #include "p2Defs.h"
+#include "PerfTimer.h"
 #include "StaticEntity.h"
 
 class Deck;
-
+struct Card;
 
 class Core : public StaticEntity
 {
@@ -14,9 +15,9 @@ public:
 	Core(pugi::xml_node entity_config, fPoint position, Faction faction);
 	~Core();
 
-	bool Update(float dt);
+	virtual bool Update(float dt);
 
-	bool CleanUp();
+	virtual bool CleanUp();
 
 	void UseCard(int number, fPoint position);
 	void SetDeck(Deck* new_deck);
@@ -24,10 +25,11 @@ public:
 
 	Stat* GetEnergy() const;
 
-private:
+protected:
 	Deck* deck = nullptr;
-
 	PerfTimer energy_timer;
+
+	bool CanUseCard(int card_num);
 
 };
 

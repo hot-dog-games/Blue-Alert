@@ -10,6 +10,7 @@
 #include "EntityManager.h"
 #include "Entity.h"
 #include "Core.h"
+#include "CoreAI.h"
 #include "PathFinding.h"
 #include "UIAnimatedImage.h"
 #include "UIButton.h"
@@ -58,7 +59,7 @@ bool TestingScene::Start()
 	test_deck->AddCard(App->card_manager->CreateCard(EntityType::HARRIER));
 
 	test_core = App->entity_manager->CreateCore(EntityType::CORE, { 0,700 }, test_deck, FACTION_RUSSIAN);
-	test_enemy_core = App->entity_manager->CreateCore(EntityType::CORE, { 0,200 }, test_deck, FACTION_AMERICAN);
+	test_enemy_core = App->entity_manager->CreateCore(EntityType::CORE, { 0,200 }, test_deck, FACTION_AMERICAN, true);
 
 	unit_panel = App->gui->CreateImage({ 755,0 }, { 619,0,269,768 });
 	unit_button_one = App->gui->CreateButton({ 35, 365 }, test_core->GetCard(CN_FIRST)->button.anim, unit_panel);

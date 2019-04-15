@@ -7,6 +7,7 @@
 #include "StrategyBuilding.h"
 #include "CardManager.h"
 #include "Core.h"
+#include "CoreAI.h"
 #include "Deck.h"
 #include "EntityManager.h"
 #include "Brofiler/Brofiler.h"
@@ -113,14 +114,21 @@ Entity* EntityManager::CreateEntity(EntityType type, fPoint position, Card* card
 	return entity;
 }
 
-Core* EntityManager::CreateCore(EntityType type, fPoint position, Deck* deck, Faction faction)
+Core* EntityManager::CreateCore(EntityType type, fPoint position, Deck* deck, Faction faction, bool ai)
 {
 	std::string id = std::to_string(id_count);
 	pugi::xml_node entity_node = entity_configs.find_child_by_attribute("type", std::to_string((int)type).c_str());
 
 	id += "_CORE";
-
-	Core* entity = new Core(entity_node, position, faction);
+	Core* entity;
+	if (ai)
+	{
+		entity = new CoreAI(entity_node, position, faction);
+	}
+	else
+	{
+		entity = new Core(entity_node, position, faction);
+	}
 	entities.push_back(entity);
 	entity->type = type;
 	entity->Start();

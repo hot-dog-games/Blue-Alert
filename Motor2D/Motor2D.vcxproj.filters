@@ -139,6 +139,9 @@
     <ClCompile Include="EntityManager.cpp">
       <Filter>Engine\Modules</Filter>
     </ClCompile>
+    <ClCompile Include="CoreAI.cpp">
+      <Filter>Engine\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
@@ -293,6 +296,9 @@
     </ClInclude>
     <ClInclude Include="EntityManager.h">
       <Filter>Engine\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="CoreAI.h">
+      <Filter>Engine\Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

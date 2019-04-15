@@ -61,14 +61,22 @@ bool Core::CleanUp()
 
 void Core::UseCard(int number, fPoint position)
 {
-	uint energy_cost = deck->cards[number]->info.stats.find("energy_cost")->second->GetValue();
-	if (stats.find("energy")->second->GetValue() >= energy_cost)
+	if (CanUseCard(number))
 	{
 		App->entity_manager->CreateEntity(deck->cards[number]->type, position, deck->cards[number], faction);
-		stats.find("energy")->second->DecreaseStat(energy_cost);
+		stats.find("energy")->second->DecreaseStat(deck->cards[number]->info.stats.find("energy_cost")->second->GetValue());
 	}
 }
 
+bool Core::CanUseCard(int number)
+{
+	uint energy_cost = deck->cards[number]->info.stats.find("energy_cost")->second->GetValue();
+
+	if (stats.find("energy")->second->GetValue() >= energy_cost)
+		return true;
+	else 
+		return false;
+}
 void Core::SetDeck(Deck* new_deck)
 {
 	deck = new_deck;
