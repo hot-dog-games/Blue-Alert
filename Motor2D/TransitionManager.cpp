@@ -73,9 +73,9 @@ void TransitionManager::CreateZoomTransition(float transition_time, float scale)
 	active_transitions.push_back(new Zoom(transition_time, scale));
 }
 
-void TransitionManager::CreateCameraTranslation(float transition_time, iPoint origin, iPoint destination)
+void TransitionManager::CreateCameraTranslation(float transition_time, iPoint destination)
 {
-	active_transitions.push_back(new CameraTranslation(transition_time, origin, destination));
+	active_transitions.push_back(new CameraTranslation(transition_time, destination));
 }
 
 void TransitionManager::DestroyTransition(Transition * transition_to_destroy)

@@ -81,3 +81,13 @@ void Transition::Exiting()
 		App->transition_manager->DestroyTransition(this);
 	}
 }
+
+float Transition::LerpValue(float percent, float start, float end)
+{
+	return start + percent * (end - start);
+}
+
+iPoint Transition::Lerp(float percent, iPoint origin, iPoint destination)
+{
+	return { (int)(origin.x + percent * (destination.x - origin.x)),  (int)(origin.y + percent * (destination.y - origin.y)) };
+}
