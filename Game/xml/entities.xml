@@ -53,7 +53,7 @@
 		  </animations>
 	  </building>
 	  <building core_type="12">
-		  <sprite>sprites/Buildings/LandBuillding.png</sprite>
+		  <sprite>sprites/Buildings/LandBuilding.png</sprite>
 		  <animations>
 			<animation speed="5.0F" name="idle">
               <frame x="16" y="11" width="141" height="116"/>
