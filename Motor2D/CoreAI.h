@@ -13,6 +13,8 @@ public:
 
 	virtual bool Update(float dt);
 	virtual bool CleanUp();
+	virtual bool Start();
+	virtual bool PostUpdate();
 
 private:
 	enum class AIState {
@@ -24,8 +26,12 @@ private:
 	AIState ai_state = AIState::WAITING;
 
 	bool CanPlay();
+	bool LosingLane(uint lane);
 
 	float dt_sum = THINK_DELAY;
+
+	SDL_Rect lanes[3];
+	int lane = 0;
 };
 
 #endif // !_COREAI_H_

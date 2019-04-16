@@ -1,4 +1,6 @@
 #include "j1App.h"
+#include "EntityManager.h"
+#include "Render.h"
 #include "Deck.h"
 #include "p2Log.h"
 #include "CoreAI.h"
@@ -32,19 +34,29 @@ bool CoreAI::Update(float dt)
 		case CoreAI::AIState::THINKING:
 			if (dt_sum >= THINK_DELAY)
 			{
-				for (int i = 0; i < MAX_CARDS; i++)
+				for (uint i = 0; i < 3; ++i)
 				{
-					if (CanUseCard(i))
+					if (LosingLane(i))
 					{
-						UseCard(i, { position.x, position.y + 50 });
-						ai_state = AIState::THINKING;
+						ai_state = AIState::ACTING;
+						lane = i;
+						dt_sum = 0;
 						break;
 					}
 				}
-				dt_sum = 0;
 			}
 			break;
 		case CoreAI::AIState::ACTING:
+			for (int i = 0; i < MAX_CARDS; i++)
+			{
+				if (CanUseCard(i))
+				{
+					LOG("spawned in lane %i", lane);
+					UseCard(i, { (float)lanes[lane].x + (float)lanes[lane].w*0.5f, position.y + 50 });
+					ai_state = AIState::WAITING;
+					break;
+				}
+			}
 			break;
 		default:
 			break;
@@ -54,8 +66,26 @@ bool CoreAI::Update(float dt)
 	return true;
 }
 
+bool CoreAI::PostUpdate()
+{
+	App->render->DrawQuad(lanes[0], 0, 0, 255, 150, true, true);
+	App->render->DrawQuad(lanes[1], 0, 0, 255, 150, true, true);
+	App->render->DrawQuad(lanes[2], 0, 0, 255, 150, true, true);
+
+	return true;
+}
+
 bool CoreAI::CleanUp()
 {
+
+	return true;
+}
+
+bool CoreAI::Start()
+{
+	lanes[0] = { -173, 0 , 135, 1000 };
+	lanes[1] = { -37, 0 , 135, 1000 };
+	lanes[2] = { 99, 0 , 135, 1000 };
 
 	return true;
 }
@@ -68,4 +98,22 @@ bool CoreAI::CanPlay()
 			return true;
 	}
 	return false;
+}
+
+bool CoreAI::LosingLane(uint lane)
+{
+	uint own_units = 0;
+	uint enemy_units = 0;
+	std::list<Entity*> entities;
+	App->entity_manager->GetEntitiesInArea(lanes[lane], entities);
+
+	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
+	{
+		if ((*entity)->faction != faction)
+			enemy_units++;
+		else
+			own_units++;
+	}
+
+	return (enemy_units >= own_units);	
 }
