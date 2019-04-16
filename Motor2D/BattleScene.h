@@ -1,5 +1,5 @@
-#ifndef _COMBAT_SCENE_H_
-#define _COMBAT_SCENE_H_
+#ifndef _BATTLE_SCENE_H_
+#define _BATTLE_SCENE_H_
 
 #include "Scene.h"
 #include "p2Point.h"

@@ -61,9 +61,6 @@
     <ClCompile Include="Window.cpp">
       <Filter>Engine\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="MapMenuScene.cpp">
-      <Filter>Engine\Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
@@ -206,9 +203,6 @@
     </ClInclude>
     <ClInclude Include="Window.h">
       <Filter>Engine\Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="MapMenuScene.h">
-      <Filter>Engine\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="TestingScene.h">
       <Filter>Engine\Scenes</Filter>
