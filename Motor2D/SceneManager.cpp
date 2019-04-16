@@ -3,7 +3,8 @@
 #include "GUI.h"
 #include "TestingScene.h"
 #include "MapMenuScene.h"
-#include "StrategyMap.h"
+#include "StrategyMapScene.h"
+#include "BattleScene.h"
 #include "Map.h"
 #include "SceneManager.h"
 
@@ -22,7 +23,7 @@ SceneManager::~SceneManager()
 
 bool SceneManager::Awake(pugi::xml_node &)
 {
-	current_scene = new StrategyMap();
+	current_scene = new StrategyMapScene();
 	return true;
 }
 
@@ -83,9 +84,10 @@ void SceneManager::ChangeScene(int new_scene)
 	case MENU:
 		break;
 	case MAP:
-		current_scene = new StrategyMap();
+		current_scene = new StrategyMapScene();
 		break;
 	case COMBAT:
+		current_scene = new BattleScene();
 		break;
 	case TESTING:
 		current_scene = new TestingScene();

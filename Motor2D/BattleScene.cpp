@@ -19,7 +19,6 @@
 #include "TransitionManager.h"
 #include "CardManager.h"
 #include "Deck.h"
-#include "TestingScene.h"
 #include "BattleScene.h"
 #include "GameManager.h"
 #include "EncounterTree.h"
@@ -27,17 +26,17 @@
 #include "UIImage.h"
 
 
-TestingScene::TestingScene() : Scene()
+BattleScene::BattleScene() : Scene()
 {
 
 }
 
 // Destructor
-TestingScene::~TestingScene()
+BattleScene::~BattleScene()
 {}
 
 // Called before the first frame
-bool TestingScene::Start()
+bool BattleScene::Start()
 {
 	if (App->map->Load("test_grande.tmx") == true)
 	{
@@ -48,8 +47,6 @@ bool TestingScene::Start()
 
 		RELEASE_ARRAY(data);
 	}
-
-	debug_tex = App->tex->Load("maps/path2.png");
 
 	App->render->camera.x = (App->map->data.width*App->map->data.tile_width*0.5)*0.5 - 100;
 	App->render->camera.y = 0;
@@ -76,43 +73,20 @@ bool TestingScene::Start()
 	unit_button_two = App->gui->CreateButton({ 135, 365 }, test_core->GetCard(CN_SECOND)->button.anim, unit_panel);
 	unit_button_three = App->gui->CreateButton({ 35, 445 }, test_core->GetCard(CN_THIRD)->button.anim, unit_panel);
 	unit_button_four = App->gui->CreateButton({ 135, 445 }, test_core->GetCard(CN_FOURTH)->button.anim, unit_panel);
-	
+
 	energy_bar = App->gui->CreateBar({ 764, 358 }, { 601,0,16,274 }, test_core->GetEnergy());
 
 	return true;
 }
 
 // Called each loop iteration
-bool TestingScene::PreUpdate()
+bool BattleScene::PreUpdate()
 {
-	// debug pathfing ------------------
-	static iPoint origin;
-	static bool origin_selected = false;
-
-	int x, y;
-	App->input->GetMousePosition(x, y);
-	iPoint p = App->render->ScreenToWorld(x, y);
-	p = App->map->WorldToMap(p.x, p.y);
-
-	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
-	{
-		if (origin_selected == true)
-		{
-			App->pathfinding->CreatePath(origin, p);
-			origin_selected = false;
-		}
-		else
-		{
-			origin = p;
-			origin_selected = true;
-		}
-	}
-
 	return true;
 }
 
 // Called each loop iteration
-bool TestingScene::Update(float dt)
+bool BattleScene::Update(float dt)
 {
 	if (App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
 		App->LoadGame("save_game.xml");
@@ -120,27 +94,14 @@ bool TestingScene::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
 		App->SaveGame("save_game.xml");
 
-	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-		App->render->camera.y += 10 * dt;
-
-	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-		App->render->camera.y -= 10 * dt;
-
-	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-		App->render->camera.x += 10 * dt;
-
-	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-		App->render->camera.x -= 10 * dt;
-
-
 	switch (state)
 	{
-	case TestingScene::BattleSceneState::SETUP:
+	case BattleScene::BattleSceneState::SETUP:
 	{
 		//TODO TIMER ANIMATION ETC ETC
 	}
-		break;
-	case TestingScene::BattleSceneState::FIGHT:
+	break;
+	case BattleScene::BattleSceneState::FIGHT:
 	{
 		int x, y;
 		App->input->GetMousePosition(x, y);
@@ -167,19 +128,19 @@ bool TestingScene::Update(float dt)
 			App->PauseGame();
 		}
 	}
-		break;
-	case TestingScene::BattleSceneState::WIN:
+	break;
+	case BattleScene::BattleSceneState::WIN:
 	{
 		if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
 			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
 	}
-		break;
-	case TestingScene::BattleSceneState::LOSE:
+	break;
+	case BattleScene::BattleSceneState::LOSE:
 	{
 		if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
 			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
 	}
-		break;
+	break;
 	default:
 		break;
 	}
@@ -188,29 +149,11 @@ bool TestingScene::Update(float dt)
 }
 
 // Called each loop iteration
-bool TestingScene::PostUpdate()
+bool BattleScene::PostUpdate()
 {
 	bool ret = true;
 
 	App->map->Draw();
-
-	// Debug pathfinding ------------------------------
-	int x, y;
-	App->input->GetMousePosition(x, y);
-	iPoint p = App->render->ScreenToWorld(x, y);
-	p = App->map->WorldToMap(p.x, p.y);
-	p = App->map->MapToWorld(p.x, p.y);
-
-	App->render->Blit(debug_tex, p.x, p.y);
-
-	const std::vector<iPoint> path = App->pathfinding->GetLastPath();
-
-	for (uint i = 0; i < path.size(); ++i)
-	{
-		iPoint pos = App->map->MapToWorld(path.at(i).x, path.at(i).y);
-		App->render->Blit(debug_tex, pos.x, pos.y);
-	}
-
 
 	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
@@ -223,16 +166,14 @@ bool TestingScene::PostUpdate()
 }
 
 // Called before quitting
-bool TestingScene::CleanUp()
+bool BattleScene::CleanUp()
 {
 	LOG("Freeing scene");
-
-	App->tex->UnLoad(debug_tex);
 
 	return true;
 }
 
-bool TestingScene::GUIEvent(UIElement * element, GUI_Event gui_event)
+bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 {
 	if (gui_event == GUI_Event::LEFT_CLICK_DOWN) {
 		if (element == unit_button_one) {
@@ -251,13 +192,13 @@ bool TestingScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 	else if (gui_event == GUI_Event::LEFT_CLICK_UP) {
 		if (element == current_drag) {
 			ReleaseDrag();
-		}		
+		}
 	}
 
 	return true;
 }
 
-void TestingScene::CreateDrag(int num, UIElement* element)
+void BattleScene::CreateDrag(int num, UIElement* element)
 {
 	card_num = num;
 	current_drag = App->gui->CreateImage({ 0,0 }, test_core->GetCard(card_num)->button.drag, element);
@@ -268,7 +209,7 @@ void TestingScene::CreateDrag(int num, UIElement* element)
 	current_drag->clicked = true;
 }
 
-void TestingScene::ReleaseDrag()
+void BattleScene::ReleaseDrag()
 {
 	int x, y;
 	App->input->GetMousePosition(x, y);

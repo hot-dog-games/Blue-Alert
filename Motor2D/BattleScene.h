@@ -1,5 +1,5 @@
-#ifndef _TESTING_SCENE_H_
-#define _TESTING_SCENE_H_
+#ifndef _COMBAT_SCENE_H_
+#define _COMBAT_SCENE_H_
 
 #include "Scene.h"
 #include "p2Point.h"
@@ -16,11 +16,19 @@ enum CardNumber;
 
 struct Card;
 
-class TestingScene : public Scene
+enum CardNumber {
+	CN_UNKNOWN = -1,
+	CN_FIRST,
+	CN_SECOND,
+	CN_THIRD,
+	CN_FOURTH
+};
+
+class BattleScene : public Scene
 {
 public:
-	TestingScene();
-	~TestingScene();
+	BattleScene();
+	~BattleScene();
 
 	// Called before the first frame
 	virtual bool Start();
@@ -51,8 +59,6 @@ private:
 		LOSE
 	};
 	BattleSceneState state = BattleSceneState::FIGHT;
-
-	SDL_Texture*	debug_tex;
 
 	UIImage*		unit_panel;
 	UIButton*		unit_button_one;

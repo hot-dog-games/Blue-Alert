@@ -8,6 +8,7 @@
 #include "TransitionManager.h"
 #include "EncounterTree.h"
 #include "EncounterNode.h"
+#include "SceneManager.h"
 
 #include "StrategyBuilding.h"
 
@@ -40,7 +41,7 @@ bool StrategyBuilding::Update(float dt)
 				state = STATIC_HOVERED;
 				current_animation = &animations.find("highlight")->second;
 				if (App->input->GetMouseButtonDown(1)) {
-					App->transition_manager->CreateFadeTransition(2.0f, true, 3, White);
+					App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::COMBAT, White);
 					App->transition_manager->CreateZoomTransition(2.0f);
 					App->transition_manager->CreateCameraTranslation(2.0f, { mouse_world.x, mouse_world.y });
 					App->game_manager->GetEncounterTree()->SetCurrentNodeByEntity(this);
