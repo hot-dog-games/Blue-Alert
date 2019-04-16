@@ -81,15 +81,38 @@ bool MapMenuScene::CleanUp()
 
 bool MapMenuScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 {
+	SDL_Rect settings_rect[3];
+	settings_rect[0] = { 1063,201,59,51 };
+	settings_rect[1] = { 1188,201,58,51 };
+	settings_rect[2] = { 1312,201,58,51 };
+
+	SDL_Rect menu_rect[3];
+	menu_rect[0] = { 1061,333,220,51 };
+	menu_rect[1] = { 1324,333,220,51 };
+	menu_rect[2] = { 1616,333,220,51 };
+
 	if (gui_event == GUI_Event::LEFT_CLICK_DOWN) {
 		if (element == settings_button) {
 			//(options = App->gui->CreateImage();
 		}
-		/*else if (element == menu_button) {
-			options = App->gui->CreateImage({ 450,300 }, {}, NULL);
+		else if (element == menu_button) {
+			t_b_bg = App->gui->CreateImage({ 20,95 }, {0,898,986,588}, NULL);
+			backbutton_t_b_bg = App->gui->CreateButton({ 945,60 }, settings_rect, NULL);
+			troops_button = App->gui->CreateButton({ 200,60 }, menu_rect, NULL);
+			buildings_button = App->gui->CreateButton({ 945,60 }, menu_rect, NULL);
+			App->gui->DisableElement(menu_button);
+			App->gui->DisableElement(settings_button);
+			
+			
 
-		}*/
-		
+		}
+		else if (element = backbutton_t_b_bg) {
+			App->gui->DeleteElement(t_b_bg);
+			App->gui->DeleteElement(backbutton_t_b_bg);
+			App->gui->EnableElement(menu_button);
+			App->gui->EnableElement(settings_button);
+
+		}
 	}
 	return false;
 }
