@@ -83,6 +83,7 @@
     <ClCompile Include="CameraTranslation.cpp" />
     <ClCompile Include="CardManager.cpp" />
     <ClCompile Include="Color.cpp" />
+    <ClCompile Include="BattleScene.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Deck.cpp" />
     <ClCompile Include="DynamicEntity.cpp" />
@@ -99,7 +100,6 @@
     <ClCompile Include="Audio.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Map.cpp" />
-    <ClCompile Include="MapMenuScene.cpp" />
     <ClCompile Include="Pathfinding.cpp" />
     <ClCompile Include="p2Log.cpp" />
     <ClCompile Include="PerfTimer.cpp" />
@@ -108,7 +108,7 @@
     <ClCompile Include="Stat.cpp" />
     <ClCompile Include="StaticEntity.cpp" />
     <ClCompile Include="StrategyBuilding.cpp" />
-    <ClCompile Include="StrategyMap.cpp" />
+    <ClCompile Include="StrategyMapScene.cpp" />
     <ClCompile Include="TestingScene.cpp" />
     <ClCompile Include="Textures.cpp" />
     <ClCompile Include="Timer.cpp" />
@@ -131,6 +131,7 @@
     <ClInclude Include="CameraTranslation.h" />
     <ClInclude Include="CardManager.h" />
     <ClInclude Include="Color.h" />
+    <ClInclude Include="BattleScene.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="Deck.h" />
     <ClInclude Include="DynamicEntity.h" />
@@ -144,7 +145,6 @@
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GUI.h" />
     <ClInclude Include="Map.h" />
-    <ClInclude Include="MapMenuScene.h" />
     <ClInclude Include="Pathfinding.h" />
     <ClInclude Include="PerfTimer.h" />
     <ClInclude Include="Scene.h" />
@@ -160,7 +160,7 @@
     <ClInclude Include="Stat.h" />
     <ClInclude Include="StaticEntity.h" />
     <ClInclude Include="StrategyBuilding.h" />
-    <ClInclude Include="StrategyMap.h" />
+    <ClInclude Include="StrategyMapScene.h" />
     <ClInclude Include="TestingScene.h" />
     <ClInclude Include="Textures.h" />
     <ClInclude Include="Timer.h" />
