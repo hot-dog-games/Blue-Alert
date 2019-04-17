@@ -50,6 +50,8 @@ struct Card {
 	std::string sprite_path;
 
 	bool to_delete = false;
+
+	void Upgrade();
 };
 
 class CardManager : public Module

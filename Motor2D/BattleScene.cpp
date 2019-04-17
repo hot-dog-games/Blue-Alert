@@ -58,14 +58,7 @@ bool BattleScene::Start()
 	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterDeck()[2]));
 	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterDeck()[3]));
 
-	Deck* test_deck = new Deck();
-	test_deck->delete_cards = true;
-	test_deck->AddCard(App->card_manager->CreateCard(EntityType::G_I));
-	test_deck->AddCard(App->card_manager->CreateCard(EntityType::SNIPER));
-	test_deck->AddCard(App->card_manager->CreateCard(EntityType::NAVY_SEAL));
-	test_deck->AddCard(App->card_manager->CreateCard(EntityType::HARRIER));
-
-	test_core = App->entity_manager->CreateCore(1, { 30,750 }, test_deck, FACTION_RUSSIAN);
+	test_core = App->entity_manager->CreateCore(1, { 30,750 }, App->game_manager->GetPalyerDeck(), FACTION_RUSSIAN);
 	test_enemy_core = App->entity_manager->CreateCore(App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterType(), { 25,85 }, enemy_deck, FACTION_AMERICAN);
 
 	unit_panel = App->gui->CreateImage({ 755,0 }, { 619,0,269,768 });

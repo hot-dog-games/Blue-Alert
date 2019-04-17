@@ -3,6 +3,10 @@
 #include "EncounterNode.h"
 #include "EncounterTree.h"
 #include "StrategyBuilding.h"
+#include "CardManager.h"
+#include "EntityManager.h"
+#include "j1App.h"
+
 #include "GameManager.h"
 
 
@@ -28,6 +32,8 @@ bool GameManager::Start()
 	encounter_tree = new EncounterTree();
 	encounter_tree->CreateTree();
 
+	CreatePlayerDeck();
+
 	return true;
 }
 
@@ -45,4 +51,64 @@ bool GameManager::PostUpdate()
 EncounterTree* GameManager::GetEncounterTree()
 {
 	return encounter_tree;
+}
+
+Deck * GameManager::GetPalyerDeck()
+{
+	return combat_deck;
+}
+
+void GameManager::CreatePlayerDeck()
+{
+	collection.push_back(App->card_manager->CreateCard(EntityType::G_I));
+	collection.push_back(App->card_manager->CreateCard(EntityType::SNIPER));
+	collection.push_back(App->card_manager->CreateCard(EntityType::NAVY_SEAL));
+	collection.push_back(App->card_manager->CreateCard(EntityType::HARRIER));
+
+	combat_deck = new Deck();
+	combat_deck->delete_cards = true;
+	combat_deck->AddCard(GetCardFromCollection(EntityType::G_I));
+	combat_deck->AddCard(GetCardFromCollection(EntityType::SNIPER));
+	combat_deck->AddCard(GetCardFromCollection(EntityType::NAVY_SEAL));
+	combat_deck->AddCard(GetCardFromCollection(EntityType::HARRIER));
+}
+
+
+
+
+Card * GameManager::GetCardFromCollection(EntityType card_type)
+{
+	Card* card = nullptr;
+	for each (Card* c in collection)
+	{
+		if (c->type == card_type)
+		{
+			card = c;
+		}
+	}
+
+	if (card != nullptr)
+	{
+		return card;
+	}
+	else {
+		LOG("The card u tried to get is not existent in collection");
+		return nullptr;
+	}
+}
+
+void GameManager::AddCardToCollection(EntityType card_type)
+{
+	bool found = false;
+
+	for each (Card* c in collection)
+	{
+		if (c->type == card_type)
+		{
+			found = true;
+			//c->Upgrade();
+		}
+	}
+
+	if(!found) collection.push_back(App->card_manager->CreateCard(card_type));
 }

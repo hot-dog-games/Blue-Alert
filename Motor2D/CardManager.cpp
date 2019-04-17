@@ -123,3 +123,7 @@ void CardManager::LoadCardButton(Card * card, pugi::xml_node button_node)
 	card->button.drag.h = button_node.child("unit_drag").attribute("height").as_uint();
 }
 
+void Card::Upgrade()
+{
+
+}
