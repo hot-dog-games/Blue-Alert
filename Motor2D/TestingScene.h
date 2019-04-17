@@ -74,6 +74,9 @@ private:
 	UIButton*		win_unit_two;
 	UIButton*		win_unit_three;
 
+	UIImage*		lose_panel;
+	UILabel*		lose_text;
+	UIButton*		lose_continue;
 
 	UIImage* current_drag;
 	int card_num;
