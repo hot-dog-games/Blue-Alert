@@ -8,6 +8,7 @@
 #include "UIImage.h"
 
 
+
 struct SDL_Texture;
 
 class StrategyMapScene :
@@ -34,10 +35,12 @@ public:
 
 	virtual bool GUIEvent(UIElement* element, GUI_Event gui_event);
 
+	void AddCardToDeck(UIElement* element, uint num);
+
 private:
 	UIImage* banner;
 	UIImage* options;
-	UIImage* t_b_bg;
+	UIImage* troops_background;
 	UIImage* main_panel;
 	UILabel* health;
 	UILabel* gold;
@@ -53,7 +56,7 @@ private:
 	UIButton* buildings_button;
 
 	UIButton* deck_buttons[4];
-	std::vector<UIButton*> collection_buttons;
+	UIButton* collection_buttons[9];
 
 };
 
