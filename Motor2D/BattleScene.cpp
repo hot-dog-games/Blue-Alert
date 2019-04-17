@@ -58,16 +58,16 @@ bool BattleScene::Start()
 	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterDeck()[2]));
 	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterDeck()[3]));
 
-	test_core = App->entity_manager->CreateCore(1, { 30,750 }, App->game_manager->GetPalyerDeck(), FACTION_RUSSIAN);
-	test_enemy_core = App->entity_manager->CreateCore(App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterType(), { 25,85 }, enemy_deck, FACTION_AMERICAN);
+	allied_core = App->entity_manager->CreateCore(1, { 30,750 }, App->game_manager->GetPalyerDeck(), FACTION_RUSSIAN);
+	enemy_core = App->entity_manager->CreateCore(App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterType(), { 25,85 }, enemy_deck, FACTION_AMERICAN);
 
 	unit_panel = App->gui->CreateImage({ 755,0 }, { 619,0,269,768 });
-	unit_button_one = App->gui->CreateButton({ 35, 365 }, test_core->GetCard(CN_FIRST)->button.anim, unit_panel);
-	unit_button_two = App->gui->CreateButton({ 135, 365 }, test_core->GetCard(CN_SECOND)->button.anim, unit_panel);
-	unit_button_three = App->gui->CreateButton({ 35, 445 }, test_core->GetCard(CN_THIRD)->button.anim, unit_panel);
-	unit_button_four = App->gui->CreateButton({ 135, 445 }, test_core->GetCard(CN_FOURTH)->button.anim, unit_panel);
+	unit_button_one = App->gui->CreateButton({ 35, 365 }, allied_core->GetCard(CN_FIRST)->button.anim, unit_panel);
+	unit_button_two = App->gui->CreateButton({ 135, 365 }, allied_core->GetCard(CN_SECOND)->button.anim, unit_panel);
+	unit_button_three = App->gui->CreateButton({ 35, 445 }, allied_core->GetCard(CN_THIRD)->button.anim, unit_panel);
+	unit_button_four = App->gui->CreateButton({ 135, 445 }, allied_core->GetCard(CN_FOURTH)->button.anim, unit_panel);
 
-	energy_bar = App->gui->CreateBar({ 764, 358 }, { 601,0,16,274 }, test_core->GetEnergy());
+	energy_bar = App->gui->CreateBar({ 764, 358 }, { 601,0,16,274 }, allied_core->GetEnergy());
 
 	return true;
 }
@@ -101,21 +101,24 @@ bool BattleScene::Update(float dt)
 		iPoint p = App->render->ScreenToWorld(x, y);
 
 		if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
-			test_core->DecreaseLife(5);
+			allied_core->DecreaseLife(5);
 
 		if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
-			test_core->UseCard(CN_FIRST, { (float)p.x, (float)p.y });
+			allied_core->UseCard(CN_FIRST, { (float)p.x, (float)p.y });
 
 		if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
-			test_enemy_core->UseCard(CN_FIRST, { (float)p.x, (float)p.y });
+			enemy_core->UseCard(CN_FIRST, { (float)p.x, (float)p.y });
+
+		if (App->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
+			App->game_manager->AddCardToCollection(EntityType::G_I);
 
 
-		if (!test_core->IsAlive())
+		if (!allied_core->IsAlive())
 		{
 			state = BattleSceneState::LOSE;
 			App->PauseGame();
 		}
-		else if (!test_enemy_core->IsAlive())
+		else if (!enemy_core->IsAlive())
 		{
 			state = BattleSceneState::WIN;
 			App->PauseGame();
@@ -194,7 +197,7 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 void BattleScene::CreateDrag(int num, UIElement* element)
 {
 	card_num = num;
-	current_drag = App->gui->CreateImage({ 0,0 }, test_core->GetCard(card_num)->button.drag, element);
+	current_drag = App->gui->CreateImage({ 0,0 }, allied_core->GetCard(card_num)->button.drag, element);
 	current_drag->interactable = true;
 	current_drag->dragable = true;
 	current_drag->clipping = false;
@@ -207,7 +210,7 @@ void BattleScene::ReleaseDrag()
 	int x, y;
 	App->input->GetMousePosition(x, y);
 	iPoint point = App->render->ScreenToWorld(x, y);
-	test_core->UseCard(card_num, { float(point.x),float(point.y) });
+	allied_core->UseCard(card_num, { float(point.x),float(point.y) });
 	App->gui->DeleteElement(current_drag);
 	current_drag = nullptr;
 }
