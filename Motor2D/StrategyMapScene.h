@@ -43,9 +43,12 @@ private:
 	UILabel* gold;
 	UILabel* energy;
 	UILabel* text_menu;
+	UILabel* troops_text;
+	UILabel* buildings_text;
+	UILabel* back_cross_text;
 	UIButton* settings_button;
 	UIButton* menu_button;
-	UIButton* backbutton_t_b_bg;
+	UIButton* backbutton_t_b;
 	UIButton* troops_button;
 	UIButton* buildings_button;
 
