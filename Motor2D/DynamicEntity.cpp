@@ -93,8 +93,12 @@ bool DynamicEntity::PreUpdate()
 bool DynamicEntity::PostUpdate()
 {
 	Draw();
-	//Range debug 
-	App->render->DrawCircle(position.x, position.y, entity_card->info.stats.find("range")->second->GetValue()*App->map->data.tile_height, 255, 0, 0);
+
+	if (debug)
+	{
+		//Range debug 
+		App->render->DrawCircle(position.x, position.y, entity_card->info.stats.find("range")->second->GetValue()*App->map->data.tile_height, 255, 0, 0);
+	}
 
 	return true;
 }

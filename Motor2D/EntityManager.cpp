@@ -7,6 +7,7 @@
 #include "StrategyBuilding.h"
 #include "CardManager.h"
 #include "Core.h"
+#include "CoreAI.h"
 #include "Deck.h"
 #include "EntityManager.h"
 #include "Brofiler/Brofiler.h"
@@ -42,6 +43,9 @@ bool EntityManager::Start()
 bool EntityManager::Update(float dt)
 {
 	BROFILER_CATEGORY("EMUpdate", Profiler::Color::Plum);
+
+	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
+		SetDebug();
 
 	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
 	{
@@ -108,13 +112,14 @@ Entity* EntityManager::CreateEntity(EntityType type, fPoint position, Card* card
 	entity->type = type;
 	entity->Start();
 	entities.push_back(entity);
+	entity->SetDebug(debug);
 
 	id_count++;
 
 	return entity;
 }
 
-Core* EntityManager::CreateCore(uint core_type, fPoint position, Deck* deck, Faction faction)
+Core* EntityManager::CreateCore(uint core_type, fPoint position, Deck* deck, Faction faction, bool ai)
 {
 	std::string id = std::to_string(id_count);
 	pugi::xml_node entity_node = entity_configs.find_child_by_attribute("type", std::to_string((int)CORE).c_str());
@@ -130,12 +135,20 @@ Core* EntityManager::CreateCore(uint core_type, fPoint position, Deck* deck, Fac
 	}
 
 	id += "_CORE";
-
-	Core* entity = new Core(info, position, faction, stats_node);
+	Core* entity;
+	if (ai)
+	{
+		entity = new CoreAI(info, position, faction, stats_node);
+	}
+	else
+	{
+		entity = new Core(info, position, faction, stats_node);
+	}
 	entities.push_back(entity);
 	entity->type = CORE;
 	entity->Start();
 	entity->SetDeck(deck);
+	entity->SetDebug(debug);
 
 	id_count++;
 
@@ -184,6 +197,28 @@ void EntityManager::FindClosestEnemy(fPoint position, Faction faction, Entity* &
 				closest_entity = (*entity);
 			}
 		}
+	}
+}
+
+void EntityManager::GetEntitiesInArea(SDL_Rect area, std::list<Entity*> &list)
+{
+	Entity* ent;
+	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
+	{
+		ent = (*entity);
+		if (ent->type != CORE && ent->IsAlive() && 
+			(ent->position.x >= area.x && ent->position.x <= area.x + area.w 
+				&& ent->position.y >= area.y && ent->position.y <= area.y + area.h))
+			list.push_back(ent);
+	}
+}
+
+void EntityManager::SetDebug()
+{
+	debug = !debug;
+	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
+	{
+		(*entity)->SetDebug(debug);
 	}
 }
 

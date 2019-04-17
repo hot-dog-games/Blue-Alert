@@ -1,7 +1,6 @@
 <config>
 
   <!--STATIC ENTITIES-->
-  
   <entity type ="0">
     <stats>
       <stat stat="health" value ="1000"/>
@@ -126,7 +125,6 @@
         </animation>
       </animations>
     </info>
-
   </entity>
   
   <entity type ="11">

@@ -10,12 +10,12 @@
 
 struct SDL_Texture;
 
-class StrategyMap :
+class StrategyMapScene :
 	public Scene
 {
 public:
-	StrategyMap();
-	~StrategyMap();
+	StrategyMapScene();
+	~StrategyMapScene();
 
 	// Called before the first frame
 	virtual bool Start();
