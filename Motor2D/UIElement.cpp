@@ -1,3 +1,5 @@
+#include "j1App.h"
+#include "GUI.h"
 #include "UIElement.h"
 
 
