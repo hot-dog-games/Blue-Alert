@@ -10,6 +10,7 @@
 #include "EntityManager.h"
 #include "Entity.h"
 #include "Core.h"
+#include "CoreAI.h"
 #include "PathFinding.h"
 #include "UIAnimatedImage.h"
 #include "UIButton.h"
@@ -56,10 +57,10 @@ bool TestingScene::Start()
 
 	Deck* enemy_deck = new Deck();
 	enemy_deck->delete_cards = true;
-	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterDeck()[0]));
-	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterDeck()[1]));
-	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterDeck()[2]));
-	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterDeck()[3]));
+	enemy_deck->AddCard(App->card_manager->CreateCard(EntityType::G_I));
+	enemy_deck->AddCard(App->card_manager->CreateCard(EntityType::SNIPER));
+	enemy_deck->AddCard(App->card_manager->CreateCard(EntityType::NAVY_SEAL));
+	enemy_deck->AddCard(App->card_manager->CreateCard(EntityType::HARRIER));
 
 	Deck* test_deck = new Deck();
 	test_deck->delete_cards = true;
@@ -69,7 +70,7 @@ bool TestingScene::Start()
 	test_deck->AddCard(App->card_manager->CreateCard(EntityType::HARRIER));
 
 	test_core = App->entity_manager->CreateCore(1, { 30,750 }, test_deck, FACTION_RUSSIAN);
-	test_enemy_core = App->entity_manager->CreateCore(App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterType(), { 25,85 }, enemy_deck, FACTION_AMERICAN);
+	test_enemy_core = App->entity_manager->CreateCore(13, { 25,85 }, enemy_deck, FACTION_AMERICAN, true);
 
 	unit_panel = App->gui->CreateImage({ 755,0 }, { 619,0,269,768 });
 	unit_button_one = App->gui->CreateButton({ 35, 365 }, test_core->GetCard(CN_FIRST)->button.anim, unit_panel);
@@ -213,7 +214,6 @@ bool TestingScene::PostUpdate()
 		iPoint pos = App->map->MapToWorld(path.at(i).x, path.at(i).y);
 		App->render->Blit(debug_tex, pos.x, pos.y);
 	}
-
 
 	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;

@@ -58,8 +58,8 @@ bool BattleScene::Start()
 	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterDeck()[2]));
 	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterDeck()[3]));
 
-	allied_core = App->entity_manager->CreateCore(1, { 30,750 }, App->game_manager->GetPalyerDeck(), FACTION_RUSSIAN);
-	enemy_core = App->entity_manager->CreateCore(App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterType(), { 25,85 }, enemy_deck, FACTION_AMERICAN);
+	allied_core = App->entity_manager->CreateCore(1, { 30,750 }, App->game_manager->GetPlayerDeck(), FACTION_RUSSIAN);
+	enemy_core = App->entity_manager->CreateCore(App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterType(), { 25,85 }, enemy_deck, FACTION_AMERICAN, true);
 
 	unit_panel = App->gui->CreateImage({ 755,0 }, { 619,0,269,768 });
 	unit_button_one = App->gui->CreateButton({ 35, 365 }, allied_core->GetCard(CN_FIRST)->button.anim, unit_panel);
@@ -157,10 +157,6 @@ bool BattleScene::PostUpdate()
 
 	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
-
-
-	if (current_drag)
-		current_drag->GetScreenPos();
 
 	return ret;
 }
