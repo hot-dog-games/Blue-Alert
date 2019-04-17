@@ -15,20 +15,20 @@
 #include "EncounterNode.h"
 #include "StrategyBuilding.h"
 #include "GameManager.h"
-#include "StrategyMap.h"
+#include "StrategyMapScene.h"
 #include "Brofiler/Brofiler.h"
 
-StrategyMap::StrategyMap() : Scene()
+StrategyMapScene::StrategyMapScene() : Scene()
 {
 
 }
 
 // Destructor
-StrategyMap::~StrategyMap()
+StrategyMapScene::~StrategyMapScene()
 {}
 
 // Called before the first frame
-bool StrategyMap::Start()
+bool StrategyMapScene::Start()
 {
 	BROFILER_CATEGORY("SMStart", Profiler::Color::Red);
 
@@ -52,7 +52,7 @@ bool StrategyMap::Start()
 	SDL_Rect menu_rect[3];
 	menu_rect[0] = { 0,533,220,51 };
 	menu_rect[1] = { 0,585,220,51 };
-	menu_rect[2] = { 0,585,220,51 };
+	menu_rect[2] = { 0,637,220,51 };
 
 	settings_button = App->gui->CreateButton({ 50,700 }, settings_rect, main_panel);
 	menu_button = App->gui->CreateButton({ 700,700 }, menu_rect, main_panel);
@@ -71,7 +71,7 @@ bool StrategyMap::Start()
 }
 
 // Called each loop iteration
-bool StrategyMap::PreUpdate()
+bool StrategyMapScene::PreUpdate()
 {
 	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 		App->render->camera.y += 10;
@@ -88,14 +88,14 @@ bool StrategyMap::PreUpdate()
 }
 
 // Called each loop iteration
-bool StrategyMap::Update(float dt)
+bool StrategyMapScene::Update(float dt)
 {
 	BROFILER_CATEGORY("SMUpdate", Profiler::Color::Green);
 	return true;
 }
 
 // Called each loop iteration
-bool StrategyMap::PostUpdate()
+bool StrategyMapScene::PostUpdate()
 {
 	bool ret = true;
 
@@ -110,14 +110,14 @@ bool StrategyMap::PostUpdate()
 }
 
 // Called before quitting
-bool StrategyMap::CleanUp()
+bool StrategyMapScene::CleanUp()
 {
 	LOG("Freeing scene");
 
 	return true;
 }
 
-bool StrategyMap::GUIEvent(UIElement * element, GUI_Event gui_event)
+bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 {
 	if (gui_event == GUI_Event::LEFT_CLICK_DOWN) {
 

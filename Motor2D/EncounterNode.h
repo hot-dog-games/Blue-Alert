@@ -10,9 +10,9 @@ class UIButton;
 class StrategyBuilding;
 
 struct Encounter {
-	int type = 10; // indica el tipo de edificio que es.
-	int ai_difficulty = 0;
-	int deck[4];
+	int type = -1;
+	std::vector<int> deck;
+	int deck_size = 4;
 	//BUFF
 };
 
@@ -47,7 +47,7 @@ public:
 	void SetPosition(fPoint position);
 	fPoint GetPosition();
 
-	void LoadEncounterInfo(pugi::xml_node encounter_node);
+	void FillEncounterDeck();
 	void CreateNodeEntity();
 	void CreateNode();
 
@@ -57,6 +57,8 @@ public:
 	//-----Emcounter Accessors-----
 	int EncounterNode::GetEncounterType() const;
 	void SetEncounterType(int type);
+
+	std::vector<int> GetEncounterDeck();
 
 	SDL_Rect node_rect;
 

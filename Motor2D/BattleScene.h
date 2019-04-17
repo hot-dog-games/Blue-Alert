@@ -1,5 +1,5 @@
-#ifndef _TESTING_SCENE_H_
-#define _TESTING_SCENE_H_
+#ifndef _BATTLE_SCENE_H_
+#define _BATTLE_SCENE_H_
 
 #include "Scene.h"
 #include "p2Point.h"
@@ -16,11 +16,19 @@ enum CardNumber;
 
 struct Card;
 
-class TestingScene : public Scene
+enum CardNumber {
+	CN_UNKNOWN = -1,
+	CN_FIRST,
+	CN_SECOND,
+	CN_THIRD,
+	CN_FOURTH
+};
+
+class BattleScene : public Scene
 {
 public:
-	TestingScene();
-	~TestingScene();
+	BattleScene();
+	~BattleScene();
 
 	// Called before the first frame
 	virtual bool Start();
@@ -42,7 +50,6 @@ public:
 private:
 	void CreateDrag(int num, UIElement* element);
 	void ReleaseDrag();
-	void IncreaseUnit(Card* card);
 
 private:
 	enum class BattleSceneState {
@@ -53,8 +60,6 @@ private:
 	};
 	BattleSceneState state = BattleSceneState::FIGHT;
 
-	SDL_Texture*	debug_tex;
-
 	UIImage*		unit_panel;
 	UIButton*		unit_button_one;
 	UIButton*		unit_button_two;
@@ -62,21 +67,8 @@ private:
 	UIButton*		unit_button_four;
 	UIBar*			energy_bar;
 
-	UIImage*		win_panel_one;
-	UIImage*		win_panel_two;
-	UIButton*		win_continue_one;
-	UIButton*		win_continue_two;
-	UILabel*		win_text_one;
-	UILabel*		win_text_two;
-	UIImage*		win_building;
-	UIButton*		win_unit_one;
-	UIButton*		win_unit_two;
-	UIButton*		win_unit_three;
-
-
 	UIImage* current_drag;
 	int card_num;
-	int random_num[3];
 
 	uint max_energy;
 	uint current_energy;
