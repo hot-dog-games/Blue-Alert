@@ -23,6 +23,9 @@
 #include "UIImage.h"
 #include "UILabel.h"
 #include "GameManager.h"
+#include "Stat.h"
+#include <stdlib.h>
+#include <time.h>
 
 
 TestingScene::TestingScene() : Scene()
@@ -70,6 +73,7 @@ bool TestingScene::Start()
 	
 	energy_bar = App->gui->CreateBar({ 764, 358 }, { 601,0,16,274 }, test_core->GetEnergy());
 
+	// End Game Screen
 	win_panel_one = App->gui->CreateImage({ 139,150 }, { 1,852,744,466 });
 	win_panel_two = App->gui->CreateImage({ 139,150 }, { 1,852,744,466 });
 	win_text_one = App->gui->CreateLabel({ 30,30 }, "fonts/red_alert.ttf", 40, "Congratulations, you've conquered this zone and unlocked the next building!", { 255,232,2, 255 }, 710, win_panel_one);
@@ -263,6 +267,10 @@ bool TestingScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 		else if (element == win_continue_two) {
 			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
 		}
+		else if (element == win_unit_one) {
+			/*IncreaseUnit(test_core->)*/
+		}
+			
 	}
 	else if (gui_event == GUI_Event::LEFT_CLICK_UP) {
 		if (element == current_drag) {
@@ -271,14 +279,6 @@ bool TestingScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 	}
 
 	return true;
-}
-
-void TestingScene::WinScreen()
-{
-	win_text_one->SetText("Upgrade a troop or choose a new one to add to your deck:");
-	win_unit_one->SetEnabled(true);
-	win_unit_two->SetEnabled(true);
-	win_unit_three->SetEnabled(true);
 }
 
 void TestingScene::CreateDrag(int num, UIElement* element)
@@ -300,4 +300,9 @@ void TestingScene::ReleaseDrag()
 	test_core->UseCard(card_num, { float(point.x),float(point.y) });
 	App->gui->DeleteElement(current_drag);
 	current_drag = nullptr;
+}
+
+void TestingScene::IncreaseUnit(Card * card)
+{
+	card->info.stats.find("health")->second->IncreaseStat(card->info.scaling.health_upgrade);
 }

@@ -47,11 +47,10 @@ public:
 
 	virtual bool GUIEvent(UIElement* element, GUI_Event gui_event);
 
-	void WinScreen();
-
 private:
 	void CreateDrag(int num, UIElement* element);
 	void ReleaseDrag();
+	void IncreaseUnit(Card* card);
 
 private:
 	enum class BattleSceneState {
@@ -85,6 +84,7 @@ private:
 
 	UIImage* current_drag;
 	int card_num;
+	int random_num[3];
 
 	uint max_energy;
 	uint current_energy;
