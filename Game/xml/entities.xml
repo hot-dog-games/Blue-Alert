@@ -1,6 +1,7 @@
 <config>
 
   <!--STATIC ENTITIES-->
+  
   <entity type ="0">
     <stats>
       <stat stat="health" value ="1000"/>
@@ -125,6 +126,7 @@
         </animation>
       </animations>
     </info>
+
   </entity>
   
   <entity type ="11">
@@ -873,10 +875,10 @@
   <!--NIGHTHAWK-->
   <entity type ="7">
     <info faction ="0">
-      <sprite>sprites/units/AirVehicles/Nighthawk.png</sprite>
+      <sprite>sprites/Units/AirVehicles/Nighthawk.png</sprite>
       <animations>
         <animation speed="5.0F" name="idle">
-          <frame x="345" y="1851" width="15" height="33"/>
+          <frame x="502" y="409" width="59" height="50"/>
         </animation>
         <animation speed="5.0F" name="moving_right">
           <frame x="289" y="130" width="76" height="43"/>
@@ -901,6 +903,98 @@
         </animation>
         <animation speed="5.0F" name="moving_down_right">
           <frame x="63" y="310" width="65" height="47"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_up">
+          <frame x="502" y="409" width="59" height="50"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_down">
+          <frame x="182" y="359" width="59" height="48"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_left">
+          <frame x="75" y="129" width="78" height="44"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_right">
+          <frame x="289" y="130" width="76" height="43"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_up_right">
+          <frame x="580" y="359" width="62" height="49"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_up_left">
+          <frame x="512" y="358" width="67" height="50"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_down_right">
+          <frame x="63" y="310" width="65" height="47"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_down_left">
+          <frame x="260" y="311" width="62" height="47"/>
+        </animation>
+        <animation speed="10.0F" loop="false" name="dying">
+          <frame x="502" y="409" width="59" height="50"/>
+        </animation>
+        <animation speed="5.0F" loop="false" name="dead">
+          <frame x="0" y="0" width="0" height="0"/>
+        </animation>
+      </animations>
+    </info>
+   <info faction ="1">
+      <sprite>sprites/Units/AirVehicles/Nighthawk.png</sprite>
+      <animations>
+        <animation speed="5.0F" name="idle">
+          <frame x="502" y="409" width="59" height="50"/>
+        </animation>
+        <animation speed="5.0F" name="moving_right">
+          <frame x="289" y="130" width="76" height="43"/>
+        </animation>
+        <animation speed="5.0F" name="moving_left">
+          <frame x="75" y="129" width="78" height="44"/>
+        </animation>
+        <animation speed="5.0F" name="moving_up">
+          <frame x="502" y="409" width="59" height="50"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down">
+          <frame x="182" y="359" width="59" height="48"/>
+        </animation>
+        <animation speed="5.0F" name="moving_up_left">
+          <frame x="512" y="358" width="67" height="50"/>
+        </animation>
+        <animation speed="5.0F" name="moving_up_right">
+          <frame x="580" y="359" width="62" height="49"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down_left">
+          <frame x="260" y="311" width="62" height="47"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down_right">
+          <frame x="63" y="310" width="65" height="47"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_up">
+          <frame x="502" y="409" width="59" height="50"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_down">
+          <frame x="182" y="359" width="59" height="48"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_left">
+          <frame x="75" y="129" width="78" height="44"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_right">
+          <frame x="289" y="130" width="76" height="43"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_up_right">
+          <frame x="580" y="359" width="62" height="49"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_up_left">
+          <frame x="512" y="358" width="67" height="50"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_down_right">
+          <frame x="63" y="310" width="65" height="47"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_down_left">
+          <frame x="260" y="311" width="62" height="47"/>
+        </animation>
+        <animation speed="10.0F" loop="false" name="dying">
+          <frame x="502" y="409" width="59" height="50"/>
+        </animation>
+        <animation speed="5.0F" loop="false" name="dead">
+          <frame x="0" y="0" width="0" height="0"/>
         </animation>
       </animations>
     </info>
@@ -938,6 +1032,98 @@
         <animation speed="5.0F" name="moving_down_right">
           <frame x="161" y="201" width="53" height="45"/>
         </animation>
+        <animation speed="5.0F" name="attacking_up">
+          <frame x="110" y="575" width="53" height="34"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_down">
+          <frame x="110" y="248" width="53" height="46"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_left">
+          <frame x="194" y="417" width="64" height="30"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_right">
+          <frame x="196" y="60" width="65" height="29"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_up_right">
+          <frame x="111" y="609" width="53" height="33"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_up_left">
+          <frame x="104" y="540" width="53" height="33"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_down_right">
+          <frame x="161" y="201" width="53" height="45"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_down_left">
+          <frame x="165" y="295" width="52" height="43"/>
+        </animation>
+        <animation speed="10.0F" loop="false" name="dying">
+          <frame x="165" y="295" width="52" height="43"/>
+        </animation>
+        <animation speed="5.0F" loop="false" name="dead">
+          <frame x="0" y="0" width="0" height="0"/>
+        </animation>
+      </animations>
+    </info>
+    <info faction ="1">
+      <sprite>sprites/Units/AirVehicles/Harrier.png</sprite>
+      <animations>
+        <animation speed="5.0F" name="idle">
+          <frame x="110" y="575" width="53" height="34"/>
+        </animation>
+        <animation speed="5.0F" name="moving_right">
+          <frame x="196" y="60" width="65" height="29"/>
+        </animation>
+        <animation speed="5.0F" name="moving_left">
+          <frame x="194" y="417" width="64" height="30"/>
+        </animation>
+        <animation speed="5.0F" name="moving_up">
+          <frame x="110" y="575" width="53" height="34"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down">
+          <frame x="110" y="248" width="53" height="46"/>
+        </animation>
+        <animation speed="5.0F" name="moving_up_left">
+          <frame x="104" y="540" width="53" height="33"/>
+        </animation>
+        <animation speed="5.0F" name="moving_up_right">
+          <frame x="111" y="609" width="53" height="33"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down_left">
+          <frame x="165" y="295" width="52" height="43"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down_right">
+          <frame x="161" y="201" width="53" height="45"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_up">
+          <frame x="110" y="575" width="53" height="34"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_down">
+          <frame x="110" y="248" width="53" height="46"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_left">
+          <frame x="194" y="417" width="64" height="30"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_right">
+          <frame x="196" y="60" width="65" height="29"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_up_right">
+          <frame x="111" y="609" width="53" height="33"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_up_left">
+          <frame x="104" y="540" width="53" height="33"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_down_right">
+          <frame x="161" y="201" width="53" height="45"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_down_left">
+          <frame x="165" y="295" width="52" height="43"/>
+        </animation>
+        <animation speed="10.0F" loop="false" name="dying">
+          <frame x="165" y="295" width="52" height="43"/>
+        </animation>
+        <animation speed="5.0F" loop="false" name="dead">
+          <frame x="0" y="0" width="0" height="0"/>
+        </animation>
       </animations>
     </info>
   </entity>
@@ -948,7 +1134,7 @@
       <sprite>sprites/Units/AirVehicles/BlackEagle.png</sprite>
       <animations>
         <animation speed="5.0F" name="idle">
-          <frame x="693" y="49" width="119" height="50"/>
+          <frame x="759" y="388" width="90" height="63"/>
         </animation>
         <animation speed="5.0F" name="moving_right">
           <frame x="693" y="49" width="119" height="50"/>
@@ -974,6 +1160,98 @@
         <animation speed="5.0F" name="moving_down_right">
           <frame x="730" y="520" width="90" height="77"/>
         </animation>
+        <animation speed="5.0F" name="attacking_up">
+          <frame x="759" y="388" width="90" height="63"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_down">
+          <frame x="650" y="598" width="91" height="78"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_left">
+          <frame x="832" y="100" width="120" height="51"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_right">
+          <frame x="693" y="49" width="119" height="50"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_up_right">
+          <frame x="797" y="261" width="89" height="61"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_up_left">
+          <frame x="180" y="324" width="87" height="60"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_down_right">
+          <frame x="730" y="520" width="90" height="77"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_down_left">
+          <frame x="639" y="521" width="88" height="74"/>
+        </animation>
+        <animation speed="10.0F" loop="false" name="dying">
+          <frame x="759" y="388" width="90" height="63"/>
+        </animation>
+        <animation speed="5.0F" loop="false" name="dead">
+          <frame x="0" y="0" width="0" height="0"/>
+        </animation>
+      </animations>
+    </info>
+      <info faction ="1">
+      <sprite>sprites/Units/AirVehicles/BlackEagle.png</sprite>
+      <animations>
+        <animation speed="5.0F" name="idle">
+          <frame x="759" y="388" width="90" height="63"/>
+        </animation>
+        <animation speed="5.0F" name="moving_right">
+          <frame x="693" y="49" width="119" height="50"/>
+        </animation>
+        <animation speed="5.0F" name="moving_left">
+          <frame x="832" y="100" width="120" height="51"/>
+        </animation>
+        <animation speed="5.0F" name="moving_up">
+          <frame x="759" y="388" width="90" height="63"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down">
+          <frame x="650" y="598" width="91" height="78"/>
+        </animation>
+        <animation speed="5.0F" name="moving_up_left">
+          <frame x="180" y="324" width="87" height="60"/>
+        </animation>
+        <animation speed="5.0F" name="moving_up_right">
+          <frame x="797" y="261" width="89" height="61"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down_left">
+          <frame x="639" y="521" width="88" height="74"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down_right">
+          <frame x="730" y="520" width="90" height="77"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_up">
+          <frame x="759" y="388" width="90" height="63"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_down">
+          <frame x="650" y="598" width="91" height="78"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_left">
+          <frame x="832" y="100" width="120" height="51"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_right">
+          <frame x="693" y="49" width="119" height="50"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_up_right">
+          <frame x="797" y="261" width="89" height="61"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_up_left">
+          <frame x="180" y="324" width="87" height="60"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_down_right">
+          <frame x="730" y="520" width="90" height="77"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_down_left">
+          <frame x="639" y="521" width="88" height="74"/>
+        </animation>
+        <animation speed="10.0F" loop="false" name="dying">
+          <frame x="759" y="388" width="90" height="63"/>
+        </animation>
+        <animation speed="5.0F" loop="false" name="dead">
+          <frame x="0" y="0" width="0" height="0"/>
+        </animation>
       </animations>
     </info>
   </entity>
@@ -981,10 +1259,10 @@
   <!--GREY TANK-->
   <entity type ="4">
     <info faction ="0">
-      <sprite>sprites/units/LandVehicles/GreyTank.png</sprite>
+      <sprite>sprites/Units/LandVehicles/GreyTank.png</sprite>
       <animations>
         <animation speed="5.0F" name="idle">
-          <frame x="345" y="1851" width="15" height="33"/>
+          <frame x="175" y="538" width="26" height="45"/>
         </animation>
         <animation speed="5.0F" name="moving_right">
           <frame x="163" y="0" width="52" height="58"/>
@@ -1009,6 +1287,354 @@
         </animation>
         <animation speed="5.0F" name="moving_down_right">
           <frame x="150" y="336" width="40" height="36"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_up">
+          <frame x="175" y="538" width="26" height="45"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_down">
+          <frame x="175" y="262" width="27" height="36"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_left">
+          <frame x="0" y="0" width="53" height="27"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_right">
+          <frame x="163" y="0" width="52" height="58"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_up_right">
+          <frame x="103" y="631" width="36" height="61"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_up_left">
+          <frame x="202" y="539" width="39" height="44"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_down_right">
+          <frame x="150" y="336" width="40" height="36"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_down_left">
+          <frame x="1" y="299" width="41" height="36"/>
+        </animation>
+        <animation speed="10.0F" loop="false" name="dying">
+          <frame x="175" y="538" width="26" height="45"/>
+        </animation>
+        <animation speed="5.0F" loop="false" name="dead">
+          <frame x="0" y="0" width="0" height="0"/>
+        </animation>
+      </animations>
+    </info>
+      <info faction ="1">
+      <sprite>sprites/Units/LandVehicles/GreyTank.png</sprite>
+      <animations>
+        <animation speed="5.0F" name="idle">
+          <frame x="175" y="538" width="26" height="45"/>
+        </animation>
+        <animation speed="5.0F" name="moving_right">
+          <frame x="163" y="0" width="52" height="58"/>
+        </animation>
+        <animation speed="5.0F" name="moving_left">
+          <frame x="0" y="0" width="53" height="27"/>
+        </animation>
+        <animation speed="5.0F" name="moving_up">
+          <frame x="175" y="538" width="26" height="45"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down">
+          <frame x="175" y="262" width="27" height="36"/>
+        </animation>
+        <animation speed="5.0F" name="moving_up_left">
+          <frame x="202" y="539" width="39" height="44"/>
+        </animation>
+        <animation speed="5.0F" name="moving_up_right">
+          <frame x="103" y="631" width="36" height="61"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down_left">
+          <frame x="1" y="299" width="41" height="36"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down_right">
+          <frame x="150" y="336" width="40" height="36"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_up">
+          <frame x="175" y="538" width="26" height="45"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_down">
+          <frame x="175" y="262" width="27" height="36"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_left">
+          <frame x="0" y="0" width="53" height="27"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_right">
+          <frame x="163" y="0" width="52" height="58"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_up_right">
+          <frame x="103" y="631" width="36" height="61"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_up_left">
+          <frame x="202" y="539" width="39" height="44"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_down_right">
+          <frame x="150" y="336" width="40" height="36"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_down_left">
+          <frame x="1" y="299" width="41" height="36"/>
+        </animation>
+        <animation speed="10.0F" loop="false" name="dying">
+          <frame x="175" y="538" width="26" height="45"/>
+        </animation>
+        <animation speed="5.0F" loop="false" name="dead">
+          <frame x="0" y="0" width="0" height="0"/>
+        </animation>
+      </animations>
+    </info>
+  </entity>
+  
+<!--ROBOT TANK-->
+  <entity type ="5">
+    <info faction ="0">
+      <sprite>sprites/Units/LandVehicles/GreyTank.png</sprite>
+      <animations>
+        <animation speed="5.0F" name="idle">
+          <frame x="175" y="538" width="26" height="45"/>
+        </animation>
+        <animation speed="5.0F" name="moving_right">
+          <frame x="163" y="0" width="52" height="58"/>
+        </animation>
+        <animation speed="5.0F" name="moving_left">
+          <frame x="0" y="0" width="53" height="27"/>
+        </animation>
+        <animation speed="5.0F" name="moving_up">
+          <frame x="175" y="538" width="26" height="45"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down">
+          <frame x="175" y="262" width="27" height="36"/>
+        </animation>
+        <animation speed="5.0F" name="moving_up_left">
+          <frame x="202" y="539" width="39" height="44"/>
+        </animation>
+        <animation speed="5.0F" name="moving_up_right">
+          <frame x="103" y="631" width="36" height="61"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down_left">
+          <frame x="1" y="299" width="41" height="36"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down_right">
+          <frame x="150" y="336" width="40" height="36"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_up">
+          <frame x="175" y="538" width="26" height="45"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_down">
+          <frame x="175" y="262" width="27" height="36"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_left">
+          <frame x="0" y="0" width="53" height="27"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_right">
+          <frame x="163" y="0" width="52" height="58"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_up_right">
+          <frame x="103" y="631" width="36" height="61"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_up_left">
+          <frame x="202" y="539" width="39" height="44"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_down_right">
+          <frame x="150" y="336" width="40" height="36"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_down_left">
+          <frame x="1" y="299" width="41" height="36"/>
+        </animation>
+        <animation speed="10.0F" loop="false" name="dying">
+          <frame x="175" y="538" width="26" height="45"/>
+        </animation>
+        <animation speed="5.0F" loop="false" name="dead">
+          <frame x="0" y="0" width="0" height="0"/>
+        </animation>
+      </animations>
+    </info>
+      <info faction ="1">
+      <sprite>sprites/Units/LandVehicles/GreyTank.png</sprite>
+      <animations>
+        <animation speed="5.0F" name="idle">
+          <frame x="175" y="538" width="26" height="45"/>
+        </animation>
+        <animation speed="5.0F" name="moving_right">
+          <frame x="163" y="0" width="52" height="58"/>
+        </animation>
+        <animation speed="5.0F" name="moving_left">
+          <frame x="0" y="0" width="53" height="27"/>
+        </animation>
+        <animation speed="5.0F" name="moving_up">
+          <frame x="175" y="538" width="26" height="45"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down">
+          <frame x="175" y="262" width="27" height="36"/>
+        </animation>
+        <animation speed="5.0F" name="moving_up_left">
+          <frame x="202" y="539" width="39" height="44"/>
+        </animation>
+        <animation speed="5.0F" name="moving_up_right">
+          <frame x="103" y="631" width="36" height="61"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down_left">
+          <frame x="1" y="299" width="41" height="36"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down_right">
+          <frame x="150" y="336" width="40" height="36"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_up">
+          <frame x="175" y="538" width="26" height="45"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_down">
+          <frame x="175" y="262" width="27" height="36"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_left">
+          <frame x="0" y="0" width="53" height="27"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_right">
+          <frame x="163" y="0" width="52" height="58"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_up_right">
+          <frame x="103" y="631" width="36" height="61"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_up_left">
+          <frame x="202" y="539" width="39" height="44"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_down_right">
+          <frame x="150" y="336" width="40" height="36"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_down_left">
+          <frame x="1" y="299" width="41" height="36"/>
+        </animation>
+        <animation speed="10.0F" loop="false" name="dying">
+          <frame x="175" y="538" width="26" height="45"/>
+        </animation>
+        <animation speed="5.0F" loop="false" name="dead">
+          <frame x="0" y="0" width="0" height="0"/>
+        </animation>
+      </animations>
+    </info>
+  </entity>
+  
+<!--PRISM TANK-->
+  <entity type ="6">
+    <info faction ="0">
+      <sprite>sprites/Units/LandVehicles/GreyTank.png</sprite>
+      <animations>
+        <animation speed="5.0F" name="idle">
+          <frame x="175" y="538" width="26" height="45"/>
+        </animation>
+        <animation speed="5.0F" name="moving_right">
+          <frame x="163" y="0" width="52" height="58"/>
+        </animation>
+        <animation speed="5.0F" name="moving_left">
+          <frame x="0" y="0" width="53" height="27"/>
+        </animation>
+        <animation speed="5.0F" name="moving_up">
+          <frame x="175" y="538" width="26" height="45"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down">
+          <frame x="175" y="262" width="27" height="36"/>
+        </animation>
+        <animation speed="5.0F" name="moving_up_left">
+          <frame x="202" y="539" width="39" height="44"/>
+        </animation>
+        <animation speed="5.0F" name="moving_up_right">
+          <frame x="103" y="631" width="36" height="61"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down_left">
+          <frame x="1" y="299" width="41" height="36"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down_right">
+          <frame x="150" y="336" width="40" height="36"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_up">
+          <frame x="175" y="538" width="26" height="45"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_down">
+          <frame x="175" y="262" width="27" height="36"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_left">
+          <frame x="0" y="0" width="53" height="27"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_right">
+          <frame x="163" y="0" width="52" height="58"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_up_right">
+          <frame x="103" y="631" width="36" height="61"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_up_left">
+          <frame x="202" y="539" width="39" height="44"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_down_right">
+          <frame x="150" y="336" width="40" height="36"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_down_left">
+          <frame x="1" y="299" width="41" height="36"/>
+        </animation>
+        <animation speed="10.0F" loop="false" name="dying">
+          <frame x="175" y="538" width="26" height="45"/>
+        </animation>
+        <animation speed="5.0F" loop="false" name="dead">
+          <frame x="0" y="0" width="0" height="0"/>
+        </animation>
+      </animations>
+    </info>
+  <info faction ="1">
+      <sprite>sprites/Units/LandVehicles/GreyTank.png</sprite>
+      <animations>
+        <animation speed="5.0F" name="idle">
+          <frame x="175" y="538" width="26" height="45"/>
+        </animation>
+        <animation speed="5.0F" name="moving_right">
+          <frame x="163" y="0" width="52" height="58"/>
+        </animation>
+        <animation speed="5.0F" name="moving_left">
+          <frame x="0" y="0" width="53" height="27"/>
+        </animation>
+        <animation speed="5.0F" name="moving_up">
+          <frame x="175" y="538" width="26" height="45"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down">
+          <frame x="175" y="262" width="27" height="36"/>
+        </animation>
+        <animation speed="5.0F" name="moving_up_left">
+          <frame x="202" y="539" width="39" height="44"/>
+        </animation>
+        <animation speed="5.0F" name="moving_up_right">
+          <frame x="103" y="631" width="36" height="61"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down_left">
+          <frame x="1" y="299" width="41" height="36"/>
+        </animation>
+        <animation speed="5.0F" name="moving_down_right">
+          <frame x="150" y="336" width="40" height="36"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_up">
+          <frame x="175" y="538" width="26" height="45"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_down">
+          <frame x="175" y="262" width="27" height="36"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_left">
+          <frame x="0" y="0" width="53" height="27"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_right">
+          <frame x="163" y="0" width="52" height="58"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_up_right">
+          <frame x="103" y="631" width="36" height="61"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_up_left">
+          <frame x="202" y="539" width="39" height="44"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_down_right">
+          <frame x="150" y="336" width="40" height="36"/>
+        </animation>
+        <animation speed="5.0F" name="attacking_down_left">
+          <frame x="1" y="299" width="41" height="36"/>
+        </animation>
+        <animation speed="10.0F" loop="false" name="dying">
+          <frame x="175" y="538" width="26" height="45"/>
+        </animation>
+        <animation speed="5.0F" loop="false" name="dead">
+          <frame x="0" y="0" width="0" height="0"/>
         </animation>
       </animations>
     </info>
