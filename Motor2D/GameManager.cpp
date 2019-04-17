@@ -1,3 +1,4 @@
+#include "j1App.h"
 #include "CardManager.h"
 #include "Deck.h"
 #include "EncounterNode.h"
@@ -5,7 +6,6 @@
 #include "StrategyBuilding.h"
 #include "CardManager.h"
 #include "EntityManager.h"
-#include "j1App.h"
 
 #include "GameManager.h"
 
@@ -39,6 +39,8 @@ bool GameManager::Start()
 
 bool GameManager::CleanUp()
 {
+	collection.clear();
+	encounter_tree->CleanTree();
 	return true;
 }
 
@@ -66,7 +68,6 @@ void GameManager::CreatePlayerDeck()
 	collection.push_back(App->card_manager->CreateCard(EntityType::HARRIER));
 
 	combat_deck = new Deck();
-	combat_deck->delete_cards = true;
 	combat_deck->AddCard(GetCardFromCollection(EntityType::G_I));
 	combat_deck->AddCard(GetCardFromCollection(EntityType::SNIPER));
 	combat_deck->AddCard(GetCardFromCollection(EntityType::NAVY_SEAL));

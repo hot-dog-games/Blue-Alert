@@ -136,7 +136,7 @@ void CardManager::LoadCardUpgrades(Card * card, pugi::xml_node upgrades_node)
 
 void Card::Upgrade()
 {
-	level += 1;
+	level++;
 	info.stats.find("health")->second->IncreaseMaxValue(info.scaling.health_upgrade);
 	info.stats.find("damage")->second->IncreaseMaxValue(info.scaling.attack_damage_upgrade);
 	info.stats.find("defense")->second->IncreaseMaxValue(info.scaling.defense_upgrade);

@@ -100,6 +100,8 @@ bool BattleScene::Update(float dt)
 		App->input->GetMousePosition(x, y);
 		iPoint p = App->render->ScreenToWorld(x, y);
 
+		//-------SHORTCUTS-----------------------//
+
 		if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 			allied_core->UseCard(CN_FIRST, { (float)p.x, (float)p.y });
 
@@ -111,6 +113,8 @@ bool BattleScene::Update(float dt)
 
 		if (App->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
 			allied_core->UseCard(CN_FOURTH, { (float)p.x, (float)p.y });
+
+		//---------------------------------------//
 
 
 		if (!allied_core->IsAlive())
