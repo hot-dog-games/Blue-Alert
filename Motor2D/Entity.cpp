@@ -20,7 +20,6 @@ Entity::Entity(pugi::xml_node entity_node, fPoint position, Faction faction)
 	this->faction = faction;
 	this->position = position;
 
-	entity_node = entity_node.find_child_by_attribute("faction", std::to_string((int)faction).c_str());
 	LoadSprite(entity_node);
 	LoadAnimations(entity_node);
 }

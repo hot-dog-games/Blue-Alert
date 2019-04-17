@@ -61,9 +61,6 @@
     <ClCompile Include="Window.cpp">
       <Filter>Engine\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="MapMenuScene.cpp">
-      <Filter>Engine\Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
@@ -93,9 +90,6 @@
     </ClCompile>
     <ClCompile Include="PerfTimer.cpp">
       <Filter>Engine\Tools</Filter>
-    </ClCompile>
-    <ClCompile Include="StrategyMap.cpp">
-      <Filter>Engine\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="StrategyBuilding.cpp">
       <Filter>Engine\Entities</Filter>
@@ -141,6 +135,12 @@
     </ClCompile>
     <ClCompile Include="CoreAI.cpp">
       <Filter>Engine\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="BattleScene.cpp">
+      <Filter>Engine\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="StrategyMapScene.cpp">
+      <Filter>Engine\Scenes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -207,9 +207,6 @@
     <ClInclude Include="Window.h">
       <Filter>Engine\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="MapMenuScene.h">
-      <Filter>Engine\Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="TestingScene.h">
       <Filter>Engine\Scenes</Filter>
     </ClInclude>
@@ -245,9 +242,6 @@
     </ClInclude>
     <ClInclude Include="PerfTimer.h">
       <Filter>Engine\Tools</Filter>
-    </ClInclude>
-    <ClInclude Include="StrategyMap.h">
-      <Filter>Engine\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="StrategyBuilding.h">
       <Filter>Engine\Entities</Filter>
@@ -299,6 +293,12 @@
     </ClInclude>
     <ClInclude Include="CoreAI.h">
       <Filter>Engine\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="BattleScene.h">
+      <Filter>Engine\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="StrategyMapScene.h">
+      <Filter>Engine\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

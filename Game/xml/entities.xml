@@ -9,32 +9,90 @@
     </stats>
 
     <info faction="0">
-      <sprite>textures/buildings/sprite_core.png</sprite>
+      <sprite>sprites/Buildings/Allied_Core.png</sprite>
       <animations>
         <animation speed="5.0F" name="idle">
-          <frame x="45" y="52" width="147" height="129"/>
+          <frame x="84" y="1" width="94" height="136"/>
         </animation>
         <animation speed="1.0F" loop="false" name="die">
-          <frame x="45" y="861" width="147" height="128"/>
+          <frame x="84" y="1" width="94" height="136"/>
         </animation>
         <animation speed="5.0F" loop="false" name="destroyed">
-          <frame x="45" y="861" width="147" height="128"/>
+          <frame x="84" y="1" width="94" height="136"/>
         </animation>
       </animations>     
     </info>
     <info faction="1">
-      <sprite>textures/buildings/sprite_core.png</sprite>
-      <animations>
-        <animation speed="5.0F" name="idle">
-          <frame x="45" y="52" width="147" height="129"/>
-        </animation>
-        <animation speed="5.0F" loop ="false" name="die">
-          <frame x="45" y="861" width="147" height="128"/>
-        </animation>
-        <animation speed="5.0F" loop="false" name="destroyed">
-          <frame x="45" y="861" width="147" height="128"/>
-        </animation>
-      </animations>
+	  <building core_type="10">
+		  <sprite>sprites/Buildings/InfantryBuilding.png</sprite>
+		  <animations>
+			<animation speed="5.0F" name="idle">
+			  <frame x="2" y="12" width="127" height="104"/>
+			</animation>
+			<animation speed="5.0F" loop ="false" name="die">
+              <frame x="152" y="12" width="127" height="104"/>
+			</animation>
+			<animation speed="5.0F" loop="false" name="destroyed">
+              <frame x="152" y="12" width="127" height="104"/>
+			</animation>
+		  </animations>
+	  </building>
+	  <building core_type="11">
+		  <sprite>sprites/Buildings/AerialBuilding.png</sprite>
+		  <animations>
+			<animation speed="5.0F" name="idle">
+              <frame x="18" y="7" width="177" height="109"/>
+		  </animation>
+			<animation speed="5.0F" loop ="false" name="die">
+              <frame x="209" y="7" width="174" height="108"/>
+			</animation>
+			<animation speed="5.0F" loop="false" name="destroyed">
+              <frame x="209" y="7" width="174" height="108"/>
+			</animation>
+		  </animations>
+	  </building>
+	  <building core_type="12">
+		  <sprite>sprites/Buildings/LandBuilding.png</sprite>
+		  <animations>
+			<animation speed="5.0F" name="idle">
+              <frame x="16" y="11" width="141" height="116"/>
+			</animation>
+			<animation speed="5.0F" loop ="false" name="die">
+              <frame x="226" y="11" width="141" height="116"/>
+			</animation>
+			<animation speed="5.0F" loop="false" name="destroyed">
+              <frame x="226" y="11" width="141" height="116"/>
+			</animation>
+		  </animations>
+	  </building>
+	  <building core_type="13">
+		  <sprite>sprites/Buildings/GoldBuilding.png</sprite>
+		  <animations>
+			<animation speed="5.0F" name="idle">
+              <frame x="35" y="18" width="128" height="127"/>
+			</animation>
+			<animation speed="5.0F" loop ="false" name="die">
+              <frame x="245" y="17" width="127" height="128"/>
+			</animation>
+			<animation speed="5.0F" loop="false" name="destroyed">
+              <frame x="245" y="17" width="127" height="128"/>
+			</animation>
+		  </animations>
+	  </building>
+	  <building core_type="14">
+		  <sprite>sprites/Buildings/StoreBuilding.png</sprite>
+		  <animations>
+			<animation speed="5.0F" name="idle">
+			  <frame x="44" y="5" width="148" height="166"/>
+			</animation>
+			<animation speed="5.0F" loop ="false" name="die">
+			  <frame x="276" y="8" width="154" height="163"/>
+			</animation>
+			<animation speed="5.0F" loop="false" name="destroyed">
+			  <frame x="276" y="8" width="154" height="163"/>
+			</animation>
+		  </animations>
+	  </building>
     </info>
   </entity>
    

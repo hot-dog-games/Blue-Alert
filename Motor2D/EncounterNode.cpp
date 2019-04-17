@@ -6,6 +6,7 @@
 #include "Map.h"
 #include "UIButton.h"
 #include "StrategyBuilding.h"
+#include <time.h>
 #include "EncounterNode.h"
 
 
@@ -28,6 +29,11 @@ int EncounterNode::GetEncounterType() const
 void EncounterNode::SetEncounterType(int type)
 {
 	encounter->type = type;
+}
+
+std::vector<int> EncounterNode::GetEncounterDeck()
+{
+	return encounter->deck;
 }
 
 void EncounterNode::SetParent(EncounterNode * parent)
@@ -62,21 +68,20 @@ fPoint EncounterNode::GetPosition()
 	return position;
 }
 
-
-void EncounterNode::LoadEncounterInfo(pugi::xml_node encounter_node)
+void EncounterNode::FillEncounterDeck()
 {
-	encounter->type = encounter_node.attribute("name").as_int();
-	encounter->ai_difficulty = encounter_node.attribute("ai_difficulty").as_int();
+	std::vector<int> pool = { 1, 2, 3 ,4 ,5, 6, 7, 8, 9 };
+	std::vector<int>::iterator it;
 
-	pugi::xml_node deck_node = encounter_node.child("deck");
-
-	int i = 0;
-
-	for (pugi::xml_node_iterator it = deck_node.begin(); it != deck_node.end(); ++it)
+	for (int i = 0; i < encounter->deck_size; i++)
 	{
-		encounter->deck[i] = it->attribute("type").as_uint();
-		i++;
+		int position = rand() % pool.size();
+		int card = pool[position];
+		encounter->deck.push_back(card);
+		it = pool.begin() + position;
+		pool.erase(it);
 	}
+
 }
 
 void EncounterNode::CreateNodeEntity()

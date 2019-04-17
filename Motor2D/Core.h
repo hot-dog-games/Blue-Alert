@@ -12,7 +12,7 @@ struct Card;
 class Core : public StaticEntity
 {
 public:
-	Core(pugi::xml_node entity_config, fPoint position, Faction faction);
+	Core(pugi::xml_node entity_config, fPoint position, Faction faction, pugi::xml_node stats_node);
 	~Core();
 
 	virtual bool Update(float dt);
