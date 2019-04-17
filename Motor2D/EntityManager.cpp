@@ -129,6 +129,7 @@ Core* EntityManager::CreateCore(EntityType type, fPoint position, Deck* deck, Fa
 	{
 		entity = new Core(entity_node, position, faction);
 	}
+
 	entities.push_back(entity);
 	entity->type = type;
 	entity->Start();
@@ -189,8 +190,19 @@ void EntityManager::GetEntitiesInArea(SDL_Rect area, std::list<Entity*> &list)
 	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
 	{
 		ent = (*entity);
-		if (ent->type != CORE && (ent->position.x >= area.x && ent->position.x <= area.x + area.w && ent->position.y >= area.y && ent->position.y <= area.y + area.h))
+		if (ent->type != CORE && ent->IsAlive() && 
+			(ent->position.x >= area.x && ent->position.x <= area.x + area.w 
+				&& ent->position.y >= area.y && ent->position.y <= area.y + area.h))
 			list.push_back(ent);
+	}
+}
+
+void EntityManager::SetDebug()
+{
+	debug = !debug;
+	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
+	{
+		(*entity)->SetDebug(debug);
 	}
 }
 

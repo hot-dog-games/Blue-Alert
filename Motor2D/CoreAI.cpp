@@ -68,9 +68,14 @@ bool CoreAI::Update(float dt)
 
 bool CoreAI::PostUpdate()
 {
-	App->render->DrawQuad(lanes[0], 0, 0, 255, 150, true, true);
-	App->render->DrawQuad(lanes[1], 0, 0, 255, 150, true, true);
-	App->render->DrawQuad(lanes[2], 0, 0, 255, 150, true, true);
+	Core::PostUpdate();
+
+	if (debug)
+	{
+		App->render->DrawQuad(lanes[0], 0, 0, 255, 100, true, true);
+		App->render->DrawQuad(lanes[1], 0, 0, 255, 100, true, true);
+		App->render->DrawQuad(lanes[2], 0, 0, 255, 100, true, true);
+	}
 
 	return true;
 }

@@ -56,11 +56,13 @@ public:
 	bool DeleteEntity(Entity* entity);
 	void FindClosestEnemy(fPoint position, Faction faction, Entity* &closest_entity, float &distance);
 	void GetEntitiesInArea(SDL_Rect area, std::list<Entity*> &list);
+	void SetDebug();
 
 private:
 	pugi::xml_document entity_file;
 	pugi::xml_node entity_configs;
 	int id_count = 0;
+	bool debug = false;
 };
 
 #endif //_ENTITYMANAGER_H_

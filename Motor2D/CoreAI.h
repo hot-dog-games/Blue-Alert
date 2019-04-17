@@ -3,7 +3,7 @@
 
 #include "Core.h"
 
-const uint THINK_DELAY = 1.0F;
+const float THINK_DELAY = 1.0F;
 
 class CoreAI : public Core
 {
