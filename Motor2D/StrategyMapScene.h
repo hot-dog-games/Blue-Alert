@@ -52,6 +52,9 @@ private:
 	UIButton* troops_button;
 	UIButton* buildings_button;
 
+	UIButton* deck_buttons[4];
+	
+
 };
 
 #endif

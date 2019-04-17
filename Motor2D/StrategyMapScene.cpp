@@ -38,6 +38,11 @@ bool StrategyMapScene::Start()
 	App->game_manager->GetEncounterTree()->CreateAllNodes();
 	App->game_manager->GetEncounterTree()->UpdateTreeState();
 
+	// Cards
+
+	
+
+
 	//UI
 	uint w, h;
 	App->win->GetWindowSize(w, h);
@@ -69,15 +74,21 @@ bool StrategyMapScene::Start()
 
 	t_b_bg = App->gui->CreateImage({ 20,95 }, { 26,908,986,593 }, main_panel);
 	App->gui->DisableElement(t_b_bg);
-	backbutton_t_b = App->gui->CreateButton({ 940,100 }, small_button_rect, main_panel);
+	backbutton_t_b = App->gui->CreateButton({ 940,100 }, small_button_rect, t_b_bg);
 	back_cross_text = App->gui->CreateLabel({ 15,10 }, "ui/Fonts/command_and_conquer___logo_font_by_dexistor371-d6k2yvb.ttf", 28, "X", { 0,0,0,0 }, 0, backbutton_t_b);
 	App->gui->DisableElement(backbutton_t_b);
-	troops_button = App->gui->CreateButton({380,100 }, large_button_rect, main_panel);
+	troops_button = App->gui->CreateButton({380,100 }, large_button_rect, t_b_bg);
 	troops_text = App->gui->CreateLabel({50,10}, "ui/Fonts/command_and_conquer___logo_font_by_dexistor371-d6k2yvb.ttf", 20, "TROOPS", { 0,0,0,0 }, 0, troops_button);
 	App->gui->DisableElement(troops_button);
-	buildings_button = App->gui->CreateButton({ 600,100 }, large_button_rect, main_panel);
+	buildings_button = App->gui->CreateButton({ 600,100 }, large_button_rect, t_b_bg);
 	buildings_text = App->gui->CreateLabel({ 35,10 }, "ui/Fonts/command_and_conquer___logo_font_by_dexistor371-d6k2yvb.ttf", 20, "BUILDINGS", { 0,0,0,0 }, 0, buildings_button);
 	App->gui->DisableElement(buildings_button);
+
+
+	deck_buttons[0] = App->gui->CreateButton({ 940,100 }, nullptr, t_b_bg);
+	deck_buttons[1] = App->gui->CreateButton({ 940,100 }, nullptr, t_b_bg);
+	deck_buttons[2] = App->gui->CreateButton({ 940,100 }, nullptr, t_b_bg);
+	deck_buttons[3] = App->gui->CreateButton({ 940,100 }, nullptr, t_b_bg);
 
 
 	return true;
@@ -139,6 +150,8 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			//(options = App->gui->CreateImage();
 		}
 		else if (element == menu_button) {
+			App->game_manager->collection;
+
 			App->gui->EnableElement(troops_button);
 			App->gui->EnableElement(buildings_button);
 			App->gui->EnableElement(t_b_bg);

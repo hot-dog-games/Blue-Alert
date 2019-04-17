@@ -37,13 +37,13 @@ public:
 
 	Card* GetCardFromCollection(EntityType card_type);
 	void AddCardToCollection(EntityType card_type);
-
+	std::list<Card*> collection;
 	//----------------------
 
 
 private:
 	uint gold;
-	std::list<Card*> collection;
+	
 	Deck* combat_deck;
 
 	EncounterTree* encounter_tree = nullptr;
