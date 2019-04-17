@@ -60,7 +60,7 @@ bool BattleScene::Start()
 	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterDeck()[2]));
 	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterDeck()[3]));
 
-	allied_core = App->entity_manager->CreateCore(1, { 30,750 }, App->game_manager->GetPalyerDeck(), FACTION_RUSSIAN);
+	allied_core = App->entity_manager->CreateCore(1, { 30,750 }, App->game_manager->GetPlayerDeck(), FACTION_RUSSIAN);
 	enemy_core = App->entity_manager->CreateCore(App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterType(), { 25,85 }, enemy_deck, FACTION_AMERICAN);
 
 	//Initialize UI
@@ -189,15 +189,15 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 		}
 		else if (element == win_continue_two) {
 			if (win_unit_one->selected) {
-				//App->game_manager->AddCardToPlayerCollection(random_num[0]);
+				App->game_manager->AddCardToCollection((EntityType)random_num[0]);
 				App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
 			}
 			else if (win_unit_two->selected) {
-				//App->game_manager->AddCardToPlayerCollection(random_num[1]);
+				App->game_manager->AddCardToCollection((EntityType)random_num[1]);
 				App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
 			}
 			else if (win_unit_three->selected) {
-				//App->game_manager->AddCardToPlayerCollection(random_num[2]);
+				App->game_manager->AddCardToCollection((EntityType)random_num[2]);
 				App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
 			}
 		}
@@ -265,12 +265,12 @@ void BattleScene::StartUI()
 	//Game_UI
 
 	unit_panel = App->gui->CreateImage({ 755,0 }, { 619,0,269,768 });
-	unit_button_one = App->gui->CreateButton({ 35, 365 }, App->gui->LoadUIButton(test_core->GetCard(CN_FIRST)->type, "button"), unit_panel);
-	unit_button_two = App->gui->CreateButton({ 135, 365 }, App->gui->LoadUIButton(test_core->GetCard(CN_SECOND)->type, "button"), unit_panel);
-	unit_button_three = App->gui->CreateButton({ 35, 445 }, App->gui->LoadUIButton(test_core->GetCard(CN_THIRD)->type, "button"), unit_panel);
-	unit_button_four = App->gui->CreateButton({ 135, 445 }, App->gui->LoadUIButton(test_core->GetCard(CN_FOURTH)->type, "button"), unit_panel);
+	unit_button_one = App->gui->CreateButton({ 35, 365 }, App->gui->LoadUIButton(allied_core->GetCard(CN_FIRST)->type, "button"), unit_panel);
+	unit_button_two = App->gui->CreateButton({ 135, 365 }, App->gui->LoadUIButton(allied_core->GetCard(CN_SECOND)->type, "button"), unit_panel);
+	unit_button_three = App->gui->CreateButton({ 35, 445 }, App->gui->LoadUIButton(allied_core->GetCard(CN_THIRD)->type, "button"), unit_panel);
+	unit_button_four = App->gui->CreateButton({ 135, 445 }, App->gui->LoadUIButton(allied_core->GetCard(CN_FOURTH)->type, "button"), unit_panel);
 
-	energy_bar = App->gui->CreateBar({ 764, 358 }, { 601,0,16,274 }, test_core->GetEnergy());
+	energy_bar = App->gui->CreateBar({ 764, 358 }, { 601,0,16,274 }, allied_core->GetEnergy());
 
 	// End Game Screen Win
 	SDL_Rect button_rect[3];
