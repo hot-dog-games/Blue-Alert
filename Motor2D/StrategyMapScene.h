@@ -37,12 +37,16 @@ public:
 private:
 	UIImage* banner;
 	UIImage* options;
+	UIImage* t_b_bg;
 	UILabel* health;
 	UILabel* gold;
 	UILabel* energy;
+	UILabel* text_menu;
 	UIButton* settings_button;
 	UIButton* menu_button;
-	UIImage* main_panel;
+	UIButton* backbutton_t_b_bg;
+	UIButton* troops_button;
+	UIButton* buildings_button;
 };
 
 #endif
