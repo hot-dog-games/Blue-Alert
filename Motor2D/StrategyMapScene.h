@@ -38,6 +38,7 @@ private:
 	UIImage* banner;
 	UIImage* options;
 	UIImage* t_b_bg;
+	UIImage* main_panel;
 	UILabel* health;
 	UILabel* gold;
 	UILabel* energy;
@@ -47,6 +48,7 @@ private:
 	UIButton* backbutton_t_b_bg;
 	UIButton* troops_button;
 	UIButton* buildings_button;
+
 };
 
 #endif
