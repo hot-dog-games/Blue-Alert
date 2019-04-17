@@ -75,6 +75,9 @@ bool BattleScene::Start()
 	unit_button_four = App->gui->CreateButton({ 135, 445 }, test_core->GetCard(CN_FOURTH)->button.anim, unit_panel);
 
 	energy_bar = App->gui->CreateBar({ 764, 358 }, { 601,0,16,274 }, test_core->GetEnergy());
+
+	win_fx = App->audio->LoadFx("audio/fx/Mission/You_victorious.wav");
+	lose_fx = App->audio->LoadFx("audio/fx/Mission/You_Lost.wav");
 	App->audio->PlayMusic("audio/music/9.Destroy-Red Alert2_2.ogg");
 
 	return true;
@@ -121,25 +124,31 @@ bool BattleScene::Update(float dt)
 		if (!test_core->IsAlive())
 		{
 			state = BattleSceneState::LOSE;
+			App->audio->PlayFx(lose_fx, 0);
 			App->PauseGame();
 		}
 		else if (!test_enemy_core->IsAlive())
 		{
 			state = BattleSceneState::WIN;
+			App->audio->PlayFx(win_fx, 0);
 			App->PauseGame();
 		}
 	}
 	break;
 	case BattleScene::BattleSceneState::WIN:
 	{
+
 		if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
 			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
+		
 	}
 	break;
 	case BattleScene::BattleSceneState::LOSE:
 	{
+
 		if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
 			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
+		
 	}
 	break;
 	default:

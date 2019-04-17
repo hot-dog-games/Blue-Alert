@@ -70,6 +70,9 @@ private:
 	UIImage* current_drag;
 	int card_num;
 
+	//Audio fx
+	uint win_fx;
+	uint lose_fx;
 	uint max_energy;
 	uint current_energy;
 
