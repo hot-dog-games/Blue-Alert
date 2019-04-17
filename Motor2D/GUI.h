@@ -23,6 +23,8 @@ class Stat;
 enum GUI_Event {
 	LEFT_CLICK_DOWN,
 	LEFT_CLICK_UP,
+	RIGHT_CLICK_DOWN,
+	RIGHT_CLICK_UP,
 	MOUSE_OVER,
 	MOUSE_EXIT
 };
@@ -63,7 +65,7 @@ public:
 	// Gui creation functions
 	UIImage* CreateImage(iPoint pos, SDL_Rect rect, UIElement* parent = nullptr, bool image = true);
 	UILabel* CreateLabel(iPoint pos, std::string path, int size, std::string text, SDL_Color color, int max_width = 0, UIElement* parent = nullptr);
-	UIButton* CreateButton(iPoint pos, SDL_Rect* sprite_rect, UIElement* parent = nullptr, bool is_interactable = true);
+	UIButton* CreateButton(iPoint pos, SDL_Rect* sprite_rect, UIElement* parent = nullptr, bool is_selectable = false, bool is_interactable = true);
 	UIScrollBar* CreateScrollBar(iPoint pos, float min, float max, ScrollType type = VERTICAL, UIElement* parent = nullptr);
 	UIAnimatedImage* CreateAnimatedImage(iPoint pos, SDL_Rect * rect, int total_sprites, int speed, UIElement* parent = nullptr);
 	UIBar* CreateBar(iPoint pos, SDL_Rect rect, Stat* value, UIElement* parent = nullptr);
@@ -74,12 +76,16 @@ public:
 	void EnableElement(UIElement* element);
 	void DisableElement(UIElement* element);
 
+	SDL_Rect* LoadUIButton(int num, std::string type);
+	SDL_Rect  LoadUIImage(int num);
+
 	SDL_Texture* GetAtlas() const;
 
 private:
 	std::list<UIElement*> elements;
 	SDL_Texture* atlas;
 	std::string atlas_file_name;
+	pugi::xml_document buttons_file;
 
 	//scaling
 

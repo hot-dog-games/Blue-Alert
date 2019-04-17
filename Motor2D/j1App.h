@@ -62,6 +62,7 @@ public:
 	void LoadGame(const char* file);
 	void SaveGame(const char* file) const;
 	void GetSaveGames(std::list<std::string>& list_to_fill) const;
+	float GetFrameRate();
 
 private:
 
@@ -115,7 +116,7 @@ private:
 	char**				args;
 
 	Timer				frame_time;
-	double				frame_rate;
+	float				frame_rate;
 	bool				paused = false;
 	bool				frame_cap = true;
 	Timer				last_sec_frame_time;

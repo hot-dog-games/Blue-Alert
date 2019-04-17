@@ -38,6 +38,8 @@ bool Gui::Awake(pugi::xml_node& conf)
 
 	atlas_file_name = conf.child("atlas").attribute("file").as_string("");
 
+	buttons_file.load_file("xml/ui.xml");
+
 	return ret;
 }
 
@@ -112,7 +114,13 @@ bool Gui::PreUpdate()
 					}
 				}
 			}
-			if (!current_element->clicked && selected_element != current_element)
+			else if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN && current_element->selectable && current_element == selected_element)
+			{
+				current_element->OnMouseClick();
+				App->scene_manager->current_scene->GUIEvent(current_element, RIGHT_CLICK_DOWN);
+				current_element->selected = true;
+			}
+			if (!current_element->clicked && selected_element != current_element && !current_element->selected)
 			{
 				current_element->OnMouseExit();
 				App->scene_manager->current_scene->GUIEvent(current_element, MOUSE_EXIT);
@@ -189,9 +197,9 @@ UILabel* Gui::CreateLabel(iPoint pos, std::string path, int size, std::string te
 	return label;
 }
 
-UIButton* Gui::CreateButton(iPoint pos, SDL_Rect* sprite_rect, UIElement* parent, bool is_interactable)
+UIButton* Gui::CreateButton(iPoint pos, SDL_Rect* sprite_rect, UIElement* parent, bool is_selectable, bool is_interactable)
 {
-	UIButton* button = new UIButton(pos, sprite_rect, is_interactable);
+	UIButton* button = new UIButton(pos, sprite_rect, is_selectable, is_interactable);
 	button->parent = parent;
 	elements.push_back(button);
 
@@ -245,6 +253,7 @@ void Gui::EnableElement(UIElement* ele)
 			EnableElement(*element);
 	}
 }
+
 void Gui::DisableElement(UIElement* ele)
 {
 	ele->SetEnabled(false);
@@ -254,6 +263,93 @@ void Gui::DisableElement(UIElement* ele)
 			DisableElement(*element);
 	}
 }
+
+SDL_Rect* Gui::LoadUIButton(int num, std::string type)
+{
+	pugi::xml_node buttons_node = buttons_file.first_child().child("ui_button");
+
+	std::string name;
+
+	switch (num) {
+	case 1:
+		name = "GI";
+		break;
+	case 2:
+		name = "Sniper";
+		break;
+	case 3:
+		name = "NavySeal";
+		break;
+	case 4:
+		name = "GrizzlyTank";
+		break;
+	case 5:
+		name = "RobotTank";
+		break;
+	case 6:
+		name = "PrismTank";
+		break;
+	case 7:
+		name = "NightHawk";
+		break;
+	case 8:
+		name = "Harrier";
+		break;
+	case 9:
+		name = "BlackEagle";
+		break;
+	}
+
+	SDL_Rect* button_rect = new SDL_Rect[4];
+	int anim_num = 0;
+
+	for (pugi::xml_node it_node = buttons_node.child(name.c_str()).child(type.c_str()).child("frame"); it_node; it_node = it_node.next_sibling()) {
+		button_rect[anim_num].x = it_node.attribute("x").as_uint();
+		button_rect[anim_num].y = it_node.attribute("y").as_uint();
+		button_rect[anim_num].w = it_node.attribute("width").as_uint();
+		button_rect[anim_num].h = it_node.attribute("height").as_uint();
+
+		anim_num++;
+	}
+
+	return button_rect;
+}
+
+SDL_Rect Gui::LoadUIImage(int num)
+{
+	pugi::xml_node images_node = buttons_file.first_child().child("ui_image");
+
+	std::string name;
+
+	switch (num) {
+	case 10:
+		name = "Infantry";
+		break;
+	case 11:
+		name = "Aerial";
+		break;
+	case 12:
+		name = "Land";
+		break;
+	case 13:
+		name = "Gold";
+		break;
+	case 14:
+		name = "Store";
+		break;
+	}
+
+	SDL_Rect image_rect;
+	pugi::xml_node rect_node = images_node.child(name.c_str());
+
+	image_rect.x = rect_node.attribute("x").as_uint();
+	image_rect.y = rect_node.attribute("y").as_uint();
+	image_rect.w = rect_node.attribute("width").as_uint();
+	image_rect.h = rect_node.attribute("height").as_uint();
+
+	return image_rect;
+}
+
 UIElement* Gui::GetElementUnderMouse()
 {
 	int x, y;
@@ -280,6 +376,47 @@ UIElement* Gui::GetElementUnderMouse()
 	return nullptr;
 }
 
+//void Gui::LoadUI(std::string xml_path)
+//{
+//	pugi::xml_document ui_file;
+//	ui_file.load_file(xml_path.c_str());
+//	pugi::xml_node ui_node = ui_file.first_child();
+//
+//	for (pugi::xml_node ui_element_node = ui_node.child("element"); ui_element_node; ui_element_node = ui_element_node.next_sibling())
+//	{
+//		std::string type = ui_element_node.attribute("type").as_string();
+//		std::string name = ui_element_node.attribute("name").as_string();
+//
+//		UIElement* ui_element = nullptr;
+//		pugi::xml_node ui_element_attributes = ui_element_node.first_child();
+//
+//		if (type == "button")
+//		{
+//			SDL_Rect sprite_rect[4];
+//			ui_element = App->gui->CreateButton({
+//				ui_element_attributes.attribute("pos_x").as_uint(),
+//				ui_element_attributes.attribute("pos_y").as_uint()
+//				},
+//				)
+//		}
+//		else if (type == "label")
+//		{
+//
+//		}
+//		else if (type == "image")
+//		{
+//
+//		}
+//		else if (type == "bar")
+//		{
+//
+//		}
+//
+//		if (ui_element != nullptr)
+//			ui_elements.insert(std::pair<std::string, UIElement*>(name, ui_element));
+//	}
+//}
+
 
 
 // const getter for atlas
@@ -287,5 +424,6 @@ SDL_Texture* Gui::GetAtlas() const
 {
 	return atlas;
 }
+
 
 // class Gui ---------------------------------------------------

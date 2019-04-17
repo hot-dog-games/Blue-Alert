@@ -12,7 +12,6 @@ class Entity;
 class UIBar;
 class Core;
 class UIButton;
-enum CardNumber;
 
 struct Card;
 
@@ -48,8 +47,10 @@ public:
 	virtual bool GUIEvent(UIElement* element, GUI_Event gui_event);
 
 private:
-	void CreateDrag(int num, UIElement* element);
+	void CreateDrag(int num, int type, UIElement* element);
 	void ReleaseDrag();
+
+	void StartUI();
 
 private:
 	enum class BattleSceneState {
@@ -67,8 +68,24 @@ private:
 	UIButton*		unit_button_four;
 	UIBar*			energy_bar;
 
+	UIImage*		win_panel_one;
+	UIImage*		win_panel_two;
+	UIButton*		win_continue_one;
+	UIButton*		win_continue_two;
+	UILabel*		win_text_one;
+	UILabel*		win_text_two;
+	UIImage*		win_building;
+	UIButton*		win_unit_one;
+	UIButton*		win_unit_two;
+	UIButton*		win_unit_three;
+
+	UIImage*		lose_panel;
+	UILabel*		lose_text;
+	UIButton*		lose_continue;
+
 	UIImage* current_drag;
 	int card_num;
+	int random_num[3];
 
 	//Audio fx
 	uint win_fx;
@@ -78,8 +95,8 @@ private:
 	uint max_energy;
 	uint current_energy;
 
-	Core* test_core;
-	Core* test_enemy_core;
+	Core* allied_core;
+	Core* enemy_core;
 };
 
 #endif

@@ -7,7 +7,7 @@
 class UIButton : public UIElement
 {
 public:
-	UIButton(iPoint pos, SDL_Rect* sprite_rect, bool is_interactable = true);
+	UIButton(iPoint pos, SDL_Rect* sprite_rect, bool is_selectable = false, bool is_interactable = true);
 	~UIButton();
 
 	SDL_Rect* anim;
