@@ -1,5 +1,5 @@
-#ifndef _TESTING_SCENE_H_
-#define _TESTING_SCENE_H_
+#ifndef _BATTLE_SCENE_H_
+#define _BATTLE_SCENE_H_
 
 #include "Scene.h"
 #include "p2Point.h"
@@ -11,17 +11,23 @@ struct UIImage;
 class Entity;
 class UIBar;
 class Core;
-class CoreAI;
 class UIButton;
-enum CardNumber;
 
 struct Card;
 
-class TestingScene : public Scene
+enum CardNumber {
+	CN_UNKNOWN = -1,
+	CN_FIRST,
+	CN_SECOND,
+	CN_THIRD,
+	CN_FOURTH
+};
+
+class BattleScene : public Scene
 {
 public:
-	TestingScene();
-	~TestingScene();
+	BattleScene();
+	~BattleScene();
 
 	// Called before the first frame
 	virtual bool Start();
@@ -40,11 +46,11 @@ public:
 
 	virtual bool GUIEvent(UIElement* element, GUI_Event gui_event);
 
-	void StartUI();
-
 private:
 	void CreateDrag(int num, UIElement* element);
 	void ReleaseDrag();
+
+	void StartUI();
 
 private:
 	enum class BattleSceneState {
@@ -54,8 +60,6 @@ private:
 		LOSE
 	};
 	BattleSceneState state = BattleSceneState::FIGHT;
-
-	SDL_Texture*	debug_tex;
 
 	UIImage*		unit_panel;
 	UIButton*		unit_button_one;
@@ -86,8 +90,8 @@ private:
 	uint max_energy;
 	uint current_energy;
 
-	Core* test_core;
-	Core* test_enemy_core;
+	Core* allied_core;
+	Core* enemy_core;
 };
 
 #endif

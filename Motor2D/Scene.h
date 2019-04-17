@@ -35,6 +35,8 @@ public:
 	virtual bool Save(pugi::xml_node&) const { return true; };
 
 	virtual bool GUIEvent(UIElement*, GUI_Event) { return true; };
+
+	virtual void StartUI() {};
 };
 
 #endif // _SCENE_H_

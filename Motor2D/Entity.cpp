@@ -39,6 +39,10 @@ void Entity::DecreaseLife(float damage)
 
 	LOG("current life is: %f", stats.find("health")->second->GetValue());
 }
+void Entity::SetDebug(bool value)
+{
+	debug = value;
+}
 bool Entity::IsAlive()
 {
 	return (stats.find("health")->second->GetValue() > 0);
