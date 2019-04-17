@@ -22,6 +22,14 @@
       <frame x="0" y="0" width="100" height="80"/>
       <unit_drag x="0" y="0" width="100" height="80"/>
     </button>
+
+    <upgrade>
+      <frame x="747" y="853" width="105" height="106"/>
+      <frame x="747" y="977" width="105" height="106"/>
+      <frame x="747" y="1107" width="105" height="106"/>
+      <frame x="747" y="853" width="105" height="106"/>
+    </upgrade>
+    
   </card>
   
   <card type ="2">
@@ -47,6 +55,14 @@
       <frame x="0" y="0" width="100" height="80"/>
       <unit_drag x="400" y="0" width="100" height="80"/>
     </button>
+
+    <upgrade>
+      <frame x="960" y="853" width="105" height="106"/>
+      <frame x="960" y="977" width="105" height="106"/>
+      <frame x="960" y="1107" width="105" height="106"/>
+      <frame x="960" y="853" width="105" height="106"/>
+    </upgrade>
+    
   </card>
 
   <card type ="3">
@@ -72,6 +88,14 @@
       <frame x="0" y="0" width="100" height="80"/>
       <unit_drag x="200" y="0" width="100" height="80"/>
     </button>
+
+    <upgrade>
+      <frame x="854" y="853" width="105" height="106"/>
+      <frame x="854" y="977" width="105" height="106"/>
+      <frame x="854" y="1107" width="105" height="106"/>
+      <frame x="854" y="853" width="105" height="106"/>
+    </upgrade>
+    
   </card>
 
   <card type ="4">
@@ -97,6 +121,14 @@
       <frame x="0" y="0" width="100" height="80"/>
       <unit_drag x="400" y="160" width="100" height="80"/>
     </button>
+
+    <upgrade>
+      <frame x="1067" y="853" width="105" height="106"/>
+      <frame x="1067" y="977" width="105" height="106"/>
+      <frame x="1067" y="1107" width="105" height="106"/>
+      <frame x="1067" y="853" width="105" height="106"/>
+    </upgrade>
+
   </card>
 
   <card type ="5">
@@ -122,6 +154,14 @@
       <frame x="0" y="0" width="100" height="80"/>
       <unit_drag x="0" y="160" width="100" height="80"/>
     </button>
+
+    <upgrade>
+      <frame x="1282" y="853" width="105" height="106"/>
+      <frame x="1282" y="977" width="105" height="106"/>
+      <frame x="1282" y="1107" width="105" height="106"/>
+      <frame x="1282" y="853" width="105" height="106"/>
+    </upgrade>
+    
   </card>
 
   <card type ="6">
@@ -147,9 +187,18 @@
       <frame x="0" y="0" width="100" height="80"/>
       <unit_drag x="400" y="160" width="100" height="80"/>
     </button>
+
+    <upgrade>
+      <frame x="1175" y="853" width="105" height="106"/>
+      <frame x="1175" y="977" width="105" height="106"/>
+      <frame x="1175" y="1107" width="105" height="106"/>
+      <frame x="1175" y="853" width="105" height="106"/>
+    </upgrade>
+    
   </card>
 
   <card type ="7">
+    <name>Nighthawk</name>
     <combat attack_type="0" armored="false"/>
     <stats>
       <stat stat="health" value ="100"/>
@@ -171,10 +220,18 @@
       <frame x="0" y="0" width="100" height="80"/>
       <unit_drag x="200" y="320" width="100" height="80"/>
     </button>
+
+    <upgrade>
+      <frame x="1494" y="853" width="105" height="106"/>
+      <frame x="1494" y="977" width="105" height="106"/>
+      <frame x="1494" y="1107" width="105" height="106"/>
+      <frame x="1494" y="853" width="105" height="106"/>
+    </upgrade>
+    
   </card>
 
   <card type ="8">
-    <name>Harrrier</name>
+    <name>Harrier</name>
     <combat attack_type="1" armored="true"/>
     <stats>
       <stat stat="health" value ="80"/>
@@ -196,6 +253,14 @@
       <frame x="0" y="0" width="100" height="80"/>
       <unit_drag x="0" y="320" width="100" height="80"/>
     </button>
+
+    <upgrade>
+      <frame x="1599" y="853" width="105" height="106"/>
+      <frame x="1599" y="977" width="105" height="106"/>
+      <frame x="1599" y="1107" width="105" height="106"/>
+      <frame x="1599" y="853" width="105" height="106"/>
+    </upgrade>
+    
   </card>
 
   <card type ="9">
@@ -221,6 +286,14 @@
       <frame x="0" y="0" width="100" height="80"/>
       <unit_drag x="400" y="320" width="100" height="80"/>
     </button>
+
+    <upgrade>
+      <frame x="1389" y="853" width="105" height="106"/>
+      <frame x="1389" y="977" width="105" height="106"/>
+      <frame x="1389" y="1107" width="105" height="106"/>
+      <frame x="1389" y="853" width="105" height="106"/>
+    </upgrade>
+    
   </card>
   
 </config>

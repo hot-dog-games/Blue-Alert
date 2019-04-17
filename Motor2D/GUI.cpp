@@ -112,7 +112,13 @@ bool Gui::PreUpdate()
 					}
 				}
 			}
-			if (!current_element->clicked && selected_element != current_element)
+			else if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN && current_element->selectable)
+			{
+				current_element->OnMouseClick();
+				App->scene_manager->current_scene->GUIEvent(current_element, RIGHT_CLICK_DOWN);
+				current_element->selected = true;
+			}
+			if (!current_element->clicked && selected_element != current_element && !current_element->selected)
 			{
 				current_element->OnMouseExit();
 				App->scene_manager->current_scene->GUIEvent(current_element, MOUSE_EXIT);
@@ -280,6 +286,47 @@ UIElement* Gui::GetElementUnderMouse()
 	return nullptr;
 }
 
+//void Gui::LoadUI(std::string xml_path)
+//{
+//	pugi::xml_document ui_file;
+//	ui_file.load_file(xml_path.c_str());
+//	pugi::xml_node ui_node = ui_file.first_child();
+//
+//	for (pugi::xml_node ui_element_node = ui_node.child("element"); ui_element_node; ui_element_node = ui_element_node.next_sibling())
+//	{
+//		std::string type = ui_element_node.attribute("type").as_string();
+//		std::string name = ui_element_node.attribute("name").as_string();
+//
+//		UIElement* ui_element = nullptr;
+//		pugi::xml_node ui_element_attributes = ui_element_node.first_child();
+//
+//		if (type == "button")
+//		{
+//			SDL_Rect sprite_rect[4];
+//			ui_element = App->gui->CreateButton({
+//				ui_element_attributes.attribute("pos_x").as_uint(),
+//				ui_element_attributes.attribute("pos_y").as_uint()
+//				},
+//				)
+//		}
+//		else if (type == "label")
+//		{
+//
+//		}
+//		else if (type == "image")
+//		{
+//
+//		}
+//		else if (type == "bar")
+//		{
+//
+//		}
+//
+//		if (ui_element != nullptr)
+//			ui_elements.insert(std::pair<std::string, UIElement*>(name, ui_element));
+//	}
+//}
+
 
 
 // const getter for atlas
@@ -287,5 +334,6 @@ SDL_Texture* Gui::GetAtlas() const
 {
 	return atlas;
 }
+
 
 // class Gui ---------------------------------------------------

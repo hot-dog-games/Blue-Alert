@@ -23,6 +23,8 @@ class Stat;
 enum GUI_Event {
 	LEFT_CLICK_DOWN,
 	LEFT_CLICK_UP,
+	RIGHT_CLICK_DOWN,
+	RIGHT_CLICK_UP,
 	MOUSE_OVER,
 	MOUSE_EXIT
 };
@@ -71,6 +73,7 @@ public:
 	void DeleteElement(UIElement* element);
 
 	UIElement* GetElementUnderMouse();
+	void LoadUI(std::string xml_path);
 	void EnableElement(UIElement* element);
 	void DisableElement(UIElement* element);
 

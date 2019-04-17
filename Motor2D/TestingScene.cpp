@@ -10,17 +10,19 @@
 #include "EntityManager.h"
 #include "Entity.h"
 #include "Core.h"
-#include "PathFinding.h"
 #include "UIAnimatedImage.h"
 #include "UIButton.h"
 #include "UIBar.h"
 #include "GUI.h"
+#include "Pathfinding.h"
 #include "SceneManager.h"
 #include "TransitionManager.h"
 #include "CardManager.h"
 #include "Deck.h"
 #include "TestingScene.h"
 #include "UIImage.h"
+#include "UILabel.h"
+#include "GameManager.h"
 
 
 TestingScene::TestingScene() : Scene()
@@ -68,6 +70,23 @@ bool TestingScene::Start()
 	
 	energy_bar = App->gui->CreateBar({ 764, 358 }, { 601,0,16,274 }, test_core->GetEnergy());
 
+	win_panel_one = App->gui->CreateImage({ 139,150 }, { 1,852,744,466 });
+	win_panel_two = App->gui->CreateImage({ 139,150 }, { 1,852,744,466 });
+	win_text_one = App->gui->CreateLabel({ 30,30 }, "fonts/red_alert.ttf", 40, "Congratulations, you've conquered this zone and unlocked the next building!", { 255,232,2, 255 }, 710, win_panel_one);
+	SDL_Rect button_rect[3];
+	button_rect[0] = { 221,533,220,51 };
+	button_rect[1] = { 221,585,220,51 };
+	button_rect[2] = { 221,637,220,51 };
+	win_continue_one = App->gui->CreateButton({ 262,375 }, button_rect, win_panel_one);
+
+	win_unit_one = App->gui->CreateButton({ 130,200 }, test_core->GetCard(CN_FIRST)->button.upgrade, win_panel_two);
+	win_unit_two = App->gui->CreateButton({ 320,200 }, test_core->GetCard(CN_SECOND)->button.upgrade, win_panel_two);
+	win_unit_three = App->gui->CreateButton({ 510,200 }, test_core->GetCard(CN_THIRD)->button.upgrade, win_panel_two);
+	win_text_two = App->gui->CreateLabel({ 30,30 }, "fonts/red_alert.ttf", 40, "Upgrade a troop or choose a new one to add to your deck", { 255,232,2, 255 }, 710, win_panel_two);
+	win_continue_two = App->gui->CreateButton({ 262,375 }, button_rect, win_panel_two);
+
+	App->gui->DisableElement((UIElement*)win_panel_one);
+	App->gui->DisableElement((UIElement*)win_panel_two);
 	return true;
 }
 
@@ -154,13 +173,14 @@ bool TestingScene::Update(float dt)
 		{
 			state = BattleSceneState::WIN;
 			App->PauseGame();
+			App->gui->EnableElement((UIElement*)win_panel_one);
 		}
 	}
 		break;
 	case TestingScene::BattleSceneState::WIN:
 	{
-		if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
-			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
+	/*	if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
+			*/
 	}
 		break;
 	case TestingScene::BattleSceneState::LOSE:
@@ -236,6 +256,13 @@ bool TestingScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 		else if (element == unit_button_four) {
 			CreateDrag(CN_FOURTH, element);
 		}
+		else if (element == win_continue_one) {
+			App->gui->DisableElement((UIElement*)win_panel_one);
+			App->gui->EnableElement((UIElement*)win_panel_two);
+		}
+		else if (element == win_continue_two) {
+			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
+		}
 	}
 	else if (gui_event == GUI_Event::LEFT_CLICK_UP) {
 		if (element == current_drag) {
@@ -244,6 +271,14 @@ bool TestingScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 	}
 
 	return true;
+}
+
+void TestingScene::WinScreen()
+{
+	win_text_one->SetText("Upgrade a troop or choose a new one to add to your deck:");
+	win_unit_one->SetEnabled(true);
+	win_unit_two->SetEnabled(true);
+	win_unit_three->SetEnabled(true);
 }
 
 void TestingScene::CreateDrag(int num, UIElement* element)

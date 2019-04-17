@@ -47,6 +47,8 @@ public:
 
 	virtual bool GUIEvent(UIElement* element, GUI_Event gui_event);
 
+	void WinScreen();
+
 private:
 	void CreateDrag(int num, UIElement* element);
 	void ReleaseDrag();
@@ -68,6 +70,18 @@ private:
 	UIButton*		unit_button_three;
 	UIButton*		unit_button_four;
 	UIBar*			energy_bar;
+
+	UIImage*		win_panel_one;
+	UIImage*		win_panel_two;
+	UIButton*		win_continue_one;
+	UIButton*		win_continue_two;
+	UILabel*		win_text_one;
+	UILabel*		win_text_two;
+	UIImage*		win_building;
+	UIButton*		win_unit_one;
+	UIButton*		win_unit_two;
+	UIButton*		win_unit_three;
+
 
 	UIImage* current_drag;
 	int card_num;
