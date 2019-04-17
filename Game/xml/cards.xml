@@ -19,7 +19,7 @@
       <stat stat="defense" value ="2"/>
       <stat stat="movement" value ="5"/>
       <stat stat="attack_speed" value ="1"/>
-      <stat stat="range" value ="2"/>
+      <stat stat="range" value ="1"/>
 	</upgrades>
     
     <sprite faction="0">textures/units/sprite_gi.png</sprite>    
