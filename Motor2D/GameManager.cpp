@@ -106,7 +106,7 @@ void GameManager::AddCardToCollection(EntityType card_type)
 		if (c->type == card_type)
 		{
 			found = true;
-			//c->Upgrade();
+			c->Upgrade();
 		}
 	}
 

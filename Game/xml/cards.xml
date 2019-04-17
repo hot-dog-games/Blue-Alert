@@ -6,12 +6,21 @@
       <stat stat="health" value ="50"/>
       <stat stat="damage" value ="5"/>
       <stat stat="defense" value ="5"/>
-      <stat stat="movement" value ="70"/>
+      <stat stat="movement" value ="45"/>
       <stat stat="attack_speed" value ="10"/>
       <stat stat="range" value ="5"/>
       <stat stat="energy_cost" value ="2"/>
       <stat stat="units" value ="4"/>
     </stats>
+	
+	<upgrades>
+	  <stat stat="health" value ="20"/>
+      <stat stat="damage" value ="2"/>
+      <stat stat="defense" value ="2"/>
+      <stat stat="movement" value ="5"/>
+      <stat stat="attack_speed" value ="1"/>
+      <stat stat="range" value ="2"/>
+	</upgrades>
     
     <sprite faction="0">textures/units/sprite_gi.png</sprite>    
     
@@ -31,12 +40,21 @@
       <stat stat="health" value ="50"/>
       <stat stat="damage" value ="40"/>
       <stat stat="defense" value ="3"/>
-      <stat stat="movement" value ="50"/>
+      <stat stat="movement" value ="25"/>
       <stat stat="attack_speed" value ="4"/>
       <stat stat="range" value ="8"/>
       <stat stat="energy_cost" value ="4"/>
       <stat stat="units" value ="2"/>
     </stats>
+	
+	<upgrades>
+	  <stat stat="health" value ="10"/>
+      <stat stat="damage" value ="10"/>
+      <stat stat="defense" value ="2"/>
+      <stat stat="movement" value ="10"/>
+      <stat stat="attack_speed" value ="1"/>
+      <stat stat="range" value ="1"/>
+	</upgrades>
      
     <sprite faction="0">textures/units/sprite_gi.png</sprite>
 
@@ -56,12 +74,21 @@
       <stat stat="health" value ="70"/>
       <stat stat="damage" value ="20"/>
       <stat stat="defense" value ="7"/>
-      <stat stat="movement" value ="50"/>
+      <stat stat="movement" value ="25"/>
       <stat stat="attack_speed" value ="5"/>
       <stat stat="range" value ="4"/>
       <stat stat="energy_cost" value ="2"/>
       <stat stat="units" value ="2"/>
     </stats>
+	
+	<upgrades>
+	  <stat stat="health" value ="15"/>
+      <stat stat="damage" value ="5"/>
+      <stat stat="defense" value ="1"/>
+      <stat stat="movement" value ="5"/>
+      <stat stat="attack_speed" value ="2"/>
+      <stat stat="range" value ="2"/>
+	</upgrades>
     
     <sprite>textures/units/sprite_gi.png</sprite>
 
@@ -81,12 +108,21 @@
       <stat stat="health" value ="120"/>
       <stat stat="damage" value ="100"/>
       <stat stat="defense" value ="10"/>
-      <stat stat="movement" value ="50"/>
+      <stat stat="movement" value ="25"/>
       <stat stat="attack_speed" value ="2"/>
       <stat stat="range" value ="5"/>
       <stat stat="energy_cost" value ="2"/>
       <stat stat="units" value ="1"/>
     </stats>
+	
+	<upgrades>
+	  <stat stat="health" value ="20"/>
+      <stat stat="damage" value ="20"/>
+      <stat stat="defense" value ="2"/>
+      <stat stat="movement" value ="5"/>
+      <stat stat="attack_speed" value ="1"/>
+      <stat stat="range" value ="2"/>
+	</upgrades>
 
     <sprite>textures/units/sprite_gi.png</sprite>
 
@@ -106,12 +142,21 @@
       <stat stat="health" value ="60"/>
       <stat stat="damage" value ="7"/>
       <stat stat="defense" value ="5"/>
-      <stat stat="movement" value ="80"/>
+      <stat stat="movement" value ="40"/>
       <stat stat="attack_speed" value ="8"/>
       <stat stat="range" value ="5"/>
       <stat stat="energy_cost" value ="2"/>
       <stat stat="units" value ="3"/>
     </stats>
+	
+	<upgrades>
+	  <stat stat="health" value ="10"/>
+      <stat stat="damage" value ="1"/>
+      <stat stat="defense" value ="2"/>
+      <stat stat="movement" value ="5"/>
+      <stat stat="attack_speed" value ="1"/>
+      <stat stat="range" value ="2"/>
+	</upgrades>
 
     <sprite>textures/units/sprite_gi.png</sprite>
 
@@ -131,12 +176,21 @@
       <stat stat="health" value ="100"/>
       <stat stat="damage" value ="40"/>
       <stat stat="defense" value ="8"/>
-      <stat stat="movement" value ="40"/>
+      <stat stat="movement" value ="20"/>
       <stat stat="attack_speed" value ="5"/>
       <stat stat="range" value ="5"/>
       <stat stat="energy_cost" value ="2"/>
       <stat stat="units" value ="1"/>
     </stats>
+	
+	<upgrades>
+	  <stat stat="health" value ="15"/>
+      <stat stat="damage" value ="5"/>
+      <stat stat="defense" value ="1"/>
+      <stat stat="movement" value ="10"/>
+      <stat stat="attack_speed" value ="2"/>
+      <stat stat="range" value ="1"/>
+	</upgrades>
 
     <sprite>textures/units/sprite_gi.png</sprite>
 
@@ -150,17 +204,27 @@
   </card>
 
   <card type ="7">
+    <name>Night_Hawk</name>
     <combat attack_type="0" armored="false"/>
     <stats>
       <stat stat="health" value ="100"/>
       <stat stat="damage" value ="6"/>
       <stat stat="defense" value ="6"/>
-      <stat stat="movement" value ="70"/>
+      <stat stat="movement" value ="35"/>
       <stat stat="attack_speed" value ="9"/>
       <stat stat="range" value ="5"/>
       <stat stat="energy_cost" value ="2"/>
       <stat stat="units" value ="3"/>
     </stats>
+	
+	<upgrades>
+	  <stat stat="health" value ="20"/>
+      <stat stat="damage" value ="1"/>
+      <stat stat="defense" value ="2"/>
+      <stat stat="movement" value ="5"/>
+      <stat stat="attack_speed" value ="1"/>
+      <stat stat="range" value ="2"/>
+	</upgrades>
     
     <sprite>textures/units/sprite_gi.png</sprite> 
 
@@ -180,12 +244,21 @@
       <stat stat="health" value ="80"/>
       <stat stat="damage" value ="70"/>
       <stat stat="defense" value ="3"/>
-      <stat stat="movement" value ="80"/>
+      <stat stat="movement" value ="40"/>
       <stat stat="attack_speed" value ="4"/>
       <stat stat="range" value ="5"/>
       <stat stat="energy_cost" value ="2"/>
       <stat stat="units" value ="2"/>
     </stats>
+	
+	<upgrades>
+	  <stat stat="health" value ="10"/>
+      <stat stat="damage" value ="10"/>
+      <stat stat="defense" value ="2"/>
+      <stat stat="movement" value ="5"/>
+      <stat stat="attack_speed" value ="1"/>
+      <stat stat="range" value ="2"/>
+	</upgrades>
 
     <sprite>textures/units/sprite_gi.png</sprite>
 
@@ -205,12 +278,21 @@
       <stat stat="health" value ="70"/>
       <stat stat="damage" value ="150"/>
       <stat stat="defense" value ="4"/>
-      <stat stat="movement" value ="100"/>
+      <stat stat="movement" value ="50"/>
       <stat stat="attack_speed" value ="2"/>
       <stat stat="range" value ="5"/>
       <stat stat="energy_cost" value ="2"/>
       <stat stat="units" value ="1"/>
     </stats>
+	
+	<upgrades>
+	  <stat stat="health" value ="10"/>
+      <stat stat="damage" value ="20"/>
+      <stat stat="defense" value ="1"/>
+      <stat stat="movement" value ="5"/>
+      <stat stat="attack_speed" value ="1"/>
+      <stat stat="range" value ="2"/>
+	</upgrades>
 
     <sprite>textures/units/sprite_gi.png</sprite>
 

@@ -74,6 +74,7 @@ Card* CardManager::CreateCard(EntityType type)
 
 	LoadCardStats(card, card_node.child("stats"));
 	LoadCardButton(card, card_node.child("button"));
+	LoadCardUpgrades(card, card_node.child("upgrades"));
 	cards.push_back(card);
 
 	return card;
@@ -123,7 +124,23 @@ void CardManager::LoadCardButton(Card * card, pugi::xml_node button_node)
 	card->button.drag.h = button_node.child("unit_drag").attribute("height").as_uint();
 }
 
+void CardManager::LoadCardUpgrades(Card * card, pugi::xml_node upgrades_node)
+{
+	card->info.scaling.health_upgrade = upgrades_node.find_child_by_attribute("stat", "health").attribute("value").as_uint();
+	card->info.scaling.attack_damage_upgrade = upgrades_node.find_child_by_attribute("stat", "damage").attribute("value").as_uint();
+	card->info.scaling.defense_upgrade = upgrades_node.find_child_by_attribute("stat", "defense").attribute("value").as_uint();
+	card->info.scaling.movement_speed_upgrade = upgrades_node.find_child_by_attribute("stat", "movement").attribute("value").as_uint();
+	card->info.scaling.attack_speed_upgrade = upgrades_node.find_child_by_attribute("stat", "attack_speed").attribute("value").as_uint();
+	card->info.scaling.range_upgrade = upgrades_node.find_child_by_attribute("stat", "range").attribute("value").as_uint();
+}
+
 void Card::Upgrade()
 {
-
+	level += 1;
+	info.stats.find("health")->second->IncreaseMaxValue(info.scaling.health_upgrade);
+	info.stats.find("damage")->second->IncreaseMaxValue(info.scaling.attack_damage_upgrade);
+	info.stats.find("defense")->second->IncreaseMaxValue(info.scaling.defense_upgrade);
+	info.stats.find("movement")->second->IncreaseMaxValue(info.scaling.movement_speed_upgrade);
+	info.stats.find("attack_speed")->second->IncreaseMaxValue(info.scaling.attack_speed_upgrade);
+	info.stats.find("range")->second->IncreaseMaxValue(info.scaling.range_upgrade);
 }
