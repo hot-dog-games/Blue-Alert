@@ -1,5 +1,6 @@
 #include <iostream> 
 #include <sstream> 
+#include <time.h>
 
 #include "p2Defs.h"
 #include "p2Log.h"
@@ -89,6 +90,8 @@ void j1App::AddModule(Module* module)
 // Called before render is available
 bool j1App::Awake()
 {
+	srand(time(0));
+
 	pugi::xml_document	config_file;
 	pugi::xml_node		config;
 	pugi::xml_node		app_config;
