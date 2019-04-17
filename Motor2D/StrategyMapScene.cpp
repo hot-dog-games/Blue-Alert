@@ -38,9 +38,6 @@ bool StrategyMapScene::Start()
 	App->game_manager->GetEncounterTree()->CreateAllNodes();
 	App->game_manager->GetEncounterTree()->UpdateTreeState();
 
-	// Cards
-
-	
 
 
 	//UI
@@ -64,31 +61,36 @@ bool StrategyMapScene::Start()
 	text_menu = App->gui->CreateLabel({ 50,10 }, "ui/Fonts/command_and_conquer___logo_font_by_dexistor371-d6k2yvb.ttf", 20, "MENU", { 0,0,0,0 }, 0, menu_button);
 
 	gold = App->gui->CreateLabel({ 90, 30 }, "ui/Fonts/command_and_conquer___logo_font_by_dexistor371-d6k2yvb.ttf", 20, "GOLD", { 0,0,0,0 }, 0, main_panel);
-	energy = App->gui->CreateLabel({ 450, 30 }, "ui/Fonts/command_and_conquer___logo_font_by_dexistor371-d6k2yvb.ttf", 20, "ENERGY", { 0,0,0,0 },0, main_panel);
+	energy = App->gui->CreateLabel({ 450, 30 }, "ui/Fonts/command_and_conquer___logo_font_by_dexistor371-d6k2yvb.ttf", 20, "ENERGY", { 0,0,0,0 }, 0, main_panel);
 	health = App->gui->CreateLabel({ 860, 30 }, "ui/Fonts/command_and_conquer___logo_font_by_dexistor371-d6k2yvb.ttf", 20, "HEALTH", { 0,0,0,0 }, 0, main_panel);
 
 	iPoint world_position = App->map->MapToWorld((int)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetPosition().x, (int)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetPosition().y);
-	
+
 	App->render->camera.x = -world_position.x + w * 0.5;
 	App->render->camera.y = -world_position.y + h;
 
+	// Troops menu
 	t_b_bg = App->gui->CreateImage({ 20,95 }, { 26,908,986,593 }, main_panel);
 	App->gui->DisableElement(t_b_bg);
 	backbutton_t_b = App->gui->CreateButton({ 940,100 }, small_button_rect, t_b_bg);
 	back_cross_text = App->gui->CreateLabel({ 15,10 }, "ui/Fonts/command_and_conquer___logo_font_by_dexistor371-d6k2yvb.ttf", 28, "X", { 0,0,0,0 }, 0, backbutton_t_b);
 	App->gui->DisableElement(backbutton_t_b);
-	troops_button = App->gui->CreateButton({380,100 }, large_button_rect, t_b_bg);
-	troops_text = App->gui->CreateLabel({50,10}, "ui/Fonts/command_and_conquer___logo_font_by_dexistor371-d6k2yvb.ttf", 20, "TROOPS", { 0,0,0,0 }, 0, troops_button);
+	troops_button = App->gui->CreateButton({ 380,100 }, large_button_rect, t_b_bg);
+	troops_text = App->gui->CreateLabel({ 50,10 }, "ui/Fonts/command_and_conquer___logo_font_by_dexistor371-d6k2yvb.ttf", 20, "TROOPS", { 0,0,0,0 }, 0, troops_button);
 	App->gui->DisableElement(troops_button);
 	buildings_button = App->gui->CreateButton({ 600,100 }, large_button_rect, t_b_bg);
 	buildings_text = App->gui->CreateLabel({ 35,10 }, "ui/Fonts/command_and_conquer___logo_font_by_dexistor371-d6k2yvb.ttf", 20, "BUILDINGS", { 0,0,0,0 }, 0, buildings_button);
 	App->gui->DisableElement(buildings_button);
 
 
-	deck_buttons[0] = App->gui->CreateButton({ 940,100 }, nullptr, t_b_bg);
-	deck_buttons[1] = App->gui->CreateButton({ 940,100 }, nullptr, t_b_bg);
-	deck_buttons[2] = App->gui->CreateButton({ 940,100 }, nullptr, t_b_bg);
-	deck_buttons[3] = App->gui->CreateButton({ 940,100 }, nullptr, t_b_bg);
+	for (int i = 0; i < 4; i++) {
+	deck_buttons[i] = App->gui->CreateButton({ 940,100 }, nullptr, t_b_bg);
+	}
+
+	for (int i = 0; i < 4; i++) {
+		collection_buttons[i] = App->gui->CreateButton({ 940,100 }, nullptr, t_b_bg);
+	}
+	
 
 
 	return true;

@@ -53,7 +53,7 @@ private:
 	UIButton* buildings_button;
 
 	UIButton* deck_buttons[4];
-	
+	std::vector<UIButton*> collection_buttons;
 
 };
 
