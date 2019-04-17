@@ -66,6 +66,11 @@ bool BattleScene::Start()
 	//Initialize UI
 	StartUI();
 
+	win_fx = App->audio->LoadFx("audio/fx/Mission/Mission_accomplished.wav");
+	lose_fx = App->audio->LoadFx("audio/fx/Mission/Mission_Failed.wav");
+	deployment_fx = App->audio->LoadFx("audio/fx/Voice_Over/Unit_ready.wav");
+	App->audio->PlayMusic("audio/music/9.Destroy-Red Alert2_2.ogg");
+
 	return true;
 }
 
@@ -117,11 +122,13 @@ bool BattleScene::Update(float dt)
 		if (!allied_core->IsAlive())
 		{
 			state = BattleSceneState::LOSE;
+			App->audio->PlayFx(lose_fx, 0);
 			App->PauseGame();
 		}
 		else if (!enemy_core->IsAlive())
 		{
 			state = BattleSceneState::WIN;
+			App->audio->PlayFx(win_fx, 0);
 			App->PauseGame();
 			App->gui->EnableElement((UIElement*)win_panel_one);
 		}
@@ -129,11 +136,14 @@ bool BattleScene::Update(float dt)
 	break;
 	case BattleScene::BattleSceneState::WIN:
 	{
+		if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
+			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
 	}
 	break;
 	case BattleScene::BattleSceneState::LOSE:
 	{
-		
+		if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
+			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
 	}
 	break;
 	default:
@@ -240,6 +250,7 @@ void BattleScene::CreateDrag(int num, int type, UIElement* element)
 void BattleScene::ReleaseDrag()
 {
 	int x, y;
+	App->audio->PlayFx(deployment_fx, 0);
 	App->input->GetMousePosition(x, y);
 	iPoint point = App->render->ScreenToWorld(x, y);
 	allied_core->UseCard(card_num, { float(point.x),float(point.y) });
