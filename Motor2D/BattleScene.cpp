@@ -76,8 +76,9 @@ bool BattleScene::Start()
 
 	energy_bar = App->gui->CreateBar({ 764, 358 }, { 601,0,16,274 }, test_core->GetEnergy());
 
-	win_fx = App->audio->LoadFx("audio/fx/Mission/You_victorious.wav");
-	lose_fx = App->audio->LoadFx("audio/fx/Mission/You_Lost.wav");
+	win_fx = App->audio->LoadFx("audio/fx/Mission/Mission_accomplished.wav");
+	lose_fx = App->audio->LoadFx("audio/fx/Mission/Mission_Failed.wav");
+	deployment_fx = App->audio->LoadFx("audio/fx/Voice_Over/Unit_ready.wav");
 	App->audio->PlayMusic("audio/music/9.Destroy-Red Alert2_2.ogg");
 
 	return true;
@@ -222,6 +223,7 @@ void BattleScene::CreateDrag(int num, UIElement* element)
 void BattleScene::ReleaseDrag()
 {
 	int x, y;
+	App->audio->PlayFx(deployment_fx, 0);
 	App->input->GetMousePosition(x, y);
 	iPoint point = App->render->ScreenToWorld(x, y);
 	test_core->UseCard(card_num, { float(point.x),float(point.y) });

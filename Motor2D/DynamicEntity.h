@@ -60,10 +60,13 @@ protected:
 	Entity* objective = nullptr;
 	PerfTimer attack_timer;
 
+
 	//Pathfinding
 	std::vector<iPoint> path;
 	int current_point = 0;
 	int previous_point = 0;
+private:
+	uint attack_fx;
 };
 
 #endif // !_DYNAMIC_ENTITY_

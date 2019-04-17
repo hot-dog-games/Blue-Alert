@@ -73,6 +73,8 @@ private:
 	//Audio fx
 	uint win_fx;
 	uint lose_fx;
+	uint deployment_fx;
+
 	uint max_energy;
 	uint current_energy;
 
