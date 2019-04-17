@@ -130,7 +130,27 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 	large_button_rect[2] = { 0,637,220,51 };
 
 	if (gui_event == GUI_Event::LEFT_CLICK_DOWN) {
+		if (element == settings_button) {
+			//(options = App->gui->CreateImage();
+		}
+		else if (element == menu_button) {
+			t_b_bg = App->gui->CreateImage({ 20,95 }, { 0,898,986,588 }, NULL);
+			backbutton_t_b_bg = App->gui->CreateButton({ 945,60 }, settings_rect, NULL);
+			troops_button = App->gui->CreateButton({ 200,60 }, menu_rect, NULL);
+			buildings_button = App->gui->CreateButton({ 945,60 }, menu_rect, NULL);
+			App->gui->DisableElement(menu_button);
+			App->gui->DisableElement(settings_button);
 
+
+
+		}
+		else if (element = backbutton_t_b_bg) {
+			App->gui->DeleteElement(t_b_bg);
+			App->gui->DeleteElement(backbutton_t_b_bg);
+			App->gui->EnableElement(menu_button);
+			App->gui->EnableElement(settings_button);
+
+		}
 	}
 
 	return true;
