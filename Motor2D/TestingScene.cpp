@@ -162,6 +162,9 @@ bool TestingScene::Update(float dt)
 		if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
 			test_enemy_core->UseCard(CN_FIRST, { (float)p.x, (float)p.y });
 
+		if (App->input->GetKey(SDL_SCANCODE_5) == KEY_DOWN)
+			App->game_manager->AddCardToCollection(EntityType::G_I);
+
 
 		if (!test_core->IsAlive())
 		{

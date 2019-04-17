@@ -9,6 +9,8 @@ class Deck;
 class EncounterTree;
 class StrategyBuilding;
 
+enum EntityType;
+
 class GameManager : public Module
 {
 public:
@@ -23,6 +25,21 @@ public:
 	bool Save(pugi::xml_node&) const { return true; }
 
 	EncounterTree* GetEncounterTree();
+	Deck* GetPalyerDeck();
+
+	//----Initialization----
+
+	void CreatePlayerDeck();
+
+	//----------------------
+
+	//---Collection_Acces----
+
+	Card* GetCardFromCollection(EntityType card_type);
+	void AddCardToCollection(EntityType card_type);
+
+	//----------------------
+
 
 private:
 	uint gold;
