@@ -70,8 +70,6 @@ private:
 
 	Core* test_core;
 	Core* test_enemy_core;
-
-	bool debug = false;
 };
 
 #endif

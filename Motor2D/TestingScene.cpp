@@ -133,12 +133,6 @@ bool TestingScene::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		App->render->camera.x -= 10 * dt;
 
-	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
-	{
-		App->entity_manager->SetDebug();
-		debug = !debug;
-	}
-
 
 	switch (state)
 	{
@@ -204,24 +198,21 @@ bool TestingScene::PostUpdate()
 
 	App->map->Draw();
 
-	if (debug)
+	// Debug pathfinding ------------------------------
+	int x, y;
+	App->input->GetMousePosition(x, y);
+	iPoint p = App->render->ScreenToWorld(x, y);
+	p = App->map->WorldToMap(p.x, p.y);
+	p = App->map->MapToWorld(p.x, p.y);
+
+	App->render->Blit(debug_tex, p.x, p.y);
+
+	const std::vector<iPoint> path = App->pathfinding->GetLastPath();
+
+	for (uint i = 0; i < path.size(); ++i)
 	{
-		// Debug pathfinding ------------------------------
-		int x, y;
-		App->input->GetMousePosition(x, y);
-		iPoint p = App->render->ScreenToWorld(x, y);
-		p = App->map->WorldToMap(p.x, p.y);
-		p = App->map->MapToWorld(p.x, p.y);
-
-		App->render->Blit(debug_tex, p.x, p.y);
-
-		const std::vector<iPoint> path = App->pathfinding->GetLastPath();
-
-		for (uint i = 0; i < path.size(); ++i)
-		{
-			iPoint pos = App->map->MapToWorld(path.at(i).x, path.at(i).y);
-			App->render->Blit(debug_tex, pos.x, pos.y);
-		}
+		iPoint pos = App->map->MapToWorld(path.at(i).x, path.at(i).y);
+		App->render->Blit(debug_tex, pos.x, pos.y);
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)

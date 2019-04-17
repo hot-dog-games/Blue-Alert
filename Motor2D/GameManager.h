@@ -25,7 +25,7 @@ public:
 	bool Save(pugi::xml_node&) const { return true; }
 
 	EncounterTree* GetEncounterTree();
-	Deck* GetPalyerDeck();
+	Deck* GetPlayerDeck();
 
 	//----Initialization----
 

@@ -44,6 +44,9 @@ bool EntityManager::Update(float dt)
 {
 	BROFILER_CATEGORY("EMUpdate", Profiler::Color::Plum);
 
+	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
+		SetDebug();
+
 	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
 	{
 		(*entity)->Update(dt);
@@ -109,6 +112,7 @@ Entity* EntityManager::CreateEntity(EntityType type, fPoint position, Card* card
 	entity->type = type;
 	entity->Start();
 	entities.push_back(entity);
+	entity->SetDebug(debug);
 
 	id_count++;
 
@@ -144,6 +148,7 @@ Core* EntityManager::CreateCore(uint core_type, fPoint position, Deck* deck, Fac
 	entity->type = CORE;
 	entity->Start();
 	entity->SetDeck(deck);
+	entity->SetDebug(debug);
 
 	id_count++;
 

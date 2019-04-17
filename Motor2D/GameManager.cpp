@@ -55,7 +55,7 @@ EncounterTree* GameManager::GetEncounterTree()
 	return encounter_tree;
 }
 
-Deck * GameManager::GetPalyerDeck()
+Deck * GameManager::GetPlayerDeck()
 {
 	return combat_deck;
 }
