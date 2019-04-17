@@ -91,8 +91,8 @@ private:
 	uint max_energy;
 	uint current_energy;
 
-	Core* test_core;
-	Core* test_enemy_core;
+	Core* allied_core;
+	Core* enemy_core;
 };
 
 #endif

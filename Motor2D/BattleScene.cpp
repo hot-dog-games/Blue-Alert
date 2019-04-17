@@ -60,15 +60,8 @@ bool BattleScene::Start()
 	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterDeck()[2]));
 	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterDeck()[3]));
 
-	Deck* test_deck = new Deck();
-	test_deck->delete_cards = true;
-	test_deck->AddCard(App->card_manager->CreateCard(EntityType::G_I));
-	test_deck->AddCard(App->card_manager->CreateCard(EntityType::SNIPER));
-	test_deck->AddCard(App->card_manager->CreateCard(EntityType::NAVY_SEAL));
-	test_deck->AddCard(App->card_manager->CreateCard(EntityType::HARRIER));
-
-	test_core = App->entity_manager->CreateCore(1, { 30,750 }, test_deck, FACTION_RUSSIAN);
-	test_enemy_core = App->entity_manager->CreateCore(App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterType(), { 25,85 }, enemy_deck, FACTION_AMERICAN);
+	allied_core = App->entity_manager->CreateCore(1, { 30,750 }, App->game_manager->GetPalyerDeck(), FACTION_RUSSIAN);
+	enemy_core = App->entity_manager->CreateCore(App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterType(), { 25,85 }, enemy_deck, FACTION_AMERICAN);
 
 	//Initialize UI
 	StartUI();
@@ -104,22 +97,29 @@ bool BattleScene::Update(float dt)
 		App->input->GetMousePosition(x, y);
 		iPoint p = App->render->ScreenToWorld(x, y);
 
+		//-------SHORTCUTS-----------------------//
+
 		if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
-			test_core->DecreaseLife(5);
+			allied_core->UseCard(CN_FIRST, { (float)p.x, (float)p.y });
 
 		if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
-			test_core->UseCard(CN_FIRST, { (float)p.x, (float)p.y });
+			allied_core->UseCard(CN_SECOND, { (float)p.x, (float)p.y });
 
 		if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
-			test_enemy_core->UseCard(CN_FIRST, { (float)p.x, (float)p.y });
+			allied_core->UseCard(CN_THIRD, { (float)p.x, (float)p.y });
+
+		if (App->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
+			allied_core->UseCard(CN_FOURTH, { (float)p.x, (float)p.y });
+
+		//---------------------------------------//
 
 
-		if (!test_core->IsAlive())
+		if (!allied_core->IsAlive())
 		{
 			state = BattleSceneState::LOSE;
 			App->PauseGame();
 		}
-		else if (!test_enemy_core->IsAlive())
+		else if (!enemy_core->IsAlive())
 		{
 			state = BattleSceneState::WIN;
 			App->PauseGame();
@@ -172,16 +172,16 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 {
 	if (gui_event == GUI_Event::LEFT_CLICK_DOWN) {
 		if (element == unit_button_one) {
-			CreateDrag(test_core->GetCard(CN_FIRST)->type, element);
+			CreateDrag(allied_core->GetCard(CN_FIRST)->type, element);
 		}
 		else if (element == unit_button_two) {
-			CreateDrag(test_core->GetCard(CN_SECOND)->type, element);
+			CreateDrag(allied_core->GetCard(CN_SECOND)->type, element);
 		}
 		else if (element == unit_button_three) {
-			CreateDrag(test_core->GetCard(CN_THIRD)->type, element);
+			CreateDrag(allied_core->GetCard(CN_THIRD)->type, element);
 		}
 		else if (element == unit_button_four) {
-			CreateDrag(test_core->GetCard(CN_FOURTH)->type, element);
+			CreateDrag(allied_core->GetCard(CN_FOURTH)->type, element);
 		}
 		else if (element == win_continue_one) {
 			App->gui->DisableElement((UIElement*)win_panel_one);
@@ -246,7 +246,7 @@ void BattleScene::ReleaseDrag()
 	int x, y;
 	App->input->GetMousePosition(x, y);
 	iPoint point = App->render->ScreenToWorld(x, y);
-	test_core->UseCard(card_num, { float(point.x),float(point.y) });
+	allied_core->UseCard(card_num, { float(point.x),float(point.y) });
 	App->gui->DeleteElement(current_drag);
 	current_drag = nullptr;
 }

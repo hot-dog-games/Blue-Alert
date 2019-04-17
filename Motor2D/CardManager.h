@@ -43,6 +43,8 @@ struct Card {
 	std::string sprite_path;
 
 	bool to_delete = false;
+
+	void Upgrade();
 };
 
 class CardManager : public Module
@@ -62,7 +64,7 @@ public:
 	Card* DeleteCard(Card* card);
 
 private:
-	void LoadCardStats(Card* card, pugi::xml_node stats_node);;
+	void LoadCardStats(Card* card, pugi::xml_node stats_node);
 
 private:
 	bool to_delete = false;

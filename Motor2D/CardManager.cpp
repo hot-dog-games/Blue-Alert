@@ -102,4 +102,13 @@ void CardManager::LoadCardStats(Card* card, pugi::xml_node stats_node)
 	card->info.armored = stats_node.attribute("armored").as_bool();
 }
 
-
+void Card::Upgrade()
+{
+	level++;
+	info.stats.find("health")->second->IncreaseMaxValue(info.scaling.health_upgrade);
+	info.stats.find("damage")->second->IncreaseMaxValue(info.scaling.attack_damage_upgrade);
+	info.stats.find("defense")->second->IncreaseMaxValue(info.scaling.defense_upgrade);
+	info.stats.find("movement")->second->IncreaseMaxValue(info.scaling.movement_speed_upgrade);
+	info.stats.find("attack_speed")->second->IncreaseMaxValue(info.scaling.attack_speed_upgrade);
+	info.stats.find("range")->second->IncreaseMaxValue(info.scaling.range_upgrade);
+}
