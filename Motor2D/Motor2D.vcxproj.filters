@@ -133,6 +133,9 @@
     <ClCompile Include="EntityManager.cpp">
       <Filter>Engine\Modules</Filter>
     </ClCompile>
+    <ClCompile Include="CoreAI.cpp">
+      <Filter>Engine\Entities</Filter>
+    </ClCompile>
     <ClCompile Include="BattleScene.cpp">
       <Filter>Engine\Scenes</Filter>
     </ClCompile>
@@ -287,6 +290,9 @@
     </ClInclude>
     <ClInclude Include="EntityManager.h">
       <Filter>Engine\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="CoreAI.h">
+      <Filter>Engine\Entities</Filter>
     </ClInclude>
     <ClInclude Include="BattleScene.h">
       <Filter>Engine\Scenes</Filter>

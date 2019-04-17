@@ -17,7 +17,6 @@ enum Faction {
 	FACTION_NONE = -1,
 	FACTION_RUSSIAN,
 	FACTION_AMERICAN,
-
 };
 
 class Entity
@@ -34,6 +33,7 @@ public:
 	virtual bool Start() { return true; };
 
 	void DecreaseLife(float damage);
+	void SetDebug(bool value);
 	bool IsAlive();
 
 protected:
@@ -53,6 +53,7 @@ protected:
 	SDL_Rect current_frame;
 	SDL_Texture* sprite = nullptr;
 
+	bool debug = false;
 	std::map<std::string, Stat*> stats;
 
 };
