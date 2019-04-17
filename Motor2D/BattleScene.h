@@ -12,7 +12,6 @@ class Entity;
 class UIBar;
 class Core;
 class UIButton;
-enum CardNumber;
 
 struct Card;
 

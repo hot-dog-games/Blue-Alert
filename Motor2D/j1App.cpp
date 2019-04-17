@@ -104,7 +104,7 @@ bool j1App::Awake()
 		app_config = config.child("app");
 		title = app_config.child("title").child_value();
 		organization = app_config.child("organization").child_value();
-		frame_rate = app_config.attribute("framerate_cap").as_uint();
+		frame_rate = app_config.attribute("framerate_cap").as_float();
 	}
 
 	if(ret == true)
@@ -181,8 +181,8 @@ void j1App::PrepareUpdate()
 	if (!paused)
 	{
 		dt = frame_time.ReadSec();
-		if (dt > (float)frame_rate / 1000)
-			dt = (float)frame_rate / 1000;
+		if (dt > frame_rate / 1000)
+			dt = frame_rate / 1000;
 	}
 	else
 	{
@@ -437,4 +437,9 @@ bool j1App::SavegameNow() const
 	data.reset();
 	want_to_save = false;
 	return ret;
+}
+
+float j1App::GetFrameRate()
+{
+	return frame_rate;
 }

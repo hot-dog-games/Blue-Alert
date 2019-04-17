@@ -11,6 +11,7 @@ struct UIImage;
 class Entity;
 class UIBar;
 class Core;
+class CoreAI;
 class UIButton;
 enum CardNumber;
 
