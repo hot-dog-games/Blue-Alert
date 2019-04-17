@@ -69,10 +69,10 @@ bool BattleScene::Start()
 	test_enemy_core = App->entity_manager->CreateCore(App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterType(), { 25,85 }, enemy_deck, FACTION_AMERICAN);
 
 	unit_panel = App->gui->CreateImage({ 755,0 }, { 619,0,269,768 });
-	unit_button_one = App->gui->CreateButton({ 35, 365 }, test_core->GetCard(CN_FIRST)->button.anim, unit_panel);
+	/*unit_button_one = App->gui->CreateButton({ 35, 365 }, test_core->GetCard(CN_FIRST)->button.anim, unit_panel);
 	unit_button_two = App->gui->CreateButton({ 135, 365 }, test_core->GetCard(CN_SECOND)->button.anim, unit_panel);
 	unit_button_three = App->gui->CreateButton({ 35, 445 }, test_core->GetCard(CN_THIRD)->button.anim, unit_panel);
-	unit_button_four = App->gui->CreateButton({ 135, 445 }, test_core->GetCard(CN_FOURTH)->button.anim, unit_panel);
+	unit_button_four = App->gui->CreateButton({ 135, 445 }, test_core->GetCard(CN_FOURTH)->button.anim, unit_panel);*/
 
 	energy_bar = App->gui->CreateBar({ 764, 358 }, { 601,0,16,274 }, test_core->GetEnergy());
 
@@ -201,7 +201,7 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 void BattleScene::CreateDrag(int num, UIElement* element)
 {
 	card_num = num;
-	current_drag = App->gui->CreateImage({ 0,0 }, test_core->GetCard(card_num)->button.drag, element);
+	//current_drag = App->gui->CreateImage({ 0,0 }, test_core->GetCard(card_num)->button.drag, element);
 	current_drag->interactable = true;
 	current_drag->dragable = true;
 	current_drag->clipping = false;

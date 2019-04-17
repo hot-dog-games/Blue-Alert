@@ -36,7 +36,7 @@ public:
 
 	virtual bool GUIEvent(UIElement*, GUI_Event) { return true; };
 
-	virtual void LoadUI(std::string xml_path) {};
+	virtual void StartUI() {};
 };
 
 #endif // _SCENE_H_

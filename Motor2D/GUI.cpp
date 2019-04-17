@@ -38,6 +38,8 @@ bool Gui::Awake(pugi::xml_node& conf)
 
 	atlas_file_name = conf.child("atlas").attribute("file").as_string("");
 
+	buttons_file.load_file("xml/buttons.xml");
+
 	return ret;
 }
 
@@ -112,7 +114,7 @@ bool Gui::PreUpdate()
 					}
 				}
 			}
-			else if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN && current_element->selectable)
+			else if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN && current_element->selectable && current_element == selected_element)
 			{
 				current_element->OnMouseClick();
 				App->scene_manager->current_scene->GUIEvent(current_element, RIGHT_CLICK_DOWN);
@@ -195,9 +197,9 @@ UILabel* Gui::CreateLabel(iPoint pos, std::string path, int size, std::string te
 	return label;
 }
 
-UIButton* Gui::CreateButton(iPoint pos, SDL_Rect* sprite_rect, UIElement* parent, bool is_interactable)
+UIButton* Gui::CreateButton(iPoint pos, SDL_Rect* sprite_rect, UIElement* parent, bool is_selectable, bool is_interactable)
 {
-	UIButton* button = new UIButton(pos, sprite_rect, is_interactable);
+	UIButton* button = new UIButton(pos, sprite_rect, is_selectable, is_interactable);
 	button->parent = parent;
 	elements.push_back(button);
 
@@ -251,6 +253,7 @@ void Gui::EnableElement(UIElement* ele)
 			EnableElement(*element);
 	}
 }
+
 void Gui::DisableElement(UIElement* ele)
 {
 	ele->SetEnabled(false);
@@ -260,6 +263,58 @@ void Gui::DisableElement(UIElement* ele)
 			DisableElement(*element);
 	}
 }
+
+SDL_Rect* Gui::LoadButton(int num, std::string type)
+{
+	pugi::xml_node buttons_node = buttons_file.first_child();
+
+	std::string name;
+
+	switch (num) {
+	case 1:
+		name = "GI";
+		break;
+	case 2:
+		name = "Sniper";
+		break;
+	case 3:
+		name = "NavySeal";
+		break;
+	case 4:
+		name = "GrizzlyTank";
+		break;
+	case 5:
+		name = "RobotTank";
+		break;
+	case 6:
+		name = "PrismTank";
+		break;
+	case 7:
+		name = "NightHawk";
+		break;
+	case 8:
+		name = "Harrier";
+		break;
+	case 9:
+		name = "BlackEagle";
+		break;
+	}
+
+	SDL_Rect* button_rect = new SDL_Rect[4];
+	int anim_num = 0;
+
+	for (pugi::xml_node it_node = buttons_node.child(name.c_str()).child(type.c_str()).child("frame"); it_node; it_node = it_node.next_sibling()) {
+		button_rect[anim_num].x = it_node.attribute("x").as_uint();
+		button_rect[anim_num].y = it_node.attribute("y").as_uint();
+		button_rect[anim_num].w = it_node.attribute("width").as_uint();
+		button_rect[anim_num].h = it_node.attribute("height").as_uint();
+
+		anim_num++;
+	}
+
+	return button_rect;
+}
+
 UIElement* Gui::GetElementUnderMouse()
 {
 	int x, y;

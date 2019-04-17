@@ -61,11 +61,10 @@ bool TestingScene::Start()
 
 	Deck* enemy_deck = new Deck();
 	enemy_deck->delete_cards = true;
-	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterDeck()[0]));
-	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterDeck()[1]));
-	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterDeck()[2]));
-	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterDeck()[3]));
-
+	enemy_deck->AddCard(App->card_manager->CreateCard(EntityType::G_I));
+	enemy_deck->AddCard(App->card_manager->CreateCard(EntityType::SNIPER));
+	enemy_deck->AddCard(App->card_manager->CreateCard(EntityType::NAVY_SEAL));
+	enemy_deck->AddCard(App->card_manager->CreateCard(EntityType::HARRIER));
 	Deck* test_deck = new Deck();
 	test_deck->delete_cards = true;
 	test_deck->AddCard(App->card_manager->CreateCard(EntityType::G_I));
@@ -74,34 +73,18 @@ bool TestingScene::Start()
 	test_deck->AddCard(App->card_manager->CreateCard(EntityType::HARRIER));
 
 	test_core = App->entity_manager->CreateCore(1, { 30,750 }, test_deck, FACTION_RUSSIAN);
-	test_enemy_core = App->entity_manager->CreateCore(App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterType(), { 25,85 }, enemy_deck, FACTION_AMERICAN);
+	test_enemy_core = App->entity_manager->CreateCore(11, { 25,85 }, enemy_deck, FACTION_AMERICAN);
 
-	unit_panel = App->gui->CreateImage({ 755,0 }, { 619,0,269,768 });
-	unit_button_one = App->gui->CreateButton({ 35, 365 }, test_core->GetCard(CN_FIRST)->button.anim, unit_panel);
-	unit_button_two = App->gui->CreateButton({ 135, 365 }, test_core->GetCard(CN_SECOND)->button.anim, unit_panel);
-	unit_button_three = App->gui->CreateButton({ 35, 445 }, test_core->GetCard(CN_THIRD)->button.anim, unit_panel);
-	unit_button_four = App->gui->CreateButton({ 135, 445 }, test_core->GetCard(CN_FOURTH)->button.anim, unit_panel);
-	
-	energy_bar = App->gui->CreateBar({ 764, 358 }, { 601,0,16,274 }, test_core->GetEnergy());
+	srand(time(NULL));
+	do {
+		random_num[0] = rand() % 9 + 1;
+		random_num[1] = rand() % 9 + 1;
+		random_num[2] = rand() % 9 + 1;
+	} while (random_num[0] != random_num[1] != random_num[2]);
 
-	// End Game Screen
-	win_panel_one = App->gui->CreateImage({ 139,150 }, { 1,852,744,466 });
-	win_panel_two = App->gui->CreateImage({ 139,150 }, { 1,852,744,466 });
-	win_text_one = App->gui->CreateLabel({ 30,30 }, "fonts/red_alert.ttf", 40, "Congratulations, you've conquered this zone and unlocked the next building!", { 255,232,2, 255 }, 710, win_panel_one);
-	SDL_Rect button_rect[3];
-	button_rect[0] = { 221,533,220,51 };
-	button_rect[1] = { 221,585,220,51 };
-	button_rect[2] = { 221,637,220,51 };
-	win_continue_one = App->gui->CreateButton({ 262,375 }, button_rect, win_panel_one);
+	//Initialize UI
+	StartUI();
 
-	win_unit_one = App->gui->CreateButton({ 130,200 }, test_core->GetCard(CN_FIRST)->button.upgrade, win_panel_two);
-	win_unit_two = App->gui->CreateButton({ 320,200 }, test_core->GetCard(CN_SECOND)->button.upgrade, win_panel_two);
-	win_unit_three = App->gui->CreateButton({ 510,200 }, test_core->GetCard(CN_THIRD)->button.upgrade, win_panel_two);
-	win_text_two = App->gui->CreateLabel({ 30,30 }, "fonts/red_alert.ttf", 40, "Upgrade a troop or choose a new one to add to your deck", { 255,232,2, 255 }, 710, win_panel_two);
-	win_continue_two = App->gui->CreateButton({ 262,375 }, button_rect, win_panel_two);
-
-	App->gui->DisableElement((UIElement*)win_panel_one);
-	App->gui->DisableElement((UIElement*)win_panel_two);
 	return true;
 }
 
@@ -194,8 +177,8 @@ bool TestingScene::Update(float dt)
 		break;
 	case TestingScene::BattleSceneState::WIN:
 	{
-	/*	if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
-			*/
+
+
 	}
 		break;
 	case TestingScene::BattleSceneState::LOSE:
@@ -239,7 +222,6 @@ bool TestingScene::PostUpdate()
 	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
 
-
 	if (current_drag)
 		current_drag->GetScreenPos();
 
@@ -260,16 +242,16 @@ bool TestingScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 {
 	if (gui_event == GUI_Event::LEFT_CLICK_DOWN) {
 		if (element == unit_button_one) {
-			CreateDrag(CN_FIRST, element);
+			CreateDrag(test_core->GetCard(CN_FIRST)->type, element);
 		}
 		else if (element == unit_button_two) {
-			CreateDrag(CN_SECOND, element);
+			CreateDrag(test_core->GetCard(CN_SECOND)->type, element);
 		}
 		else if (element == unit_button_three) {
-			CreateDrag(CN_THIRD, element);
+			CreateDrag(test_core->GetCard(CN_THIRD)->type, element);
 		}
 		else if (element == unit_button_four) {
-			CreateDrag(CN_FOURTH, element);
+			CreateDrag(test_core->GetCard(CN_FOURTH)->type, element);
 		}
 		else if (element == win_continue_one) {
 			App->gui->DisableElement((UIElement*)win_panel_one);
@@ -278,9 +260,6 @@ bool TestingScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 		else if (element == win_continue_two) {
 			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
 		}
-		else if (element == win_unit_one) {
-			/*IncreaseUnit(test_core->)*/
-		}
 			
 	}
 	else if (gui_event == GUI_Event::LEFT_CLICK_UP) {
@@ -288,14 +267,64 @@ bool TestingScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			ReleaseDrag();
 		}		
 	}
+	else if (gui_event == GUI_Event::RIGHT_CLICK_DOWN)
+	{
+		if (element == win_unit_one) {
+			win_unit_two->selected = false;
+			win_unit_three->selected = false;
+		}
+		else if (element == win_unit_two) {
+			win_unit_one->selected = false;
+			win_unit_three->selected = false;
+		}
+		else if (element == win_unit_three) {
+			win_unit_two->selected = false;
+			win_unit_one->selected = false;
+		}
+	}
 
 	return true;
+}
+
+void TestingScene::StartUI()
+{
+	//Game_UI
+
+	unit_panel = App->gui->CreateImage({ 755,0 }, { 619,0,269,768 });
+	unit_button_one = App->gui->CreateButton({ 35, 365 }, App->gui->LoadButton(test_core->GetCard(CN_FIRST)->type, "button"), unit_panel);
+	unit_button_two = App->gui->CreateButton({ 135, 365 }, App->gui->LoadButton(test_core->GetCard(CN_SECOND)->type, "button"), unit_panel);
+	unit_button_three = App->gui->CreateButton({ 35, 445 }, App->gui->LoadButton(test_core->GetCard(CN_THIRD)->type, "button"), unit_panel);
+	unit_button_four = App->gui->CreateButton({ 135, 445 }, App->gui->LoadButton(test_core->GetCard(CN_FOURTH)->type, "button"), unit_panel);
+
+	energy_bar = App->gui->CreateBar({ 764, 358 }, { 601,0,16,274 }, test_core->GetEnergy());
+
+	// End Game Screen
+	SDL_Rect button_rect[3];
+	button_rect[0] = { 221,533,220,51 };
+	button_rect[1] = { 221,585,220,51 };
+	button_rect[2] = { 221,637,220,51 };
+
+	win_panel_one = App->gui->CreateImage({ 139,150 }, { 1,852,744,466 });
+	win_panel_two = App->gui->CreateImage({ 139,150 }, { 1,852,744,466 });
+	win_text_one = App->gui->CreateLabel({ 30,30 }, "fonts/red_alert.ttf", 40, "Congratulations, you've conquered this zone and unlocked the next building!", { 255,232,2, 255 }, 710, win_panel_one);
+	win_text_two = App->gui->CreateLabel({ 30,30 }, "fonts/red_alert.ttf", 40, "Upgrade a troop or choose a new one to add to your deck", { 255,232,2, 255 }, 710, win_panel_two);
+	win_continue_one = App->gui->CreateButton({ 262,375 }, button_rect, win_panel_one);
+	win_continue_two = App->gui->CreateButton({ 262,375 }, button_rect, win_panel_two);
+
+	win_unit_one = App->gui->CreateButton({ 130,200 }, App->gui->LoadButton(random_num[0],"upgrade"), win_panel_two, true);
+	win_unit_two = App->gui->CreateButton({ 320,200 }, App->gui->LoadButton(random_num[1], "upgrade"), win_panel_two, true);
+	win_unit_three = App->gui->CreateButton({ 510,200 }, App->gui->LoadButton(random_num[2], "upgrade"), win_panel_two, true);
+
+	App->gui->DisableElement((UIElement*)win_panel_one);
+	App->gui->DisableElement((UIElement*)win_panel_two);
+
+
 }
 
 void TestingScene::CreateDrag(int num, UIElement* element)
 {
 	card_num = num;
-	current_drag = App->gui->CreateImage({ 0,0 }, test_core->GetCard(card_num)->button.drag, element);
+	current_drag = App->gui->CreateImage({ 0,0 }, App->gui->LoadButton(num + 1, "drag")[0], element);
 	current_drag->interactable = true;
 	current_drag->dragable = true;
 	current_drag->clipping = false;
@@ -313,7 +342,3 @@ void TestingScene::ReleaseDrag()
 	current_drag = nullptr;
 }
 
-void TestingScene::IncreaseUnit(Card * card)
-{
-	card->info.stats.find("health")->second->IncreaseStat(card->info.scaling.health_upgrade);
-}

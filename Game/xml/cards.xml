@@ -13,23 +13,6 @@
       <stat stat="units" value ="4"/>
     </stats>
     
-    <sprite faction="0">textures/units/sprite_gi.png</sprite>    
-    
-    <button>
-      <frame x="0" y="0" width="100" height="80"/>
-      <frame x="100" y="0" width="100" height="80"/>
-      <frame x="0" y="80" width="100" height="80"/>
-      <frame x="0" y="0" width="100" height="80"/>
-      <unit_drag x="0" y="0" width="100" height="80"/>
-    </button>
-
-    <upgrade>
-      <frame x="747" y="853" width="105" height="106"/>
-      <frame x="747" y="977" width="105" height="106"/>
-      <frame x="747" y="1107" width="105" height="106"/>
-      <frame x="747" y="853" width="105" height="106"/>
-    </upgrade>
-    
   </card>
   
   <card type ="2">
@@ -45,23 +28,6 @@
       <stat stat="energy_cost" value ="4"/>
       <stat stat="units" value ="2"/>
     </stats>
-     
-    <sprite faction="0">textures/units/sprite_gi.png</sprite>
-
-    <button>
-      <frame x="400" y="0" width="100" height="80"/>
-      <frame x="500" y="0" width="100" height="80"/>
-      <frame x="400" y="80" width="100" height="80"/>
-      <frame x="0" y="0" width="100" height="80"/>
-      <unit_drag x="400" y="0" width="100" height="80"/>
-    </button>
-
-    <upgrade>
-      <frame x="960" y="853" width="105" height="106"/>
-      <frame x="960" y="977" width="105" height="106"/>
-      <frame x="960" y="1107" width="105" height="106"/>
-      <frame x="960" y="853" width="105" height="106"/>
-    </upgrade>
     
   </card>
 
@@ -79,23 +45,6 @@
       <stat stat="units" value ="2"/>
     </stats>
     
-    <sprite>textures/units/sprite_gi.png</sprite>
-
-    <button>
-      <frame x="200" y="0" width="100" height="80"/>
-      <frame x="300" y="0" width="100" height="80"/>
-      <frame x="200" y="80" width="100" height="80"/>
-      <frame x="0" y="0" width="100" height="80"/>
-      <unit_drag x="200" y="0" width="100" height="80"/>
-    </button>
-
-    <upgrade>
-      <frame x="854" y="853" width="105" height="106"/>
-      <frame x="854" y="977" width="105" height="106"/>
-      <frame x="854" y="1107" width="105" height="106"/>
-      <frame x="854" y="853" width="105" height="106"/>
-    </upgrade>
-    
   </card>
 
   <card type ="4">
@@ -111,24 +60,6 @@
       <stat stat="energy_cost" value ="2"/>
       <stat stat="units" value ="1"/>
     </stats>
-
-    <sprite>textures/units/sprite_gi.png</sprite>
-
-    <button>
-      <frame x="400" y="160" width="100" height="80"/>
-      <frame x="500" y="160" width="100" height="80"/>
-      <frame x="400" y="240" width="100" height="80"/>
-      <frame x="0" y="0" width="100" height="80"/>
-      <unit_drag x="400" y="160" width="100" height="80"/>
-    </button>
-
-    <upgrade>
-      <frame x="1067" y="853" width="105" height="106"/>
-      <frame x="1067" y="977" width="105" height="106"/>
-      <frame x="1067" y="1107" width="105" height="106"/>
-      <frame x="1067" y="853" width="105" height="106"/>
-    </upgrade>
-
   </card>
 
   <card type ="5">
@@ -144,23 +75,6 @@
       <stat stat="energy_cost" value ="2"/>
       <stat stat="units" value ="3"/>
     </stats>
-
-    <sprite>textures/units/sprite_gi.png</sprite>
-
-    <button>
-      <frame x="0" y="160" width="100" height="80"/>
-      <frame x="100" y="160" width="100" height="80"/>
-      <frame x="0" y="240" width="100" height="80"/>
-      <frame x="0" y="0" width="100" height="80"/>
-      <unit_drag x="0" y="160" width="100" height="80"/>
-    </button>
-
-    <upgrade>
-      <frame x="1282" y="853" width="105" height="106"/>
-      <frame x="1282" y="977" width="105" height="106"/>
-      <frame x="1282" y="1107" width="105" height="106"/>
-      <frame x="1282" y="853" width="105" height="106"/>
-    </upgrade>
     
   </card>
 
@@ -178,23 +92,6 @@
       <stat stat="units" value ="1"/>
     </stats>
 
-    <sprite>textures/units/sprite_gi.png</sprite>
-
-    <button>
-      <frame x="200" y="160" width="100" height="80"/>
-      <frame x="300" y="160" width="100" height="80"/>
-      <frame x="200" y="240" width="100" height="80"/>
-      <frame x="0" y="0" width="100" height="80"/>
-      <unit_drag x="400" y="160" width="100" height="80"/>
-    </button>
-
-    <upgrade>
-      <frame x="1175" y="853" width="105" height="106"/>
-      <frame x="1175" y="977" width="105" height="106"/>
-      <frame x="1175" y="1107" width="105" height="106"/>
-      <frame x="1175" y="853" width="105" height="106"/>
-    </upgrade>
-    
   </card>
 
   <card type ="7">
@@ -211,23 +108,6 @@
       <stat stat="units" value ="3"/>
     </stats>
     
-    <sprite>textures/units/sprite_gi.png</sprite> 
-
-    <button>
-      <frame x="200" y="320" width="100" height="80"/>
-      <frame x="300" y="320" width="100" height="80"/>
-      <frame x="200" y="400" width="100" height="80"/>
-      <frame x="0" y="0" width="100" height="80"/>
-      <unit_drag x="200" y="320" width="100" height="80"/>
-    </button>
-
-    <upgrade>
-      <frame x="1494" y="853" width="105" height="106"/>
-      <frame x="1494" y="977" width="105" height="106"/>
-      <frame x="1494" y="1107" width="105" height="106"/>
-      <frame x="1494" y="853" width="105" height="106"/>
-    </upgrade>
-    
   </card>
 
   <card type ="8">
@@ -243,23 +123,6 @@
       <stat stat="energy_cost" value ="2"/>
       <stat stat="units" value ="2"/>
     </stats>
-
-    <sprite>textures/units/sprite_gi.png</sprite>
-
-    <button>
-      <frame x="0" y="320" width="100" height="80"/>
-      <frame x="100" y="320" width="100" height="80"/>
-      <frame x="0" y="400" width="100" height="80"/>
-      <frame x="0" y="0" width="100" height="80"/>
-      <unit_drag x="0" y="320" width="100" height="80"/>
-    </button>
-
-    <upgrade>
-      <frame x="1599" y="853" width="105" height="106"/>
-      <frame x="1599" y="977" width="105" height="106"/>
-      <frame x="1599" y="1107" width="105" height="106"/>
-      <frame x="1599" y="853" width="105" height="106"/>
-    </upgrade>
     
   </card>
 
@@ -276,23 +139,6 @@
       <stat stat="energy_cost" value ="2"/>
       <stat stat="units" value ="1"/>
     </stats>
-
-    <sprite>textures/units/sprite_gi.png</sprite>
-
-    <button>
-      <frame x="400" y="320" width="100" height="80"/>
-      <frame x="500" y="320" width="100" height="80"/>
-      <frame x="400" y="400" width="100" height="80"/>
-      <frame x="0" y="0" width="100" height="80"/>
-      <unit_drag x="400" y="320" width="100" height="80"/>
-    </button>
-
-    <upgrade>
-      <frame x="1389" y="853" width="105" height="106"/>
-      <frame x="1389" y="977" width="105" height="106"/>
-      <frame x="1389" y="1107" width="105" height="106"/>
-      <frame x="1389" y="853" width="105" height="106"/>
-    </upgrade>
     
   </card>
   

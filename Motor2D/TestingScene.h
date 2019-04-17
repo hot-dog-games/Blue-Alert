@@ -39,10 +39,11 @@ public:
 
 	virtual bool GUIEvent(UIElement* element, GUI_Event gui_event);
 
+	void StartUI();
+
 private:
 	void CreateDrag(int num, UIElement* element);
 	void ReleaseDrag();
-	void IncreaseUnit(Card* card);
 
 private:
 	enum class BattleSceneState {

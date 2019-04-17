@@ -1,0 +1,201 @@
+<config>
+
+  <GI type="1" >
+    
+    <button>
+      <frame x="0" y="0" width="100" height="80"/>
+      <frame x="100" y="0" width="100" height="80"/>
+      <frame x="0" y="80" width="100" height="80"/>
+      <frame x="0" y="0" width="100" height="80"/>
+    </button>
+
+    <drag>
+      <frame x="0" y="0" width="100" height="80"/>
+    </drag>
+
+    <upgrade>
+      <frame x="747" y="853" width="105" height="106"/>
+      <frame x="747" y="977" width="105" height="106"/>
+      <frame x="747" y="1107" width="105" height="106"/>
+      <frame x="747" y="853" width="105" height="106"/>
+    </upgrade>
+    
+  </GI>
+
+  <Sniper type="2">
+
+    <button>
+      <frame x="400" y="0" width="100" height="80"/>
+      <frame x="500" y="0" width="100" height="80"/>
+      <frame x="400" y="80" width="100" height="80"/>
+      <frame x="0" y="0" width="100" height="80"/>
+    </button>
+
+    <drag>
+      <frame x="400" y="0" width="100" height="80"/>
+    </drag>
+
+    <upgrade>
+      <frame x="960" y="853" width="105" height="106"/>
+      <frame x="960" y="977" width="105" height="106"/>
+      <frame x="960" y="1107" width="105" height="106"/>
+      <frame x="960" y="853" width="105" height="106"/>
+    </upgrade>
+
+  </Sniper>
+
+  <NavySeal type="3">
+
+    <button>
+      <frame x="200" y="0" width="100" height="80"/>
+      <frame x="300" y="0" width="100" height="80"/>
+      <frame x="200" y="80" width="100" height="80"/>
+      <frame x="0" y="0" width="100" height="80"/>
+    </button>
+
+    <drag>
+      <frame x="200" y="0" width="100" height="80"/>
+    </drag>
+
+    <upgrade>
+      <frame x="854" y="853" width="105" height="106"/>
+      <frame x="854" y="977" width="105" height="106"/>
+      <frame x="854" y="1107" width="105" height="106"/>
+      <frame x="854" y="853" width="105" height="106"/>
+    </upgrade>
+
+  </NavySeal>
+
+  <GrizzlyTank type="4">
+
+    <button>
+      <frame x="400" y="160" width="100" height="80"/>
+      <frame x="500" y="160" width="100" height="80"/>
+      <frame x="400" y="240" width="100" height="80"/>
+      <frame x="0" y="0" width="100" height="80"/>
+    </button>
+
+    <drag>
+      <frame x="400" y="160" width="100" height="80"/>
+    </drag>
+
+    <upgrade>
+      <frame x="1067" y="853" width="105" height="106"/>
+      <frame x="1067" y="977" width="105" height="106"/>
+      <frame x="1067" y="1107" width="105" height="106"/>
+      <frame x="1067" y="853" width="105" height="106"/>
+    </upgrade>
+
+  </GrizzlyTank>
+
+  <RobotTank type="5">
+
+    <button>
+      <frame x="0" y="160" width="100" height="80"/>
+      <frame x="100" y="160" width="100" height="80"/>
+      <frame x="0" y="240" width="100" height="80"/>
+      <frame x="0" y="0" width="100" height="80"/>
+    </button>
+
+    <drag>
+      <frame x="0" y="160" width="100" height="80"/>
+    </drag>
+
+    <upgrade>
+      <frame x="1282" y="853" width="105" height="106"/>
+      <frame x="1282" y="977" width="105" height="106"/>
+      <frame x="1282" y="1107" width="105" height="106"/>
+      <frame x="1282" y="853" width="105" height="106"/>
+    </upgrade>
+
+  </RobotTank>
+
+  <PrismTank type="6">
+
+    <button>
+      <frame x="200" y="160" width="100" height="80"/>
+      <frame x="300" y="160" width="100" height="80"/>
+      <frame x="200" y="240" width="100" height="80"/>
+      <frame x="0" y="0" width="100" height="80"/>
+    </button>
+
+    <drag>
+      <frame x="400" y="160" width="100" height="80"/>
+    </drag>
+
+    <upgrade>
+      <frame x="1175" y="853" width="105" height="106"/>
+      <frame x="1175" y="977" width="105" height="106"/>
+      <frame x="1175" y="1107" width="105" height="106"/>
+      <frame x="1175" y="853" width="105" height="106"/>
+    </upgrade>
+
+  </PrismTank>
+
+  <NightHawk type="7">
+
+    <button>
+      <frame x="200" y="320" width="100" height="80"/>
+      <frame x="300" y="320" width="100" height="80"/>
+      <frame x="200" y="400" width="100" height="80"/>
+      <frame x="0" y="0" width="100" height="80"/>
+    </button>
+
+    <drag>
+      <frame x="200" y="320" width="100" height="80"/>
+    </drag>
+
+    <upgrade>
+      <frame x="1494" y="853" width="105" height="106"/>
+      <frame x="1494" y="977" width="105" height="106"/>
+      <frame x="1494" y="1107" width="105" height="106"/>
+      <frame x="1494" y="853" width="105" height="106"/>
+    </upgrade>
+
+  </NightHawk>
+
+  <Harrier type="8">
+
+    <button>
+      <frame x="0" y="320" width="100" height="80"/>
+      <frame x="100" y="320" width="100" height="80"/>
+      <frame x="0" y="400" width="100" height="80"/>
+      <frame x="0" y="0" width="100" height="80"/>
+    </button>
+
+    <drag>
+      <frame x="0" y="320" width="100" height="80"/>
+    </drag>
+
+    <upgrade>
+      <frame x="1599" y="853" width="105" height="106"/>
+      <frame x="1599" y="977" width="105" height="106"/>
+      <frame x="1599" y="1107" width="105" height="106"/>
+      <frame x="1599" y="853" width="105" height="106"/>
+    </upgrade>
+
+  </Harrier>
+
+  <BlackEagle type="9">
+
+    <button>
+      <frame x="400" y="320" width="100" height="80"/>
+      <frame x="500" y="320" width="100" height="80"/>
+      <frame x="400" y="400" width="100" height="80"/>
+      <frame x="0" y="0" width="100" height="80"/>
+    </button>
+
+    <drag>
+      <frame x="400" y="320" width="100" height="80"/>
+    </drag>
+
+    <upgrade>
+      <frame x="1389" y="853" width="105" height="106"/>
+      <frame x="1389" y="977" width="105" height="106"/>
+      <frame x="1389" y="1107" width="105" height="106"/>
+      <frame x="1389" y="853" width="105" height="106"/>
+    </upgrade>
+
+  </BlackEagle>
+  
+</config>

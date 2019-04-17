@@ -34,16 +34,9 @@ struct CardInfo {
 
 };
 
-struct CardButton {
-	SDL_Rect anim[3];
-	SDL_Rect drag;
-	SDL_Rect upgrade[3];
-};
-
 struct Card {
 	EntityType type;
 	CardInfo info;
-	CardButton button;
 
 	uint level;
 	std::string name;
@@ -69,9 +62,7 @@ public:
 	Card* DeleteCard(Card* card);
 
 private:
-	void LoadCardStats(Card* card, pugi::xml_node stats_node);
-	void LoadCardButton(Card* card, pugi::xml_node button_node);
-	void LoadCardUpgrade(Card* card, pugi::xml_node upgrade_node);
+	void LoadCardStats(Card* card, pugi::xml_node stats_node);;
 
 private:
 	bool to_delete = false;

@@ -65,7 +65,7 @@ public:
 	// Gui creation functions
 	UIImage* CreateImage(iPoint pos, SDL_Rect rect, UIElement* parent = nullptr, bool image = true);
 	UILabel* CreateLabel(iPoint pos, std::string path, int size, std::string text, SDL_Color color, int max_width = 0, UIElement* parent = nullptr);
-	UIButton* CreateButton(iPoint pos, SDL_Rect* sprite_rect, UIElement* parent = nullptr, bool is_interactable = true);
+	UIButton* CreateButton(iPoint pos, SDL_Rect* sprite_rect, UIElement* parent = nullptr, bool is_selectable = false, bool is_interactable = true);
 	UIScrollBar* CreateScrollBar(iPoint pos, float min, float max, ScrollType type = VERTICAL, UIElement* parent = nullptr);
 	UIAnimatedImage* CreateAnimatedImage(iPoint pos, SDL_Rect * rect, int total_sprites, int speed, UIElement* parent = nullptr);
 	UIBar* CreateBar(iPoint pos, SDL_Rect rect, Stat* value, UIElement* parent = nullptr);
@@ -73,9 +73,10 @@ public:
 	void DeleteElement(UIElement* element);
 
 	UIElement* GetElementUnderMouse();
-	void LoadUI(std::string xml_path);
 	void EnableElement(UIElement* element);
 	void DisableElement(UIElement* element);
+
+	SDL_Rect* LoadButton(int num, std::string type);
 
 	SDL_Texture* GetAtlas() const;
 
@@ -83,6 +84,7 @@ private:
 	std::list<UIElement*> elements;
 	SDL_Texture* atlas;
 	std::string atlas_file_name;
+	pugi::xml_document buttons_file;
 
 	//scaling
 
