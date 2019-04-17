@@ -258,7 +258,18 @@ bool TestingScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			App->gui->EnableElement((UIElement*)win_panel_two);
 		}
 		else if (element == win_continue_two) {
-			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
+			if (win_unit_one->selected) {
+				//App->game_manager->AddCardToPlayerCollection(random_num[0]);
+				App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
+			}
+			else if (win_unit_two->selected) {
+				//App->game_manager->AddCardToPlayerCollection(random_num[1]);
+				App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
+			}
+			else if(win_unit_three->selected) {
+				//App->game_manager->AddCardToPlayerCollection(random_num[2]);
+				App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
+			}
 		}
 			
 	}
