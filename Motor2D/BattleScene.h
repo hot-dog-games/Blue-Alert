@@ -47,7 +47,7 @@ public:
 	virtual bool GUIEvent(UIElement* element, GUI_Event gui_event);
 
 private:
-	void CreateDrag(int num, UIElement* element);
+	void CreateDrag(int num, int type, UIElement* element);
 	void ReleaseDrag();
 
 	void StartUI();
@@ -86,6 +86,11 @@ private:
 	UIImage* current_drag;
 	int card_num;
 	int random_num[3];
+
+	//Audio fx
+	uint win_fx;
+	uint lose_fx;
+	uint deployment_fx;
 
 	uint max_energy;
 	uint current_energy;

@@ -66,6 +66,11 @@ bool BattleScene::Start()
 	//Initialize UI
 	StartUI();
 
+	win_fx = App->audio->LoadFx("audio/fx/Mission/Mission_accomplished.wav");
+	lose_fx = App->audio->LoadFx("audio/fx/Mission/Mission_Failed.wav");
+	deployment_fx = App->audio->LoadFx("audio/fx/Voice_Over/Unit_ready.wav");
+	App->audio->PlayMusic("audio/music/9.Destroy-Red Alert2_2.ogg");
+
 	return true;
 }
 
@@ -117,11 +122,13 @@ bool BattleScene::Update(float dt)
 		if (!allied_core->IsAlive())
 		{
 			state = BattleSceneState::LOSE;
+			App->audio->PlayFx(lose_fx, 0);
 			App->PauseGame();
 		}
 		else if (!enemy_core->IsAlive())
 		{
 			state = BattleSceneState::WIN;
+			App->audio->PlayFx(win_fx, 0);
 			App->PauseGame();
 			App->gui->EnableElement((UIElement*)win_panel_one);
 		}
@@ -129,11 +136,14 @@ bool BattleScene::Update(float dt)
 	break;
 	case BattleScene::BattleSceneState::WIN:
 	{
+		if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
+			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
 	}
 	break;
 	case BattleScene::BattleSceneState::LOSE:
 	{
-		
+		if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
+			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
 	}
 	break;
 	default:
@@ -168,16 +178,16 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 {
 	if (gui_event == GUI_Event::LEFT_CLICK_DOWN) {
 		if (element == unit_button_one) {
-			CreateDrag(allied_core->GetCard(CN_FIRST)->type, element);
+			CreateDrag(CN_FIRST, allied_core->GetCard(CN_FIRST)->type, element);
 		}
 		else if (element == unit_button_two) {
-			CreateDrag(allied_core->GetCard(CN_SECOND)->type, element);
+			CreateDrag(CN_SECOND, allied_core->GetCard(CN_SECOND)->type, element);
 		}
 		else if (element == unit_button_three) {
-			CreateDrag(allied_core->GetCard(CN_THIRD)->type, element);
+			CreateDrag(CN_THIRD, allied_core->GetCard(CN_THIRD)->type, element);
 		}
 		else if (element == unit_button_four) {
-			CreateDrag(allied_core->GetCard(CN_FOURTH)->type, element);
+			CreateDrag(CN_FOURTH, allied_core->GetCard(CN_FOURTH)->type, element);
 		}
 		else if (element == win_continue_one) {
 			App->gui->DisableElement((UIElement*)win_panel_one);
@@ -226,10 +236,10 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 	return true;
 }
 
-void BattleScene::CreateDrag(int num, UIElement* element)
+void BattleScene::CreateDrag(int num, int type, UIElement* element)
 {
 	card_num = num;
-	current_drag = App->gui->CreateImage({ 0,0 }, App->gui->LoadUIButton(num, "drag")[0], element);
+	current_drag = App->gui->CreateImage({ 0,0 }, App->gui->LoadUIButton(type, "drag")[0], element);
 	current_drag->interactable = true;
 	current_drag->dragable = true;
 	current_drag->clipping = false;
@@ -240,6 +250,7 @@ void BattleScene::CreateDrag(int num, UIElement* element)
 void BattleScene::ReleaseDrag()
 {
 	int x, y;
+	App->audio->PlayFx(deployment_fx, 0);
 	App->input->GetMousePosition(x, y);
 	iPoint point = App->render->ScreenToWorld(x, y);
 	allied_core->UseCard(card_num, { float(point.x),float(point.y) });
