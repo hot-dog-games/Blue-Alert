@@ -76,7 +76,8 @@ public:
 	void EnableElement(UIElement* element);
 	void DisableElement(UIElement* element);
 
-	SDL_Rect* LoadButton(int num, std::string type);
+	SDL_Rect* LoadUIButton(int num, std::string type);
+	SDL_Rect  LoadUIImage(int num);
 
 	SDL_Texture* GetAtlas() const;
 

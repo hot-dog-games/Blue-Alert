@@ -38,7 +38,7 @@ bool Gui::Awake(pugi::xml_node& conf)
 
 	atlas_file_name = conf.child("atlas").attribute("file").as_string("");
 
-	buttons_file.load_file("xml/buttons.xml");
+	buttons_file.load_file("xml/ui.xml");
 
 	return ret;
 }
@@ -264,9 +264,9 @@ void Gui::DisableElement(UIElement* ele)
 	}
 }
 
-SDL_Rect* Gui::LoadButton(int num, std::string type)
+SDL_Rect* Gui::LoadUIButton(int num, std::string type)
 {
-	pugi::xml_node buttons_node = buttons_file.first_child();
+	pugi::xml_node buttons_node = buttons_file.first_child().child("ui_button");
 
 	std::string name;
 
@@ -313,6 +313,41 @@ SDL_Rect* Gui::LoadButton(int num, std::string type)
 	}
 
 	return button_rect;
+}
+
+SDL_Rect Gui::LoadUIImage(int num)
+{
+	pugi::xml_node images_node = buttons_file.first_child().child("ui_image");
+
+	std::string name;
+
+	switch (num) {
+	case 10:
+		name = "Infantry";
+		break;
+	case 11:
+		name = "Aerial";
+		break;
+	case 12:
+		name = "Land";
+		break;
+	case 13:
+		name = "Gold";
+		break;
+	case 14:
+		name = "Store";
+		break;
+	}
+
+	SDL_Rect image_rect;
+	pugi::xml_node rect_node = images_node.child(name.c_str());
+
+	image_rect.x = rect_node.attribute("x").as_uint();
+	image_rect.y = rect_node.attribute("y").as_uint();
+	image_rect.w = rect_node.attribute("width").as_uint();
+	image_rect.h = rect_node.attribute("height").as_uint();
+
+	return image_rect;
 }
 
 UIElement* Gui::GetElementUnderMouse()

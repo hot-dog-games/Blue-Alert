@@ -291,10 +291,10 @@ void TestingScene::StartUI()
 	//Game_UI
 
 	unit_panel = App->gui->CreateImage({ 755,0 }, { 619,0,269,768 });
-	unit_button_one = App->gui->CreateButton({ 35, 365 }, App->gui->LoadButton(test_core->GetCard(CN_FIRST)->type, "button"), unit_panel);
-	unit_button_two = App->gui->CreateButton({ 135, 365 }, App->gui->LoadButton(test_core->GetCard(CN_SECOND)->type, "button"), unit_panel);
-	unit_button_three = App->gui->CreateButton({ 35, 445 }, App->gui->LoadButton(test_core->GetCard(CN_THIRD)->type, "button"), unit_panel);
-	unit_button_four = App->gui->CreateButton({ 135, 445 }, App->gui->LoadButton(test_core->GetCard(CN_FOURTH)->type, "button"), unit_panel);
+	unit_button_one = App->gui->CreateButton({ 35, 365 }, App->gui->LoadUIButton(test_core->GetCard(CN_FIRST)->type, "button"), unit_panel);
+	unit_button_two = App->gui->CreateButton({ 135, 365 }, App->gui->LoadUIButton(test_core->GetCard(CN_SECOND)->type, "button"), unit_panel);
+	unit_button_three = App->gui->CreateButton({ 35, 445 }, App->gui->LoadUIButton(test_core->GetCard(CN_THIRD)->type, "button"), unit_panel);
+	unit_button_four = App->gui->CreateButton({ 135, 445 }, App->gui->LoadUIButton(test_core->GetCard(CN_FOURTH)->type, "button"), unit_panel);
 
 	energy_bar = App->gui->CreateBar({ 764, 358 }, { 601,0,16,274 }, test_core->GetEnergy());
 
@@ -311,9 +311,11 @@ void TestingScene::StartUI()
 	win_continue_one = App->gui->CreateButton({ 262,375 }, button_rect, win_panel_one);
 	win_continue_two = App->gui->CreateButton({ 262,375 }, button_rect, win_panel_two);
 
-	win_unit_one = App->gui->CreateButton({ 130,200 }, App->gui->LoadButton(random_num[0],"upgrade"), win_panel_two, true);
-	win_unit_two = App->gui->CreateButton({ 320,200 }, App->gui->LoadButton(random_num[1], "upgrade"), win_panel_two, true);
-	win_unit_three = App->gui->CreateButton({ 510,200 }, App->gui->LoadButton(random_num[2], "upgrade"), win_panel_two, true);
+	win_unit_one = App->gui->CreateButton({ 130,200 }, App->gui->LoadUIButton(random_num[0],"upgrade"), win_panel_two, true);
+	win_unit_two = App->gui->CreateButton({ 320,200 }, App->gui->LoadUIButton(random_num[1], "upgrade"), win_panel_two, true);
+	win_unit_three = App->gui->CreateButton({ 510,200 }, App->gui->LoadUIButton(random_num[2], "upgrade"), win_panel_two, true);
+
+	win_building = App->gui->CreateImage({ 300,200 }, App->gui->LoadUIImage(App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterType()), win_panel_one);
 
 	App->gui->DisableElement((UIElement*)win_panel_one);
 	App->gui->DisableElement((UIElement*)win_panel_two);
@@ -324,7 +326,7 @@ void TestingScene::StartUI()
 void TestingScene::CreateDrag(int num, UIElement* element)
 {
 	card_num = num;
-	current_drag = App->gui->CreateImage({ 0,0 }, App->gui->LoadButton(num + 1, "drag")[0], element);
+	current_drag = App->gui->CreateImage({ 0,0 }, App->gui->LoadUIButton(num + 1, "drag")[0], element);
 	current_drag->interactable = true;
 	current_drag->dragable = true;
 	current_drag->clipping = false;
