@@ -8,7 +8,7 @@ const float THINK_DELAY = 1.0F;
 class CoreAI : public Core
 {
 public:
-	CoreAI(pugi::xml_node entity_config, fPoint position, Faction faction);
+	CoreAI(pugi::xml_node entity_config, fPoint position, Faction faction, pugi::xml_node stats_node);
 	~CoreAI();
 
 	virtual bool Update(float dt);

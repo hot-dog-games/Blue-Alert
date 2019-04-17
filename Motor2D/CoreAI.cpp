@@ -7,7 +7,7 @@
 
 
 
-CoreAI::CoreAI(pugi::xml_node entity_config, fPoint position, Faction faction): Core(entity_config,position,faction)
+CoreAI::CoreAI(pugi::xml_node entity_config, fPoint position, Faction faction, pugi::xml_node stats_node): Core(entity_config,position,faction,stats_node)
 {
 
 }
