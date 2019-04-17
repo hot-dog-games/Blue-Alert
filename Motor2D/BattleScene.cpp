@@ -75,6 +75,7 @@ bool BattleScene::Start()
 	unit_button_four = App->gui->CreateButton({ 135, 445 }, test_core->GetCard(CN_FOURTH)->button.anim, unit_panel);
 
 	energy_bar = App->gui->CreateBar({ 764, 358 }, { 601,0,16,274 }, test_core->GetEnergy());
+	App->audio->PlayMusic("audio/music/9.Destroy-Red Alert2_2.ogg");
 
 	return true;
 }

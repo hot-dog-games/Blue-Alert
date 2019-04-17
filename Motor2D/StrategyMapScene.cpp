@@ -66,6 +66,7 @@ bool StrategyMapScene::Start()
 	App->render->camera.x = -world_position.x + w * 0.5;
 	App->render->camera.y = -world_position.y + h;
 
+	App->audio->PlayMusic("audio/music/5.InDeep-RedAlert2_2.ogg");
 
 	return true;
 }
