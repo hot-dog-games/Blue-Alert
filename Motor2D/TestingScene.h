@@ -43,7 +43,7 @@ public:
 	void StartUI();
 
 private:
-	void CreateDrag(int num, UIElement* element);
+	void CreateDrag(int num, int type, UIElement* element);
 	void ReleaseDrag();
 
 private:

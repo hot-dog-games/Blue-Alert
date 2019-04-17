@@ -909,10 +909,10 @@
   <!--HARRIER-->
   <entity type ="8">
     <info faction ="0">
-      <sprite>sprites/units/AirVehicles/Harrier.png</sprite>
+      <sprite>sprites/Units/AirVehicles/Harrier.png</sprite>
       <animations>
         <animation speed="5.0F" name="idle">
-          <frame x="345" y="1851" width="15" height="33"/>
+          <frame x="110" y="575" width="53" height="34"/>
         </animation>
         <animation speed="5.0F" name="moving_right">
           <frame x="196" y="60" width="65" height="29"/>
@@ -945,10 +945,10 @@
   <!--BLACK EAGLE-->
   <entity type ="9">
     <info faction ="0">
-      <sprite>sprites/units/AirVehicles/BlackEagle.png</sprite>
+      <sprite>sprites/Units/AirVehicles/BlackEagle.png</sprite>
       <animations>
         <animation speed="5.0F" name="idle">
-          <frame x="345" y="1851" width="15" height="33"/>
+          <frame x="693" y="49" width="119" height="50"/>
         </animation>
         <animation speed="5.0F" name="moving_right">
           <frame x="693" y="49" width="119" height="50"/>

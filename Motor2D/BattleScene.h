@@ -47,7 +47,7 @@ public:
 	virtual bool GUIEvent(UIElement* element, GUI_Event gui_event);
 
 private:
-	void CreateDrag(int num, UIElement* element);
+	void CreateDrag(int num, int type, UIElement* element);
 	void ReleaseDrag();
 
 	void StartUI();
