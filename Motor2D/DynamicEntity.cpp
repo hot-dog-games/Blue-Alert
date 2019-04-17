@@ -224,7 +224,7 @@ bool DynamicEntity::CheckEnemies()
 	float distance = 10000.0f;
 	App->entity_manager->FindClosestEnemy(position, faction, closest_entity, distance);
 
-	if (distance <= entity_card->info.stats.find("range")->second->GetValue()* App->map->data.tile_height)
+	if (closest_entity && distance <= entity_card->info.stats.find("range")->second->GetValue()* App->map->data.tile_height)
 	{
 		objective = closest_entity;
 		fPoint objective_direction = { objective->position.x - position.x, objective->position.y - position.y };
