@@ -14,7 +14,7 @@
 
 bool higher_y(Entity* first, Entity* second)
 {
-	return (first->position.y > second->position.y);
+	return (first->position.y < second->position.y);
 }
 
 EntityManager::EntityManager()
@@ -60,6 +60,8 @@ bool EntityManager::Update(float dt)
 
 bool EntityManager::PreUpdate()
 {
+	entities.sort(higher_y);
+
 	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
 	{
 		(*entity)->PreUpdate();
@@ -119,8 +121,6 @@ Entity* EntityManager::CreateEntity(EntityType type, fPoint position, Card* card
 
 	id_count++;
 
-	entities.sort(higher_y);
-
 	return entity;
 }
 
@@ -156,8 +156,6 @@ Core* EntityManager::CreateCore(uint core_type, fPoint position, Deck* deck, Fac
 	entity->SetDebug(debug);
 
 	id_count++;
-
-	entities.sort(higher_y);
 
 	return entity;
 }

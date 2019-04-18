@@ -58,8 +58,8 @@ bool TestingScene::Start()
 
 	debug_tex = App->tex->Load("maps/path2.png");
 
-	App->render->camera.x = (App->map->data.width*App->map->data.tile_width*0.5)*0.5 - 100;
-	App->render->camera.y = 0;
+	App->render->camera.x = (App->map->data.width*App->map->data.tile_width*0.5)*0.5 - 250;
+	App->render->camera.y = -210;
 
 	Deck* enemy_deck = new Deck();
 	enemy_deck->delete_cards = true;
@@ -75,8 +75,8 @@ bool TestingScene::Start()
 	test_deck->AddCard(App->card_manager->CreateCard(EntityType::GRIZZLY));
 	test_deck->AddCard(App->card_manager->CreateCard(EntityType::HARRIER));
 
-	test_core = App->entity_manager->CreateCore(1, { 30,750 }, test_deck, FACTION_RUSSIAN);
-	test_enemy_core = App->entity_manager->CreateCore(13, { 25,85 }, enemy_deck, FACTION_AMERICAN, true);
+	test_core = App->entity_manager->CreateCore(1, { 30,980 }, test_deck, FACTION_RUSSIAN);
+	test_enemy_core = App->entity_manager->CreateCore(13, { 25,285 }, enemy_deck, FACTION_AMERICAN, true);
 
 	do {
 		random_num[0] = rand() % 9 + 1;
