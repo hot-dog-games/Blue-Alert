@@ -56,5 +56,6 @@ Card * Deck::GetCard(EntityType type)
 			return cards[i];
 		
 	}
+
 	return nullptr;
 }

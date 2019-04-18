@@ -43,6 +43,15 @@ void UIButton::OnMouseExit()
 	rect_sprite = anim[0];
 }
 
+void UIButton::ChangeSprite(SDL_Rect* rect)
+{
+	anim[0] = rect[0];
+	anim[1] = rect[1];
+	anim[2] = rect[2];
+	anim[3] = rect[3];
+	rect_sprite = anim[0];
+}
+
 void UIButton::SetLocked(bool value)
 {
 	interactable = value;

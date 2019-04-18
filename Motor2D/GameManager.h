@@ -26,6 +26,8 @@ public:
 
 	EncounterTree* GetEncounterTree();
 	Deck* GetPlayerDeck();
+	
+	bool IsInPlayerDeck(Card* card);
 
 	//----Initialization----
 

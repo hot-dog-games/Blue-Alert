@@ -47,7 +47,7 @@
       </upgrade>
 
       <deck>
-        <frame x="909" y="1840" width="160" height="160"/>
+        <frame x="1072" y="1840" width="160" height="160"/>
       </deck>
       
     </Sniper>
@@ -73,7 +73,7 @@
       </upgrade>
 
       <deck>
-        <frame x="1072" y="1840" width="160" height="160"/>
+        <frame x="909" y="1840" width="160" height="160"/>
       </deck>
       
     </NavySeal>
@@ -125,7 +125,7 @@
       </upgrade>
 
       <deck>
-        <frame x="1398" y="1840" width="160" height="160"/>
+        <frame x="1557" y="1841" width="160" height="160"/>
       </deck>
       
     </RobotTank>
@@ -151,7 +151,7 @@
       </upgrade>
 
       <deck>
-        <frame x="1561" y="1840" width="160" height="160"/>
+        <frame x="1398" y="1840" width="160" height="160"/>
       </deck>
       
     </PrismTank>
@@ -177,7 +177,7 @@
       </upgrade>
 
       <deck>
-        <frame x="1724" y="1840" width="160" height="160"/>
+        <frame x="1887" y="1840" width="160" height="160"/>
       </deck>
       
     </NightHawk>
@@ -203,7 +203,7 @@
       </upgrade>
 
       <deck>
-        <frame x="1887" y="1840" width="160" height="160"/>
+        <frame x="2050" y="1840" width="160" height="160"/>
       </deck>
       
     </Harrier>
@@ -229,7 +229,7 @@
       </upgrade>
 
       <deck>
-        <frame x="2050" y="1840" width="160" height="160"/>
+        <frame x="1724" y="1840" width="160" height="160"/>
       </deck>
       
     </BlackEagle>

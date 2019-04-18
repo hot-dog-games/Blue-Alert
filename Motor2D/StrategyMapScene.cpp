@@ -82,14 +82,10 @@ bool StrategyMapScene::Start()
 	buildings_text = App->gui->CreateLabel({ 35,10 }, "ui/Fonts/command_and_conquer___logo_font_by_dexistor371-d6k2yvb.ttf", 20, "BUILDINGS", { 0,0,0,0 }, 0, buildings_button);
 	App->gui->DisableElement(buildings_button);
 
-
-	
 	deck_buttons[0] = App->gui->CreateButton({ 320,69 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[0]->type, "deck"), troops_background);
 	deck_buttons[1] = App->gui->CreateButton({ 485,69 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[1]->type, "deck"), troops_background);
 	deck_buttons[2] = App->gui->CreateButton({ 666,69 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[2]->type, "deck"), troops_background);
 	deck_buttons[3] = App->gui->CreateButton({ 800,69 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[3]->type, "deck"), troops_background);
-	
-
 	
 	collection_buttons[0] = App->gui->CreateButton({ 31,320 }, App->gui->LoadUIButton(1, "upgrade"), troops_background);
 	collection_buttons[1] = App->gui->CreateButton({ 170,320 }, App->gui->LoadUIButton(2, "upgrade"), troops_background);
@@ -255,10 +251,11 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 
 void  StrategyMapScene::AddCardToDeck(UIElement * element, uint num) {
 	for (int i = 0; i < 4; i++) {
-		Card* card = App->game_manager->GetPlayerDeck()->GetCard((EntityType)(num+1));
-		if (deck_buttons[i]->enabled == false && !card) {
+		Card* card = App->game_manager->GetCardFromCollection((EntityType)(num+1));
+		if (deck_buttons[i]->enabled == false && card && !App->game_manager->IsInPlayerDeck(card)) {
 			App->gui->EnableElement(deck_buttons[i]);
 			App->game_manager->GetPlayerDeck()->AddCard(card);
+			deck_buttons[i]->ChangeSprite(App->gui->LoadUIButton((App->game_manager->GetPlayerDeck()->cards[i]->type), "deck"));
 			break;
 		}
 	}
