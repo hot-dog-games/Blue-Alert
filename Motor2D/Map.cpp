@@ -490,3 +490,21 @@ bool Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
 
 	return ret;
 }
+
+bool Map::IsWalkable(iPoint tile)
+{
+	for (std::list<MapLayer*>::const_iterator item = data.layers.begin(); item != data.layers.end(); ++item)
+	{
+		MapLayer* layer = *item;
+
+		if (layer->properties.Get("Navigation", 0) == 0)
+			continue;
+
+		int tile_id = layer->Get(tile.x, tile.y);
+		if (tile_id > 0)
+			return false;
+		else
+			return true;
+	}
+	return false;
+}

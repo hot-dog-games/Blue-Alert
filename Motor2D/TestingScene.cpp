@@ -360,8 +360,10 @@ void TestingScene::ReleaseDrag()
 	if ((map_pos.x > 0 && map_pos.y > 0)
 		&& (map_pos.x < App->map->data.width && map_pos.y < App->map->data.height))
 	{
-		test_core->UseCard(card_num, { float(world_pos.x),float(world_pos.y) });
-
+		if (App->map->IsWalkable(map_pos))
+		{
+			test_core->UseCard(card_num, { float(world_pos.x),float(world_pos.y) });
+		}
 	}
 	App->gui->DeleteElement(current_drag);
 	current_drag = nullptr;

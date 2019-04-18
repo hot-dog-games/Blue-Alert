@@ -120,6 +120,7 @@ public:
 	iPoint MapToWorld(int x, int y) const;
 	iPoint WorldToMap(int x, int y) const;
 	bool CreateWalkabilityMap(int& width, int& height, uchar** buffer) const;
+	bool IsWalkable(iPoint tile);
 
 private:
 
