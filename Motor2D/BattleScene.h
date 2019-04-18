@@ -60,6 +60,7 @@ private:
 		LOSE
 	};
 	BattleSceneState state = BattleSceneState::FIGHT;
+	PerfTimer shortcut_timer;
 
 	UIImage*		unit_panel;
 	UIButton*		unit_button_one;

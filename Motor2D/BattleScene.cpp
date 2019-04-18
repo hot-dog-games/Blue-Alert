@@ -27,6 +27,7 @@
 #include <time.h>
 #include <stdlib.h>
 
+const double HELD_DELAY = 175;
 
 BattleScene::BattleScene() : Scene()
 {
@@ -62,6 +63,7 @@ bool BattleScene::Start()
 
 	allied_core = App->entity_manager->CreateCore(1, { 30,980 }, App->game_manager->GetPlayerDeck(), FACTION_RUSSIAN);
 	enemy_core = App->entity_manager->CreateCore(App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterType(), { 25,285 }, enemy_deck, FACTION_AMERICAN, true);
+	enemy_core->delete_deck = true;
 
 	//Initialize UI
 	StartUI();
@@ -104,12 +106,18 @@ bool BattleScene::Update(float dt)
 		iPoint tile_p = App->map->WorldToMap(p.x, p.y);
 
 		//-------SHORTCUTS-----------------------//
-		if (App->input->GetKey(SDL_SCANCODE_1) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_2) == KEY_REPEAT
+		if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN
+			|| App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
+		{
+			shortcut_timer.Start();
+		}
+
+		if ((App->input->GetKey(SDL_SCANCODE_1) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_2) == KEY_REPEAT
 			|| App->input->GetKey(SDL_SCANCODE_3) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_4) == KEY_REPEAT)
+			&& shortcut_timer.ReadMs() > HELD_DELAY)
 		{
 			App->map->SetDrawable("Spawn", 0);
 		}
-
 
 		if (App->input->GetKey(SDL_SCANCODE_1) == KEY_UP)
 		{
@@ -153,6 +161,15 @@ bool BattleScene::Update(float dt)
 			
 
 		//---------------------------------------//
+
+		if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_UP)
+		{
+			state = BattleSceneState::WIN;
+			App->PauseGame();
+			App->gui->EnableElement((UIElement*)win_panel_one);
+			App->audio->PlayFx(win_fx, 0);
+		}
+			
 
 
 		if (!allied_core->IsAlive())
@@ -304,6 +321,7 @@ void BattleScene::ReleaseDrag()
 
 void BattleScene::StartUI()
 {
+	srand(time(0));
 	//Generate random number
 	do {
 		random_num[0] = rand() % 9 + 1;

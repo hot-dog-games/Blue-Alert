@@ -25,6 +25,8 @@ public:
 
 	Stat* GetEnergy() const;
 
+	bool delete_deck = false;
+
 protected:
 	Deck* deck = nullptr;
 	PerfTimer energy_timer;

@@ -47,7 +47,7 @@ bool EntityManager::Update(float dt)
 {
 	BROFILER_CATEGORY("EMUpdate", Profiler::Color::Plum);
 
-	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_UP)
 		SetDebug();
 
 	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)

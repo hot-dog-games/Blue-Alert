@@ -54,7 +54,9 @@ bool Core::CleanUp()
 	stats.clear();
 
 	deck->CleanUp();
-	delete deck;
+
+	if(delete_deck)
+		delete deck;
 
 	return true;
 }

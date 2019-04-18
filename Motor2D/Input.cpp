@@ -7,14 +7,12 @@
 #include "SDL/include/SDL.h"
 
 #define MAX_KEYS 300
-#define HELD_DELAY 175
 
 Input::Input() : Module()
 {
 	name = "input";
 
 	keyboard = new j1KeyState[MAX_KEYS];
-	keyboard_timers = new PerfTimer[MAX_KEYS];
 	memset(keyboard, KEY_IDLE, sizeof(j1KeyState) * MAX_KEYS);
 	memset(mouse_buttons, KEY_IDLE, sizeof(j1KeyState) * NUM_MOUSE_BUTTONS);
 }
@@ -60,23 +58,14 @@ bool Input::PreUpdate()
 		if(keys[i] == 1)
 		{
 			if (keyboard[i] == KEY_IDLE)
-			{
 				keyboard[i] = KEY_DOWN;
-				keyboard_timers[i].Start();
-			}
-			else {
-				double press_timer = keyboard_timers[i].ReadMs();
-				LOG("TIMER: %f", press_timer);
-				if (press_timer >= HELD_DELAY)
-					keyboard[i] = KEY_REPEAT;
-			}
+			else
+				keyboard[i] = KEY_REPEAT;
 		}
 		else
 		{
 			if (keyboard[i] == KEY_REPEAT || keyboard[i] == KEY_DOWN)
-			{
 				keyboard[i] = KEY_UP;
-			}
 			else
 				keyboard[i] = KEY_IDLE;
 		}
