@@ -50,8 +50,8 @@ bool BattleScene::Start()
 		RELEASE_ARRAY(data);
 	}
 
-	App->render->camera.x = (App->map->data.width*App->map->data.tile_width*0.5)*0.5 - 100;
-	App->render->camera.y = 0;
+	App->render->camera.x = (App->map->data.width*App->map->data.tile_width*0.5)*0.5 - 250;
+	App->render->camera.y = -210;
 
 	Deck* enemy_deck = new Deck();
 	enemy_deck->delete_cards = true;
@@ -60,8 +60,8 @@ bool BattleScene::Start()
 	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterDeck()[2]));
 	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterDeck()[3]));
 
-	allied_core = App->entity_manager->CreateCore(1, { 30,750 }, App->game_manager->GetPlayerDeck(), FACTION_RUSSIAN);
-	enemy_core = App->entity_manager->CreateCore(App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterType(), { 25,85 }, enemy_deck, FACTION_AMERICAN, true);
+	allied_core = App->entity_manager->CreateCore(1, { 30,980 }, App->game_manager->GetPlayerDeck(), FACTION_RUSSIAN);
+	enemy_core = App->entity_manager->CreateCore(App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterType(), { 25,285 }, enemy_deck, FACTION_AMERICAN, true);
 
 	//Initialize UI
 	StartUI();
