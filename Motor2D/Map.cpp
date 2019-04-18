@@ -508,3 +508,8 @@ bool Map::IsWalkable(iPoint tile)
 	}
 	return false;
 }
+
+bool Map::IsInsideMap(iPoint tile)
+{
+	return ((tile.x > 0 && tile.y > 0) && (tile.x < App->map->data.width && tile.y < App->map->data.height));
+}

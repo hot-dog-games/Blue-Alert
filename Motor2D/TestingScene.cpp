@@ -357,15 +357,17 @@ void TestingScene::ReleaseDrag()
 	iPoint world_pos = App->render->ScreenToWorld(x, y);
 	iPoint map_pos = App->map->WorldToMap(world_pos.x, world_pos.y);
 
-	if ((map_pos.x > 0 && map_pos.y > 0)
-		&& (map_pos.x < App->map->data.width && map_pos.y < App->map->data.height))
+	if (App->map->IsInsideMap(map_pos) && App->map->IsWalkable(map_pos) && IsInAlliedSide(map_pos))
 	{
-		if (App->map->IsWalkable(map_pos))
-		{
-			test_core->UseCard(card_num, { float(world_pos.x),float(world_pos.y) });
-		}
+		test_core->UseCard(card_num, { float(world_pos.x),float(world_pos.y) });
 	}
+
 	App->gui->DeleteElement(current_drag);
 	current_drag = nullptr;
 }
 
+
+bool TestingScene::IsInAlliedSide(iPoint tile)
+{
+	return tile.y >= App->map->data.height*0.5;
+}

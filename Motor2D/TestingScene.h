@@ -45,6 +45,7 @@ public:
 private:
 	void CreateDrag(int num, int type, UIElement* element);
 	void ReleaseDrag();
+	bool IsInAlliedSide(iPoint tile);
 
 private:
 	enum class BattleSceneState {
