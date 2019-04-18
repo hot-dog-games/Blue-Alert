@@ -59,13 +59,16 @@ bool Core::CleanUp()
 	return true;
 }
 
-void Core::UseCard(int number, fPoint position)
+bool Core::UseCard(int number, fPoint position)
 {
 	if (CanUseCard(number))
 	{
 		App->entity_manager->CreateEntity(deck->cards[number]->type, position, deck->cards[number], faction);
 		stats.find("energy")->second->DecreaseStat(deck->cards[number]->info.stats.find("energy_cost")->second->GetValue());
+		return true;
 	}
+
+	return false;
 }
 
 bool Core::CanUseCard(int number)

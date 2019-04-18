@@ -224,6 +224,22 @@ bool TestingScene::PostUpdate()
 		App->render->Blit(debug_tex, pos.x, pos.y);
 	}
 
+	if (current_drag)
+	{
+		for (int i = 0; i < App->map->data.width; ++i)
+		{
+			for (int j = 0; j < App->map->data.height; ++j)
+			{
+				if (App->map->IsInsideMap({ i,j }) && App->map->IsSpawnable({ i,j }))
+				{
+					iPoint pos = App->map->MapToWorld(i, j);
+					App->render->Blit(debug_tex, pos.x, pos.y);
+				}
+			}
+		}
+	}
+
+
 	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
 
@@ -357,17 +373,11 @@ void TestingScene::ReleaseDrag()
 	iPoint world_pos = App->render->ScreenToWorld(x, y);
 	iPoint map_pos = App->map->WorldToMap(world_pos.x, world_pos.y);
 
-	if (App->map->IsInsideMap(map_pos) && App->map->IsWalkable(map_pos) && IsInAlliedSide(map_pos))
+	if (App->map->IsInsideMap(map_pos) && App->map->IsSpawnable(map_pos))
 	{
 		test_core->UseCard(card_num, { float(world_pos.x),float(world_pos.y) });
 	}
 
 	App->gui->DeleteElement(current_drag);
 	current_drag = nullptr;
-}
-
-
-bool TestingScene::IsInAlliedSide(iPoint tile)
-{
-	return tile.y >= App->map->data.height*0.5;
 }

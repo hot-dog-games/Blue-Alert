@@ -61,6 +61,8 @@ private:
 	};
 	BattleSceneState state = BattleSceneState::FIGHT;
 
+	SDL_Texture*	spawn_tex = nullptr;
+
 	UIImage*		unit_panel;
 	UIButton*		unit_button_one;
 	UIButton*		unit_button_two;

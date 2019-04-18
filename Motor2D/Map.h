@@ -122,6 +122,7 @@ public:
 	bool CreateWalkabilityMap(int& width, int& height, uchar** buffer) const;
 	bool IsWalkable(iPoint tile);
 	bool IsInsideMap(iPoint tile);
+	bool IsSpawnable(iPoint tile);
 
 private:
 

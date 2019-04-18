@@ -50,6 +50,8 @@ bool BattleScene::Start()
 		RELEASE_ARRAY(data);
 	}
 
+	spawn_tex = App->tex->Load("maps/path2.png");
+
 	App->render->camera.x = (App->map->data.width*App->map->data.tile_width*0.5)*0.5 - 100;
 	App->render->camera.y = 0;
 
@@ -160,6 +162,21 @@ bool BattleScene::PostUpdate()
 
 	App->map->Draw();
 
+	if (current_drag)
+	{
+		for (int i = 0; i < App->map->data.width; ++i)
+		{
+			for (int j = 0; j < App->map->data.height; ++j)
+			{
+				if (App->map->IsInsideMap({ i,j }) && App->map->IsSpawnable({ i,j }))
+				{
+					iPoint pos = App->map->MapToWorld(i, j);
+					App->render->Blit(spawn_tex, pos.x, pos.y);
+				}
+			}
+		}
+	}
+
 	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
 
@@ -250,10 +267,16 @@ void BattleScene::CreateDrag(int num, int type, UIElement* element)
 void BattleScene::ReleaseDrag()
 {
 	int x, y;
-	App->audio->PlayFx(deployment_fx, 0);
 	App->input->GetMousePosition(x, y);
-	iPoint point = App->render->ScreenToWorld(x, y);
-	allied_core->UseCard(card_num, { float(point.x),float(point.y) });
+	iPoint world_pos = App->render->ScreenToWorld(x, y);
+	iPoint map_pos = App->map->WorldToMap(world_pos.x, world_pos.y);
+
+	if (App->map->IsInsideMap(map_pos) && App->map->IsSpawnable(map_pos))
+	{
+		if (allied_core->UseCard(card_num, { float(world_pos.x),float(world_pos.y) }))
+			App->audio->PlayFx(deployment_fx, 0);
+	}
+
 	App->gui->DeleteElement(current_drag);
 	current_drag = nullptr;
 }
