@@ -8,6 +8,7 @@
 //#define LAST_KEYS_PRESSED_BUFFER 50
 
 struct SDL_Rect;
+class PerfTimer;
 
 enum j1EventWindow
 {
@@ -71,6 +72,7 @@ public:
 private:
 	bool		windowEvents[WE_COUNT];
 	j1KeyState*	keyboard;
+	PerfTimer*	keyboard_timers;
 	j1KeyState	mouse_buttons[NUM_MOUSE_BUTTONS];
 	int			mouse_motion_x;
 	int			mouse_motion_y;

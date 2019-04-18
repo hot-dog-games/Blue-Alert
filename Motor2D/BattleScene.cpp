@@ -104,9 +104,16 @@ bool BattleScene::Update(float dt)
 		iPoint tile_p = App->map->WorldToMap(p.x, p.y);
 
 		//-------SHORTCUTS-----------------------//
-
-		if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+		if (App->input->GetKey(SDL_SCANCODE_1) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_2) == KEY_REPEAT
+			|| App->input->GetKey(SDL_SCANCODE_3) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_4) == KEY_REPEAT)
 		{
+			App->map->SetDrawable("Spawn", 0);
+		}
+
+
+		if (App->input->GetKey(SDL_SCANCODE_1) == KEY_UP)
+		{
+			App->map->SetDrawable("Spawn", 1);
 			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
 			{
 				if (allied_core->UseCard(CN_FIRST, { float(p.x),float(p.y) }))
@@ -114,8 +121,9 @@ bool BattleScene::Update(float dt)
 			}
 		}
 
-		if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+		if (App->input->GetKey(SDL_SCANCODE_2) == KEY_UP)
 		{
+			App->map->SetDrawable("Spawn", 1);
 			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
 			{
 				if (allied_core->UseCard(CN_SECOND, { float(p.x),float(p.y) }))
@@ -123,8 +131,9 @@ bool BattleScene::Update(float dt)
 			}
 		}
 
-		if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
+		if (App->input->GetKey(SDL_SCANCODE_3) == KEY_UP)
 		{
+			App->map->SetDrawable("Spawn", 1);
 			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
 			{
 				if (allied_core->UseCard(CN_THIRD, { float(p.x),float(p.y) }))
@@ -132,8 +141,9 @@ bool BattleScene::Update(float dt)
 			}
 		}
 
-		if (App->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
+		if (App->input->GetKey(SDL_SCANCODE_4) == KEY_UP)
 		{
+			App->map->SetDrawable("Spawn", 1);
 			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
 			{
 				if (allied_core->UseCard(CN_FOURTH, { float(p.x),float(p.y) }))
