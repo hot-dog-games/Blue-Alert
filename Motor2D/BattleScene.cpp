@@ -50,8 +50,6 @@ bool BattleScene::Start()
 		RELEASE_ARRAY(data);
 	}
 
-	spawn_tex = App->tex->Load("maps/path2.png");
-
 	App->render->camera.x = (App->map->data.width*App->map->data.tile_width*0.5)*0.5 - 100;
 	App->render->camera.y = 0;
 
@@ -162,21 +160,6 @@ bool BattleScene::PostUpdate()
 
 	App->map->Draw();
 
-	if (current_drag)
-	{
-		for (int i = 0; i < App->map->data.width; ++i)
-		{
-			for (int j = 0; j < App->map->data.height; ++j)
-			{
-				if (App->map->IsInsideMap({ i,j }) && App->map->IsSpawnable({ i,j }))
-				{
-					iPoint pos = App->map->MapToWorld(i, j);
-					App->render->Blit(spawn_tex, pos.x, pos.y);
-				}
-			}
-		}
-	}
-
 	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
 
@@ -262,6 +245,7 @@ void BattleScene::CreateDrag(int num, int type, UIElement* element)
 	current_drag->clipping = false;
 	current_drag->parent_limit = false;
 	current_drag->clicked = true;
+	App->map->SetDrawable("Spawn", 0);
 }
 
 void BattleScene::ReleaseDrag()
@@ -277,6 +261,7 @@ void BattleScene::ReleaseDrag()
 			App->audio->PlayFx(deployment_fx, 0);
 	}
 
+	App->map->SetDrawable("Spawn", 1);
 	App->gui->DeleteElement(current_drag);
 	current_drag = nullptr;
 }
