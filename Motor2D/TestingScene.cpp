@@ -130,16 +130,16 @@ bool TestingScene::Update(float dt)
 		App->SaveGame("save_game.xml");
 
 	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-		App->render->camera.y += 10 * dt;
+		App->render->camera.y += 100 * dt;
 
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-		App->render->camera.y -= 10 * dt;
+		App->render->camera.y -= 100 * dt;
 
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-		App->render->camera.x += 10 * dt;
+		App->render->camera.x += 100 * dt;
 
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-		App->render->camera.x -= 10 * dt;
+		App->render->camera.x -= 100 * dt;
 
 
 	switch (state)
@@ -354,8 +354,15 @@ void TestingScene::ReleaseDrag()
 {
 	int x, y;
 	App->input->GetMousePosition(x, y);
-	iPoint point = App->render->ScreenToWorld(x, y);
-	test_core->UseCard(card_num, { float(point.x),float(point.y) });
+	iPoint world_pos = App->render->ScreenToWorld(x, y);
+	iPoint map_pos = App->map->WorldToMap(world_pos.x, world_pos.y);
+
+	if ((map_pos.x > 0 && map_pos.y > 0)
+		&& (map_pos.x < App->map->data.width && map_pos.y < App->map->data.height))
+	{
+		test_core->UseCard(card_num, { float(world_pos.x),float(world_pos.y) });
+
+	}
 	App->gui->DeleteElement(current_drag);
 	current_drag = nullptr;
 }
