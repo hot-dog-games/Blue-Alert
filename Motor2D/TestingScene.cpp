@@ -154,18 +154,41 @@ bool TestingScene::Update(float dt)
 		int x, y;
 		App->input->GetMousePosition(x, y);
 		iPoint p = App->render->ScreenToWorld(x, y);
+		iPoint tile_p = App->map->WorldToMap(p.x, p.y);
+
+		//-------SHORTCUTS-----------------------//
 
 		if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
-			test_core->DecreaseLife(5);
+		{
+			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
+			{
+				test_core->UseCard(CN_FIRST, { float(p.x),float(p.y) });
+			}
+		}
 
 		if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
-			test_core->UseCard(CN_FIRST, { (float)p.x, (float)p.y });
+		{
+			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
+			{
+				test_core->UseCard(CN_SECOND, { float(p.x),float(p.y) });
+			}
+		}
 
 		if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
-			test_enemy_core->UseCard(CN_FIRST, { (float)p.x, (float)p.y });
+		{
+			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
+			{
+				test_core->UseCard(CN_THIRD, { float(p.x),float(p.y) });
+			}
+		}
 
-		if (App->input->GetKey(SDL_SCANCODE_5) == KEY_DOWN)
-			App->game_manager->AddCardToCollection(EntityType::G_I);
+		if (App->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
+		{
+			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
+			{
+				test_core->UseCard(CN_FOURTH, { float(p.x),float(p.y) });
+			}
+		}
 
 
 		if (!test_core->IsAlive())
