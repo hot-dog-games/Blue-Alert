@@ -88,9 +88,9 @@ bool CoreAI::CleanUp()
 
 bool CoreAI::Start()
 {
-	lanes[0] = { -173, 0 , 135, 1000 };
-	lanes[1] = { -37, 0 , 135, 1000 };
-	lanes[2] = { 99, 0 , 135, 1000 };
+	lanes[0] = { -150, 0 , 120, 1000 };
+	lanes[1] = { -30, 0 , 120, 1000 };
+	lanes[2] = { 90, 0 , 120, 1000 };
 
 	return true;
 }

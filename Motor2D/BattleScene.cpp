@@ -27,6 +27,7 @@
 #include <time.h>
 #include <stdlib.h>
 
+const double HELD_DELAY = 175;
 
 BattleScene::BattleScene() : Scene()
 {
@@ -50,8 +51,8 @@ bool BattleScene::Start()
 		RELEASE_ARRAY(data);
 	}
 
-	App->render->camera.x = (App->map->data.width*App->map->data.tile_width*0.5)*0.5 - 100;
-	App->render->camera.y = 0;
+	App->render->camera.x = (App->map->data.width*App->map->data.tile_width*0.5)*0.5 - 250;
+	App->render->camera.y = -210;
 
 	Deck* enemy_deck = new Deck();
 	enemy_deck->delete_cards = true;
@@ -60,8 +61,9 @@ bool BattleScene::Start()
 	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterDeck()[2]));
 	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterDeck()[3]));
 
-	allied_core = App->entity_manager->CreateCore(1, { 30,750 }, App->game_manager->GetPlayerDeck(), FACTION_RUSSIAN);
-	enemy_core = App->entity_manager->CreateCore(App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterType(), { 25,85 }, enemy_deck, FACTION_AMERICAN, true);
+	allied_core = App->entity_manager->CreateCore(1, { 30,980 }, App->game_manager->GetPlayerDeck(), FACTION_RUSSIAN);
+	enemy_core = App->entity_manager->CreateCore(App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterType(), { 25,285 }, enemy_deck, FACTION_AMERICAN, true);
+	enemy_core->delete_deck = true;
 
 	//Initialize UI
 	StartUI();
@@ -101,22 +103,73 @@ bool BattleScene::Update(float dt)
 		int x, y;
 		App->input->GetMousePosition(x, y);
 		iPoint p = App->render->ScreenToWorld(x, y);
+		iPoint tile_p = App->map->WorldToMap(p.x, p.y);
 
 		//-------SHORTCUTS-----------------------//
+		if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN
+			|| App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
+		{
+			shortcut_timer.Start();
+		}
 
-		if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
-			allied_core->UseCard(CN_FIRST, { (float)p.x, (float)p.y });
+		if ((App->input->GetKey(SDL_SCANCODE_1) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_2) == KEY_REPEAT
+			|| App->input->GetKey(SDL_SCANCODE_3) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_4) == KEY_REPEAT)
+			&& shortcut_timer.ReadMs() > HELD_DELAY)
+		{
+			App->map->SetDrawable("Spawn", 0);
+		}
 
-		if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
-			allied_core->UseCard(CN_SECOND, { (float)p.x, (float)p.y });
+		if (App->input->GetKey(SDL_SCANCODE_1) == KEY_UP)
+		{
+			App->map->SetDrawable("Spawn", 1);
+			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
+			{
+				if (allied_core->UseCard(CN_FIRST, { float(p.x),float(p.y) }))
+					App->audio->PlayFx(deployment_fx, 0);
+			}
+		}
 
-		if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
-			allied_core->UseCard(CN_THIRD, { (float)p.x, (float)p.y });
+		if (App->input->GetKey(SDL_SCANCODE_2) == KEY_UP)
+		{
+			App->map->SetDrawable("Spawn", 1);
+			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
+			{
+				if (allied_core->UseCard(CN_SECOND, { float(p.x),float(p.y) }))
+					App->audio->PlayFx(deployment_fx, 0);
+			}
+		}
 
-		if (App->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
-			allied_core->UseCard(CN_FOURTH, { (float)p.x, (float)p.y });
+		if (App->input->GetKey(SDL_SCANCODE_3) == KEY_UP)
+		{
+			App->map->SetDrawable("Spawn", 1);
+			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
+			{
+				if (allied_core->UseCard(CN_THIRD, { float(p.x),float(p.y) }))
+					App->audio->PlayFx(deployment_fx, 0);
+			}
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_4) == KEY_UP)
+		{
+			App->map->SetDrawable("Spawn", 1);
+			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
+			{
+				if (allied_core->UseCard(CN_FOURTH, { float(p.x),float(p.y) }))
+					App->audio->PlayFx(deployment_fx, 0);
+			}
+		}
+			
 
 		//---------------------------------------//
+
+		if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_UP)
+		{
+			state = BattleSceneState::WIN;
+			App->PauseGame();
+			App->gui->EnableElement((UIElement*)win_panel_one);
+			App->audio->PlayFx(win_fx, 0);
+		}
+			
 
 
 		if (!allied_core->IsAlive())
@@ -245,24 +298,31 @@ void BattleScene::CreateDrag(int num, int type, UIElement* element)
 	current_drag->clipping = false;
 	current_drag->parent_limit = false;
 	current_drag->clicked = true;
+	App->map->SetDrawable("Spawn", 0);
 }
 
 void BattleScene::ReleaseDrag()
 {
 	int x, y;
-	App->audio->PlayFx(deployment_fx, 0);
 	App->input->GetMousePosition(x, y);
-	iPoint point = App->render->ScreenToWorld(x, y);
-	allied_core->UseCard(card_num, { float(point.x),float(point.y) });
+	iPoint world_pos = App->render->ScreenToWorld(x, y);
+	iPoint map_pos = App->map->WorldToMap(world_pos.x, world_pos.y);
+
+	if (App->map->IsInsideMap(map_pos) && App->map->IsSpawnable(map_pos))
+	{
+		if (allied_core->UseCard(card_num, { float(world_pos.x),float(world_pos.y) }))
+			App->audio->PlayFx(deployment_fx, 0);
+	}
+
+	App->map->SetDrawable("Spawn", 1);
 	App->gui->DeleteElement(current_drag);
 	current_drag = nullptr;
 }
 
 void BattleScene::StartUI()
 {
+	srand(time(0));
 	//Generate random number
-
-	srand(time(NULL));
 	do {
 		random_num[0] = rand() % 9 + 1;
 		random_num[1] = rand() % 9 + 1;

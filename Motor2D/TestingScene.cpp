@@ -58,8 +58,8 @@ bool TestingScene::Start()
 
 	debug_tex = App->tex->Load("maps/path2.png");
 
-	App->render->camera.x = (App->map->data.width*App->map->data.tile_width*0.5)*0.5 - 100;
-	App->render->camera.y = 0;
+	App->render->camera.x = (App->map->data.width*App->map->data.tile_width*0.5)*0.5 - 250;
+	App->render->camera.y = -210;
 
 	Deck* enemy_deck = new Deck();
 	enemy_deck->delete_cards = true;
@@ -75,10 +75,9 @@ bool TestingScene::Start()
 	test_deck->AddCard(App->card_manager->CreateCard(EntityType::GRIZZLY));
 	test_deck->AddCard(App->card_manager->CreateCard(EntityType::HARRIER));
 
-	test_core = App->entity_manager->CreateCore(1, { 30,750 }, test_deck, FACTION_RUSSIAN);
-	test_enemy_core = App->entity_manager->CreateCore(13, { 25,85 }, enemy_deck, FACTION_AMERICAN, true);
+	test_core = App->entity_manager->CreateCore(1, { 30,980 }, test_deck, FACTION_RUSSIAN);
+	test_enemy_core = App->entity_manager->CreateCore(13, { 25,285 }, enemy_deck, FACTION_AMERICAN, true);
 
-	srand(time(NULL));
 	do {
 		random_num[0] = rand() % 9 + 1;
 		random_num[1] = rand() % 9 + 1;
@@ -130,16 +129,16 @@ bool TestingScene::Update(float dt)
 		App->SaveGame("save_game.xml");
 
 	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-		App->render->camera.y += 10 * dt;
+		App->render->camera.y += 100 * dt;
 
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-		App->render->camera.y -= 10 * dt;
+		App->render->camera.y -= 100 * dt;
 
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-		App->render->camera.x += 10 * dt;
+		App->render->camera.x += 100 * dt;
 
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-		App->render->camera.x -= 10 * dt;
+		App->render->camera.x -= 100 * dt;
 
 
 	switch (state)
@@ -154,18 +153,41 @@ bool TestingScene::Update(float dt)
 		int x, y;
 		App->input->GetMousePosition(x, y);
 		iPoint p = App->render->ScreenToWorld(x, y);
+		iPoint tile_p = App->map->WorldToMap(p.x, p.y);
+
+		//-------SHORTCUTS-----------------------//
 
 		if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
-			test_core->DecreaseLife(5);
+		{
+			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
+			{
+				test_core->UseCard(CN_FIRST, { float(p.x),float(p.y) });
+			}
+		}
 
 		if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
-			test_core->UseCard(CN_FIRST, { (float)p.x, (float)p.y });
+		{
+			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
+			{
+				test_core->UseCard(CN_SECOND, { float(p.x),float(p.y) });
+			}
+		}
 
 		if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
-			test_enemy_core->UseCard(CN_FIRST, { (float)p.x, (float)p.y });
+		{
+			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
+			{
+				test_core->UseCard(CN_THIRD, { float(p.x),float(p.y) });
+			}
+		}
 
-		if (App->input->GetKey(SDL_SCANCODE_5) == KEY_DOWN)
-			App->game_manager->AddCardToCollection(EntityType::G_I);
+		if (App->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
+		{
+			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
+			{
+				test_core->UseCard(CN_FOURTH, { float(p.x),float(p.y) });
+			}
+		}
 
 
 		if (!test_core->IsAlive())
@@ -223,6 +245,7 @@ bool TestingScene::PostUpdate()
 		iPoint pos = App->map->MapToWorld(path.at(i).x, path.at(i).y);
 		App->render->Blit(debug_tex, pos.x, pos.y);
 	}
+
 
 	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
@@ -348,15 +371,22 @@ void TestingScene::CreateDrag(int num, int type, UIElement* element)
 	current_drag->clipping = false;
 	current_drag->parent_limit = false;
 	current_drag->clicked = true;
+	App->map->SetDrawable("Spawn", 0);
 }
 
 void TestingScene::ReleaseDrag()
 {
 	int x, y;
 	App->input->GetMousePosition(x, y);
-	iPoint point = App->render->ScreenToWorld(x, y);
-	test_core->UseCard(card_num, { float(point.x),float(point.y) });
+	iPoint world_pos = App->render->ScreenToWorld(x, y);
+	iPoint map_pos = App->map->WorldToMap(world_pos.x, world_pos.y);
+
+	if (App->map->IsInsideMap(map_pos) && App->map->IsSpawnable(map_pos))
+	{
+		test_core->UseCard(card_num, { float(world_pos.x),float(world_pos.y) });
+	}
+
+	App->map->SetDrawable("Spawn", 1);
 	App->gui->DeleteElement(current_drag);
 	current_drag = nullptr;
 }
-

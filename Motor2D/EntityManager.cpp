@@ -12,7 +12,10 @@
 #include "EntityManager.h"
 #include "Brofiler/Brofiler.h"
 
-
+bool higher_y(Entity* first, Entity* second)
+{
+	return (first->position.y < second->position.y);
+}
 
 EntityManager::EntityManager()
 {
@@ -44,7 +47,7 @@ bool EntityManager::Update(float dt)
 {
 	BROFILER_CATEGORY("EMUpdate", Profiler::Color::Plum);
 
-	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_UP)
 		SetDebug();
 
 	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
@@ -57,6 +60,8 @@ bool EntityManager::Update(float dt)
 
 bool EntityManager::PreUpdate()
 {
+	entities.sort(higher_y);
+
 	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
 	{
 		(*entity)->PreUpdate();

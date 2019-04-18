@@ -65,6 +65,7 @@ public:
 
 private:
 	void LoadCardStats(Card* card, pugi::xml_node stats_node);
+	void LoadCardUpgrades(Card* card, pugi::xml_node upgrades_node);
 
 private:
 	bool to_delete = false;
