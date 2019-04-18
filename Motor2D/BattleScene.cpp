@@ -101,20 +101,46 @@ bool BattleScene::Update(float dt)
 		int x, y;
 		App->input->GetMousePosition(x, y);
 		iPoint p = App->render->ScreenToWorld(x, y);
+		iPoint tile_p = App->map->WorldToMap(p.x, p.y);
 
 		//-------SHORTCUTS-----------------------//
 
 		if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
-			allied_core->UseCard(CN_FIRST, { (float)p.x, (float)p.y });
+		{
+			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
+			{
+				if (allied_core->UseCard(CN_FIRST, { float(p.x),float(p.y) }))
+					App->audio->PlayFx(deployment_fx, 0);
+			}
+		}
 
 		if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
-			allied_core->UseCard(CN_SECOND, { (float)p.x, (float)p.y });
+		{
+			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
+			{
+				if (allied_core->UseCard(CN_SECOND, { float(p.x),float(p.y) }))
+					App->audio->PlayFx(deployment_fx, 0);
+			}
+		}
 
 		if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
-			allied_core->UseCard(CN_THIRD, { (float)p.x, (float)p.y });
+		{
+			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
+			{
+				if (allied_core->UseCard(CN_THIRD, { float(p.x),float(p.y) }))
+					App->audio->PlayFx(deployment_fx, 0);
+			}
+		}
 
 		if (App->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
-			allied_core->UseCard(CN_FOURTH, { (float)p.x, (float)p.y });
+		{
+			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
+			{
+				if (allied_core->UseCard(CN_FOURTH, { float(p.x),float(p.y) }))
+					App->audio->PlayFx(deployment_fx, 0);
+			}
+		}
+			
 
 		//---------------------------------------//
 
