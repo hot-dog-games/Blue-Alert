@@ -28,6 +28,7 @@ struct Properties
 	}
 
 	int Get(const char* name, int default_value = 0) const;
+	void Set(const char* name, int value);
 
 	std::list<Property*>	list;
 };
@@ -123,6 +124,7 @@ public:
 	bool IsWalkable(iPoint tile);
 	bool IsInsideMap(iPoint tile);
 	bool IsSpawnable(iPoint tile);
+	void SetDrawable(std::string layer_name, int value);
 
 private:
 

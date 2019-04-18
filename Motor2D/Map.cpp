@@ -77,6 +77,21 @@ int Properties::Get(const char* value, int default_value) const
 	return default_value;
 }
 
+void Properties::Set(const char * name, int value)
+{
+	std::list<Property*>::const_iterator item = list.begin();
+
+	while (item != list.end())
+	{
+		if ((*item)->name == name)
+		{
+			(*item)->value = value;
+			break;
+		}
+		++item;
+	}
+}
+
 TileSet* Map::GetTilesetFromTileId(int id) const
 {
 	std::list<TileSet*>::const_iterator item = data.tilesets.begin();
@@ -451,20 +466,14 @@ bool Map::IsSpawnable(iPoint tile)
 	{
 		MapLayer* layer = *item;
 
-		if (layer->properties.Get("Navigation", 0) == 0)
+		if (layer->properties.Get("Spawn", 0) == 0)
 			continue;
 
 		int tile_id = layer->Get(tile.x, tile.y);
 		TileSet* tileset = (tile_id > 0) ? GetTilesetFromTileId(tile_id) : NULL;
 
 		if (tileset != NULL)
-		{
-			tile_id = (tile_id - tileset->firstgid);
-			if (tile_id > 0)
-				return false;
-			else
-				return true;
-		}
+			return true;
 	}
 	return false;
 }
@@ -511,6 +520,20 @@ bool Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
 	return ret;
 }
 
+void Map::SetDrawable(std::string layer_name, int value)
+{
+	for (std::list<MapLayer*>::const_iterator item = data.layers.begin(); item != data.layers.end(); ++item)
+	{
+		MapLayer* layer = *item;
+
+		if (layer->name == layer_name)
+		{
+			layer->properties.Set("Nodraw", value);
+		}
+
+	}
+}
+
 bool Map::IsWalkable(iPoint tile)
 {
 	for (std::list<MapLayer*>::const_iterator item = data.layers.begin(); item != data.layers.end(); ++item)
@@ -521,17 +544,10 @@ bool Map::IsWalkable(iPoint tile)
 			continue;
 
 		int tile_id = layer->Get(tile.x, tile.y);
-		TileSet* tileset = (tile_id > 0) ? GetTilesetFromTileId(tile_id) : NULL;
 
-		if (tileset != NULL)
-		{
-			tile_id = (tile_id - tileset->firstgid);
-			if (tile_id > 0)
-				return false;
-			else
-				return true;
-		}
-		else if (tile_id == 0)
+		if (tile_id > 0)
+			return false;
+		else
 			return true;
 
 	}

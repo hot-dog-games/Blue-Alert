@@ -224,21 +224,6 @@ bool TestingScene::PostUpdate()
 		App->render->Blit(debug_tex, pos.x, pos.y);
 	}
 
-	if (current_drag)
-	{
-		for (int i = 0; i < App->map->data.width; ++i)
-		{
-			for (int j = 0; j < App->map->data.height; ++j)
-			{
-				if (App->map->IsInsideMap({ i,j }) && App->map->IsSpawnable({ i,j }))
-				{
-					iPoint pos = App->map->MapToWorld(i, j);
-					App->render->Blit(debug_tex, pos.x, pos.y);
-				}
-			}
-		}
-	}
-
 
 	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
@@ -364,6 +349,7 @@ void TestingScene::CreateDrag(int num, int type, UIElement* element)
 	current_drag->clipping = false;
 	current_drag->parent_limit = false;
 	current_drag->clicked = true;
+	App->map->SetDrawable("Spawn", 0);
 }
 
 void TestingScene::ReleaseDrag()
@@ -378,6 +364,7 @@ void TestingScene::ReleaseDrag()
 		test_core->UseCard(card_num, { float(world_pos.x),float(world_pos.y) });
 	}
 
+	App->map->SetDrawable("Spawn", 1);
 	App->gui->DeleteElement(current_drag);
 	current_drag = nullptr;
 }
