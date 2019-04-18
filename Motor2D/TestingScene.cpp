@@ -78,7 +78,6 @@ bool TestingScene::Start()
 	test_core = App->entity_manager->CreateCore(1, { 30,750 }, test_deck, FACTION_RUSSIAN);
 	test_enemy_core = App->entity_manager->CreateCore(13, { 25,85 }, enemy_deck, FACTION_AMERICAN, true);
 
-	srand(time(NULL));
 	do {
 		random_num[0] = rand() % 9 + 1;
 		random_num[1] = rand() % 9 + 1;

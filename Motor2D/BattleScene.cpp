@@ -295,8 +295,6 @@ void BattleScene::ReleaseDrag()
 void BattleScene::StartUI()
 {
 	//Generate random number
-
-	srand(time(NULL));
 	do {
 		random_num[0] = rand() % 9 + 1;
 		random_num[1] = rand() % 9 + 1;

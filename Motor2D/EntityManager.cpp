@@ -12,7 +12,10 @@
 #include "EntityManager.h"
 #include "Brofiler/Brofiler.h"
 
-
+bool higher_y(Entity* first, Entity* second)
+{
+	return (first->position.y > second->position.y);
+}
 
 EntityManager::EntityManager()
 {
@@ -116,6 +119,8 @@ Entity* EntityManager::CreateEntity(EntityType type, fPoint position, Card* card
 
 	id_count++;
 
+	entities.sort(higher_y);
+
 	return entity;
 }
 
@@ -151,6 +156,8 @@ Core* EntityManager::CreateCore(uint core_type, fPoint position, Deck* deck, Fac
 	entity->SetDebug(debug);
 
 	id_count++;
+
+	entities.sort(higher_y);
 
 	return entity;
 }
