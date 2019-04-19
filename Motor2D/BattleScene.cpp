@@ -61,7 +61,7 @@ bool BattleScene::Start()
 	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterDeck()[3]));
 
 	allied_core = App->entity_manager->CreateCore(1, { 30,980 }, App->game_manager->GetPlayerDeck(), FACTION_RUSSIAN);
-	enemy_core = App->entity_manager->CreateCore(App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterType(), { 25,285 }, enemy_deck, FACTION_AMERICAN, true);
+	enemy_core = App->entity_manager->CreateCore(App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterType(), { 25,330 }, enemy_deck, FACTION_AMERICAN, true);
 
 	//Initialize UI
 	StartUI();
