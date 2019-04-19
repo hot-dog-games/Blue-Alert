@@ -11,7 +11,7 @@
       </button>
 
       <drag>
-        <frame x="0" y="0" width="100" height="80"/>
+        <frame x="1909" y="1069" width="14" height="28"/>
       </drag>
 
       <upgrade>
@@ -33,7 +33,7 @@
       </button>
 
       <drag>
-        <frame x="400" y="0" width="100" height="80"/>
+        <frame x="1909" y="1069" width="14" height="28"/>
       </drag>
 
       <upgrade>
@@ -55,7 +55,7 @@
       </button>
 
       <drag>
-        <frame x="200" y="0" width="100" height="80"/>
+        <frame x="1909" y="1069" width="14" height="28"/>
       </drag>
 
       <upgrade>
@@ -77,7 +77,7 @@
       </button>
 
       <drag>
-        <frame x="400" y="160" width="100" height="80"/>
+        <frame x="1993" y="934" width="26" height="46"/>
       </drag>
 
       <upgrade>
@@ -99,7 +99,7 @@
       </button>
 
       <drag>
-        <frame x="0" y="160" width="100" height="80"/>
+        <frame x="1993" y="934" width="26" height="46"/>
       </drag>
 
       <upgrade>
@@ -121,7 +121,7 @@
       </button>
 
       <drag>
-        <frame x="400" y="160" width="100" height="80"/>
+        <frame x="1993" y="934" width="26" height="46"/>
       </drag>
 
       <upgrade>
@@ -143,7 +143,7 @@
       </button>
 
       <drag>
-        <frame x="200" y="320" width="100" height="80"/>
+        <frame x="1870" y="839" width="59" height="64"/>
       </drag>
 
       <upgrade>
@@ -165,7 +165,7 @@
       </button>
 
       <drag>
-        <frame x="0" y="320" width="100" height="80"/>
+        <frame x="1890" y="1009" width="53" height="35"/>
       </drag>
 
       <upgrade>
@@ -187,7 +187,7 @@
       </button>
 
       <drag>
-        <frame x="400" y="320" width="100" height="80"/>
+        <frame x="1886" y="934" width="60" height="51"/>
       </drag>
 
       <upgrade>
