@@ -35,7 +35,7 @@ bool CardManager::PostUpdate()
 			{
 				App->tex->UnLoad((*card)->sprite_path);
 				delete (*card);
-				card = cards.erase(card);
+				cards.erase(card);
 			}				
 		}
 

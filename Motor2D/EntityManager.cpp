@@ -91,7 +91,12 @@ bool EntityManager::CleanUp()
 {
 	LOG("entity manager cleanup");
 
-	while (!entities.empty()) delete entities.front(), entities.pop_front();
+	while (!entities.empty()) 
+	{
+		entities.front()->CleanUp();
+		delete entities.front();
+		entities.pop_front();
+	}
 
 	entities.clear();
 	id_count = 0;

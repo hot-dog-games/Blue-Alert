@@ -79,12 +79,6 @@ bool CoreAI::PostUpdate()
 	return true;
 }
 
-bool CoreAI::CleanUp()
-{
-
-	return true;
-}
-
 bool CoreAI::Start()
 {
 	lanes[0] = { -150, 0 , 120, 1000 };

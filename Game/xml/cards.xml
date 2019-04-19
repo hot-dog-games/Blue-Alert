@@ -1,6 +1,7 @@
 <config>
   <card type ="1">
     <name>GI</name>
+    <sprite>sprites/Units/Infantry/sprite_gi.png</sprite>
     <combat attack_type="0" armored="false"/>
     <stats>
       <stat stat="health" value ="50"/>
@@ -21,11 +22,11 @@
       <stat stat="attack_speed" value ="1"/>
       <stat stat="range" value ="1"/>
 	</upgrades>
-    
   </card>
   
   <card type ="2">
-    <name>Sniper</name>  
+    <name>Sniper</name>
+    <sprite>sprites/Units/Infantry/sprite_gi.png</sprite>
     <combat attack_type="2" armored="false"/>
     <stats>
       <stat stat="health" value ="50"/>
@@ -51,6 +52,7 @@
 
   <card type ="3">
     <name>Navy_Seal</name>
+    <sprite>sprites/Units/Infantry/sprite_gi.png</sprite>
     <combat attack_type="1" armored="false"/>
     <stats>
       <stat stat="health" value ="70"/>
@@ -76,6 +78,7 @@
 
   <card type ="4">
     <name>Grizzly_Tank</name>
+    <sprite>sprites/Units/LandVehicles/GreyTank.png</sprite>
     <combat attack_type="2" armored="true"/>
     <stats>
       <stat stat="health" value ="120"/>
@@ -101,6 +104,7 @@
 
   <card type ="5">
     <name>Robot_Tank</name>
+    <sprite>sprites/Units/LandVehicles/GreyTank.png</sprite>
     <combat attack_type="0" armored="true"/>
     <stats>
       <stat stat="health" value ="60"/>
@@ -126,6 +130,7 @@
 
   <card type ="6">
     <name>Prism_Tank</name>
+    <sprite>sprites/Units/LandVehicles/GreyTank.png</sprite>
     <combat attack_type="1" armored="true"/>
     <stats>
       <stat stat="health" value ="100"/>
@@ -151,6 +156,7 @@
 
   <card type ="7">
     <name>Nighthawk</name>
+    <sprite>sprites/Units/AirVehicles/Nighthawk.png</sprite>
     <combat attack_type="0" armored="false"/>
     <stats>
       <stat stat="health" value ="100"/>
@@ -176,6 +182,7 @@
 
   <card type ="8">
     <name>Harrier</name>
+    <sprite>sprites/Units/AirVehicles/Harrier.png</sprite>
     <combat attack_type="1" armored="true"/>
     <stats>
       <stat stat="health" value ="80"/>
@@ -200,6 +207,7 @@
 
   <card type ="9">
     <name>Black_Eagle</name>
+    <sprite>sprites/Units/AirVehicles/BlackEagle.png</sprite>
     <combat attack_type="2" armored="false"/>
     <stats>
       <stat stat="health" value ="70"/>

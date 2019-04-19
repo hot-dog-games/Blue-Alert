@@ -261,7 +261,7 @@
   <!--GI-->
   <entity type ="1">
     <info faction ="0">
-      <sprite>textures/units/sprite_gi.png</sprite>
+      <sprite>sprites/Units/Infantry/sprite_gi.png</sprite>
       <animations>
         <animation speed="5.0F" name="idle">
           <frame x="345" y="1851" width="15" height="33"/>
@@ -413,7 +413,7 @@
     
     <!--GI-->
     <info faction ="1">
-      <sprite>textures/units/sprite_gi.png</sprite>
+      <sprite>sprites/Units/Infantry/sprite_gi.png</sprite>
       <animations>
         <animation speed="5.0F" name="idle">
           <frame x="345" y="1851" width="15" height="33"/>
@@ -567,7 +567,7 @@
   <!--SNIPER-->
   <entity type ="2">
     <info faction ="0">
-      <sprite>textures/units/sprite_gi.png</sprite>
+      <sprite>sprites/Units/Infantry/sprite_gi.png</sprite>
       <animations>
         <animation speed="5.0F" name="idle">
           <frame x="345" y="1851" width="15" height="33"/>
@@ -716,8 +716,9 @@
         </animation>
       </animations>
     </info>
+    
     <info faction ="1">
-      <sprite>textures/units/sprite_gi.png</sprite>
+      <sprite>sprites/Units/Infantry/sprite_gi.png</sprite>
       <animations>
         <animation speed="5.0F" name="idle">
           <frame x="345" y="1851" width="15" height="33"/>
@@ -871,7 +872,7 @@
   <!--NAVI_SEAL-->
   <entity type ="3">
     <info faction ="0">
-      <sprite>textures/units/sprite_gi.png</sprite>
+      <sprite>sprites/Units/Infantry/sprite_gi.png</sprite>
       <animations>
         <animation speed="5.0F" name="idle">
           <frame x="345" y="1851" width="15" height="33"/>
@@ -1020,8 +1021,9 @@
         </animation>
       </animations>
     </info>
+    
     <info faction ="1">
-      <sprite>textures/units/sprite_gi.png</sprite>
+      <sprite>sprites/Units/Infantry/sprite_gi.png</sprite>
       <animations>
         <animation speed="5.0F" name="idle">
           <frame x="345" y="1851" width="15" height="33"/>
@@ -1556,7 +1558,7 @@
     </info>
   </entity>
 
-  <!--GREY TANK-->
+  <!--GRIZZLY TANK-->
   <entity type ="4">
     <info faction ="0">
       <sprite>sprites/Units/LandVehicles/GreyTank.png</sprite>

@@ -169,10 +169,13 @@ bool Gui::PostUpdate()
 bool Gui::CleanUp()
 {
 	LOG("Freeing GUI");
-	for (std::list<UIElement*>::iterator element = elements.begin(); element != elements.end(); ++element)
+	while (!elements.empty())
 	{
-		(*element)->CleanUp();
+		elements.front()->CleanUp();
+		delete elements.front();
+		elements.pop_front();
 	}
+
 	elements.clear();
 
 	return true;
