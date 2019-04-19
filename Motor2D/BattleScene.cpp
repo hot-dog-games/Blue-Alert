@@ -303,13 +303,19 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 
 void BattleScene::CreateDrag(int num, int type, UIElement* element)
 {
+	int x, y;
+	App->input->GetMousePosition(x, y);
+	x = x - element->GetScreenPos().x;
+	y = y - element->GetScreenPos().y;
+
 	card_num = num;
-	current_drag = App->gui->CreateImage({ 0,0 }, App->gui->LoadUIButton(type, "drag")[0], element);
+	current_drag = App->gui->CreateImage({ x,y }, App->gui->LoadUIButton(type, "drag")[0], element);
 	current_drag->interactable = true;
 	current_drag->dragable = true;
 	current_drag->clipping = false;
 	current_drag->parent_limit = false;
 	current_drag->clicked = true;
+	current_drag->hovered = true;
 	App->map->SetDrawable("Spawn", 0);
 }
 
