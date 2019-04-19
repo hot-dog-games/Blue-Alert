@@ -65,6 +65,7 @@ protected:
 	std::vector<iPoint> path;
 	int current_point = 0;
 	int previous_point = 0;
+	float dead_timer = 0.0f;
 
 private:
 	uint attack_fx;

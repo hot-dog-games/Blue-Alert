@@ -8,7 +8,7 @@
 #include "Map.h"
 #include "DynamicEntity.h"
 
-
+const float DELETE_TIME = 5.0f;
 
 DynamicEntity::DynamicEntity()
 {
@@ -107,6 +107,9 @@ bool DynamicEntity::PostUpdate()
 
 bool DynamicEntity::Update(float dt)
 {
+	if (current_animation)
+		current_frame = current_animation->GetCurrentFrame(dt);
+
 	switch (state)
 	{
 		case DYNAMIC_IDLE:
@@ -129,10 +132,14 @@ bool DynamicEntity::Update(float dt)
 
 		}
 		break;
+		case DYNAMIC_DEAD:
+			dead_timer += dt;
+			if (dead_timer >= DELETE_TIME)
+			{
+				App->entity_manager->DeleteEntity(this);
+			}
+		break;
 	}
-
-	if (current_animation)
-		current_frame = current_animation->GetCurrentFrame(dt);
 
 	return true;
 }
