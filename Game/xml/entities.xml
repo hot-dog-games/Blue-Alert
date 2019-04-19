@@ -1582,7 +1582,7 @@
           <frame x="202" y="539" width="39" height="44"/>
         </animation>
         <animation speed="5.0F" name="moving_up_right">
-          <frame x="103" y="631" width="36" height="61"/>
+          <frame x="67" y="630" width="35" height="46"/>
         </animation>
         <animation speed="5.0F" name="moving_down_left">
           <frame x="1" y="299" width="41" height="36"/>
@@ -1644,7 +1644,7 @@
           <frame x="202" y="539" width="39" height="44"/>
         </animation>
         <animation speed="5.0F" name="moving_up_right">
-          <frame x="103" y="631" width="36" height="61"/>
+          <frame x="67" y="630" width="35" height="46"/>
         </animation>
         <animation speed="5.0F" name="moving_down_left">
           <frame x="1" y="299" width="41" height="36"/>
@@ -1710,7 +1710,7 @@
           <frame x="202" y="539" width="39" height="44"/>
         </animation>
         <animation speed="5.0F" name="moving_up_right">
-          <frame x="103" y="631" width="36" height="61"/>
+          <frame x="67" y="630" width="35" height="46"/>
         </animation>
         <animation speed="5.0F" name="moving_down_left">
           <frame x="1" y="299" width="41" height="36"/>
@@ -1772,7 +1772,7 @@
           <frame x="202" y="539" width="39" height="44"/>
         </animation>
         <animation speed="5.0F" name="moving_up_right">
-          <frame x="103" y="631" width="36" height="61"/>
+          <frame x="67" y="630" width="35" height="46"/>
         </animation>
         <animation speed="5.0F" name="moving_down_left">
           <frame x="1" y="299" width="41" height="36"/>
@@ -1838,7 +1838,7 @@
           <frame x="202" y="539" width="39" height="44"/>
         </animation>
         <animation speed="5.0F" name="moving_up_right">
-          <frame x="103" y="631" width="36" height="61"/>
+          <frame x="67" y="630" width="35" height="46"/>
         </animation>
         <animation speed="5.0F" name="moving_down_left">
           <frame x="1" y="299" width="41" height="36"/>
@@ -1900,7 +1900,7 @@
           <frame x="202" y="539" width="39" height="44"/>
         </animation>
         <animation speed="5.0F" name="moving_up_right">
-          <frame x="103" y="631" width="36" height="61"/>
+          <frame x="67" y="630" width="35" height="46"/>
         </animation>
         <animation speed="5.0F" name="moving_down_left">
           <frame x="1" y="299" width="41" height="36"/>
