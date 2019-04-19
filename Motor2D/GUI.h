@@ -28,11 +28,17 @@ enum GUI_Event {
 	MOUSE_OVER,
 	MOUSE_EXIT
 };
+
 enum ScrollType {
 	VERTICAL,
 	HORIZONTAL
 };
 
+enum BarType {
+	BAR_NONE = -1,
+	BAR_VERTICAL,
+	BAR_HORITZONTAL
+};
 
 // ---------------------------------------------------
 class Gui : public Module
@@ -68,7 +74,7 @@ public:
 	UIButton* CreateButton(iPoint pos, SDL_Rect* sprite_rect, UIElement* parent = nullptr, bool is_selectable = false, bool is_interactable = true);
 	UIScrollBar* CreateScrollBar(iPoint pos, float min, float max, ScrollType type = VERTICAL, UIElement* parent = nullptr);
 	UIAnimatedImage* CreateAnimatedImage(iPoint pos, SDL_Rect * rect, int total_sprites, int speed, UIElement* parent = nullptr);
-	UIBar* CreateBar(iPoint pos, SDL_Rect rect, Stat* value, UIElement* parent = nullptr);
+	UIBar* CreateBar(iPoint pos, SDL_Rect rect, Stat* value, BarType type = BarType::BAR_VERTICAL, UIElement* parent = nullptr);
 
 	void DeleteElement(UIElement* element);
 	void DisableUI();

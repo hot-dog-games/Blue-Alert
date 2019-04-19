@@ -99,3 +99,8 @@ Stat* Core::GetEnergy() const
 {	
 	return stats.find("energy")->second;
 }
+
+Stat * Core::GetHealth() const
+{
+	return stats.find("health")->second;
+}
