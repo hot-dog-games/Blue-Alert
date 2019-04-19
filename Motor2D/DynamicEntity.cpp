@@ -63,10 +63,11 @@ bool DynamicEntity::PreUpdate()
 		if (!objective->IsAlive())
 		{
 			objective = nullptr;
-			if (CheckEnemies())
-				state = DYNAMIC_ATTACKING;
-			else 
+			if (!CheckEnemies())
+			{
 				state = DYNAMIC_MOVING;
+				CheckDestination();
+			}			
 		}
 		else
 		{
