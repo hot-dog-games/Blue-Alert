@@ -71,7 +71,7 @@ public:
 	UIBar* CreateBar(iPoint pos, SDL_Rect rect, Stat* value, UIElement* parent = nullptr);
 
 	void DeleteElement(UIElement* element);
-
+	void DisableUI();
 	UIElement* GetElementUnderMouse();
 	void EnableElement(UIElement* element);
 	void DisableElement(UIElement* element);

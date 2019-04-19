@@ -244,6 +244,15 @@ void Gui::DeleteElement(UIElement* ele)
 	delete ele;
 }
 
+void Gui::DisableUI()
+{
+	for (std::list<UIElement*>::iterator element = elements.begin(); element != elements.end(); ++element)
+	{
+		if((*element)->enabled)
+			DisableElement((*element));
+	}
+}
+
 void Gui::EnableElement(UIElement* ele)
 {
 	ele->SetEnabled(true);

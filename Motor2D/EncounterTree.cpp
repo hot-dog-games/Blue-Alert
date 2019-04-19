@@ -2,6 +2,7 @@
 #include "GUI.h"
 #include "TransitionManager.h"
 #include "EntityManager.h"
+#include "SceneManager.h"
 #include "Render.h"
 #include "Map.h"
 #include "StrategyBuilding.h"
@@ -153,6 +154,16 @@ void EncounterTree::CleanTree()
 	map_encounters.clear();
 
 	delete this;
+}
+
+void EncounterTree::EntityClicked(StrategyBuilding * entity)
+{
+	SetCurrentNodeByEntity(entity);
+	App->gui->DisableUI();
+	App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::COMBAT, White);
+	App->transition_manager->CreateZoomTransition(2.0f);
+	App->transition_manager->CreateCameraTranslation(2.0f, { (int)entity->position.x, (int)entity->position.y });
+
 }
 
 void EncounterTree::SetCurrentNodeByEntity(StrategyBuilding * entity)
