@@ -60,7 +60,7 @@ bool DynamicEntity::PreUpdate()
 			CheckDestination();
 		break;
 	case DYNAMIC_ATTACKING:
-		if (!objective->IsAlive())
+		if (!objective->IsAlive() && current_animation->isDone())
 		{
 			objective = nullptr;
 			if (!CheckEnemies())
