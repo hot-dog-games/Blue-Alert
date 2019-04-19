@@ -48,6 +48,8 @@ public:
 	bool CleanUp();
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;
+	bool Pause();
+	bool Resume();
 
 	Entity* CreateEntity(EntityType type, fPoint position, Card* card, Faction faction);
 	Core* CreateCore(uint core_type, fPoint position, Deck* deck, Faction faction, bool ai = false);
@@ -63,6 +65,7 @@ private:
 	pugi::xml_node entity_configs;
 	int id_count = 0;
 	bool debug = false;
+	bool paused = false;
 };
 
 #endif //_ENTITYMANAGER_H_

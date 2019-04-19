@@ -45,14 +45,18 @@ bool EntityManager::Start()
 
 bool EntityManager::Update(float dt)
 {
-	BROFILER_CATEGORY("EMUpdate", Profiler::Color::Plum);
-
-	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_UP)
-		SetDebug();
-
-	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
+	if (!paused) 
 	{
-		(*entity)->Update(dt);
+		BROFILER_CATEGORY("EMUpdate", Profiler::Color::Plum);
+
+		if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_UP)
+			SetDebug();
+
+		for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
+		{
+			(*entity)->Update(dt);
+		}
+
 	}
 
 	return true;
@@ -60,11 +64,14 @@ bool EntityManager::Update(float dt)
 
 bool EntityManager::PreUpdate()
 {
-	entities.sort(higher_y);
-
-	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
+	if (!paused)
 	{
-		(*entity)->PreUpdate();
+		entities.sort(higher_y);
+
+		for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
+		{
+			(*entity)->PreUpdate();
+		}
 	}
 
 	return true;
@@ -99,6 +106,20 @@ bool EntityManager::Load(pugi::xml_node&)
 
 bool EntityManager::Save(pugi::xml_node&) const
 {
+	return true;
+}
+
+bool EntityManager::Pause()
+{
+	paused = true;
+
+	return true;
+}
+
+bool EntityManager::Resume()
+{
+	paused = false;
+
 	return true;
 }
 

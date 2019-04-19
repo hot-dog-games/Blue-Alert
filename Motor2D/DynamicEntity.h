@@ -10,7 +10,7 @@ enum DynamicState {
 	DYNAMIC_MOVING,
 	DYNAMIC_ATTACKING,
 	DYNAMIC_DYING,
-	DYNAMIC_DEAD
+	DYNAMIC_DEAD,
 };
 
 enum EntiyDirection {
@@ -65,6 +65,7 @@ protected:
 	std::vector<iPoint> path;
 	int current_point = 0;
 	int previous_point = 0;
+
 private:
 	uint attack_fx;
 };

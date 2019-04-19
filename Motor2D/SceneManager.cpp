@@ -68,6 +68,20 @@ bool SceneManager::Save(pugi::xml_node &xml) const
 	return true;
 }
 
+bool SceneManager::Pause()
+{
+	if (current_scene)
+		current_scene->Pause();
+	return true;
+}
+
+bool SceneManager::Resume()
+{
+	if (current_scene)
+		current_scene->Resume();
+	return true;
+}
+
 //Scene unloads current scene, then creates and loads new scene.
 void SceneManager::ChangeScene(int new_scene)
 {

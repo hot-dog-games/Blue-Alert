@@ -181,16 +181,10 @@ void j1App::PrepareUpdate()
 {
 	last_sec_frame_count++;
 
-	if (!paused)
-	{
-		dt = frame_time.ReadSec();
-		if (dt > frame_rate / 1000)
-			dt = frame_rate / 1000;
-	}
-	else
-	{
-		dt = 0;
-	}
+	dt = frame_time.ReadSec();
+	if (dt > frame_rate / 1000)
+		dt = frame_rate / 1000;
+
 	frame_time.Start();
 }
 
@@ -338,11 +332,19 @@ const char* j1App::GetOrganization() const
 void j1App::PauseGame()
 {
 	paused = true;
+	for (std::list<Module*>::iterator item = modules.begin(); item != modules.end(); ++item)
+	{
+		(*item)->Pause();
+	}
 }
 
 void j1App::ResumeGame()
 {
 	paused = false;
+	for (std::list<Module*>::iterator item = modules.begin(); item != modules.end(); ++item)
+	{
+		(*item)->Resume();
+	}
 }
 
 // Load / Save
