@@ -72,20 +72,20 @@ bool StrategyMapScene::Start()
 	// Troops menu
 	troops_background = App->gui->CreateImage({ 20,95 }, { 789,1222,990,600 }, main_panel);
 	
-	backbutton_t_b = App->gui->CreateButton({ 940,100 }, small_button_rect, troops_background);
+	backbutton_t_b = App->gui->CreateButton({ 930,10 }, small_button_rect, troops_background);
 	back_cross_text = App->gui->CreateLabel({ 15,10 }, "ui/Fonts/command_and_conquer___logo_font_by_dexistor371-d6k2yvb.ttf", 28, "X", { 0,0,0,0 }, 0, backbutton_t_b);
 	App->gui->DisableElement(backbutton_t_b);
-	troops_button = App->gui->CreateButton({ 380,100 }, large_button_rect, troops_background);
+	troops_button = App->gui->CreateButton({ 380,10 }, large_button_rect, troops_background);
 	troops_text = App->gui->CreateLabel({ 50,10 }, "ui/Fonts/command_and_conquer___logo_font_by_dexistor371-d6k2yvb.ttf", 20, "TROOPS", { 0,0,0,0 }, 0, troops_button);
 	App->gui->DisableElement(troops_button);
-	buildings_button = App->gui->CreateButton({ 600,100 }, large_button_rect, troops_background);
+	buildings_button = App->gui->CreateButton({ 600,10 }, large_button_rect, troops_background);
 	buildings_text = App->gui->CreateLabel({ 35,10 }, "ui/Fonts/command_and_conquer___logo_font_by_dexistor371-d6k2yvb.ttf", 20, "BUILDINGS", { 0,0,0,0 }, 0, buildings_button);
 	App->gui->DisableElement(buildings_button);
 
-	deck_buttons[0] = App->gui->CreateButton({ 320,69 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[0]->type, "deck"), troops_background);
-	deck_buttons[1] = App->gui->CreateButton({ 485,69 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[1]->type, "deck"), troops_background);
-	deck_buttons[2] = App->gui->CreateButton({ 666,69 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[2]->type, "deck"), troops_background);
-	deck_buttons[3] = App->gui->CreateButton({ 800,69 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[3]->type, "deck"), troops_background);
+	deck_buttons[0] = App->gui->CreateButton({ 360,69 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[0]->type, "deck"), troops_background);
+	deck_buttons[1] = App->gui->CreateButton({ 500,69 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[1]->type, "deck"), troops_background);
+	deck_buttons[2] = App->gui->CreateButton({ 640,69 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[2]->type, "deck"), troops_background);
+	deck_buttons[3] = App->gui->CreateButton({ 780,69 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[3]->type, "deck"), troops_background);
 	
 	collection_buttons[0] = App->gui->CreateButton({ 31,320 }, App->gui->LoadUIButton(1, "upgrade"), troops_background);
 	collection_buttons[1] = App->gui->CreateButton({ 170,320 }, App->gui->LoadUIButton(2, "upgrade"), troops_background);

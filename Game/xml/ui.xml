@@ -22,7 +22,8 @@
       </upgrade>
       
       <deck>
-        <frame x="746" y="1840" width="160" height="160"/>
+        <frame x="12" y="1850" width="145" height="145"/>
+        <frame x="4" y="2027" width="159" height="160"/>
       </deck>
     </GI>
 
@@ -47,7 +48,8 @@
       </upgrade>
 
       <deck>
-        <frame x="1072" y="1840" width="160" height="160"/>
+        <frame x="391" y="1850" width="145" height="145"/>
+        <frame x="383" y="2027" width="159" height="160"/>
       </deck>
       
     </Sniper>
@@ -73,7 +75,8 @@
       </upgrade>
 
       <deck>
-        <frame x="909" y="1840" width="160" height="160"/>
+        <frame x="200" y="1850" width="145" height="145"/>
+        <frame x="192" y="2027" width="159" height="160"/>
       </deck>
       
     </NavySeal>
@@ -99,7 +102,8 @@
       </upgrade>
 
       <deck>
-        <frame x="1235" y="1840" width="160" height="160"/>
+        <frame x="583" y="1850" width="145" height="145"/>
+        <frame x="575" y="2027" width="160" height="160"/>
       </deck>
       
     </GrizzlyTank>
@@ -125,7 +129,8 @@
       </upgrade>
 
       <deck>
-        <frame x="1557" y="1841" width="160" height="160"/>
+        <frame x="957" y="1850" width="145" height="145"/>
+        <frame x="949" y="2027" width="159" height="160"/>
       </deck>
       
     </RobotTank>
@@ -151,7 +156,8 @@
       </upgrade>
 
       <deck>
-        <frame x="1398" y="1840" width="160" height="160"/>
+        <frame x="772" y="1850" width="145" height="145"/>
+        <frame x="764" y="2027" width="160" height="160"/>
       </deck>
       
     </PrismTank>
@@ -177,7 +183,8 @@
       </upgrade>
 
       <deck>
-        <frame x="1887" y="1840" width="160" height="160"/>
+        <frame x="1336" y="1850" width="145" height="145"/>
+        <frame x="1328" y="2027" width="160" height="160"/>
       </deck>
       
     </NightHawk>
@@ -203,7 +210,8 @@
       </upgrade>
 
       <deck>
-        <frame x="2050" y="1840" width="160" height="160"/>
+        <frame x="1520" y="1850" width="145" height="145"/>
+        <frame x="1512" y="2027" width="160" height="160"/>
       </deck>
       
     </Harrier>
@@ -229,7 +237,8 @@
       </upgrade>
 
       <deck>
-        <frame x="1724" y="1840" width="160" height="160"/>
+        <frame x="1146" y="1850" width="145" height="145"/>
+        <frame x="1138" y="2027" width="160" height="160"/>
       </deck>
       
     </BlackEagle>
