@@ -254,10 +254,32 @@ void DynamicEntity::Attack()
 {
 	if (attack_timer.ReadMs() >= SECOND_MS / entity_card->info.stats.find("attack_speed")->second->GetValue() )
 	{
+		float attack = entity_card->info.stats.find("damage")->second->GetValue();
+		switch (entity_card->info.attack_type)
+		{
+		case AttackType::BASIC:
+			objective->DecreaseLife(attack);
+			break;
+		case AttackType::AOE:
+			break;
+		case AttackType::PIERCING:
+			break;
+		default:
+			break;
+		}
 		App->audio->PlayFx(attack_fx, 0);
-		objective->DecreaseLife(entity_card->info.stats.find("damage")->second->GetValue());
 		attack_timer.Start();
 	}
+}
+
+void DynamicEntity::DecreaseLife(float damage)
+{
+	float defense = entity_card->info.stats.find("defense")->second->GetValue();
+	float damage_received = CalculateDamage(damage, defense);
+
+	stats.find("health")->second->DecreaseStat(damage_received);
+	if (stats.find("health")->second->GetValue() <= 0)
+		Die();
 }
 
 void DynamicEntity::Die()
