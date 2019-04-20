@@ -9,6 +9,7 @@
 #include "DynamicEntity.h"
 
 const float DELETE_TIME = 5.0f;
+const int EXPLOSION_RANGE_TILES = 4;
 
 DynamicEntity::DynamicEntity()
 {
@@ -261,6 +262,16 @@ void DynamicEntity::Attack()
 			objective->DecreaseLife(attack);
 			break;
 		case AttackType::AOE:
+		{
+			std::list<Entity*> entities;
+			float radius = EXPLOSION_RANGE_TILES * App->map->data.tile_height;
+			App->entity_manager->GetEntitiesInArea(radius, objective->position, entities, faction);
+
+			for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
+			{
+				(*entity)->DecreaseLife(attack);
+			}
+		}
 			break;
 		case AttackType::PIERCING:
 			break;

@@ -74,6 +74,7 @@ Card* CardManager::CreateCard(EntityType type)
 
 	LoadCardStats(card, card_node.child("stats"));
 	LoadCardUpgrades(card, card_node.child("upgrades"));
+	LoadCardCombat(card, card_node.child("combat"));
 	cards.push_back(card);
 
 	return card;
@@ -98,9 +99,12 @@ void CardManager::LoadCardStats(Card* card, pugi::xml_node stats_node)
 			stat_name,
 			new Stat(iter.attribute("value").as_int())));
 	}
+}
 
-	card->info.attack_type = (AttackType)stats_node.attribute("attack_type").as_uint();
-	card->info.armored = stats_node.attribute("armored").as_bool();
+void CardManager::LoadCardCombat(Card* card, pugi::xml_node combat_node)
+{
+	card->info.attack_type = (AttackType)combat_node.attribute("attack_type").as_uint();
+	card->info.armored = combat_node.attribute("armored").as_bool();
 }
 
 void CardManager::LoadCardUpgrades(Card * card, pugi::xml_node upgrades_node)
