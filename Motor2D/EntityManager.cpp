@@ -14,7 +14,7 @@
 
 bool higher_y(Entity* first, Entity* second)
 {
-	return (first->position.y < second->position.y && first->sorting_layer < second->sorting_layer);
+	return (first->position.y < second->position.y && first->sorting_layer <= second->sorting_layer);
 }
 
 EntityManager::EntityManager()
@@ -254,7 +254,7 @@ void EntityManager::GetEntitiesInArea(float radius, fPoint position, std::list<E
 	{
 		ent = (*entity);
 		float distance = position.DistanceTo(ent->position);
-		if (ent->type != CORE && ent->faction != faction && ent->IsAlive() 
+		if (ent->faction != faction && ent->IsAlive() 
 			&& distance <= radius)
 			list.push_back(ent);
 	}
