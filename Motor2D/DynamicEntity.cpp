@@ -9,7 +9,7 @@
 #include "DynamicEntity.h"
 
 const float DELETE_TIME = 5.0f;
-const int EXPLOSION_RANGE_TILES = 4;
+const int EXPLOSION_RANGE_TILES = 2;
 
 DynamicEntity::DynamicEntity()
 {
