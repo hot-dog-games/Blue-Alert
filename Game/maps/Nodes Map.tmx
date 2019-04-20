@@ -13,10 +13,10 @@
   <image source="../sprites/Environment/Grass/flatTiles/Trees.png" width="800" height="600"/>
  </tileset>
  <tileset firstgid="783" name="Rocks Spritesheett" tilewidth="60" tileheight="29" spacing="1" margin="1" tilecount="299" columns="13">
-  <image source="../sprites/Environment/Grass/flatTiles/Rocks Spritesheett.png" width="800" height="700"/>
+  <image source="../sprites/Environment/Grass/flatTiles/Rocks Spritesheett.png" width="800" height="600"/>
  </tileset>
  <tileset firstgid="1082" name="Rocks Spritesheett" tilewidth="60" tileheight="29" spacing="1" margin="1" tilecount="299" columns="13">
-  <image source="../sprites/Environment/Grass/flatTiles/Rocks Spritesheett.png" width="800" height="700"/>
+  <image source="../sprites/Environment/Grass/flatTiles/Rocks Spritesheett.png" width="800" height="600"/>
  </tileset>
  <tileset firstgid="1381" name="Ramps" tilewidth="60" tileheight="29" spacing="1" margin="1" tilecount="260" columns="13">
   <image source="../sprites/Environment/Grass/flatTiles/Ramps.png" width="800" height="600"/>
@@ -24442,7 +24442,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="107"/>
    <tile gid="283"/>
    <tile gid="267"/>
    <tile gid="280"/>
@@ -24509,8 +24509,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="106"/>
+   <tile gid="84"/>
    <tile gid="268"/>
    <tile gid="277"/>
    <tile gid="274"/>
@@ -24643,12 +24643,13 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="103"/>
+   <tile gid="103"/>
    <tile/>
    <tile gid="269"/>
    <tile gid="277"/>
    <tile gid="286"/>
+   <tile gid="95"/>
    <tile/>
    <tile/>
    <tile/>
@@ -24708,14 +24709,14 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="99"/>
+   <tile gid="87"/>
    <tile gid="282"/>
    <tile gid="265"/>
    <tile gid="264"/>
    <tile gid="267"/>
    <tile gid="279"/>
+   <tile gid="94"/>
    <tile/>
    <tile/>
    <tile/>
@@ -24775,15 +24776,15 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="103"/>
+   <tile gid="104"/>
    <tile gid="282"/>
    <tile gid="267"/>
    <tile gid="277"/>
    <tile gid="274"/>
    <tile gid="273"/>
    <tile gid="286"/>
+   <tile gid="94"/>
    <tile/>
    <tile/>
    <tile/>
@@ -24842,15 +24843,14 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="107"/>
    <tile gid="282"/>
    <tile gid="278"/>
    <tile gid="267"/>
    <tile gid="276"/>
    <tile gid="286"/>
-   <tile/>
-   <tile/>
+   <tile gid="92"/>
+   <tile gid="108"/>
    <tile/>
    <tile/>
    <tile/>
@@ -24916,7 +24916,7 @@
    <tile gid="277"/>
    <tile gid="274"/>
    <tile gid="287"/>
-   <tile/>
+   <tile gid="109"/>
    <tile/>
    <tile/>
    <tile/>
