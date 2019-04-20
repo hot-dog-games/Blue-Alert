@@ -46,6 +46,7 @@ public:
 	Faction faction;
 	EntityType type;
 	fPoint position;
+	int sorting_layer = 0;
 
 protected:
 	std::map<std::string, Animation> animations;

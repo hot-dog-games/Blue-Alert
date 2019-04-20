@@ -14,7 +14,7 @@
 
 bool higher_y(Entity* first, Entity* second)
 {
-	return (first->position.y < second->position.y);
+	return (first->position.y < second->position.y && first->sorting_layer < second->sorting_layer);
 }
 
 EntityManager::EntityManager()
@@ -66,8 +66,6 @@ bool EntityManager::PreUpdate()
 {
 	if (!paused)
 	{
-		entities.sort(higher_y);
-
 		for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
 		{
 			(*entity)->PreUpdate();
@@ -79,6 +77,8 @@ bool EntityManager::PreUpdate()
 
 bool EntityManager::PostUpdate()
 {
+	entities.sort(higher_y);
+
 	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
 	{
 		(*entity)->PostUpdate();
@@ -142,9 +142,12 @@ Entity* EntityManager::CreateEntity(EntityType type, fPoint position, Card* card
 	DynamicEntity* entity = new DynamicEntity(entity_node, position, card, faction);
 	entity->type = type;
 	entity->Start();
-	entities.push_back(entity);
 	entity->SetDebug(debug);
 
+	if (type == EntityType::HARRIER || type == EntityType::NIGHTHAWK || type == EntityType::BLACK_EAGLE)
+		entity->sorting_layer = 1;
+
+	entities.push_back(entity);
 	id_count++;
 
 	return entity;
