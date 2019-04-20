@@ -31,7 +31,7 @@ bool Entity::PostUpdate()
 	return true;
 }
 
-void Entity::DecreaseLife(float damage)
+void Entity::DecreaseLife(float damage, bool piercing)
 {
 	float damage_received = CalculateDamage(damage, 0);
 

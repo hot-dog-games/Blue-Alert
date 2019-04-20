@@ -36,7 +36,7 @@ public:
 	virtual bool PostUpdate();
 	virtual bool CleanUp();
 	virtual bool Start();
-	virtual void DecreaseLife(float damage);
+	virtual void DecreaseLife(float damage, bool piercing = false);
 
 public:
 	Card * entity_card = nullptr;

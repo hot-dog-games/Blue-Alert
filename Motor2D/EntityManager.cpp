@@ -254,7 +254,7 @@ void EntityManager::GetEntitiesInArea(float radius, fPoint position, std::list<E
 	{
 		ent = (*entity);
 		float distance = position.DistanceTo(ent->position);
-		if (ent->type != CORE && ent->type != faction && ent->IsAlive() 
+		if (ent->type != CORE && ent->faction != faction && ent->IsAlive() 
 			&& distance <= radius)
 			list.push_back(ent);
 	}

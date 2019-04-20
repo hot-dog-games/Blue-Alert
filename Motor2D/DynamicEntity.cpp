@@ -274,6 +274,7 @@ void DynamicEntity::Attack()
 		}
 			break;
 		case AttackType::PIERCING:
+			objective->DecreaseLife(attack, true);
 			break;
 		default:
 			break;
@@ -283,10 +284,20 @@ void DynamicEntity::Attack()
 	}
 }
 
-void DynamicEntity::DecreaseLife(float damage)
+void DynamicEntity::DecreaseLife(float damage, bool piercing)
 {
 	float defense = entity_card->info.stats.find("defense")->second->GetValue();
 	float damage_received = CalculateDamage(damage, defense);
+
+	if (entity_card->info.armored)
+	{
+		if (piercing)
+			damage_received *= 1.25f;
+		else
+			damage_received *= 0.75f;
+	}
+
+	LOG("ME HAN PEGAO %f", damage_received);
 
 	stats.find("health")->second->DecreaseStat(damage_received);
 	if (stats.find("health")->second->GetValue() <= 0)

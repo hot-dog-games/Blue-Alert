@@ -65,7 +65,7 @@ bool TestingScene::Start()
 	enemy_deck->delete_cards = true;
 	enemy_deck->AddCard(App->card_manager->CreateCard(EntityType::G_I));
 	enemy_deck->AddCard(App->card_manager->CreateCard(EntityType::SNIPER));
-	enemy_deck->AddCard(App->card_manager->CreateCard(EntityType::NAVY_SEAL));
+	enemy_deck->AddCard(App->card_manager->CreateCard(EntityType::PRISM));
 	enemy_deck->AddCard(App->card_manager->CreateCard(EntityType::HARRIER));
 
 	Deck* test_deck = new Deck();

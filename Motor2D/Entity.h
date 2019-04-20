@@ -32,7 +32,7 @@ public:
 	virtual bool CleanUp() { return true; };
 	virtual bool Start() { return true; };
 
-	virtual void DecreaseLife(float damage);
+	virtual void DecreaseLife(float damage, bool piercing = false);
 	void SetDebug(bool value);
 	bool IsAlive();
 
