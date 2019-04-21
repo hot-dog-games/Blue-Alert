@@ -25,6 +25,9 @@ private:
 	uint	current_value = 0;
 	BarType	bar_type;
 
+	float decimal_decrease = 0.0f;
+	float decimal_increase = 0.0f;
+
 };
 
 #endif // !UI_BAR_H

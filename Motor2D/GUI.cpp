@@ -276,6 +276,26 @@ void Gui::DisableElement(UIElement* ele)
 	}
 }
 
+void Gui::EnableInteractable(UIElement* ele)
+{
+	ele->interactable = true;
+	for (std::list<UIElement*>::iterator element = elements.begin(); element != elements.end(); ++element)
+	{
+		if ((*element)->parent && (*element)->parent == ele)
+			(*element)->interactable = true;
+	}
+}
+
+void Gui::DisableInteractable(UIElement* ele)
+{
+	ele->interactable = false;
+	for (std::list<UIElement*>::iterator element = elements.begin(); element != elements.end(); ++element)
+	{
+		if ((*element)->parent && (*element)->parent == ele)
+			(*element)->interactable = false;
+	}
+}
+
 SDL_Rect* Gui::LoadUIButton(int num, std::string type)
 {
 	pugi::xml_node buttons_node = buttons_file.first_child().child("ui_button");

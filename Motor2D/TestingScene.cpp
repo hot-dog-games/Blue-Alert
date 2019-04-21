@@ -200,6 +200,7 @@ bool TestingScene::Update(float dt)
 			state = BattleSceneState::WIN;
 			App->PauseGame();
 			App->gui->EnableElement((UIElement*)win_panel_one);
+			App->gui->DisableInteractable((UIElement*)unit_panel);
 		}
 	}
 		break;
@@ -361,6 +362,7 @@ void TestingScene::StartUI()
 
 	App->gui->DisableElement((UIElement*)win_panel_one);
 	App->gui->DisableElement((UIElement*)win_panel_two);
+	App->gui->EnableInteractable((UIElement*)unit_panel);
 
 
 }

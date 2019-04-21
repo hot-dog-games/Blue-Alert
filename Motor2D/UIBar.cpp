@@ -25,7 +25,13 @@ void UIBar::DecreaseBar(uint value)
 		current_value -= value;
 	}
 	else if (bar_type == BarType::BAR_HORITZONTAL) {
-		uint width = (rect_box.w / bar_value->GetMaxValue()) * value;
+		float width = (rect_box.w / bar_value->GetMaxValue()) * value;
+		float aux = width - (int)width;
+		decimal_decrease += aux;
+		if (decimal_decrease > 1) {
+			width += 1;
+			decimal_decrease -= 1;
+		}
 		rect_sprite.w -= (int)width;
 		current_value -= value;
 	}
@@ -40,7 +46,13 @@ void UIBar::IncreaseBar(uint value)
 		current_value += value;
 	}
 	else if (bar_type == BarType::BAR_HORITZONTAL) {
-		uint width = (rect_box.w / bar_value->GetMaxValue()) * value;
+		float width = (rect_box.w / bar_value->GetMaxValue()) * value;
+		float aux = width - (int)width;
+		decimal_increase += aux;
+		if (decimal_increase > 1) {
+			width += 1;
+			decimal_increase -= 1;
+		}
 		rect_sprite.w += width;
 		current_value += value;
 	}

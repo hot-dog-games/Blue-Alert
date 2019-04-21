@@ -82,6 +82,9 @@ public:
 	void EnableElement(UIElement* element);
 	void DisableElement(UIElement* element);
 
+	void EnableInteractable(UIElement * ele);
+	void DisableInteractable(UIElement * ele);
+
 	SDL_Rect* LoadUIButton(int num, std::string type);
 	SDL_Rect  LoadUIImage(int num);
 
