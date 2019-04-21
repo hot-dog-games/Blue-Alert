@@ -14,7 +14,7 @@
 
 bool higher_y(Entity* first, Entity* second)
 {
-	return (first->position.y < second->position.y);
+	return (first->position.y < second->position.y && first->sorting_layer <= second->sorting_layer);
 }
 
 EntityManager::EntityManager()
@@ -66,8 +66,6 @@ bool EntityManager::PreUpdate()
 {
 	if (!paused)
 	{
-		entities.sort(higher_y);
-
 		for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
 		{
 			(*entity)->PreUpdate();
@@ -79,6 +77,8 @@ bool EntityManager::PreUpdate()
 
 bool EntityManager::PostUpdate()
 {
+	entities.sort(higher_y);
+
 	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
 	{
 		(*entity)->PostUpdate();
@@ -142,9 +142,12 @@ Entity* EntityManager::CreateEntity(EntityType type, fPoint position, Card* card
 	DynamicEntity* entity = new DynamicEntity(entity_node, position, card, faction);
 	entity->type = type;
 	entity->Start();
-	entities.push_back(entity);
 	entity->SetDebug(debug);
 
+	if (type == EntityType::HARRIER || type == EntityType::NIGHTHAWK || type == EntityType::BLACK_EAGLE)
+		entity->sorting_layer = 1;
+
+	entities.push_back(entity);
 	id_count++;
 
 	return entity;
@@ -231,15 +234,28 @@ void EntityManager::FindClosestEnemy(fPoint position, Faction faction, Entity* &
 	}
 }
 
-void EntityManager::GetEntitiesInArea(SDL_Rect area, std::list<Entity*> &list)
+void EntityManager::GetEntitiesInArea(SDL_Rect area, std::list<Entity*> &list, int faction)
 {
 	Entity* ent;
 	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
 	{
 		ent = (*entity);
-		if (ent->type != CORE && ent->IsAlive() && 
-			(ent->position.x >= area.x && ent->position.x <= area.x + area.w 
+		if (ent->type != CORE && ent->type != faction && ent->IsAlive() 
+			&& (ent->position.x >= area.x && ent->position.x <= area.x + area.w 
 				&& ent->position.y >= area.y && ent->position.y <= area.y + area.h))
+			list.push_back(ent);
+	}
+}
+
+void EntityManager::GetEntitiesInArea(float radius, fPoint position, std::list<Entity*> &list, int faction)
+{
+	Entity* ent;
+	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
+	{
+		ent = (*entity);
+		float distance = position.DistanceTo(ent->position);
+		if (ent->faction != faction && ent->IsAlive() 
+			&& distance <= radius)
 			list.push_back(ent);
 	}
 }

@@ -16,7 +16,7 @@ Core::Core(pugi::xml_node entity_config, fPoint position, Faction faction, pugi:
 			stat_name,
 			new Stat(iter.attribute("value").as_int())));
 	}
-
+	//stats.find("energy")->second->DecreaseStat(10);
 	current_animation = &animations.find("idle")->second;
 }
 
@@ -104,3 +104,4 @@ Stat * Core::GetHealth() const
 {
 	return stats.find("health")->second;
 }
+
