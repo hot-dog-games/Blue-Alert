@@ -76,7 +76,7 @@ bool TestingScene::Start()
 	test_deck->AddCard(App->card_manager->CreateCard(EntityType::HARRIER));
 
 	test_core = App->entity_manager->CreateCore(1, { 30,980 }, test_deck, FACTION_RUSSIAN);
-	test_enemy_core = App->entity_manager->CreateCore(13, { 25,285 }, enemy_deck, FACTION_AMERICAN, true);
+	test_enemy_core = App->entity_manager->CreateCore(13, { 25,285 }, enemy_deck, FACTION_AMERICAN);
 
 	do {
 		random_num[0] = rand() % 9 + 1;

@@ -29,4 +29,10 @@
       <frame x="16" y="1211" width="196" height="63"/>
     </animation>
   </particle>
+  <particle type="1">
+    <stats speed ="1000"/>
+    <animation speed="1">
+      <frame x="333" y="1256" width="4" height="2"/>
+    </animation>
+  </particle>
 </config>

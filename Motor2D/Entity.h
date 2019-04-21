@@ -47,12 +47,12 @@ public:
 	Faction faction;
 	EntityType type;
 	fPoint position;
+	SDL_Rect current_frame;
 	int sorting_layer = 0;
 
 protected:
 	std::map<std::string, Animation> animations;
 	Animation* current_animation = nullptr;
-	SDL_Rect current_frame;
 	SDL_Texture* sprite = nullptr;
 
 	bool debug = false;

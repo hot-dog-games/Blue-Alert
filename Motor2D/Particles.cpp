@@ -3,6 +3,7 @@
 #include "j1App.h"
 #include "Textures.h"
 #include "Particle.h"
+#include "ProjectileParticle.h"
 #include "Particles.h"
 
 
@@ -77,7 +78,7 @@ bool Particles::PostUpdate()
 	return true;
 }
 
-Particle * Particles::CreateParticle(const ParticleType &particle_type, const fPoint &pos)
+Particle * Particles::CreateParticle(const ParticleType &particle_type, const fPoint &pos, const fPoint &dest)
 {
 	Particle* particle;
 	pugi::xml_node particle_node;
@@ -86,6 +87,11 @@ Particle * Particles::CreateParticle(const ParticleType &particle_type, const fP
 	case ParticleType::ATTACK_EXPLOSION:
 		particle_node = particle_configs.find_child_by_attribute("type", std::to_string(0).c_str());
 		particle = new Particle(particle_node, pos, particle_atlas);
+		particle->type = particle_type;
+		break;
+	case ParticleType::ATTACK_BASIC_SHOT:
+		particle_node = particle_configs.find_child_by_attribute("type", std::to_string(1).c_str());
+		particle = new ProjectileParticle(particle_node, pos, dest, particle_atlas);
 		particle->type = particle_type;
 		break;
 	default:

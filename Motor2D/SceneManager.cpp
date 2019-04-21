@@ -3,6 +3,7 @@
 #include "GUI.h"
 #include "TestingScene.h"
 #include "StrategyMapScene.h"
+#include "Particles.h"
 #include "BattleScene.h"
 #include "Map.h"
 #include "SceneManager.h"
@@ -87,8 +88,11 @@ void SceneManager::ChangeScene(int new_scene)
 {
 	current_scene->CleanUp();
 	App->entity_manager->CleanUp();
+	App->particles->CleanUp();
 	App->gui->CleanUp();
 	App->map->CleanUp();
+
+
 	delete current_scene;
 	current_scene = nullptr;
 
