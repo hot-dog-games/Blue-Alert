@@ -138,7 +138,7 @@ Entity* EntityManager::CreateEntity(EntityType type, fPoint position, Card* card
 		std::to_string((int)type).c_str()).find_child_by_attribute("faction", std::to_string((int)faction).c_str());
 
 	id += "_" + card->name;
-
+	
 	DynamicEntity* entity = new DynamicEntity(entity_node, position, card, faction);
 	entity->type = type;
 	entity->Start();
@@ -234,7 +234,24 @@ void EntityManager::FindClosestEnemy(fPoint position, Faction faction, Entity* &
 	}
 }
 
+void EntityManager::FindClosestAllie(fPoint position, Faction faction, Entity* &closest_entity, float &distance)
+{
+	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
+	{
+		if ((*entity)->faction == faction && (*entity)->IsAlive() && (*entity)->position != position)
+		{
+			float tmp_distance = position.DistanceTo((*entity)->position);
+			if (tmp_distance < distance)
+			{
+				distance = tmp_distance;
+				closest_entity = (*entity);
+			}
+		}
+	}
+}
+
 void EntityManager::GetEntitiesInArea(SDL_Rect area, std::list<Entity*> &list, int faction)
+
 {
 	Entity* ent;
 	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
@@ -276,4 +293,27 @@ bool EntityManager::DeleteEntity(Entity* entity)
 	delete entity;
 
 	return true;
+}
+
+bool EntityManager::CreateGroup(int units, EntityType type, fPoint position, Card * card, Faction faction)
+{
+	for (int i = 0; i < units; i++)
+	{
+		if (i == 1)
+		{
+			position.x = position.x + 10;
+			position.y = position.y + 10;
+		}
+		else if (i == 2)
+		{
+			position.x = position.x - 10;
+			position.y = position.y + 10;
+		}
+		else if (i == 3)
+		{
+			position.y = position.y + 20;
+		}
+		App->entity_manager->CreateEntity(type, position, card, faction);
+
+	}return true;
 }

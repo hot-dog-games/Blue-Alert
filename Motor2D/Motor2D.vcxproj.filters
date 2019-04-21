@@ -133,6 +133,9 @@
     <ClCompile Include="EntityManager.cpp">
       <Filter>Engine\Modules</Filter>
     </ClCompile>
+    <ClCompile Include="Movement.cpp">
+      <Filter>Engine\Modules</Filter>
+    </ClCompile>
     <ClCompile Include="CoreAI.cpp">
       <Filter>Engine\Entities</Filter>
     </ClCompile>
@@ -298,6 +301,9 @@
       <Filter>Engine\Tools</Filter>
     </ClInclude>
     <ClInclude Include="EntityManager.h">
+      <Filter>Engine\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Movement.h">
       <Filter>Engine\Modules</Filter>
     </ClInclude>
     <ClInclude Include="CoreAI.h">

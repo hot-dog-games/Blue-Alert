@@ -65,8 +65,11 @@ bool Core::UseCard(int number, fPoint position)
 {
 	if (CanUseCard(number))
 	{
-		App->entity_manager->CreateEntity(deck->cards[number]->type, position, deck->cards[number], faction);
+		int group_size = deck->cards[number]->info.stats.find("units")->second->GetValue();
+		
+		App->entity_manager->CreateGroup(group_size,deck->cards[number]->type, position, deck->cards[number], faction);
 		stats.find("energy")->second->DecreaseStat(deck->cards[number]->info.stats.find("energy_cost")->second->GetValue());
+
 		return true;
 	}
 
