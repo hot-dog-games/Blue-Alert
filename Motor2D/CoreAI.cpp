@@ -21,7 +21,7 @@ bool CoreAI::Update(float dt)
 {
 	Core::Update(dt);
 
-	/*dt_sum += dt;
+	dt_sum += dt;
 	if (state == STATIC_IDLE)
 	{
 
@@ -60,7 +60,7 @@ bool CoreAI::Update(float dt)
 		default:
 			break;
 		}
-	}*/
+	}
 
 	return true;
 }
