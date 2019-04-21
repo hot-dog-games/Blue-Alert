@@ -60,9 +60,6 @@ protected:
 	bool CheckEnemies();
 	bool CheckAllies();
 
-public:
-	Card * entity_card = nullptr;
-
 protected:
 
 	DynamicState state = DYNAMIC_IDLE;
