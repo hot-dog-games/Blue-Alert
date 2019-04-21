@@ -60,12 +60,29 @@ Deck * GameManager::GetPlayerDeck()
 	return combat_deck;
 }
 
+bool GameManager::IsInPlayerDeck(Card * card)
+{
+	bool ret = false;
+
+	Card* deck_card = combat_deck->GetCard(card->type);
+
+	if (deck_card) {
+		ret = true;
+	}
+	else {
+		ret = false;
+	}
+
+	return ret;
+}
+
 void GameManager::CreatePlayerDeck()
 {
 	collection.push_back(App->card_manager->CreateCard(EntityType::G_I));
 	collection.push_back(App->card_manager->CreateCard(EntityType::SNIPER));
 	collection.push_back(App->card_manager->CreateCard(EntityType::GRIZZLY));
 	collection.push_back(App->card_manager->CreateCard(EntityType::HARRIER));
+	collection.push_back(App->card_manager->CreateCard(EntityType::ROBOT));
 
 	combat_deck = new Deck();
 	combat_deck->AddCard(GetCardFromCollection(EntityType::G_I));

@@ -14,7 +14,7 @@ public:
 	void CleanUp();
 	void AddCard(Card* card);
 	void RemoveCard(uint position);
-
+	Card* GetCard(EntityType type);
 	Card* cards[MAX_CARDS];
 
 	bool delete_cards = false;
