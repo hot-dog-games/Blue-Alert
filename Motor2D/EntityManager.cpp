@@ -247,15 +247,16 @@ void EntityManager::FindClosestAllie(fPoint position, Faction faction, Entity* &
 				closest_entity = (*entity);
 			}
 		}
-
+	}
+}
 void EntityManager::GetEntitiesInArea(SDL_Rect area, std::list<Entity*> &list)
 {
 	Entity* ent;
 	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
 	{
 		ent = (*entity);
-		if (ent->type != CORE && ent->IsAlive() && 
-			(ent->position.x >= area.x && ent->position.x <= area.x + area.w 
+		if (ent->type != CORE && ent->IsAlive() &&
+			(ent->position.x >= area.x && ent->position.x <= area.x + area.w
 				&& ent->position.y >= area.y && ent->position.y <= area.y + area.h))
 			list.push_back(ent);
 	}
@@ -298,7 +299,6 @@ bool EntityManager::CreateGroup(int units, EntityType type, fPoint position, Car
 			position.y = position.y + 20;
 		}
 		App->entity_manager->CreateEntity(type, position, card, faction);
-		
+
 	}return true;
 }
-

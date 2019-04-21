@@ -133,7 +133,6 @@
     <ClCompile Include="EntityManager.cpp">
       <Filter>Engine\Modules</Filter>
     </ClCompile>
-
     <ClCompile Include="Movement.cpp">
       <Filter>Engine\Modules</Filter>
     </ClCompile>
@@ -295,7 +294,6 @@
     <ClInclude Include="EntityManager.h">
       <Filter>Engine\Modules</Filter>
     </ClInclude>
-
     <ClInclude Include="Movement.h">
       <Filter>Engine\Modules</Filter>
     </ClInclude>

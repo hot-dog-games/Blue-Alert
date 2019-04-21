@@ -101,7 +101,6 @@
     <ClCompile Include="Audio.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Map.cpp" />
-    <ClCompile Include="MapMenuScene.cpp" />
     <ClCompile Include="Movement.cpp" />
     <ClCompile Include="Pathfinding.cpp" />
     <ClCompile Include="p2Log.cpp" />
@@ -149,7 +148,6 @@
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GUI.h" />
     <ClInclude Include="Map.h" />
-    <ClInclude Include="MapMenuScene.h" />
     <ClInclude Include="Movement.h" />
     <ClInclude Include="Pathfinding.h" />
     <ClInclude Include="PerfTimer.h" />
