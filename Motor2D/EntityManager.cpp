@@ -12,10 +12,7 @@
 #include "EntityManager.h"
 #include "Brofiler/Brofiler.h"
 
-bool higher_y(Entity* first, Entity* second)
-{
-	return (first->position.y < second->position.y && first->sorting_layer <= second->sorting_layer);
-}
+
 
 EntityManager::EntityManager()
 {
@@ -45,18 +42,14 @@ bool EntityManager::Start()
 
 bool EntityManager::Update(float dt)
 {
-	if (!paused) 
+	BROFILER_CATEGORY("EMUpdate", Profiler::Color::Plum);
+
+	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
+		SetDebug();
+
+	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
 	{
-		BROFILER_CATEGORY("EMUpdate", Profiler::Color::Plum);
-
-		if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_UP)
-			SetDebug();
-
-		for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
-		{
-			(*entity)->Update(dt);
-		}
-
+		(*entity)->Update(dt);
 	}
 
 	return true;
@@ -64,12 +57,9 @@ bool EntityManager::Update(float dt)
 
 bool EntityManager::PreUpdate()
 {
-	if (!paused)
+	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
 	{
-		for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
-		{
-			(*entity)->PreUpdate();
-		}
+		(*entity)->PreUpdate();
 	}
 
 	return true;
@@ -77,8 +67,6 @@ bool EntityManager::PreUpdate()
 
 bool EntityManager::PostUpdate()
 {
-	entities.sort(higher_y);
-
 	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
 	{
 		(*entity)->PostUpdate();
@@ -91,12 +79,7 @@ bool EntityManager::CleanUp()
 {
 	LOG("entity manager cleanup");
 
-	while (!entities.empty()) 
-	{
-		entities.front()->CleanUp();
-		delete entities.front();
-		entities.pop_front();
-	}
+	while (!entities.empty()) delete entities.front(), entities.pop_front();
 
 	entities.clear();
 	id_count = 0;
@@ -114,20 +97,6 @@ bool EntityManager::Save(pugi::xml_node&) const
 	return true;
 }
 
-bool EntityManager::Pause()
-{
-	paused = true;
-
-	return true;
-}
-
-bool EntityManager::Resume()
-{
-	paused = false;
-
-	return true;
-}
-
 Entity* EntityManager::CreateEntity(EntityType type, fPoint position, Card* card, Faction faction)
 {
 
@@ -142,12 +111,9 @@ Entity* EntityManager::CreateEntity(EntityType type, fPoint position, Card* card
 	DynamicEntity* entity = new DynamicEntity(entity_node, position, card, faction);
 	entity->type = type;
 	entity->Start();
+	entities.push_back(entity);
 	entity->SetDebug(debug);
 
-	if (type == EntityType::HARRIER || type == EntityType::NIGHTHAWK || type == EntityType::BLACK_EAGLE)
-		entity->sorting_layer = 1;
-
-	entities.push_back(entity);
 	id_count++;
 
 	return entity;
@@ -234,28 +200,15 @@ void EntityManager::FindClosestEnemy(fPoint position, Faction faction, Entity* &
 	}
 }
 
-void EntityManager::GetEntitiesInArea(SDL_Rect area, std::list<Entity*> &list, int faction)
+void EntityManager::GetEntitiesInArea(SDL_Rect area, std::list<Entity*> &list)
 {
 	Entity* ent;
 	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
 	{
 		ent = (*entity);
-		if (ent->type != CORE && ent->type != faction && ent->IsAlive() 
-			&& (ent->position.x >= area.x && ent->position.x <= area.x + area.w 
+		if (ent->type != CORE && ent->IsAlive() && 
+			(ent->position.x >= area.x && ent->position.x <= area.x + area.w 
 				&& ent->position.y >= area.y && ent->position.y <= area.y + area.h))
-			list.push_back(ent);
-	}
-}
-
-void EntityManager::GetEntitiesInArea(float radius, fPoint position, std::list<Entity*> &list, int faction)
-{
-	Entity* ent;
-	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
-	{
-		ent = (*entity);
-		float distance = position.DistanceTo(ent->position);
-		if (ent->faction != faction && ent->IsAlive() 
-			&& distance <= radius)
 			list.push_back(ent);
 	}
 }

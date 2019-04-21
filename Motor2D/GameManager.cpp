@@ -80,14 +80,14 @@ void GameManager::CreatePlayerDeck()
 {
 	collection.push_back(App->card_manager->CreateCard(EntityType::G_I));
 	collection.push_back(App->card_manager->CreateCard(EntityType::SNIPER));
-	collection.push_back(App->card_manager->CreateCard(EntityType::GRIZZLY));
+	collection.push_back(App->card_manager->CreateCard(EntityType::NAVY_SEAL));
 	collection.push_back(App->card_manager->CreateCard(EntityType::HARRIER));
 	collection.push_back(App->card_manager->CreateCard(EntityType::ROBOT));
 
 	combat_deck = new Deck();
 	combat_deck->AddCard(GetCardFromCollection(EntityType::G_I));
 	combat_deck->AddCard(GetCardFromCollection(EntityType::SNIPER));
-	combat_deck->AddCard(GetCardFromCollection(EntityType::GRIZZLY));
+	combat_deck->AddCard(GetCardFromCollection(EntityType::NAVY_SEAL));
 	combat_deck->AddCard(GetCardFromCollection(EntityType::HARRIER));
 }
 

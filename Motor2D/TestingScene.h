@@ -43,7 +43,7 @@ public:
 	void StartUI();
 
 private:
-	void CreateDrag(int num, int type, UIElement* element);
+	void CreateDrag(int num, UIElement* element);
 	void ReleaseDrag();
 
 private:
@@ -63,8 +63,6 @@ private:
 	UIButton*		unit_button_three;
 	UIButton*		unit_button_four;
 	UIBar*			energy_bar;
-	UIBar*			health_bar;
-	UIImage*		health_bar_image;
 
 	UIImage*		win_panel_one;
 	UIImage*		win_panel_two;

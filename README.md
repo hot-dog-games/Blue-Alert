@@ -1,49 +1,30 @@
-﻿# Blue Alert
+﻿# Project-2
 This is the repository for the video game of Project-2 subject.
 Command and Conquer: Blue Alert is a strategy game that combines elements of Deck-building and Tower Defense, the goal of the game is to simplify the classic strategy of an RTS to the point where it becomes an accessible game for a casual player, looking for fast games. The game consists of two phases; the military strategy phase where the player builds his army, improves it and decides where to attack, and then, there is the combat phase, where the player deploys his units to attack the enemy's core. The assets and some mechanics are from Command and Conquer: Red Alert 2.
 
 
-#Current version: V.0.45
+#Current version: V.0.3
 
 ## Implementations: 
 
 - Predefined Map
-
 - Map to Encounter Transition
-
 - Allied Core
-
 - Basic Unit
-
 - Unit Spawn
-
 - Energy System
-
 - Unit Basic Movement
-
 - Deck System
 
-- Unit Attack
+## Gameplay of the current version:
 
-- Map with buildings (nodes)
+- Nodes Menu:
 
-- Simple IA
+Just click on a node that is opened from the start node.
 
-- Troop upgrading
+- In Battle:
 
-- Allied and enemy core HP
-
-- SFX
-
-Nodes Menu:
-
-When the menu opens click on one of the two buildings and the battle will start.
-
-In Battle:
-The IA will spawn troops to defeat you and you will have to defend and attack the other building to win the battle spawning troops in a tactiacal way.
-
-Reward screen:
-Select the reward that you want with RIGHT CLICK and then click continue, in the next game the troop that you upgrade will recive the buff. DISCLAIMER: Deck costumization is not implemented yet so new cards can't be used
+Drag units from the right panel to the map and they will spwan taking direction to the enemy core.
 
 
 

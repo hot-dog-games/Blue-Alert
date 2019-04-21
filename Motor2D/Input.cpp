@@ -3,7 +3,6 @@
 #include "j1App.h"
 #include "Input.h"
 #include "Window.h"
-#include "PerfTimer.h"
 #include "SDL/include/SDL.h"
 
 #define MAX_KEYS 300
@@ -57,14 +56,14 @@ bool Input::PreUpdate()
 	{
 		if(keys[i] == 1)
 		{
-			if (keyboard[i] == KEY_IDLE)
+			if(keyboard[i] == KEY_IDLE)
 				keyboard[i] = KEY_DOWN;
 			else
 				keyboard[i] = KEY_REPEAT;
 		}
 		else
 		{
-			if (keyboard[i] == KEY_REPEAT || keyboard[i] == KEY_DOWN)
+			if(keyboard[i] == KEY_REPEAT || keyboard[i] == KEY_DOWN)
 				keyboard[i] = KEY_UP;
 			else
 				keyboard[i] = KEY_IDLE;

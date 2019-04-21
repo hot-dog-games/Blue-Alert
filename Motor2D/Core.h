@@ -19,14 +19,11 @@ public:
 
 	virtual bool CleanUp();
 
-	bool UseCard(int number, fPoint position);
+	void UseCard(int number, fPoint position);
 	void SetDeck(Deck* new_deck);
 	Card* GetCard(int card_num) const;
 
 	Stat* GetEnergy() const;
-	Stat* GetHealth() const;
-
-	bool delete_deck = false;
 
 protected:
 	Deck* deck = nullptr;

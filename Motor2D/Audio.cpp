@@ -51,7 +51,7 @@ bool Audio::Awake(pugi::xml_node& config)
 		active = false;
 		ret = true;
 	}
-	Mix_Volume(-1, MIX_MAX_VOLUME / 2);
+
 	return ret;
 }
 

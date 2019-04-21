@@ -16,7 +16,7 @@ Core::Core(pugi::xml_node entity_config, fPoint position, Faction faction, pugi:
 			stat_name,
 			new Stat(iter.attribute("value").as_int())));
 	}
-	stats.find("energy")->second->DecreaseStat(10);
+
 	current_animation = &animations.find("idle")->second;
 }
 
@@ -54,23 +54,18 @@ bool Core::CleanUp()
 	stats.clear();
 
 	deck->CleanUp();
-
-	if(delete_deck)
-		delete deck;
+	delete deck;
 
 	return true;
 }
 
-bool Core::UseCard(int number, fPoint position)
+void Core::UseCard(int number, fPoint position)
 {
 	if (CanUseCard(number))
 	{
 		App->entity_manager->CreateEntity(deck->cards[number]->type, position, deck->cards[number], faction);
 		stats.find("energy")->second->DecreaseStat(deck->cards[number]->info.stats.find("energy_cost")->second->GetValue());
-		return true;
 	}
-
-	return false;
 }
 
 bool Core::CanUseCard(int number)
@@ -99,9 +94,3 @@ Stat* Core::GetEnergy() const
 {	
 	return stats.find("energy")->second;
 }
-
-Stat * Core::GetHealth() const
-{
-	return stats.find("health")->second;
-}
-

@@ -49,7 +49,6 @@ bool StrategyMapScene::Start()
 
 	InitializeUI();
 	
-	App->audio->PlayMusic("audio/music/5.InDeep-RedAlert2_2.ogg");
 
 
 	return true;

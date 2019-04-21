@@ -8,7 +8,6 @@
 //#define LAST_KEYS_PRESSED_BUFFER 50
 
 struct SDL_Rect;
-class PerfTimer;
 
 enum j1EventWindow
 {

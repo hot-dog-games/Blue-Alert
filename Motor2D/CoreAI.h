@@ -12,6 +12,7 @@ public:
 	~CoreAI();
 
 	virtual bool Update(float dt);
+	virtual bool CleanUp();
 	virtual bool Start();
 	virtual bool PostUpdate();
 

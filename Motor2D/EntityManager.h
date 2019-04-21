@@ -48,8 +48,6 @@ public:
 	bool CleanUp();
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;
-	bool Pause();
-	bool Resume();
 
 	Entity* CreateEntity(EntityType type, fPoint position, Card* card, Faction faction);
 	Core* CreateCore(uint core_type, fPoint position, Deck* deck, Faction faction, bool ai = false);
@@ -57,8 +55,7 @@ public:
 	fPoint GetCorePosition(Faction faction);
 	bool DeleteEntity(Entity* entity);
 	void FindClosestEnemy(fPoint position, Faction faction, Entity* &closest_entity, float &distance);
-	void GetEntitiesInArea(SDL_Rect area, std::list<Entity*> &list, int faction = -1);
-	void GetEntitiesInArea(float radius, fPoint position, std::list<Entity*> &list, int faction = -1);
+	void GetEntitiesInArea(SDL_Rect area, std::list<Entity*> &list);
 	void SetDebug();
 
 private:
@@ -66,7 +63,6 @@ private:
 	pugi::xml_node entity_configs;
 	int id_count = 0;
 	bool debug = false;
-	bool paused = false;
 };
 
 #endif //_ENTITYMANAGER_H_

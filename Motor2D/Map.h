@@ -28,7 +28,6 @@ struct Properties
 	}
 
 	int Get(const char* name, int default_value = 0) const;
-	void Set(const char* name, int value);
 
 	std::list<Property*>	list;
 };
@@ -121,10 +120,6 @@ public:
 	iPoint MapToWorld(int x, int y) const;
 	iPoint WorldToMap(int x, int y) const;
 	bool CreateWalkabilityMap(int& width, int& height, uchar** buffer) const;
-	bool IsWalkable(iPoint tile);
-	bool IsInsideMap(iPoint tile);
-	bool IsSpawnable(iPoint tile);
-	void SetDrawable(std::string layer_name, int value);
 
 private:
 

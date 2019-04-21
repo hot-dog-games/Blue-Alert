@@ -32,14 +32,13 @@ public:
 	virtual bool CleanUp() { return true; };
 	virtual bool Start() { return true; };
 
-	virtual void DecreaseLife(float damage, bool piercing = false);
+	void DecreaseLife(float damage);
 	void SetDebug(bool value);
 	bool IsAlive();
 
 protected:
 	void LoadAnimations(pugi::xml_node anim_config);
 	void LoadSprite(pugi::xml_node node);
-	float CalculateDamage(float attack, float defense);
 	virtual void Die() {};
 	virtual void Draw();
 
@@ -47,12 +46,11 @@ public:
 	Faction faction;
 	EntityType type;
 	fPoint position;
-	SDL_Rect current_frame;
-	int sorting_layer = 0;
 
 protected:
 	std::map<std::string, Animation> animations;
 	Animation* current_animation = nullptr;
+	SDL_Rect current_frame;
 	SDL_Texture* sprite = nullptr;
 
 	bool debug = false;

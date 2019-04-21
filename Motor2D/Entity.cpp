@@ -31,13 +31,13 @@ bool Entity::PostUpdate()
 	return true;
 }
 
-void Entity::DecreaseLife(float damage, bool piercing)
+void Entity::DecreaseLife(float damage)
 {
-	float damage_received = CalculateDamage(damage, 0);
-	LOG("DAMAGE");
-	stats.find("health")->second->DecreaseStat(damage_received);
+	stats.find("health")->second->DecreaseStat(damage);
 	if (stats.find("health")->second->GetValue() <= 0)
 		Die();
+
+	LOG("current life is: %f", stats.find("health")->second->GetValue());
 }
 void Entity::SetDebug(bool value)
 {
@@ -51,11 +51,6 @@ void Entity::LoadSprite(pugi::xml_node node)
 {
 	std::string sprite_path = node.child("sprite").child_value();
 	sprite = App->tex->Load(sprite_path.c_str());
-}
-
-float Entity::CalculateDamage(float attack, float defense)
-{
-	return (attack - ((attack * defense) / 25));
 }
 
 void Entity::LoadAnimations(pugi::xml_node anim_config)

@@ -37,10 +37,6 @@ public:
 	virtual bool GUIEvent(UIElement*, GUI_Event) { return true; };
 
 	virtual void StartUI() {};
-
-	virtual void Pause() {};
-
-	virtual void Resume() {};
 };
 
 #endif // _SCENE_H_
