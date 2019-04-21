@@ -348,7 +348,7 @@ void BattleScene::StartUI()
 		random_num[0] = rand() % 9 + 1;
 		random_num[1] = rand() % 9 + 1;
 		random_num[2] = rand() % 9 + 1;
-	} while (random_num[0] != random_num[1] != random_num[2]);
+	} while (random_num[0] == random_num[1] || random_num[0] == random_num[2] || random_num[1] == random_num[2]);
 
 	//Game_UI
 
