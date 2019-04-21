@@ -44,7 +44,7 @@ bool DynamicEntity::Start()
 		*point = App->map->MapToWorld((*point).x, (*point).y);
 		*point = { (*point).x + (int)(App->map->data.tile_width * 0.5), (*point).y + (int)(App->map->data.tile_height * 0.5) };
 	}
-	
+	explosion_fx = App->audio->LoadFx("audio/fx/Ambient_Sounds/Explosions/Explosion2.wav");
 	attack_fx = App->audio->LoadFx("audio/fx/Ambient_Sounds/Shots/One_shoot2.wav");
 	return true;
 }
@@ -266,6 +266,7 @@ void DynamicEntity::Attack()
 			break;
 		case AttackType::AOE:
 		{
+			App->audio->PlayFx(explosion_fx, 0);
 			std::list<Entity*> entities;
 			float radius = EXPLOSION_RANGE_TILES * App->map->data.tile_height;
 			App->entity_manager->GetEntitiesInArea(radius, objective->position, entities, faction);
