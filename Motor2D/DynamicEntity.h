@@ -72,6 +72,7 @@ protected:
 
 private:
 	uint attack_fx;
+	uint explosion_fx;
 };
 
 #endif // !_DYNAMIC_ENTITY_
