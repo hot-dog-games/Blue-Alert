@@ -74,14 +74,14 @@ bool StrategyMapScene::PreUpdate()
 
 // Called each loop iteration
 bool StrategyMapScene::Update(float dt)
-{
-	BROFILER_CATEGORY("SMUpdate", Profiler::Color::Green);
+{	
 	return true;
 }
 
 // Called each loop iteration
 bool StrategyMapScene::PostUpdate()
 {
+	BROFILER_CATEGORY("SMPostUpdate", Profiler::Color::Green);
 	bool ret = true;
 
 	App->map->Draw();

@@ -46,12 +46,6 @@ bool GameManager::CleanUp()
 	return true;
 }
 
-bool GameManager::PostUpdate()
-{
-	encounter_tree->UpdateTree();
-	return true;
-}
-
 EncounterTree* GameManager::GetEncounterTree()
 {
 	return encounter_tree;

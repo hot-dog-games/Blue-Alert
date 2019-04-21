@@ -15,8 +15,10 @@
 #include "UILabel.h"
 #include "UIScrollBar.h"
 #include "UIBar.h"
-#include "GUI.h"
+#include "Brofiler/Brofiler.h"
 #include "Stat.h"
+#include "GUI.h"
+
 
 Gui::Gui() : Module()
 {
@@ -54,7 +56,7 @@ bool Gui::Start()
 // Update all guis
 bool Gui::PreUpdate()
 {
-	//BROFILER_CATEGORY("UIPreUpdate", Profiler::Color::Magenta);
+	BROFILER_CATEGORY("UIPreUpdate", Profiler::Color::Magenta);
 	if (App->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN)
 		debug_draw = !debug_draw;
 
@@ -134,9 +136,8 @@ bool Gui::PreUpdate()
 
 bool Gui::Update(float dt)
 {
-	//scale stuff
 	
-	//BROFILER_CATEGORY("UIUpdate", Profiler::Color::Magenta);
+	BROFILER_CATEGORY("UIUpdate", Profiler::Color::Magenta);
 	for (std::list<UIElement*>::iterator element = elements.begin(); element != elements.end(); ++element)
 	{
 		if ((*element)->enabled)
@@ -151,7 +152,7 @@ bool Gui::Update(float dt)
 // Called after all Updates
 bool Gui::PostUpdate()
 {
-	//BROFILER_CATEGORY("UIPostUpdate", Profiler::Color::Magenta);
+	BROFILER_CATEGORY("UIPostUpdate", Profiler::Color::Magenta);
 	for (std::list<UIElement*>::iterator element = elements.begin(); element != elements.end(); ++element)
 	{
 		if ((*element)->enabled)

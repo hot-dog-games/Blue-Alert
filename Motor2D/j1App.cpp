@@ -21,6 +21,7 @@
 #include "Particles.h"
 #include "TransitionManager.h"
 #include "GameManager.h"
+#include "Brofiler/Brofiler.h"
 #include "Movement.h"
 #include "j1App.h"
 
@@ -217,7 +218,7 @@ void j1App::FinishUpdate()
 		frames_on_last_update, last_frame_ms);
 	App->win->SetTitle(title);
 
-
+	BROFILER_CATEGORY("WAIT", Profiler::Color::MediumVioletRed);
 	if (frame_cap)
 	{
 		float waiting_time = (1000 / frame_rate);
