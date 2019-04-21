@@ -48,3 +48,14 @@ void Deck::RemoveCard(uint position)
 {
 	cards[position] = nullptr;
 }
+
+Card * Deck::GetCard(EntityType type)
+{
+	for (int i = 0; i < MAX_CARDS; i++) {
+		if (cards[i] && cards[i]->type == type) 
+			return cards[i];
+		
+	}
+
+	return nullptr;
+}
