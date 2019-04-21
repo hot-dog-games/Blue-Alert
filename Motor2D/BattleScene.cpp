@@ -62,8 +62,9 @@ bool BattleScene::Start()
 	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterDeck()[3]));
 
 	allied_core = App->entity_manager->CreateCore(1, { 30,980 }, App->game_manager->GetPlayerDeck(), FACTION_RUSSIAN);
-	enemy_core = App->entity_manager->CreateCore(App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterType(), { 25,285 }, enemy_deck, FACTION_AMERICAN, true);
+	enemy_core = App->entity_manager->CreateCore(App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterType(), { 25,330 }, enemy_deck, FACTION_AMERICAN, true);
 	enemy_core->delete_deck = true;
+
 
 	//Initialize UI
 	StartUI();
@@ -178,6 +179,7 @@ bool BattleScene::Update(float dt)
 			App->audio->PlayFx(lose_fx, 0);
 			App->PauseGame();
 			App->gui->EnableElement((UIElement*)lose_panel);
+			App->gui->DisableInteractable((UIElement*)unit_panel);
 		}
 		else if (!enemy_core->IsAlive())
 		{
@@ -185,6 +187,7 @@ bool BattleScene::Update(float dt)
 			App->audio->PlayFx(win_fx, 0);
 			App->PauseGame();
 			App->gui->EnableElement((UIElement*)win_panel_one);
+			App->gui->DisableInteractable((UIElement*)unit_panel);
 		}
 	}
 	break;
@@ -345,7 +348,7 @@ void BattleScene::StartUI()
 		random_num[0] = rand() % 9 + 1;
 		random_num[1] = rand() % 9 + 1;
 		random_num[2] = rand() % 9 + 1;
-	} while (random_num[0] != random_num[1] != random_num[2]);
+	} while (random_num[0] == random_num[1] || random_num[0] == random_num[2] || random_num[1] == random_num[2]);
 
 	//Game_UI
 
@@ -356,6 +359,13 @@ void BattleScene::StartUI()
 	unit_button_four = App->gui->CreateButton({ 135, 445 }, App->gui->LoadUIButton(allied_core->GetCard(CN_FOURTH)->type, "button"), unit_panel);
 
 	energy_bar = App->gui->CreateBar({ 764, 358 }, { 601,0,16,274 }, allied_core->GetEnergy());
+
+	health_bar_image = App->gui->CreateImage({ 470,730 }, { 747,1215,353,28 });
+	enemy_health_bar_image = App->gui->CreateImage({ 40,20 }, { 747,1290,353,28 });
+	health_bar = App->gui->CreateBar({ 498,740 }, { 747,1244,223,16 }, allied_core->GetHealth(), BarType::BAR_HORITZONTAL);
+	enemy_health_bar = App->gui->CreateBar({ 68,30 }, { 747,1244,223,16 }, enemy_core->GetHealth(), BarType::BAR_HORITZONTAL);
+
+	App->gui->EnableInteractable((UIElement*)unit_panel);
 
 	// End Game Screen Win
 	SDL_Rect button_rect[3];

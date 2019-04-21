@@ -26,6 +26,7 @@ class TransitionManager;
 class BuffSourceManager;
 class GameManager;
 class Movement;
+class Particles;
 
 class j1App
 {
@@ -108,6 +109,7 @@ public:
 	BuffSourceManager* buff;
 	GameManager* game_manager;
 	Movement* movement;
+	Particles*	particles;
 
 private:
 

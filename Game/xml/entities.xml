@@ -1603,7 +1603,7 @@
           <frame x="163" y="0" width="52" height="58"/>
         </animation>
         <animation speed="5.0F" name="attacking_up_right">
-          <frame x="103" y="631" width="36" height="61"/>
+          <frame x="67" y="630" width="35" height="46"/>
         </animation>
         <animation speed="5.0F" name="attacking_up_left">
           <frame x="202" y="539" width="39" height="44"/>
@@ -1665,7 +1665,7 @@
           <frame x="163" y="0" width="52" height="58"/>
         </animation>
         <animation speed="5.0F" name="attacking_up_right">
-          <frame x="103" y="631" width="36" height="61"/>
+          <frame x="67" y="630" width="35" height="46"/>
         </animation>
         <animation speed="5.0F" name="attacking_up_left">
           <frame x="202" y="539" width="39" height="44"/>
@@ -1731,7 +1731,7 @@
           <frame x="163" y="0" width="52" height="58"/>
         </animation>
         <animation speed="5.0F" name="attacking_up_right">
-          <frame x="103" y="631" width="36" height="61"/>
+          <frame x="67" y="630" width="35" height="46"/>
         </animation>
         <animation speed="5.0F" name="attacking_up_left">
           <frame x="202" y="539" width="39" height="44"/>
@@ -1790,7 +1790,7 @@
           <frame x="0" y="0" width="53" height="27"/>
         </animation>
         <animation speed="5.0F" name="attacking_right">
-          <frame x="163" y="0" width="52" height="58"/>
+          <frame x="67" y="630" width="35" height="46"/>
         </animation>
         <animation speed="5.0F" name="attacking_up_right">
           <frame x="103" y="631" width="36" height="61"/>
@@ -1859,7 +1859,7 @@
           <frame x="163" y="0" width="52" height="58"/>
         </animation>
         <animation speed="5.0F" name="attacking_up_right">
-          <frame x="103" y="631" width="36" height="61"/>
+          <frame x="67" y="630" width="35" height="46"/>
         </animation>
         <animation speed="5.0F" name="attacking_up_left">
           <frame x="202" y="539" width="39" height="44"/>
@@ -1918,7 +1918,7 @@
           <frame x="0" y="0" width="53" height="27"/>
         </animation>
         <animation speed="5.0F" name="attacking_right">
-          <frame x="163" y="0" width="52" height="58"/>
+          <frame x="67" y="630" width="35" height="46"/>
         </animation>
         <animation speed="5.0F" name="attacking_up_right">
           <frame x="103" y="631" width="36" height="61"/>

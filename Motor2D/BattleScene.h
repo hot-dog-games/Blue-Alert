@@ -68,6 +68,10 @@ private:
 	UIButton*		unit_button_three;
 	UIButton*		unit_button_four;
 	UIBar*			energy_bar;
+	UIBar*			health_bar;
+	UIImage*		health_bar_image;
+	UIBar*			enemy_health_bar;
+	UIImage*		enemy_health_bar_image;
 
 	UIImage*		win_panel_one;
 	UIImage*		win_panel_two;

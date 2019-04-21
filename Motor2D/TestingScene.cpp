@@ -76,7 +76,7 @@ bool TestingScene::Start()
 	test_deck->AddCard(App->card_manager->CreateCard(EntityType::HARRIER));
 
 	test_core = App->entity_manager->CreateCore(1, { 30,980 }, test_deck, FACTION_RUSSIAN);
-	test_enemy_core = App->entity_manager->CreateCore(13, { 25,285 }, enemy_deck, FACTION_AMERICAN, true);
+	test_enemy_core = App->entity_manager->CreateCore(13, { 25,330 }, enemy_deck, FACTION_AMERICAN);
 
 	do {
 		random_num[0] = rand() % 9 + 1;
@@ -189,6 +189,25 @@ bool TestingScene::Update(float dt)
 			}
 		}
 
+		if (App->input->GetKey(SDL_SCANCODE_5) == KEY_DOWN)
+		{
+			test_enemy_core->UseCard(CN_FIRST, { float(p.x),float(p.y) });
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_6) == KEY_DOWN)
+		{
+			test_enemy_core->UseCard(CN_SECOND, { float(p.x),float(p.y) });
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_7) == KEY_DOWN)
+		{
+			test_enemy_core->UseCard(CN_THIRD, { float(p.x),float(p.y) });
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_8) == KEY_DOWN)
+		{
+			test_enemy_core->UseCard(CN_FOURTH, { float(p.x),float(p.y) });
+		}
 
 		if (!test_core->IsAlive())
 		{
@@ -200,6 +219,7 @@ bool TestingScene::Update(float dt)
 			state = BattleSceneState::WIN;
 			App->PauseGame();
 			App->gui->EnableElement((UIElement*)win_panel_one);
+			App->gui->DisableInteractable((UIElement*)unit_panel);
 		}
 	}
 		break;
@@ -337,6 +357,9 @@ void TestingScene::StartUI()
 
 	energy_bar = App->gui->CreateBar({ 764, 358 }, { 601,0,16,274 }, test_core->GetEnergy());
 
+	health_bar_image = App->gui->CreateImage({ 470,730 }, { 747,1215,353,28 });
+	health_bar = App->gui->CreateBar({ 498,740 }, { 747,1244,223,16 }, test_core->GetHealth(), BarType::BAR_HORITZONTAL);
+
 	// End Game Screen
 	SDL_Rect button_rect[3];
 	button_rect[0] = { 221,533,220,51 };
@@ -358,6 +381,7 @@ void TestingScene::StartUI()
 
 	App->gui->DisableElement((UIElement*)win_panel_one);
 	App->gui->DisableElement((UIElement*)win_panel_two);
+	App->gui->EnableInteractable((UIElement*)unit_panel);
 
 
 }

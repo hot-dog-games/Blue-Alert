@@ -24,6 +24,7 @@ public:
 	Card* GetCard(int card_num) const;
 
 	Stat* GetEnergy() const;
+	Stat* GetHealth() const;
 
 	bool delete_deck = false;
 

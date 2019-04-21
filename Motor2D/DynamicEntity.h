@@ -37,11 +37,16 @@ public:
 	virtual bool PostUpdate();
 	virtual bool CleanUp();
 	virtual bool Start();
+
 	SingleUnit* GetSingleUnit();
 	void SetUnitDirection(EntiyDirection unitDirection);
 	EntiyDirection GetUnitDirection();
 	void SetUnitDirectionByValue(fPoint unitDirection);
 	fPoint GetUnitDirectionByValue() const;
+	virtual void DecreaseLife(float damage, bool piercing = false);
+
+public:
+	Card * entity_card = nullptr;
 
 protected:
 	void CalcDirection();
@@ -59,12 +64,13 @@ public:
 	Card * entity_card = nullptr;
 
 protected:
+
 	DynamicState state = DYNAMIC_IDLE;
 	EntiyDirection direction = UP;
 	fPoint direction_vector = { 1.0f, 1.0f };
 	SingleUnit * singleUnit = nullptr;
 
-	const float SNAP_RANGE = 5.0f;
+	const float SNAP_RANGE = 3.0f;
 
 	Entity* objective = nullptr;
 	PerfTimer attack_timer;
@@ -79,6 +85,7 @@ protected:
 
 private:
 	uint attack_fx;
+	uint explosion_fx;
 };
 
 

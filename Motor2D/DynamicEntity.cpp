@@ -6,10 +6,12 @@
 #include "Pathfinding.h"
 #include "Stat.h"
 #include "Map.h"
+#include "Particles.h"
 #include "DynamicEntity.h"
 #include "Movement.h"
 
 const float DELETE_TIME = 5.0f;
+const int EXPLOSION_RANGE_TILES = 2;
 
 DynamicEntity::DynamicEntity()
 {
@@ -45,7 +47,7 @@ bool DynamicEntity::Start()
 		*point = App->map->MapToWorld((*point).x, (*point).y);
 		*point = { (*point).x + (int)(App->map->data.tile_width * 0.5), (*point).y + (int)(App->map->data.tile_height * 0.5) };
 	}
-	
+	explosion_fx = App->audio->LoadFx("audio/fx/Ambient_Sounds/Explosions/Explosion2.wav");
 	attack_fx = App->audio->LoadFx("audio/fx/Ambient_Sounds/Shots/One_shoot2.wav");
 	return true;
 }
@@ -151,7 +153,7 @@ bool DynamicEntity::Update(float dt)
 
 void DynamicEntity::CalcDirection()
 {
-	if (direction_vector.x > 0)
+	if (direction_vector.x > 0.3f)
 	{
 		direction = RIGHT;
 		if (direction_vector.y > 0)
@@ -163,7 +165,7 @@ void DynamicEntity::CalcDirection()
 			direction = UP_RIGHT;
 		}
 	}
-	else if (direction_vector.x < 0)
+	else if (direction_vector.x < -0.3f)
 	{
 		direction = LEFT;
 		if (direction_vector.y > 0)
@@ -278,8 +280,38 @@ void DynamicEntity::Attack()
 {
 	if (attack_timer.ReadMs() >= SECOND_MS / entity_card->info.stats.find("attack_speed")->second->GetValue() )
 	{
-		App->audio->PlayFx(attack_fx, 0);
-		objective->DecreaseLife(entity_card->info.stats.find("damage")->second->GetValue());
+		float attack = entity_card->info.stats.find("damage")->second->GetValue();
+		switch (entity_card->info.attack_type)
+		{
+		case AttackType::BASIC:
+			objective->DecreaseLife(attack);
+			App->particles->CreateParticle(ParticleType::ATTACK_BASIC_SHOT, { position.x, position.y - current_frame.h * 0.5f }, 
+				{ objective->position.x, objective->position.y - objective->current_frame.h * 0.5f });
+			App->audio->PlayFx(attack_fx, 0);
+			break;
+		case AttackType::AOE:
+		{
+			App->audio->PlayFx(explosion_fx, 0);
+			std::list<Entity*> entities;
+			float radius = EXPLOSION_RANGE_TILES * App->map->data.tile_height;
+			App->entity_manager->GetEntitiesInArea(radius, objective->position, entities, faction);
+
+			for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
+			{
+				(*entity)->DecreaseLife(attack);
+			}
+			App->particles->CreateParticle(ParticleType::ATTACK_EXPLOSION, objective->position);
+		}
+			break;
+		case AttackType::PIERCING:
+			objective->DecreaseLife(attack, true);
+			App->particles->CreateParticle(ParticleType::ATTACK_BASIC_SHOT, { position.x, position.y - current_frame.h * 0.5f },
+				{ objective->position.x, objective->position.y - objective->current_frame.h * 0.5f });
+			App->audio->PlayFx(attack_fx, 0);
+			break;
+		default:
+			break;
+		}
 		attack_timer.Start();
 	}
 }
@@ -305,6 +337,25 @@ void DynamicEntity::SetUnitDirectionByValue(fPoint unitDirection)
 fPoint DynamicEntity::GetUnitDirectionByValue() const
 {
 	return fPoint();
+}
+void DynamicEntity::DecreaseLife(float damage, bool piercing)
+{
+	float defense = entity_card->info.stats.find("defense")->second->GetValue();
+	float damage_received = CalculateDamage(damage, defense);
+
+	if (entity_card->info.armored)
+	{
+		if (piercing)
+			damage_received *= 1.25f;
+		else
+			damage_received *= 0.75f;
+	}
+
+	LOG("ME HAN PEGAO %f", damage_received);
+
+	stats.find("health")->second->DecreaseStat(damage_received);
+	if (stats.find("health")->second->GetValue() <= 0)
+		Die();
 }
 
 void DynamicEntity::Die()
