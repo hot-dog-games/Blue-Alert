@@ -360,10 +360,10 @@ void BattleScene::StartUI()
 
 	energy_bar = App->gui->CreateBar({ 764, 358 }, { 601,0,16,274 }, allied_core->GetEnergy());
 
-	health_bar_image = App->gui->CreateImage({ 470,730 }, { 26,1399,252,28 });
-	enemy_health_bar_image = App->gui->CreateImage({ 40,20 }, { 26,1474,252,28 });
-	health_bar = App->gui->CreateBar({ 498,740 }, { 26,1428,223,16 }, allied_core->GetHealth(), BarType::BAR_HORITZONTAL);
-	enemy_health_bar = App->gui->CreateBar({ 68,30 }, { 26,1428,223,16 }, enemy_core->GetHealth(), BarType::BAR_HORITZONTAL);
+	health_bar_image = App->gui->CreateImage({ 470,730 }, { 25,1399,253,28 });
+	enemy_health_bar_image = App->gui->CreateImage({ 40,20 }, { 25,1474,253,28 });
+	health_bar = App->gui->CreateBar({ 498,740 }, { 25,1428,224,16 }, allied_core->GetHealth(), BarType::BAR_HORITZONTAL);
+	enemy_health_bar = App->gui->CreateBar({ 68,30 }, { 25,1428,224,16 }, enemy_core->GetHealth(), BarType::BAR_HORITZONTAL);
 
 	App->gui->EnableInteractable((UIElement*)unit_panel);
 
