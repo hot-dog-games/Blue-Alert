@@ -32,13 +32,14 @@ public:
 	virtual bool CleanUp() { return true; };
 	virtual bool Start() { return true; };
 
-	void DecreaseLife(float damage);
+	virtual void DecreaseLife(float damage, bool piercing = false);
 	void SetDebug(bool value);
 	bool IsAlive();
 
 protected:
 	void LoadAnimations(pugi::xml_node anim_config);
 	void LoadSprite(pugi::xml_node node);
+	float CalculateDamage(float attack, float defense);
 	virtual void Die() {};
 	virtual void Draw();
 

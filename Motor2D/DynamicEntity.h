@@ -36,7 +36,10 @@ public:
 	virtual bool PostUpdate();
 	virtual bool CleanUp();
 	virtual bool Start();
+	virtual void DecreaseLife(float damage, bool piercing = false);
 
+public:
+	Card * entity_card = nullptr;
 
 protected:
 	void CalcDirection();
@@ -50,7 +53,7 @@ protected:
 	bool CheckEnemies();
 
 protected:
-	Card * entity_card = nullptr;
+
 	DynamicState state = DYNAMIC_IDLE;
 	EntiyDirection direction = UP;
 	fPoint direction_vector = { 1.0f, 1.0f };
