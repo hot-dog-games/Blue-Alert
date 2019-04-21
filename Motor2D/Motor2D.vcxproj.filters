@@ -148,6 +148,7 @@
     <ClCompile Include="Particle.cpp">
       <Filter>Engine\Particles</Filter>
     </ClCompile>
+    <ClCompile Include="ProjectileParticle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
@@ -312,6 +313,7 @@
     <ClInclude Include="Particle.h">
       <Filter>Engine\Particles</Filter>
     </ClInclude>
+    <ClInclude Include="ProjectileParticle.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

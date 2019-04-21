@@ -261,6 +261,8 @@ void DynamicEntity::Attack()
 		{
 		case AttackType::BASIC:
 			objective->DecreaseLife(attack);
+			App->particles->CreateParticle(ParticleType::ATTACK_BASIC_SHOT, { position.x, position.y - current_frame.h * 0.5f }, 
+				{ objective->position.x, objective->position.y - objective->current_frame.h * 0.5f });
 			break;
 		case AttackType::AOE:
 		{

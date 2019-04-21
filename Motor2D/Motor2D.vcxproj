@@ -106,6 +106,7 @@
     <ClCompile Include="Pathfinding.cpp" />
     <ClCompile Include="p2Log.cpp" />
     <ClCompile Include="PerfTimer.cpp" />
+    <ClCompile Include="ProjectileParticle.cpp" />
     <ClCompile Include="Render.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Stat.cpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="Particles.h" />
     <ClInclude Include="Pathfinding.h" />
     <ClInclude Include="PerfTimer.h" />
+    <ClInclude Include="ProjectileParticle.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Audio.h" />
     <ClInclude Include="Input.h" />
