@@ -74,6 +74,15 @@ public:
 		return true;
 	}
 
+	virtual bool Pause()
+	{
+		return true;
+	}
+
+	virtual bool Resume()
+	{
+		return true;
+	}
 public:
 
 	std::string	name;

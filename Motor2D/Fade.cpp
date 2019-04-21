@@ -26,27 +26,32 @@ void Fade::Entering()
 {
 	Transition::Entering();
 
-	float normalized_alpha = floor(current_time->ReadSec()*(255.0F / transition_time));
+	float percent = current_time->ReadSec()*(1 / transition_time);
+
+	float normalized_alpha = floor(LerpValue(percent, 0, 255));
 	DrawFadeRect(normalized_alpha);
 }
 
 void Fade::Action()
 {
-	Transition::Action();
-
 	DrawFadeRect(255.0F);
 
 	if (is_scene_change)
 	{
 		App->scene_manager->ChangeScene(scene_to_change);
 	}
+
+	Transition::Action();
 }
 
 void Fade::Exiting()
 {
 	Transition::Exiting();
 
-	float normalized_alpha = floor((transition_time - current_time->ReadSec())*(255.0F / transition_time));
+	float percent = current_time->ReadSec()*(1 / transition_time);
+
+	float normalized_alpha = floor(LerpValue(percent, 255, 0));
+
 	DrawFadeRect(normalized_alpha);
 }
 

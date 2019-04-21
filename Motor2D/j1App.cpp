@@ -1,5 +1,6 @@
 #include <iostream> 
 #include <sstream> 
+#include <time.h>
 
 #include "p2Defs.h"
 #include "p2Log.h"
@@ -89,6 +90,8 @@ void j1App::AddModule(Module* module)
 // Called before render is available
 bool j1App::Awake()
 {
+	srand(time(0));
+
 	pugi::xml_document	config_file;
 	pugi::xml_node		config;
 	pugi::xml_node		app_config;
@@ -104,7 +107,7 @@ bool j1App::Awake()
 		app_config = config.child("app");
 		title = app_config.child("title").child_value();
 		organization = app_config.child("organization").child_value();
-		frame_rate = app_config.attribute("framerate_cap").as_uint();
+		frame_rate = app_config.attribute("framerate_cap").as_float();
 	}
 
 	if(ret == true)
@@ -178,16 +181,10 @@ void j1App::PrepareUpdate()
 {
 	last_sec_frame_count++;
 
-	if (!paused)
-	{
-		dt = frame_time.ReadSec();
-		if (dt > (float)frame_rate / 1000)
-			dt = (float)frame_rate / 1000;
-	}
-	else
-	{
-		dt = 0;
-	}
+	dt = frame_time.ReadSec();
+	if (dt > frame_rate / 1000)
+		dt = frame_rate / 1000;
+
 	frame_time.Start();
 }
 
@@ -335,11 +332,19 @@ const char* j1App::GetOrganization() const
 void j1App::PauseGame()
 {
 	paused = true;
+	for (std::list<Module*>::iterator item = modules.begin(); item != modules.end(); ++item)
+	{
+		(*item)->Pause();
+	}
 }
 
 void j1App::ResumeGame()
 {
 	paused = false;
+	for (std::list<Module*>::iterator item = modules.begin(); item != modules.end(); ++item)
+	{
+		(*item)->Resume();
+	}
 }
 
 // Load / Save
@@ -437,4 +442,9 @@ bool j1App::SavegameNow() const
 	data.reset();
 	want_to_save = false;
 	return ret;
+}
+
+float j1App::GetFrameRate()
+{
+	return frame_rate;
 }

@@ -1,6 +1,7 @@
 #ifndef __j1FONTS_H__
 #define __j1FONTS_H__
 
+#include <map>
 #include "Module.h"
 #include "SDL\include\SDL_pixels.h"
 
@@ -34,7 +35,7 @@ public:
 
 public:
 
-	std::list<_TTF_Font*>	fonts;
+	std::map<std::string, _TTF_Font*>	fonts;
 	_TTF_Font*			default;
 };
 

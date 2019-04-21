@@ -20,7 +20,6 @@ Entity::Entity(pugi::xml_node entity_node, fPoint position, Faction faction)
 	this->faction = faction;
 	this->position = position;
 
-	entity_node = entity_node.find_child_by_attribute("faction", std::to_string((int)faction).c_str());
 	LoadSprite(entity_node);
 	LoadAnimations(entity_node);
 }
@@ -39,6 +38,10 @@ void Entity::DecreaseLife(float damage)
 		Die();
 
 	LOG("current life is: %f", stats.find("health")->second->GetValue());
+}
+void Entity::SetDebug(bool value)
+{
+	debug = value;
 }
 bool Entity::IsAlive()
 {
@@ -63,6 +66,7 @@ void Entity::LoadAnimations(pugi::xml_node anim_config)
 			anim.PushBack({ frame.attribute("x").as_int(), frame.attribute("y").as_int(), frame.attribute("width").as_int(), frame.attribute("height").as_int() });
 		}
 		anim.speed = animation.attribute("speed").as_float();
+		anim.base_speed = anim.speed;
 		anim.loop = animation.attribute("loop").as_bool(true);
 		std::string animation_name = animation.attribute("name").as_string();
 

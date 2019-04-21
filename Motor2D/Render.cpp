@@ -75,6 +75,7 @@ bool Render::Update(float dt)
 bool Render::PostUpdate()
 {
 	SDL_SetRenderDrawColor(renderer, background.r, background.g, background.g, background.a);
+	SDL_RenderSetViewport(renderer, &viewport);
 	SDL_RenderPresent(renderer);
 	return true;
 }
@@ -129,6 +130,17 @@ iPoint Render::ScreenToWorld(int x, int y) const
 
 	ret.x = (x - camera.x / scale);
 	ret.y = (y - camera.y / scale);
+
+	return ret;
+}
+
+iPoint Render::WorldToScreen(int x, int y) const
+{
+	iPoint ret;
+	int scale = App->win->GetScale();
+
+	ret.x = (x + camera.x * scale);
+	ret.y = (y + camera.y * scale);
 
 	return ret;
 }

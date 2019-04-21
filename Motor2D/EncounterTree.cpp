@@ -2,7 +2,9 @@
 #include "GUI.h"
 #include "TransitionManager.h"
 #include "EntityManager.h"
+#include "SceneManager.h"
 #include "Render.h"
+#include "Map.h"
 #include "StrategyBuilding.h"
 #include "EncounterTree.h"
 
@@ -21,34 +23,24 @@ EncounterTree::~EncounterTree()
 
 EncounterTree * EncounterTree::CreateTree()
 {
-	LoadDocument();
+	LoadDocuments();
 
-	// 0 - start, 1 - land, 2 - aerial, 3 - infantry
+	for (int i = 0; i < map01_nodes.attribute("size").as_int(); i++)
+	{
+		map_encounters.push_back(new EncounterNode(i));
+	}
 
-	EncounterNode* start_encounter = new EncounterNode();
-	start_encounter->SetPosition({ 500, 700 });
-	start_encounter->LoadEncounterInfo(GetXmlEncounterNodeById(0)); //Start node creation
-	map_encounters.push_back(start_encounter);
-
-	EncounterNode* infantry_encounter = new EncounterNode();
-	start_encounter->AddChild(infantry_encounter);
-	infantry_encounter->LoadEncounterInfo(GetXmlEncounterNodeById(3));
-	map_encounters.push_back(infantry_encounter);
-
-	EncounterNode* land_encounter = new EncounterNode();
-	infantry_encounter->AddChild(land_encounter);
-	land_encounter->LoadEncounterInfo(GetXmlEncounterNodeById(1));
-	map_encounters.push_back(land_encounter);
-
-	EncounterNode* aerial_encounter_02 = new EncounterNode();
-	infantry_encounter->AddChild(aerial_encounter_02);
-	aerial_encounter_02->LoadEncounterInfo(GetXmlEncounterNodeById(2));
-	map_encounters.push_back(aerial_encounter_02);
-
-	EncounterNode* aerial_encounter = new EncounterNode();
-	start_encounter->AddChild(aerial_encounter);
-	aerial_encounter->LoadEncounterInfo(GetXmlEncounterNodeById(2)); 
-	map_encounters.push_back(aerial_encounter);
+	for (int i = 0; i < map_encounters.size(); i++)
+	{
+		pugi::xml_node node = map01_nodes.find_child_by_attribute("id", std::to_string((int)i).c_str());
+		map_encounters[i]->SetPosition({ node.attribute("x").as_float(),  node.attribute("y").as_float() });
+		map_encounters[i]->SetEncounterType(node.attribute("type").as_int());
+		for (pugi::xml_node child = node.first_child(); child; child = child.next_sibling())
+		{
+			map_encounters[i]->AddChild(map_encounters[child.attribute("id").as_int()]);
+		}
+		map_encounters[i]->FillEncounterDeck();
+	}
 
 
 	LOG("NODES", map_encounters.size());
@@ -56,7 +48,7 @@ EncounterTree * EncounterTree::CreateTree()
 	return this;
 }
 
-bool EncounterTree::LoadDocument()
+bool EncounterTree::LoadDocuments()
 {
 	pugi::xml_parse_result result = encounters.load_file("xml/encounters.xml");
 
@@ -64,6 +56,13 @@ bool EncounterTree::LoadDocument()
 		LOG("Could not load card xml file. pugi error: %s", result.description());
 	else
 		encounter_tree = encounters.child("encounter_tree");
+
+	result = nodes_01.load_file("xml/map01_nodes.xml");
+
+	if (result == NULL)
+		LOG("Could not load card xml file. pugi error: %s", result.description());
+	else
+		map01_nodes = nodes_01.child("map01_nodes");
 
 	return true;
 }
@@ -95,13 +94,17 @@ void EncounterTree::DrawTreeLines()
 			{
 				for (int i = 0; i < n->GetChildren().size(); i++)
 				{
-					App->render->DrawLine(n->GetPosition().x, n->GetPosition().y, n->GetChildren()[i]->GetPosition().x, n->GetChildren()[i]->GetPosition().y, 255, 0, 0);
+					iPoint parent_world_position = App->map->MapToWorld(n->GetPosition().x, n->GetPosition().y);
+					iPoint child_world_position = App->map->MapToWorld(n->GetChildren()[i]->GetPosition().x, n->GetChildren()[i]->GetPosition().y);
+					App->render->DrawLine(parent_world_position.x, parent_world_position.y, child_world_position.x, child_world_position.y, 255, 0, 0);
 				}
 			}
 			else {
 				for (int i = 0; i < n->GetChildren().size(); i++)
 				{
-					App->render->DrawLine(n->GetPosition().x, n->GetPosition().y, n->GetChildren()[i]->GetPosition().x, n->GetChildren()[i]->GetPosition().y, 0, 255, 0);
+					iPoint parent_world_position = App->map->MapToWorld(n->GetPosition().x, n->GetPosition().y);
+					iPoint child_world_position = App->map->MapToWorld(n->GetChildren()[i]->GetPosition().x, n->GetChildren()[i]->GetPosition().y);
+					App->render->DrawLine(parent_world_position.x, parent_world_position.y, child_world_position.x, child_world_position.y, 0, 255, 0);
 				}
 			}
 		}
@@ -110,14 +113,14 @@ void EncounterTree::DrawTreeLines()
 
 void EncounterTree::UpdateTreeState()
 {
-	if(!current_node)SetCurrentNode(map_encounters.front());
+	if (!current_node) {
+		SetCurrentNode(map_encounters.front());
+	}
 
 	for (int i = 0; i < current_node->GetChildren().size(); i++)
 	{
 		current_node->GetChildren()[i]->GetEntity()->SetInRange(true);
 	}
-
-	current_node->GetEntity()->SetInRange(true);
 }
 
 void EncounterTree::CreateAllNodes()
@@ -145,10 +148,28 @@ void EncounterTree::CleanTree()
 {
 	for each (EncounterNode* en in map_encounters)
 	{
-		//if(en->GetEntity() != nullptr)App->entity_manager->DeleteEntity((Entity*)en->GetEntity());
-		//App->gui->DeleteElement((UIElement*)en->GetButton());
 		delete en;
 	}
 
+	map_encounters.clear();
+
 	delete this;
+}
+
+void EncounterTree::EntityClicked(StrategyBuilding * entity)
+{
+	SetCurrentNodeByEntity(entity);
+	App->gui->DisableUI();
+	App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::COMBAT, White);
+	App->transition_manager->CreateZoomTransition(2.0f);
+	App->transition_manager->CreateCameraTranslation(2.0f, { (int)entity->position.x, (int)entity->position.y });
+
+}
+
+void EncounterTree::SetCurrentNodeByEntity(StrategyBuilding * entity)
+{
+	for each (EncounterNode* en in map_encounters)
+	{
+		if (en->GetEntity() == entity) SetCurrentNode(en);
+	}
 }

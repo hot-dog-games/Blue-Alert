@@ -1,8 +1,11 @@
-#pragma once
+#ifndef _STRATEGY_BUILDING_H_
+#define _STRATEGY_BUILDING_H_
+
 #include "StaticEntity.h"
 
-class StrategyBuilding :
-	public StaticEntity
+class EncounterNode;
+
+class StrategyBuilding : public StaticEntity
 {
 public:
 	StrategyBuilding(pugi::xml_node entity_node, fPoint position, Faction faction);
@@ -14,8 +17,6 @@ public:
 
 	bool in_range = false;
 	bool im_current_building = false;
-
-private:
-
 };
 
+#endif

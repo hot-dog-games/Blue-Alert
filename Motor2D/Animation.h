@@ -10,6 +10,7 @@ public:
 	bool loop = true;
 	bool hold = false;
 	float speed = 1.0f;
+	float base_speed = 1.0f;
 	SDL_Rect frames[MAX_FRAMES];
 	const int GetFrameAmount() const
 	{
@@ -29,7 +30,7 @@ public:
 
 	bool isDone()
 	{
-		if (current_frame == last_frame - 1) return true;
+		if (current_frame >= last_frame - 1) return true;
 		else return false;
 	}
 

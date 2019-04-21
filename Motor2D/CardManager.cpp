@@ -35,7 +35,7 @@ bool CardManager::PostUpdate()
 			{
 				App->tex->UnLoad((*card)->sprite_path);
 				delete (*card);
-				card = cards.erase(card);
+				cards.erase(card);
 			}				
 		}
 
@@ -73,7 +73,7 @@ Card* CardManager::CreateCard(EntityType type)
 	card->sprite_path = card_node.child("sprite").child_value();
 
 	LoadCardStats(card, card_node.child("stats"));
-	LoadCardButton(card, card_node.child("button"));
+	LoadCardUpgrades(card, card_node.child("upgrades"));
 	cards.push_back(card);
 
 	return card;
@@ -103,23 +103,23 @@ void CardManager::LoadCardStats(Card* card, pugi::xml_node stats_node)
 	card->info.armored = stats_node.attribute("armored").as_bool();
 }
 
-void CardManager::LoadCardButton(Card * card, pugi::xml_node button_node)
+void CardManager::LoadCardUpgrades(Card * card, pugi::xml_node upgrades_node)
 {
-	uint anim_num = 0;
-	for (pugi::xml_node animation = button_node.child("frame"); animation; animation = animation.next_sibling())
-	{
-		
-		card->button.anim[anim_num].x = animation.attribute("x").as_uint();
-		card->button.anim[anim_num].y = animation.attribute("y").as_uint();
-		card->button.anim[anim_num].w = animation.attribute("width").as_uint();
-		card->button.anim[anim_num].h = animation.attribute("height").as_uint();
-
-		anim_num++;
-	}
-
-	card->button.drag.x = button_node.child("unit_drag").attribute("x").as_uint();
-	card->button.drag.y = button_node.child("unit_drag").attribute("y").as_uint();
-	card->button.drag.w = button_node.child("unit_drag").attribute("width").as_uint();
-	card->button.drag.h = button_node.child("unit_drag").attribute("height").as_uint();
+	card->info.scaling.health_upgrade = upgrades_node.find_child_by_attribute("stat", "health").attribute("value").as_uint();
+	card->info.scaling.attack_damage_upgrade = upgrades_node.find_child_by_attribute("stat", "damage").attribute("value").as_uint();
+	card->info.scaling.defense_upgrade = upgrades_node.find_child_by_attribute("stat", "defense").attribute("value").as_uint();
+	card->info.scaling.movement_speed_upgrade = upgrades_node.find_child_by_attribute("stat", "movement").attribute("value").as_uint();
+	card->info.scaling.attack_speed_upgrade = upgrades_node.find_child_by_attribute("stat", "attack_speed").attribute("value").as_uint();
+	card->info.scaling.range_upgrade = upgrades_node.find_child_by_attribute("stat", "range").attribute("value").as_uint();
 }
 
+void Card::Upgrade()
+{
+	level++;
+	info.stats.find("health")->second->IncreaseMaxValue(info.scaling.health_upgrade);
+	info.stats.find("damage")->second->IncreaseMaxValue(info.scaling.attack_damage_upgrade);
+	info.stats.find("defense")->second->IncreaseMaxValue(info.scaling.defense_upgrade);
+	info.stats.find("movement")->second->IncreaseMaxValue(info.scaling.movement_speed_upgrade);
+	info.stats.find("attack_speed")->second->IncreaseMaxValue(info.scaling.attack_speed_upgrade);
+	info.stats.find("range")->second->IncreaseMaxValue(info.scaling.range_upgrade);
+}

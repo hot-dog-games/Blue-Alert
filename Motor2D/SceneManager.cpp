@@ -2,8 +2,9 @@
 #include "EntityManager.h"
 #include "GUI.h"
 #include "TestingScene.h"
-#include "MapMenuScene.h"
-#include "StrategyMap.h"
+#include "StrategyMapScene.h"
+#include "BattleScene.h"
+#include "Map.h"
 #include "SceneManager.h"
 
 
@@ -21,7 +22,7 @@ SceneManager::~SceneManager()
 
 bool SceneManager::Awake(pugi::xml_node &)
 {
-	current_scene = new StrategyMap();
+	current_scene = new StrategyMapScene();
 	return true;
 }
 
@@ -67,12 +68,27 @@ bool SceneManager::Save(pugi::xml_node &xml) const
 	return true;
 }
 
+bool SceneManager::Pause()
+{
+	if (current_scene)
+		current_scene->Pause();
+	return true;
+}
+
+bool SceneManager::Resume()
+{
+	if (current_scene)
+		current_scene->Resume();
+	return true;
+}
+
 //Scene unloads current scene, then creates and loads new scene.
 void SceneManager::ChangeScene(int new_scene)
 {
 	current_scene->CleanUp();
 	App->entity_manager->CleanUp();
 	App->gui->CleanUp();
+	App->map->CleanUp();
 	delete current_scene;
 	current_scene = nullptr;
 
@@ -81,9 +97,10 @@ void SceneManager::ChangeScene(int new_scene)
 	case MENU:
 		break;
 	case MAP:
-		current_scene = new StrategyMap();
+		current_scene = new StrategyMapScene();
 		break;
 	case COMBAT:
+		current_scene = new BattleScene();
 		break;
 	case TESTING:
 		current_scene = new TestingScene();

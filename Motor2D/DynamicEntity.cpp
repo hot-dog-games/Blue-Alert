@@ -1,6 +1,7 @@
 #include "p2Log.h"
 #include "j1App.h"
 #include "Render.h"
+#include "Audio.h"
 #include "CardManager.h"
 #include "Pathfinding.h"
 #include "Stat.h"
@@ -8,7 +9,7 @@
 #include "DynamicEntity.h"
 #include "Movement.h"
 
-
+const float DELETE_TIME = 5.0f;
 
 DynamicEntity::DynamicEntity()
 {
@@ -44,7 +45,8 @@ bool DynamicEntity::Start()
 		*point = App->map->MapToWorld((*point).x, (*point).y);
 		*point = { (*point).x + (int)(App->map->data.tile_width * 0.5), (*point).y + (int)(App->map->data.tile_height * 0.5) };
 	}
-
+	
+	attack_fx = App->audio->LoadFx("audio/fx/Ambient_Sounds/Shots/One_shoot2.wav");
 	return true;
 }
 
@@ -61,13 +63,14 @@ bool DynamicEntity::PreUpdate()
 			CheckDestination();
 		break;
 	case DYNAMIC_ATTACKING:
-		if (!objective->IsAlive())
+		if (!objective->IsAlive() && current_animation->isDone())
 		{
 			objective = nullptr;
-			if (CheckEnemies())
-				state = DYNAMIC_ATTACKING;
-			else 
+			if (!CheckEnemies())
+			{
 				state = DYNAMIC_MOVING;
+				CheckDestination();
+			}			
 		}
 		else
 		{
@@ -96,16 +99,22 @@ bool DynamicEntity::PreUpdate()
 bool DynamicEntity::PostUpdate()
 {
 	Draw();
-	//Range debug 
-	App->render->DrawCircle(position.x, position.y, entity_card->info.stats.find("range")->second->GetValue()*App->map->data.tile_height, 255, 0, 0);
-	
-	App->render->DrawQuad(pivot, 255, 0, 0);
+
+	if (debug)
+	{
+		//Range debug 
+		App->render->DrawCircle(position.x, position.y, entity_card->info.stats.find("range")->second->GetValue()*App->map->data.tile_height, 255, 0, 0);
+		App->render->DrawQuad(pivot, 255, 0, 0);
+	}
 
 	return true;
 }
 
 bool DynamicEntity::Update(float dt)
 {
+	if (current_animation)
+		current_frame = current_animation->GetCurrentFrame(dt);
+
 	switch (state)
 	{
 		case DYNAMIC_IDLE:
@@ -128,10 +137,14 @@ bool DynamicEntity::Update(float dt)
 
 		}
 		break;
+		case DYNAMIC_DEAD:
+			dead_timer += dt;
+			if (dead_timer >= DELETE_TIME)
+			{
+				App->entity_manager->DeleteEntity(this);
+			}
+		break;
 	}
-
-	if (current_animation)
-		current_frame = current_animation->GetCurrentFrame(dt);
 
 	return true;
 }
@@ -228,7 +241,7 @@ bool DynamicEntity::CheckEnemies()
 	float distance = 10000.0f;
 	App->entity_manager->FindClosestEnemy(position, faction, closest_entity, distance);
 
-	if (distance <= entity_card->info.stats.find("range")->second->GetValue()* App->map->data.tile_height)
+	if (closest_entity && distance <= entity_card->info.stats.find("range")->second->GetValue()* App->map->data.tile_height)
 	{
 		objective = closest_entity;
 		fPoint objective_direction = { objective->position.x - position.x, objective->position.y - position.y };
@@ -265,6 +278,7 @@ void DynamicEntity::Attack()
 {
 	if (attack_timer.ReadMs() >= SECOND_MS / entity_card->info.stats.find("attack_speed")->second->GetValue() )
 	{
+		App->audio->PlayFx(attack_fx, 0);
 		objective->DecreaseLife(entity_card->info.stats.find("damage")->second->GetValue());
 		attack_timer.Start();
 	}
@@ -366,6 +380,8 @@ void DynamicEntity::MovementAnimationCheck() {
 	default:
 		break;
 	}
+
+	current_animation->speed = (entity_card->info.stats.find("movement")->second->GetValue() * current_animation->base_speed) / entity_card->info.stats.find("movement")->second->GetBaseValue();
 }
 void DynamicEntity::AttackingAnimationCheck() {
 	switch (direction)

@@ -13,9 +13,12 @@ bool UIButton::UIBlit()
 {
 	iPoint screen_pos = GetScreenPos();
 	if (clipping && parent)
+	{
 		App->render->Blit(App->gui->GetAtlas(), screen_pos.x, screen_pos.y, &rect_sprite, 0.0F, 0.0, INT_MAX, INT_MAX, &parent->GetScreenRect());
-	else
+	}
+	else {
 		App->render->Blit(App->gui->GetAtlas(), screen_pos.x, screen_pos.y, &rect_sprite, 0.0F, 0.0, INT_MAX, INT_MAX);
+	}
 	return true;
 }
 
@@ -53,9 +56,10 @@ bool UIButton::CleanUp()
 	return true;
 }
 
-UIButton::UIButton(iPoint position, SDL_Rect* sprite_rect, bool is_interactable)
+UIButton::UIButton(iPoint position, SDL_Rect* sprite_rect, bool is_selectable, bool is_interactable)
 {
 	interactable = is_interactable;
+	selectable = is_selectable;
 	rect_box = { position.x, position.y, sprite_rect[0].w,sprite_rect[0].h };
 
 	anim = new SDL_Rect[4];

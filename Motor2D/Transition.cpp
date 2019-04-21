@@ -65,19 +65,26 @@ void Transition::Entering()
 
 void Transition::Action()
 {
-	current_time->Stop();
+	current_time->Start();
 
-	transition_time += transition_time;
 	state = TransitionState::EXITING;
 }
 
 void Transition::Exiting()
 {
-	current_time->Resume();
-
 	if (current_time->ReadSec() >= transition_time)
 	{
 		state = TransitionState::NONE;
 		App->transition_manager->DestroyTransition(this);
 	}
+}
+
+float Transition::LerpValue(float percent, float start, float end)
+{
+	return start + percent * (end - start);
+}
+
+iPoint Transition::Lerp(float percent, iPoint origin, iPoint destination)
+{
+	return { (int)(origin.x + percent * (destination.x - origin.x)),  (int)(origin.y + percent * (destination.y - origin.y)) };
 }

@@ -19,6 +19,8 @@ public:
 	bool dragable = false;
 	bool clicked = false;
 	bool enabled = true;
+	bool selected = false;
+	bool selectable = false;
 	//TODO
 	bool clipping = true; //Zona que se pinta es el rectangulo del padre.
 	bool parent_limit = true;

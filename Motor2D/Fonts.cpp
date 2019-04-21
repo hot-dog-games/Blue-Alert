@@ -42,9 +42,11 @@ bool Fonts::Awake(pugi::xml_node& conf)
 bool Fonts::CleanUp()
 {
 	LOG("Freeing True Type fonts and library");
-	for (std::list<TTF_Font*>::iterator item = fonts.begin(); item != fonts.end(); ++item)
-	{
-		TTF_CloseFont(*item);
+
+	for (std::map<std::string, TTF_Font*>::iterator item = fonts.begin(); item != fonts.end(); ++item)
+	{	
+		TTF_CloseFont(item->second);
+		fonts.erase(item);
 	}
 
 	fonts.clear();
@@ -55,17 +57,28 @@ bool Fonts::CleanUp()
 // Load new texture from file path
 TTF_Font* const Fonts::Load(const char* path, int size)
 {
-	TTF_Font* font = TTF_OpenFont(path, size);
+	TTF_Font* font = nullptr;
+	std::string key = path + std::to_string(size);
+	std::map<std::string, TTF_Font*>::iterator item = fonts.find(key);
 
-	if (font == NULL)
+	if (item == fonts.end())
 	{
-		LOG("Could not load TTF font with path: %s. TTF_OpenFont: %s", path, TTF_GetError());
+		TTF_Font* new_font = TTF_OpenFont(path, size);
+
+		if (new_font == NULL)
+		{
+			LOG("Could not load TTF font with path: %s. TTF_OpenFont: %s", path, TTF_GetError());
+		}
+		else
+		{
+			LOG("Successfully loaded font %s size %d", path, size);
+			fonts.insert({ key, new_font });
+			return new_font;
+		}
 	}
 	else
-	{
-		LOG("Successfully loaded font %s size %d", path, size);
-		fonts.push_back(font);
-	}
+		font = item->second;
+
 
 	return font;
 }

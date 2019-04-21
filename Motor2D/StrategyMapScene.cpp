@@ -15,25 +15,25 @@
 #include "EncounterNode.h"
 #include "StrategyBuilding.h"
 #include "GameManager.h"
-#include "StrategyMap.h"
+#include "StrategyMapScene.h"
+#include "Brofiler/Brofiler.h"
 
-StrategyMap::StrategyMap() : Scene()
+StrategyMapScene::StrategyMapScene() : Scene()
 {
 
 }
 
 // Destructor
-StrategyMap::~StrategyMap()
+StrategyMapScene::~StrategyMapScene()
 {}
 
 // Called before the first frame
-bool StrategyMap::Start()
+bool StrategyMapScene::Start()
 {
+	BROFILER_CATEGORY("SMStart", Profiler::Color::Red);
+
 	App->map->Load("Nodes Map.tmx");
 	App->ResumeGame();
-
-	App->render->camera.x = 0;
-	App->render->camera.y = 0;
 
 	App->game_manager->GetEncounterTree()->CreateAllNodes();
 	App->game_manager->GetEncounterTree()->UpdateTreeState();
@@ -52,7 +52,7 @@ bool StrategyMap::Start()
 	SDL_Rect menu_rect[3];
 	menu_rect[0] = { 0,533,220,51 };
 	menu_rect[1] = { 0,585,220,51 };
-	menu_rect[2] = { 0,585,220,51 };
+	menu_rect[2] = { 0,637,220,51 };
 
 	settings_button = App->gui->CreateButton({ 50,700 }, settings_rect, main_panel);
 	menu_button = App->gui->CreateButton({ 700,700 }, menu_rect, main_panel);
@@ -61,12 +61,18 @@ bool StrategyMap::Start()
 	energy = App->gui->CreateLabel({ 450, 30 }, "ui/Fonts/command_and_conquer___logo_font_by_dexistor371-d6k2yvb.ttf", 20, "ENERGY", { 0,0,0,0 },0, main_panel);
 	health = App->gui->CreateLabel({ 860, 30 }, "ui/Fonts/command_and_conquer___logo_font_by_dexistor371-d6k2yvb.ttf", 20, "HEALTH", { 0,0,0,0 }, 0, main_panel);
 
+	iPoint world_position = App->map->MapToWorld((int)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetPosition().x, (int)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetPosition().y);
+	
+	App->render->camera.x = -world_position.x + w * 0.5;
+	App->render->camera.y = -world_position.y + h;
+
+	App->audio->PlayMusic("audio/music/5.InDeep-RedAlert2_2.ogg");
 
 	return true;
 }
 
 // Called each loop iteration
-bool StrategyMap::PreUpdate()
+bool StrategyMapScene::PreUpdate()
 {
 	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 		App->render->camera.y += 10;
@@ -83,14 +89,14 @@ bool StrategyMap::PreUpdate()
 }
 
 // Called each loop iteration
-bool StrategyMap::Update(float dt)
+bool StrategyMapScene::Update(float dt)
 {
-
+	BROFILER_CATEGORY("SMUpdate", Profiler::Color::Green);
 	return true;
 }
 
 // Called each loop iteration
-bool StrategyMap::PostUpdate()
+bool StrategyMapScene::PostUpdate()
 {
 	bool ret = true;
 
@@ -105,28 +111,16 @@ bool StrategyMap::PostUpdate()
 }
 
 // Called before quitting
-bool StrategyMap::CleanUp()
+bool StrategyMapScene::CleanUp()
 {
 	LOG("Freeing scene");
 
 	return true;
 }
 
-bool StrategyMap::GUIEvent(UIElement * element, GUI_Event gui_event)
+bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 {
 	if (gui_event == GUI_Event::LEFT_CLICK_DOWN) {
-
-		for (int i = 0; i < App->game_manager->GetEncounterTree()->GetCurrentNode()->GetChildren().size(); i++)
-		{
-			if (element == App->game_manager->GetEncounterTree()->GetCurrentNode()->GetChildren()[i]->GetButton())
-			{
-				App->transition_manager->CreateFadeTransition(2.0f, true, 3, White);
-				App->transition_manager->CreateZoomTransition(2.0f);
-				//App->transition_manager->CreateCameraTranslation(2.0f, { App->render->camera.x, App->render->camera.y }, { (int)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetPosition().x, (int)(int)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetPosition().y});
-				App->game_manager->GetEncounterTree()->SetCurrentNode(App->game_manager->GetEncounterTree()->GetCurrentNode()->GetChildren()[i]);
-				App->gui->DisableElement(main_panel);
-			}
-		}
 
 	}
 

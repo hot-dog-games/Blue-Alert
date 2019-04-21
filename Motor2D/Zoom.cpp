@@ -8,6 +8,12 @@
 Zoom::Zoom(float transition_time, float target_scale) : Transition(transition_time)
 {
 	this->target_scale = target_scale;
+	start_width = App->render->camera.w;
+	start_height = App->render->camera.h;
+	final_width = App->render->camera.w / target_scale;
+	final_height = App->render->camera.h / target_scale;
+	current_width = App->render->camera.w;
+	current_height = App->render->camera.h;
 }
 
 Zoom::~Zoom()
@@ -18,16 +24,24 @@ void Zoom::Entering()
 {
 	Transition::Entering();
 
-	float normalized_scale = current_time->ReadSec()*(target_scale / transition_time) + normal_scale;
-	float scale_increment = normalized_scale - current_scale;
+	float percent = current_time->ReadSec()*(1 / transition_time);
 
-	App->render->camera.x -= scale_increment * ((App->render->camera.w*0.5f) / current_scale);
-	App->render->camera.y -= scale_increment * ((App->render->camera.h*0.5f) / current_scale);
+	float normalized_scale = LerpValue(percent, normal_scale, target_scale);
+
+	float next_width = LerpValue(percent, start_width, final_width);
+	float next_height = LerpValue(percent, start_height, final_height);
+
+	float step_x = next_width - current_width;
+	float step_y = next_height - current_height;
+
+	LOG("%f", step_x);
+	App->render->camera.x += step_x;
+	App->render->camera.y += step_y;
 
 	current_scale = normalized_scale;
 	SDL_RenderSetScale(App->render->renderer, normalized_scale, normalized_scale);
-
-	LOG("scale increment %f", scale_increment);
+	current_height = next_height;
+	current_width = next_width;
 }
 
 void Zoom::Exiting()

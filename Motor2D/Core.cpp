@@ -5,9 +5,9 @@
 #include "Stat.h"
 #include "Core.h"
 
-Core::Core(pugi::xml_node entity_config, fPoint position, Faction faction): StaticEntity(entity_config, position, faction)
+Core::Core(pugi::xml_node entity_config, fPoint position, Faction faction, pugi::xml_node stats_node): StaticEntity(entity_config, position, faction)
 {
-	for (pugi::xml_node iter = entity_config.child("stats").child("stat"); iter; iter = iter.next_sibling("stat"))
+	for (pugi::xml_node iter = stats_node.child("stat"); iter; iter = iter.next_sibling("stat"))
 	{
 		std::string stat_name = iter.attribute("stat").as_string();
 
@@ -54,24 +54,37 @@ bool Core::CleanUp()
 	stats.clear();
 
 	deck->CleanUp();
-	delete deck;
+
+	if(delete_deck)
+		delete deck;
 
 	return true;
 }
 
-void Core::UseCard(int number, fPoint position)
+bool Core::UseCard(int number, fPoint position)
 {
-	uint energy_cost = deck->cards[number]->info.stats.find("energy_cost")->second->GetValue();
-	if (stats.find("energy")->second->GetValue() >= energy_cost)
+	if (CanUseCard(number))
 	{
 		int group_size = deck->cards[number]->info.stats.find("units")->second->GetValue();
 		
-
 		App->entity_manager->CreateGroup(group_size,deck->cards[number]->type, position, deck->cards[number], faction);
-		stats.find("energy")->second->DecreaseStat(energy_cost);
+		stats.find("energy")->second->DecreaseStat(deck->cards[number]->info.stats.find("energy_cost")->second->GetValue());
+
+		return true;
 	}
+
+	return false;
 }
 
+bool Core::CanUseCard(int number)
+{
+	uint energy_cost = deck->cards[number]->info.stats.find("energy_cost")->second->GetValue();
+
+	if (stats.find("energy")->second->GetValue() >= energy_cost)
+		return true;
+	else 
+		return false;
+}
 void Core::SetDeck(Deck* new_deck)
 {
 	deck = new_deck;

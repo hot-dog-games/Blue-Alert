@@ -7,10 +7,15 @@
 #include "StrategyBuilding.h"
 #include "CardManager.h"
 #include "Core.h"
+#include "CoreAI.h"
 #include "Deck.h"
 #include "EntityManager.h"
+#include "Brofiler/Brofiler.h"
 
-
+bool higher_y(Entity* first, Entity* second)
+{
+	return (first->position.y < second->position.y && first->sorting_layer < second->sorting_layer);
+}
 
 EntityManager::EntityManager()
 {
@@ -40,9 +45,18 @@ bool EntityManager::Start()
 
 bool EntityManager::Update(float dt)
 {
-	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
+	if (!paused) 
 	{
-		(*entity)->Update(dt);
+		BROFILER_CATEGORY("EMUpdate", Profiler::Color::Plum);
+
+		if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_UP)
+			SetDebug();
+
+		for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
+		{
+			(*entity)->Update(dt);
+		}
+
 	}
 
 	return true;
@@ -50,9 +64,12 @@ bool EntityManager::Update(float dt)
 
 bool EntityManager::PreUpdate()
 {
-	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
+	if (!paused)
 	{
-		(*entity)->PreUpdate();
+		for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
+		{
+			(*entity)->PreUpdate();
+		}
 	}
 
 	return true;
@@ -60,6 +77,8 @@ bool EntityManager::PreUpdate()
 
 bool EntityManager::PostUpdate()
 {
+	entities.sort(higher_y);
+
 	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
 	{
 		(*entity)->PostUpdate();
@@ -72,7 +91,12 @@ bool EntityManager::CleanUp()
 {
 	LOG("entity manager cleanup");
 
-	while (!entities.empty()) delete entities.front(), entities.pop_front();
+	while (!entities.empty()) 
+	{
+		entities.front()->CleanUp();
+		delete entities.front();
+		entities.pop_front();
+	}
 
 	entities.clear();
 	id_count = 0;
@@ -90,35 +114,75 @@ bool EntityManager::Save(pugi::xml_node&) const
 	return true;
 }
 
+bool EntityManager::Pause()
+{
+	paused = true;
+
+	return true;
+}
+
+bool EntityManager::Resume()
+{
+	paused = false;
+
+	return true;
+}
+
 Entity* EntityManager::CreateEntity(EntityType type, fPoint position, Card* card, Faction faction)
 {
+
+	BROFILER_CATEGORY("CreateEntity", Profiler::Color::Gold);
+
 	std::string id = std::to_string(id_count);
-	pugi::xml_node entity_node = entity_configs.find_child_by_attribute("type", std::to_string((int)type).c_str());
+	pugi::xml_node entity_node = entity_configs.find_child_by_attribute("type",
+		std::to_string((int)type).c_str()).find_child_by_attribute("faction", std::to_string((int)faction).c_str());
 
 	id += "_" + card->name;
 	
 	DynamicEntity* entity = new DynamicEntity(entity_node, position, card, faction);
 	entity->type = type;
 	entity->Start();
-	entities.push_back(entity);
+	entity->SetDebug(debug);
 
+	if (type == EntityType::HARRIER || type == EntityType::NIGHTHAWK || type == EntityType::BLACK_EAGLE)
+		entity->sorting_layer = 1;
+
+	entities.push_back(entity);
 	id_count++;
 
 	return entity;
 }
 
-Core* EntityManager::CreateCore(EntityType type, fPoint position, Deck* deck, Faction faction)
+Core* EntityManager::CreateCore(uint core_type, fPoint position, Deck* deck, Faction faction, bool ai)
 {
 	std::string id = std::to_string(id_count);
-	pugi::xml_node entity_node = entity_configs.find_child_by_attribute("type", std::to_string((int)type).c_str());
+	pugi::xml_node entity_node = entity_configs.find_child_by_attribute("type", std::to_string((int)CORE).c_str());
+	pugi::xml_node stats_node = entity_node.child("stats");
+	pugi::xml_node info;
+
+	if (faction == FACTION_AMERICAN)
+	{
+		info = entity_node.find_child_by_attribute("faction", std::to_string((int)FACTION_AMERICAN).c_str()).find_child_by_attribute("core_type", std::to_string((int)core_type).c_str());
+	}
+	else {
+		info = entity_node.find_child_by_attribute("faction", std::to_string((int)FACTION_RUSSIAN).c_str());
+	}
 
 	id += "_CORE";
-
-	Core* entity = new Core(entity_node, position, faction);
+	Core* entity;
+	if (ai)
+	{
+		entity = new CoreAI(info, position, faction, stats_node);
+	}
+	else
+	{
+		entity = new Core(info, position, faction, stats_node);
+	}
 	entities.push_back(entity);
-	entity->type = type;
+	entity->type = CORE;
 	entity->Start();
 	entity->SetDeck(deck);
+	entity->SetDebug(debug);
 
 	id_count++;
 
@@ -128,7 +192,8 @@ Core* EntityManager::CreateCore(EntityType type, fPoint position, Deck* deck, Fa
 StrategyBuilding* EntityManager::CreateStrategyBuilding(EntityType type, fPoint position, Faction faction)
 {
 	std::string id = std::to_string(id_count);
-	pugi::xml_node entity_node = entity_configs.find_child_by_attribute("type", std::to_string((int)type).c_str());
+	pugi::xml_node entity_node = entity_configs.find_child_by_attribute("type",
+		std::to_string((int)type).c_str()).find_child_by_attribute("faction", std::to_string((int)faction).c_str());
 
 	id += "_TESTSTRATEGYBUILDING";
 
@@ -169,7 +234,6 @@ void EntityManager::FindClosestEnemy(fPoint position, Faction faction, Entity* &
 	}
 }
 
-
 void EntityManager::FindClosestAllie(fPoint position, Faction faction, Entity* &closest_entity, float &distance)
 {
 	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
@@ -183,6 +247,26 @@ void EntityManager::FindClosestAllie(fPoint position, Faction faction, Entity* &
 				closest_entity = (*entity);
 			}
 		}
+
+void EntityManager::GetEntitiesInArea(SDL_Rect area, std::list<Entity*> &list)
+{
+	Entity* ent;
+	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
+	{
+		ent = (*entity);
+		if (ent->type != CORE && ent->IsAlive() && 
+			(ent->position.x >= area.x && ent->position.x <= area.x + area.w 
+				&& ent->position.y >= area.y && ent->position.y <= area.y + area.h))
+			list.push_back(ent);
+	}
+}
+
+void EntityManager::SetDebug()
+{
+	debug = !debug;
+	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
+	{
+		(*entity)->SetDebug(debug);
 	}
 }
 

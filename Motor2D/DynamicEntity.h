@@ -11,7 +11,7 @@ enum DynamicState {
 	DYNAMIC_MOVING,
 	DYNAMIC_ATTACKING,
 	DYNAMIC_DYING,
-	DYNAMIC_DEAD
+	DYNAMIC_DEAD,
 };
 
 enum EntiyDirection {
@@ -69,11 +69,16 @@ protected:
 	Entity* objective = nullptr;
 	PerfTimer attack_timer;
 
+
 	//Pathfinding
 	std::vector<iPoint> path;
 	SDL_Rect pivot;
 	int current_point = 0;
 	int previous_point = 0;
+	float dead_timer = 0.0f;
+
+private:
+	uint attack_fx;
 };
 
 

@@ -24,8 +24,10 @@ public:
 	void CalculateStat();
 	float GetValue();
 	float GetMaxValue();
+	float GetBaseValue();
 	void DecreaseStat(float value);
 	void IncreaseStat(float value);
+	void IncreaseMaxValue(float value);
 };
 
 #endif // !_STAT_H_
