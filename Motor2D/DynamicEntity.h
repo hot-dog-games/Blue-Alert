@@ -55,8 +55,10 @@ protected:
 	bool CheckEnemies();
 	bool CheckAllies();
 
-protected:
+public:
 	Card * entity_card = nullptr;
+
+protected:
 	DynamicState state = DYNAMIC_IDLE;
 	EntiyDirection direction = UP;
 	fPoint direction_vector = { 1.0f, 1.0f };

@@ -23,6 +23,8 @@ DynamicEntity::DynamicEntity(pugi::xml_node config, fPoint position, Card* card,
 {
 	entity_card = card;
 	std::string stat_name = "health";
+	singleUnit = new SingleUnit(this, nullptr);
+	App->movement->CreateGroupFromUnit(this);
 	stats.insert({ "health", new Stat(card->info.stats.find("health")->second->GetMaxValue())});
 }
 
@@ -271,6 +273,24 @@ void DynamicEntity::Attack()
 SingleUnit* DynamicEntity::GetSingleUnit()
 {
 	return singleUnit;
+}
+
+void DynamicEntity::SetUnitDirection(EntiyDirection unitDirection)
+{
+}
+
+EntiyDirection DynamicEntity::GetUnitDirection()
+{
+	return EntiyDirection();
+}
+
+void DynamicEntity::SetUnitDirectionByValue(fPoint unitDirection)
+{
+}
+
+fPoint DynamicEntity::GetUnitDirectionByValue() const
+{
+	return fPoint();
 }
 
 void DynamicEntity::Die()

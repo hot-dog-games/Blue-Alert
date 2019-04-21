@@ -2,6 +2,8 @@
 #include "p2Log.h"
 
 #include "j1App.h"
+#include "CardManager.h"
+#include "Stat.h"
 #include "Movement.h"
 #include"DynamicEntity.h"
 #include "Map.h"
@@ -214,8 +216,8 @@ MovementState Movement::MoveUnit(DynamicEntity* unit, float dt)
 
 		u->unit->SetUnitDirectionByValue(movePos);
 
-		movePos.x *= u->speed * dt;
-		movePos.y *= u->speed * dt;
+		movePos.x *= u->unit->entity_card->info.stats.find("movement")->second->GetValue() * dt;
+		movePos.y *= u->unit->entity_card->info.stats.find("movement")->second->GetValue() * dt;
 
 		// ---------------------------------------------------------------------
 		// COLLISION CALCULATION
@@ -671,7 +673,7 @@ iPoint Movement::FindNewValidTile(SingleUnit* singleUnit, bool checkOnlyFront) c
 		// Check only the 3 tiles in front of the unit (depending on its direction)
 		/// This way, the unit can only move forward in its direction
 
-		switch (singleUnit->unit->GetUnitDirection()) {
+		/*switch (singleUnit->unit->GetUnitDirection()) {
 
 		case UnitDirection_Idle:
 
@@ -749,7 +751,7 @@ iPoint Movement::FindNewValidTile(SingleUnit* singleUnit, bool checkOnlyFront) c
 			neighbors[2].create(singleUnit->currTile.x + 1, singleUnit->currTile.y + 0); // Right
 
 			break;
-		}
+		}*/
 	}
 	else {
 
@@ -765,7 +767,7 @@ iPoint Movement::FindNewValidTile(SingleUnit* singleUnit, bool checkOnlyFront) c
 	}
 
 	// 2. PRIORITY: the neighbor closer to the unit's goal
-	priority_queue<iPointPriority, std::vector<iPointPriority>, Comparator> queue;
+	/*priority_queue<iPointPriority, std::vector<iPointPriority>, Comparator> queue;
 	iPointPriority priorityNeighbors;
 
 	for (uint i = 0; i < 8; ++i)
@@ -784,7 +786,7 @@ iPoint Movement::FindNewValidTile(SingleUnit* singleUnit, bool checkOnlyFront) c
 
 		if (App->pathfinding->IsWalkable(curr.point) && IsValidTile(singleUnit, curr.point, true, true))
 			return curr.point;
-	}
+	}*/
 
 	return { -1,-1 };
 }
@@ -795,13 +797,13 @@ iPoint Movement::FindNewValidGoal(SingleUnit* singleUnit, iPoint goal, bool chec
 {
 	// 1. We use BFS to calculate a new goal for the unit (we want to expand the search to all the possible tiles)
 	// 2. PRIORITY: the neighbor closer to the group goal
-	priority_queue<iPointPriority, std::vector<iPointPriority>, Comparator> priorityQueue;
+	//priority_queue<iPointPriority, std::vector<iPointPriority>, Comparator> priorityQueue;
 	std::list<iPoint> visited;
 
 	iPointPriority curr;
 	curr.point = goal;
 	curr.priority = curr.point.DistanceManhattan(goal);
-	priorityQueue.push(curr);
+	/*priorityQueue.push(curr);
 
 	while (priorityQueue.size() > 0) {
 
@@ -833,7 +835,7 @@ iPoint Movement::FindNewValidGoal(SingleUnit* singleUnit, iPoint goal, bool chec
 				visited.push_back(neighbors[i]);
 			}
 		}
-	}
+	}*/
 
 	return { -1,-1 };
 }
@@ -886,7 +888,7 @@ bool Movement::IsOppositeDirection(SingleUnit* singleUnitA, SingleUnit* singleUn
 	EntiyDirection dirA = singleUnitA->unit->GetUnitDirection();
 	EntiyDirection dirB = singleUnitB->unit->GetUnitDirection();
 
-	switch (dirA) {
+	/*switch (dirA) {
 
 	case UnitDirection_Up:
 
@@ -943,7 +945,8 @@ bool Movement::IsOppositeDirection(SingleUnit* singleUnitA, SingleUnit* singleUn
 			return true;
 
 		break;
-	}
+	}*/
+	return true;
 }
 
 // UnitGroup struct ---------------------------------------------------------------------------------
@@ -1086,7 +1089,7 @@ bool SingleUnit::CreatePath(iPoint startPos)
 
 	// Save the path found
 	if (ret)
-		path = *App->pathfinding->GetLastPath();
+		path = App->pathfinding->GetLastPath();
 
 	return ret;
 }
@@ -1129,5 +1132,5 @@ bool SingleUnit::IsTileReached(iPoint nextPos, fPoint endPos) const
 // Stops the unit
 void SingleUnit::StopUnit()
 {
-	unit->SetUnitDirection(UnitDirection_Idle);
+	//unit->SetUnitDirection(UnitDirection_Idle);
 }
