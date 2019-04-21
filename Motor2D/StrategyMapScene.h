@@ -37,8 +37,6 @@ public:
 
 	void AddCardToDeck(UIElement* element, uint num);
 
-	void InitializeUI();
-
 private:
 	UIImage* banner;
 	UIImage* options;
