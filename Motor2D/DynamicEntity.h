@@ -4,6 +4,7 @@
 #include "Entity.h"
 
 struct Card;
+struct SingleUnit;
 
 enum DynamicState {
 	DYNAMIC_IDLE,
@@ -36,6 +37,12 @@ public:
 	virtual bool PostUpdate();
 	virtual bool CleanUp();
 	virtual bool Start();
+
+	SingleUnit* GetSingleUnit();
+	void SetUnitDirection(EntiyDirection unitDirection);
+	EntiyDirection GetUnitDirection();
+	void SetUnitDirectionByValue(fPoint unitDirection);
+	fPoint GetUnitDirectionByValue() const;
 	virtual void DecreaseLife(float damage, bool piercing = false);
 
 public:
@@ -51,12 +58,14 @@ protected:
 	virtual void Move(float dt);
 	virtual void Attack();
 	bool CheckEnemies();
+	bool CheckAllies();
 
 protected:
 
 	DynamicState state = DYNAMIC_IDLE;
 	EntiyDirection direction = UP;
 	fPoint direction_vector = { 1.0f, 1.0f };
+	SingleUnit * singleUnit = nullptr;
 
 	const float SNAP_RANGE = 3.0f;
 
@@ -66,6 +75,7 @@ protected:
 
 	//Pathfinding
 	std::vector<iPoint> path;
+	SDL_Rect pivot;
 	int current_point = 0;
 	int previous_point = 0;
 	float dead_timer = 0.0f;
@@ -74,6 +84,8 @@ private:
 	uint attack_fx;
 	uint explosion_fx;
 };
+
+
 
 #endif // !_DYNAMIC_ENTITY_
 

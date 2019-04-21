@@ -337,7 +337,7 @@ void BattleScene::StartUI()
 		random_num[0] = rand() % 9 + 1;
 		random_num[1] = rand() % 9 + 1;
 		random_num[2] = rand() % 9 + 1;
-	} while (random_num[0] != random_num[1] != random_num[2]);
+	} while (random_num[0] == random_num[1] || random_num[0] == random_num[2] || random_num[1] == random_num[2]);
 
 	//Game_UI
 
@@ -349,10 +349,10 @@ void BattleScene::StartUI()
 
 	energy_bar = App->gui->CreateBar({ 764, 358 }, { 601,0,16,274 }, allied_core->GetEnergy());
 
-	health_bar_image = App->gui->CreateImage({ 470,730 }, { 747,1215,353,28 });
-	enemy_health_bar_image = App->gui->CreateImage({ 40,20 }, { 747,1290,353,28 });
-	health_bar = App->gui->CreateBar({ 498,740 }, { 747,1244,223,16 }, allied_core->GetHealth(), BarType::BAR_HORITZONTAL);
-	enemy_health_bar = App->gui->CreateBar({ 68,30 }, { 747,1244,223,16 }, enemy_core->GetHealth(), BarType::BAR_HORITZONTAL);
+	health_bar_image = App->gui->CreateImage({ 470,730 }, { 25,1399,253,28 });
+	enemy_health_bar_image = App->gui->CreateImage({ 40,20 }, { 25,1474,253,28 });
+	health_bar = App->gui->CreateBar({ 498,740 }, { 25,1428,224,16 }, allied_core->GetHealth(), BarType::BAR_HORITZONTAL);
+	enemy_health_bar = App->gui->CreateBar({ 68,30 }, { 25,1428,224,16 }, enemy_core->GetHealth(), BarType::BAR_HORITZONTAL);
 
 	App->gui->EnableInteractable((UIElement*)unit_panel);
 

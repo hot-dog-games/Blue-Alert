@@ -57,6 +57,8 @@ public:
 	fPoint GetCorePosition(Faction faction);
 	bool DeleteEntity(Entity* entity);
 	void FindClosestEnemy(fPoint position, Faction faction, Entity* &closest_entity, float &distance);
+	void FindClosestAllie(fPoint position, Faction faction, Entity* &closest_entity, float &distance);
+	bool CreateGroup(int units, EntityType type, fPoint position, Card* card, Faction faction);
 	void GetEntitiesInArea(SDL_Rect area, std::list<Entity*> &list, int faction = -1);
 	void GetEntitiesInArea(float radius, fPoint position, std::list<Entity*> &list, int faction = -1);
 	void SetDebug();
