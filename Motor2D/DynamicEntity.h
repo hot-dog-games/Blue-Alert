@@ -46,7 +46,7 @@ public:
 	virtual void DecreaseLife(float damage, bool piercing = false);
 
 public:
-	Card * entity_card = nullptr;
+	Card* entity_card = nullptr;
 
 protected:
 	void CalcDirection();
@@ -65,13 +65,12 @@ protected:
 	DynamicState state = DYNAMIC_IDLE;
 	EntiyDirection direction = UP;
 	fPoint direction_vector = { 1.0f, 1.0f };
-	SingleUnit * singleUnit = nullptr;
+	SingleUnit* singleUnit = nullptr;
 
 	const float SNAP_RANGE = 3.0f;
 
 	Entity* objective = nullptr;
 	PerfTimer attack_timer;
-
 
 	//Pathfinding
 	std::vector<iPoint> path;
@@ -81,8 +80,8 @@ protected:
 	float dead_timer = 0.0f;
 
 private:
-	uint attack_fx;
-	uint explosion_fx;
+	std::string attack_fx;
+	std::string explosion_fx;
 };
 
 

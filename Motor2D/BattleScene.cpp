@@ -124,7 +124,7 @@ bool BattleScene::Update(float dt)
 			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
 			{
 				if (allied_core->UseCard(CN_FIRST, { float(p.x),float(p.y) }))
-					App->audio->PlayFx(deployment_fx, 0);
+					App->audio->PlayFx(deployment_fx.c_str(), 0);
 			}
 		}
 
@@ -134,7 +134,7 @@ bool BattleScene::Update(float dt)
 			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
 			{
 				if (allied_core->UseCard(CN_SECOND, { float(p.x),float(p.y) }))
-					App->audio->PlayFx(deployment_fx, 0);
+					App->audio->PlayFx(deployment_fx.c_str(), 0);
 			}
 		}
 
@@ -144,7 +144,7 @@ bool BattleScene::Update(float dt)
 			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
 			{
 				if (allied_core->UseCard(CN_THIRD, { float(p.x),float(p.y) }))
-					App->audio->PlayFx(deployment_fx, 0);
+					App->audio->PlayFx(deployment_fx.c_str(), 0);
 			}
 		}
 
@@ -154,7 +154,7 @@ bool BattleScene::Update(float dt)
 			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
 			{
 				if (allied_core->UseCard(CN_FOURTH, { float(p.x),float(p.y) }))
-					App->audio->PlayFx(deployment_fx, 0);
+					App->audio->PlayFx(deployment_fx.c_str(), 0);
 			}
 		}
 			
@@ -166,7 +166,7 @@ bool BattleScene::Update(float dt)
 			state = BattleSceneState::WIN;
 			App->PauseGame();
 			App->gui->EnableElement((UIElement*)win_panel_one);
-			App->audio->PlayFx(win_fx, 0);
+			App->audio->PlayFx(win_fx.c_str(), 0);
 		}
 			
 
@@ -174,7 +174,7 @@ bool BattleScene::Update(float dt)
 		if (!allied_core->IsAlive())
 		{
 			state = BattleSceneState::LOSE;
-			App->audio->PlayFx(lose_fx, 0);
+			App->audio->PlayFx(lose_fx.c_str(), 0);
 			App->PauseGame();
 			App->gui->EnableElement((UIElement*)lose_panel);
 			App->gui->DisableInteractable((UIElement*)unit_panel);
@@ -182,7 +182,7 @@ bool BattleScene::Update(float dt)
 		else if (!enemy_core->IsAlive())
 		{
 			state = BattleSceneState::WIN;
-			App->audio->PlayFx(win_fx, 0);
+			App->audio->PlayFx(win_fx.c_str(), 0);
 			App->PauseGame();
 			App->gui->EnableElement((UIElement*)win_panel_one);
 			App->gui->DisableInteractable((UIElement*)unit_panel);
@@ -322,7 +322,7 @@ void BattleScene::ReleaseDrag()
 	if (App->map->IsInsideMap(map_pos) && App->map->IsSpawnable(map_pos))
 	{
 		if (allied_core->UseCard(card_num, { float(world_pos.x),float(world_pos.y) }))
-			App->audio->PlayFx(deployment_fx, 0);
+			App->audio->PlayFx(deployment_fx.c_str(), 0);
 	}
 
 	App->map->SetDrawable("Spawn", 1);

@@ -4,6 +4,7 @@
 #include "TestingScene.h"
 #include "StrategyMapScene.h"
 #include "Particles.h"
+#include "Audio.h"
 #include "BattleScene.h"
 #include "Map.h"
 #include "SceneManager.h"
@@ -91,7 +92,6 @@ void SceneManager::ChangeScene(int new_scene)
 	App->particles->CleanUp();
 	App->gui->CleanUp();
 	App->map->CleanUp();
-
 
 	delete current_scene;
 	current_scene = nullptr;

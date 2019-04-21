@@ -47,7 +47,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	transition_manager = new TransitionManager();
 	buff = new BuffSourceManager();
 	game_manager = new GameManager();
-	movement = new Movement();
+	//movement = new Movement();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp

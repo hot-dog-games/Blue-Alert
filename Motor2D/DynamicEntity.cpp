@@ -26,8 +26,10 @@ DynamicEntity::DynamicEntity(pugi::xml_node config, fPoint position, Card* card,
 {
 	entity_card = card;
 	std::string stat_name = "health";
-	singleUnit = new SingleUnit(this, nullptr);
-	App->movement->CreateGroupFromUnit(this);
+
+	//singleUnit = new SingleUnit(this, nullptr);
+	//App->movement->CreateGroupFromUnit(this);
+
 	stats.insert({ "health", new Stat(card->info.stats.find("health")->second->GetMaxValue())});
 }
 
@@ -287,11 +289,11 @@ void DynamicEntity::Attack()
 			objective->DecreaseLife(attack);
 			App->particles->CreateParticle(ParticleType::ATTACK_BASIC_SHOT, { position.x, position.y - current_frame.h * 0.5f }, 
 				{ objective->position.x, objective->position.y - objective->current_frame.h * 0.5f });
-			App->audio->PlayFx(attack_fx, 0);
+			App->audio->PlayFx(attack_fx.c_str(), 0);
 			break;
 		case AttackType::AOE:
 		{
-			App->audio->PlayFx(explosion_fx, 0);
+			App->audio->PlayFx(explosion_fx.c_str(), 0);
 			std::list<Entity*> entities;
 			float radius = EXPLOSION_RANGE_TILES * App->map->data.tile_height;
 			App->entity_manager->GetEntitiesInArea(radius, objective->position, entities, faction);
@@ -307,7 +309,7 @@ void DynamicEntity::Attack()
 			objective->DecreaseLife(attack, true);
 			App->particles->CreateParticle(ParticleType::ATTACK_BASIC_SHOT, { position.x, position.y - current_frame.h * 0.5f },
 				{ objective->position.x, objective->position.y - objective->current_frame.h * 0.5f });
-			App->audio->PlayFx(attack_fx, 0);
+			App->audio->PlayFx(attack_fx.c_str(), 0);
 			break;
 		default:
 			break;
@@ -351,8 +353,6 @@ void DynamicEntity::DecreaseLife(float damage, bool piercing)
 			damage_received *= 0.75f;
 	}
 
-	LOG("ME HAN PEGAO %f", damage_received);
-
 	stats.find("health")->second->DecreaseStat(damage_received);
 	if (stats.find("health")->second->GetValue() <= 0)
 		Die();
@@ -375,6 +375,8 @@ bool DynamicEntity::CleanUp()
 		stats.erase(item);
 	}
 	stats.clear();
+
+	//delete singleUnit;
 
 	return true;
 }

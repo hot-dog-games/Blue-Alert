@@ -130,7 +130,6 @@ bool EntityManager::Resume()
 
 Entity* EntityManager::CreateEntity(EntityType type, fPoint position, Card* card, Faction faction)
 {
-
 	BROFILER_CATEGORY("CreateEntity", Profiler::Color::Gold);
 
 	std::string id = std::to_string(id_count);
@@ -315,5 +314,6 @@ bool EntityManager::CreateGroup(int units, EntityType type, fPoint position, Car
 		}
 		App->entity_manager->CreateEntity(type, position, card, faction);
 
-	}return true;
+	}
+	return true;
 }

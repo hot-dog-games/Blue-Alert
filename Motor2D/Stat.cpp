@@ -15,6 +15,10 @@ Stat::Stat(float base) :
 {
 }
 
+Stat::~Stat()
+{
+}
+
 void Stat::AddBuff(Buff & buff)
 {
 	switch (buff.GetType())
