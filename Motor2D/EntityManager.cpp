@@ -81,7 +81,9 @@ bool EntityManager::PostUpdate()
 
 	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
 	{
-		(*entity)->PostUpdate();
+		if(App->render->IsOnCamera((*entity)->position.x - (*entity)->current_frame.w*0.5f, (*entity)->position.y - (*entity)->current_frame.h,
+			(*entity)->current_frame.w, (*entity)->current_frame.h))
+			(*entity)->PostUpdate();
 	}
 
 	return true;
