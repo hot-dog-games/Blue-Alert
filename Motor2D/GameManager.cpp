@@ -39,8 +39,10 @@ bool GameManager::Start()
 
 bool GameManager::CleanUp()
 {
+	delete combat_deck;
 	collection.clear();
 	encounter_tree->CleanTree();
+
 	return true;
 }
 
@@ -74,6 +76,19 @@ void GameManager::CreatePlayerDeck()
 	combat_deck->AddCard(GetCardFromCollection(EntityType::HARRIER));
 }
 
+bool GameManager::Restart()
+{
+	for (std::list<Card*>::iterator card = collection.begin(); card != collection.end(); ++card)
+	{
+		App->card_manager->DeleteCard((*card));
+		collection.erase(card);
+	}		
+	delete combat_deck;
+	encounter_tree->CleanTree();
+	Start();
+
+	return true;
+}
 
 
 

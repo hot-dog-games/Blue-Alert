@@ -24,8 +24,6 @@
 #include "EncounterTree.h"
 #include "EncounterNode.h"
 #include "UIImage.h"
-#include <time.h>
-#include <stdlib.h>
 
 const double HELD_DELAY = 175;
 
@@ -193,21 +191,12 @@ bool BattleScene::Update(float dt)
 	break;
 	case BattleScene::BattleSceneState::WIN:
 	{
-		if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
-		{
-			App->gui->DisableElement((UIElement*)win_panel_two);
-			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
-		}
 			
 	}
 	break;
 	case BattleScene::BattleSceneState::LOSE:
 	{
-		if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
-		{
-			App->gui->DisableElement((UIElement*)lose_panel);
-			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
-		}
+
 	}
 	break;
 	default:
@@ -276,6 +265,7 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 		}
 		else if (element == lose_continue) {
 			App->gui->DisableElement((UIElement*)lose_panel);
+			App->game_manager->Restart();
 			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
 		}
 
@@ -342,7 +332,6 @@ void BattleScene::ReleaseDrag()
 
 void BattleScene::StartUI()
 {
-	srand(time(0));
 	//Generate random number
 	do {
 		random_num[0] = rand() % 9 + 1;

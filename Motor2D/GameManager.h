@@ -23,6 +23,7 @@ public:
 	bool PostUpdate();
 	bool Load(pugi::xml_node&) { return true; }
 	bool Save(pugi::xml_node&) const { return true; }
+	bool Restart();
 
 	EncounterTree* GetEncounterTree();
 	Deck* GetPlayerDeck();
