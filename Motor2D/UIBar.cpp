@@ -11,7 +11,7 @@ UIBar::UIBar(iPoint pos, SDL_Rect sprite_rect, Stat* value, bool is_interactable
 
 	rect_sprite = sprite_rect;
 	bar_value = value;
-	current_value = value->GetValue();
+	current_value = value->GetMaxValue();
 }
 
 void UIBar::DecreaseBar(uint value)

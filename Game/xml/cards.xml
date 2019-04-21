@@ -1,13 +1,14 @@
 <config>
   <card type ="1">
     <name>GI</name>
+    <sprite>sprites/Units/Infantry/sprite_gi.png</sprite>
     <combat attack_type="0" armored="false"/>
     <stats>
       <stat stat="health" value ="50"/>
       <stat stat="damage" value ="5"/>
       <stat stat="defense" value ="5"/>
       <stat stat="movement" value ="45"/>
-      <stat stat="attack_speed" value ="10"/>
+      <stat stat="attack_speed" value ="5"/>
       <stat stat="range" value ="5"/>
       <stat stat="energy_cost" value ="2"/>
       <stat stat="units" value ="4"/>
@@ -21,18 +22,18 @@
       <stat stat="attack_speed" value ="1"/>
       <stat stat="range" value ="1"/>
 	</upgrades>
-    
   </card>
   
   <card type ="2">
-    <name>Sniper</name>  
+    <name>Sniper</name>
+    <sprite>sprites/Units/Infantry/sprite_gi.png</sprite>
     <combat attack_type="2" armored="false"/>
     <stats>
       <stat stat="health" value ="50"/>
       <stat stat="damage" value ="40"/>
       <stat stat="defense" value ="3"/>
       <stat stat="movement" value ="25"/>
-      <stat stat="attack_speed" value ="4"/>
+      <stat stat="attack_speed" value ="2"/>
       <stat stat="range" value ="8"/>
       <stat stat="energy_cost" value ="4"/>
       <stat stat="units" value ="2"/>
@@ -51,13 +52,14 @@
 
   <card type ="3">
     <name>Navy_Seal</name>
+    <sprite>sprites/Units/Infantry/sprite_gi.png</sprite>
     <combat attack_type="1" armored="false"/>
     <stats>
       <stat stat="health" value ="70"/>
       <stat stat="damage" value ="20"/>
       <stat stat="defense" value ="7"/>
       <stat stat="movement" value ="25"/>
-      <stat stat="attack_speed" value ="5"/>
+      <stat stat="attack_speed" value ="2.5"/>
       <stat stat="range" value ="4"/>
       <stat stat="energy_cost" value ="2"/>
       <stat stat="units" value ="2"/>
@@ -76,15 +78,16 @@
 
   <card type ="4">
     <name>Grizzly_Tank</name>
+    <sprite>sprites/Units/LandVehicles/GreyTank.png</sprite>
     <combat attack_type="2" armored="true"/>
     <stats>
       <stat stat="health" value ="120"/>
       <stat stat="damage" value ="100"/>
       <stat stat="defense" value ="10"/>
       <stat stat="movement" value ="25"/>
-      <stat stat="attack_speed" value ="2"/>
+      <stat stat="attack_speed" value ="1"/>
       <stat stat="range" value ="5"/>
-      <stat stat="energy_cost" value ="2"/>
+      <stat stat="energy_cost" value ="5"/>
       <stat stat="units" value ="1"/>
     </stats>
 	
@@ -101,15 +104,16 @@
 
   <card type ="5">
     <name>Robot_Tank</name>
+    <sprite>sprites/Units/LandVehicles/GreyTank.png</sprite>
     <combat attack_type="0" armored="true"/>
     <stats>
       <stat stat="health" value ="60"/>
       <stat stat="damage" value ="7"/>
       <stat stat="defense" value ="5"/>
       <stat stat="movement" value ="40"/>
-      <stat stat="attack_speed" value ="8"/>
+      <stat stat="attack_speed" value ="4"/>
       <stat stat="range" value ="5"/>
-      <stat stat="energy_cost" value ="2"/>
+      <stat stat="energy_cost" value ="3"/>
       <stat stat="units" value ="3"/>
     </stats>
 	
@@ -126,15 +130,16 @@
 
   <card type ="6">
     <name>Prism_Tank</name>
+    <sprite>sprites/Units/LandVehicles/GreyTank.png</sprite>
     <combat attack_type="1" armored="true"/>
     <stats>
       <stat stat="health" value ="100"/>
       <stat stat="damage" value ="40"/>
       <stat stat="defense" value ="8"/>
       <stat stat="movement" value ="20"/>
-      <stat stat="attack_speed" value ="5"/>
+      <stat stat="attack_speed" value ="2.5"/>
       <stat stat="range" value ="5"/>
-      <stat stat="energy_cost" value ="2"/>
+      <stat stat="energy_cost" value ="4"/>
       <stat stat="units" value ="1"/>
     </stats>
 	
@@ -151,15 +156,16 @@
 
   <card type ="7">
     <name>Nighthawk</name>
+    <sprite>sprites/Units/AirVehicles/Nighthawk.png</sprite>
     <combat attack_type="0" armored="false"/>
     <stats>
       <stat stat="health" value ="100"/>
       <stat stat="damage" value ="6"/>
       <stat stat="defense" value ="6"/>
       <stat stat="movement" value ="35"/>
-      <stat stat="attack_speed" value ="9"/>
+      <stat stat="attack_speed" value ="4.5"/>
       <stat stat="range" value ="5"/>
-      <stat stat="energy_cost" value ="2"/>
+      <stat stat="energy_cost" value ="3"/>
       <stat stat="units" value ="3"/>
     </stats>
 	
@@ -176,15 +182,16 @@
 
   <card type ="8">
     <name>Harrier</name>
+    <sprite>sprites/Units/AirVehicles/Harrier.png</sprite>
     <combat attack_type="1" armored="true"/>
     <stats>
       <stat stat="health" value ="80"/>
       <stat stat="damage" value ="70"/>
       <stat stat="defense" value ="3"/>
       <stat stat="movement" value ="40"/>
-      <stat stat="attack_speed" value ="4"/>
+      <stat stat="attack_speed" value ="2"/>
       <stat stat="range" value ="5"/>
-      <stat stat="energy_cost" value ="2"/>
+      <stat stat="energy_cost" value ="4"/>
       <stat stat="units" value ="2"/>
     </stats>
 	
@@ -200,15 +207,16 @@
 
   <card type ="9">
     <name>Black_Eagle</name>
+    <sprite>sprites/Units/AirVehicles/BlackEagle.png</sprite>
     <combat attack_type="2" armored="false"/>
     <stats>
       <stat stat="health" value ="70"/>
       <stat stat="damage" value ="150"/>
       <stat stat="defense" value ="4"/>
       <stat stat="movement" value ="50"/>
-      <stat stat="attack_speed" value ="2"/>
+      <stat stat="attack_speed" value ="1"/>
       <stat stat="range" value ="5"/>
-      <stat stat="energy_cost" value ="2"/>
+      <stat stat="energy_cost" value ="5"/>
       <stat stat="units" value ="1"/>
     </stats>
 	

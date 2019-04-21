@@ -178,6 +178,7 @@ bool BattleScene::Update(float dt)
 			state = BattleSceneState::LOSE;
 			App->audio->PlayFx(lose_fx, 0);
 			App->PauseGame();
+			App->gui->EnableElement((UIElement*)lose_panel);
 		}
 		else if (!enemy_core->IsAlive())
 		{
@@ -191,13 +192,20 @@ bool BattleScene::Update(float dt)
 	case BattleScene::BattleSceneState::WIN:
 	{
 		if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
+		{
+			App->gui->DisableElement((UIElement*)win_panel_two);
 			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
+		}
+			
 	}
 	break;
 	case BattleScene::BattleSceneState::LOSE:
 	{
 		if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
+		{
+			App->gui->DisableElement((UIElement*)lose_panel);
 			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
+		}
 	}
 	break;
 	default:
@@ -250,18 +258,22 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 		else if (element == win_continue_two) {
 			if (win_unit_one->selected) {
 				App->game_manager->AddCardToCollection((EntityType)random_num[0]);
+				App->gui->DisableElement((UIElement*)win_panel_two);
 				App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
 			}
 			else if (win_unit_two->selected) {
 				App->game_manager->AddCardToCollection((EntityType)random_num[1]);
+				App->gui->DisableElement((UIElement*)win_panel_two);
 				App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
 			}
 			else if (win_unit_three->selected) {
 				App->game_manager->AddCardToCollection((EntityType)random_num[2]);
+				App->gui->DisableElement((UIElement*)win_panel_two);
 				App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
 			}
 		}
 		else if (element == lose_continue) {
+			App->gui->DisableElement((UIElement*)lose_panel);
 			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
 		}
 
@@ -292,13 +304,19 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 
 void BattleScene::CreateDrag(int num, int type, UIElement* element)
 {
+	int x, y;
+	App->input->GetMousePosition(x, y);
+	x = x - element->GetScreenPos().x;
+	y = y - element->GetScreenPos().y;
+
 	card_num = num;
-	current_drag = App->gui->CreateImage({ 0,0 }, App->gui->LoadUIButton(type, "drag")[0], element);
+	current_drag = App->gui->CreateImage({ x,y }, App->gui->LoadUIButton(type, "drag")[0], element);
 	current_drag->interactable = true;
 	current_drag->dragable = true;
 	current_drag->clipping = false;
 	current_drag->parent_limit = false;
 	current_drag->clicked = true;
+	current_drag->hovered = true;
 	App->map->SetDrawable("Spawn", 0);
 }
 

@@ -169,10 +169,13 @@ bool Gui::PostUpdate()
 bool Gui::CleanUp()
 {
 	LOG("Freeing GUI");
-	for (std::list<UIElement*>::iterator element = elements.begin(); element != elements.end(); ++element)
+	while (!elements.empty())
 	{
-		(*element)->CleanUp();
+		elements.front()->CleanUp();
+		delete elements.front();
+		elements.pop_front();
 	}
+
 	elements.clear();
 
 	return true;
@@ -242,6 +245,15 @@ void Gui::DeleteElement(UIElement* ele)
 	ele->CleanUp();
 	elements.remove(ele);
 	delete ele;
+}
+
+void Gui::DisableUI()
+{
+	for (std::list<UIElement*>::iterator element = elements.begin(); element != elements.end(); ++element)
+	{
+		if((*element)->enabled)
+			DisableElement((*element));
+	}
 }
 
 void Gui::EnableElement(UIElement* ele)

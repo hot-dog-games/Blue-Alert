@@ -76,7 +76,7 @@ bool TestingScene::Start()
 	test_deck->AddCard(App->card_manager->CreateCard(EntityType::HARRIER));
 
 	test_core = App->entity_manager->CreateCore(1, { 30,980 }, test_deck, FACTION_RUSSIAN);
-	test_enemy_core = App->entity_manager->CreateCore(13, { 25,330 }, enemy_deck, FACTION_AMERICAN, true);
+	test_enemy_core = App->entity_manager->CreateCore(13, { 25,330 }, enemy_deck, FACTION_AMERICAN);
 
 	do {
 		random_num[0] = rand() % 9 + 1;
@@ -189,6 +189,25 @@ bool TestingScene::Update(float dt)
 			}
 		}
 
+		if (App->input->GetKey(SDL_SCANCODE_5) == KEY_DOWN)
+		{
+			test_enemy_core->UseCard(CN_FIRST, { float(p.x),float(p.y) });
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_6) == KEY_DOWN)
+		{
+			test_enemy_core->UseCard(CN_SECOND, { float(p.x),float(p.y) });
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_7) == KEY_DOWN)
+		{
+			test_enemy_core->UseCard(CN_THIRD, { float(p.x),float(p.y) });
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_8) == KEY_DOWN)
+		{
+			test_enemy_core->UseCard(CN_FOURTH, { float(p.x),float(p.y) });
+		}
 
 		if (!test_core->IsAlive())
 		{

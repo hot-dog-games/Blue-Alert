@@ -51,7 +51,6 @@ bool CoreAI::Update(float dt)
 			{
 				if (CanUseCard(i))
 				{
-					LOG("spawned in lane %i", lane);
 					UseCard(i, { (float)lanes[lane].x + (float)lanes[lane].w*0.5f, position.y + 50 });
 					ai_state = AIState::WAITING;
 					break;
@@ -76,12 +75,6 @@ bool CoreAI::PostUpdate()
 		App->render->DrawQuad(lanes[1], 0, 0, 255, 100, true, true);
 		App->render->DrawQuad(lanes[2], 0, 0, 255, 100, true, true);
 	}
-
-	return true;
-}
-
-bool CoreAI::CleanUp()
-{
 
 	return true;
 }
