@@ -26,4 +26,9 @@
     <folder>maps/</folder>
   </map>
 
+  <particles>
+    <xml>xml/particles.xml</xml>
+    <atlas>sprites/particles/particles_atlas.png</atlas>
+  </particles>
+
 </config>

@@ -1,0 +1,8 @@
+<config>
+  <!--AOE_EXPLOSION-->
+  <particle type="0">
+    <animation speed="">
+      <frame x="" y="" width="" height=""/>
+    </animation>
+  </particle>
+</config>

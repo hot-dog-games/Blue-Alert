@@ -18,6 +18,7 @@
 #include "GUI.h"
 #include "Fonts.h"
 #include "BuffSourceManager.h"
+#include "Particles.h"
 #include "TransitionManager.h"
 #include "GameManager.h"
 #include "j1App.h"
@@ -41,6 +42,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	gui = new Gui();
 	fonts = new Fonts();
 	entity_manager = new EntityManager();
+	particles = new Particles();
 	transition_manager = new TransitionManager();
 	buff = new BuffSourceManager();
 	game_manager = new GameManager();
@@ -58,6 +60,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(fonts);
 	AddModule(entity_manager);
 	AddModule(pathfinding);
+	AddModule(particles);
 	AddModule(gui);
 	AddModule(transition_manager);
 	AddModule(buff);
