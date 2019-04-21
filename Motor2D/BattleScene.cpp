@@ -27,6 +27,7 @@
 #include <time.h>
 #include <stdlib.h>
 
+const double HELD_DELAY = 175;
 
 BattleScene::BattleScene() : Scene()
 {
@@ -50,8 +51,8 @@ bool BattleScene::Start()
 		RELEASE_ARRAY(data);
 	}
 
-	App->render->camera.x = (App->map->data.width*App->map->data.tile_width*0.5)*0.5 - 100;
-	App->render->camera.y = 0;
+	App->render->camera.x = (App->map->data.width*App->map->data.tile_width*0.5)*0.5 - 250;
+	App->render->camera.y = -210;
 
 	Deck* enemy_deck = new Deck();
 	enemy_deck->delete_cards = true;
@@ -60,11 +61,18 @@ bool BattleScene::Start()
 	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterDeck()[2]));
 	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterDeck()[3]));
 
-	allied_core = App->entity_manager->CreateCore(1, { 30,750 }, App->game_manager->GetPlayerDeck(), FACTION_RUSSIAN);
-	enemy_core = App->entity_manager->CreateCore(App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterType(), { 25,85 }, enemy_deck, FACTION_AMERICAN, true);
+	allied_core = App->entity_manager->CreateCore(1, { 30,980 }, App->game_manager->GetPlayerDeck(), FACTION_RUSSIAN);
+	enemy_core = App->entity_manager->CreateCore(App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterType(), { 25,330 }, enemy_deck, FACTION_AMERICAN, true);
+	enemy_core->delete_deck = true;
+
 
 	//Initialize UI
 	StartUI();
+
+	win_fx = App->audio->LoadFx("audio/fx/Mission/Mission_accomplished.wav");
+	lose_fx = App->audio->LoadFx("audio/fx/Mission/Mission_Failed.wav");
+	deployment_fx = App->audio->LoadFx("audio/fx/Voice_Over/Unit_ready.wav");
+	App->audio->PlayMusic("audio/music/9.Destroy-Red Alert2_2.ogg");
 
 	return true;
 }
@@ -96,44 +104,110 @@ bool BattleScene::Update(float dt)
 		int x, y;
 		App->input->GetMousePosition(x, y);
 		iPoint p = App->render->ScreenToWorld(x, y);
+		iPoint tile_p = App->map->WorldToMap(p.x, p.y);
 
 		//-------SHORTCUTS-----------------------//
+		if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN
+			|| App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
+		{
+			shortcut_timer.Start();
+		}
 
-		if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
-			allied_core->UseCard(CN_FIRST, { (float)p.x, (float)p.y });
+		if ((App->input->GetKey(SDL_SCANCODE_1) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_2) == KEY_REPEAT
+			|| App->input->GetKey(SDL_SCANCODE_3) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_4) == KEY_REPEAT)
+			&& shortcut_timer.ReadMs() > HELD_DELAY)
+		{
+			App->map->SetDrawable("Spawn", 0);
+		}
 
-		if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
-			allied_core->UseCard(CN_SECOND, { (float)p.x, (float)p.y });
+		if (App->input->GetKey(SDL_SCANCODE_1) == KEY_UP)
+		{
+			App->map->SetDrawable("Spawn", 1);
+			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
+			{
+				if (allied_core->UseCard(CN_FIRST, { float(p.x),float(p.y) }))
+					App->audio->PlayFx(deployment_fx, 0);
+			}
+		}
 
-		if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
-			allied_core->UseCard(CN_THIRD, { (float)p.x, (float)p.y });
+		if (App->input->GetKey(SDL_SCANCODE_2) == KEY_UP)
+		{
+			App->map->SetDrawable("Spawn", 1);
+			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
+			{
+				if (allied_core->UseCard(CN_SECOND, { float(p.x),float(p.y) }))
+					App->audio->PlayFx(deployment_fx, 0);
+			}
+		}
 
-		if (App->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
-			allied_core->UseCard(CN_FOURTH, { (float)p.x, (float)p.y });
+		if (App->input->GetKey(SDL_SCANCODE_3) == KEY_UP)
+		{
+			App->map->SetDrawable("Spawn", 1);
+			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
+			{
+				if (allied_core->UseCard(CN_THIRD, { float(p.x),float(p.y) }))
+					App->audio->PlayFx(deployment_fx, 0);
+			}
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_4) == KEY_UP)
+		{
+			App->map->SetDrawable("Spawn", 1);
+			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
+			{
+				if (allied_core->UseCard(CN_FOURTH, { float(p.x),float(p.y) }))
+					App->audio->PlayFx(deployment_fx, 0);
+			}
+		}
+			
 
 		//---------------------------------------//
+
+		if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_UP)
+		{
+			state = BattleSceneState::WIN;
+			App->PauseGame();
+			App->gui->EnableElement((UIElement*)win_panel_one);
+			App->audio->PlayFx(win_fx, 0);
+		}
+			
 
 
 		if (!allied_core->IsAlive())
 		{
 			state = BattleSceneState::LOSE;
+			App->audio->PlayFx(lose_fx, 0);
 			App->PauseGame();
+			App->gui->EnableElement((UIElement*)lose_panel);
+			App->gui->DisableInteractable((UIElement*)unit_panel);
 		}
 		else if (!enemy_core->IsAlive())
 		{
 			state = BattleSceneState::WIN;
+			App->audio->PlayFx(win_fx, 0);
 			App->PauseGame();
 			App->gui->EnableElement((UIElement*)win_panel_one);
+			App->gui->DisableInteractable((UIElement*)unit_panel);
 		}
 	}
 	break;
 	case BattleScene::BattleSceneState::WIN:
 	{
+		if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
+		{
+			App->gui->DisableElement((UIElement*)win_panel_two);
+			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
+		}
+			
 	}
 	break;
 	case BattleScene::BattleSceneState::LOSE:
 	{
-		
+		if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
+		{
+			App->gui->DisableElement((UIElement*)lose_panel);
+			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
+		}
 	}
 	break;
 	default:
@@ -168,16 +242,16 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 {
 	if (gui_event == GUI_Event::LEFT_CLICK_DOWN) {
 		if (element == unit_button_one) {
-			CreateDrag(allied_core->GetCard(CN_FIRST)->type, element);
+			CreateDrag(CN_FIRST, allied_core->GetCard(CN_FIRST)->type, element);
 		}
 		else if (element == unit_button_two) {
-			CreateDrag(allied_core->GetCard(CN_SECOND)->type, element);
+			CreateDrag(CN_SECOND, allied_core->GetCard(CN_SECOND)->type, element);
 		}
 		else if (element == unit_button_three) {
-			CreateDrag(allied_core->GetCard(CN_THIRD)->type, element);
+			CreateDrag(CN_THIRD, allied_core->GetCard(CN_THIRD)->type, element);
 		}
 		else if (element == unit_button_four) {
-			CreateDrag(allied_core->GetCard(CN_FOURTH)->type, element);
+			CreateDrag(CN_FOURTH, allied_core->GetCard(CN_FOURTH)->type, element);
 		}
 		else if (element == win_continue_one) {
 			App->gui->DisableElement((UIElement*)win_panel_one);
@@ -186,18 +260,22 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 		else if (element == win_continue_two) {
 			if (win_unit_one->selected) {
 				App->game_manager->AddCardToCollection((EntityType)random_num[0]);
+				App->gui->DisableElement((UIElement*)win_panel_two);
 				App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
 			}
 			else if (win_unit_two->selected) {
 				App->game_manager->AddCardToCollection((EntityType)random_num[1]);
+				App->gui->DisableElement((UIElement*)win_panel_two);
 				App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
 			}
 			else if (win_unit_three->selected) {
 				App->game_manager->AddCardToCollection((EntityType)random_num[2]);
+				App->gui->DisableElement((UIElement*)win_panel_two);
 				App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
 			}
 		}
 		else if (element == lose_continue) {
+			App->gui->DisableElement((UIElement*)lose_panel);
 			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
 		}
 
@@ -226,32 +304,46 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 	return true;
 }
 
-void BattleScene::CreateDrag(int num, UIElement* element)
+void BattleScene::CreateDrag(int num, int type, UIElement* element)
 {
+	int x, y;
+	App->input->GetMousePosition(x, y);
+	x = x - element->GetScreenPos().x;
+	y = y - element->GetScreenPos().y;
+
 	card_num = num;
-	current_drag = App->gui->CreateImage({ 0,0 }, App->gui->LoadUIButton(num, "drag")[0], element);
+	current_drag = App->gui->CreateImage({ x,y }, App->gui->LoadUIButton(type, "drag")[0], element);
 	current_drag->interactable = true;
 	current_drag->dragable = true;
 	current_drag->clipping = false;
 	current_drag->parent_limit = false;
 	current_drag->clicked = true;
+	current_drag->hovered = true;
+	App->map->SetDrawable("Spawn", 0);
 }
 
 void BattleScene::ReleaseDrag()
 {
 	int x, y;
 	App->input->GetMousePosition(x, y);
-	iPoint point = App->render->ScreenToWorld(x, y);
-	allied_core->UseCard(card_num, { float(point.x),float(point.y) });
+	iPoint world_pos = App->render->ScreenToWorld(x, y);
+	iPoint map_pos = App->map->WorldToMap(world_pos.x, world_pos.y);
+
+	if (App->map->IsInsideMap(map_pos) && App->map->IsSpawnable(map_pos))
+	{
+		if (allied_core->UseCard(card_num, { float(world_pos.x),float(world_pos.y) }))
+			App->audio->PlayFx(deployment_fx, 0);
+	}
+
+	App->map->SetDrawable("Spawn", 1);
 	App->gui->DeleteElement(current_drag);
 	current_drag = nullptr;
 }
 
 void BattleScene::StartUI()
 {
+	srand(time(0));
 	//Generate random number
-
-	srand(time(NULL));
 	do {
 		random_num[0] = rand() % 9 + 1;
 		random_num[1] = rand() % 9 + 1;
@@ -267,6 +359,13 @@ void BattleScene::StartUI()
 	unit_button_four = App->gui->CreateButton({ 135, 445 }, App->gui->LoadUIButton(allied_core->GetCard(CN_FOURTH)->type, "button"), unit_panel);
 
 	energy_bar = App->gui->CreateBar({ 764, 358 }, { 601,0,16,274 }, allied_core->GetEnergy());
+
+	health_bar_image = App->gui->CreateImage({ 470,730 }, { 747,1215,353,28 });
+	enemy_health_bar_image = App->gui->CreateImage({ 40,20 }, { 747,1290,353,28 });
+	health_bar = App->gui->CreateBar({ 498,740 }, { 747,1244,223,16 }, allied_core->GetHealth(), BarType::BAR_HORITZONTAL);
+	enemy_health_bar = App->gui->CreateBar({ 68,30 }, { 747,1244,223,16 }, enemy_core->GetHealth(), BarType::BAR_HORITZONTAL);
+
+	App->gui->EnableInteractable((UIElement*)unit_panel);
 
 	// End Game Screen Win
 	SDL_Rect button_rect[3];

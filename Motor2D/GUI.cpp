@@ -169,10 +169,13 @@ bool Gui::PostUpdate()
 bool Gui::CleanUp()
 {
 	LOG("Freeing GUI");
-	for (std::list<UIElement*>::iterator element = elements.begin(); element != elements.end(); ++element)
+	while (!elements.empty())
 	{
-		(*element)->CleanUp();
+		elements.front()->CleanUp();
+		delete elements.front();
+		elements.pop_front();
 	}
+
 	elements.clear();
 
 	return true;
@@ -224,9 +227,9 @@ UIAnimatedImage* Gui::CreateAnimatedImage(iPoint pos, SDL_Rect * rect, int total
 	return image;
 }
 
-UIBar * Gui::CreateBar(iPoint pos, SDL_Rect rect, Stat* value, UIElement * parent)
+UIBar * Gui::CreateBar(iPoint pos, SDL_Rect rect, Stat* value, BarType type, UIElement * parent)
 {
-	UIBar* bar = new UIBar(pos, rect, value, parent);
+	UIBar* bar = new UIBar(pos, rect, value, type);
 	bar->parent = parent;
 	elements.push_back(bar);
 	return bar;
@@ -242,6 +245,15 @@ void Gui::DeleteElement(UIElement* ele)
 	ele->CleanUp();
 	elements.remove(ele);
 	delete ele;
+}
+
+void Gui::DisableUI()
+{
+	for (std::list<UIElement*>::iterator element = elements.begin(); element != elements.end(); ++element)
+	{
+		if((*element)->enabled)
+			DisableElement((*element));
+	}
 }
 
 void Gui::EnableElement(UIElement* ele)
@@ -261,6 +273,26 @@ void Gui::DisableElement(UIElement* ele)
 	{
 		if ((*element)->parent && (*element)->parent == ele)
 			DisableElement(*element);
+	}
+}
+
+void Gui::EnableInteractable(UIElement* ele)
+{
+	ele->interactable = true;
+	for (std::list<UIElement*>::iterator element = elements.begin(); element != elements.end(); ++element)
+	{
+		if ((*element)->parent && (*element)->parent == ele)
+			(*element)->interactable = true;
+	}
+}
+
+void Gui::DisableInteractable(UIElement* ele)
+{
+	ele->interactable = false;
+	for (std::list<UIElement*>::iterator element = elements.begin(); element != elements.end(); ++element)
+	{
+		if ((*element)->parent && (*element)->parent == ele)
+			(*element)->interactable = false;
 	}
 }
 

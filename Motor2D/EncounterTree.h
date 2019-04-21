@@ -43,6 +43,7 @@ public:
 
 	void CleanTree();
 
+	void EntityClicked(StrategyBuilding* entity);
 	void SetCurrentNodeByEntity(StrategyBuilding* entity);
 
 };
