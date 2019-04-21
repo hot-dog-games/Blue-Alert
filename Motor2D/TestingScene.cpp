@@ -219,6 +219,7 @@ bool TestingScene::Update(float dt)
 			state = BattleSceneState::WIN;
 			App->PauseGame();
 			App->gui->EnableElement((UIElement*)win_panel_one);
+			App->gui->DisableInteractable((UIElement*)unit_panel);
 		}
 	}
 		break;
@@ -356,6 +357,9 @@ void TestingScene::StartUI()
 
 	energy_bar = App->gui->CreateBar({ 764, 358 }, { 601,0,16,274 }, test_core->GetEnergy());
 
+	health_bar_image = App->gui->CreateImage({ 470,730 }, { 747,1215,353,28 });
+	health_bar = App->gui->CreateBar({ 498,740 }, { 747,1244,223,16 }, test_core->GetHealth(), BarType::BAR_HORITZONTAL);
+
 	// End Game Screen
 	SDL_Rect button_rect[3];
 	button_rect[0] = { 221,533,220,51 };
@@ -377,6 +381,7 @@ void TestingScene::StartUI()
 
 	App->gui->DisableElement((UIElement*)win_panel_one);
 	App->gui->DisableElement((UIElement*)win_panel_two);
+	App->gui->EnableInteractable((UIElement*)unit_panel);
 
 
 }
