@@ -142,6 +142,15 @@
     <ClCompile Include="StrategyMapScene.cpp">
       <Filter>Engine\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Particles.cpp">
+      <Filter>Engine\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle.cpp">
+      <Filter>Engine\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectileParticle.cpp">
+      <Filter>Engine\Particles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
@@ -300,6 +309,15 @@
     <ClInclude Include="StrategyMapScene.h">
       <Filter>Engine\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="Particles.h">
+      <Filter>Engine\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>Engine\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectileParticle.h">
+      <Filter>Engine\Particles</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -331,6 +349,9 @@
     </Filter>
     <Filter Include="Engine\Stats&amp;Buffs">
       <UniqueIdentifier>{9ccec464-7004-43d9-a244-1da510e94769}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Particles">
+      <UniqueIdentifier>{58182d04-cf05-4c4d-9038-8e38e51be0d3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

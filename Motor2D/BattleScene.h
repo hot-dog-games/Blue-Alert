@@ -47,7 +47,7 @@ public:
 	virtual bool GUIEvent(UIElement* element, GUI_Event gui_event);
 
 private:
-	void CreateDrag(int num, UIElement* element);
+	void CreateDrag(int num, int type, UIElement* element);
 	void ReleaseDrag();
 
 	void StartUI();
@@ -60,6 +60,7 @@ private:
 		LOSE
 	};
 	BattleSceneState state = BattleSceneState::FIGHT;
+	PerfTimer shortcut_timer;
 
 	UIImage*		unit_panel;
 	UIButton*		unit_button_one;
@@ -67,6 +68,10 @@ private:
 	UIButton*		unit_button_three;
 	UIButton*		unit_button_four;
 	UIBar*			energy_bar;
+	UIBar*			health_bar;
+	UIImage*		health_bar_image;
+	UIBar*			enemy_health_bar;
+	UIImage*		enemy_health_bar_image;
 
 	UIImage*		win_panel_one;
 	UIImage*		win_panel_two;
@@ -86,6 +91,11 @@ private:
 	UIImage* current_drag;
 	int card_num;
 	int random_num[3];
+
+	//Audio fx
+	uint win_fx;
+	uint lose_fx;
+	uint deployment_fx;
 
 	uint max_energy;
 	uint current_energy;

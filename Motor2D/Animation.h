@@ -30,7 +30,7 @@ public:
 
 	bool isDone()
 	{
-		if (current_frame == last_frame - 1) return true;
+		if (current_frame >= last_frame - 1) return true;
 		else return false;
 	}
 

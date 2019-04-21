@@ -51,7 +51,6 @@ bool CoreAI::Update(float dt)
 			{
 				if (CanUseCard(i))
 				{
-					LOG("spawned in lane %i", lane);
 					UseCard(i, { (float)lanes[lane].x + (float)lanes[lane].w*0.5f, position.y + 50 });
 					ai_state = AIState::WAITING;
 					break;
@@ -80,17 +79,11 @@ bool CoreAI::PostUpdate()
 	return true;
 }
 
-bool CoreAI::CleanUp()
-{
-
-	return true;
-}
-
 bool CoreAI::Start()
 {
-	lanes[0] = { -173, 0 , 135, 1000 };
-	lanes[1] = { -37, 0 , 135, 1000 };
-	lanes[2] = { 99, 0 , 135, 1000 };
+	lanes[0] = { -150, 0 , 120, 1000 };
+	lanes[1] = { -30, 0 , 120, 1000 };
+	lanes[2] = { 90, 0 , 120, 1000 };
 
 	return true;
 }
