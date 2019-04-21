@@ -9,7 +9,7 @@ enum class ParticleType;
 class Particle
 {
 public:
-	Particle(const pugi::xml_node &config, const fPoint &pos);
+	Particle(const pugi::xml_node &config, const fPoint &pos, SDL_Texture* sprite);
 	~Particle();
 
 	virtual bool Update(float dt);

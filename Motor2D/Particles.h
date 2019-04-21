@@ -25,11 +25,14 @@ public:
 	bool PostUpdate();
 	bool Pause();
 	bool Resume();
+	bool Start();
 
 	Particle* CreateParticle(const ParticleType &particle, const fPoint &pos);
 
 private:
 	SDL_Texture* particle_atlas = nullptr;
+	std::string atlas_route;
+
 	std::list<Particle*> particles;
 
 	pugi::xml_document particle_file;

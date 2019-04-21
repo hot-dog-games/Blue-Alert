@@ -6,6 +6,7 @@
 #include "Pathfinding.h"
 #include "Stat.h"
 #include "Map.h"
+#include "Particles.h"
 #include "DynamicEntity.h"
 
 const float DELETE_TIME = 5.0f;
@@ -271,6 +272,7 @@ void DynamicEntity::Attack()
 			{
 				(*entity)->DecreaseLife(attack);
 			}
+			App->particles->CreateParticle(ParticleType::ATTACK_EXPLOSION, objective->position);
 		}
 			break;
 		case AttackType::PIERCING:

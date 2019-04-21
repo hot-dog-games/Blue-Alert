@@ -6,9 +6,10 @@
 
 
 
-Particle::Particle(const pugi::xml_node &config, const fPoint &pos)
+Particle::Particle(const pugi::xml_node &config, const fPoint &pos, SDL_Texture* sprite)
 {
 	position = pos;
+	this->sprite = sprite;
 	LoadAnimation(config.child("animation"));
 }
 
@@ -41,7 +42,7 @@ bool Particle::Update(float dt)
 
 bool Particle::PostUpdate()
 {
-	App->render->Blit(sprite, position.x + (current_frame.w*0.5), position.y + (current_frame.h), &current_frame);
+	App->render->Blit(sprite, position.x - (current_frame.w*0.5), position.y - current_frame.h, &current_frame);
 
 	return true;
 }

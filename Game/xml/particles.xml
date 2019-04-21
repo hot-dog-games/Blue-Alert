@@ -1,8 +1,32 @@
 <config>
   <!--AOE_EXPLOSION-->
   <particle type="0">
-    <animation speed="">
-      <frame x="" y="" width="" height=""/>
+    <animation speed="40">
+      <frame x="84" y="86" width="49" height="44"/>
+      <frame x="298" y="79" width="58" height="55"/>
+      <frame x="513" y="72" width="63" height="62"/>
+      <frame x="726" y="64" width="71" height="70"/>
+      <frame x="70" y="245" width="78" height="80"/>
+      <frame x="284" y="240" width="84" height="89"/>
+      <frame x="498" y="233" width="93" height="98"/>
+      <frame x="713" y="228" width="99" height="106"/>
+      <frame x="55" y="415" width="106" height="114"/>
+      <frame x="270" y="412" width="113" height="120"/>
+      <frame x="485" y="410" width="118" height="126"/>
+      <frame x="702" y="409" width="123" height="129"/>
+      <frame x="42" y="601" width="133" height="131"/>
+      <frame x="259" y="603" width="137" height="133"/>
+      <frame x="473" y="606" width="143" height="136"/>
+      <frame x="686" y="610" width="150" height="134"/>
+      <frame x="30" y="806" width="156" height="131"/>
+      <frame x="247" y="812" width="158" height="133"/>
+      <frame x="465" y="819" width="162" height="127"/>
+      <frame x="682" y="826" width="164" height="119"/>
+      <frame x="25" y="1022" width="172" height="118"/>
+      <frame x="239" y="1022" width="180" height="122"/>
+      <frame x="453" y="1021" width="177" height="127"/>
+      <frame x="673" y="1020" width="181" height="85"/>
+      <frame x="16" y="1211" width="196" height="63"/>
     </animation>
   </particle>
 </config>

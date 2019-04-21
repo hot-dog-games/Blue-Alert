@@ -27,7 +27,14 @@ bool Particles::Awake(pugi::xml_node &config)
 	else
 		particle_configs = particle_file.child("config");
 
-	particle_atlas = App->tex->Load(config.child("atlas").child_value());
+	atlas_route = config.child("atlas").child_value();
+
+	return true;
+}
+
+bool Particles::Start()
+{
+	particle_atlas = App->tex->Load(atlas_route.c_str());
 
 	return true;
 }
@@ -39,8 +46,10 @@ bool Particles::Update(float dt)
 		for (std::list<Particle*>::iterator particle = particles.begin(); particle != particles.end(); ++particle)
 		{
 			if (!(*particle)->Update(dt))
+			{
 				delete (*particle);
-			particles.erase(particle);
+				particles.erase(particle);
+			}		
 		}
 	}
 
@@ -75,8 +84,8 @@ Particle * Particles::CreateParticle(const ParticleType &particle_type, const fP
 	switch (particle_type)
 	{
 	case ParticleType::ATTACK_EXPLOSION:
-		particle_node = particle_configs.find_child_by_attribute("type", 0);
-		particle = new Particle(particle_node, pos);
+		particle_node = particle_configs.find_child_by_attribute("type", std::to_string(0).c_str());
+		particle = new Particle(particle_node, pos, particle_atlas);
 		particle->type = particle_type;
 		break;
 	default:
@@ -90,8 +99,12 @@ Particle * Particles::CreateParticle(const ParticleType &particle_type, const fP
 bool Particles::Pause()
 {
 	paused = true;
+
+	return true;
 }
 bool Particles::Resume()
 {
 	paused = false;
+
+	return true;
 }
