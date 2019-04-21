@@ -149,7 +149,7 @@ bool DynamicEntity::Update(float dt)
 
 void DynamicEntity::CalcDirection()
 {
-	if (direction_vector.x > 0)
+	if (direction_vector.x > 0.3f)
 	{
 		direction = RIGHT;
 		if (direction_vector.y > 0)
@@ -161,7 +161,7 @@ void DynamicEntity::CalcDirection()
 			direction = UP_RIGHT;
 		}
 	}
-	else if (direction_vector.x < 0)
+	else if (direction_vector.x < -0.3f)
 	{
 		direction = LEFT;
 		if (direction_vector.y > 0)
