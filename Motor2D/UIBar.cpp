@@ -13,7 +13,7 @@ UIBar::UIBar(iPoint pos, SDL_Rect sprite_rect, Stat* value, BarType type, bool i
 	rect_sprite = sprite_rect;
 	bar_value = value;
 	bar_type = type;
-	current_value = value->GetValue();
+	current_value = value->GetMaxValue();
 }
 
 void UIBar::DecreaseBar(uint value)

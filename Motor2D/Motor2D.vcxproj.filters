@@ -148,7 +148,9 @@
     <ClCompile Include="Particle.cpp">
       <Filter>Engine\Particles</Filter>
     </ClCompile>
-    <ClCompile Include="ProjectileParticle.cpp" />
+    <ClCompile Include="ProjectileParticle.cpp">
+      <Filter>Engine\Particles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
@@ -313,7 +315,9 @@
     <ClInclude Include="Particle.h">
       <Filter>Engine\Particles</Filter>
     </ClInclude>
-    <ClInclude Include="ProjectileParticle.h" />
+    <ClInclude Include="ProjectileParticle.h">
+      <Filter>Engine\Particles</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
