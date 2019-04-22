@@ -63,17 +63,17 @@ bool TestingScene::Start()
 
 	Deck* enemy_deck = new Deck();
 	enemy_deck->delete_cards = true;
-	enemy_deck->AddCard(App->card_manager->CreateCard(EntityType::G_I));
+	enemy_deck->AddCard(App->card_manager->CreateCard(EntityType::BLACK_EAGLE));
 	enemy_deck->AddCard(App->card_manager->CreateCard(EntityType::SNIPER));
 	enemy_deck->AddCard(App->card_manager->CreateCard(EntityType::GRIZZLY));
 	enemy_deck->AddCard(App->card_manager->CreateCard(EntityType::HARRIER));
 
 	Deck* test_deck = new Deck();
 	test_deck->delete_cards = true;
-	test_deck->AddCard(App->card_manager->CreateCard(EntityType::G_I));
+	test_deck->AddCard(App->card_manager->CreateCard(EntityType::NAVY_SEAL));
 	test_deck->AddCard(App->card_manager->CreateCard(EntityType::SNIPER));
-	test_deck->AddCard(App->card_manager->CreateCard(EntityType::GRIZZLY));
-	test_deck->AddCard(App->card_manager->CreateCard(EntityType::HARRIER));
+	test_deck->AddCard(App->card_manager->CreateCard(EntityType::BLACK_EAGLE));
+	test_deck->AddCard(App->card_manager->CreateCard(EntityType::G_I));
 
 	test_core = App->entity_manager->CreateCore(1, { 30,980 }, test_deck, FACTION_RUSSIAN);
 	test_enemy_core = App->entity_manager->CreateCore(13, { 25,330 }, enemy_deck, FACTION_AMERICAN);
