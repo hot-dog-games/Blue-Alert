@@ -261,7 +261,7 @@ void Gui::EnableElement(UIElement* ele)
 	ele->SetEnabled(true);
 	for (std::list<UIElement*>::iterator element = elements.begin(); element != elements.end(); ++element)
 	{
-		if ((*element)->parent && (*element)->parent == ele)
+		if ((*element)->parent && (*element)->parent == ele && (*element) != nullptr)
 			EnableElement(*element);
 	}
 }

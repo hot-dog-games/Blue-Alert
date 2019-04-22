@@ -111,7 +111,6 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			//(options = App->gui->CreateImage();
 		}
 		else if (element == menu_button) {
-			App->game_manager->collection;
 			
 
 			App->gui->EnableElement(troops_button);
