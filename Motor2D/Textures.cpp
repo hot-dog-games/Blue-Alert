@@ -50,11 +50,11 @@ bool Textures::CleanUp()
 
 	for(item = textures.begin(); item != textures.end(); ++item)
 	{
-		SDL_DestroyTexture(item->second);
+		if(item->second)
+			SDL_DestroyTexture(item->second);
 		textures.erase(item);
 	}
 
-	textures.clear();
 	IMG_Quit();
 	return true;
 }
