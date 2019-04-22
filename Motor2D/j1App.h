@@ -25,6 +25,8 @@ class Fonts;
 class TransitionManager;
 class BuffSourceManager;
 class GameManager;
+class Movement;
+class Particles;
 
 class j1App
 {
@@ -106,6 +108,8 @@ public:
 	TransitionManager* transition_manager;
 	BuffSourceManager* buff;
 	GameManager* game_manager;
+	Movement* movement;
+	Particles*	particles;
 
 private:
 

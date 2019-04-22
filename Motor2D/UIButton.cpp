@@ -25,7 +25,6 @@ bool UIButton::UIBlit()
 void UIButton::OnMouseClick()
 {
 	rect_sprite = anim[2];
-	App->audio->PlayFx(sound);
 }
 
 void UIButton::OnMouseHover()
@@ -40,6 +39,15 @@ void UIButton::OnMouseRelease()
 
 void UIButton::OnMouseExit()
 {
+	rect_sprite = anim[0];
+}
+
+void UIButton::ChangeSprite(SDL_Rect* rect)
+{
+	anim[0] = rect[0];
+	anim[1] = rect[1];
+	anim[2] = rect[2];
+	anim[3] = rect[3];
 	rect_sprite = anim[0];
 }
 
@@ -69,6 +77,4 @@ UIButton::UIButton(iPoint position, SDL_Rect* sprite_rect, bool is_selectable, b
 	anim[3] = sprite_rect[3];
 
 	rect_sprite = anim[interactable ? 0 : 3];
-
-	sound = App->audio->LoadFx("fx_button.wav");
 }

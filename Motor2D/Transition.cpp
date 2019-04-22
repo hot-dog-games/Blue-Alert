@@ -65,16 +65,13 @@ void Transition::Entering()
 
 void Transition::Action()
 {
-	current_time->Stop();
+	current_time->Start();
 
-	transition_time += transition_time;
 	state = TransitionState::EXITING;
 }
 
 void Transition::Exiting()
 {
-	current_time->Resume();
-
 	if (current_time->ReadSec() >= transition_time)
 	{
 		state = TransitionState::NONE;

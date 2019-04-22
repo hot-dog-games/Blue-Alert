@@ -32,6 +32,8 @@ public:
 	virtual bool CleanUp();
 	virtual bool Load(pugi::xml_node&);
 	virtual bool Save(pugi::xml_node&) const;
+	virtual bool Pause();
+	virtual bool Resume();
 
 	void ChangeScene(int new_scene);
 	Scene* current_scene = nullptr;

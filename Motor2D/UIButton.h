@@ -18,6 +18,8 @@ public:
 	void OnMouseHover();
 	void OnMouseRelease();
 	void OnMouseExit();
+
+	void ChangeSprite(SDL_Rect* rect);
 	void SetLocked(bool value);
 	bool CleanUp();
 };

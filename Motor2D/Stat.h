@@ -18,6 +18,7 @@ private:
 public:
 	float base_value;//INFO: The value of the stat without adding any buff
 	Stat(float base);
+	~Stat();
 
 	void AddBuff(Buff & buff);
 	void RemoveBuff(uint source_id);

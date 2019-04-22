@@ -6,9 +6,12 @@
 #include "Pathfinding.h"
 #include "Stat.h"
 #include "Map.h"
+#include "Particles.h"
 #include "DynamicEntity.h"
+#include "Movement.h"
 
-
+const float DELETE_TIME = 5.0f;
+const int EXPLOSION_RANGE_TILES = 2;
 
 DynamicEntity::DynamicEntity()
 {
@@ -23,6 +26,10 @@ DynamicEntity::DynamicEntity(pugi::xml_node config, fPoint position, Card* card,
 {
 	entity_card = card;
 	std::string stat_name = "health";
+
+	//singleUnit = new SingleUnit(this, nullptr);
+	//App->movement->CreateGroupFromUnit(this);
+
 	stats.insert({ "health", new Stat(card->info.stats.find("health")->second->GetMaxValue())});
 }
 
@@ -42,7 +49,7 @@ bool DynamicEntity::Start()
 		*point = App->map->MapToWorld((*point).x, (*point).y);
 		*point = { (*point).x + (int)(App->map->data.tile_width * 0.5), (*point).y + (int)(App->map->data.tile_height * 0.5) };
 	}
-	
+	explosion_fx = App->audio->LoadFx("audio/fx/Ambient_Sounds/Explosions/Explosion2.wav");
 	attack_fx = App->audio->LoadFx("audio/fx/Ambient_Sounds/Shots/One_shoot2.wav");
 	return true;
 }
@@ -60,13 +67,14 @@ bool DynamicEntity::PreUpdate()
 			CheckDestination();
 		break;
 	case DYNAMIC_ATTACKING:
-		if (!objective->IsAlive())
+		if (!objective->IsAlive() && current_animation->isDone())
 		{
 			objective = nullptr;
-			if (CheckEnemies())
-				state = DYNAMIC_ATTACKING;
-			else 
+			if (!CheckEnemies())
+			{
 				state = DYNAMIC_MOVING;
+				CheckDestination();
+			}			
 		}
 		else
 		{
@@ -88,7 +96,7 @@ bool DynamicEntity::PreUpdate()
 
 	CalcDirection();
 	AnimationCheck();
-
+	pivot.x = position.x - current_frame.w / 2; pivot.y = position.y; pivot.w = current_frame.w; pivot.h = -current_frame.h / 2;
 	return true;
 }
 
@@ -100,6 +108,7 @@ bool DynamicEntity::PostUpdate()
 	{
 		//Range debug 
 		App->render->DrawCircle(position.x, position.y, entity_card->info.stats.find("range")->second->GetValue()*App->map->data.tile_height, 255, 0, 0);
+		App->render->DrawQuad(pivot, 255, 0, 0);
 	}
 
 	return true;
@@ -107,6 +116,9 @@ bool DynamicEntity::PostUpdate()
 
 bool DynamicEntity::Update(float dt)
 {
+	if (current_animation)
+		current_frame = current_animation->GetCurrentFrame(dt);
+
 	switch (state)
 	{
 		case DYNAMIC_IDLE:
@@ -129,17 +141,21 @@ bool DynamicEntity::Update(float dt)
 
 		}
 		break;
+		case DYNAMIC_DEAD:
+			dead_timer += dt;
+			if (dead_timer >= DELETE_TIME)
+			{
+				App->entity_manager->DeleteEntity(this);
+			}
+		break;
 	}
-
-	if (current_animation)
-		current_frame = current_animation->GetCurrentFrame(dt);
 
 	return true;
 }
 
 void DynamicEntity::CalcDirection()
 {
-	if (direction_vector.x > 0)
+	if (direction_vector.x > 0.3f)
 	{
 		direction = RIGHT;
 		if (direction_vector.y > 0)
@@ -151,7 +167,7 @@ void DynamicEntity::CalcDirection()
 			direction = UP_RIGHT;
 		}
 	}
-	else if (direction_vector.x < 0)
+	else if (direction_vector.x < -0.3f)
 	{
 		direction = LEFT;
 		if (direction_vector.y > 0)
@@ -188,8 +204,13 @@ void DynamicEntity::CheckDestination()
 		if (current_point >= path.size())
 			state = DYNAMIC_IDLE;
 	}
-
-	fPoint move_pos = { path[current_point].x - position.x, path[current_point].y - position.y };
+	fPoint move_pos;
+	/*if (CheckAllies())
+	{
+		move_pos = { path[current_point].x - position.x - 20, path[current_point].y - position.y };
+	}else*/
+	move_pos = { path[current_point].x - position.x, path[current_point].y - position.y };
+	
 	float m = sqrtf(pow(move_pos.x, 2.0f) + pow(move_pos.y, 2.0f));
 	if (m > 0.0f) {
 		move_pos.x /= m;
@@ -213,8 +234,8 @@ void DynamicEntity::Move(float dt)
 	}
 	else
 	{
-		position.x += movement_vector.x;
-		position.y += movement_vector.y;
+			position.x += movement_vector.x;
+			position.y += movement_vector.y;
 	}
 }
 
@@ -224,7 +245,7 @@ bool DynamicEntity::CheckEnemies()
 	float distance = 10000.0f;
 	App->entity_manager->FindClosestEnemy(position, faction, closest_entity, distance);
 
-	if (distance <= entity_card->info.stats.find("range")->second->GetValue()* App->map->data.tile_height)
+	if (closest_entity && distance <= entity_card->info.stats.find("range")->second->GetValue()* App->map->data.tile_height)
 	{
 		objective = closest_entity;
 		fPoint objective_direction = { objective->position.x - position.x, objective->position.y - position.y };
@@ -241,15 +262,100 @@ bool DynamicEntity::CheckEnemies()
 	return false;
 }
 
+bool DynamicEntity::CheckAllies()
+{
+	Entity* closest_entity = nullptr;
+	float distance = 10000.0f;
+	App->entity_manager->FindClosestAllie(position, faction, closest_entity, distance);
+	
+
+	if (distance <= current_frame.h/2)
+	{
+		return true;
+	}
+
+	return false;
+}
+
 
 void DynamicEntity::Attack()
 {
 	if (attack_timer.ReadMs() >= SECOND_MS / entity_card->info.stats.find("attack_speed")->second->GetValue() )
 	{
-		App->audio->PlayFx(attack_fx, 0);
-		objective->DecreaseLife(entity_card->info.stats.find("damage")->second->GetValue());
+		float attack = entity_card->info.stats.find("damage")->second->GetValue();
+		switch (entity_card->info.attack_type)
+		{
+		case AttackType::BASIC:
+			objective->DecreaseLife(attack);
+			App->particles->CreateParticle(ParticleType::ATTACK_BASIC_SHOT, { position.x, position.y - current_frame.h * 0.5f }, 
+				{ objective->position.x, objective->position.y - objective->current_frame.h * 0.5f });
+			App->audio->PlayFx(attack_fx.c_str(), 0);
+			break;
+		case AttackType::AOE:
+		{
+			App->audio->PlayFx(explosion_fx.c_str(), 0);
+			std::list<Entity*> entities;
+			float radius = EXPLOSION_RANGE_TILES * App->map->data.tile_height;
+			App->entity_manager->GetEntitiesInArea(radius, objective->position, entities, faction);
+
+			for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
+			{
+				(*entity)->DecreaseLife(attack);
+			}
+			App->particles->CreateParticle(ParticleType::ATTACK_EXPLOSION, objective->position);
+		}
+			break;
+		case AttackType::PIERCING:
+			objective->DecreaseLife(attack, true);
+			App->particles->CreateParticle(ParticleType::ATTACK_BASIC_SHOT, { position.x, position.y - current_frame.h * 0.5f },
+				{ objective->position.x, objective->position.y - objective->current_frame.h * 0.5f });
+			App->audio->PlayFx(attack_fx.c_str(), 0);
+			break;
+		default:
+			break;
+		}
 		attack_timer.Start();
 	}
+}
+
+SingleUnit* DynamicEntity::GetSingleUnit()
+{
+	return singleUnit;
+}
+
+void DynamicEntity::SetUnitDirection(EntiyDirection unitDirection)
+{
+}
+
+EntiyDirection DynamicEntity::GetUnitDirection()
+{
+	return EntiyDirection();
+}
+
+void DynamicEntity::SetUnitDirectionByValue(fPoint unitDirection)
+{
+}
+
+fPoint DynamicEntity::GetUnitDirectionByValue() const
+{
+	return fPoint();
+}
+void DynamicEntity::DecreaseLife(float damage, bool piercing)
+{
+	float defense = entity_card->info.stats.find("defense")->second->GetValue();
+	float damage_received = CalculateDamage(damage, defense);
+
+	if (entity_card->info.armored)
+	{
+		if (piercing)
+			damage_received *= 1.25f;
+		else
+			damage_received *= 0.75f;
+	}
+
+	stats.find("health")->second->DecreaseStat(damage_received);
+	if (stats.find("health")->second->GetValue() <= 0)
+		Die();
 }
 
 void DynamicEntity::Die()
@@ -269,6 +375,8 @@ bool DynamicEntity::CleanUp()
 		stats.erase(item);
 	}
 	stats.clear();
+
+	//delete singleUnit;
 
 	return true;
 }

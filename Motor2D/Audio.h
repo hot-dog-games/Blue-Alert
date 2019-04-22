@@ -2,7 +2,7 @@
 #define __Audio_H__
 
 #include "Module.h"
-
+#include <map>
 #define DEFAULT_MUSIC_FADE_TIME 2.0f
 
 struct _Mix_Music;
@@ -27,15 +27,15 @@ public:
 	bool PlayMusic(const char* path, float fade_time = DEFAULT_MUSIC_FADE_TIME);
 
 	// Load a WAV in memory
-	unsigned int LoadFx(const char* path);
+	const char* LoadFx(const char* path);
 
 	// Play a previously loaded WAV
-	bool PlayFx(unsigned int fx, int repeat = 0);
+	bool PlayFx(const char* fx, int repeat = 0);
 
 private:
 
-	_Mix_Music*			music = NULL;
-	std::vector<Mix_Chunk*>	fx;
+	_Mix_Music*	music = NULL;
+	std::map<std::string, Mix_Chunk*>	fx;
 };
 
 #endif // __Audio_H__

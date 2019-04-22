@@ -39,14 +39,10 @@ bool GameManager::Start()
 
 bool GameManager::CleanUp()
 {
+	delete combat_deck;
 	collection.clear();
 	encounter_tree->CleanTree();
-	return true;
-}
 
-bool GameManager::PostUpdate()
-{
-	encounter_tree->UpdateTree();
 	return true;
 }
 
@@ -60,20 +56,50 @@ Deck * GameManager::GetPlayerDeck()
 	return combat_deck;
 }
 
+bool GameManager::IsInPlayerDeck(Card * card)
+{
+	bool ret = false;
+
+	Card* deck_card = combat_deck->GetCard(card->type);
+
+	if (deck_card) {
+		ret = true;
+	}
+	else {
+		ret = false;
+	}
+
+	return ret;
+}
+
 void GameManager::CreatePlayerDeck()
 {
 	collection.push_back(App->card_manager->CreateCard(EntityType::G_I));
 	collection.push_back(App->card_manager->CreateCard(EntityType::SNIPER));
-	collection.push_back(App->card_manager->CreateCard(EntityType::NAVY_SEAL));
+	collection.push_back(App->card_manager->CreateCard(EntityType::GRIZZLY));
 	collection.push_back(App->card_manager->CreateCard(EntityType::HARRIER));
+	collection.push_back(App->card_manager->CreateCard(EntityType::ROBOT));
 
 	combat_deck = new Deck();
 	combat_deck->AddCard(GetCardFromCollection(EntityType::G_I));
 	combat_deck->AddCard(GetCardFromCollection(EntityType::SNIPER));
-	combat_deck->AddCard(GetCardFromCollection(EntityType::NAVY_SEAL));
+	combat_deck->AddCard(GetCardFromCollection(EntityType::GRIZZLY));
 	combat_deck->AddCard(GetCardFromCollection(EntityType::HARRIER));
 }
 
+bool GameManager::Restart()
+{
+	for (std::list<Card*>::iterator card = collection.begin(); card != collection.end(); ++card)
+	{
+		App->card_manager->DeleteCard((*card));
+		collection.erase(card);
+	}		
+	delete combat_deck;
+	encounter_tree->CleanTree();
+	Start();
+
+	return true;
+}
 
 
 

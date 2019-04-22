@@ -1,5 +1,6 @@
 #include <iostream> 
 #include <sstream> 
+#include <time.h>
 
 #include "p2Defs.h"
 #include "p2Log.h"
@@ -17,8 +18,11 @@
 #include "GUI.h"
 #include "Fonts.h"
 #include "BuffSourceManager.h"
+#include "Particles.h"
 #include "TransitionManager.h"
 #include "GameManager.h"
+#include "Brofiler/Brofiler.h"
+#include "Movement.h"
 #include "j1App.h"
 
 
@@ -40,9 +44,11 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	gui = new Gui();
 	fonts = new Fonts();
 	entity_manager = new EntityManager();
+	particles = new Particles();
 	transition_manager = new TransitionManager();
 	buff = new BuffSourceManager();
 	game_manager = new GameManager();
+	//movement = new Movement();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -57,6 +63,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(fonts);
 	AddModule(entity_manager);
 	AddModule(pathfinding);
+	AddModule(particles);
 	AddModule(gui);
 	AddModule(transition_manager);
 	AddModule(buff);
@@ -89,6 +96,8 @@ void j1App::AddModule(Module* module)
 // Called before render is available
 bool j1App::Awake()
 {
+	srand(time(0));
+
 	pugi::xml_document	config_file;
 	pugi::xml_node		config;
 	pugi::xml_node		app_config;
@@ -178,16 +187,10 @@ void j1App::PrepareUpdate()
 {
 	last_sec_frame_count++;
 
-	if (!paused)
-	{
-		dt = frame_time.ReadSec();
-		if (dt > frame_rate / 1000)
-			dt = frame_rate / 1000;
-	}
-	else
-	{
-		dt = 0;
-	}
+	dt = frame_time.ReadSec();
+	if (dt > frame_rate / 1000)
+		dt = frame_rate / 1000;
+
 	frame_time.Start();
 }
 
@@ -215,7 +218,7 @@ void j1App::FinishUpdate()
 		frames_on_last_update, last_frame_ms);
 	App->win->SetTitle(title);
 
-
+	BROFILER_CATEGORY("WAIT", Profiler::Color::MediumVioletRed);
 	if (frame_cap)
 	{
 		float waiting_time = (1000 / frame_rate);
@@ -335,11 +338,19 @@ const char* j1App::GetOrganization() const
 void j1App::PauseGame()
 {
 	paused = true;
+	for (std::list<Module*>::iterator item = modules.begin(); item != modules.end(); ++item)
+	{
+		(*item)->Pause();
+	}
 }
 
 void j1App::ResumeGame()
 {
 	paused = false;
+	for (std::list<Module*>::iterator item = modules.begin(); item != modules.end(); ++item)
+	{
+		(*item)->Resume();
+	}
 }
 
 // Load / Save

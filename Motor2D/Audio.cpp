@@ -51,7 +51,7 @@ bool Audio::Awake(pugi::xml_node& config)
 		active = false;
 		ret = true;
 	}
-
+	Mix_Volume(-1, MIX_MAX_VOLUME / 2);
 	return ret;
 }
 
@@ -69,8 +69,14 @@ bool Audio::CleanUp()
 	}
 
 
-	for(std::vector<Mix_Chunk*>::iterator item = fx.begin(); item != fx.end(); ++item)
-		Mix_FreeChunk(*item);
+
+	std::map<std::string, Mix_Chunk*>::iterator item;
+
+	for (item = fx.begin(); item != fx.end(); ++item)
+	{
+		Mix_FreeChunk(item->second);
+		fx.erase(item);
+	}
 
 	fx.clear();
 
@@ -136,39 +142,47 @@ bool Audio::PlayMusic(const char* path, float fade_time)
 }
 
 // Load WAV
-unsigned int Audio::LoadFx(const char* path)
+const char* Audio::LoadFx(const char* path)
 {
-	unsigned int ret = 0;
-
 	if(!active)
-		return 0;
+		return 0;	
 
-	Mix_Chunk* chunk = Mix_LoadWAV(path);
+	std::map<std::string, Mix_Chunk*>::iterator item = fx.find(path);
+	std::string ret;
 
-	if(chunk == NULL)
+	if (item == fx.end())
 	{
-		LOG("Cannot load wav %s. Mix_GetError(): %s", path, Mix_GetError());
-	}
-	else
-	{
-		fx.push_back(chunk);
-		ret = fx.size();
-	}
+		Mix_Chunk* chunk = Mix_LoadWAV(path);
 
-	return ret;
+		if (chunk == NULL)
+		{
+			LOG("Cannot load wav %s. Mix_GetError(): %s", path, Mix_GetError());
+		}
+		else
+		{
+			fx.insert({ path,chunk });
+			ret = path;
+		}
+	}
+	else 
+		ret = path;
+
+	return path;
 }
 
 // Play WAV
-bool Audio::PlayFx(unsigned int id, int repeat)
+bool Audio::PlayFx(const char* id, int repeat)
 {
 	bool ret = false;
 
 	if(!active)
 		return false;
 
-	if(id > 0 && id <= fx.size())
+	std::map<std::string, Mix_Chunk*>::iterator item = fx.find(id);
+
+	if(item != fx.end())
 	{
-		Mix_PlayChannel(-1, fx[id - 1], repeat);
+		Mix_PlayChannel(-1, item->second, repeat);
 	}
 
 	return ret;

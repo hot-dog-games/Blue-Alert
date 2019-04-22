@@ -48,15 +48,18 @@ void Map::Draw()
 		{
 			for(int x = 0; x < data.width; ++x)
 			{
-				int tile_id = layer->Get(x, y);
-				if(tile_id > 0)
+				if (App->render->IsOnCamera(MapToWorld(x, y).x, MapToWorld(x, y).y, data.tile_width, data.tile_height))
 				{
-					TileSet* tileset = GetTilesetFromTileId(tile_id);
+					int tile_id = layer->Get(x, y);
+					if (tile_id > 0)
+					{
+						TileSet* tileset = GetTilesetFromTileId(tile_id);
 
-					SDL_Rect r = tileset->GetTileRect(tile_id);
-					iPoint pos = MapToWorld(x, y);
+						SDL_Rect r = tileset->GetTileRect(tile_id);
+						iPoint pos = MapToWorld(x, y);
 
-					App->render->Blit(tileset->texture, pos.x, pos.y, &r);
+						App->render->Blit(tileset->texture, pos.x, pos.y, &r);
+					}
 				}
 			}
 		}
@@ -75,6 +78,21 @@ int Properties::Get(const char* value, int default_value) const
 	}
 
 	return default_value;
+}
+
+void Properties::Set(const char * name, int value)
+{
+	std::list<Property*>::const_iterator item = list.begin();
+
+	while (item != list.end())
+	{
+		if ((*item)->name == name)
+		{
+			(*item)->value = value;
+			break;
+		}
+		++item;
+	}
 }
 
 TileSet* Map::GetTilesetFromTileId(int id) const
@@ -445,6 +463,25 @@ bool Map::LoadProperties(pugi::xml_node& node, Properties& properties)
 	return ret;
 }
 
+bool Map::IsSpawnable(iPoint tile)
+{
+	for (std::list<MapLayer*>::const_iterator item = data.layers.begin(); item != data.layers.end(); ++item)
+	{
+		MapLayer* layer = *item;
+
+		if (layer->properties.Get("Spawn", 0) == 0)
+			continue;
+
+		int tile_id = layer->Get(tile.x, tile.y);
+		TileSet* tileset = (tile_id > 0) ? GetTilesetFromTileId(tile_id) : NULL;
+
+		if (tileset != NULL)
+			return true;
+	}
+	return false;
+}
+
+
 bool Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
 {
 	bool ret = false;
@@ -471,11 +508,6 @@ bool Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
 				if(tileset != NULL)
 				{
 					map[i] = (tile_id - tileset->firstgid) > 0 ? 0 : 1;
-					/*TileType* ts = tileset->GetTileType(tile_id);
-					if(ts != NULL)
-					{
-						map[i] = ts->properties.Get("walkable", 1);
-					}*/
 				}
 			}
 		}
@@ -489,4 +521,45 @@ bool Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
 	}
 
 	return ret;
+}
+
+void Map::SetDrawable(std::string layer_name, int value)
+{
+	for (std::list<MapLayer*>::const_iterator item = data.layers.begin(); item != data.layers.end(); ++item)
+	{
+		MapLayer* layer = *item;
+
+		if (layer->name == layer_name)
+		{
+			layer->properties.Set("Nodraw", value);
+		}
+
+	}
+}
+
+bool Map::IsWalkable(iPoint tile)
+{
+	for (std::list<MapLayer*>::const_iterator item = data.layers.begin(); item != data.layers.end(); ++item)
+	{
+		MapLayer* layer = *item;
+
+		if (layer->properties.Get("Navigation", 0) == 0)
+			continue;
+
+		int tile_id = layer->Get(tile.x, tile.y);
+
+		if (tile_id > 0)
+			return false;
+		else
+			return true;
+
+	}
+	return false;
+}
+
+
+
+bool Map::IsInsideMap(iPoint tile)
+{
+	return ((tile.x > 0 && tile.y > 0) && (tile.x < App->map->data.width && tile.y < App->map->data.height));
 }

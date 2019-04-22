@@ -20,12 +20,14 @@ public:
 	bool Awake(pugi::xml_node&);
 	bool Start();
 	bool CleanUp();
-	bool PostUpdate();
 	bool Load(pugi::xml_node&) { return true; }
 	bool Save(pugi::xml_node&) const { return true; }
+	bool Restart();
 
 	EncounterTree* GetEncounterTree();
 	Deck* GetPlayerDeck();
+	
+	bool IsInPlayerDeck(Card* card);
 
 	//----Initialization----
 
@@ -37,13 +39,13 @@ public:
 
 	Card* GetCardFromCollection(EntityType card_type);
 	void AddCardToCollection(EntityType card_type);
-
+	std::list<Card*> collection;
 	//----------------------
 
 
 private:
 	uint gold;
-	std::list<Card*> collection;
+	
 	Deck* combat_deck;
 
 	EncounterTree* encounter_tree = nullptr;
