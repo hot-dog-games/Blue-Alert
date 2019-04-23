@@ -52,8 +52,8 @@ bool Textures::CleanUp()
 	{
 		if(item->second)
 			SDL_DestroyTexture(item->second);
-		textures.erase(item);
 	}
+	textures.clear();
 
 	IMG_Quit();
 	return true;

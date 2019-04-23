@@ -20,7 +20,7 @@
       <stat stat="defense" value ="2"/>
       <stat stat="movement" value ="5"/>
       <stat stat="attack_speed" value ="1"/>
-      <stat stat="range" value ="1"/>
+      <stat stat="range" value ="0"/>
 	</upgrades>
   </card>
   
@@ -45,7 +45,7 @@
       <stat stat="defense" value ="2"/>
       <stat stat="movement" value ="10"/>
       <stat stat="attack_speed" value ="1"/>
-      <stat stat="range" value ="1"/>
+      <stat stat="range" value ="0"/>
 	</upgrades>
 
   </card>
@@ -71,7 +71,7 @@
       <stat stat="defense" value ="1"/>
       <stat stat="movement" value ="5"/>
       <stat stat="attack_speed" value ="2"/>
-      <stat stat="range" value ="2"/>
+      <stat stat="range" value ="0"/>
 	</upgrades>
     
   </card>
@@ -97,7 +97,7 @@
       <stat stat="defense" value ="2"/>
       <stat stat="movement" value ="5"/>
       <stat stat="attack_speed" value ="1"/>
-      <stat stat="range" value ="2"/>
+      <stat stat="range" value ="0"/>
 	</upgrades>
   
   </card>
@@ -123,7 +123,7 @@
       <stat stat="defense" value ="2"/>
       <stat stat="movement" value ="5"/>
       <stat stat="attack_speed" value ="1"/>
-      <stat stat="range" value ="2"/>
+      <stat stat="range" value ="0"/>
 	</upgrades>
 
   </card>
@@ -149,7 +149,7 @@
       <stat stat="defense" value ="1"/>
       <stat stat="movement" value ="10"/>
       <stat stat="attack_speed" value ="2"/>
-      <stat stat="range" value ="1"/>
+      <stat stat="range" value ="0"/>
 	</upgrades>
 
   </card>
@@ -175,7 +175,7 @@
       <stat stat="defense" value ="2"/>
       <stat stat="movement" value ="5"/>
       <stat stat="attack_speed" value ="1"/>
-      <stat stat="range" value ="2"/>
+      <stat stat="range" value ="0"/>
 	</upgrades>
     
   </card>
@@ -201,7 +201,7 @@
       <stat stat="defense" value ="2"/>
       <stat stat="movement" value ="5"/>
       <stat stat="attack_speed" value ="1"/>
-      <stat stat="range" value ="2"/>
+      <stat stat="range" value ="0"/>
 	</upgrades>
   </card>
 
@@ -226,7 +226,7 @@
       <stat stat="defense" value ="1"/>
       <stat stat="movement" value ="5"/>
       <stat stat="attack_speed" value ="1"/>
-      <stat stat="range" value ="2"/>
+      <stat stat="range" value ="0"/>
 	</upgrades>
 
   </card>

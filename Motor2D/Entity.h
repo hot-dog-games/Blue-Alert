@@ -38,7 +38,6 @@ public:
 
 protected:
 	void LoadAnimations(pugi::xml_node anim_config);
-	void LoadSprite(pugi::xml_node node);
 	float CalculateDamage(float attack, float defense);
 	virtual void Die() {};
 	virtual void Draw();

@@ -63,6 +63,8 @@ bool BattleScene::Start()
 	enemy_core = App->entity_manager->CreateCore(App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterType(), { 25,330 }, enemy_deck, FACTION_AMERICAN, true);
 	enemy_core->delete_deck = true;
 
+	allied_core->LoadUnitSprites();
+	enemy_core->LoadUnitSprites();
 
 	//Initialize UI
 	StartUI();

@@ -1391,7 +1391,7 @@
           <frame x="338" y="51" width="54" height="34"/>
         </animation>
         <animation speed="5.0F" name="attacking_up_left">
-          <frame x="416" y="48" width="53" height="44"/>
+          <frame x="260" y="55" width="53" height="32"/>
         </animation>
         <animation speed="5.0F" name="attacking_down_right">
           <frame x="493" y="45" width="54" height="45"/>
