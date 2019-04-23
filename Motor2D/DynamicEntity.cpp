@@ -293,11 +293,11 @@ void DynamicEntity::Attack()
 			objective->DecreaseLife(attack);
 			App->particles->CreateParticle(ParticleType::ATTACK_BASIC_SHOT, { position.x, position.y - current_frame.h * 0.5f }, 
 				{ objective->position.x, objective->position.y - objective->current_frame.h * 0.5f });
-			App->audio->PlayFx(attack_fx.c_str(), 0);
+			App->audio->PlayFx(attack_fx.c_str(), 0, 1);
 			break;
 		case AttackType::AOE:
 		{
-			App->audio->PlayFx(explosion_fx.c_str(), 0);
+			App->audio->PlayFx(explosion_fx.c_str(), 0, 2);
 			std::list<Entity*> entities;
 			float radius = EXPLOSION_RANGE_TILES * App->map->data.tile_height;
 			App->entity_manager->GetEntitiesInArea(radius, objective->position, entities, faction);
@@ -313,7 +313,7 @@ void DynamicEntity::Attack()
 			objective->DecreaseLife(attack, true);
 			App->particles->CreateParticle(ParticleType::ATTACK_BASIC_SHOT, { position.x, position.y - current_frame.h * 0.5f },
 				{ objective->position.x, objective->position.y - objective->current_frame.h * 0.5f });
-			App->audio->PlayFx(attack_fx.c_str(), 0);
+			App->audio->PlayFx(attack_fx.c_str(), 0, 1);
 			break;
 		default:
 			break;
