@@ -172,7 +172,7 @@ const char* Audio::LoadFx(const char* path)
 }
 
 // Play WAV
-bool Audio::PlayFx(const char* id, int repeat)
+bool Audio::PlayFx(const char* id, int repeat, int channel)
 {
 	bool ret = false;
 
@@ -183,7 +183,7 @@ bool Audio::PlayFx(const char* id, int repeat)
 
 	if(item != fx.end())
 	{
-		Mix_PlayChannel(-1, item->second, repeat);
+		Mix_PlayChannel(channel, item->second, repeat);
 	}
 
 	return ret;
