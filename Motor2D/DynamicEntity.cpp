@@ -52,6 +52,9 @@ bool DynamicEntity::Start()
 	}
 	explosion_fx = App->audio->LoadFx("audio/fx/Ambient_Sounds/Explosions/Explosion2.wav");
 	attack_fx = App->audio->LoadFx("audio/fx/Ambient_Sounds/Shots/One_shoot2.wav");
+
+	App->audio->SetFXVolume(attack_fx.c_str(), 30);
+	App->audio->SetFXVolume(explosion_fx.c_str(), 30);
 	return true;
 }
 

@@ -53,7 +53,8 @@ bool Audio::Awake(pugi::xml_node& config)
 	}
 
 	Mix_Volume(-1, MIX_MAX_VOLUME / 2);
-
+	Mix_VolumeMusic(20);
+	
 	return ret;
 }
 
@@ -187,3 +188,19 @@ bool Audio::PlayFx(const char* id, int repeat)
 
 	return ret;
 }
+
+void Audio::SetFXVolume(const char * path, int volume)
+{
+	
+
+	std::map<std::string, Mix_Chunk*>::iterator item = fx.find(path);
+
+	if (item != fx.end())
+	{
+		Mix_VolumeChunk(item->second,volume);
+	}
+
+
+
+}
+

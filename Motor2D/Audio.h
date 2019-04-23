@@ -32,6 +32,8 @@ public:
 	// Play a previously loaded WAV
 	bool PlayFx(const char* fx, int repeat = 0);
 
+	void SetFXVolume(const char* path, int volume);
+
 private:
 
 	_Mix_Music*	music = NULL;

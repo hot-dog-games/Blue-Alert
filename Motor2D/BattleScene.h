@@ -93,9 +93,10 @@ private:
 	int random_num[3];
 
 	//Audio fx
-	std::string win_fx;
+	std::string  win_fx;
 	std::string  lose_fx;
 	std::string  deployment_fx;
+	std::string  no_energy;
 
 	uint max_energy;
 	uint current_energy;

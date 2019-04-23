@@ -72,6 +72,7 @@ bool BattleScene::Start()
 	win_fx = App->audio->LoadFx("audio/fx/Mission/Mission_accomplished.wav");
 	lose_fx = App->audio->LoadFx("audio/fx/Mission/Mission_Failed.wav");
 	deployment_fx = App->audio->LoadFx("audio/fx/Voice_Over/Unit_ready.wav");
+	no_energy = App->audio->LoadFx("audio/fx/UI/gpsyampa.wav");
 	App->audio->PlayMusic("audio/music/9.Destroy-Red Alert2_2.ogg");
 
 	return true;
@@ -324,8 +325,13 @@ void BattleScene::ReleaseDrag()
 	if (App->map->IsInsideMap(map_pos) && App->map->IsSpawnable(map_pos))
 	{
 		if (allied_core->UseCard(card_num, { float(world_pos.x),float(world_pos.y) }))
+		{ 
 			App->audio->PlayFx(deployment_fx.c_str(), 0);
+		}
+		else App->audio->PlayFx(no_energy.c_str(), 0);
 	}
+
+	
 
 	App->map->SetDrawable("Spawn", 1);
 	App->gui->DeleteElement(current_drag);
