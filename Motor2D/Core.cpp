@@ -61,6 +61,16 @@ bool Core::CleanUp()
 	return true;
 }
 
+void Core::LoadUnitSprites()
+{
+	for (int i = 0; i < 4; i++)
+	{
+		if (deck->cards[i])
+		{
+			deck->cards[i]->LoadSprite();
+		}
+	}
+}
 bool Core::UseCard(int number, fPoint position)
 {
 	if (CanUseCard(number))

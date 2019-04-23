@@ -51,7 +51,9 @@ bool Audio::Awake(pugi::xml_node& config)
 		active = false;
 		ret = true;
 	}
+
 	Mix_Volume(-1, MIX_MAX_VOLUME / 2);
+
 	return ret;
 }
 
@@ -68,14 +70,11 @@ bool Audio::CleanUp()
 		Mix_FreeMusic(music);
 	}
 
-
-
 	std::map<std::string, Mix_Chunk*>::iterator item;
 
 	for (item = fx.begin(); item != fx.end(); ++item)
 	{
 		Mix_FreeChunk(item->second);
-		fx.erase(item);
 	}
 
 	fx.clear();
@@ -144,11 +143,12 @@ bool Audio::PlayMusic(const char* path, float fade_time)
 // Load WAV
 const char* Audio::LoadFx(const char* path)
 {
+	std::string ret = " ";
+
 	if(!active)
-		return 0;	
+		return ret.c_str();	
 
 	std::map<std::string, Mix_Chunk*>::iterator item = fx.find(path);
-	std::string ret;
 
 	if (item == fx.end())
 	{
@@ -167,7 +167,7 @@ const char* Audio::LoadFx(const char* path)
 	else 
 		ret = path;
 
-	return path;
+	return ret.c_str();
 }
 
 // Play WAV

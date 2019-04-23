@@ -9,6 +9,7 @@
 #include "EntityManager.h"
 
 class Stat;
+class SDL_Texture;
 
 enum AttackType {
 	BASIC,
@@ -40,11 +41,13 @@ struct Card {
 
 	uint level;
 	std::string name;
-	std::string sprite_path;
+	std::string sprite_path = " ";
+	SDL_Texture* texture;
 
 	bool to_delete = false;
 
 	void Upgrade();
+	void LoadSprite();
 };
 
 class CardManager : public Module
