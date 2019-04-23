@@ -1235,7 +1235,7 @@
         <animation speed="5.0F" name="attacking_down_left">
           <frame x="591" y="14" width="62" height="49"/>
         </animation>
-        <animation speed="10.0F" loop="false" name="dying">
+        <animation speed="28.0F" loop="false" name="dying">
           <frame x="760" y="21" width="72" height="59"/>
           <frame x="876" y="12" width="79" height="67"/>
           <frame x="977" y="9" width="84" height="75"/>
@@ -1315,7 +1315,7 @@
         <animation speed="5.0F" name="attacking_down_left">
           <frame x="591" y="14" width="62" height="49"/>
         </animation>
-        <animation speed="10.0F" loop="false" name="dying">
+        <animation speed="28.0F" loop="false" name="dying">
           <frame x="760" y="21" width="72" height="59"/>
           <frame x="876" y="12" width="79" height="67"/>
           <frame x="977" y="9" width="84" height="75"/>
@@ -1399,7 +1399,7 @@
         <animation speed="5.0F" name="attacking_down_left">
           <frame x="416" y="48" width="53" height="44"/>
         </animation>
-        <animation speed="10.0F" loop="false" name="dying">
+        <animation speed="28.0F" loop="false" name="dying">
           <frame x="24" y="121" width="72" height="59"/>
           <frame x="204" y="116" width="79" height="67"/>
           <frame x="383" y="111" width="84" height="76"/>
@@ -1478,7 +1478,7 @@
         <animation speed="5.0F" name="attacking_down_left">
           <frame x="416" y="48" width="53" height="44"/>
         </animation>
-        <animation speed="10.0F" loop="false" name="dying">
+        <animation speed="28.0F" loop="false" name="dying">
           <frame x="24" y="121" width="72" height="59"/>
           <frame x="204" y="116" width="79" height="67"/>
           <frame x="383" y="111" width="84" height="76"/>
@@ -1561,7 +1561,7 @@
         <animation speed="5.0F" name="attacking_down_left">
           <frame x="413" y="38" width="46" height="39"/>
         </animation>
-        <animation speed="10.0F" loop="false" name="dying">
+        <animation speed="28.0F" loop="false" name="dying">
           <frame x="21" y="110" width="72" height="59"/>
           <frame x="201" y="105" width="79" height="67"/>
           <frame x="380" y="100" width="84" height="76"/>
@@ -1640,7 +1640,7 @@
           <animation speed="5.0F" name="attacking_down_left">
             <frame x="413" y="38" width="46" height="39"/>
           </animation>
-          <animation speed="10.0F" loop="false" name="dying">
+          <animation speed="28.0F" loop="false" name="dying">
             <frame x="21" y="110" width="72" height="59"/>
             <frame x="201" y="105" width="79" height="67"/>
             <frame x="380" y="100" width="84" height="76"/>
