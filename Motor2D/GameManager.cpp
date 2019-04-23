@@ -76,9 +76,13 @@ void GameManager::CreatePlayerDeck()
 {
 	collection.push_back(App->card_manager->CreateCard(EntityType::G_I));
 	collection.push_back(App->card_manager->CreateCard(EntityType::SNIPER));
+	collection.push_back(App->card_manager->CreateCard(EntityType::NAVY_SEAL));
 	collection.push_back(App->card_manager->CreateCard(EntityType::GRIZZLY));
-	collection.push_back(App->card_manager->CreateCard(EntityType::HARRIER));
 	collection.push_back(App->card_manager->CreateCard(EntityType::ROBOT));
+	collection.push_back(App->card_manager->CreateCard(EntityType::PRISM));
+	collection.push_back(App->card_manager->CreateCard(EntityType::NIGHTHAWK));
+	collection.push_back(App->card_manager->CreateCard(EntityType::HARRIER));
+	collection.push_back(App->card_manager->CreateCard(EntityType::BLACK_EAGLE));
 
 	combat_deck = new Deck();
 	combat_deck->AddCard(GetCardFromCollection(EntityType::G_I));
@@ -92,8 +96,8 @@ bool GameManager::Restart()
 	for (std::list<Card*>::iterator card = collection.begin(); card != collection.end(); ++card)
 	{
 		App->card_manager->DeleteCard((*card));
-		collection.erase(card);
 	}		
+	collection.clear();
 	delete combat_deck;
 	encounter_tree->CleanTree();
 	Start();
