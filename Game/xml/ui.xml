@@ -37,7 +37,7 @@
       </button>
 
       <drag>
-        <frame x="421" y="1738" width="14" height="28"/>
+        <frame x="510" y="1737" width="15" height="29"/>
       </drag>
 
       <upgrade>
@@ -64,7 +64,7 @@
       </button>
 
       <drag>
-        <frame x="421" y="1738" width="14" height="28"/>
+        <frame x="510" y="1682" width="14" height="29"/>
       </drag>
 
       <upgrade>
@@ -91,7 +91,7 @@
       </button>
 
       <drag>
-        <frame x="505" y="1603" width="26" height="46"/>
+        <frame x="503" y="1603" width="28" height="46"/>
       </drag>
 
       <upgrade>
@@ -118,7 +118,7 @@
       </button>
 
       <drag>
-        <frame x="505" y="1603" width="26" height="46"/>
+        <frame x="503" y="1603" width="28" height="46"/>
       </drag>
 
       <upgrade>
@@ -145,7 +145,7 @@
       </button>
 
       <drag>
-        <frame x="505" y="1603" width="26" height="46"/>
+        <frame x="503" y="1603" width="28" height="46"/>
       </drag>
 
       <upgrade>
@@ -226,7 +226,7 @@
       </button>
 
       <drag>
-        <frame x="384" y="1508" width="60" height="64"/>
+        <frame x="404" y="1535" width="47" height="40"/>
       </drag>
 
       <upgrade>
@@ -250,7 +250,7 @@
     <Infantry x="1918" y="342" width="178" height="148"/>
     <Aerial x="1917" y="121" width="251" height="226"/>
     <Gold x="1916" y="3" width="181" height="115"/> 
-    <Store x="2029" y="688" width="147" height="165"/>
+    <Store x="1946" y="731" width="148" height="162"/>
   </ui_image>
   
 </config>
