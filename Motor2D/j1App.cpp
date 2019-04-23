@@ -213,10 +213,10 @@ void j1App::FinishUpdate()
 	double last_frame_ms = frame_time.Read();
 	uint32 frames_on_last_update = prev_last_sec_frame_count;
 
-	static char title[256];
+	/*static char title[256];
 	sprintf_s(title, 256, " FPS: %i Last Frame Ms: %.2f",
 		frames_on_last_update, last_frame_ms);
-	App->win->SetTitle(title);
+	App->win->SetTitle(title);*/
 
 	BROFILER_CATEGORY("WAIT", Profiler::Color::MediumVioletRed);
 	if (frame_cap)
