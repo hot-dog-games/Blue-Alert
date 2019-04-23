@@ -20,13 +20,13 @@
       <stat stat="defense" value ="2"/>
       <stat stat="movement" value ="5"/>
       <stat stat="attack_speed" value ="1"/>
-      <stat stat="range" value ="1"/>
+      <stat stat="range" value ="0"/>
 	</upgrades>
   </card>
   
   <card type ="2">
     <name>Sniper</name>
-    <sprite>sprites/Units/Infantry/sprite_gi.png</sprite>
+    <sprite>sprites/Units/Infantry/sniper.png</sprite>
     <combat attack_type="2" armored="false"/>
     <stats>
       <stat stat="health" value ="50"/>
@@ -45,14 +45,14 @@
       <stat stat="defense" value ="2"/>
       <stat stat="movement" value ="10"/>
       <stat stat="attack_speed" value ="1"/>
-      <stat stat="range" value ="1"/>
+      <stat stat="range" value ="0"/>
 	</upgrades>
 
   </card>
 
   <card type ="3">
     <name>Navy_Seal</name>
-    <sprite>sprites/Units/Infantry/sprite_gi.png</sprite>
+    <sprite>sprites/Units/Infantry/seal.png</sprite>
     <combat attack_type="1" armored="false"/>
     <stats>
       <stat stat="health" value ="70"/>
@@ -71,7 +71,7 @@
       <stat stat="defense" value ="1"/>
       <stat stat="movement" value ="5"/>
       <stat stat="attack_speed" value ="2"/>
-      <stat stat="range" value ="2"/>
+      <stat stat="range" value ="0"/>
 	</upgrades>
     
   </card>
@@ -97,7 +97,7 @@
       <stat stat="defense" value ="2"/>
       <stat stat="movement" value ="5"/>
       <stat stat="attack_speed" value ="1"/>
-      <stat stat="range" value ="2"/>
+      <stat stat="range" value ="0"/>
 	</upgrades>
   
   </card>
@@ -123,7 +123,7 @@
       <stat stat="defense" value ="2"/>
       <stat stat="movement" value ="5"/>
       <stat stat="attack_speed" value ="1"/>
-      <stat stat="range" value ="2"/>
+      <stat stat="range" value ="0"/>
 	</upgrades>
 
   </card>
@@ -149,14 +149,14 @@
       <stat stat="defense" value ="1"/>
       <stat stat="movement" value ="10"/>
       <stat stat="attack_speed" value ="2"/>
-      <stat stat="range" value ="1"/>
+      <stat stat="range" value ="0"/>
 	</upgrades>
 
   </card>
 
   <card type ="7">
     <name>Nighthawk</name>
-    <sprite>sprites/Units/AirVehicles/Nighthawk.png</sprite>
+    <sprite>sprites/Units/AirVehicles/nighthawksprite.png</sprite>
     <combat attack_type="0" armored="false"/>
     <stats>
       <stat stat="health" value ="100"/>
@@ -175,14 +175,14 @@
       <stat stat="defense" value ="2"/>
       <stat stat="movement" value ="5"/>
       <stat stat="attack_speed" value ="1"/>
-      <stat stat="range" value ="2"/>
+      <stat stat="range" value ="0"/>
 	</upgrades>
     
   </card>
 
   <card type ="8">
     <name>Harrier</name>
-    <sprite>sprites/Units/AirVehicles/Harrier.png</sprite>
+    <sprite>sprites/Units/AirVehicles/harriersprite.png</sprite>
     <combat attack_type="1" armored="true"/>
     <stats>
       <stat stat="health" value ="80"/>
@@ -201,13 +201,13 @@
       <stat stat="defense" value ="2"/>
       <stat stat="movement" value ="5"/>
       <stat stat="attack_speed" value ="1"/>
-      <stat stat="range" value ="2"/>
+      <stat stat="range" value ="0"/>
 	</upgrades>
   </card>
 
   <card type ="9">
     <name>Black_Eagle</name>
-    <sprite>sprites/Units/AirVehicles/BlackEagle.png</sprite>
+    <sprite>sprites/Units/AirVehicles/blackeaglesprite.png</sprite>
     <combat attack_type="2" armored="false"/>
     <stats>
       <stat stat="health" value ="70"/>
@@ -226,7 +226,7 @@
       <stat stat="defense" value ="1"/>
       <stat stat="movement" value ="5"/>
       <stat stat="attack_speed" value ="1"/>
-      <stat stat="range" value ="2"/>
+      <stat stat="range" value ="0"/>
 	</upgrades>
 
   </card>

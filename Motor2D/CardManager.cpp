@@ -127,3 +127,11 @@ void Card::Upgrade()
 	info.stats.find("attack_speed")->second->IncreaseMaxValue(info.scaling.attack_speed_upgrade);
 	info.stats.find("range")->second->IncreaseMaxValue(info.scaling.range_upgrade);
 }
+
+void Card::LoadSprite()
+{
+	if (sprite_path != " ")
+	{
+		texture = App->tex->Load(sprite_path.c_str());
+	}
+}

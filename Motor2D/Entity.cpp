@@ -20,7 +20,6 @@ Entity::Entity(pugi::xml_node entity_node, fPoint position, Faction faction)
 	this->faction = faction;
 	this->position = position;
 
-	LoadSprite(entity_node);
 	LoadAnimations(entity_node);
 }
 
@@ -46,11 +45,6 @@ void Entity::SetDebug(bool value)
 bool Entity::IsAlive()
 {
 	return (stats.find("health")->second->GetValue() > 0);
-}
-void Entity::LoadSprite(pugi::xml_node node)
-{
-	std::string sprite_path = node.child("sprite").child_value();
-	sprite = App->tex->Load(sprite_path.c_str());
 }
 
 float Entity::CalculateDamage(float attack, float defense)

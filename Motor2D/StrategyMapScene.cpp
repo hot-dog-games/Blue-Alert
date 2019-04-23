@@ -111,7 +111,6 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			//(options = App->gui->CreateImage();
 		}
 		else if (element == menu_button) {
-			App->game_manager->collection;
 			
 
 			App->gui->EnableElement(troops_button);
@@ -122,7 +121,10 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			App->gui->DisableElement(menu_button);
 			App->gui->DisableElement(settings_button);
 
-
+			for (uint i = 0; i < 4; ++i) {
+				if(!App->game_manager->GetPlayerDeck()->cards[i])
+					App->gui->DisableElement(deck_buttons[i]);
+			}
 
 		}
 		else if (element == backbutton_t_b) {
