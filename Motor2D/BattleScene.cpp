@@ -268,7 +268,7 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 		}
 		else if (element == lose_continue) {
 			App->gui->DisableElement((UIElement*)lose_panel);
-			App->game_manager->Restart();
+			App->game_manager->restart = true;
 			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
 		}
 

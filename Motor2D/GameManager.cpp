@@ -93,14 +93,18 @@ void GameManager::CreatePlayerDeck()
 
 bool GameManager::Restart()
 {
-	for (std::list<Card*>::iterator card = collection.begin(); card != collection.end(); ++card)
+	if (restart)
 	{
-		App->card_manager->DeleteCard((*card));
-	}		
-	collection.clear();
-	delete combat_deck;
-	encounter_tree->CleanTree();
-	Start();
+		for (std::list<Card*>::iterator card = collection.begin(); card != collection.end(); ++card)
+		{
+			App->card_manager->DeleteCard((*card));
+		}
+		collection.clear();
+
+		delete combat_deck;
+		encounter_tree->CleanTree();
+		Start();
+	}
 
 	return true;
 }

@@ -40,9 +40,9 @@ struct Card {
 	CardInfo info;
 
 	uint level;
-	std::string name;
+	std::string name = " ";
 	std::string sprite_path = " ";
-	SDL_Texture* texture;
+	SDL_Texture* texture = nullptr;
 
 	bool to_delete = false;
 

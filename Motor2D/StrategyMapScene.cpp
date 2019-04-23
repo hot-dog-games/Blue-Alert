@@ -30,6 +30,8 @@ StrategyMapScene::~StrategyMapScene()
 // Called before the first frame
 bool StrategyMapScene::Start()
 {
+	App->game_manager->Restart();
+
 	BROFILER_CATEGORY("SMStart", Profiler::Color::Red);
 
 	App->map->Load("Nodes Map.tmx");

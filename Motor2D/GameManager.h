@@ -22,7 +22,6 @@ public:
 	bool CleanUp();
 	bool Load(pugi::xml_node&) { return true; }
 	bool Save(pugi::xml_node&) const { return true; }
-	bool Restart();
 
 	EncounterTree* GetEncounterTree();
 	Deck* GetPlayerDeck();
@@ -41,11 +40,11 @@ public:
 	void AddCardToCollection(EntityType card_type);
 	std::list<Card*> collection;
 	//----------------------
-
+	bool Restart();
+	bool restart = false;
 
 private:
 	uint gold;
-	
 	Deck* combat_deck;
 
 	EncounterTree* encounter_tree = nullptr;
