@@ -104,6 +104,7 @@ bool GameManager::Restart()
 		delete combat_deck;
 		encounter_tree->CleanTree();
 		Start();
+		restart = false;
 	}
 
 	return true;
