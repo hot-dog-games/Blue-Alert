@@ -46,6 +46,8 @@ public:
 	void EntityClicked(StrategyBuilding* entity);
 	void SetCurrentNodeByEntity(StrategyBuilding* entity);
 
+	bool is_clickable = true;
+
 };
 
 #endif

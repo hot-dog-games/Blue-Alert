@@ -22,7 +22,7 @@ public:
 	bool selected = false;
 	bool selectable = false;
 	//TODO
-	bool clipping = true; //Zona que se pinta es el rectangulo del padre.
+	bool clipping = false; //Zona que se pinta es el rectangulo del padre.
 	bool parent_limit = true;
 
 	float starting_scale_X = 1.0F;

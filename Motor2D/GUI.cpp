@@ -395,7 +395,7 @@ UIElement* Gui::GetElementUnderMouse()
 			bool inside_child = false;
 			for (std::list<UIElement*>::iterator child_item = elements.begin(); child_item != elements.end(); child_item = ++child_item)
 			{
-				if ((*child_item)->parent && (*child_item)->parent == (*element) && (*child_item)->IsInside(x, y) && (*child_item)->interactable && (*element)->enabled)
+				if ((*child_item)->parent && (*child_item)->parent == (*element) && (*child_item)->IsInside(x, y) && (*child_item)->interactable && (*child_item)->enabled)
 				{
 					inside_child = true;
 					break;

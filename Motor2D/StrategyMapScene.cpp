@@ -123,6 +123,8 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			App->gui->DisableElement(menu_button);
 			App->gui->DisableElement(settings_button);
 
+			App->game_manager->GetEncounterTree()->is_clickable = false;
+
 			for (uint i = 0; i < 4; ++i) {
 				if(!App->game_manager->GetPlayerDeck()->cards[i])
 					App->gui->DisableElement(deck_buttons[i]);
@@ -137,6 +139,9 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 
 			App->gui->EnableElement(menu_button);
 			App->gui->EnableElement(settings_button);
+
+			App->game_manager->GetEncounterTree()->is_clickable = true;
+
 
 		}
 		else if (element == deck_buttons[0])
@@ -221,7 +226,7 @@ void StrategyMapScene::InitializeUI()
 	uint w, h;
 	App->win->GetWindowSize(w, h);
 
-	main_panel = App->gui->CreateImage({ 0,0 }, { 0, 0, (int)w, (int)h }, nullptr, false);
+	main_panel = App->gui->CreateImage({ 0,0 }, { 0, 0, 0, 0}, nullptr, false);
 	banner = App->gui->CreateImage({ 4,5 }, { 1,769,1017,83 }, main_panel);
 
 	SDL_Rect small_button_rect[3];
