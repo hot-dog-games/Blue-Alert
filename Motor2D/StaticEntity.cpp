@@ -13,7 +13,7 @@ StaticEntity::StaticEntity()
 
 StaticEntity::StaticEntity(pugi::xml_node entity_node, fPoint position, Faction faction) : Entity(entity_node, position, faction)
 {
-
+	LoadSprite(entity_node);
 }
 
 
@@ -37,3 +37,8 @@ void StaticEntity::Die()
 	current_animation = &animations.find("die")->second;
 }
 
+void StaticEntity::LoadSprite(pugi::xml_node node)
+{
+	std::string sprite_path = node.child("sprite").child_value();
+	sprite = App->tex->Load(sprite_path.c_str());
+}

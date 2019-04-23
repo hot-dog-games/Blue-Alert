@@ -27,6 +27,7 @@ public:
 
 protected:
 	Static_State state = STATIC_IDLE;
+	void LoadSprite(pugi::xml_node node);
 };
 
 #endif // _STATIC_ENTITY_H_
