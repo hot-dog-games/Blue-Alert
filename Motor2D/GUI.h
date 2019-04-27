@@ -20,6 +20,7 @@ class UIAnimatedImage;
 class UILabel;
 class UIBar;
 class Stat;
+class Entity;
 
 enum GUI_Event {
 	LEFT_CLICK_DOWN,
@@ -76,7 +77,7 @@ public:
 	UISelectableButton* CreateSelectableButton(iPoint pos, SDL_Rect* sprite_rect, UIElement* parent = nullptr, bool is_interactable = true);
 	UIScrollBar* CreateScrollBar(iPoint pos, float min, float max, ScrollType type = VERTICAL, UIElement* parent = nullptr);
 	UIAnimatedImage* CreateAnimatedImage(iPoint pos, SDL_Rect * rect, int total_sprites, int speed, UIElement* parent = nullptr);
-	UIBar* CreateBar(iPoint pos, SDL_Rect rect, Stat* value, BarType type = BarType::BAR_VERTICAL, UIElement* parent = nullptr);
+	UIBar* CreateBar(iPoint pos, SDL_Rect rect, Stat* value, BarType type = BarType::BAR_VERTICAL, Entity* entity= nullptr, UIElement* parent = nullptr);
 
 	void DeleteElement(UIElement* element);
 	void DisableUI();
@@ -86,6 +87,8 @@ public:
 
 	void EnableInteractable(UIElement * ele);
 	void DisableInteractable(UIElement * ele);
+
+	void RenderElement(UIElement* element);
 
 	SDL_Rect* LoadUIButton(int num, std::string type);
 	SDL_Rect  LoadUIImage(int num);

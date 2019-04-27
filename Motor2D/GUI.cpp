@@ -16,6 +16,7 @@
 #include "UILabel.h"
 #include "UIScrollBar.h"
 #include "UIBar.h"
+#include "UIEntityBar.h"
 #include "Brofiler/Brofiler.h"
 #include "Stat.h"
 #include "GUI.h"
@@ -151,11 +152,9 @@ bool Gui::PostUpdate()
 	BROFILER_CATEGORY("UIPostUpdate", Profiler::Color::Magenta);
 	for (std::list<UIElement*>::iterator element = elements.begin(); element != elements.end(); ++element)
 	{
-		if ((*element)->enabled)
+		if ((*element)->enabled && !(*element)->parent)
 		{
-			(*element)->UIBlit();
-			if (debug_draw)
-				App->render->DrawQuad((*element)->GetScreenRect(), 255, 0, 0, 255, false, false);
+			RenderElement((*element));
 		}
 
 	}
@@ -233,11 +232,18 @@ UIAnimatedImage* Gui::CreateAnimatedImage(iPoint pos, SDL_Rect * rect, int total
 	return image;
 }
 
-UIBar * Gui::CreateBar(iPoint pos, SDL_Rect rect, Stat* value, BarType type, UIElement * parent)
+UIBar * Gui::CreateBar(iPoint pos, SDL_Rect rect, Stat* value, BarType type, Entity* entity, UIElement * parent)
 {
-	UIBar* bar = new UIBar(pos, rect, value, type);
+	UIBar* bar;
+	if (entity) {
+		bar = new UIEntityBar(pos, rect, value, type, entity);
+	}
+	else {
+		bar = new UIBar(pos, rect, value, type);
+	}
+	
 	bar->parent = parent;
-	elements.push_back(bar);
+	elements.push_front(bar);
 	return bar;
 }
 
@@ -299,6 +305,19 @@ void Gui::DisableInteractable(UIElement* ele)
 	{
 		if ((*element)->parent && (*element)->parent == ele)
 			(*element)->interactable = false;
+	}
+}
+
+void Gui::RenderElement(UIElement* element)
+{
+	element->UIBlit();
+	if (debug_draw)
+		App->render->DrawQuad(element->GetScreenRect(), 255, 0, 0, 255, false, false);
+
+	for (std::list<UIElement*>::iterator child_element = elements.begin(); child_element != elements.end(); ++child_element)
+	{
+		if ((*child_element)->enabled && (*child_element)->parent && (*child_element)->parent == element)
+			RenderElement((*child_element));
 	}
 }
 

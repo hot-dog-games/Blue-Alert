@@ -10,7 +10,7 @@ enum BarType;
 class UIBar : public UIElement 
 {
 public:
-	UIBar(iPoint pos, SDL_Rect sprite_rect, Stat* value, BarType type, bool is_interactable = true);
+	UIBar(iPoint pos, SDL_Rect sprite_rect, Stat* value, BarType type);
 	~UIBar();
 
 	void DecreaseBar(uint value);
@@ -18,9 +18,7 @@ public:
 	bool UIBlit();
 	bool Update(float dt);
 
-	//bool CleanUp();
-
-private:
+protected:
 	Stat*	bar_value = nullptr;
 	uint	current_value = 0;
 	BarType	bar_type;
