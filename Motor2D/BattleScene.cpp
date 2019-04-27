@@ -13,6 +13,7 @@
 #include "PathFinding.h"
 #include "UIAnimatedImage.h"
 #include "UIButton.h"
+#include "UISelectableButton.h"
 #include "UIBar.h"
 #include "GUI.h"
 #include "SceneManager.h"
@@ -250,17 +251,17 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			App->gui->EnableElement((UIElement*)win_panel_two);
 		}
 		else if (element == win_continue_two) {
-			if (win_unit_one->selected) {
+			if (win_unit_one->IsSelected()) {
 				App->game_manager->AddCardToCollection((EntityType)random_num[0]);
 				App->gui->DisableElement((UIElement*)win_panel_two);
 				App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
 			}
-			else if (win_unit_two->selected) {
+			else if (win_unit_two->IsSelected()) {
 				App->game_manager->AddCardToCollection((EntityType)random_num[1]);
 				App->gui->DisableElement((UIElement*)win_panel_two);
 				App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
 			}
-			else if (win_unit_three->selected) {
+			else if (win_unit_three->IsSelected()) {
 				App->game_manager->AddCardToCollection((EntityType)random_num[2]);
 				App->gui->DisableElement((UIElement*)win_panel_two);
 				App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
@@ -272,25 +273,22 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
 		}
 
+		if (element == win_unit_one) {
+			win_unit_two->ChangeState(false);
+			win_unit_three->ChangeState(false);
+		}
+		else if (element == win_unit_two) {
+			win_unit_one->ChangeState(false);
+			win_unit_three->ChangeState(false);
+		}
+		else if (element == win_unit_three) {
+			win_unit_two->ChangeState(false);
+			win_unit_one->ChangeState(false);
+		}
 	}
 	else if (gui_event == GUI_Event::LEFT_CLICK_UP) {
 		if (element == current_drag) {
 			ReleaseDrag();
-		}
-	}
-	else if (gui_event == GUI_Event::RIGHT_CLICK_DOWN)
-	{
-		if (element == win_unit_one) {
-			win_unit_two->selected = false;
-			win_unit_three->selected = false;
-		}
-		else if (element == win_unit_two) {
-			win_unit_one->selected = false;
-			win_unit_three->selected = false;
-		}
-		else if (element == win_unit_three) {
-			win_unit_two->selected = false;
-			win_unit_one->selected = false;
 		}
 	}
 
@@ -377,9 +375,9 @@ void BattleScene::StartUI()
 	win_continue_one = App->gui->CreateButton({ 262,375 }, button_rect, win_panel_one);
 	win_continue_two = App->gui->CreateButton({ 262,375 }, button_rect, win_panel_two);
 
-	win_unit_one = App->gui->CreateButton({ 130,200 }, App->gui->LoadUIButton(random_num[0], "upgrade"), win_panel_two, true);
-	win_unit_two = App->gui->CreateButton({ 320,200 }, App->gui->LoadUIButton(random_num[1], "upgrade"), win_panel_two, true);
-	win_unit_three = App->gui->CreateButton({ 510,200 }, App->gui->LoadUIButton(random_num[2], "upgrade"), win_panel_two, true);
+	win_unit_one = App->gui->CreateSelectableButton({ 130,200 }, App->gui->LoadUIButton(random_num[0], "upgrade"), win_panel_two);
+	win_unit_two = App->gui->CreateSelectableButton({ 320,200 }, App->gui->LoadUIButton(random_num[1], "upgrade"), win_panel_two);
+	win_unit_three = App->gui->CreateSelectableButton({ 510,200 }, App->gui->LoadUIButton(random_num[2], "upgrade"), win_panel_two);
 
 	win_building = App->gui->CreateImage({ 260,160 }, App->gui->LoadUIImage(App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterType()), win_panel_one);
 

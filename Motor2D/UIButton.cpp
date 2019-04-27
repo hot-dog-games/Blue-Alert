@@ -64,10 +64,9 @@ bool UIButton::CleanUp()
 	return true;
 }
 
-UIButton::UIButton(iPoint position, SDL_Rect* sprite_rect, bool is_selectable, bool is_interactable)
+UIButton::UIButton(iPoint position, SDL_Rect* sprite_rect, bool is_interactable)
 {
 	interactable = is_interactable;
-	selectable = is_selectable;
 	rect_box = { position.x, position.y, sprite_rect[0].w,sprite_rect[0].h };
 
 	anim = new SDL_Rect[4];

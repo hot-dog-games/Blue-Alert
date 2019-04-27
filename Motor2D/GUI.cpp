@@ -12,6 +12,7 @@
 #include "UIAnimatedImage.h"
 #include "UIImage.h"
 #include "UIButton.h"
+#include "UISelectableButton.h"
 #include "UILabel.h"
 #include "UIScrollBar.h"
 #include "UIBar.h"
@@ -116,13 +117,8 @@ bool Gui::PreUpdate()
 					}
 				}
 			}
-			else if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN && current_element->selectable && current_element == selected_element)
-			{
-				current_element->OnMouseClick();
-				App->scene_manager->current_scene->GUIEvent(current_element, RIGHT_CLICK_DOWN);
-				current_element->selected = true;
-			}
-			if (!current_element->clicked && selected_element != current_element && !current_element->selected)
+
+			if (!current_element->clicked && selected_element != current_element)
 			{
 				current_element->OnMouseExit();
 				App->scene_manager->current_scene->GUIEvent(current_element, MOUSE_EXIT);
@@ -201,9 +197,18 @@ UILabel* Gui::CreateLabel(iPoint pos, std::string path, int size, std::string te
 	return label;
 }
 
-UIButton* Gui::CreateButton(iPoint pos, SDL_Rect* sprite_rect, UIElement* parent, bool is_selectable, bool is_interactable)
+UIButton* Gui::CreateButton(iPoint pos, SDL_Rect* sprite_rect, UIElement* parent, bool is_interactable)
 {
-	UIButton* button = new UIButton(pos, sprite_rect, is_selectable, is_interactable);
+	UIButton* button = new UIButton(pos, sprite_rect, is_interactable);
+	button->parent = parent;
+	elements.push_back(button);
+
+	return button;
+}
+
+UISelectableButton * Gui::CreateSelectableButton(iPoint pos, SDL_Rect * sprite_rect, UIElement * parent, bool is_interactable)
+{
+	UISelectableButton* button = new UISelectableButton(pos, sprite_rect, is_interactable);
 	button->parent = parent;
 	elements.push_back(button);
 
