@@ -5,9 +5,8 @@
 #include "Stat.h"
 #include "p2Log.h"
 
-UIBar::UIBar(iPoint pos, SDL_Rect sprite_rect, Stat* value, BarType type, bool is_interactable)
+UIBar::UIBar(iPoint pos, SDL_Rect sprite_rect, Stat* value, BarType type)
 {
-	interactable = is_interactable;
 	rect_box = { pos.x, pos.y, sprite_rect.w,sprite_rect.h };
 
 	rect_sprite = sprite_rect;
@@ -69,8 +68,7 @@ bool UIBar::UIBlit()
 }
 
 bool UIBar::Update(float dt)
-{
-	LOG("Current Value: %i\n Bar Value: %f", current_value, bar_value->GetValue());
+{;
 	if (bar_value->GetValue() > current_value) {
 		IncreaseBar(bar_value->GetValue() - current_value);
 	}

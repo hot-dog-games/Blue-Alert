@@ -80,9 +80,9 @@ private:
 	UILabel*		win_text_one;
 	UILabel*		win_text_two;
 	UIImage*		win_building;
-	UIButton*		win_unit_one;
-	UIButton*		win_unit_two;
-	UIButton*		win_unit_three;
+	UISelectableButton*		win_unit_one;
+	UISelectableButton*		win_unit_two;
+	UISelectableButton*		win_unit_three;
 
 	UIImage*		lose_panel;
 	UILabel*		lose_text;

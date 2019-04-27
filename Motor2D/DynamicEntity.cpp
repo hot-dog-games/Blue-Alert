@@ -2,13 +2,15 @@
 #include "j1App.h"
 #include "Render.h"
 #include "Audio.h"
+#include "Movement.h"
+#include "GUI.h"
+#include "UIBar.h"
 #include "CardManager.h"
 #include "Pathfinding.h"
 #include "Stat.h"
 #include "Map.h"
 #include "Particles.h"
 #include "DynamicEntity.h"
-#include "Movement.h"
 
 const float DELETE_TIME = 5.0f;
 const int EXPLOSION_RANGE_TILES = 2;
@@ -39,11 +41,13 @@ bool DynamicEntity::Start()
 	fPoint core_position = App->entity_manager->GetCorePosition(faction);
 	iPoint core_map_position = App->map->WorldToMap((int)core_position.x, (int)core_position.y);
 	iPoint map_position = App->map->WorldToMap(position.x, position.y);
+	iPoint bar_position = App->render->WorldToScreen(position.x, position.y);
 
 	App->pathfinding->CreatePath({ map_position.x, map_position.y }, { core_map_position.x , core_map_position.y });
 	path = App->pathfinding->GetLastPath();
 	state = DYNAMIC_MOVING;
 	current_animation = &animations.find("moving_up")->second;
+	current_frame = current_animation->GetCurrentFrame(0.1);
 
 	for (std::vector<iPoint>::iterator point = path.begin(); point != path.end(); ++point)
 	{
@@ -55,6 +59,8 @@ bool DynamicEntity::Start()
 
 	App->audio->SetFXVolume(attack_fx.c_str(), 30);
 	App->audio->SetFXVolume(explosion_fx.c_str(), 30);
+
+	health_bar = App->gui->CreateBar(bar_position, { 25,1503,current_frame.w, 7 }, stats.find("health")->second, BarType::BAR_HORITZONTAL, this);
 	return true;
 }
 
@@ -137,7 +143,8 @@ bool DynamicEntity::Update(float dt)
 		break;
 		case DYNAMIC_ATTACKING:
 		{
-			Attack();
+			if(objective->IsAlive())
+				Attack();
 		}
 		break;
 		case DYNAMIC_DYING:
@@ -367,6 +374,7 @@ void DynamicEntity::Die()
 	state = DYNAMIC_DYING;
 	current_animation = &animations.find("dying")->second;
 	objective = nullptr;
+	App->gui->DeleteElement(health_bar);
 	path.clear();
 }
 
