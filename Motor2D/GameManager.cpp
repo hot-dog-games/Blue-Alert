@@ -74,9 +74,9 @@ bool GameManager::IsInPlayerDeck(Card * card)
 
 void GameManager::CreatePlayerDeck()
 {
-	collection.push_back(App->card_manager->CreateCard(EntityType::G_I));
+	collection.push_back(App->card_manager->CreateCard(EntityType::CONSCRIPT));
 	collection.push_back(App->card_manager->CreateCard(EntityType::SNIPER));
-	collection.push_back(App->card_manager->CreateCard(EntityType::NAVY_SEAL));
+	collection.push_back(App->card_manager->CreateCard(EntityType::FLAK_TROOPER));
 	collection.push_back(App->card_manager->CreateCard(EntityType::GRIZZLY));
 	collection.push_back(App->card_manager->CreateCard(EntityType::ROBOT));
 	collection.push_back(App->card_manager->CreateCard(EntityType::PRISM));
@@ -85,7 +85,7 @@ void GameManager::CreatePlayerDeck()
 	collection.push_back(App->card_manager->CreateCard(EntityType::BLACK_EAGLE));
 
 	combat_deck = new Deck();
-	combat_deck->AddCard(GetCardFromCollection(EntityType::G_I));
+	combat_deck->AddCard(GetCardFromCollection(EntityType::CONSCRIPT));
 	combat_deck->AddCard(GetCardFromCollection(EntityType::SNIPER));
 	combat_deck->AddCard(GetCardFromCollection(EntityType::GRIZZLY));
 	combat_deck->AddCard(GetCardFromCollection(EntityType::HARRIER));
