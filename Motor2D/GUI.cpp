@@ -406,19 +406,19 @@ SDL_Rect Gui::LoadUIImage(int num)
 	std::string name;
 
 	switch (num) {
-	case 10:
+	case 30:
 		name = "Infantry";
 		break;
-	case 11:
+	case 31:
 		name = "Aerial";
 		break;
-	case 12:
+	case 32:
 		name = "Land";
 		break;
-	case 13:
+	case 33:
 		name = "Gold";
 		break;
-	case 14:
+	case 34:
 		name = "Store";
 		break;
 	}

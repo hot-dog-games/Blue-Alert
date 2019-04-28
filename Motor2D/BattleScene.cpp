@@ -340,10 +340,11 @@ void BattleScene::StartUI()
 {
 	//Generate random number
 	do {
-		random_num[0] = rand() % 9 + 1;
-		random_num[1] = rand() % 9 + 1;
-		random_num[2] = rand() % 9 + 1;
-	} while (random_num[0] == random_num[1] || random_num[0] == random_num[2] || random_num[1] == random_num[2]);
+		random_num[0] = rand() % 18 + 1;
+		random_num[1] = rand() % 18 + 1;
+		random_num[2] = rand() % 18 + 1;
+	} while ((random_num[0] == random_num[1] || random_num[0] == random_num[2] || random_num[1] == random_num[2])
+		|| (random_num[0] % 2 == 0 || random_num[1] % 2 == 0 || random_num[2] % 2 == 0));
 
 	//Game_UI
 
