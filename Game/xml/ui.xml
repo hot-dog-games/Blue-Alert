@@ -30,9 +30,9 @@
     <Conscript type="2">
 
       <button>
-        <frame x="400" y="0" width="100" height="80"/>
-        <frame x="500" y="0" width="100" height="80"/>
-        <frame x="400" y="80" width="100" height="80"/>
+        <frame x="2223" y="320" width="100" height="80"/>
+        <frame x="2323" y="320" width="100" height="80"/>
+        <frame x="2223" y="400" width="100" height="80"/>
         <frame x="0" y="0" width="100" height="80"/>
       </button>
 
@@ -57,9 +57,9 @@
     <Virus type="3">
 
       <button>
-        <frame x="200" y="0" width="100" height="80"/>
-        <frame x="300" y="0" width="100" height="80"/>
-        <frame x="200" y="80" width="100" height="80"/>
+        <frame x="2423" y="0" width="100" height="80"/>
+        <frame x="2523" y="0" width="100" height="80"/>
+        <frame x="2423" y="80" width="100" height="80"/>
         <frame x="0" y="0" width="100" height="80"/>
       </button>
 
@@ -112,9 +112,9 @@
     <GuardianGI type="5">
 
       <button>
-        <frame x="200" y="0" width="100" height="80"/>
-        <frame x="300" y="0" width="100" height="80"/>
-        <frame x="200" y="80" width="100" height="80"/>
+        <frame x="2223" y="0" width="100" height="80"/>
+        <frame x="2323" y="0" width="100" height="80"/>
+        <frame x="2223" y="80" width="100" height="80"/>
         <frame x="0" y="0" width="100" height="80"/>
       </button>
 
@@ -139,9 +139,9 @@
     <FlakTrooper type="6">
 
       <button>
-        <frame x="200" y="0" width="100" height="80"/>
-        <frame x="300" y="0" width="100" height="80"/>
-        <frame x="200" y="80" width="100" height="80"/>
+        <frame x="2223" y="160" width="100" height="80"/>
+        <frame x="2323" y="160" width="100" height="80"/>
+        <frame x="2223" y="240" width="100" height="80"/>
         <frame x="0" y="0" width="100" height="80"/>
       </button>
 
