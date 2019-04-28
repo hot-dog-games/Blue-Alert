@@ -12,9 +12,11 @@
 #include "UIAnimatedImage.h"
 #include "UIImage.h"
 #include "UIButton.h"
+#include "UISelectableButton.h"
 #include "UILabel.h"
 #include "UIScrollBar.h"
 #include "UIBar.h"
+#include "UIEntityBar.h"
 #include "Brofiler/Brofiler.h"
 #include "Stat.h"
 #include "GUI.h"
@@ -116,13 +118,8 @@ bool Gui::PreUpdate()
 					}
 				}
 			}
-			else if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN && current_element->selectable && current_element == selected_element)
-			{
-				current_element->OnMouseClick();
-				App->scene_manager->current_scene->GUIEvent(current_element, RIGHT_CLICK_DOWN);
-				current_element->selected = true;
-			}
-			if (!current_element->clicked && selected_element != current_element && !current_element->selected)
+
+			if (!current_element->clicked && selected_element != current_element)
 			{
 				current_element->OnMouseExit();
 				App->scene_manager->current_scene->GUIEvent(current_element, MOUSE_EXIT);
@@ -155,11 +152,9 @@ bool Gui::PostUpdate()
 	BROFILER_CATEGORY("UIPostUpdate", Profiler::Color::Magenta);
 	for (std::list<UIElement*>::iterator element = elements.begin(); element != elements.end(); ++element)
 	{
-		if ((*element)->enabled)
+		if ((*element)->enabled && !(*element)->parent)
 		{
-			(*element)->UIBlit();
-			if (debug_draw)
-				App->render->DrawQuad((*element)->GetScreenRect(), 255, 0, 0, 255, false, false);
+			RenderElement((*element));
 		}
 
 	}
@@ -201,9 +196,18 @@ UILabel* Gui::CreateLabel(iPoint pos, std::string path, int size, std::string te
 	return label;
 }
 
-UIButton* Gui::CreateButton(iPoint pos, SDL_Rect* sprite_rect, UIElement* parent, bool is_selectable, bool is_interactable)
+UIButton* Gui::CreateButton(iPoint pos, SDL_Rect* sprite_rect, UIElement* parent, bool is_interactable)
 {
-	UIButton* button = new UIButton(pos, sprite_rect, is_selectable, is_interactable);
+	UIButton* button = new UIButton(pos, sprite_rect, is_interactable);
+	button->parent = parent;
+	elements.push_back(button);
+
+	return button;
+}
+
+UISelectableButton * Gui::CreateSelectableButton(iPoint pos, SDL_Rect * sprite_rect, UIElement * parent, bool is_interactable)
+{
+	UISelectableButton* button = new UISelectableButton(pos, sprite_rect, is_interactable);
 	button->parent = parent;
 	elements.push_back(button);
 
@@ -228,11 +232,18 @@ UIAnimatedImage* Gui::CreateAnimatedImage(iPoint pos, SDL_Rect * rect, int total
 	return image;
 }
 
-UIBar * Gui::CreateBar(iPoint pos, SDL_Rect rect, Stat* value, BarType type, UIElement * parent)
+UIBar * Gui::CreateBar(iPoint pos, SDL_Rect rect, Stat* value, BarType type, Entity* entity, UIElement * parent)
 {
-	UIBar* bar = new UIBar(pos, rect, value, type);
+	UIBar* bar;
+	if (entity) {
+		bar = new UIEntityBar(pos, rect, value, type, entity);
+	}
+	else {
+		bar = new UIBar(pos, rect, value, type);
+	}
+	
 	bar->parent = parent;
-	elements.push_back(bar);
+	elements.push_front(bar);
 	return bar;
 }
 
@@ -294,6 +305,19 @@ void Gui::DisableInteractable(UIElement* ele)
 	{
 		if ((*element)->parent && (*element)->parent == ele)
 			(*element)->interactable = false;
+	}
+}
+
+void Gui::RenderElement(UIElement* element)
+{
+	element->UIBlit();
+	if (debug_draw)
+		App->render->DrawQuad(element->GetScreenRect(), 255, 0, 0, 255, false, false);
+
+	for (std::list<UIElement*>::iterator child_element = elements.begin(); child_element != elements.end(); ++child_element)
+	{
+		if ((*child_element)->enabled && (*child_element)->parent && (*child_element)->parent == element)
+			RenderElement((*child_element));
 	}
 }
 

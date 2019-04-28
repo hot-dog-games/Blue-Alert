@@ -5,6 +5,7 @@
 
 struct Card;
 struct SingleUnit;
+class UIBar;
 
 enum DynamicState {
 	DYNAMIC_IDLE,
@@ -82,6 +83,8 @@ protected:
 private:
 	std::string attack_fx;
 	std::string explosion_fx;
+	
+	UIBar*	health_bar = nullptr;
 };
 
 

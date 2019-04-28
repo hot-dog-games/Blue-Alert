@@ -307,41 +307,12 @@ bool TestingScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			App->gui->DisableElement((UIElement*)win_panel_one);
 			App->gui->EnableElement((UIElement*)win_panel_two);
 		}
-		else if (element == win_continue_two) {
-			if (win_unit_one->selected) {
-				//App->game_manager->AddCardToPlayerCollection(random_num[0]);
-				App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
-			}
-			else if (win_unit_two->selected) {
-				//App->game_manager->AddCardToPlayerCollection(random_num[1]);
-				App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
-			}
-			else if(win_unit_three->selected) {
-				//App->game_manager->AddCardToPlayerCollection(random_num[2]);
-				App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
-			}
-		}
 			
 	}
 	else if (gui_event == GUI_Event::LEFT_CLICK_UP) {
 		if (element == current_drag) {
 			ReleaseDrag();
 		}		
-	}
-	else if (gui_event == GUI_Event::RIGHT_CLICK_DOWN)
-	{
-		if (element == win_unit_one) {
-			win_unit_two->selected = false;
-			win_unit_three->selected = false;
-		}
-		else if (element == win_unit_two) {
-			win_unit_one->selected = false;
-			win_unit_three->selected = false;
-		}
-		else if (element == win_unit_three) {
-			win_unit_two->selected = false;
-			win_unit_one->selected = false;
-		}
 	}
 
 	return true;
