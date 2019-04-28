@@ -70,7 +70,7 @@ fPoint EncounterNode::GetPosition()
 
 void EncounterNode::FillEncounterDeck()
 {
-	std::vector<int> pool = { 1, 2, 3 ,4 ,5, 6, 7, 8, 9 };
+	std::vector<int> pool = { 1, 3, 5, 7, 9, 11, 13, 15, 17 };
 	std::vector<int>::iterator it;
 
 	for (int i = 0; i < encounter->deck_size; i++)

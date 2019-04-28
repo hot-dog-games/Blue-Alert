@@ -60,9 +60,9 @@ void Entity::LoadAnimations(pugi::xml_node anim_config)
 	{
 		Animation anim;
 		pugi::xml_node frame;
-		for (frame = animation.child("frame"); frame; frame = frame.next_sibling("frame"))
+		for (frame = animation.child("sprite"); frame; frame = frame.next_sibling("sprite"))
 		{
-			anim.PushBack({ frame.attribute("x").as_int(), frame.attribute("y").as_int(), frame.attribute("width").as_int(), frame.attribute("height").as_int() });
+			anim.PushBack({ frame.attribute("x").as_int(), frame.attribute("y").as_int(), frame.attribute("w").as_int(), frame.attribute("h").as_int() });
 		}
 		anim.speed = animation.attribute("speed").as_float();
 		anim.base_speed = anim.speed;
