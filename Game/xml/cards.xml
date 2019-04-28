@@ -151,7 +151,7 @@
 
   <card type ="7">
     <name>Grizzly Tank</name>
-    <sprite>sprites/Units/LandVehicles/GreyTank.png</sprite>
+    <sprite>sprites/Units/LandVehicles/grizzly.png</sprite>
     <combat attack_type="2" armored="true"/>
     <stats>
       <stat stat="health" value ="120"/>
@@ -176,7 +176,7 @@
 
   <card type ="8">
     <name>Rhino Tank</name>
-    <sprite>sprites/Units/LandVehicles/GreyTank.png</sprite>
+    <sprite>sprites/Units/LandVehicles/grizzly.png</sprite>
     <combat attack_type="2" armored="true"/>
     <stats>
       <stat stat="health" value ="120"/>
@@ -201,7 +201,7 @@
 
   <card type ="9">
     <name>Robot Tank</name>
-    <sprite>sprites/Units/LandVehicles/GreyTank.png</sprite>
+    <sprite>sprites/Units/LandVehicles/grizzly.png</sprite>
     <combat attack_type="0" armored="true"/>
     <stats>
       <stat stat="health" value ="60"/>
@@ -227,7 +227,7 @@
 
   <card type ="10">
     <name>Terror Drone</name>
-    <sprite>sprites/Units/LandVehicles/GreyTank.png</sprite>
+    <sprite>sprites/Units/LandVehicles/grizzly.png</sprite>
     <combat attack_type="0" armored="true"/>
     <stats>
       <stat stat="health" value ="60"/>
@@ -253,7 +253,7 @@
 
   <card type ="11">
     <name>Prism Tank</name>
-    <sprite>sprites/Units/LandVehicles/GreyTank.png</sprite>
+    <sprite>sprites/Units/LandVehicles/grizzly.png</sprite>
     <combat attack_type="1" armored="true"/>
     <stats>
       <stat stat="health" value ="100"/>
@@ -279,7 +279,7 @@
   
   <card type ="12">
     <name>Tesla Tank</name>
-    <sprite>sprites/Units/LandVehicles/GreyTank.png</sprite>
+    <sprite>sprites/Units/LandVehicles/grizzly.png</sprite>
     <combat attack_type="1" armored="true"/>
     <stats>
       <stat stat="health" value ="100"/>
@@ -305,7 +305,7 @@
 
   <card type ="13">
     <name>Nighthawk</name>
-    <sprite>sprites/Units/AirVehicles/nighthawksprite.png</sprite>
+    <sprite>sprites/Units/AirVehicles/siegechopper.png</sprite>
     <combat attack_type="0" armored="false"/>
     <stats>
       <stat stat="health" value ="100"/>
@@ -330,7 +330,7 @@
   
   <card type ="14">
     <name>Siegechopper</name>
-    <sprite>sprites/Units/AirVehicles/nighthawksprite.png</sprite>
+    <sprite>sprites/Units/AirVehicles/siegechopper.png</sprite>
     <combat attack_type="0" armored="false"/>
     <stats>
       <stat stat="health" value ="100"/>
