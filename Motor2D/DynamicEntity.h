@@ -45,6 +45,9 @@ public:
 	void SetUnitDirectionByValue(fPoint unitDirection);
 	fPoint GetUnitDirectionByValue() const;
 	virtual void DecreaseLife(float damage, bool piercing = false);
+	virtual float GetDamage();
+	virtual bool IsArmored();
+	virtual int GetAttackType();
 
 public:
 	Card* entity_card = nullptr;

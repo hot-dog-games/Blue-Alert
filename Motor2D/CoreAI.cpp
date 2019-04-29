@@ -1,7 +1,9 @@
 #include "j1App.h"
 #include "EntityManager.h"
+#include "DynamicEntity.h"
 #include "Render.h"
 #include "Deck.h"
+#include "CardManager.h"
 #include "p2Log.h"
 #include "CoreAI.h"
 
@@ -31,31 +33,16 @@ bool CoreAI::Update(float dt)
 			if (CanPlay())
 				ai_state = AIState::THINKING;
 			break;
-		case CoreAI::AIState::THINKING:
+		case CoreAI::AIState::THINKING:	
 			if (dt_sum >= THINK_DELAY)
 			{
-				for (uint i = 0; i < 3; ++i)
-				{
-					if (LosingLane(i))
-					{
-						ai_state = AIState::ACTING;
-						lane = i;
-						dt_sum = 0;
-						break;
-					}
-				}
+				Think();
+				dt_sum = 0;
 			}
 			break;
 		case CoreAI::AIState::ACTING:
-			for (int i = 0; i < MAX_CARDS; i++)
-			{
-				if (CanUseCard(i))
-				{
-					UseCard(i, { (float)lanes[lane].x + (float)lanes[lane].w*0.5f, position.y + 50 });
-					ai_state = AIState::WAITING;
-					break;
-				}
-			}
+			UseCard(selected_card, { (float)lanes[selected_lane].area.x + (float)lanes[selected_lane].area.w*0.5f, position.y + 50 });
+			ai_state = AIState::WAITING;
 			break;
 		default:
 			break;
@@ -65,15 +52,180 @@ bool CoreAI::Update(float dt)
 	return true;
 }
 
+void CoreAI::Think()
+{
+	for (uint i = 0; i < 3; ++i)
+	{
+		AnalyzeLane(i);
+	}
+
+	SelectLane();
+	SelectCard();
+
+
+	if (selected_card > -1)
+		ai_state = AIState::ACTING;
+	else
+		ai_state = AIState::WAITING;
+}
+
+void CoreAI::SelectLane()
+{
+	if (lanes[0].lane_priority >= lanes[1].lane_priority)
+	{
+		if (lanes[0].lane_priority >= lanes[2].lane_priority)
+			selected_lane = 0;
+		else
+			selected_lane = 2;
+	}
+	else
+	{
+		if (lanes[1].lane_priority >= lanes[2].lane_priority)
+			selected_lane = 1;
+		else
+			selected_lane = 2;
+	}
+}
+
+void CoreAI::AnalyzeLane(uint lane)
+{
+	float player_damage = 0;
+	float enemy_damage = 0;
+	float closest_enemy_distance = 1000;
+	std::list<Entity*> entities;
+
+	App->entity_manager->GetEntitiesInArea(lanes[lane].area, entities);
+	lanes[lane].Reset();
+
+	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
+	{
+		if ((*entity)->faction != faction)
+		{
+			lanes[lane].enemy_units++;
+
+			enemy_damage += (*entity)->GetDamage();
+			float enemy_distance = (*entity)->position.DistanceNoSqrt(position);
+			closest_enemy_distance = enemy_distance <= closest_enemy_distance ? enemy_distance : closest_enemy_distance;
+
+			if ((*entity)->IsArmored())
+				lanes[lane].enemy_armored++;
+			if((*entity)->GetAttackType() == AttackType::AT_BASIC)
+				lanes[lane].enemy_basic++;
+			else if ((*entity)->GetAttackType() == AttackType::AT_PIERCING)
+				lanes[lane].enemy_piercing++;
+			else 
+				lanes[lane].enemy_aoe++;
+		}
+		else
+		{
+			lanes[lane].own_units++;
+			player_damage += (*entity)->GetDamage();
+		}
+	}
+
+
+	lanes[lane].unit_value = enemy_damage - player_damage;
+	lanes[lane].distance_value = LINEAR_INTERPOLATION(closest_enemy_distance, 0, 1000, 1000, 0);
+	lanes[lane].lane_priority = lanes[lane].unit_value + lanes[lane].distance_value;
+}
+
+void CoreAI::SelectCard()
+{
+	selected_card = -1;
+	AttackType counter = AttackType::AT_BASIC;
+	AttackType secondary_counter = AttackType::AT_NONE;
+
+	bool has_counter = false;
+
+	if (lanes[selected_lane].enemy_armored > lanes[selected_lane].enemy_basic)
+	{
+		if (lanes[selected_lane].enemy_armored > lanes[selected_lane].enemy_piercing)
+		{
+			counter = AttackType::AT_PIERCING;
+			if (lanes[selected_lane].enemy_aoe > lanes[selected_lane].enemy_piercing)
+				secondary_counter = AttackType::AT_AOE;
+			else
+				secondary_counter = AttackType::AT_BASIC;
+		}
+		else
+		{
+			if (lanes[selected_lane].enemy_aoe > lanes[selected_lane].enemy_piercing)
+				counter = AttackType::AT_PIERCING;
+			else
+				counter = AttackType::AT_BASIC;
+		}
+	}
+	else
+	{
+		if (lanes[selected_lane].enemy_basic > lanes[selected_lane].enemy_piercing)
+		{
+			counter = AttackType::AT_AOE;
+			secondary_counter = AT_BASIC;
+		}
+		else
+		{
+			if (lanes[selected_lane].enemy_aoe > lanes[selected_lane].enemy_piercing)
+				counter = AttackType::AT_PIERCING;
+			else
+				counter = AttackType::AT_BASIC;
+		}
+
+	}
+
+	LOG("piercing: %i, armored: %i, basic: %i, aoe: %i", lanes[selected_lane].enemy_piercing, lanes[selected_lane].enemy_armored, lanes[selected_lane].enemy_basic, lanes[selected_lane].enemy_aoe);
+	LOG("SELECTED COUNTER IS: %i  SELECTED SECONDARY COUNTER IS: %i", (int)counter, (int)secondary_counter);
+
+	for (int i = 0; i < MAX_CARDS; i++)
+	{
+		if (deck->cards[i]->info.attack_type == counter)
+		{
+			has_counter = true;
+			if (CanUseCard(i))
+			{
+				LOG("COUNTER FOUND");
+				selected_card = i;
+				break;
+			}
+		}
+	}
+
+	if (!has_counter)
+	{
+		for (int i = 0; i < MAX_CARDS; i++)
+		{
+			if (deck->cards[i]->info.attack_type == secondary_counter)
+			{
+				if (CanUseCard(i))
+				{
+					LOG("SECONDARY COUNTER FOUND");
+					selected_card = i;
+					break;
+				}
+			}
+			else if (!deck->cards[i]->info.armored && secondary_counter == AttackType::AT_NONE)
+			{
+				if (CanUseCard(i))
+				{
+					LOG("SECONDARY COUNTER NON BLINDED FOUND");
+					selected_card = i;
+					break;
+				}
+			}
+		}
+
+	}
+
+}
+
 bool CoreAI::PostUpdate()
 {
 	Core::PostUpdate();
 
 	if (debug)
 	{
-		App->render->DrawQuad(lanes[0], 0, 0, 255, 100, true, true);
-		App->render->DrawQuad(lanes[1], 0, 0, 255, 100, true, true);
-		App->render->DrawQuad(lanes[2], 0, 0, 255, 100, true, true);
+		App->render->DrawQuad(lanes[0].area, 0, 0, 255, 100, true, true);
+		App->render->DrawQuad(lanes[1].area, 0, 0, 255, 100, true, true);
+		App->render->DrawQuad(lanes[2].area, 0, 0, 255, 100, true, true);
 	}
 
 	return true;
@@ -81,9 +233,9 @@ bool CoreAI::PostUpdate()
 
 bool CoreAI::Start()
 {
-	lanes[0] = { -150, 0 , 120, 1000 };
-	lanes[1] = { -30, 0 , 120, 1000 };
-	lanes[2] = { 90, 0 , 120, 1000 };
+	lanes[0].area = { -150, 0 , 120, 1000 };
+	lanes[1].area = { -30, 0 , 120, 1000 };
+	lanes[2].area = { 90, 0 , 120, 1000 };
 
 	return true;
 }
@@ -96,22 +248,4 @@ bool CoreAI::CanPlay()
 			return true;
 	}
 	return false;
-}
-
-bool CoreAI::LosingLane(uint lane)
-{
-	uint own_units = 0;
-	uint enemy_units = 0;
-	std::list<Entity*> entities;
-	App->entity_manager->GetEntitiesInArea(lanes[lane], entities);
-
-	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
-	{
-		if ((*entity)->faction != faction)
-			enemy_units++;
-		else
-			own_units++;
-	}
-
-	return (enemy_units >= own_units);	
 }

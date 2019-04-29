@@ -64,7 +64,7 @@ bool TestingScene::Start()
 	Deck* enemy_deck = new Deck();
 	enemy_deck->delete_cards = true;
 	enemy_deck->AddCard(App->card_manager->CreateCard(EntityType::GI));
-	enemy_deck->AddCard(App->card_manager->CreateCard(EntityType::VIRUS));
+	enemy_deck->AddCard(App->card_manager->CreateCard(EntityType::GI));
 	enemy_deck->AddCard(App->card_manager->CreateCard(EntityType::GUARDIAN_GI));
 	enemy_deck->AddCard(App->card_manager->CreateCard(EntityType::HARRIER));
 
@@ -73,10 +73,10 @@ bool TestingScene::Start()
 	test_deck->AddCard(App->card_manager->CreateCard(EntityType::CONSCRIPT));
 	test_deck->AddCard(App->card_manager->CreateCard(EntityType::SNIPER));
 	test_deck->AddCard(App->card_manager->CreateCard(EntityType::FLAK_TROOPER));
-	test_deck->AddCard(App->card_manager->CreateCard(EntityType::SIEGECHOPPER));
+	test_deck->AddCard(App->card_manager->CreateCard(EntityType::HARRIER));
 
 	test_core = App->entity_manager->CreateCore(1, { 30,980 }, test_deck, FACTION_RUSSIAN);
-	test_enemy_core = App->entity_manager->CreateCore(33, { 25,330 }, enemy_deck, FACTION_AMERICAN);
+	test_enemy_core = App->entity_manager->CreateCore(33, { 25,330 }, enemy_deck, FACTION_AMERICAN, true);
 	test_core->LoadUnitSprites();
 	test_enemy_core->LoadUnitSprites();
 

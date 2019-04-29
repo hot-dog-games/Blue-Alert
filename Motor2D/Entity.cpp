@@ -33,7 +33,6 @@ bool Entity::PostUpdate()
 void Entity::DecreaseLife(float damage, bool piercing)
 {
 	float damage_received = CalculateDamage(damage, 0);
-	LOG("DAMAGE");
 	stats.find("health")->second->DecreaseStat(damage_received);
 	if (stats.find("health")->second->GetValue() <= 0)
 		Die();

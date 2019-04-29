@@ -12,9 +12,10 @@ class Stat;
 class SDL_Texture;
 
 enum AttackType {
-	BASIC,
-	AOE,
-	PIERCING
+	AT_NONE = -1,
+	AT_BASIC,
+	AT_AOE,
+	AT_PIERCING
 };
 
 struct CardScaling {
