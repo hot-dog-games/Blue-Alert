@@ -6,6 +6,7 @@
 #include "EncounterTree.h"
 #include "UIButton.h"
 #include "UIImage.h"
+#include "UIButtonText.h"
 
 
 
@@ -48,14 +49,11 @@ private:
 	UILabel* gold;
 	UILabel* energy;
 	UILabel* text_menu;
-	UILabel* troops_text;
-	UILabel* buildings_text;
-	UILabel* back_cross_text;
 	UIButton* settings_button;
 	UIButton* menu_button;
-	UIButton* backbutton_t_b;
-	UIButton* troops_button;
-	UIButton* buildings_button;
+	UIButtonText* backbutton_t_b;
+	UIButtonText* troops_button;
+	UIButtonText* buildings_button;
 
 	UIButton* deck_buttons[4];
 	UIButton* collection_buttons[9];

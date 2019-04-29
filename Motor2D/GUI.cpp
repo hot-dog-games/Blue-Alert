@@ -13,6 +13,7 @@
 #include "UIImage.h"
 #include "UIButton.h"
 #include "UISelectableButton.h"
+#include "UIButtonText.h"
 #include "UILabel.h"
 #include "UIScrollBar.h"
 #include "UIBar.h"
@@ -43,6 +44,8 @@ bool Gui::Awake(pugi::xml_node& conf)
 	atlas_file_name = conf.child("atlas").attribute("file").as_string("");
 
 	buttons_file.load_file("xml/ui.xml");
+
+	button_font = App->fonts->Load("fonts/button_text.ttf", 12);
 
 	return ret;
 }
@@ -186,10 +189,10 @@ UIImage* Gui::CreateImage(iPoint pos, SDL_Rect rect, UIElement* parent, bool ima
 	return image;
 }
 
-UILabel* Gui::CreateLabel(iPoint pos, std::string path, int size, std::string text, SDL_Color color, int max_width, UIElement* parent)
+UILabel* Gui::CreateLabel(iPoint pos, std::string path, int size, std::string text, SDL_Color color, int max_width, UIElement* parent, bool is_interactable)
 {
 	_TTF_Font* font = App->fonts->Load(path.c_str(), size);
-	UILabel* label = new UILabel(pos, font, text, color, max_width);
+	UILabel* label = new UILabel(pos, font, text, color, max_width, is_interactable);
 	label->parent = parent;
 	elements.push_back(label);
 
@@ -208,6 +211,15 @@ UIButton* Gui::CreateButton(iPoint pos, SDL_Rect* sprite_rect, UIElement* parent
 UISelectableButton * Gui::CreateSelectableButton(iPoint pos, SDL_Rect * sprite_rect, UIElement * parent, bool is_interactable)
 {
 	UISelectableButton* button = new UISelectableButton(pos, sprite_rect, is_interactable);
+	button->parent = parent;
+	elements.push_back(button);
+
+	return button;
+}
+
+UIButtonText * Gui::CreateButtonText(iPoint pos, iPoint offset, SDL_Rect * sprite_rect, std::string text, SDL_Color color, int size, UIElement* parent, bool is_interactable)
+{
+	UIButtonText* button = new UIButtonText(pos, offset, sprite_rect, text, color, size, is_interactable);
 	button->parent = parent;
 	elements.push_back(button);
 
@@ -480,6 +492,11 @@ UIElement* Gui::GetElementUnderMouse()
 SDL_Texture* Gui::GetAtlas() const
 {
 	return atlas;
+}
+
+_TTF_Font * Gui::GetButtonFont() const
+{
+	return button_font;
 }
 
 

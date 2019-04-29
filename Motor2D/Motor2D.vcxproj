@@ -122,6 +122,7 @@
     <ClCompile Include="UIAnimatedImage.cpp" />
     <ClCompile Include="UIBar.cpp" />
     <ClCompile Include="UIButton.cpp" />
+    <ClCompile Include="UIButtonText.cpp" />
     <ClCompile Include="UIEntityBar.cpp" />
     <ClCompile Include="UISelectableButton.cpp" />
     <ClCompile Include="UIElement.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="UIAnimatedImage.h" />
     <ClInclude Include="UIBar.h" />
     <ClInclude Include="UIButton.h" />
+    <ClInclude Include="UIButtonText.h" />
     <ClInclude Include="UIEntityBar.h" />
     <ClInclude Include="UISelectableButton.h" />
     <ClInclude Include="UIElement.h" />

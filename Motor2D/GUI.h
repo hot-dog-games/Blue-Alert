@@ -10,11 +10,12 @@ struct SDL_Rect;
 struct SDL_Color;
 struct SDL_Texture;
 
-class _TTF_Font;
+struct _TTF_Font;
 class UIElement;
 class UIImage;
 class UIButton;
 class UISelectableButton;
+class UIButtonText;
 class UIScrollBar;
 class UIAnimatedImage;
 class UILabel;
@@ -72,9 +73,10 @@ public:
 	// TODO 2: Create the factory methods
 	// Gui creation functions
 	UIImage* CreateImage(iPoint pos, SDL_Rect rect, UIElement* parent = nullptr, bool image = true);
-	UILabel* CreateLabel(iPoint pos, std::string path, int size, std::string text, SDL_Color color, int max_width = 0, UIElement* parent = nullptr);
+	UILabel* CreateLabel(iPoint pos, std::string path, int size, std::string text, SDL_Color color, int max_width = 0, UIElement* parent = nullptr, bool is_interactable = false);
 	UIButton* CreateButton(iPoint pos, SDL_Rect* sprite_rect, UIElement* parent = nullptr, bool is_interactable = true);
 	UISelectableButton* CreateSelectableButton(iPoint pos, SDL_Rect* sprite_rect, UIElement* parent = nullptr, bool is_interactable = true);
+	UIButtonText* CreateButtonText(iPoint pos, iPoint offset, SDL_Rect* sprite_rect, std::string text, SDL_Color color, int size = 20, UIElement* parent = nullptr, bool is_interactable = true);
 	UIScrollBar* CreateScrollBar(iPoint pos, float min, float max, ScrollType type = VERTICAL, UIElement* parent = nullptr);
 	UIAnimatedImage* CreateAnimatedImage(iPoint pos, SDL_Rect * rect, int total_sprites, int speed, UIElement* parent = nullptr);
 	UIBar* CreateBar(iPoint pos, SDL_Rect rect, Stat* value, BarType type = BarType::BAR_VERTICAL, Entity* entity= nullptr, UIElement* parent = nullptr);
@@ -94,6 +96,7 @@ public:
 	SDL_Rect  LoadUIImage(int num);
 
 	SDL_Texture* GetAtlas() const;
+	_TTF_Font*	 GetButtonFont() const;
 
 private:
 	std::list<UIElement*> elements;
@@ -106,6 +109,8 @@ private:
 	bool debug_draw = false;
 
 	bool is_world_ui = false;
+
+	_TTF_Font* button_font = nullptr;
 };
 
 #endif // __j1GUI_H__

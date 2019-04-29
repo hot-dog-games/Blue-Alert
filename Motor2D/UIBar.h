@@ -11,7 +11,7 @@ class UIBar : public UIElement
 {
 public:
 	UIBar(iPoint pos, SDL_Rect sprite_rect, Stat* value, BarType type);
-	~UIBar();
+	~UIBar() {};
 
 	void DecreaseBar(uint value);
 	void IncreaseBar(uint value);

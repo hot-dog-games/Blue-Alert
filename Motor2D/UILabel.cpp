@@ -3,8 +3,10 @@
 #include "Fonts.h"
 #include "UILabel.h"
 
-UILabel::UILabel(iPoint pos, _TTF_Font* font, std::string text, SDL_Color color, int max_width)
+UILabel::UILabel(iPoint pos, _TTF_Font* font, std::string text, SDL_Color color, int max_width, bool is_interactable)
 {
+	interactable = is_interactable;
+
 	int w, h;
 	App->fonts->CalcSize("a", w, h, font); //calc size of one char
 
@@ -61,6 +63,7 @@ UILabel::UILabel(iPoint pos, _TTF_Font* font, std::string text, SDL_Color color,
 	this->font = font;
 	this->text = text;
 	this->color = color;
+	this->original_color = color;
 }
 UILabel::~UILabel()
 {
@@ -88,6 +91,7 @@ void UILabel::SetText(std::string text)
 void UILabel::SetColor(SDL_Color color)
 {
 	this->color = color;
+	this->original_color = color;
 }
 
 bool UILabel::CleanUp()
@@ -96,4 +100,24 @@ bool UILabel::CleanUp()
 	font = nullptr;
 
 	return true;
+}
+
+void UILabel::OnMouseClick()
+{
+	color = { 100,100,100,255 };
+}
+
+void UILabel::OnMouseHover()
+{
+	color = { 255,255,255,255 };
+}
+
+void UILabel::OnMouseRelease()
+{
+	color = { 255,255,255,255 };
+}
+
+void UILabel::OnMouseExit()
+{
+	color = original_color;
 }
