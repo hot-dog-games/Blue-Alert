@@ -35,6 +35,7 @@
 #define MIN( a, b ) ( ((a) < (b)) ? (a) : (b) )
 #define MAX( a, b ) ( ((a) > (b)) ? (a) : (b) )
 #define TO_BOOL( a )  ( (a != 0) ? true : false )
+#define LINEAR_INTERPOLATION(value, min, min_value, max, max_value) (((value-min)*(max_value - min_value)/(max-min))+min_value)
 
 typedef unsigned int uint;
 typedef unsigned __int32 uint32;

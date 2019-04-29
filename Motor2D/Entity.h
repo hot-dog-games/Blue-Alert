@@ -33,8 +33,11 @@ public:
 	virtual bool Start() { return true; };
 
 	virtual void DecreaseLife(float damage, bool piercing = false);
+	virtual float GetDamage() { return 0.0f; };
 	void SetDebug(bool value);
 	bool IsAlive();
+	virtual bool IsArmored() { return false; };
+	virtual int GetAttackType() { return -1; };
 
 protected:
 	void LoadAnimations(pugi::xml_node anim_config);

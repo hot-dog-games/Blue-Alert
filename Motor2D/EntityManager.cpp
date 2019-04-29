@@ -251,7 +251,6 @@ void EntityManager::FindClosestAllie(fPoint position, Faction faction, Entity* &
 }
 
 void EntityManager::GetEntitiesInArea(SDL_Rect area, std::list<Entity*> &list, int faction)
-
 {
 	Entity* ent;
 	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
