@@ -16,6 +16,8 @@
 #include "StrategyBuilding.h"
 #include "GameManager.h"
 #include "StrategyMapScene.h"
+#include "UISelectableButton.h"
+#include "UILabel.h"
 #include "Brofiler/Brofiler.h"
 
 StrategyMapScene::StrategyMapScene() : Scene()
@@ -106,8 +108,6 @@ bool StrategyMapScene::CleanUp()
 
 bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 {
-	
-
 	if (gui_event == GUI_Event::LEFT_CLICK_DOWN) {
 		if (element == settings_button) {
 			//(options = App->gui->CreateImage();
@@ -130,6 +130,9 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 					App->gui->DisableElement(deck_buttons[i]);
 			}
 
+			building_aerial_button->ChangeState(true);
+			building_title->SetText("Aerial Building:");
+
 		}
 		else if (element == backbutton_t_b) {
 			App->gui->DisableElement(troops_background);
@@ -148,6 +151,8 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 		else if (element == buildings_button) {
 			App->gui->DisableElement(troops_background);
 			App->gui->EnableElement(buildings_background);
+			App->gui->DisableElement(building_infantry_image);
+			building_aerial_button->ChangeState(true);
 		}
 		else if (element == deck_buttons[0])
 		{
@@ -208,6 +213,20 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 		else if (element == collection_buttons[9])
 		{
 			AddCardToDeck(element,9);
+		}
+
+		// Building butttons
+		if (element == building_infantry_button) {
+			App->gui->EnableElement(building_infantry_image);
+			App->gui->DisableElement(building_aerial_image);
+			building_aerial_button->ChangeState(false);
+			building_title->SetText("Infantry Building:");
+		}
+		else if (element == building_aerial_button) {
+			App->gui->EnableElement(building_aerial_image);
+			App->gui->DisableElement(building_infantry_image);
+			building_infantry_button->ChangeState(false);
+			building_title->SetText("Aerial Building:");
 		}
 	}
 
@@ -285,8 +304,17 @@ void StrategyMapScene::InitializeUI()
 	App->gui->DisableElement(troops_background);
 
 	//Building Menu
+
 	buildings_background = App->gui->CreateImage({ 20,95 }, { 1780,1229,986,593 }, main_panel);
+	building_title = App->gui->CreateLabel({ 610, 70 }, "fonts/button_text.ttf", 22, "Aerial Building:", { 242, 222, 70, 255 }, 600, buildings_background);
 
-
+	building_infantry_button = App->gui->CreateSelectableButton({ 560,400 }, App->gui->LoadUIButton(10, "button"),buildings_background);
+	building_infantry_image = App->gui->CreateImage({ 365,125 }, App->gui->LoadUIImage(10, "building"), buildings_background);
+	building_infantry_info = App->gui->CreateLabel({ 245,-30 }, "fonts/red_alert.ttf", 20, "The infantry troops are upgraded by %i", { 231,216,145,255 }, 300, building_infantry_image);
+	
+	building_aerial_button = App->gui->CreateSelectableButton({333,390 }, App->gui->LoadUIButton(11, "button"), buildings_background);
+	building_aerial_image = App->gui->CreateImage({ 355,135 }, App->gui->LoadUIImage(11, "building"), buildings_background);
+	building_aerial_info = App->gui->CreateLabel({ 255,-40 }, "fonts/red_alert.ttf", 20, "The aerial troops are upgraded by %i", { 231,216,145,255 }, 300, building_aerial_image);
+	
 	App->gui->DisableElement(buildings_background);
 }

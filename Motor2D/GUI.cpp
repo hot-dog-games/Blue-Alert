@@ -367,6 +367,12 @@ SDL_Rect* Gui::LoadUIButton(int num, std::string type)
 	case 9:
 		name = "BlackEagle";
 		break;
+	case 10:
+		name = "Infantry";
+		break;
+	case 11:
+		name = "Aerial";
+		break;
 	}
 
 	SDL_Rect* button_rect = new SDL_Rect[4];
@@ -384,7 +390,7 @@ SDL_Rect* Gui::LoadUIButton(int num, std::string type)
 	return button_rect;
 }
 
-SDL_Rect Gui::LoadUIImage(int num)
+SDL_Rect Gui::LoadUIImage(int num, std::string type)
 {
 	pugi::xml_node images_node = buttons_file.first_child().child("ui_image");
 
@@ -409,7 +415,7 @@ SDL_Rect Gui::LoadUIImage(int num)
 	}
 
 	SDL_Rect image_rect;
-	pugi::xml_node rect_node = images_node.child(name.c_str());
+	pugi::xml_node rect_node = images_node.child(name.c_str()).child(type.c_str());
 
 	image_rect.x = rect_node.attribute("x").as_uint();
 	image_rect.y = rect_node.attribute("y").as_uint();

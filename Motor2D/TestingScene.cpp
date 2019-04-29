@@ -350,7 +350,7 @@ void TestingScene::StartUI()
 	win_unit_two = App->gui->CreateButton({ 320,200 }, App->gui->LoadUIButton(random_num[1], "upgrade"), win_panel_two, true);
 	win_unit_three = App->gui->CreateButton({ 510,200 }, App->gui->LoadUIButton(random_num[2], "upgrade"), win_panel_two, true);
 
-	win_building = App->gui->CreateImage({ 300,200 }, App->gui->LoadUIImage(13), win_panel_one);
+	win_building = App->gui->CreateImage({ 300,200 }, App->gui->LoadUIImage(13, "end_screen"), win_panel_one);
 
 	App->gui->DisableElement((UIElement*)win_panel_one);
 	App->gui->DisableElement((UIElement*)win_panel_two);

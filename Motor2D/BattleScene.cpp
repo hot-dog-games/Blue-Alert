@@ -379,7 +379,7 @@ void BattleScene::StartUI()
 	win_unit_two = App->gui->CreateSelectableButton({ 320,200 }, App->gui->LoadUIButton(random_num[1], "upgrade"), win_panel_two);
 	win_unit_three = App->gui->CreateSelectableButton({ 510,200 }, App->gui->LoadUIButton(random_num[2], "upgrade"), win_panel_two);
 
-	win_building = App->gui->CreateImage({ 260,160 }, App->gui->LoadUIImage(App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterType()), win_panel_one);
+	win_building = App->gui->CreateImage({ 260,160 }, App->gui->LoadUIImage(App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterType(), "end_screen"), win_panel_one);
 
 	App->gui->DisableElement((UIElement*)win_panel_one);
 	App->gui->DisableElement((UIElement*)win_panel_two);

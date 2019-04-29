@@ -93,7 +93,7 @@ public:
 	void RenderElement(UIElement* element);
 
 	SDL_Rect* LoadUIButton(int num, std::string type);
-	SDL_Rect  LoadUIImage(int num);
+	SDL_Rect  LoadUIImage(int num, std::string type);
 
 	SDL_Texture* GetAtlas() const;
 	_TTF_Font*	 GetButtonFont() const;

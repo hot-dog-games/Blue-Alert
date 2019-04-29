@@ -57,6 +57,20 @@ private:
 
 	//Building Menu
 	UIImage* buildings_background;
+	UIImage* core_image;
+
+	UIImage* building_infantry_image = nullptr;
+	UISelectableButton* building_infantry_button = nullptr;
+	UILabel* building_infantry_info = nullptr;
+
+	UIImage* building_aerial_image = nullptr;
+	UISelectableButton* building_aerial_button = nullptr;
+	UILabel* building_aerial_info = nullptr;
+
+	UISelectableButton* building_button_tank = nullptr;
+	UIButton* level_up = nullptr;
+	UILabel* building_title = nullptr;
+	
 
 	UIButton* deck_buttons[4];
 	UIButton* collection_buttons[9];
