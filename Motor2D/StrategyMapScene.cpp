@@ -112,9 +112,8 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 		if (element == settings_button) {
 			//(options = App->gui->CreateImage();
 		}
-		else if (element == menu_button) {
+		else if (element == menu_button || (element == troops_button && !troops_background->IsEnabled())) {
 			
-
 			App->gui->EnableElement(troops_button);
 			App->gui->EnableElement(buildings_button);
 			App->gui->EnableElement(troops_background);
@@ -122,6 +121,7 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 
 			App->gui->DisableElement(menu_button);
 			App->gui->DisableElement(settings_button);
+			App->gui->DisableElement(buildings_background);
 
 			App->game_manager->GetEncounterTree()->is_clickable = false;
 
@@ -133,6 +133,7 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 		}
 		else if (element == backbutton_t_b) {
 			App->gui->DisableElement(troops_background);
+			App->gui->DisableElement(buildings_background);
 			App->gui->DisableElement(backbutton_t_b);
 			App->gui->DisableElement(troops_button);
 			App->gui->DisableElement(buildings_button);
@@ -143,6 +144,10 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			App->game_manager->GetEncounterTree()->is_clickable = true;
 
 
+		}
+		else if (element == buildings_button) {
+			App->gui->DisableElement(troops_background);
+			App->gui->EnableElement(buildings_background);
 		}
 		else if (element == deck_buttons[0])
 		{
@@ -254,13 +259,13 @@ void StrategyMapScene::InitializeUI()
 
 
 	// Troops menu
-	troops_background = App->gui->CreateImage({ 20,95 }, { 789,1222,990,600 }, main_panel);
+	troops_background = App->gui->CreateImage({ 20,95 }, { 793,1229,986,593 }, main_panel);
 
-	backbutton_t_b = App->gui->CreateButtonText({ 945,12 }, {6,3}, small_button_rect, "X", { 200,200,200,255 }, 27, troops_background);
+	backbutton_t_b = App->gui->CreateButtonText({ 961,99 }, {6,3}, small_button_rect, "X", { 200,200,200,255 }, 27);
 	App->gui->DisableElement(backbutton_t_b);
-	troops_button = App->gui->CreateButtonText({ 336,10 }, { 32,0 }, medium_button_rect, "TROOPS", {200,200,200,255},33, troops_background);
+	troops_button = App->gui->CreateButtonText({ 351,98 }, { 32,0 }, medium_button_rect, "TROOPS", {200,200,200,255},33);
 	App->gui->DisableElement(troops_button);
-	buildings_button = App->gui->CreateButtonText({ 620,10 }, { 10,16 }, medium_button_rect, "BUILDINGS", { 200,200,200,255 }, 33, troops_background);
+	buildings_button = App->gui->CreateButtonText({ 635,98 }, { 10,16 }, medium_button_rect, "BUILDINGS", { 200,200,200,255 }, 33);
 	App->gui->DisableElement(buildings_button);
 
 	deck_buttons[0] = App->gui->CreateButton({ 360,99 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[0]->type, "deck"), troops_background);
@@ -278,4 +283,10 @@ void StrategyMapScene::InitializeUI()
 	collection_buttons[7] = App->gui->CreateButton({ 840,320 }, App->gui->LoadUIButton(8, "upgrade"), troops_background);
 	collection_buttons[8] = App->gui->CreateButton({ 780,450 }, App->gui->LoadUIButton(9, "upgrade"), troops_background);
 	App->gui->DisableElement(troops_background);
+
+	//Building Menu
+	buildings_background = App->gui->CreateImage({ 20,95 }, { 1780,1229,986,593 }, main_panel);
+
+
+	App->gui->DisableElement(buildings_background);
 }

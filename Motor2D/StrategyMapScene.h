@@ -55,6 +55,9 @@ private:
 	UIButtonText* troops_button;
 	UIButtonText* buildings_button;
 
+	//Building Menu
+	UIImage* buildings_background;
+
 	UIButton* deck_buttons[4];
 	UIButton* collection_buttons[9];
 
