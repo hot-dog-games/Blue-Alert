@@ -317,20 +317,24 @@ void StrategyMapScene::InitializeUI()
 	buildings_button = App->gui->CreateButtonText({ 635,98 }, { 10,16 }, medium_button_rect, "BUILDINGS", { 200,200,200,255 }, 33);
 	App->gui->DisableElement(buildings_button);
 
+	troops_title[0] = App->gui->CreateLabel({ 30,285 }, "fonts/button_text.ttf", 33, "Infantry", { 0,0,0,0 }, 300, troops_background);
+	troops_title[1] = App->gui->CreateLabel({ 420,285 }, "fonts/button_text.ttf", 33, "Land", { 0,0,0,0 }, 300, troops_background);
+	troops_title[2] = App->gui->CreateLabel({ 733,285 }, "fonts/button_text.ttf", 33, "Aerial", { 0,0,0,0 }, 300, troops_background);
+
 	deck_buttons[0] = App->gui->CreateButton({ 360,99 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[0]->type, "deck"), troops_background);
 	deck_buttons[1] = App->gui->CreateButton({ 500,99 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[1]->type, "deck"), troops_background);
 	deck_buttons[2] = App->gui->CreateButton({ 640,99 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[2]->type, "deck"), troops_background);
 	deck_buttons[3] = App->gui->CreateButton({ 780,99 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[3]->type, "deck"), troops_background);
 
-	collection_buttons[0] = App->gui->CreateButton({ 40,320 }, App->gui->LoadUIButton(1, "upgrade"), troops_background);
-	collection_buttons[1] = App->gui->CreateButton({ 170,320 }, App->gui->LoadUIButton(2, "upgrade"), troops_background);
-	collection_buttons[2] = App->gui->CreateButton({ 110,450 }, App->gui->LoadUIButton(3, "upgrade"), troops_background);
-	collection_buttons[3] = App->gui->CreateButton({ 380,320 }, App->gui->LoadUIButton(4, "upgrade"), troops_background);
-	collection_buttons[4] = App->gui->CreateButton({ 510,320 }, App->gui->LoadUIButton(5, "upgrade"), troops_background);
-	collection_buttons[5] = App->gui->CreateButton({ 445,450 }, App->gui->LoadUIButton(6, "upgrade"), troops_background);
-	collection_buttons[6] = App->gui->CreateButton({ 720,320 }, App->gui->LoadUIButton(7, "upgrade"), troops_background);
-	collection_buttons[7] = App->gui->CreateButton({ 840,320 }, App->gui->LoadUIButton(8, "upgrade"), troops_background);
-	collection_buttons[8] = App->gui->CreateButton({ 780,450 }, App->gui->LoadUIButton(9, "upgrade"), troops_background);
+	collection_buttons[0] = App->gui->CreateButton({ 40,350 }, App->gui->LoadUIButton(1, "upgrade"), troops_background);
+	collection_buttons[1] = App->gui->CreateButton({ 170,350 }, App->gui->LoadUIButton(2, "upgrade"), troops_background);
+	collection_buttons[2] = App->gui->CreateButton({ 110,480 }, App->gui->LoadUIButton(3, "upgrade"), troops_background);
+	collection_buttons[3] = App->gui->CreateButton({ 380,350 }, App->gui->LoadUIButton(4, "upgrade"), troops_background);
+	collection_buttons[4] = App->gui->CreateButton({ 510,350 }, App->gui->LoadUIButton(5, "upgrade"), troops_background);
+	collection_buttons[5] = App->gui->CreateButton({ 445,480 }, App->gui->LoadUIButton(6, "upgrade"), troops_background);
+	collection_buttons[6] = App->gui->CreateButton({ 720,350 }, App->gui->LoadUIButton(7, "upgrade"), troops_background);
+	collection_buttons[7] = App->gui->CreateButton({ 840,350 }, App->gui->LoadUIButton(8, "upgrade"), troops_background);
+	collection_buttons[8] = App->gui->CreateButton({ 780,480 }, App->gui->LoadUIButton(9, "upgrade"), troops_background);
 	App->gui->DisableElement(troops_background);
 
 	//Building Menu

@@ -74,9 +74,10 @@ private:
 	UIButton* level_up = nullptr;
 	UILabel* building_title = nullptr;
 	
-
+	// Troops Menu
 	UIButton* deck_buttons[4];
 	UIButton* collection_buttons[9];
+	UILabel* troops_title[3];
 
 };
 
