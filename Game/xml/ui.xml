@@ -260,6 +260,15 @@
         <frame x="2154" y="490" width="194" height="155"/>
       </button>
     </Aerial>
+
+    <Land type="12">
+      <button>
+        <frame x="2106" y="8" width="180" height="115"/>
+        <frame x="1915" y="1" width="180" height="115"/>
+        <frame x="2301" y="14" width="180" height="115"/>
+        <frame x="2154" y="490" width="180" height="115"/>
+      </button>
+    </Land>
     
   </ui_button>
   

@@ -50,7 +50,7 @@ private:
 	UILabel* energy;
 	UILabel* text_menu;
 	UIButton* settings_button;
-	UIButton* menu_button;
+	UIButtonText* menu_button;
 	UIButtonText* backbutton_t_b;
 	UIButtonText* troops_button;
 	UIButtonText* buildings_button;
@@ -67,7 +67,10 @@ private:
 	UISelectableButton* building_aerial_button = nullptr;
 	UILabel* building_aerial_info = nullptr;
 
-	UISelectableButton* building_button_tank = nullptr;
+	UIImage* building_land_image = nullptr;
+	UISelectableButton* building_land_button = nullptr;
+	UILabel* building_land_info = nullptr;
+
 	UIButton* level_up = nullptr;
 	UILabel* building_title = nullptr;
 	

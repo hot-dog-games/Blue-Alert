@@ -373,6 +373,9 @@ SDL_Rect* Gui::LoadUIButton(int num, std::string type)
 	case 11:
 		name = "Aerial";
 		break;
+	case 12:
+		name = "Land";
+		break;
 	}
 
 	SDL_Rect* button_rect = new SDL_Rect[4];
