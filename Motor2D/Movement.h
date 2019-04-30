@@ -53,7 +53,7 @@ public:
 	UnitGroup* GetLastGroup() const;
 
 	// Returns an existing group by a pointer to one of its units or nullptr
-	UnitGroup* GetGroupByUnit(DynamicEntity* unit) const;
+	UnitGroup* GetGroupByUnit(DynamicEntity* unit);
 
 	// Returns an existing group by a list to all of its units or nullptr
 	UnitGroup* GetGroupByUnits(std::list<DynamicEntity*> units) const;

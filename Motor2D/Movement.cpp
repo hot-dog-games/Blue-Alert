@@ -96,13 +96,13 @@ UnitGroup* Movement::GetLastGroup() const
 }
 
 // Returns an existing group by a pointer to one of its units or nullptr
-UnitGroup* Movement::GetGroupByUnit(DynamicEntity* unit) const
+UnitGroup* Movement::GetGroupByUnit(DynamicEntity* unit) 
 {
-	std::list<UnitGroup*>::const_iterator groups;
-	std::list<SingleUnit*>::const_iterator units;
+	std::list<UnitGroup*>::iterator groups;
+	std::list<SingleUnit*>::iterator units;
 	UnitGroup* group = nullptr;
 
-	for (groups = unitGroups.begin(); groups != unitGroups.end(); ++groups) {
+	 for(groups = unitGroups.begin(); groups != unitGroups.end(); ++groups) {
 		for (units = (*groups)->units.begin(); units != (*groups)->units.end(); ++units) {
 			if ((*units)->unit == unit) {
 				group = *groups;

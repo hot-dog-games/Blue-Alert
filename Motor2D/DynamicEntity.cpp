@@ -30,8 +30,8 @@ DynamicEntity::DynamicEntity(pugi::xml_node config, fPoint position, Card* card,
 	std::string stat_name = "health";
 	sprite = entity_card->texture;
 
-	//singleUnit = new SingleUnit(this, nullptr);
-	//App->movement->CreateGroupFromUnit(this);
+	singleUnit = new SingleUnit(this, nullptr);
+	App->movement->CreateGroupFromUnit(this);
 
 	stats.insert({ "health", new Stat(card->info.stats.find("health")->second->GetMaxValue())});
 }
@@ -45,6 +45,8 @@ bool DynamicEntity::Start()
 
 	App->pathfinding->CreatePath({ map_position.x, map_position.y }, { core_map_position.x , core_map_position.y });
 	path = App->pathfinding->GetLastPath();
+
+
 	state = DYNAMIC_MOVING;
 	current_animation = &animations.find("moving_up")->second;
 	current_frame = current_animation->GetCurrentFrame(0.1);
@@ -202,37 +204,38 @@ void DynamicEntity::CalcDirection()
 
 void DynamicEntity::CheckDestination()
 {
-	bool reached_x = (path[previous_point].x <= path[current_point].x && path[current_point].x <= position.x)
-		|| (path[previous_point].x >= path[current_point].x && path[current_point].x >= position.x);
+	//bool reached_x = (path[previous_point].x <= path[current_point].x && path[current_point].x <= position.x)
+	//	|| (path[previous_point].x >= path[current_point].x && path[current_point].x >= position.x);
 
-	bool reached_y = (path[previous_point].y <= path[current_point].y && path[current_point].y <= position.y)
-		|| (path[previous_point].y >= path[current_point].y && path[current_point].y >= position.y);
+	//bool reached_y = (path[previous_point].y <= path[current_point].y && path[current_point].y <= position.y)
+	//	|| (path[previous_point].y >= path[current_point].y && path[current_point].y >= position.y);
 
-	if (reached_x && reached_y)
-	{
-		previous_point = current_point;
-		current_point++;
-		if (current_point >= path.size())
-			state = DYNAMIC_IDLE;
-	}
-	fPoint move_pos;
-	/*if (CheckAllies())
-	{
-		move_pos = { path[current_point].x - position.x - 20, path[current_point].y - position.y };
-	}else*/
-	move_pos = { path[current_point].x - position.x, path[current_point].y - position.y };
-	
-	float m = sqrtf(pow(move_pos.x, 2.0f) + pow(move_pos.y, 2.0f));
-	if (m > 0.0f) {
-		move_pos.x /= m;
-		move_pos.y /= m;
-	}
-	direction_vector = { move_pos.x, move_pos.y };
+	//if (reached_x && reached_y)
+	//{
+	//	previous_point = current_point;
+	//	current_point++;
+	//	if (current_point >= path.size())
+	//		state = DYNAMIC_IDLE;
+	//}
+	//fPoint move_pos;
+	///*if (CheckAllies())
+	//{
+	//	move_pos = { path[current_point].x - position.x - 20, path[current_point].y - position.y };
+	//}else*/
+	//move_pos = { path[current_point].x - position.x, path[current_point].y - position.y };
+	//
+	//float m = sqrtf(pow(move_pos.x, 2.0f) + pow(move_pos.y, 2.0f));
+	//if (m > 0.0f) {
+	//	move_pos.x /= m;
+	//	move_pos.y /= m;
+	//}
+	//direction_vector = { move_pos.x, move_pos.y };
 }
 
 void DynamicEntity::Move(float dt)
 {
-	fPoint movement_vector = direction_vector;
+	App->movement->MoveUnit(this, dt);
+	/*fPoint movement_vector = direction_vector;
 	float speed = entity_card->info.stats.find("movement")->second->GetValue();
 	movement_vector.x *= speed * dt;
 	movement_vector.y *= speed * dt;
@@ -247,7 +250,7 @@ void DynamicEntity::Move(float dt)
 	{
 			position.x += movement_vector.x;
 			position.y += movement_vector.y;
-	}
+	}*/
 }
 
 bool DynamicEntity::CheckEnemies()
