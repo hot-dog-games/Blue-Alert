@@ -45,12 +45,11 @@ public:
 
 	pugi::xml_node GetXmlEncounterNodeById(int id);
 
-	void UpdateTree();
-
 	void CleanTree();
 
 	void EntityClicked(StrategyBuilding* entity);
 	void SetCurrentNodeByEntity(StrategyBuilding* entity);
+	void SetFightingNodeByEntity(StrategyBuilding* entity);
 
 	bool is_clickable = true;
 

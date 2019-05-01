@@ -55,13 +55,13 @@ bool BattleScene::Start()
 
 	Deck* enemy_deck = new Deck();
 	enemy_deck->delete_cards = true;
-	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterDeck()[0]));
-	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterDeck()[1]));
-	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterDeck()[2]));
-	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterDeck()[3]));
+	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterDeck()[0]));
+	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterDeck()[1]));
+	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterDeck()[2]));
+	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterDeck()[3]));
 
 	allied_core = App->entity_manager->CreateCore(1, { 30,980 }, App->game_manager->GetPlayerDeck(), FACTION_RUSSIAN);
-	enemy_core = App->entity_manager->CreateCore(App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterType(), { 25,330 }, enemy_deck, FACTION_AMERICAN, true);
+	enemy_core = App->entity_manager->CreateCore(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType(), { 25,330 }, enemy_deck, FACTION_AMERICAN, true);
 	enemy_core->delete_deck = true;
 
 	allied_core->LoadUnitSprites();
@@ -171,6 +171,7 @@ bool BattleScene::Update(float dt)
 			App->PauseGame();
 			App->gui->EnableElement((UIElement*)win_panel_one);
 			App->audio->PlayFx(win_fx.c_str(), 0);
+			App->game_manager->GetEncounterTree()->SetCurrentNode(App->game_manager->GetEncounterTree()->GetFightingNode());
 		}
 			
 
@@ -190,6 +191,7 @@ bool BattleScene::Update(float dt)
 			App->PauseGame();
 			App->gui->EnableElement((UIElement*)win_panel_one);
 			App->gui->DisableInteractable((UIElement*)unit_panel);
+			App->game_manager->GetEncounterTree()->SetCurrentNode(App->game_manager->GetEncounterTree()->GetFightingNode());
 		}
 	}
 	break;
@@ -380,7 +382,7 @@ void BattleScene::StartUI()
 	win_unit_two = App->gui->CreateSelectableButton({ 320,200 }, App->gui->LoadUIButton(random_num[1], "upgrade"), win_panel_two);
 	win_unit_three = App->gui->CreateSelectableButton({ 510,200 }, App->gui->LoadUIButton(random_num[2], "upgrade"), win_panel_two);
 
-	win_building = App->gui->CreateImage({ 260,160 }, App->gui->LoadUIImage(App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterType()), win_panel_one);
+	win_building = App->gui->CreateImage({ 260,160 }, App->gui->LoadUIImage(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType()), win_panel_one);
 
 	App->gui->DisableElement((UIElement*)win_panel_one);
 	App->gui->DisableElement((UIElement*)win_panel_two);

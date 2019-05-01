@@ -44,6 +44,8 @@ EncounterTree * EncounterTree::CreateTree()
 		map_encounters[i]->FillEncounterDeck();
 	}
 
+	if (!current_node)
+		SetCurrentNode(map_encounters.front());
 
 	LOG("NODES", map_encounters.size());
 
@@ -81,18 +83,18 @@ EncounterNode * EncounterTree::GetCurrentNode()
 
 EncounterNode * EncounterTree::GetFightingNode()
 {
-	return nullptr;
+	return fighting_node;
 }
 
 void EncounterTree::SetCurrentNode(EncounterNode * current_node)
 {
 	this->current_node = current_node;
-	this->current_node->GetEntity()->im_current_building = true;
 	this->current_node->visited = true;
 }
 
 void EncounterTree::SetFightingNode(EncounterNode * fighting_node)
 {
+	this->fighting_node = fighting_node;
 }
 
 void EncounterTree::DrawTreeLines()
@@ -127,10 +129,6 @@ void EncounterTree::DrawTreeLines()
 
 void EncounterTree::UpdateTreeState()
 {
-	if (!current_node) {
-		SetCurrentNode(map_encounters.front());
-	}
-
 	for (int i = 0; i < current_node->GetChildren().size(); i++)
 	{
 		current_node->GetChildren()[i]->GetEntity()->SetInRange(true);
@@ -153,11 +151,6 @@ pugi::xml_node EncounterTree::GetXmlEncounterNodeById(int id)
 	return encounter;
 }
 
-void EncounterTree::UpdateTree()
-{
-
-}
-
 void EncounterTree::CleanTree()
 {
 	for each (EncounterNode* en in map_encounters)
@@ -173,7 +166,7 @@ void EncounterTree::CleanTree()
 void EncounterTree::EntityClicked(StrategyBuilding * entity)
 {
 	if (App->game_manager->GetPlayerDeck()->cards[0] != nullptr && App->game_manager->GetPlayerDeck()->cards[1] != nullptr && App->game_manager->GetPlayerDeck()->cards[2] != nullptr && App->game_manager->GetPlayerDeck()->cards[3] != nullptr && is_clickable) {
-		SetCurrentNodeByEntity(entity);
+		SetFightingNodeByEntity(entity);
 		App->gui->DisableUI();
 		App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::COMBAT, White);
 		App->transition_manager->CreateZoomTransition(2.0f);
@@ -187,5 +180,13 @@ void EncounterTree::SetCurrentNodeByEntity(StrategyBuilding * entity)
 	for each (EncounterNode* en in map_encounters)
 	{
 		if (en->GetEntity() == entity) SetCurrentNode(en);
+	}
+}
+
+void EncounterTree::SetFightingNodeByEntity(StrategyBuilding * entity)
+{
+	for each (EncounterNode* en in map_encounters)
+	{
+		if (en->GetEntity() == entity) SetFightingNode(en);
 	}
 }
