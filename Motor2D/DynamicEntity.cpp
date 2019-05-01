@@ -45,7 +45,7 @@ bool DynamicEntity::Start()
 
 	App->pathfinding->CreatePath({ map_position.x, map_position.y }, { core_map_position.x , core_map_position.y });
 	path = App->pathfinding->GetLastPath();
-
+	App->movement->GetGroupByUnit(this)->SetGoal(path[path.size()-1]);
 
 	state = DYNAMIC_MOVING;
 	current_animation = &animations.find("moving_up")->second;
@@ -135,7 +135,13 @@ bool DynamicEntity::Update(float dt)
 	{
 		case DYNAMIC_IDLE:
 		{
-
+			if (next_Goal != waitingUnit->next_Goal && next_Goal != App->map->WorldToMap(waitingUnit->position.x, waitingUnit->position.y))
+			{
+				if (path.size() > 0)
+					state = DYNAMIC_MOVING;
+				else
+					state = DYNAMIC_GETPATH;
+			}
 		}
 		break;
 		case DYNAMIC_MOVING:
@@ -160,10 +166,110 @@ bool DynamicEntity::Update(float dt)
 			{
 				App->entity_manager->DeleteEntity(this);
 			}
+			break;
+		case DYNAMIC_GETPATH:
+		{
+			int result = App->pathfinding->CreatePath(App->map->WorldToMap((int)position.x, (int)position.y), goal);
+			if (result != -1)
+			{
+				path.clear();
+				path = App->pathfinding->GetLastPath();
+				state = DYNAMIC_INCREMENTWAYPOINT;
+				path.erase(path.begin());
+
+			}
+			else
+			{
+				state = DYNAMIC_IDLE;
+			}
+		}
+		break;
+		case DYNAMIC_INCREMENTWAYPOINT:
+		{
+
+			next_Goal = *path.begin();
+
+			iPoint aux = next_Goal - App->map->WorldToMap((int)position.x, (int)position.y);
+			SetUnitDirectionByValue({ (float)aux.x,(float)aux.y });
+			state = DYNAMIC_MOVING;
+
+			if (path.size() == 0)
+				state = DYNAMIC_IDLE;
+
+		}
 		break;
 	}
 
 	return true;
+}
+
+bool DynamicEntity::MoveOfTheWayOf(DynamicEntity* u)
+{
+	iPoint tile_pos = App->map->WorldToMap((int)position.x, (int)position.y);
+	iPoint neightBoar[4];
+	neightBoar[UP] = {tile_pos.x, tile_pos.y - 1}; //up
+	neightBoar[DOWN] = { tile_pos.x,tile_pos.y + 1 }; //down
+	neightBoar[LEFT] = { tile_pos.x - 1,tile_pos.y }; //left
+	neightBoar[RIGHT] = { tile_pos.x + 1,tile_pos.y }; //right
+
+	for (uint i = 0; i < 4; ++i)
+	{
+		if (App->pathfinding->IsWalkable(neightBoar[i]) != true)
+		{
+			neightBoar[i].SetToZero();
+		}
+	}
+	//x axis --------------------------------------
+	if (u->direction == LEFT || u->direction == RIGHT)
+	{
+		if (neightBoar[UP].IsZero() != true
+			&& App->entity_manager->InThisTile_IsUnits(neightBoar[UP]) == nullptr)
+		{
+			state = DYNAMIC_GETPATH;
+			goal = neightBoar[UP];
+			return true;
+		}
+
+
+		else if (neightBoar[DOWN].IsZero() != true
+			&& App->entity_manager->InThisTile_IsUnits(neightBoar[DOWN]) == nullptr)
+		{
+			state = DYNAMIC_GETPATH;
+			goal = neightBoar[DOWN];
+			return true;
+		}
+
+		else
+		{
+			return false;
+		}
+	}
+
+	else
+	{
+		if (neightBoar[LEFT].IsZero() != true
+			&& App->entity_manager->InThisTile_IsUnits(neightBoar[LEFT]) == nullptr)
+		{
+			state = DYNAMIC_GETPATH;
+			goal = neightBoar[LEFT];
+			return true;
+		}
+
+		else if (neightBoar[RIGHT].IsZero() != true
+			&& App->entity_manager->InThisTile_IsUnits(neightBoar[LEFT]) == nullptr)
+		{
+			state = DYNAMIC_GETPATH;
+			goal = neightBoar[RIGHT];
+			return true;
+		}
+
+		else
+		{
+			return false;
+		}
+	}
+
+
 }
 
 void DynamicEntity::CalcDirection()
@@ -235,6 +341,34 @@ void DynamicEntity::CheckDestination()
 void DynamicEntity::Move(float dt)
 {
 	App->movement->MoveUnit(this, dt);
+	fPoint speed = {1,1};
+	if (path.size() > 0)
+	{
+
+		iPoint world_next_pos = App->map->MapToWorld(next_Goal.x, next_Goal.y);
+		fPoint aux = { (float)world_next_pos.x + App->map->data.tile_width*0.5F,(float)world_next_pos.y + App->map->data.tile_height*0.5F };
+
+
+		speed = aux - position;
+		iPoint int_pos = { (int)position.x,(int)position.y };
+		//Check if we are on the center of the tile
+		if (App->map->WorldToMap((int)position.x, (int)position.y) == goal)
+		{
+			path.erase(path.begin());
+			App->map->WorldToMap((int)position.x, (int)position.y) = next_Goal;
+			state = DYNAMIC_INCREMENTWAYPOINT;
+		}
+
+	}
+	else
+	{
+		state = DYNAMIC_IDLE;
+	}
+	iPoint aux = { (int)(speed.x*dt * 20),(int)(speed.y*dt * 20) };
+	position.x += (float)aux.x;
+	position.y += (float)aux.y;
+	//posCollider.center = position;
+
 	/*fPoint movement_vector = direction_vector;
 	float speed = entity_card->info.stats.find("movement")->second->GetValue();
 	movement_vector.x *= speed * dt;

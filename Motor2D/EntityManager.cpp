@@ -9,6 +9,7 @@
 #include "Core.h"
 #include "CoreAI.h"
 #include "Deck.h"
+#include "Map.h"
 #include "EntityManager.h"
 #include "Brofiler/Brofiler.h"
 
@@ -316,4 +317,16 @@ bool EntityManager::CreateGroup(int units, EntityType type, fPoint position, Car
 
 	}
 	return true;
+}
+
+Entity* EntityManager::InThisTile_IsUnits(iPoint tile)
+{
+	Entity* ret = nullptr;
+	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
+	{
+		iPoint TilePos = App->map->WorldToMap((*entity)->position.x, (*entity)->position.y);
+		if (TilePos == tile)
+			return ret = *entity;
+	}
+	return ret;
 }

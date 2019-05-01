@@ -13,6 +13,9 @@ enum DynamicState {
 	DYNAMIC_ATTACKING,
 	DYNAMIC_DYING,
 	DYNAMIC_DEAD,
+	DYNAMIC_GETPATH,
+	DYNAMIC_INCREMENTWAYPOINT
+
 };
 
 enum EntiyDirection {
@@ -48,9 +51,13 @@ public:
 	virtual float GetDamage();
 	virtual bool IsArmored();
 	virtual int GetAttackType();
+	virtual bool MoveOfTheWayOf(DynamicEntity* u);
 
 public:
 	Card* entity_card = nullptr;
+	iPoint goal;
+	iPoint next_Goal;
+	DynamicEntity* waitingUnit = nullptr;
 
 protected:
 	void CalcDirection();

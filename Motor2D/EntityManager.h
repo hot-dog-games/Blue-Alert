@@ -70,6 +70,7 @@ public:
 	bool CreateGroup(int units, EntityType type, fPoint position, Card* card, Faction faction);
 	void GetEntitiesInArea(SDL_Rect area, std::list<Entity*> &list, int faction = -1);
 	void GetEntitiesInArea(float radius, fPoint position, std::list<Entity*> &list, int faction = -1);
+	Entity* InThisTile_IsUnits(iPoint tile);
 	void SetDebug();
 
 private:

@@ -172,14 +172,14 @@ MovementState Movement::MoveUnit(DynamicEntity* unit, float dt)
 	case MovementState_WaitForPath:
 
 		if (pathsCreated < MAX_PATHS_CREATED) {
-
+			u->goal = nextPos;
 			// TODO 2:
 			// Check if the goal of the unit is valid. Valid means that it isn't the goal of another unit
 			// If the goal is not valid, find a new goal
 			// Create a new path for the unit
 			// If the path is created, set the unit state to MovementState_IncreaseWaypoint
 
-			if (!IsValidTile(u, u->goal, false, false, true))
+			if (!IsValidTile(u, u->goal, false, false, false))
 
 				u->goal = u->newGoal = FindNewValidGoal(u, u->group->goal);
 
