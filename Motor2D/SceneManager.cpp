@@ -2,6 +2,7 @@
 #include "EntityManager.h"
 #include "GUI.h"
 #include "TestingScene.h"
+#include "MainMenuScene.h"
 #include "StrategyMapScene.h"
 #include "Particles.h"
 #include "Audio.h"
@@ -24,7 +25,7 @@ SceneManager::~SceneManager()
 
 bool SceneManager::Awake(pugi::xml_node &)
 {
-	current_scene = new StrategyMapScene();
+	current_scene = new MainMenuScene();
 	return true;
 }
 
@@ -99,6 +100,7 @@ void SceneManager::ChangeScene(int new_scene)
 	switch (new_scene)
 	{
 	case MENU:
+		current_scene = new MainMenuScene();
 		break;
 	case MAP:
 		current_scene = new StrategyMapScene();
