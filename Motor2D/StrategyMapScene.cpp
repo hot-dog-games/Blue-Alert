@@ -353,17 +353,17 @@ void StrategyMapScene::InitializeUI()
 	buildings_background = App->gui->CreateImage({ 20,95 }, { 1780,1229,986,593 }, main_panel);
 	building_title = App->gui->CreateLabel({ 610, 70 }, "fonts/button_text.ttf", 22, "Aerial Building:", { 242, 222, 70, 255 }, 600, buildings_background);
 
-	building_infantry_button = App->gui->CreateSelectableButton({ 560,400 }, App->gui->LoadUIButton(10, "button"),buildings_background);
+	building_infantry_button = App->gui->CreateSelectableButton({343, 400 }, App->gui->LoadUIButton(10, "button"),buildings_background);
 	building_infantry_image = App->gui->CreateImage({ 365,125 }, App->gui->LoadUIImage(10, "building"), buildings_background);
 	building_infantry_info = App->gui->CreateLabel({ 245,-30 }, "fonts/red_alert.ttf", 20, "The infantry troops are upgraded by %i", { 231,216,145,255 }, 300, building_infantry_image);
 	
-	building_aerial_button = App->gui->CreateSelectableButton({333,390 }, App->gui->LoadUIButton(11, "button"), buildings_background);
+	building_aerial_button = App->gui->CreateSelectableButton({ 770,400 }, App->gui->LoadUIButton(11, "button"), buildings_background);
 	building_aerial_image = App->gui->CreateImage({ 345,115 }, App->gui->LoadUIImage(11, "building"), buildings_background);
 	building_aerial_info = App->gui->CreateLabel({ 265,-20 }, "fonts/red_alert.ttf", 20, "The aerial troops are upgraded by %i", { 231,216,145,255 }, 300, building_aerial_image);
 	
-	building_land_button = App->gui->CreateSelectableButton({ 776,420 }, App->gui->LoadUIButton(12, "button"), buildings_background);
+	building_land_button = App->gui->CreateSelectableButton({ 560,430 } , App->gui->LoadUIButton(12, "button"), buildings_background);
 	building_land_image = App->gui->CreateImage({ 350,145 }, App->gui->LoadUIImage(12, "building"), buildings_background);
 	building_land_info = App->gui->CreateLabel({ 260, -50 }, "fonts/red_alert.ttf", 20, "The land troops are upgraded by %i", { 231,216,145,255 }, 300, building_land_image);
 
-	App->gui->DisableElement(buildings_background);
+	//App->gui->DisableElement(buildings_background);
 }
