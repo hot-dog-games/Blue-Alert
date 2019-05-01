@@ -61,9 +61,9 @@ bool Core::CleanUp()
 	return true;
 }
 
-void Core::LoadUnitSprites()
+void Core::LoadUnitSprites(int deck_size)
 {
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < deck_size; i++)
 	{
 		if (deck->cards[i])
 		{

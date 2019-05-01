@@ -88,7 +88,7 @@ void GameManager::CreatePlayerDeck()
 	combat_deck->AddCard(GetCardFromCollection(EntityType::G_I));
 	combat_deck->AddCard(GetCardFromCollection(EntityType::SNIPER));
 	combat_deck->AddCard(GetCardFromCollection(EntityType::GRIZZLY));
-	combat_deck->AddCard(GetCardFromCollection(EntityType::HARRIER));
+	//combat_deck->AddCard(GetCardFromCollection(EntityType::HARRIER));
 }
 
 bool GameManager::Restart()
