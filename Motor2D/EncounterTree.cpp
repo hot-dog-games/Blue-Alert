@@ -79,6 +79,11 @@ EncounterNode * EncounterTree::GetCurrentNode()
 	return current_node;
 }
 
+EncounterNode * EncounterTree::GetFightingNode()
+{
+	return nullptr;
+}
+
 void EncounterTree::SetCurrentNode(EncounterNode * current_node)
 {
 	this->current_node = current_node;
@@ -86,8 +91,13 @@ void EncounterTree::SetCurrentNode(EncounterNode * current_node)
 	this->current_node->visited = true;
 }
 
+void EncounterTree::SetFightingNode(EncounterNode * fighting_node)
+{
+}
+
 void EncounterTree::DrawTreeLines()
 {
+	node_position_offset = { current_node->GetEntity()->current_frame.w / 2, current_node->GetEntity()->current_frame.h / 2 };
 	for each (EncounterNode* n in map_encounters)
 	{
 		if (n->GetChildren().size() != 0)
@@ -98,7 +108,8 @@ void EncounterTree::DrawTreeLines()
 				{
 					iPoint parent_world_position = App->map->MapToWorld(n->GetPosition().x, n->GetPosition().y);
 					iPoint child_world_position = App->map->MapToWorld(n->GetChildren()[i]->GetPosition().x, n->GetChildren()[i]->GetPosition().y);
-					App->render->DrawLine(parent_world_position.x, parent_world_position.y, child_world_position.x, child_world_position.y, 255, 0, 0);
+					App->render->DrawLine(parent_world_position.x, parent_world_position.y - node_position_offset.y,
+						child_world_position.x, child_world_position.y - node_position_offset.y, 255, 0, 0);
 				}
 			}
 			else {
@@ -106,7 +117,8 @@ void EncounterTree::DrawTreeLines()
 				{
 					iPoint parent_world_position = App->map->MapToWorld(n->GetPosition().x, n->GetPosition().y);
 					iPoint child_world_position = App->map->MapToWorld(n->GetChildren()[i]->GetPosition().x, n->GetChildren()[i]->GetPosition().y);
-					App->render->DrawLine(parent_world_position.x, parent_world_position.y, child_world_position.x, child_world_position.y, 0, 255, 0);
+					App->render->DrawLine(parent_world_position.x, parent_world_position.y - node_position_offset.y,
+						child_world_position.x, child_world_position.y - node_position_offset.y, 0, 255, 0);
 				}
 			}
 		}
