@@ -99,5 +99,13 @@ bool MainMenuScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 
 void MainMenuScene::StartUI() {
 
+	SDL_Rect large_button_rect[3];
+	large_button_rect[0] = { 0,533,220,51 };
+	large_button_rect[1] = { 0,585,220,51 };
+	large_button_rect[2] = { 0,637,220,51 };
+
 	MenuBackground = App->gui->CreateImage({ 0,0 }, { 1976,987,1024,768 },nullptr);
+
+	exitbutton = App->gui->CreateButton({ 785,650 }, large_button_rect,MenuBackground);
+	exitlabel = App->gui->CreateLabel({ 10,10 }, "", 20, "EXIT GAME", {0,0,0,0},0,exitbutton);
 }
