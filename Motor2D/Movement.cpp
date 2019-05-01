@@ -797,18 +797,18 @@ iPoint Movement::FindNewValidGoal(SingleUnit* singleUnit, iPoint goal, bool chec
 {
 	// 1. We use BFS to calculate a new goal for the unit (we want to expand the search to all the possible tiles)
 	// 2. PRIORITY: the neighbor closer to the group goal
-	//priority_queue<iPointPriority, std::vector<iPointPriority>, Comparator> priorityQueue;
+	std::priority_queue<iPointPriority, std::vector<iPointPriority>, Comparator> queue;
 	std::list<iPoint> visited;
 
 	iPointPriority curr;
 	curr.point = goal;
 	curr.priority = curr.point.DistanceManhattan(goal);
-	/*priorityQueue.push(curr);
+	queue.push(curr);
 
-	while (priorityQueue.size() > 0) {
+	while (queue.size() > 0) {
 
-		curr = priorityQueue.top();
-		priorityQueue.pop();
+		curr = queue.top();
+		queue.pop();
 
 		if (App->pathfinding->IsWalkable(curr.point) && IsValidTile(singleUnit, curr.point, checkEverything, checkEverything, true))
 			return curr.point;
@@ -830,12 +830,12 @@ iPoint Movement::FindNewValidGoal(SingleUnit* singleUnit, iPoint goal, bool chec
 				iPointPriority priorityNeighbors;
 				priorityNeighbors.point = neighbors[i];
 				priorityNeighbors.priority = neighbors[i].DistanceManhattan(goal);
-				priorityQueue.push(priorityNeighbors);
+				queue.push(priorityNeighbors);
 
 				visited.push_back(neighbors[i]);
 			}
 		}
-	}*/
+	}
 
 	return { -1,-1 };
 }
