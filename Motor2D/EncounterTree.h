@@ -13,6 +13,7 @@ private:
 	std::vector<EncounterNode*> map_encounters;
 
 	EncounterNode* current_node = nullptr;
+	EncounterNode* fighting_node = nullptr;
 
 	pugi::xml_document encounters;
 	pugi::xml_node encounter_tree;
@@ -45,9 +46,12 @@ public:
 
 	void EntityClicked(StrategyBuilding* entity);
 	void SetCurrentNodeByEntity(StrategyBuilding* entity);
+	EncounterNode* GetNodeByEntity(StrategyBuilding* entity);
+
+	void SetFightingNodeByEntity(StrategyBuilding* entity);
+	EncounterNode* GetFightingNode();
 
 	bool is_clickable = true;
-
 };
 
 #endif
