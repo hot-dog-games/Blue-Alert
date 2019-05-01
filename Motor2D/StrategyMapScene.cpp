@@ -249,7 +249,7 @@ void StrategyMapScene::InitializeUI()
 
 
 	// Troops menu
-	troops_background = App->gui->CreateImage({ 20,95 }, { 789,1222,990,600 }, main_panel);
+	troops_background = App->gui->CreateImage({ 20,95 }, { 746,1218,990,600 }, main_panel);
 
 	backbutton_t_b = App->gui->CreateButton({ 930,10 }, small_button_rect, troops_background);
 	back_cross_text = App->gui->CreateLabel({ 15,10 }, "ui/Fonts/command_and_conquer___logo_font_by_dexistor371-d6k2yvb.ttf", 28, "X", { 0,0,0,0 }, 0, backbutton_t_b);
