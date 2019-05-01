@@ -266,10 +266,17 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 
 void  StrategyMapScene::AddCardToDeck(UIElement * element, uint num) {
 	for (int i = 0; i < 4; i++) {
-		Card* card = App->game_manager->GetCardFromCollection((EntityType)(num+1));
-		if (deck_buttons[i]->enabled == false && card && !App->game_manager->IsInPlayerDeck(card)) {
+		Card* card = App->game_manager->GetCardFromCollection((EntityType)(num + 1));
+		if (deck_buttons[i] && deck_buttons[i]->enabled == false && card && !App->game_manager->IsInPlayerDeck(card)) {
 			App->gui->EnableElement(deck_buttons[i]);
 			App->game_manager->GetPlayerDeck()->AddCard(card);
+			deck_buttons[i]->ChangeSprite(App->gui->LoadUIButton((App->game_manager->GetPlayerDeck()->cards[i]->type), "deck"));
+			break;
+		}
+		else if (!deck_buttons[i] && card && !App->game_manager->IsInPlayerDeck(card)) {
+			App->game_manager->GetPlayerDeck()->AddCard(card);
+			deck_buttons[i] = App->gui->CreateButton({ (int)(360 + i * 140), 99 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[i]->type, "deck"), troops_background);
+			App->gui->EnableElement(deck_buttons[i]);
 			deck_buttons[i]->ChangeSprite(App->gui->LoadUIButton((App->game_manager->GetPlayerDeck()->cards[i]->type), "deck"));
 			break;
 		}
@@ -321,10 +328,14 @@ void StrategyMapScene::InitializeUI()
 	troops_title[1] = App->gui->CreateLabel({ 420,285 }, "fonts/button_text.ttf", 33, "Land", { 0,0,0,0 }, 300, troops_background);
 	troops_title[2] = App->gui->CreateLabel({ 733,285 }, "fonts/button_text.ttf", 33, "Aerial", { 0,0,0,0 }, 300, troops_background);
 
-	deck_buttons[0] = App->gui->CreateButton({ 360,99 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[0]->type, "deck"), troops_background);
-	deck_buttons[1] = App->gui->CreateButton({ 500,99 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[1]->type, "deck"), troops_background);
-	deck_buttons[2] = App->gui->CreateButton({ 640,99 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[2]->type, "deck"), troops_background);
-	deck_buttons[3] = App->gui->CreateButton({ 780,99 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[3]->type, "deck"), troops_background);
+	if(App->game_manager->GetPlayerDeck()->cards[0])
+		deck_buttons[0] = App->gui->CreateButton({ 360,99 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[0]->type, "deck"), troops_background);
+	if (App->game_manager->GetPlayerDeck()->cards[1])
+		deck_buttons[1] = App->gui->CreateButton({ 500,99 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[1]->type, "deck"), troops_background);
+	if (App->game_manager->GetPlayerDeck()->cards[2])
+		deck_buttons[2] = App->gui->CreateButton({ 640,99 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[2]->type, "deck"), troops_background);
+	if (App->game_manager->GetPlayerDeck()->cards[3])
+		deck_buttons[3] = App->gui->CreateButton({ 780,99 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[3]->type, "deck"), troops_background);
 
 	collection_buttons[0] = App->gui->CreateButton({ 40,350 }, App->gui->LoadUIButton(1, "upgrade"), troops_background);
 	collection_buttons[1] = App->gui->CreateButton({ 170,350 }, App->gui->LoadUIButton(2, "upgrade"), troops_background);

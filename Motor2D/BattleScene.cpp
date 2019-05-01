@@ -64,7 +64,7 @@ bool BattleScene::Start()
 	enemy_core = App->entity_manager->CreateCore(App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterType(), { 25,330 }, enemy_deck, FACTION_AMERICAN, true);
 	enemy_core->delete_deck = true;
 
-	allied_core->LoadUnitSprites();
+	allied_core->LoadUnitSprites(App->game_manager->GetPlayerDeck()->GetDeckSize());
 	enemy_core->LoadUnitSprites();
 
 	//Initialize UI
@@ -122,7 +122,7 @@ bool BattleScene::Update(float dt)
 			App->map->SetDrawable("Spawn", 0);
 		}
 
-		if (App->input->GetKey(SDL_SCANCODE_1) == KEY_UP)
+		if (App->input->GetKey(SDL_SCANCODE_1) == KEY_UP && allied_core->GetCard(CN_FIRST))
 		{
 			App->map->SetDrawable("Spawn", 1);
 			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
@@ -132,7 +132,7 @@ bool BattleScene::Update(float dt)
 			}
 		}
 
-		if (App->input->GetKey(SDL_SCANCODE_2) == KEY_UP)
+		if (App->input->GetKey(SDL_SCANCODE_2) == KEY_UP && allied_core->GetCard(CN_SECOND))
 		{
 			App->map->SetDrawable("Spawn", 1);
 			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
@@ -142,7 +142,7 @@ bool BattleScene::Update(float dt)
 			}
 		}
 
-		if (App->input->GetKey(SDL_SCANCODE_3) == KEY_UP)
+		if (App->input->GetKey(SDL_SCANCODE_3) == KEY_UP && allied_core->GetCard(CN_THIRD))
 		{
 			App->map->SetDrawable("Spawn", 1);
 			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
@@ -152,7 +152,7 @@ bool BattleScene::Update(float dt)
 			}
 		}
 
-		if (App->input->GetKey(SDL_SCANCODE_4) == KEY_UP)
+		if (App->input->GetKey(SDL_SCANCODE_4) == KEY_UP && allied_core->GetCard(CN_FOURTH))
 		{
 			App->map->SetDrawable("Spawn", 1);
 			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
@@ -329,8 +329,6 @@ void BattleScene::ReleaseDrag()
 		else App->audio->PlayFx(no_energy.c_str(), 0);
 	}
 
-	
-
 	App->map->SetDrawable("Spawn", 1);
 	App->gui->DeleteElement(current_drag);
 	current_drag = nullptr;
@@ -348,10 +346,14 @@ void BattleScene::StartUI()
 	//Game_UI
 
 	unit_panel = App->gui->CreateImage({ 755,0 }, { 619,0,269,768 });
-	unit_button_one = App->gui->CreateButton({ 35, 365 }, App->gui->LoadUIButton(allied_core->GetCard(CN_FIRST)->type, "button"), unit_panel);
-	unit_button_two = App->gui->CreateButton({ 135, 365 }, App->gui->LoadUIButton(allied_core->GetCard(CN_SECOND)->type, "button"), unit_panel);
-	unit_button_three = App->gui->CreateButton({ 35, 445 }, App->gui->LoadUIButton(allied_core->GetCard(CN_THIRD)->type, "button"), unit_panel);
-	unit_button_four = App->gui->CreateButton({ 135, 445 }, App->gui->LoadUIButton(allied_core->GetCard(CN_FOURTH)->type, "button"), unit_panel);
+	if(allied_core->GetCard(CN_FIRST))
+		unit_button_one = App->gui->CreateButton({ 35, 365 }, App->gui->LoadUIButton(allied_core->GetCard(CN_FIRST)->type, "button"), unit_panel);
+	if (allied_core->GetCard(CN_SECOND))
+		unit_button_two = App->gui->CreateButton({ 135, 365 }, App->gui->LoadUIButton(allied_core->GetCard(CN_SECOND)->type, "button"), unit_panel);
+	if (allied_core->GetCard(CN_THIRD))
+		unit_button_three = App->gui->CreateButton({ 35, 445 }, App->gui->LoadUIButton(allied_core->GetCard(CN_THIRD)->type, "button"), unit_panel);
+	if (allied_core->GetCard(CN_FOURTH))
+		unit_button_four = App->gui->CreateButton({ 135, 445 }, App->gui->LoadUIButton(allied_core->GetCard(CN_FOURTH)->type, "button"), unit_panel);
 
 	energy_bar = App->gui->CreateBar({ 8, 358 }, { 601,0,16,274 }, allied_core->GetEnergy(), BAR_VERTICAL, nullptr, unit_panel);
 

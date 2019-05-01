@@ -282,21 +282,25 @@ void Gui::DisableUI()
 
 void Gui::EnableElement(UIElement* ele)
 {
-	ele->SetEnabled(true);
-	for (std::list<UIElement*>::iterator element = elements.begin(); element != elements.end(); ++element)
-	{
-		if ((*element)->parent && (*element)->parent == ele)
-			EnableElement(*element);
+	if (ele) {
+		ele->SetEnabled(true);
+		for (std::list<UIElement*>::iterator element = elements.begin(); element != elements.end(); ++element)
+		{
+			if ((*element)->parent && (*element)->parent == ele)
+				EnableElement(*element);
+		}
 	}
 }
 
 void Gui::DisableElement(UIElement* ele)
 {
-	ele->SetEnabled(false);
-	for (std::list<UIElement*>::iterator element = elements.begin(); element != elements.end(); ++element)
-	{
-		if ((*element)->parent && (*element)->parent == ele)
-			DisableElement(*element);
+	if (ele) {
+		ele->SetEnabled(false);
+		for (std::list<UIElement*>::iterator element = elements.begin(); element != elements.end(); ++element)
+		{
+			if ((*element)->parent && (*element)->parent == ele)
+				DisableElement(*element);
+		}
 	}
 }
 
