@@ -296,13 +296,13 @@ void DynamicEntity::Attack()
 		float attack = entity_card->info.stats.find("damage")->second->GetValue();
 		switch (entity_card->info.attack_type)
 		{
-		case AttackType::BASIC:
+		case AttackType::AT_BASIC:
 			objective->DecreaseLife(attack);
 			App->particles->CreateParticle(ParticleType::ATTACK_BASIC_SHOT, { position.x, position.y - current_frame.h * 0.5f }, 
 				{ objective->position.x, objective->position.y - objective->current_frame.h * 0.5f });
 			App->audio->PlayFx(attack_fx.c_str(), 0, 1);
 			break;
-		case AttackType::AOE:
+		case AttackType::AT_AOE:
 		{
 			App->audio->PlayFx(explosion_fx.c_str(), 0, 2);
 			std::list<Entity*> entities;
@@ -316,7 +316,7 @@ void DynamicEntity::Attack()
 			App->particles->CreateParticle(ParticleType::ATTACK_EXPLOSION, objective->position);
 		}
 			break;
-		case AttackType::PIERCING:
+		case AttackType::AT_PIERCING:
 			objective->DecreaseLife(attack, true);
 			App->particles->CreateParticle(ParticleType::ATTACK_BASIC_SHOT, { position.x, position.y - current_frame.h * 0.5f },
 				{ objective->position.x, objective->position.y - objective->current_frame.h * 0.5f });
@@ -367,6 +367,21 @@ void DynamicEntity::DecreaseLife(float damage, bool piercing)
 	stats.find("health")->second->DecreaseStat(damage_received);
 	if (stats.find("health")->second->GetValue() <= 0)
 		Die();
+}
+
+float DynamicEntity::GetDamage()
+{
+	return entity_card->info.stats.find("damage")->second->GetValue();
+}
+
+bool DynamicEntity::IsArmored()
+{
+	return entity_card->info.armored;
+}
+
+int DynamicEntity::GetAttackType()
+{
+	return entity_card->info.attack_type;
 }
 
 void DynamicEntity::Die()

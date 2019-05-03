@@ -324,6 +324,7 @@ void StrategyMapScene::InitializeUI()
 	buildings_button = App->gui->CreateButtonText({ 635,98 }, { 10,16 }, medium_button_rect, "BUILDINGS", { 200,200,200,255 }, 33);
 	App->gui->DisableElement(buildings_button);
 
+
 	troops_title[0] = App->gui->CreateLabel({ 30,285 }, "fonts/button_text.ttf", 33, "Infantry", { 0,0,0,0 }, 300, troops_background);
 	troops_title[1] = App->gui->CreateLabel({ 420,285 }, "fonts/button_text.ttf", 33, "Land", { 0,0,0,0 }, 300, troops_background);
 	troops_title[2] = App->gui->CreateLabel({ 733,285 }, "fonts/button_text.ttf", 33, "Aerial", { 0,0,0,0 }, 300, troops_background);
@@ -337,15 +338,16 @@ void StrategyMapScene::InitializeUI()
 	if (App->game_manager->GetPlayerDeck()->cards[3])
 		deck_buttons[3] = App->gui->CreateButton({ 780,99 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[3]->type, "deck"), troops_background);
 
-	collection_buttons[0] = App->gui->CreateButton({ 40,350 }, App->gui->LoadUIButton(1, "upgrade"), troops_background);
-	collection_buttons[1] = App->gui->CreateButton({ 170,350 }, App->gui->LoadUIButton(2, "upgrade"), troops_background);
-	collection_buttons[2] = App->gui->CreateButton({ 110,480 }, App->gui->LoadUIButton(3, "upgrade"), troops_background);
-	collection_buttons[3] = App->gui->CreateButton({ 380,350 }, App->gui->LoadUIButton(4, "upgrade"), troops_background);
-	collection_buttons[4] = App->gui->CreateButton({ 510,350 }, App->gui->LoadUIButton(5, "upgrade"), troops_background);
-	collection_buttons[5] = App->gui->CreateButton({ 445,480 }, App->gui->LoadUIButton(6, "upgrade"), troops_background);
-	collection_buttons[6] = App->gui->CreateButton({ 720,350 }, App->gui->LoadUIButton(7, "upgrade"), troops_background);
-	collection_buttons[7] = App->gui->CreateButton({ 840,350 }, App->gui->LoadUIButton(8, "upgrade"), troops_background);
-	collection_buttons[8] = App->gui->CreateButton({ 780,480 }, App->gui->LoadUIButton(9, "upgrade"), troops_background);
+	collection_buttons[0] = App->gui->CreateButton({ 40,320 }, App->gui->LoadUIButton(2, "upgrade"), troops_background);
+	collection_buttons[1] = App->gui->CreateButton({ 170,320 }, App->gui->LoadUIButton(4, "upgrade"), troops_background);
+	collection_buttons[2] = App->gui->CreateButton({ 110,450 }, App->gui->LoadUIButton(6, "upgrade"), troops_background);
+	collection_buttons[3] = App->gui->CreateButton({ 380,320 }, App->gui->LoadUIButton(8, "upgrade"), troops_background);
+	collection_buttons[4] = App->gui->CreateButton({ 510,320 }, App->gui->LoadUIButton(10, "upgrade"), troops_background);
+	collection_buttons[5] = App->gui->CreateButton({ 445,450 }, App->gui->LoadUIButton(12, "upgrade"), troops_background);
+	collection_buttons[6] = App->gui->CreateButton({ 720,320 }, App->gui->LoadUIButton(14, "upgrade"), troops_background);
+	collection_buttons[7] = App->gui->CreateButton({ 840,320 }, App->gui->LoadUIButton(16, "upgrade"), troops_background);
+	collection_buttons[8] = App->gui->CreateButton({ 780,450 }, App->gui->LoadUIButton(18, "upgrade"), troops_background);
+
 	App->gui->DisableElement(troops_background);
 
 	//Building Menu
@@ -353,17 +355,17 @@ void StrategyMapScene::InitializeUI()
 	buildings_background = App->gui->CreateImage({ 20,95 }, { 1780,1229,986,593 }, main_panel);
 	building_title = App->gui->CreateLabel({ 610, 70 }, "fonts/button_text.ttf", 22, "Aerial Building:", { 242, 222, 70, 255 }, 600, buildings_background);
 
-	building_infantry_button = App->gui->CreateSelectableButton({343, 400 }, App->gui->LoadUIButton(10, "button"),buildings_background);
-	building_infantry_image = App->gui->CreateImage({ 365,125 }, App->gui->LoadUIImage(10, "building"), buildings_background);
+	building_infantry_button = App->gui->CreateSelectableButton({343, 400 }, App->gui->LoadUIButton(30, "button"),buildings_background);
+	building_infantry_image = App->gui->CreateImage({ 365,125 }, App->gui->LoadUIImage(30, "building"), buildings_background);
 	building_infantry_info = App->gui->CreateLabel({ 245,-30 }, "fonts/red_alert.ttf", 20, "The infantry troops are upgraded by %i", { 231,216,145,255 }, 300, building_infantry_image);
 	
-	building_aerial_button = App->gui->CreateSelectableButton({ 770,400 }, App->gui->LoadUIButton(11, "button"), buildings_background);
-	building_aerial_image = App->gui->CreateImage({ 345,115 }, App->gui->LoadUIImage(11, "building"), buildings_background);
+	building_aerial_button = App->gui->CreateSelectableButton({ 770,400 }, App->gui->LoadUIButton(31, "button"), buildings_background);
+	building_aerial_image = App->gui->CreateImage({ 345,115 }, App->gui->LoadUIImage(31, "building"), buildings_background);
 	building_aerial_info = App->gui->CreateLabel({ 265,-20 }, "fonts/red_alert.ttf", 20, "The aerial troops are upgraded by %i", { 231,216,145,255 }, 300, building_aerial_image);
 	
-	building_land_button = App->gui->CreateSelectableButton({ 560,430 } , App->gui->LoadUIButton(12, "button"), buildings_background);
-	building_land_image = App->gui->CreateImage({ 350,145 }, App->gui->LoadUIImage(12, "building"), buildings_background);
+	building_land_button = App->gui->CreateSelectableButton({ 560,430 } , App->gui->LoadUIButton(32, "button"), buildings_background);
+	building_land_image = App->gui->CreateImage({ 350,145 }, App->gui->LoadUIImage(32, "building"), buildings_background);
 	building_land_info = App->gui->CreateLabel({ 260, -50 }, "fonts/red_alert.ttf", 20, "The land troops are upgraded by %i", { 231,216,145,255 }, 300, building_land_image);
 
-	//App->gui->DisableElement(buildings_background);
+	App->gui->DisableElement(buildings_background);
 }

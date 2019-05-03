@@ -348,37 +348,64 @@ SDL_Rect* Gui::LoadUIButton(int num, std::string type)
 		name = "GI";
 		break;
 	case 2:
-		name = "Sniper";
+		name = "Conscript";
 		break;
 	case 3:
-		name = "NavySeal";
+		name = "Virus";
 		break;
 	case 4:
-		name = "GrizzlyTank";
+		name = "Sniper";
 		break;
 	case 5:
-		name = "RobotTank";
+		name = "GuardianGI";
 		break;
 	case 6:
-		name = "PrismTank";
+		name = "FlakTrooper";
 		break;
 	case 7:
-		name = "NightHawk";
+		name = "GrizzlyTank";
 		break;
 	case 8:
-		name = "Harrier";
+		name = "RhinoTank";
 		break;
 	case 9:
-		name = "BlackEagle";
+		name = "RobotTank";
 		break;
 	case 10:
-		name = "Infantry";
+		name = "TerrorDrone";
 		break;
 	case 11:
-		name = "Aerial";
+		name = "PrismTank";
 		break;
 	case 12:
+		name = "TeslaTank";
+		break;
+	case 13:
+		name = "NightHawk";
+		break;
+	case 14:
+		name = "SiegeChopper";
+		break;
+	case 15:
+		name = "Harrier";
+		break;
+	case 16:
+		name = "MiG";
+		break;
+	case 17:
+		name = "BlackEagle";
+		break;
+  case 18:
+		name = "SpyPlane";
+	case 30:
+		name = "Infantry";
+		break;
+	case 31:
+		name = "Aerial";
+		break;
+	case 32:
 		name = "Land";
+
 		break;
 	}
 
@@ -404,19 +431,19 @@ SDL_Rect Gui::LoadUIImage(int num, std::string type)
 	std::string name;
 
 	switch (num) {
-	case 10:
+	case 30:
 		name = "Infantry";
 		break;
-	case 11:
+	case 31:
 		name = "Aerial";
 		break;
-	case 12:
+	case 32:
 		name = "Land";
 		break;
-	case 13:
+	case 33:
 		name = "Gold";
 		break;
-	case 14:
+	case 34:
 		name = "Store";
 		break;
 	}

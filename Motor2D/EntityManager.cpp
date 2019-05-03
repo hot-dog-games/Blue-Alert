@@ -135,8 +135,7 @@ Entity* EntityManager::CreateEntity(EntityType type, fPoint position, Card* card
 	BROFILER_CATEGORY("CreateEntity", Profiler::Color::Gold);
 
 	std::string id = std::to_string(id_count);
-	pugi::xml_node entity_node = entity_configs.find_child_by_attribute("type",
-		std::to_string((int)type).c_str()).find_child_by_attribute("faction", std::to_string((int)faction).c_str());
+	pugi::xml_node entity_node = entity_configs.find_child_by_attribute("type", std::to_string((int)type).c_str());
 
 	id += "_" + card->name;
 	
@@ -252,7 +251,6 @@ void EntityManager::FindClosestAllie(fPoint position, Faction faction, Entity* &
 }
 
 void EntityManager::GetEntitiesInArea(SDL_Rect area, std::list<Entity*> &list, int faction)
-
 {
 	Entity* ent;
 	for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)

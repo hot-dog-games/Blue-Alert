@@ -5,6 +5,30 @@
 
 const float THINK_DELAY = 1.0F;
 
+struct AILane{
+	SDL_Rect area;
+	float unit_value = 0.0f;
+	float distance_value = 0.0f;
+	float lane_priority = 0.0f;
+
+	uint enemy_units = 0;
+	uint own_units = 0;
+	uint enemy_armored = 0;
+	uint enemy_piercing = 0;
+	uint enemy_basic = 0;
+	uint enemy_aoe = 0;
+
+	void Reset()
+	{
+		enemy_units = 0;
+		own_units = 0;
+		enemy_armored = 0;
+		enemy_piercing = 0;
+		enemy_basic = 0;
+		enemy_aoe = 0;
+	}
+};
+
 class CoreAI : public Core
 {
 public:
@@ -25,12 +49,16 @@ private:
 	AIState ai_state = AIState::WAITING;
 
 	bool CanPlay();
-	bool LosingLane(uint lane);
+	void Think();
+	void AnalyzeLane(uint lane);
+	void SelectCard();
+	void SelectLane();
 
 	float dt_sum = THINK_DELAY;
 
-	SDL_Rect lanes[3];
-	int lane = 0;
+	AILane lanes[3];
+	int selected_lane = 0;
+	int selected_card = 0;
 };
 
 #endif // !_COREAI_H_
