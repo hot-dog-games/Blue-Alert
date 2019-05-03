@@ -55,7 +55,7 @@ bool Fonts::CleanUp()
 }
 
 // Load new texture from file path
-TTF_Font* const Fonts::Load(const char* path, int size)
+_TTF_Font* const Fonts::Load(const char* path, int size)
 {
 	TTF_Font* font = nullptr;
 	std::string key = path + std::to_string(size);

@@ -48,6 +48,7 @@ public:
 	void SetLocalRect(SDL_Rect rect);
 	void DadEnabled();
 	void SetEnabled(bool enabled);
+	bool IsEnabled() const;
 
 	virtual void OnMouseClick() {};
 	virtual void OnMouseHover() {};

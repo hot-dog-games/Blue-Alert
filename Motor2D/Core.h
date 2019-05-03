@@ -22,7 +22,7 @@ public:
 	bool UseCard(int number, fPoint position);
 	void SetDeck(Deck* new_deck);
 	Card* GetCard(int card_num) const;
-	void LoadUnitSprites();
+	void LoadUnitSprites(int deck_size = 4);
 
 	Stat* GetEnergy() const;
 	Stat* GetHealth() const;

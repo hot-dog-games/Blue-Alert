@@ -6,6 +6,7 @@
 #include "EncounterTree.h"
 #include "UIButton.h"
 #include "UIImage.h"
+#include "UIButtonText.h"
 
 
 
@@ -48,17 +49,35 @@ private:
 	UILabel* gold;
 	UILabel* energy;
 	UILabel* text_menu;
-	UILabel* troops_text;
-	UILabel* buildings_text;
-	UILabel* back_cross_text;
 	UIButton* settings_button;
-	UIButton* menu_button;
-	UIButton* backbutton_t_b;
-	UIButton* troops_button;
-	UIButton* buildings_button;
+	UIButtonText* menu_button;
+	UIButtonText* backbutton_t_b;
+	UIButtonText* troops_button;
+	UIButtonText* buildings_button;
 
+	//Building Menu
+	UIImage* buildings_background;
+	UIImage* core_image;
+
+	UIImage* building_infantry_image = nullptr;
+	UISelectableButton* building_infantry_button = nullptr;
+	UILabel* building_infantry_info = nullptr;
+
+	UIImage* building_aerial_image = nullptr;
+	UISelectableButton* building_aerial_button = nullptr;
+	UILabel* building_aerial_info = nullptr;
+
+	UIImage* building_land_image = nullptr;
+	UISelectableButton* building_land_button = nullptr;
+	UILabel* building_land_info = nullptr;
+
+	UIButton* level_up = nullptr;
+	UILabel* building_title = nullptr;
+	
+	// Troops Menu
 	UIButton* deck_buttons[4];
 	UIButton* collection_buttons[9];
+	UILabel* troops_title[3];
 
 };
 
