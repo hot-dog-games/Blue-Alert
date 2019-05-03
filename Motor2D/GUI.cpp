@@ -397,6 +397,7 @@ SDL_Rect* Gui::LoadUIButton(int num, std::string type)
 		break;
   case 18:
 		name = "SpyPlane";
+		break;
 	case 30:
 		name = "Infantry";
 		break;

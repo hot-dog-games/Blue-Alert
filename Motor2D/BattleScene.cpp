@@ -346,7 +346,7 @@ void BattleScene::StartUI()
 
 	//Game_UI
 
-	unit_panel = App->gui->CreateImage({ 755,0 }, { 619,0,269,768 });
+	unit_panel = App->gui->CreateImage({ 755,0 }, { 2406,0,269,768 });
 	if(allied_core->GetCard(CN_FIRST))
 		unit_button_one = App->gui->CreateButton({ 35, 365 }, App->gui->LoadUIButton(allied_core->GetCard(CN_FIRST)->type, "button"), unit_panel);
 	if (allied_core->GetCard(CN_SECOND))
@@ -356,7 +356,7 @@ void BattleScene::StartUI()
 	if (allied_core->GetCard(CN_FOURTH))
 		unit_button_four = App->gui->CreateButton({ 135, 445 }, App->gui->LoadUIButton(allied_core->GetCard(CN_FOURTH)->type, "button"), unit_panel);
 
-	energy_bar = App->gui->CreateBar({ 8, 358 }, { 601,0,16,274 }, allied_core->GetEnergy(), BAR_VERTICAL, nullptr, unit_panel);
+	energy_bar = App->gui->CreateBar({ 8, 358 }, { 2388,0,16,274 }, allied_core->GetEnergy(), BAR_VERTICAL, nullptr, unit_panel);
 
 	health_bar_image = App->gui->CreateImage({ 470,730 }, { 25,1399,253,28 });
 	enemy_health_bar_image = App->gui->CreateImage({ 40,20 }, { 25,1474,253,28 });

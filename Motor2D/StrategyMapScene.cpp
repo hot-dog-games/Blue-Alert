@@ -175,43 +175,43 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			App->gui->DisableElement(deck_buttons[3]);
 			App->game_manager->GetPlayerDeck()->RemoveCard(3);
 		}
-		else if (element == collection_buttons[0])
+		else if (element == collection_buttons_allies[0])
 		{
 			AddCardToDeck(element,0);
 		}
-		else if (element == collection_buttons[1])
-		{
-			AddCardToDeck(element,1);
-		}
-		else if (element == collection_buttons[2])
+		else if (element == collection_buttons_allies[1])
 		{
 			AddCardToDeck(element,2);
 		}
-		else if (element == collection_buttons[3])
-		{
-			AddCardToDeck(element,3);
-		}
-		else if (element == collection_buttons[4])
+		else if (element == collection_buttons_allies[2])
 		{
 			AddCardToDeck(element,4);
 		}
-		else if (element == collection_buttons[5])
-		{
-			AddCardToDeck(element,5);
-		}
-		else if (element == collection_buttons[6])
+		else if (element == collection_buttons_allies[3])
 		{
 			AddCardToDeck(element,6);
 		}
-		else if (element == collection_buttons[7])
-		{
-			AddCardToDeck(element,7);
-		}
-		else if (element == collection_buttons[8])
+		else if (element == collection_buttons_allies[4])
 		{
 			AddCardToDeck(element,8);
 		}
-		else if (element == collection_buttons[9])
+		else if (element == collection_buttons_allies[5])
+		{
+			AddCardToDeck(element,10);
+		}
+		else if (element == collection_buttons_allies[6])
+		{
+			AddCardToDeck(element,12);
+		}
+		else if (element == collection_buttons_allies[7])
+		{
+			AddCardToDeck(element,14);
+		}
+		else if (element == collection_buttons_allies[8])
+		{
+			AddCardToDeck(element,16);
+		}
+		else if (element == collection_buttons_allies[9])
 		{
 			AddCardToDeck(element,9);
 		}
@@ -266,7 +266,7 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 
 void  StrategyMapScene::AddCardToDeck(UIElement * element, uint num) {
 	for (int i = 0; i < 4; i++) {
-		Card* card = App->game_manager->GetCardFromCollection((EntityType)(num + 1));
+		Card* card = App->game_manager->GetCardFromCollection((EntityType)(num));
 		if (deck_buttons[i] && deck_buttons[i]->enabled == false && card && !App->game_manager->IsInPlayerDeck(card)) {
 			App->gui->EnableElement(deck_buttons[i]);
 			App->game_manager->GetPlayerDeck()->AddCard(card);
@@ -292,19 +292,19 @@ void StrategyMapScene::InitializeUI()
 	banner = App->gui->CreateImage({ 4,5 }, { 1,769,1017,83 }, main_panel);
 
 	SDL_Rect small_button_rect[3];
-	small_button_rect[0] = { 1977, 1824, 41, 40 };
-	small_button_rect[1] = { 1977, 1865, 41, 40 };
-	small_button_rect[2] = { 1977, 1904, 41, 40 };
+	small_button_rect[0] = { 753, 497, 41, 40 };
+	small_button_rect[1] = { 753, 538, 41, 40 };
+	small_button_rect[2] = { 753, 577, 41, 40 };
 
 	SDL_Rect medium_button_rect[3];
-	medium_button_rect[0] = { 1673,2055,294,67 };
-	medium_button_rect[1] = { 1673,2125,294,67 };
-	medium_button_rect[2] = { 1673,2195,294,67 };
+	medium_button_rect[0] = { 800,499,294,67 };
+	medium_button_rect[1] = { 800,569,294,67 };
+	medium_button_rect[2] = { 800,639,294,67 };
 
 	SDL_Rect large_button_rect[3];
-	large_button_rect[0] = { 1673, 1825, 304, 74 };
-	large_button_rect[1] = { 1673, 1904, 304, 74 };
-	large_button_rect[2] = { 1673, 1980, 304, 74 };
+	large_button_rect[0] = { 449, 498, 304, 74 };
+	large_button_rect[1] = { 449, 577, 304, 74 };
+	large_button_rect[2] = { 449, 653, 304, 74 };
 
 	settings_button = App->gui->CreateButton({ 50,700 }, small_button_rect, main_panel);
 	menu_button = App->gui->CreateButtonText({ 700,700 }, {70,0 }, medium_button_rect, "MENU", { 200,200,200,255 }, 33, main_panel);
@@ -338,15 +338,15 @@ void StrategyMapScene::InitializeUI()
 	if (App->game_manager->GetPlayerDeck()->cards[3])
 		deck_buttons[3] = App->gui->CreateButton({ 780,99 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[3]->type, "deck"), troops_background);
 
-	collection_buttons[0] = App->gui->CreateButton({ 40,320 }, App->gui->LoadUIButton(2, "upgrade"), troops_background);
-	collection_buttons[1] = App->gui->CreateButton({ 170,320 }, App->gui->LoadUIButton(4, "upgrade"), troops_background);
-	collection_buttons[2] = App->gui->CreateButton({ 110,450 }, App->gui->LoadUIButton(6, "upgrade"), troops_background);
-	collection_buttons[3] = App->gui->CreateButton({ 380,320 }, App->gui->LoadUIButton(8, "upgrade"), troops_background);
-	collection_buttons[4] = App->gui->CreateButton({ 510,320 }, App->gui->LoadUIButton(10, "upgrade"), troops_background);
-	collection_buttons[5] = App->gui->CreateButton({ 445,450 }, App->gui->LoadUIButton(12, "upgrade"), troops_background);
-	collection_buttons[6] = App->gui->CreateButton({ 720,320 }, App->gui->LoadUIButton(14, "upgrade"), troops_background);
-	collection_buttons[7] = App->gui->CreateButton({ 840,320 }, App->gui->LoadUIButton(16, "upgrade"), troops_background);
-	collection_buttons[8] = App->gui->CreateButton({ 780,450 }, App->gui->LoadUIButton(18, "upgrade"), troops_background);
+	collection_buttons_allies[0] = App->gui->CreateButton({ 40,347 }, App->gui->LoadUIButton(2, "upgrade"), troops_background);
+	collection_buttons_allies[1] = App->gui->CreateButton({ 170,347 }, App->gui->LoadUIButton(4, "upgrade"), troops_background);
+	collection_buttons_allies[2] = App->gui->CreateButton({ 110,477 }, App->gui->LoadUIButton(6, "upgrade"), troops_background);
+	collection_buttons_allies[3] = App->gui->CreateButton({ 380,347 }, App->gui->LoadUIButton(8, "upgrade"), troops_background);
+	collection_buttons_allies[4] = App->gui->CreateButton({ 510,347 }, App->gui->LoadUIButton(10, "upgrade"), troops_background);
+	collection_buttons_allies[5] = App->gui->CreateButton({ 445,477 }, App->gui->LoadUIButton(12, "upgrade"), troops_background);
+	collection_buttons_allies[6] = App->gui->CreateButton({ 720,347 }, App->gui->LoadUIButton(14, "upgrade"), troops_background);
+	collection_buttons_allies[7] = App->gui->CreateButton({ 840,347 }, App->gui->LoadUIButton(16, "upgrade"), troops_background);
+	collection_buttons_allies[8] = App->gui->CreateButton({ 780,477 }, App->gui->LoadUIButton(18, "upgrade"), troops_background);
 
 	App->gui->DisableElement(troops_background);
 

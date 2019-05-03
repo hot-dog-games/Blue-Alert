@@ -76,7 +76,7 @@ private:
 	
 	// Troops Menu
 	UIButton* deck_buttons[4];
-	UIButton* collection_buttons[9];
+	UIButton* collection_buttons_allies[9];
 	UILabel* troops_title[3];
 
 };
