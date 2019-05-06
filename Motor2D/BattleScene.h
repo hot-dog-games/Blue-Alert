@@ -49,6 +49,11 @@ public:
 private:
 	void CreateDrag(int num, int type, UIElement* element);
 	void ReleaseDrag();
+	void GenerateRandomSovietTroop();
+	void GenerateRandomAlliedTroop();
+
+	void UpdateGoldOnSelect();
+	void UpdateGoldOnUnSelect();
 
 	void StartUI();
 
@@ -73,30 +78,63 @@ private:
 	UIBar*			enemy_health_bar;
 	UIImage*		enemy_health_bar_image;
 
+	//panels
 	UIImage*		win_panel_one;
 	UIImage*		win_panel_two;
+	UIImage*		store_panel;
+	UIImage*		lose_panel;
+
+	//buttons
 	UIButton*		win_continue_one;
 	UIButton*		win_continue_two;
+	UIButton*		lose_continue;
+	UIButton*		purchase;
+
+	//labels
 	UILabel*		win_text_one;
 	UILabel*		win_text_two;
+	UILabel*		lose_text;
+
+	//store
+	UILabel*		store_text;
+	UILabel*		store_unit_01_cost;
+	UILabel*		store_unit_02_cost;
+	UILabel*		store_unit_03_cost;
+	UILabel*		store_unit_04_cost;
+	UILabel*		store_unit_05_cost;
+	UILabel*		store_unit_06_cost;
+	UILabel*		current_gold;
+	UILabel*		total_cost;
+
+
+	//Images
 	UIImage*		win_building;
+
+	//selectable buttons
 	UISelectableButton*		win_unit_one;
 	UISelectableButton*		win_unit_two;
 	UISelectableButton*		win_unit_three;
 
-	UIImage*		lose_panel;
-	UILabel*		lose_text;
-	UIButton*		lose_continue;
+	UISelectableButton*		store_unit_one;
+	UISelectableButton*		store_unit_two;
+	UISelectableButton*		store_unit_three;
+	UISelectableButton*		store_unit_four;
+	UISelectableButton*		store_unit_five;
+	UISelectableButton*		store_unit_six;
 
 	UIImage* current_drag;
 	int card_num;
 	int random_num[3];
+	std::vector<int> random_store_unit;
 
 	//Audio fx
 	std::string  win_fx;
 	std::string  lose_fx;
 	std::string  deployment_fx;
 	std::string  no_energy;
+
+	int unit_store_cost = 100;
+	int total_cost_acumulated = 0;
 
 	uint max_energy;
 	uint current_energy;

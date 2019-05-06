@@ -25,6 +25,7 @@
 #include "EncounterTree.h"
 #include "EncounterNode.h"
 #include "UIImage.h"
+#include "UILabel.h"
 
 const double HELD_DELAY = 175;
 
@@ -168,10 +169,13 @@ bool BattleScene::Update(float dt)
 		if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_UP)
 		{
 			state = BattleSceneState::WIN;
-			App->PauseGame();
-			App->gui->EnableElement((UIElement*)win_panel_one);
 			App->audio->PlayFx(win_fx.c_str(), 0);
+			App->PauseGame();
+			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() != EntityType::STORE_STRATEGY_BUILDING)App->gui->EnableElement((UIElement*)win_panel_one);
+			else App->gui->EnableElement((UIElement*)store_panel);
+			App->gui->DisableInteractable((UIElement*)unit_panel);
 			App->game_manager->GetEncounterTree()->SetCurrentNode(App->game_manager->GetEncounterTree()->GetFightingNode());
+			App->game_manager->gold += 100;
 		}
 			
 
@@ -189,9 +193,11 @@ bool BattleScene::Update(float dt)
 			state = BattleSceneState::WIN;
 			App->audio->PlayFx(win_fx.c_str(), 0);
 			App->PauseGame();
-			App->gui->EnableElement((UIElement*)win_panel_one);
+			if(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() != EntityType::STORE_STRATEGY_BUILDING)App->gui->EnableElement((UIElement*)win_panel_one);
+			else App->gui->EnableElement((UIElement*)store_panel);
 			App->gui->DisableInteractable((UIElement*)unit_panel);
 			App->game_manager->GetEncounterTree()->SetCurrentNode(App->game_manager->GetEncounterTree()->GetFightingNode());
+			App->game_manager->gold += 100;
 		}
 	}
 	break;
@@ -287,6 +293,31 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			win_unit_two->ChangeState(false);
 			win_unit_one->ChangeState(false);
 		}
+
+		if (element == store_unit_one) {
+			if(store_unit_one->selected)UpdateGoldOnSelect();
+			else UpdateGoldOnUnSelect();
+		}
+		if (element == store_unit_two) {
+			if (store_unit_two->selected)UpdateGoldOnSelect();
+			else UpdateGoldOnUnSelect();
+		}
+		if (element == store_unit_three) {
+			if (store_unit_three->selected)UpdateGoldOnSelect();
+			else UpdateGoldOnUnSelect();
+		}
+		if (element == store_unit_four) {
+			if (store_unit_four->selected)UpdateGoldOnSelect();
+			else UpdateGoldOnUnSelect();
+		}
+		if (element == store_unit_five) {
+			if (store_unit_five->selected)UpdateGoldOnSelect();
+			else UpdateGoldOnUnSelect();
+		}
+		if (element == store_unit_six) {
+			if (store_unit_six->selected)UpdateGoldOnSelect();
+			else UpdateGoldOnUnSelect();
+		}
 	}
 	else if (gui_event == GUI_Event::LEFT_CLICK_UP) {
 		if (element == current_drag) {
@@ -336,16 +367,60 @@ void BattleScene::ReleaseDrag()
 	current_drag = nullptr;
 }
 
-void BattleScene::StartUI()
+void BattleScene::GenerateRandomSovietTroop()
 {
-	//Generate random number
 	do {
 		random_num[0] = rand() % 18 + 1;
 		random_num[1] = rand() % 18 + 1;
 		random_num[2] = rand() % 18 + 1;
 	} while ((random_num[0] == random_num[1] || random_num[0] == random_num[2] || random_num[1] == random_num[2])
 		|| (random_num[0] % 2 == 0 || random_num[1] % 2 == 0 || random_num[2] % 2 == 0));
+}
 
+void BattleScene::GenerateRandomAlliedTroop()
+{
+	std::vector<int> pool = { 1, 3, 5, 7, 9, 11, 13, 15, 17 };
+	std::vector<int>::iterator it;
+
+	for (int i = 0; i < 6; i++)
+	{
+		int position = rand() % pool.size();
+		int card = pool[position];
+		random_store_unit.push_back(card);
+		it = pool.begin() + position;
+		pool.erase(it);
+	}
+
+	LOG("ASD");
+}
+
+void BattleScene::UpdateGoldOnSelect()
+{
+	total_cost_acumulated += 100;
+	App->game_manager->gold -= 100;
+	current_gold->SetText("Your gold: " + std::to_string(App->game_manager->gold));
+	total_cost->SetText("Total cost: " + std::to_string(total_cost_acumulated));
+
+	if (App->game_manager->gold < 0)current_gold->SetColor({ 255, 0, 0, 255 });
+	else current_gold->SetColor({ 255,232,2, 255 });
+}
+
+void BattleScene::UpdateGoldOnUnSelect()
+{
+	total_cost_acumulated -= 100;
+	App->game_manager->gold += 100;
+	current_gold->SetText("Your gold: " + std::to_string(App->game_manager->gold));
+	total_cost->SetText("Total cost: " + std::to_string(total_cost_acumulated));
+
+	if (App->game_manager->gold < 0)current_gold->SetColor({ 255, 0, 0, 255 });
+	else current_gold->SetColor({ 255,232,2, 255 });
+}
+
+void BattleScene::StartUI()
+{
+	//Generate random number
+	GenerateRandomAlliedTroop();
+	GenerateRandomSovietTroop();
 	//Game_UI
 
 	unit_panel = App->gui->CreateImage({ 755,0 }, { 2406,0,269,768 });
@@ -384,10 +459,33 @@ void BattleScene::StartUI()
 	win_unit_two = App->gui->CreateSelectableButton({ 320,200 }, App->gui->LoadUIButton(random_num[1], "upgrade"), win_panel_two);
 	win_unit_three = App->gui->CreateSelectableButton({ 510,200 }, App->gui->LoadUIButton(random_num[2], "upgrade"), win_panel_two);
 
-	win_building = App->gui->CreateImage({ 260,160 }, App->gui->LoadUIImage(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType()), win_panel_one);
+	win_building = App->gui->CreateImage({ 260,160 }, App->gui->LoadUIImage(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType(), "end_screen"), win_panel_one);
 
 	App->gui->DisableElement((UIElement*)win_panel_one);
 	App->gui->DisableElement((UIElement*)win_panel_two);
+
+	//Store 
+	store_panel = App->gui->CreateImage({ 139,150 }, { 1,852,744,466 });
+	store_text = App->gui->CreateLabel({ 30,30 }, "fonts/red_alert.ttf", 40, "You've conquered the store! You can now buy a mercenary from the opposite faction!", { 255,232,2, 255 }, 710, store_panel);
+	store_unit_one = App->gui->CreateSelectableButton({ 130,150 }, App->gui->LoadUIButton(random_store_unit[0], "upgrade"), store_panel);
+	store_unit_01_cost = App->gui->CreateLabel({ 155,250 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
+	store_unit_two = App->gui->CreateSelectableButton({ 320,150 }, App->gui->LoadUIButton(random_store_unit[1], "upgrade"), store_panel);
+	store_unit_02_cost = App->gui->CreateLabel({ 345,250 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
+	store_unit_three = App->gui->CreateSelectableButton({ 510,150 }, App->gui->LoadUIButton(random_store_unit[2], "upgrade"), store_panel);
+	store_unit_03_cost = App->gui->CreateLabel({ 535,250 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
+	store_unit_four = App->gui->CreateSelectableButton({ 130,300 }, App->gui->LoadUIButton(random_store_unit[3], "upgrade"), store_panel);
+	store_unit_04_cost = App->gui->CreateLabel({ 155,400 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
+	store_unit_five = App->gui->CreateSelectableButton({ 320,300 }, App->gui->LoadUIButton(random_store_unit[4], "upgrade"), store_panel);
+	store_unit_05_cost = App->gui->CreateLabel({ 345,400 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
+	store_unit_six = App->gui->CreateSelectableButton({ 510,300 }, App->gui->LoadUIButton(random_store_unit[5], "upgrade"), store_panel);
+	store_unit_06_cost = App->gui->CreateLabel({ 535,400 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
+
+	current_gold = App->gui->CreateLabel({ 30,450 }, "fonts/red_alert.ttf", 40, "Your gold: " + std::to_string(App->game_manager->gold), { 255,232,2, 255 }, 710, store_panel);
+	total_cost = App->gui->CreateLabel({ 500,450 }, "fonts/red_alert.ttf", 40, "Total cost: " + std::to_string(total_cost_acumulated), { 255,232,2, 255 }, 710, store_panel);
+
+	purchase = App->gui->CreateButton({ 262,375 }, button_rect, store_panel);
+
+	App->gui->DisableElement((UIElement*)store_panel);
 
 	//End Game Screen Lose
 	lose_panel = App->gui->CreateImage({ 139,150 }, { 1,852,744,466 });
@@ -395,5 +493,4 @@ void BattleScene::StartUI()
 	lose_continue = App->gui->CreateButton({ 262,375 }, button_rect, lose_panel);
 
 	App->gui->DisableElement((UIElement*)lose_panel);
-
 }
