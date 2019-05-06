@@ -25,7 +25,7 @@ SceneManager::~SceneManager()
 
 bool SceneManager::Awake(pugi::xml_node &)
 {
-	current_scene = new StrategyMapScene();
+	current_scene = new MainMenuScene();
 	return true;
 }
 
@@ -49,8 +49,8 @@ bool SceneManager::Update(float dt)
 
 bool SceneManager::PostUpdate()
 {
-	current_scene->PostUpdate();
-	return true;
+	bool ret = current_scene->PostUpdate();
+	return ret;
 }
 
 bool SceneManager::CleanUp()
