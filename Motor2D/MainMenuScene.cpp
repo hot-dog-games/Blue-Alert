@@ -64,8 +64,6 @@ bool MainMenuScene::PreUpdate()
 // Called each loop iteration
 bool MainMenuScene::Update(float dt)
 {
-	
-
 	return true;
 }
 
@@ -73,7 +71,9 @@ bool MainMenuScene::Update(float dt)
 bool MainMenuScene::PostUpdate()
 {
 	bool ret = true;
-
+	if (gameclose == true) {
+		ret = false;
+	}
 	
 	return ret;
 }
@@ -90,11 +90,15 @@ bool MainMenuScene::CleanUp()
 
 bool MainMenuScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 {
+	
 	if (gui_event == GUI_Event::LEFT_CLICK_DOWN) {
 
-		return true;
+		if (element == exitbutton) {
+			gameclose = true;
+		}
+		
 	}
-
+	return true;
 }
 
 void MainMenuScene::StartUI() {
@@ -107,5 +111,8 @@ void MainMenuScene::StartUI() {
 	MenuBackground = App->gui->CreateImage({ 0,0 }, { 1976,987,1024,768 },nullptr);
 
 	exitbutton = App->gui->CreateButton({ 785,650 }, large_button_rect,MenuBackground);
-	exitlabel = App->gui->CreateLabel({ 10,10 }, "", 20, "EXIT GAME", {0,0,0,0},0,exitbutton);
+	//exitlabel = App->gui->CreateLabel({ 10,10 }, "", 20, "EXIT GAME", {0,0,0,0},0,exitbutton);
+	optionsbutton = App->gui->CreateButton({ 785,440 }, large_button_rect, MenuBackground);
+	newgamebutton = App->gui->CreateButton({ 785,320 }, large_button_rect, MenuBackground);
+	continuebutton = App->gui->CreateButton({ 785,380 }, large_button_rect, MenuBackground);
 }

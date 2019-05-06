@@ -43,6 +43,10 @@ private:
 	UIImage* MenuBackground;
 	UIButton* exitbutton;
 	UILabel* exitlabel;
+	UIButton* optionsbutton;
+	UIButton* newgamebutton;
+	UIButton* continuebutton;
+	bool gameclose = false;
 };
 
 #endif
