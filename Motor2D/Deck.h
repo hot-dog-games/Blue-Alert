@@ -17,6 +17,8 @@ public:
 	Card* GetCard(EntityType type);
 	Card* cards[MAX_CARDS];
 
+	int GetDeckSize() const;
+
 	bool delete_cards = false;
 };
 

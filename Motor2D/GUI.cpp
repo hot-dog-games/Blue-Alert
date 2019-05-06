@@ -13,6 +13,7 @@
 #include "UIImage.h"
 #include "UIButton.h"
 #include "UISelectableButton.h"
+#include "UIButtonText.h"
 #include "UILabel.h"
 #include "UIScrollBar.h"
 #include "UIBar.h"
@@ -43,6 +44,8 @@ bool Gui::Awake(pugi::xml_node& conf)
 	atlas_file_name = conf.child("atlas").attribute("file").as_string("");
 
 	buttons_file.load_file("xml/ui.xml");
+
+	button_font = App->fonts->Load("fonts/button_text.ttf", 12);
 
 	return ret;
 }
@@ -186,10 +189,10 @@ UIImage* Gui::CreateImage(iPoint pos, SDL_Rect rect, UIElement* parent, bool ima
 	return image;
 }
 
-UILabel* Gui::CreateLabel(iPoint pos, std::string path, int size, std::string text, SDL_Color color, int max_width, UIElement* parent)
+UILabel* Gui::CreateLabel(iPoint pos, std::string path, int size, std::string text, SDL_Color color, int max_width, UIElement* parent, bool is_interactable)
 {
 	_TTF_Font* font = App->fonts->Load(path.c_str(), size);
-	UILabel* label = new UILabel(pos, font, text, color, max_width);
+	UILabel* label = new UILabel(pos, font, text, color, max_width, is_interactable);
 	label->parent = parent;
 	elements.push_back(label);
 
@@ -208,6 +211,15 @@ UIButton* Gui::CreateButton(iPoint pos, SDL_Rect* sprite_rect, UIElement* parent
 UISelectableButton * Gui::CreateSelectableButton(iPoint pos, SDL_Rect * sprite_rect, UIElement * parent, bool is_interactable)
 {
 	UISelectableButton* button = new UISelectableButton(pos, sprite_rect, is_interactable);
+	button->parent = parent;
+	elements.push_back(button);
+
+	return button;
+}
+
+UIButtonText * Gui::CreateButtonText(iPoint pos, iPoint offset, SDL_Rect * sprite_rect, std::string text, SDL_Color color, int size, UIElement* parent, bool is_interactable)
+{
+	UIButtonText* button = new UIButtonText(pos, offset, sprite_rect, text, color, size, is_interactable);
 	button->parent = parent;
 	elements.push_back(button);
 
@@ -270,21 +282,25 @@ void Gui::DisableUI()
 
 void Gui::EnableElement(UIElement* ele)
 {
-	ele->SetEnabled(true);
-	for (std::list<UIElement*>::iterator element = elements.begin(); element != elements.end(); ++element)
-	{
-		if ((*element)->parent && (*element)->parent == ele)
-			EnableElement(*element);
+	if (ele) {
+		ele->SetEnabled(true);
+		for (std::list<UIElement*>::iterator element = elements.begin(); element != elements.end(); ++element)
+		{
+			if ((*element)->parent && (*element)->parent == ele)
+				EnableElement(*element);
+		}
 	}
 }
 
 void Gui::DisableElement(UIElement* ele)
 {
-	ele->SetEnabled(false);
-	for (std::list<UIElement*>::iterator element = elements.begin(); element != elements.end(); ++element)
-	{
-		if ((*element)->parent && (*element)->parent == ele)
-			DisableElement(*element);
+	if (ele) {
+		ele->SetEnabled(false);
+		for (std::list<UIElement*>::iterator element = elements.begin(); element != elements.end(); ++element)
+		{
+			if ((*element)->parent && (*element)->parent == ele)
+				DisableElement(*element);
+		}
 	}
 }
 
@@ -379,8 +395,18 @@ SDL_Rect* Gui::LoadUIButton(int num, std::string type)
 	case 17:
 		name = "BlackEagle";
 		break;
-	case 18:
+  case 18:
 		name = "SpyPlane";
+		break;
+	case 30:
+		name = "Infantry";
+		break;
+	case 31:
+		name = "Aerial";
+		break;
+	case 32:
+		name = "Land";
+
 		break;
 	}
 
@@ -399,7 +425,7 @@ SDL_Rect* Gui::LoadUIButton(int num, std::string type)
 	return button_rect;
 }
 
-SDL_Rect Gui::LoadUIImage(int num)
+SDL_Rect Gui::LoadUIImage(int num, std::string type)
 {
 	pugi::xml_node images_node = buttons_file.first_child().child("ui_image");
 
@@ -424,7 +450,7 @@ SDL_Rect Gui::LoadUIImage(int num)
 	}
 
 	SDL_Rect image_rect;
-	pugi::xml_node rect_node = images_node.child(name.c_str());
+	pugi::xml_node rect_node = images_node.child(name.c_str()).child(type.c_str());
 
 	image_rect.x = rect_node.attribute("x").as_uint();
 	image_rect.y = rect_node.attribute("y").as_uint();
@@ -507,6 +533,11 @@ UIElement* Gui::GetElementUnderMouse()
 SDL_Texture* Gui::GetAtlas() const
 {
 	return atlas;
+}
+
+_TTF_Font * Gui::GetButtonFont() const
+{
+	return button_font;
 }
 
 

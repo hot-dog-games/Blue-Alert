@@ -160,6 +160,9 @@
     <ClCompile Include="UIEntityBar.cpp">
       <Filter>Engine\UI</Filter>
     </ClCompile>
+    <ClCompile Include="UIButtonText.cpp">
+      <Filter>Engine\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
@@ -334,6 +337,9 @@
       <Filter>Engine\UI</Filter>
     </ClInclude>
     <ClInclude Include="UIEntityBar.h">
+      <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIButtonText.h">
       <Filter>Engine\UI</Filter>
     </ClInclude>
   </ItemGroup>

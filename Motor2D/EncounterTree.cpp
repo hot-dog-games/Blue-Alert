@@ -165,14 +165,13 @@ void EncounterTree::CleanTree()
 
 void EncounterTree::EntityClicked(StrategyBuilding * entity)
 {
-	if (App->game_manager->GetPlayerDeck()->cards[0] != nullptr && App->game_manager->GetPlayerDeck()->cards[1] != nullptr && App->game_manager->GetPlayerDeck()->cards[2] != nullptr && App->game_manager->GetPlayerDeck()->cards[3] != nullptr && is_clickable) {
+	if (is_clickable) {
 		SetFightingNodeByEntity(entity);
 		App->gui->DisableUI();
 		App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::COMBAT, White);
 		App->transition_manager->CreateZoomTransition(2.0f);
 		App->transition_manager->CreateCameraTranslation(2.0f, { (int)entity->position.x, (int)entity->position.y });
 	}
-
 }
 
 void EncounterTree::SetCurrentNodeByEntity(StrategyBuilding * entity)
