@@ -198,6 +198,7 @@ bool BattleScene::Update(float dt)
 			App->gui->DisableInteractable((UIElement*)unit_panel);
 			App->game_manager->GetEncounterTree()->SetCurrentNode(App->game_manager->GetEncounterTree()->GetFightingNode());
 			App->game_manager->gold += 100;
+			current_gold->SetText("Your gold: " + std::to_string(App->game_manager->gold));
 		}
 	}
 	break;
@@ -448,6 +449,12 @@ void BattleScene::StartUI()
 	button_rect[1] = { 221,585,220,51 };
 	button_rect[2] = { 221,637,220,51 };
 
+	SDL_Rect purchase_rect[4];
+	purchase_rect[0] = {2795, 1536, 220, 51};
+	purchase_rect[1] = {2795, 1588, 220, 51};
+	purchase_rect[2] = {2795, 1640, 220, 51};
+	purchase_rect[3] = {2795, 1692, 220, 51};
+
 	win_panel_one = App->gui->CreateImage({ 139,150 }, { 1,852,744,466 });
 	win_panel_two = App->gui->CreateImage({ 139,150 }, { 1,852,744,466 });
 	win_text_one = App->gui->CreateLabel({ 30,30 }, "fonts/red_alert.ttf", 40, "Congratulations, you've conquered this zone and unlocked the next building!", { 255,232,2, 255 }, 710, win_panel_one);
@@ -465,25 +472,24 @@ void BattleScene::StartUI()
 	App->gui->DisableElement((UIElement*)win_panel_two);
 
 	//Store 
-	store_panel = App->gui->CreateImage({ 139,150 }, { 1,852,744,466 });
-	store_text = App->gui->CreateLabel({ 30,30 }, "fonts/red_alert.ttf", 40, "You've conquered the store! You can now buy a mercenary from the opposite faction!", { 255,232,2, 255 }, 710, store_panel);
-	store_unit_one = App->gui->CreateSelectableButton({ 130,150 }, App->gui->LoadUIButton(random_store_unit[0], "upgrade"), store_panel);
-	store_unit_01_cost = App->gui->CreateLabel({ 155,250 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
-	store_unit_two = App->gui->CreateSelectableButton({ 320,150 }, App->gui->LoadUIButton(random_store_unit[1], "upgrade"), store_panel);
-	store_unit_02_cost = App->gui->CreateLabel({ 345,250 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
-	store_unit_three = App->gui->CreateSelectableButton({ 510,150 }, App->gui->LoadUIButton(random_store_unit[2], "upgrade"), store_panel);
-	store_unit_03_cost = App->gui->CreateLabel({ 535,250 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
-	store_unit_four = App->gui->CreateSelectableButton({ 130,300 }, App->gui->LoadUIButton(random_store_unit[3], "upgrade"), store_panel);
-	store_unit_04_cost = App->gui->CreateLabel({ 155,400 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
-	store_unit_five = App->gui->CreateSelectableButton({ 320,300 }, App->gui->LoadUIButton(random_store_unit[4], "upgrade"), store_panel);
-	store_unit_05_cost = App->gui->CreateLabel({ 345,400 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
-	store_unit_six = App->gui->CreateSelectableButton({ 510,300 }, App->gui->LoadUIButton(random_store_unit[5], "upgrade"), store_panel);
-	store_unit_06_cost = App->gui->CreateLabel({ 535,400 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
+	store_panel = App->gui->CreateImage({ 139,100 }, { 2793, 960, 749, 565 });
+	store_unit_one = App->gui->CreateSelectableButton({ 50, 115 }, App->gui->LoadUIButton(random_store_unit[0], "upgrade"), store_panel);
+	store_unit_01_cost = App->gui->CreateLabel({ 80, 220 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
+	store_unit_two = App->gui->CreateSelectableButton({ 325, 115 }, App->gui->LoadUIButton(random_store_unit[1], "upgrade"), store_panel);
+	store_unit_02_cost = App->gui->CreateLabel({ 355, 220 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
+	store_unit_three = App->gui->CreateSelectableButton({ 595, 115 }, App->gui->LoadUIButton(random_store_unit[2], "upgrade"), store_panel);
+	store_unit_03_cost = App->gui->CreateLabel({ 625, 220 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
+	store_unit_four = App->gui->CreateSelectableButton({ 50,300 }, App->gui->LoadUIButton(random_store_unit[3], "upgrade"), store_panel);
+	store_unit_04_cost = App->gui->CreateLabel({ 80,405 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
+	store_unit_five = App->gui->CreateSelectableButton({ 325,300 }, App->gui->LoadUIButton(random_store_unit[4], "upgrade"), store_panel);
+	store_unit_05_cost = App->gui->CreateLabel({ 355,405 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
+	store_unit_six = App->gui->CreateSelectableButton({ 595,300 }, App->gui->LoadUIButton(random_store_unit[5], "upgrade"), store_panel);
+	store_unit_06_cost = App->gui->CreateLabel({ 625,405 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
 
 	current_gold = App->gui->CreateLabel({ 30,450 }, "fonts/red_alert.ttf", 40, "Your gold: " + std::to_string(App->game_manager->gold), { 255,232,2, 255 }, 710, store_panel);
 	total_cost = App->gui->CreateLabel({ 500,450 }, "fonts/red_alert.ttf", 40, "Total cost: " + std::to_string(total_cost_acumulated), { 255,232,2, 255 }, 710, store_panel);
 
-	purchase = App->gui->CreateButton({ 262,375 }, button_rect, store_panel);
+	purchase = App->gui->CreateButton({ 263, 505 }, purchase_rect, store_panel);
 
 	App->gui->DisableElement((UIElement*)store_panel);
 
