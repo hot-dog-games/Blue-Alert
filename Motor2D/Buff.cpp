@@ -8,9 +8,7 @@ Buff::Buff(BUFF_TYPE type, std::string stat, float value, uint source_id) :
 	type(type),
 	stat(stat),
 	value(value),
-	source_id(source_id)
-{
-}
+	source_id(source_id) {}
 
 BUFF_TYPE Buff::GetType()
 {

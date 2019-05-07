@@ -23,7 +23,7 @@ public:
 	uint GetSource();
 	bool IsCausedBySource(uint source_id);
 
-private:
+protected:
 	BUFF_TYPE type = BUFF_TYPE::MAX;
 	std::string stat = "\0";
 	float value = 0.f;
