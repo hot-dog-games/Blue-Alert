@@ -13,6 +13,7 @@
 #include "PathFinding.h"
 #include "UIAnimatedImage.h"
 #include "UIButton.h"
+#include "UIButtonText.h"
 #include "UISelectableButton.h"
 #include "UIBar.h"
 #include "GUI.h"
@@ -176,6 +177,7 @@ bool BattleScene::Update(float dt)
 			App->gui->DisableInteractable((UIElement*)unit_panel);
 			App->game_manager->GetEncounterTree()->SetCurrentNode(App->game_manager->GetEncounterTree()->GetFightingNode());
 			App->game_manager->gold += 100;
+			current_gold->SetText("Your gold: " + std::to_string(App->game_manager->gold));
 		}
 			
 
@@ -296,28 +298,37 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 		}
 
 		if (element == store_unit_one) {
-			if(store_unit_one->selected)UpdateGoldOnSelect();
-			else UpdateGoldOnUnSelect();
+			if(store_unit_one->selected)UpdateGoldOnSelect(random_store_unit[0]);
+			else UpdateGoldOnUnSelect(random_store_unit[0]);
 		}
 		if (element == store_unit_two) {
-			if (store_unit_two->selected)UpdateGoldOnSelect();
-			else UpdateGoldOnUnSelect();
+			if (store_unit_two->selected)UpdateGoldOnSelect(random_store_unit[1]);
+			else UpdateGoldOnUnSelect(random_store_unit[1]);
 		}
 		if (element == store_unit_three) {
-			if (store_unit_three->selected)UpdateGoldOnSelect();
-			else UpdateGoldOnUnSelect();
+			if (store_unit_three->selected)UpdateGoldOnSelect(random_store_unit[2]);
+			else UpdateGoldOnUnSelect(random_store_unit[2]);
 		}
 		if (element == store_unit_four) {
-			if (store_unit_four->selected)UpdateGoldOnSelect();
-			else UpdateGoldOnUnSelect();
+			if (store_unit_four->selected)UpdateGoldOnSelect(random_store_unit[3]);
+			else UpdateGoldOnUnSelect(random_store_unit[3]);
 		}
 		if (element == store_unit_five) {
-			if (store_unit_five->selected)UpdateGoldOnSelect();
-			else UpdateGoldOnUnSelect();
+			if (store_unit_five->selected)UpdateGoldOnSelect(random_store_unit[4]);
+			else UpdateGoldOnUnSelect(random_store_unit[4]);
 		}
 		if (element == store_unit_six) {
-			if (store_unit_six->selected)UpdateGoldOnSelect();
-			else UpdateGoldOnUnSelect();
+			if (store_unit_six->selected)UpdateGoldOnSelect(random_store_unit[5]);
+			else UpdateGoldOnUnSelect(random_store_unit[5]);
+		}
+
+		if (element == purchase) {
+			for each (EntityType et in store_units_purchased)
+			{
+				App->game_manager->AddCardToCollection(et);
+			}
+			App->gui->DisableElement((UIElement*)store_panel);
+			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
 		}
 	}
 	else if (gui_event == GUI_Event::LEFT_CLICK_UP) {
@@ -391,30 +402,50 @@ void BattleScene::GenerateRandomAlliedTroop()
 		it = pool.begin() + position;
 		pool.erase(it);
 	}
-
-	LOG("ASD");
 }
 
-void BattleScene::UpdateGoldOnSelect()
+void BattleScene::UpdateGoldOnSelect(int unit)
 {
 	total_cost_acumulated += 100;
 	App->game_manager->gold -= 100;
 	current_gold->SetText("Your gold: " + std::to_string(App->game_manager->gold));
 	total_cost->SetText("Total cost: " + std::to_string(total_cost_acumulated));
 
-	if (App->game_manager->gold < 0)current_gold->SetColor({ 255, 0, 0, 255 });
-	else current_gold->SetColor({ 255,232,2, 255 });
+	if (App->game_manager->gold < 0)
+	{
+		current_gold->SetColor({ 255, 0, 0, 255 });
+		purchase->interactable = false;
+		purchase->SetTextColor({ 255,0,0,255 });
+	}
+	else {
+		current_gold->SetColor({ 255,232,2, 255 });
+		purchase->interactable = true;
+		purchase->SetTextColor({ 255,232,2, 255 });
+	}
+
+	store_units_purchased.push_back((EntityType)unit);
 }
 
-void BattleScene::UpdateGoldOnUnSelect()
+void BattleScene::UpdateGoldOnUnSelect(int unit)
 {
 	total_cost_acumulated -= 100;
 	App->game_manager->gold += 100;
 	current_gold->SetText("Your gold: " + std::to_string(App->game_manager->gold));
 	total_cost->SetText("Total cost: " + std::to_string(total_cost_acumulated));
 
-	if (App->game_manager->gold < 0)current_gold->SetColor({ 255, 0, 0, 255 });
-	else current_gold->SetColor({ 255,232,2, 255 });
+	if (App->game_manager->gold < 0)
+	{
+		current_gold->SetColor({ 255, 0, 0, 255 });
+		purchase->interactable = false;
+		purchase->SetTextColor({ 255,0,0,255 });
+	}
+	else {
+		current_gold->SetColor({ 255,232,2, 255 });
+		purchase->interactable = true;
+		purchase->SetTextColor({ 255,232,2, 255 });
+	}
+
+	store_units_purchased.remove((EntityType)unit);
 }
 
 void BattleScene::StartUI()
@@ -489,7 +520,7 @@ void BattleScene::StartUI()
 	current_gold = App->gui->CreateLabel({ 30,450 }, "fonts/red_alert.ttf", 40, "Your gold: " + std::to_string(App->game_manager->gold), { 255,232,2, 255 }, 710, store_panel);
 	total_cost = App->gui->CreateLabel({ 500,450 }, "fonts/red_alert.ttf", 40, "Total cost: " + std::to_string(total_cost_acumulated), { 255,232,2, 255 }, 710, store_panel);
 
-	purchase = App->gui->CreateButton({ 263, 505 }, purchase_rect, store_panel);
+	purchase = App->gui->CreateButtonText({ 263, 505 }, { 20, 0 }, purchase_rect, "PURCHASE", { 255,232,2, 255 }, 20, store_panel);
 
 	App->gui->DisableElement((UIElement*)store_panel);
 

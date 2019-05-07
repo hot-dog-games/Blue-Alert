@@ -34,6 +34,11 @@ void UIButtonText::OnMouseExit()
 	button_label->OnMouseExit();
 }
 
+void UIButtonText::SetTextColor(SDL_Color color)
+{
+	button_label->color = color;
+}
+
 bool UIButtonText::CleanUp()
 {
 	delete[] anim;

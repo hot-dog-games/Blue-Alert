@@ -52,8 +52,8 @@ private:
 	void GenerateRandomSovietTroop();
 	void GenerateRandomAlliedTroop();
 
-	void UpdateGoldOnSelect();
-	void UpdateGoldOnUnSelect();
+	void UpdateGoldOnSelect(int unit);
+	void UpdateGoldOnUnSelect(int unit);
 
 	void StartUI();
 
@@ -88,7 +88,7 @@ private:
 	UIButton*		win_continue_one;
 	UIButton*		win_continue_two;
 	UIButton*		lose_continue;
-	UIButton*		purchase;
+	UIButtonText*		purchase;
 
 	//labels
 	UILabel*		win_text_one;
@@ -126,6 +126,7 @@ private:
 	int card_num;
 	int random_num[3];
 	std::vector<int> random_store_unit;
+	std::list<EntityType> store_units_purchased;
 
 	//Audio fx
 	std::string  win_fx;
