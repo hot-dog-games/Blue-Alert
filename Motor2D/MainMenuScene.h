@@ -41,11 +41,16 @@ public:
 	void StartUI();
 private:
 	UIImage* MenuBackground;
+	UIImage* optionsbackground;
 	UIButton* exitbutton;
 	UILabel* exitlabel;
+	UILabel* optionslabel;
+	UILabel* newgamelabel;
+	UILabel* continuelabel;
 	UIButton* optionsbutton;
 	UIButton* newgamebutton;
 	UIButton* continuebutton;
+	UIButton* back_options_button;
 	bool gameclose = false;
 };
 

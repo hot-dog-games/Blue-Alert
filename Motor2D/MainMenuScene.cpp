@@ -96,7 +96,16 @@ bool MainMenuScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 		if (element == exitbutton) {
 			gameclose = true;
 		}
-		
+		if (element == optionsbutton) {
+			App->gui->DisableElement(MenuBackground);
+			App->gui->EnableElement(optionsbackground);
+			
+
+		}
+		if (element == back_options_button) {
+			App->gui->EnableElement(MenuBackground);
+			App->gui->DisableElement(optionsbackground);
+		}
 	}
 	return true;
 }
@@ -107,12 +116,26 @@ void MainMenuScene::StartUI() {
 	large_button_rect[0] = { 0,533,220,51 };
 	large_button_rect[1] = { 0,585,220,51 };
 	large_button_rect[2] = { 0,637,220,51 };
+	
+	SDL_Rect back_options_rect[3];
+	back_options_rect[0] = {0,712,46,43};
+	back_options_rect[1] = {59,712,46,43};
+	back_options_rect[2] = {118,712,46,43};
 
 	MenuBackground = App->gui->CreateImage({ 0,0 }, { 1976,987,1024,768 },nullptr);
 
+	optionsbackground = App->gui->CreateImage({ 0,0 }, { 1976,1832,1024,768 },nullptr);
+	App->gui->DisableElement(optionsbackground);
+	back_options_button = App->gui->CreateButton({10,720},back_options_rect,optionsbackground);
+	
+
+
 	exitbutton = App->gui->CreateButton({ 785,650 }, large_button_rect,MenuBackground);
-	//exitlabel = App->gui->CreateLabel({ 10,10 }, "", 20, "EXIT GAME", {0,0,0,0},0,exitbutton);
+	exitlabel = App->gui->CreateLabel({ 20,10 }, "fonts/button_text.ttf", 20, "EXIT GAME", {0,0,0,0},0,exitbutton);
 	optionsbutton = App->gui->CreateButton({ 785,440 }, large_button_rect, MenuBackground);
+	optionslabel = App->gui->CreateLabel({ 40,10 }, "fonts/button_text.ttf", 20, "OPTIONS", { 0,0,0,0 }, 0, optionsbutton);
 	newgamebutton = App->gui->CreateButton({ 785,320 }, large_button_rect, MenuBackground);
+	newgamelabel = App->gui->CreateLabel({ 20,10 }, "fonts/button_text.ttf", 20, "NEW GAME", { 0,0,0,0 }, 0, newgamebutton);
 	continuebutton = App->gui->CreateButton({ 785,380 }, large_button_rect, MenuBackground);
+	continuelabel = App->gui->CreateLabel({ 20,10 }, "fonts/button_text.ttf", 20, "CONTINUE", { 0,0,0,0 }, 0, continuebutton);
 }
