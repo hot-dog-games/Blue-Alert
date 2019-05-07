@@ -44,6 +44,8 @@ EncounterTree * EncounterTree::CreateTree()
 		map_encounters[i]->FillEncounterDeck();
 	}
 
+	if (!current_node)
+		SetCurrentNode(map_encounters.front());
 
 	LOG("NODES", map_encounters.size());
 
@@ -79,15 +81,25 @@ EncounterNode * EncounterTree::GetCurrentNode()
 	return current_node;
 }
 
+EncounterNode * EncounterTree::GetFightingNode()
+{
+	return fighting_node;
+}
+
 void EncounterTree::SetCurrentNode(EncounterNode * current_node)
 {
 	this->current_node = current_node;
-	this->current_node->GetEntity()->im_current_building = true;
 	this->current_node->visited = true;
+}
+
+void EncounterTree::SetFightingNode(EncounterNode * fighting_node)
+{
+	this->fighting_node = fighting_node;
 }
 
 void EncounterTree::DrawTreeLines()
 {
+	node_position_offset = { current_node->GetEntity()->current_frame.w / 2, current_node->GetEntity()->current_frame.h / 2 };
 	for each (EncounterNode* n in map_encounters)
 	{
 		if (n->GetChildren().size() != 0)
@@ -98,7 +110,8 @@ void EncounterTree::DrawTreeLines()
 				{
 					iPoint parent_world_position = App->map->MapToWorld(n->GetPosition().x, n->GetPosition().y);
 					iPoint child_world_position = App->map->MapToWorld(n->GetChildren()[i]->GetPosition().x, n->GetChildren()[i]->GetPosition().y);
-					App->render->DrawLine(parent_world_position.x, parent_world_position.y, child_world_position.x, child_world_position.y, 255, 0, 0);
+					App->render->DrawLine(parent_world_position.x, parent_world_position.y - node_position_offset.y,
+						child_world_position.x, child_world_position.y - node_position_offset.y, 255, 0, 0);
 				}
 			}
 			else {
@@ -106,7 +119,8 @@ void EncounterTree::DrawTreeLines()
 				{
 					iPoint parent_world_position = App->map->MapToWorld(n->GetPosition().x, n->GetPosition().y);
 					iPoint child_world_position = App->map->MapToWorld(n->GetChildren()[i]->GetPosition().x, n->GetChildren()[i]->GetPosition().y);
-					App->render->DrawLine(parent_world_position.x, parent_world_position.y, child_world_position.x, child_world_position.y, 0, 255, 0);
+					App->render->DrawLine(parent_world_position.x, parent_world_position.y - node_position_offset.y,
+						child_world_position.x, child_world_position.y - node_position_offset.y, 0, 255, 0);
 				}
 			}
 		}
@@ -115,10 +129,6 @@ void EncounterTree::DrawTreeLines()
 
 void EncounterTree::UpdateTreeState()
 {
-	if (!current_node) {
-		SetCurrentNode(map_encounters.front());
-	}
-
 	for (int i = 0; i < current_node->GetChildren().size(); i++)
 	{
 		current_node->GetChildren()[i]->GetEntity()->SetInRange(true);
@@ -141,11 +151,6 @@ pugi::xml_node EncounterTree::GetXmlEncounterNodeById(int id)
 	return encounter;
 }
 
-void EncounterTree::UpdateTree()
-{
-
-}
-
 void EncounterTree::CleanTree()
 {
 	for each (EncounterNode* en in map_encounters)
@@ -160,14 +165,13 @@ void EncounterTree::CleanTree()
 
 void EncounterTree::EntityClicked(StrategyBuilding * entity)
 {
-	if (App->game_manager->GetPlayerDeck()->cards[0] != nullptr && App->game_manager->GetPlayerDeck()->cards[1] != nullptr && App->game_manager->GetPlayerDeck()->cards[2] != nullptr && App->game_manager->GetPlayerDeck()->cards[3] != nullptr && is_clickable) {
-		SetCurrentNodeByEntity(entity);
+	if (is_clickable) {
+		SetFightingNodeByEntity(entity);
 		App->gui->DisableUI();
 		App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::COMBAT, White);
 		App->transition_manager->CreateZoomTransition(2.0f);
 		App->transition_manager->CreateCameraTranslation(2.0f, { (int)entity->position.x, (int)entity->position.y });
 	}
-
 }
 
 void EncounterTree::SetCurrentNodeByEntity(StrategyBuilding * entity)
@@ -175,5 +179,13 @@ void EncounterTree::SetCurrentNodeByEntity(StrategyBuilding * entity)
 	for each (EncounterNode* en in map_encounters)
 	{
 		if (en->GetEntity() == entity) SetCurrentNode(en);
+	}
+}
+
+void EncounterTree::SetFightingNodeByEntity(StrategyBuilding * entity)
+{
+	for each (EncounterNode* en in map_encounters)
+	{
+		if (en->GetEntity() == entity) SetFightingNode(en);
 	}
 }
