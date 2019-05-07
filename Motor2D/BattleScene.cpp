@@ -177,7 +177,7 @@ bool BattleScene::Update(float dt)
 			App->gui->DisableInteractable((UIElement*)unit_panel);
 			App->game_manager->GetEncounterTree()->SetCurrentNode(App->game_manager->GetEncounterTree()->GetFightingNode());
 			App->game_manager->gold += 100;
-			current_gold->SetText("Your gold: " + std::to_string(App->game_manager->gold));
+			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() == EntityType::STORE_STRATEGY_BUILDING)current_gold->SetText("Your gold: " + std::to_string(App->game_manager->gold));
 		}
 			
 
@@ -200,7 +200,7 @@ bool BattleScene::Update(float dt)
 			App->gui->DisableInteractable((UIElement*)unit_panel);
 			App->game_manager->GetEncounterTree()->SetCurrentNode(App->game_manager->GetEncounterTree()->GetFightingNode());
 			App->game_manager->gold += 100;
-			current_gold->SetText("Your gold: " + std::to_string(App->game_manager->gold));
+			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() == EntityType::STORE_STRATEGY_BUILDING)current_gold->SetText("Your gold: " + std::to_string(App->game_manager->gold));
 		}
 	}
 	break;
@@ -503,26 +503,30 @@ void BattleScene::StartUI()
 	App->gui->DisableElement((UIElement*)win_panel_two);
 
 	//Store 
-	store_panel = App->gui->CreateImage({ 139,100 }, { 2793, 960, 749, 565 });
-	store_unit_one = App->gui->CreateSelectableButton({ 50, 115 }, App->gui->LoadUIButton(random_store_unit[0], "upgrade"), store_panel);
-	store_unit_01_cost = App->gui->CreateLabel({ 80, 220 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
-	store_unit_two = App->gui->CreateSelectableButton({ 325, 115 }, App->gui->LoadUIButton(random_store_unit[1], "upgrade"), store_panel);
-	store_unit_02_cost = App->gui->CreateLabel({ 355, 220 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
-	store_unit_three = App->gui->CreateSelectableButton({ 595, 115 }, App->gui->LoadUIButton(random_store_unit[2], "upgrade"), store_panel);
-	store_unit_03_cost = App->gui->CreateLabel({ 625, 220 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
-	store_unit_four = App->gui->CreateSelectableButton({ 50,300 }, App->gui->LoadUIButton(random_store_unit[3], "upgrade"), store_panel);
-	store_unit_04_cost = App->gui->CreateLabel({ 80,405 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
-	store_unit_five = App->gui->CreateSelectableButton({ 325,300 }, App->gui->LoadUIButton(random_store_unit[4], "upgrade"), store_panel);
-	store_unit_05_cost = App->gui->CreateLabel({ 355,405 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
-	store_unit_six = App->gui->CreateSelectableButton({ 595,300 }, App->gui->LoadUIButton(random_store_unit[5], "upgrade"), store_panel);
-	store_unit_06_cost = App->gui->CreateLabel({ 625,405 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
 
-	current_gold = App->gui->CreateLabel({ 30,450 }, "fonts/red_alert.ttf", 40, "Your gold: " + std::to_string(App->game_manager->gold), { 255,232,2, 255 }, 710, store_panel);
-	total_cost = App->gui->CreateLabel({ 500,450 }, "fonts/red_alert.ttf", 40, "Total cost: " + std::to_string(total_cost_acumulated), { 255,232,2, 255 }, 710, store_panel);
+	if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() == EntityType::STORE_STRATEGY_BUILDING)
+	{
+		store_panel = App->gui->CreateImage({ 139,100 }, { 2793, 960, 749, 565 });
+		store_unit_one = App->gui->CreateSelectableButton({ 50, 115 }, App->gui->LoadUIButton(random_store_unit[0], "upgrade"), store_panel);
+		store_unit_01_cost = App->gui->CreateLabel({ 80, 220 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
+		store_unit_two = App->gui->CreateSelectableButton({ 325, 115 }, App->gui->LoadUIButton(random_store_unit[1], "upgrade"), store_panel);
+		store_unit_02_cost = App->gui->CreateLabel({ 355, 220 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
+		store_unit_three = App->gui->CreateSelectableButton({ 595, 115 }, App->gui->LoadUIButton(random_store_unit[2], "upgrade"), store_panel);
+		store_unit_03_cost = App->gui->CreateLabel({ 625, 220 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
+		store_unit_four = App->gui->CreateSelectableButton({ 50,300 }, App->gui->LoadUIButton(random_store_unit[3], "upgrade"), store_panel);
+		store_unit_04_cost = App->gui->CreateLabel({ 80,405 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
+		store_unit_five = App->gui->CreateSelectableButton({ 325,300 }, App->gui->LoadUIButton(random_store_unit[4], "upgrade"), store_panel);
+		store_unit_05_cost = App->gui->CreateLabel({ 355,405 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
+		store_unit_six = App->gui->CreateSelectableButton({ 595,300 }, App->gui->LoadUIButton(random_store_unit[5], "upgrade"), store_panel);
+		store_unit_06_cost = App->gui->CreateLabel({ 625,405 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
 
-	purchase = App->gui->CreateButtonText({ 263, 505 }, { 20, 0 }, purchase_rect, "PURCHASE", { 255,232,2, 255 }, 20, store_panel);
+		current_gold = App->gui->CreateLabel({ 30,450 }, "fonts/red_alert.ttf", 40, "Your gold: " + std::to_string(App->game_manager->gold), { 255,232,2, 255 }, 710, store_panel);
+		total_cost = App->gui->CreateLabel({ 500,450 }, "fonts/red_alert.ttf", 40, "Total cost: " + std::to_string(total_cost_acumulated), { 255,232,2, 255 }, 710, store_panel);
 
-	App->gui->DisableElement((UIElement*)store_panel);
+		purchase = App->gui->CreateButtonText({ 263, 505 }, { 20, 0 }, purchase_rect, "PURCHASE", { 255,232,2, 255 }, 20, store_panel);
+
+		App->gui->DisableElement((UIElement*)store_panel);
+	}
 
 	//End Game Screen Lose
 	lose_panel = App->gui->CreateImage({ 139,150 }, { 1,852,744,466 });
