@@ -18,7 +18,6 @@ public:
 	void ChangeState(bool state);
 	bool IsSelected();
 
-private:
 	bool selected = false;
 };
 

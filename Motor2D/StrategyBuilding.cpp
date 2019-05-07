@@ -30,13 +30,10 @@ bool StrategyBuilding::Update(float dt)
 	{
 		if (mouse_world.x > position.x - current_frame.w / 2 && mouse_world.x < position.x + current_frame.w / 2 && mouse_world.y < position.y && mouse_world.y > position.y - current_frame.h)
 		{
-			if (!im_current_building)
-			{
-				state = STATIC_HOVERED;
-				current_animation = &animations.find("highlight")->second;
-				if (App->input->GetMouseButtonDown(1))
-					App->game_manager->GetEncounterTree()->EntityClicked(this);
-			}
+			state = STATIC_HOVERED;
+			current_animation = &animations.find("highlight")->second;
+			if (App->input->GetMouseButtonDown(1) == KEY_DOWN)
+				App->game_manager->GetEncounterTree()->EntityClicked(this);
 		}
 		else
 		{

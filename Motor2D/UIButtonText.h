@@ -15,6 +15,7 @@ public:
 	void OnMouseHover();
 	void OnMouseRelease();
 	void OnMouseExit();
+	void SetTextColor(SDL_Color color);
 
 	bool CleanUp();
 
