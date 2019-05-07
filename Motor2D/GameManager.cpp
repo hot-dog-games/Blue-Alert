@@ -142,4 +142,5 @@ void GameManager::AddCardToCollection(EntityType card_type)
 	}
 
 	if(!found) collection.push_back(App->card_manager->CreateCard(card_type));
+	LOG("KAJAWOD");
 }

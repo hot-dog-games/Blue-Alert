@@ -25,8 +25,6 @@ public:
 
 	EncounterTree* GetEncounterTree();
 	Deck* GetPlayerDeck();
-
-	int gold = 0;
 	
 	bool IsInPlayerDeck(Card* card);
 
@@ -46,6 +44,7 @@ public:
 	bool restart = false;
 
 private:
+	uint gold;
 	Deck* combat_deck;
 
 	EncounterTree* encounter_tree = nullptr;

@@ -13,15 +13,12 @@ private:
 	std::vector<EncounterNode*> map_encounters;
 
 	EncounterNode* current_node = nullptr;
-	EncounterNode* fighting_node = nullptr;
 
 	pugi::xml_document encounters;
 	pugi::xml_node encounter_tree;
 
 	pugi::xml_document nodes_01;
 	pugi::xml_node map01_nodes;
-
-	iPoint node_position_offset;
 
 public:
 	EncounterTree();
@@ -33,10 +30,7 @@ public:
 	std::vector<EncounterNode*> GetNodes();
 
 	EncounterNode* GetCurrentNode();
-	EncounterNode* GetFightingNode();
-
 	void SetCurrentNode(EncounterNode* current_node);
-	void SetFightingNode(EncounterNode* fighting_node);
 
 	void DrawTreeLines();
 	void UpdateTreeState();
@@ -45,11 +39,12 @@ public:
 
 	pugi::xml_node GetXmlEncounterNodeById(int id);
 
+	void UpdateTree();
+
 	void CleanTree();
 
 	void EntityClicked(StrategyBuilding* entity);
 	void SetCurrentNodeByEntity(StrategyBuilding* entity);
-	void SetFightingNodeByEntity(StrategyBuilding* entity);
 
 	bool is_clickable = true;
 

@@ -99,16 +99,16 @@
    
   <entity type ="30">
     <info faction="0">
-      <sprite>sprites/BuildingNodes/Infantry_soviet.png</sprite>
+      <sprite>sprites/Buildings/testing.png</sprite>
       <animations>
         <animation speed="0.0F" name="in_range">
-          <sprite x="6" y="6" w="167" h="137"/>
+          <sprite x="24" y="12" w="147" h="127"/>
         </animation>
         <animation speed="0.0F" name="highlight">
-          <sprite x="0" y="149" w="180" h="163"/>
+          <sprite x="19" y="206" w="157" h="137"/>
         </animation>
         <animation speed="0.0F" name="off_range">
-          <sprite x="6" y="320" w="167" h="137"/>
+          <sprite x="24" y="389" w="147" h="127"/>
         </animation>
       </animations>
     </info>
@@ -131,16 +131,16 @@
   
   <entity type ="31">
     <info faction="0">
-      <sprite>sprites/BuildingNodes/AerialBuilding_soviet.png</sprite>
+      <sprite>sprites/Buildings/testing.png</sprite>
       <animations>
         <animation speed="0.0F" name="in_range">
-          <sprite x="9" y="6" w="174" h="107"/>
+          <sprite x="24" y="12" w="147" h="127"/>
         </animation>
         <animation speed="0.0F" name="highlight">
-          <sprite x="9" y="6" w="174" h="107"/>
+          <sprite x="19" y="206" w="157" h="137"/>
         </animation>
         <animation speed="0.0F" name="off_range">
-          <sprite x="9" y="6" w="174" h="107"/>
+          <sprite x="24" y="389" w="147" h="127"/>
         </animation>
       </animations>
     </info>
@@ -163,16 +163,16 @@
   
   <entity type ="32">
     <info faction="0">
-      <sprite>sprites/BuildingNodes/LandBuillding_soviet.png</sprite>
+      <sprite>sprites/Buildings/testing.png</sprite>
       <animations>
         <animation speed="0.0F" name="in_range">
-          <sprite x="11" y="8" w="223" h="174"/>
+          <sprite x="24" y="12" w="147" h="127"/>
         </animation>
         <animation speed="0.0F" name="highlight">
-          <sprite x="11" y="8" w="223" h="174"/>
+          <sprite x="19" y="206" w="157" h="137"/>
         </animation>
         <animation speed="0.0F" name="off_range">
-          <sprite x="11" y="8" w="223" h="174"/>
+          <sprite x="24" y="389" w="147" h="127"/>
         </animation>
       </animations>
     </info>
@@ -195,16 +195,16 @@
   
     <entity type ="33">
     <info faction="0">
-      <sprite>sprites/BuildingNodes/Gold_soviet.png</sprite>
+      <sprite>sprites/Buildings/testing.png</sprite>
       <animations>
         <animation speed="0.0F" name="in_range">
-          <sprite x="0" y="3" w="238" h="209"/>
+          <sprite x="24" y="12" w="147" h="127"/>
         </animation>
         <animation speed="0.0F" name="highlight">
-          <sprite x="0" y="3" w="238" h="209"/>
+          <sprite x="19" y="206" w="157" h="137"/>
         </animation>
         <animation speed="0.0F" name="off_range">
-          <sprite x="0" y="3" w="238" h="209"/>
+          <sprite x="24" y="389" w="147" h="127"/>
         </animation>
       </animations>
     </info>
@@ -227,16 +227,16 @@
   
     <entity type ="34">
     <info faction="0">
-      <sprite>sprites/BuildingNodes/Store_soviet.png</sprite>
+      <sprite>sprites/Buildings/testing.png</sprite>
       <animations>
         <animation speed="0.0F" name="in_range">
-          <sprite x="15" y="8" w="212" h="209"/>
+          <sprite x="24" y="12" w="147" h="127"/>
         </animation>
         <animation speed="0.0F" name="highlight">
-          <sprite x="3" y="230" w="236" h="232"/>
+          <sprite x="19" y="206" w="157" h="137"/>
         </animation>
         <animation speed="0.0F" name="off_range">
-          <sprite x="15" y="479" w="212" h="209"/>
+          <sprite x="24" y="389" w="147" h="127"/>
         </animation>
       </animations>
     </info>
