@@ -30,7 +30,7 @@ protected:
 	uint source_id = 0u; //ID from which modifier (object, spell, etc) the buff came from
 };
 
-class BuffSource 
+class BuffSource
 {
 public:
 	BuffSource(pugi::xml_node buff_source_node);

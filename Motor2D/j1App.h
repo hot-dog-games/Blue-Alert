@@ -27,6 +27,7 @@ class BuffSourceManager;
 class GameManager;
 class Movement;
 class Particles;
+class Buff;
 
 class j1App
 {

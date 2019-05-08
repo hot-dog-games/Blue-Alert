@@ -163,6 +163,9 @@
     <ClCompile Include="UIButtonText.cpp">
       <Filter>Engine\UI</Filter>
     </ClCompile>
+    <ClCompile Include="BuildingBuffSource.cpp">
+      <Filter>Engine\Stats&amp;Buffs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
@@ -341,6 +344,9 @@
     </ClInclude>
     <ClInclude Include="UIButtonText.h">
       <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="BuildingBuffSource.h">
+      <Filter>Engine\Stats&amp;Buffs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
