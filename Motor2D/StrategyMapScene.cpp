@@ -18,6 +18,7 @@
 #include "StrategyMapScene.h"
 #include "UISelectableButton.h"
 #include "UILabel.h"
+#include "UIButton.h"
 #include "Brofiler/Brofiler.h"
 
 StrategyMapScene::StrategyMapScene() : Scene()
@@ -260,6 +261,14 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			}
 		}
 	}
+	else if (gui_event == GUI_Event::MOUSE_OVER)
+	{
+		for (int num = 0; num < 9; ++num) {
+			if (element == collection_buttons_allies[num]) {
+				info_image->SetImage(collection_buttons_allies[num]->GetAnim()[0]);
+			}
+		}
+	}
 
 	return true;
 }
@@ -368,4 +377,7 @@ void StrategyMapScene::InitializeUI()
 	building_land_info = App->gui->CreateLabel({ 260, -50 }, "fonts/red_alert.ttf", 20, "The land troops are upgraded by %i", { 231,216,145,255 }, 300, building_land_image);
 
 	App->gui->DisableElement(buildings_background);
+
+	//Show Info
+	info_image = App->gui->CreateImage({ 30,30 }, { 0,0,100,100 }, troops_background);
 }

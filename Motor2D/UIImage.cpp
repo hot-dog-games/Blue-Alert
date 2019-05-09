@@ -29,3 +29,8 @@ bool UIImage::UIBlit()
 	}
 	return true;
 }
+
+void UIImage::SetImage(SDL_Rect rect)
+{
+	rect_sprite = rect;
+}

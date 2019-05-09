@@ -57,6 +57,11 @@ void UIButton::SetLocked(bool value)
 	rect_sprite = anim[interactable ? 0 : 3];
 }
 
+SDL_Rect * UIButton::GetAnim() const
+{
+	return anim;
+}
+
 bool UIButton::CleanUp()
 {
 	delete[] anim;

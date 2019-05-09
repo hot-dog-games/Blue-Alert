@@ -79,6 +79,9 @@ private:
 	UIButton* collection_buttons_allies[9];
 	UILabel* troops_title[3];
 
+	//Info Showing
+	UIImage* info_image = nullptr;
+
 };
 
 #endif

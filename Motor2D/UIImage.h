@@ -11,6 +11,8 @@ public:
 	~UIImage();
 	bool UIBlit();
 	bool image = true;
+
+	void SetImage(SDL_Rect rect);
 };
 
 #endif // !1
