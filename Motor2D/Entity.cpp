@@ -33,7 +33,6 @@ bool Entity::PostUpdate()
 void Entity::DecreaseLife(float damage, bool piercing)
 {
 	float damage_received = CalculateDamage(damage, 0);
-	LOG("DAMAGE");
 	stats.find("health")->second->DecreaseStat(damage_received);
 	if (stats.find("health")->second->GetValue() <= 0)
 		Die();
@@ -60,9 +59,9 @@ void Entity::LoadAnimations(pugi::xml_node anim_config)
 	{
 		Animation anim;
 		pugi::xml_node frame;
-		for (frame = animation.child("frame"); frame; frame = frame.next_sibling("frame"))
+		for (frame = animation.child("sprite"); frame; frame = frame.next_sibling("sprite"))
 		{
-			anim.PushBack({ frame.attribute("x").as_int(), frame.attribute("y").as_int(), frame.attribute("width").as_int(), frame.attribute("height").as_int() });
+			anim.PushBack({ frame.attribute("x").as_int(), frame.attribute("y").as_int(), frame.attribute("w").as_int(), frame.attribute("h").as_int() });
 		}
 		anim.speed = animation.attribute("speed").as_float();
 		anim.base_speed = anim.speed;

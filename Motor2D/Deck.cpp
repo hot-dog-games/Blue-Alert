@@ -58,3 +58,15 @@ Card * Deck::GetCard(EntityType type)
 
 	return nullptr;
 }
+
+int Deck::GetDeckSize() const
+{
+	int num = 0;
+
+	for (int i = 0; i < MAX_CARDS; i++) {
+		if (cards[i])
+			num++;
+	}
+
+	return num;
+}

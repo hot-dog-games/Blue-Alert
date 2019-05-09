@@ -12,9 +12,12 @@
 #include "UIAnimatedImage.h"
 #include "UIImage.h"
 #include "UIButton.h"
+#include "UISelectableButton.h"
+#include "UIButtonText.h"
 #include "UILabel.h"
 #include "UIScrollBar.h"
 #include "UIBar.h"
+#include "UIEntityBar.h"
 #include "Brofiler/Brofiler.h"
 #include "Stat.h"
 #include "GUI.h"
@@ -41,6 +44,8 @@ bool Gui::Awake(pugi::xml_node& conf)
 	atlas_file_name = conf.child("atlas").attribute("file").as_string("");
 
 	buttons_file.load_file("xml/ui.xml");
+
+	button_font = App->fonts->Load("fonts/button_text.ttf", 12);
 
 	return ret;
 }
@@ -116,13 +121,8 @@ bool Gui::PreUpdate()
 					}
 				}
 			}
-			else if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN && current_element->selectable && current_element == selected_element)
-			{
-				current_element->OnMouseClick();
-				App->scene_manager->current_scene->GUIEvent(current_element, RIGHT_CLICK_DOWN);
-				current_element->selected = true;
-			}
-			if (!current_element->clicked && selected_element != current_element && !current_element->selected)
+
+			if (!current_element->clicked && selected_element != current_element)
 			{
 				current_element->OnMouseExit();
 				App->scene_manager->current_scene->GUIEvent(current_element, MOUSE_EXIT);
@@ -155,11 +155,9 @@ bool Gui::PostUpdate()
 	BROFILER_CATEGORY("UIPostUpdate", Profiler::Color::Magenta);
 	for (std::list<UIElement*>::iterator element = elements.begin(); element != elements.end(); ++element)
 	{
-		if ((*element)->enabled)
+		if ((*element)->enabled && !(*element)->parent)
 		{
-			(*element)->UIBlit();
-			if (debug_draw)
-				App->render->DrawQuad((*element)->GetScreenRect(), 255, 0, 0, 255, false, false);
+			RenderElement((*element));
 		}
 
 	}
@@ -191,19 +189,37 @@ UIImage* Gui::CreateImage(iPoint pos, SDL_Rect rect, UIElement* parent, bool ima
 	return image;
 }
 
-UILabel* Gui::CreateLabel(iPoint pos, std::string path, int size, std::string text, SDL_Color color, int max_width, UIElement* parent)
+UILabel* Gui::CreateLabel(iPoint pos, std::string path, int size, std::string text, SDL_Color color, int max_width, UIElement* parent, bool is_interactable)
 {
 	_TTF_Font* font = App->fonts->Load(path.c_str(), size);
-	UILabel* label = new UILabel(pos, font, text, color, max_width);
+	UILabel* label = new UILabel(pos, font, text, color, max_width, is_interactable);
 	label->parent = parent;
 	elements.push_back(label);
 
 	return label;
 }
 
-UIButton* Gui::CreateButton(iPoint pos, SDL_Rect* sprite_rect, UIElement* parent, bool is_selectable, bool is_interactable)
+UIButton* Gui::CreateButton(iPoint pos, SDL_Rect* sprite_rect, UIElement* parent, bool is_interactable)
 {
-	UIButton* button = new UIButton(pos, sprite_rect, is_selectable, is_interactable);
+	UIButton* button = new UIButton(pos, sprite_rect, is_interactable);
+	button->parent = parent;
+	elements.push_back(button);
+
+	return button;
+}
+
+UISelectableButton * Gui::CreateSelectableButton(iPoint pos, SDL_Rect * sprite_rect, UIElement * parent, bool is_interactable)
+{
+	UISelectableButton* button = new UISelectableButton(pos, sprite_rect, is_interactable);
+	button->parent = parent;
+	elements.push_back(button);
+
+	return button;
+}
+
+UIButtonText * Gui::CreateButtonText(iPoint pos, iPoint offset, SDL_Rect * sprite_rect, std::string text, SDL_Color color, int size, UIElement* parent, bool is_interactable)
+{
+	UIButtonText* button = new UIButtonText(pos, offset, sprite_rect, text, color, size, is_interactable);
 	button->parent = parent;
 	elements.push_back(button);
 
@@ -228,11 +244,18 @@ UIAnimatedImage* Gui::CreateAnimatedImage(iPoint pos, SDL_Rect * rect, int total
 	return image;
 }
 
-UIBar * Gui::CreateBar(iPoint pos, SDL_Rect rect, Stat* value, BarType type, UIElement * parent)
+UIBar * Gui::CreateBar(iPoint pos, SDL_Rect rect, Stat* value, BarType type, Entity* entity, UIElement * parent)
 {
-	UIBar* bar = new UIBar(pos, rect, value, type);
+	UIBar* bar;
+	if (entity) {
+		bar = new UIEntityBar(pos, rect, value, type, entity);
+	}
+	else {
+		bar = new UIBar(pos, rect, value, type);
+	}
+	
 	bar->parent = parent;
-	elements.push_back(bar);
+	elements.push_front(bar);
 	return bar;
 }
 
@@ -259,21 +282,25 @@ void Gui::DisableUI()
 
 void Gui::EnableElement(UIElement* ele)
 {
-	ele->SetEnabled(true);
-	for (std::list<UIElement*>::iterator element = elements.begin(); element != elements.end(); ++element)
-	{
-		if ((*element)->parent && (*element)->parent == ele)
-			EnableElement(*element);
+	if (ele) {
+		ele->SetEnabled(true);
+		for (std::list<UIElement*>::iterator element = elements.begin(); element != elements.end(); ++element)
+		{
+			if ((*element)->parent && (*element)->parent == ele)
+				EnableElement(*element);
+		}
 	}
 }
 
 void Gui::DisableElement(UIElement* ele)
 {
-	ele->SetEnabled(false);
-	for (std::list<UIElement*>::iterator element = elements.begin(); element != elements.end(); ++element)
-	{
-		if ((*element)->parent && (*element)->parent == ele)
-			DisableElement(*element);
+	if (ele) {
+		ele->SetEnabled(false);
+		for (std::list<UIElement*>::iterator element = elements.begin(); element != elements.end(); ++element)
+		{
+			if ((*element)->parent && (*element)->parent == ele)
+				DisableElement(*element);
+		}
 	}
 }
 
@@ -297,6 +324,19 @@ void Gui::DisableInteractable(UIElement* ele)
 	}
 }
 
+void Gui::RenderElement(UIElement* element)
+{
+	element->UIBlit();
+	if (debug_draw)
+		App->render->DrawQuad(element->GetScreenRect(), 255, 0, 0, 255, false, false);
+
+	for (std::list<UIElement*>::iterator child_element = elements.begin(); child_element != elements.end(); ++child_element)
+	{
+		if ((*child_element)->enabled && (*child_element)->parent && (*child_element)->parent == element)
+			RenderElement((*child_element));
+	}
+}
+
 SDL_Rect* Gui::LoadUIButton(int num, std::string type)
 {
 	pugi::xml_node buttons_node = buttons_file.first_child().child("ui_button");
@@ -308,28 +348,65 @@ SDL_Rect* Gui::LoadUIButton(int num, std::string type)
 		name = "GI";
 		break;
 	case 2:
-		name = "Sniper";
+		name = "Conscript";
 		break;
 	case 3:
-		name = "NavySeal";
+		name = "Virus";
 		break;
 	case 4:
-		name = "GrizzlyTank";
+		name = "Sniper";
 		break;
 	case 5:
-		name = "RobotTank";
+		name = "GuardianGI";
 		break;
 	case 6:
-		name = "PrismTank";
+		name = "FlakTrooper";
 		break;
 	case 7:
-		name = "NightHawk";
+		name = "GrizzlyTank";
 		break;
 	case 8:
-		name = "Harrier";
+		name = "RhinoTank";
 		break;
 	case 9:
+		name = "RobotTank";
+		break;
+	case 10:
+		name = "TerrorDrone";
+		break;
+	case 11:
+		name = "PrismTank";
+		break;
+	case 12:
+		name = "TeslaTank";
+		break;
+	case 13:
+		name = "NightHawk";
+		break;
+	case 14:
+		name = "SiegeChopper";
+		break;
+	case 15:
+		name = "Harrier";
+		break;
+	case 16:
+		name = "MiG";
+		break;
+	case 17:
 		name = "BlackEagle";
+		break;
+  case 18:
+		name = "SpyPlane";
+		break;
+	case 30:
+		name = "Infantry";
+		break;
+	case 31:
+		name = "Aerial";
+		break;
+	case 32:
+		name = "Land";
+
 		break;
 	}
 
@@ -348,32 +425,32 @@ SDL_Rect* Gui::LoadUIButton(int num, std::string type)
 	return button_rect;
 }
 
-SDL_Rect Gui::LoadUIImage(int num)
+SDL_Rect Gui::LoadUIImage(int num, std::string type)
 {
 	pugi::xml_node images_node = buttons_file.first_child().child("ui_image");
 
 	std::string name;
 
 	switch (num) {
-	case 10:
+	case 30:
 		name = "Infantry";
 		break;
-	case 11:
+	case 31:
 		name = "Aerial";
 		break;
-	case 12:
+	case 32:
 		name = "Land";
 		break;
-	case 13:
+	case 33:
 		name = "Gold";
 		break;
-	case 14:
+	case 34:
 		name = "Store";
 		break;
 	}
 
 	SDL_Rect image_rect;
-	pugi::xml_node rect_node = images_node.child(name.c_str());
+	pugi::xml_node rect_node = images_node.child(name.c_str()).child(type.c_str());
 
 	image_rect.x = rect_node.attribute("x").as_uint();
 	image_rect.y = rect_node.attribute("y").as_uint();
@@ -456,6 +533,11 @@ UIElement* Gui::GetElementUnderMouse()
 SDL_Texture* Gui::GetAtlas() const
 {
 	return atlas;
+}
+
+_TTF_Font * Gui::GetButtonFont() const
+{
+	return button_font;
 }
 
 

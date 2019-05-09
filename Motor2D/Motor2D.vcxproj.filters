@@ -154,6 +154,15 @@
     <ClCompile Include="ProjectileParticle.cpp">
       <Filter>Engine\Particles</Filter>
     </ClCompile>
+    <ClCompile Include="UISelectableButton.cpp">
+      <Filter>Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIEntityBar.cpp">
+      <Filter>Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIButtonText.cpp">
+      <Filter>Engine\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
@@ -323,6 +332,15 @@
     </ClInclude>
     <ClInclude Include="ProjectileParticle.h">
       <Filter>Engine\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="UISelectableButton.h">
+      <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIEntityBar.h">
+      <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIButtonText.h">
+      <Filter>Engine\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

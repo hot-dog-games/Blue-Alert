@@ -63,20 +63,20 @@ bool TestingScene::Start()
 
 	Deck* enemy_deck = new Deck();
 	enemy_deck->delete_cards = true;
-	enemy_deck->AddCard(App->card_manager->CreateCard(EntityType::HARRIER));
-	enemy_deck->AddCard(App->card_manager->CreateCard(EntityType::ROBOT));
-	enemy_deck->AddCard(App->card_manager->CreateCard(EntityType::PRISM));
+	enemy_deck->AddCard(App->card_manager->CreateCard(EntityType::GI));
+	enemy_deck->AddCard(App->card_manager->CreateCard(EntityType::GI));
+	enemy_deck->AddCard(App->card_manager->CreateCard(EntityType::GUARDIAN_GI));
 	enemy_deck->AddCard(App->card_manager->CreateCard(EntityType::HARRIER));
 
 	Deck* test_deck = new Deck();
 	test_deck->delete_cards = true;
-	test_deck->AddCard(App->card_manager->CreateCard(EntityType::HARRIER));
+	test_deck->AddCard(App->card_manager->CreateCard(EntityType::CONSCRIPT));
 	test_deck->AddCard(App->card_manager->CreateCard(EntityType::SNIPER));
-	test_deck->AddCard(App->card_manager->CreateCard(EntityType::BLACK_EAGLE));
-	test_deck->AddCard(App->card_manager->CreateCard(EntityType::G_I));
+	test_deck->AddCard(App->card_manager->CreateCard(EntityType::FLAK_TROOPER));
+	test_deck->AddCard(App->card_manager->CreateCard(EntityType::HARRIER));
 
 	test_core = App->entity_manager->CreateCore(1, { 30,980 }, test_deck, FACTION_RUSSIAN);
-	test_enemy_core = App->entity_manager->CreateCore(13, { 25,330 }, enemy_deck, FACTION_AMERICAN);
+	test_enemy_core = App->entity_manager->CreateCore(33, { 25,330 }, enemy_deck, FACTION_AMERICAN, true);
 	test_core->LoadUnitSprites();
 	test_enemy_core->LoadUnitSprites();
 
@@ -307,41 +307,12 @@ bool TestingScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			App->gui->DisableElement((UIElement*)win_panel_one);
 			App->gui->EnableElement((UIElement*)win_panel_two);
 		}
-		else if (element == win_continue_two) {
-			if (win_unit_one->selected) {
-				//App->game_manager->AddCardToPlayerCollection(random_num[0]);
-				App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
-			}
-			else if (win_unit_two->selected) {
-				//App->game_manager->AddCardToPlayerCollection(random_num[1]);
-				App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
-			}
-			else if(win_unit_three->selected) {
-				//App->game_manager->AddCardToPlayerCollection(random_num[2]);
-				App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
-			}
-		}
 			
 	}
 	else if (gui_event == GUI_Event::LEFT_CLICK_UP) {
 		if (element == current_drag) {
 			ReleaseDrag();
 		}		
-	}
-	else if (gui_event == GUI_Event::RIGHT_CLICK_DOWN)
-	{
-		if (element == win_unit_one) {
-			win_unit_two->selected = false;
-			win_unit_three->selected = false;
-		}
-		else if (element == win_unit_two) {
-			win_unit_one->selected = false;
-			win_unit_three->selected = false;
-		}
-		else if (element == win_unit_three) {
-			win_unit_two->selected = false;
-			win_unit_one->selected = false;
-		}
 	}
 
 	return true;
@@ -379,7 +350,7 @@ void TestingScene::StartUI()
 	win_unit_two = App->gui->CreateButton({ 320,200 }, App->gui->LoadUIButton(random_num[1], "upgrade"), win_panel_two, true);
 	win_unit_three = App->gui->CreateButton({ 510,200 }, App->gui->LoadUIButton(random_num[2], "upgrade"), win_panel_two, true);
 
-	win_building = App->gui->CreateImage({ 300,200 }, App->gui->LoadUIImage(13), win_panel_one);
+	win_building = App->gui->CreateImage({ 300,200 }, App->gui->LoadUIImage(13, "end_screen"), win_panel_one);
 
 	App->gui->DisableElement((UIElement*)win_panel_one);
 	App->gui->DisableElement((UIElement*)win_panel_two);

@@ -11,7 +11,7 @@
       </button>
 
       <drag>
-        <frame x="421" y="1738" width="14" height="28"/>
+        <frame x="564" y="1354" width="14" height="28"/>
       </drag>
 
       <upgrade>
@@ -27,7 +27,61 @@
       </deck>
     </GI>
 
-    <Sniper type="2">
+    <Conscript type="2">
+
+      <button>
+        <frame x="600" y="320" width="100" height="80"/>
+        <frame x="700" y="320" width="100" height="80"/>
+        <frame x="600" y="400" width="100" height="80"/>
+        <frame x="0" y="0" width="100" height="80"/>
+      </button>
+
+      <drag>
+        <frame x="532" y="1353" width="15" height="29"/>
+      </drag>
+
+      <upgrade>
+        <frame x="747" y="853" width="105" height="106"/>
+        <frame x="747" y="977" width="105" height="106"/>
+        <frame x="747" y="1107" width="105" height="106"/>
+        <frame x="747" y="853" width="105" height="106"/>
+      </upgrade>
+
+      <deck>
+        <frame x="12" y="1850" width="145" height="145"/>
+        <frame x="4" y="2027" width="159" height="160"/>
+      </deck>
+      
+    </Conscript>
+
+    <Virus type="3">
+
+      <button>
+        <frame x="800" y="0" width="100" height="80"/>
+        <frame x="900" y="0" width="100" height="80"/>
+        <frame x="800" y="80" width="100" height="80"/>
+        <frame x="0" y="0" width="100" height="80"/>
+      </button>
+
+      <drag>
+        <frame x="564" y="1394" width="15" height="28"/>
+      </drag>
+
+      <upgrade>
+        <frame x="960" y="853" width="105" height="106"/>
+        <frame x="960" y="977" width="105" height="106"/>
+        <frame x="960" y="1107" width="105" height="106"/>
+        <frame x="960" y="853" width="105" height="106"/>
+      </upgrade>
+
+      <deck>
+        <frame x="391" y="1850" width="145" height="145"/>
+        <frame x="383" y="2027" width="159" height="160"/>
+      </deck>
+
+    </Virus>
+    
+    <Sniper type="4">
 
       <button>
         <frame x="400" y="0" width="100" height="80"/>
@@ -37,7 +91,7 @@
       </button>
 
       <drag>
-        <frame x="510" y="1737" width="15" height="29"/>
+        <frame x="532" y="1393" width="15" height="29"/>
       </drag>
 
       <upgrade>
@@ -54,17 +108,18 @@
       
     </Sniper>
 
-    <NavySeal type="3">
+
+    <GuardianGI type="5">
 
       <button>
-        <frame x="200" y="0" width="100" height="80"/>
-        <frame x="300" y="0" width="100" height="80"/>
-        <frame x="200" y="80" width="100" height="80"/>
+        <frame x="600" y="0" width="100" height="80"/>
+        <frame x="700" y="0" width="100" height="80"/>
+        <frame x="600" y="80" width="100" height="80"/>
         <frame x="0" y="0" width="100" height="80"/>
       </button>
 
       <drag>
-        <frame x="510" y="1682" width="14" height="29"/>
+        <frame x="564" y="1435" width="16" height="31"/>
       </drag>
 
       <upgrade>
@@ -78,10 +133,38 @@
         <frame x="200" y="1850" width="145" height="145"/>
         <frame x="192" y="2027" width="159" height="160"/>
       </deck>
-      
-    </NavySeal>
 
-    <GrizzlyTank type="4">
+    </GuardianGI>
+
+    <FlakTrooper type="6">
+
+      <button>
+        <frame x="600" y="160" width="100" height="80"/>
+        <frame x="700" y="160" width="100" height="80"/>
+        <frame x="600" y="240" width="100" height="80"/>
+        <frame x="0" y="0" width="100" height="80"/>
+      </button>
+
+      <drag>
+        <frame x="531" y="1435" width="16" height="31"/>
+      </drag>
+
+      <upgrade>
+        <frame x="854" y="853" width="105" height="106"/>
+        <frame x="854" y="977" width="105" height="106"/>
+        <frame x="854" y="1107" width="105" height="106"/>
+        <frame x="854" y="853" width="105" height="106"/>
+      </upgrade>
+
+      <deck>
+        <frame x="200" y="1850" width="145" height="145"/>
+        <frame x="192" y="2027" width="159" height="160"/>
+      </deck>
+
+    </FlakTrooper>
+    
+    
+    <GrizzlyTank type="7">
 
       <button>
         <frame x="400" y="160" width="100" height="80"/>
@@ -91,7 +174,7 @@
       </button>
 
       <drag>
-        <frame x="503" y="1603" width="28" height="46"/>
+        <frame x="523" y="1482" width="27" height="47"/>
       </drag>
 
       <upgrade>
@@ -108,7 +191,34 @@
       
     </GrizzlyTank>
 
-    <RobotTank type="5">
+    <RhinoTank type="8">
+
+      <button>
+        <frame x="400" y="160" width="100" height="80"/>
+        <frame x="500" y="160" width="100" height="80"/>
+        <frame x="400" y="240" width="100" height="80"/>
+        <frame x="0" y="0" width="100" height="80"/>
+      </button>
+
+      <drag>
+        <frame x="523" y="1482" width="27" height="47"/>
+      </drag>
+
+      <upgrade>
+        <frame x="1067" y="853" width="105" height="106"/>
+        <frame x="1067" y="977" width="105" height="106"/>
+        <frame x="1067" y="1107" width="105" height="106"/>
+        <frame x="1067" y="853" width="105" height="106"/>
+      </upgrade>
+
+      <deck>
+        <frame x="583" y="1850" width="145" height="145"/>
+        <frame x="575" y="2027" width="160" height="160"/>
+      </deck>
+
+    </RhinoTank>
+
+    <RobotTank type="9">
 
       <button>
         <frame x="0" y="160" width="100" height="80"/>
@@ -118,7 +228,7 @@
       </button>
 
       <drag>
-        <frame x="503" y="1603" width="28" height="46"/>
+        <frame x="523" y="1482" width="27" height="47"/>
       </drag>
 
       <upgrade>
@@ -135,7 +245,35 @@
       
     </RobotTank>
 
-    <PrismTank type="6">
+
+    <TerrorDrone type="10">
+
+      <button>
+        <frame x="0" y="160" width="100" height="80"/>
+        <frame x="100" y="160" width="100" height="80"/>
+        <frame x="0" y="240" width="100" height="80"/>
+        <frame x="0" y="0" width="100" height="80"/>
+      </button>
+
+      <drag>
+        <frame x="523" y="1482" width="27" height="47"/>
+      </drag>
+
+      <upgrade>
+        <frame x="1282" y="853" width="105" height="106"/>
+        <frame x="1282" y="977" width="105" height="106"/>
+        <frame x="1282" y="1107" width="105" height="106"/>
+        <frame x="1282" y="853" width="105" height="106"/>
+      </upgrade>
+
+      <deck>
+        <frame x="957" y="1850" width="145" height="145"/>
+        <frame x="949" y="2027" width="159" height="160"/>
+      </deck>
+
+    </TerrorDrone>
+
+    <PrismTank type="11">
 
       <button>
         <frame x="200" y="160" width="100" height="80"/>
@@ -145,7 +283,7 @@
       </button>
 
       <drag>
-        <frame x="503" y="1603" width="28" height="46"/>
+        <frame x="523" y="1482" width="27" height="47"/>
       </drag>
 
       <upgrade>
@@ -162,7 +300,34 @@
       
     </PrismTank>
 
-    <NightHawk type="7">
+    <TeslaTank type="12">
+
+      <button>
+        <frame x="200" y="160" width="100" height="80"/>
+        <frame x="300" y="160" width="100" height="80"/>
+        <frame x="200" y="240" width="100" height="80"/>
+        <frame x="0" y="0" width="100" height="80"/>
+      </button>
+
+      <drag>
+        <frame x="523" y="1482" width="27" height="47"/>
+      </drag>
+
+      <upgrade>
+        <frame x="1175" y="853" width="105" height="106"/>
+        <frame x="1175" y="977" width="105" height="106"/>
+        <frame x="1175" y="1107" width="105" height="106"/>
+        <frame x="1175" y="853" width="105" height="106"/>
+      </upgrade>
+
+      <deck>
+        <frame x="772" y="1850" width="145" height="145"/>
+        <frame x="764" y="2027" width="160" height="160"/>
+      </deck>
+
+    </TeslaTank>
+
+    <NightHawk type="13">
 
       <button>
         <frame x="200" y="320" width="100" height="80"/>
@@ -172,7 +337,7 @@
       </button>
 
       <drag>
-        <frame x="398" y="1603" width="60" height="51"/>
+        <frame x="492" y="1637" width="60" height="51"/>
       </drag>
 
       <upgrade>
@@ -189,7 +354,34 @@
       
     </NightHawk>
 
-    <Harrier type="8">
+    <SiegeChopper type="14">
+
+      <button>
+        <frame x="200" y="320" width="100" height="80"/>
+        <frame x="300" y="320" width="100" height="80"/>
+        <frame x="200" y="400" width="100" height="80"/>
+        <frame x="0" y="0" width="100" height="80"/>
+      </button>
+
+      <drag>
+        <frame x="492" y="1637" width="60" height="51"/>
+      </drag>
+
+      <upgrade>
+        <frame x="1494" y="853" width="105" height="106"/>
+        <frame x="1494" y="977" width="105" height="106"/>
+        <frame x="1494" y="1107" width="105" height="106"/>
+        <frame x="1494" y="853" width="105" height="106"/>
+      </upgrade>
+
+      <deck>
+        <frame x="1336" y="1850" width="145" height="145"/>
+        <frame x="1328" y="2027" width="160" height="160"/>
+      </deck>
+
+    </SiegeChopper>
+
+    <Harrier type="15">
 
       <button>
         <frame x="0" y="320" width="100" height="80"/>
@@ -199,7 +391,7 @@
       </button>
 
       <drag>
-        <frame x="402" y="1678" width="53" height="35"/>
+        <frame x="500" y="1706" width="53" height="33"/>
       </drag>
 
       <upgrade>
@@ -216,7 +408,34 @@
       
     </Harrier>
 
-    <BlackEagle type="9">
+    <MiG type="16">
+
+      <button>
+        <frame x="0" y="320" width="100" height="80"/>
+        <frame x="100" y="320" width="100" height="80"/>
+        <frame x="0" y="400" width="100" height="80"/>
+        <frame x="0" y="0" width="100" height="80"/>
+      </button>
+
+      <drag>
+        <frame x="500" y="1706" width="53" height="33"/>
+      </drag>
+      
+      <upgrade>
+        <frame x="1599" y="853" width="105" height="106"/>
+        <frame x="1599" y="977" width="105" height="106"/>
+        <frame x="1599" y="1107" width="105" height="106"/>
+        <frame x="1599" y="853" width="105" height="106"/>
+      </upgrade>
+
+      <deck>
+        <frame x="1520" y="1850" width="145" height="145"/>
+        <frame x="1512" y="2027" width="160" height="160"/>
+      </deck>
+
+    </MiG>
+
+    <BlackEagle type="17">
 
       <button>
         <frame x="400" y="320" width="100" height="80"/>
@@ -226,7 +445,7 @@
       </button>
 
       <drag>
-        <frame x="404" y="1535" width="47" height="40"/>
+        <frame x="503" y="1753" width="47" height="33"/>
       </drag>
 
       <upgrade>
@@ -243,14 +462,81 @@
       
     </BlackEagle>
     
+        <SpyPlane type="18">
+
+      <button>
+        <frame x="400" y="320" width="100" height="80"/>
+        <frame x="500" y="320" width="100" height="80"/>
+        <frame x="400" y="400" width="100" height="80"/>
+        <frame x="0" y="0" width="100" height="80"/>
+      </button>
+
+      <drag>
+        <frame x="503" y="1753" width="47" height="33"/>
+      </drag>
+
+      <upgrade>
+        <frame x="1389" y="853" width="105" height="106"/>
+        <frame x="1389" y="977" width="105" height="106"/>
+        <frame x="1389" y="1107" width="105" height="106"/>
+        <frame x="1389" y="853" width="105" height="106"/>
+      </upgrade>
+
+      <deck>
+        <frame x="1146" y="1850" width="145" height="145"/>
+        <frame x="1138" y="2027" width="160" height="160"/>
+      </deck>
+
+    </SpyPlane>
+
+    <Infantry type="30">
+      <button>
+        <frame x="2135" y="339" width="176" height="152"/>
+        <frame x="1918" y="340" width="176" height="152"/>
+        <frame x="2317" y="339" width="176" height="152"/>
+        <frame x="2135" y="339" width="176" height="152"/>
+      </button>
+    </Infantry>
+
+    <Aerial type="31">
+      <button>
+        <frame x="2113" y="490" width="194" height="155"/>
+        <frame x="1920" y="493" width="194" height="155"/>
+        <frame x="2315" y="493" width="194" height="155"/>
+        <frame x="2154" y="490" width="194" height="155"/>
+      </button>
+    </Aerial>
+
+    <Land type="32">
+      <button>
+        <frame x="2106" y="8" width="180" height="115"/>
+        <frame x="1915" y="1" width="180" height="115"/>
+        <frame x="2301" y="14" width="180" height="115"/>
+        <frame x="2154" y="490" width="180" height="115"/>
+      </button>
+    </Land>
+    
   </ui_button>
   
   <ui_image>
-    <Land x="1922" y="494" width="233" height="182"/>
-    <Infantry x="1918" y="342" width="178" height="148"/>
-    <Aerial x="1917" y="121" width="251" height="226"/>
-    <Gold x="1916" y="3" width="181" height="115"/> 
-    <Store x="1946" y="731" width="148" height="162"/>
+    <Land>
+      <end_screen x="1922" y="494" width="233" height="182"/>
+      <building x="1713" y="945" width="230" height="141"/>
+    </Land>
+    <Infantry>
+      <end_screen x="1918" y="342" width="178" height="148"/>
+      <building x="1715" y="775" width="201" height="166"/>
+    </Infantry>
+    <Aerial>
+      <end_screen x="1917" y="121" width="251" height="226"/>
+      <building x="1947" y="909" width="243" height="186"/>
+    </Aerial>
+    <Gold>
+      <end_screen x="1916" y="3" width="181" height="115"/>
+    </Gold>
+    <Store>
+      <end_screen x="1946" y="731" width="148" height="162"/>
+    </Store>
   </ui_image>
   
 </config>

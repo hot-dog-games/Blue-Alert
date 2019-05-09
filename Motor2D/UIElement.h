@@ -19,8 +19,6 @@ public:
 	bool dragable = false;
 	bool clicked = false;
 	bool enabled = true;
-	bool selected = false;
-	bool selectable = false;
 	//TODO
 	bool clipping = false; //Zona que se pinta es el rectangulo del padre.
 	bool parent_limit = true;
@@ -50,6 +48,7 @@ public:
 	void SetLocalRect(SDL_Rect rect);
 	void DadEnabled();
 	void SetEnabled(bool enabled);
+	bool IsEnabled() const;
 
 	virtual void OnMouseClick() {};
 	virtual void OnMouseHover() {};

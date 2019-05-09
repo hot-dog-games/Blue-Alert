@@ -107,3 +107,8 @@ void UIElement::SetEnabled(bool enabled)
 {
 	this->enabled = enabled;
 }
+
+bool UIElement::IsEnabled() const
+{
+	return enabled;
+}
