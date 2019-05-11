@@ -256,6 +256,38 @@
     </info>
 
   </entity>
+  
+   <entity type ="35">
+    <info faction="0">
+      <sprite>sprites/BuildingNodes/Infantry_soviet.png</sprite>
+      <animations>
+        <animation speed="0.0F" name="in_range">
+          <sprite x="6" y="6" w="167" h="137"/>
+        </animation>
+        <animation speed="0.0F" name="highlight">
+          <sprite x="0" y="149" w="180" h="163"/>
+        </animation>
+        <animation speed="0.0F" name="off_range">
+          <sprite x="6" y="320" w="167" h="137"/>
+        </animation>
+      </animations>
+    </info>
+    <info faction="1">
+      <sprite>sprites/BuildingNodes/Infantry.png</sprite>
+      <animations>
+        <animation speed="0.0F" name="in_range">
+          <sprite x="6" y="6" w="167" h="137"/>
+        </animation>
+        <animation speed="0.0F" name="highlight">
+          <sprite x="0" y="149" w="180" h="163"/>
+        </animation>
+        <animation speed="0.0F" name="off_range">
+          <sprite x="6" y="320" w="167" h="137"/>
+        </animation>
+      </animations>
+    </info>
+
+  </entity>
 
   <!--DYNAMIC ENTITIES-->
   <!--GI-->

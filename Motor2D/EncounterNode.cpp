@@ -70,18 +70,31 @@ fPoint EncounterNode::GetPosition()
 
 void EncounterNode::FillEncounterDeck()
 {
-	std::vector<int> pool = { 1, 3, 5, 7, 9, 11, 13, 15, 17 };
-	std::vector<int>::iterator it;
-
-	for (int i = 0; i < encounter->deck_size; i++)
+	if (encounter->type == BOSS_STRATEGY_BUILDING)
 	{
-		int position = rand() % pool.size();
-		int card = pool[position];
-		encounter->deck.push_back(card);
-		it = pool.begin() + position;
-		pool.erase(it);
+		FillBossDeck();
 	}
+	else {
+		std::vector<int> pool = { 1, 3, 5, 7, 9, 11, 13, 15, 17 };
+		std::vector<int>::iterator it;
 
+		for (int i = 0; i < encounter->deck_size; i++)
+		{
+			int position = rand() % pool.size();
+			int card = pool[position];
+			encounter->deck.push_back(card);
+			it = pool.begin() + position;
+			pool.erase(it);
+		}
+	}
+}
+
+void EncounterNode::FillBossDeck()
+{
+	encounter->deck.push_back(GI);
+	encounter->deck.push_back(VIRUS);
+	encounter->deck.push_back(NIGHTHAWK);
+	encounter->deck.push_back(HARRIER);
 }
 
 void EncounterNode::CreateNodeEntity()

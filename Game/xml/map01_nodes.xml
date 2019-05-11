@@ -49,6 +49,6 @@
 	<node id="13" x="27" y="15" type="32">
 		<children id="14"/>
 	</node>
-	<node id="14" x="14" y="13" type="30">
+	<node id="14" x="14" y="13" type="35">
 	</node>
 </map01_nodes>

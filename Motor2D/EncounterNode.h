@@ -48,6 +48,7 @@ public:
 	fPoint GetPosition();
 
 	void FillEncounterDeck();
+	void FillBossDeck();
 	void CreateNodeEntity();
 	void CreateNode();
 
