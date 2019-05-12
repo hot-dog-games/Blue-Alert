@@ -17,6 +17,7 @@
 #include "UILabel.h"
 #include "UIScrollBar.h"
 #include "UIBar.h"
+#include "UIPopUp.h"
 #include "UIEntityBar.h"
 #include "Brofiler/Brofiler.h"
 #include "Stat.h"
@@ -257,6 +258,15 @@ UIBar * Gui::CreateBar(iPoint pos, SDL_Rect rect, Stat* value, BarType type, Ent
 	bar->parent = parent;
 	elements.push_front(bar);
 	return bar;
+}
+
+UIPopUp * Gui::CreatePopUp(SDL_Rect rect, std::string text, SDL_Color color, UIElement* parent)
+{
+	UIPopUp* pop_up = new UIPopUp(rect, text, color);
+
+	pop_up->parent = parent;
+	elements.push_front(pop_up);
+	return pop_up;
 }
 
 void Gui::DeleteElement(UIElement* ele)

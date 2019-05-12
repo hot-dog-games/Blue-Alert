@@ -7,8 +7,7 @@
 #include "UIButton.h"
 #include "UIImage.h"
 #include "UIButtonText.h"
-
-
+#include "UIPopUp.h"
 
 struct SDL_Texture;
 
@@ -81,6 +80,8 @@ private:
 
 	//Info Showing
 	UIImage* info_image = nullptr;
+
+	UIPopUp* pop_up = nullptr;
 
 };
 

@@ -2,6 +2,9 @@
 #include "Render.h"
 #include "GUI.h"
 #include "UIPopUp.h"
+#include "UIButton.h"
+#include "UILabel.h"
+#include "p2Log.h"
 
 UIPopUp::UIPopUp(SDL_Rect rect, std::string text, SDL_Color color)
 {
@@ -9,9 +12,11 @@ UIPopUp::UIPopUp(SDL_Rect rect, std::string text, SDL_Color color)
 	rect_sprite = { 3017, 1536, 212,193 };
 
 	SDL_Rect button_rect[3];
-	/*button_rect[0] = {}*/
-	popup_label = App->gui->CreateLabel({ 5,5 }, "fonts/button_text.ttf", 20, text, color, rect.w);
-	popup_button = App->gui->CreateButton({rect.w - 10, rect.h - 10}, )
+	button_rect[0] = { 3231,1533,26,26 };
+	button_rect[1] = { 3231,1533,26,26 };
+	button_rect[2] = { 3231,1533,26,26 };
+	popup_label = App->gui->CreateLabel({ 5,5 }, "fonts/red_alert.ttf", 20, text, color, rect.w, this);
+	popup_button = App->gui->CreateButton({ rect.w - 10, rect.h - 10 }, button_rect, this);
 }
 
 
