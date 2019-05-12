@@ -212,10 +212,6 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 		{
 			AddCardToDeck(element,16);
 		}
-		else if (element == collection_buttons_allies[9])
-		{
-			AddCardToDeck(element,9);
-		}
 
 		// Building butttons
 		if (element == building_infantry_button) {
@@ -370,18 +366,20 @@ void StrategyMapScene::InitializeUI()
 
 	building_infantry_button = App->gui->CreateSelectableButton({355, 435 }, App->gui->LoadUIButton(30, "button"),buildings_background);
 	building_infantry_image = App->gui->CreateImage({ 365,125 }, App->gui->LoadUIImage(30, "building"), buildings_background);
-	building_infantry_info = App->gui->CreateLabel({ 245,-30 }, "fonts/red_alert.ttf", 20, "The infantry troops are upgraded by %i", { 231,216,145,255 }, 300, building_infantry_image);
+	building_infantry_info = App->gui->CreateLabel({ 245,-30 }, "fonts/red_alert.ttf", 23, "The infantry building is the place where the soldiers rest and prepare for battle.\n\nThe infantry troops are upgraded by: 30 %.\n\nConquered: 2 ", { 231,216,145,255 }, 300, building_infantry_image);
 	
 	building_aerial_button = App->gui->CreateSelectableButton({ 783,430 }, App->gui->LoadUIButton(31, "button"), buildings_background);
 	building_aerial_image = App->gui->CreateImage({ 345,115 }, App->gui->LoadUIImage(31, "building"), buildings_background);
-	building_aerial_info = App->gui->CreateLabel({ 265,-20 }, "fonts/red_alert.ttf", 20, "The aerial troops are upgraded by %i", { 231,216,145,255 }, 300, building_aerial_image);
+	building_aerial_info = App->gui->CreateLabel({ 265,-20 }, "fonts/red_alert.ttf", 23, "The aerial building is where the helicopters and planes are parked.\n\nThe infantry troops are upgraded by: 30 %.\n\nConquered: 2 ", { 231,216,145,255 }, 300, building_aerial_image);
 	
 	building_land_button = App->gui->CreateSelectableButton({ 560,445 } , App->gui->LoadUIButton(32, "button"), buildings_background);
 	building_land_image = App->gui->CreateImage({ 350,145 }, App->gui->LoadUIImage(32, "building"), buildings_background);
-	building_land_info = App->gui->CreateLabel({ 260, -50 }, "fonts/red_alert.ttf", 20, "The land troops are upgraded by %i", { 231,216,145,255 }, 300, building_land_image);
+	building_land_info = App->gui->CreateLabel({ 260, -50 }, "fonts/red_alert.ttf", 23, "The land building is where the tanks are waiting for the battle.\n\nThe infantry troops are upgraded by: 30 %.\n\nConquered: 2 ", { 231,216,145,255 }, 300, building_land_image);
 
-	//App->gui->DisableElement(buildings_background);
+	App->gui->DisableElement(buildings_background);
 
 	//Show Info
-	info_image = App->gui->CreateImage({ 30,30 }, { 0,0,100,100 }, troops_background);
+	info_image = App->gui->CreateImage({ 25,30 }, { 0,0,100,100 }, troops_background);
+	attack_label = App->gui->CreateLabel({ 135,30 }, "fonts/red_alert.ttf", 25, "Attack: ", { 231,216,145,255 }, 120, troops_background);
+	defense_label = App->gui->CreateLabel({ 135,55 }, "fonts/red_alert.ttf", 25, "Defense: ", { 231,216,145,255 }, 120, troops_background);
 }

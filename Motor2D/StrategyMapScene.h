@@ -79,10 +79,15 @@ private:
 	// Troops Menu
 	UIButton* deck_buttons[4];
 	UIButton* collection_buttons_allies[9];
+	UIButton* collection_buttons_enemies[9];
 	UILabel* troops_title[3];
 
 	//Info Showing
 	UIImage* info_image = nullptr;
+	UILabel* attack_label = nullptr;
+	UILabel* defense_label = nullptr;
+	UILabel* units_label = nullptr;
+	UIBar*	 energy_bar = nullptr;
 
 };
 
