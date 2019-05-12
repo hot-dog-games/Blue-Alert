@@ -163,6 +163,9 @@
     <ClCompile Include="UIButtonText.cpp">
       <Filter>Engine\UI</Filter>
     </ClCompile>
+    <ClCompile Include="UIPopUp.cpp">
+      <Filter>Engine\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
@@ -340,6 +343,9 @@
       <Filter>Engine\UI</Filter>
     </ClInclude>
     <ClInclude Include="UIButtonText.h">
+      <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIPopUp.h">
       <Filter>Engine\UI</Filter>
     </ClInclude>
   </ItemGroup>
