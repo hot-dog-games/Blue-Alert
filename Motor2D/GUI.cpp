@@ -214,11 +214,10 @@ UISelectableButton * Gui::CreateSelectableButton(iPoint pos, SDL_Rect * sprite_r
 	return button;
 }
 
-UIScrollBar* Gui::CreateScrollBar(iPoint pos, float min, float max, ScrollType type, UIElement* parent)
+UIScrollBar* Gui::CreateScrollBar(iPoint pos, SDL_Rect rect, float initial_value, UIElement* parent)
 {
-	UIScrollBar* scroll = new UIScrollBar(pos, type);
+	UIScrollBar* scroll = new UIScrollBar(pos, rect, initial_value);
 	scroll->parent = parent;
-	scroll->SetMinMax(min, max);
 	elements.push_back(scroll);
 
 	return scroll;

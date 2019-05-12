@@ -51,6 +51,7 @@ private:
 	UIButton* newgamebutton;
 	UIButton* continuebutton;
 	UIButton* back_options_button;
+	UIScrollBar* volume_slider;
 	bool gameclose = false;
 };
 

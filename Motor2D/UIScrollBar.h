@@ -9,24 +9,24 @@ enum ScrollType;
 class UIScrollBar : public UIElement
 {
 public:
-	UIScrollBar(iPoint pos, ScrollType type);
-	~UIScrollBar() {};
-
-	ScrollType type;
-	UIImage* thumb = nullptr;
-	float norm_value = 0.0F;
-	float min, max;
-
+	UIScrollBar(iPoint pos, SDL_Rect rect, float initial_value);
+	~UIScrollBar();
+	void Update();
+	void DragSlider();
+	void CalculateValue();
 	bool UIBlit();
-	/*void OnMouseClick();
-	void OnMouseHover();
-	void OnMouseRelease();
-	void OnMouseExit();
-	void MoveOtherElement();*/
-	void SetValue(float new_value);
-	float GetValue();
-	void SetMinMax(float min, float max);
-	bool CleanUp();
+
+
+public:
+	float value = min;
+
+private:
+	SDL_Rect slider[3];
+	uint min = 0;
+	uint max = 0;
+	UIButton* slider_button;
+
+
 };
 
 #endif // !UI_SCROLLBAR_H

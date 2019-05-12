@@ -15,6 +15,7 @@
 #include "UIAnimatedImage.h"
 #include "UIButton.h"
 #include "UIBar.h"
+#include "UIScrollBar.h"
 #include "GUI.h"
 #include "Pathfinding.h"
 #include "SceneManager.h"
@@ -125,10 +126,10 @@ void MainMenuScene::StartUI() {
 	MenuBackground = App->gui->CreateImage({ 0,0 }, { 1976,987,1024,768 },nullptr);
 
 	optionsbackground = App->gui->CreateImage({ 0,0 }, { 1976,1832,1024,768 },nullptr);
-	App->gui->DisableElement(optionsbackground);
-	back_options_button = App->gui->CreateButton({10,720},back_options_rect,optionsbackground);
 	
-
+	back_options_button = App->gui->CreateButton({10,720},back_options_rect,optionsbackground);
+	volume_slider = App->gui->CreateScrollBar({ 100,100 }, {3592,2335,218,40}, 30, optionsbackground);
+	App->gui->DisableElement(optionsbackground);
 
 	exitbutton = App->gui->CreateButton({ 785,650 }, large_button_rect,MenuBackground);
 	exitlabel = App->gui->CreateLabel({ 20,10 }, "fonts/button_text.ttf", 20, "EXIT GAME", {0,0,0,0},0,exitbutton);
