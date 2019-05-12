@@ -37,7 +37,13 @@ bool StrategyMapScene::Start()
 
 	BROFILER_CATEGORY("SMStart", Profiler::Color::Red);
 
-	App->map->Load("Nodes Map.tmx");
+	switch (App->game_manager->stage)
+	{
+	case STAGE_TUTORIAL: App->map->Load("Tutorial_Nodes_Map.tmx"); break;
+	case STAGE_01: App->map->Load("Nodes Map.tmx"); break;
+	default:
+		break;
+	}
 	App->ResumeGame();
 
 	App->game_manager->GetEncounterTree()->CreateAllNodes();

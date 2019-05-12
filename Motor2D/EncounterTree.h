@@ -20,6 +20,7 @@ private:
 
 	pugi::xml_document nodes_01;
 	pugi::xml_node map01_nodes;
+	pugi::xml_node tutorial_nodes;
 
 	iPoint node_position_offset;
 
@@ -42,6 +43,7 @@ public:
 	void UpdateTreeState();
 
 	void CreateAllNodes();
+
 
 	pugi::xml_node GetXmlEncounterNodeById(int id);
 

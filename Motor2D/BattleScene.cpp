@@ -178,6 +178,9 @@ bool BattleScene::Update(float dt)
 			App->game_manager->GetEncounterTree()->SetCurrentNode(App->game_manager->GetEncounterTree()->GetFightingNode());
 			App->game_manager->gold += 100;
 			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() == EntityType::STORE_STRATEGY_BUILDING)current_gold->SetText("Your gold: " + std::to_string(App->game_manager->gold));
+			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetChildren().size() == 0) {
+				App->game_manager->stage++;
+			}
 		}
 			
 
@@ -201,6 +204,10 @@ bool BattleScene::Update(float dt)
 			App->game_manager->GetEncounterTree()->SetCurrentNode(App->game_manager->GetEncounterTree()->GetFightingNode());
 			App->game_manager->gold += 100;
 			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() == EntityType::STORE_STRATEGY_BUILDING)current_gold->SetText("Your gold: " + std::to_string(App->game_manager->gold));
+			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetChildren().size() == 0) {
+				App->game_manager->stage++;
+
+			}
 		}
 	}
 	break;
@@ -277,6 +284,11 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 				App->gui->DisableElement((UIElement*)win_panel_two);
 				App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
 			}
+
+			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetChildren().size() == 0) {
+				App->game_manager->GetEncounterTree()->CleanTree();
+				App->game_manager->CreateStage();
+			}
 		}
 		else if (element == lose_continue) {
 			App->gui->DisableElement((UIElement*)lose_panel);
@@ -328,6 +340,12 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 				App->game_manager->AddCardToCollection(et);
 			}
 			App->gui->DisableElement((UIElement*)store_panel);
+
+			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetChildren().size() == 0) {
+				App->game_manager->GetEncounterTree()->CleanTree();
+				App->game_manager->CreateStage();
+			}
+
 			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
 		}
 	}
