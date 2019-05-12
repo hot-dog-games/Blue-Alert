@@ -204,3 +204,8 @@ void Audio::SetFXVolume(const char * path, int volume)
 
 }
 
+void Audio::SetMusicVolume()
+{
+	Mix_VolumeMusic(volume);
+}
+

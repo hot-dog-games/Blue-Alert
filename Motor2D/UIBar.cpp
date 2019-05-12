@@ -76,8 +76,5 @@ bool UIBar::Update(float dt)
 		DecreaseBar(current_value - bar_value->GetValue());
 	}
 
-	
-		
-
 	return true;
 }
