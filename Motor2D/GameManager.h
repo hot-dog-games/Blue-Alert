@@ -40,6 +40,7 @@ public:
 
 	Card* GetCardFromCollection(EntityType card_type);
 	void AddCardToCollection(EntityType card_type);
+	bool IsInCollection(int card_type);
 	std::list<Card*> collection;
 	//----------------------
 	bool Restart();

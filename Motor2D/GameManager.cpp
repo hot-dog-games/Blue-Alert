@@ -77,11 +77,7 @@ void GameManager::CreatePlayerDeck()
 	collection.push_back(App->card_manager->CreateCard(EntityType::GI));
 	collection.push_back(App->card_manager->CreateCard(EntityType::VIRUS));
 	collection.push_back(App->card_manager->CreateCard(EntityType::GUARDIAN_GI));
-	collection.push_back(App->card_manager->CreateCard(EntityType::GRIZZLY));
-	collection.push_back(App->card_manager->CreateCard(EntityType::ROBOT));
-	collection.push_back(App->card_manager->CreateCard(EntityType::PRISM));
-	collection.push_back(App->card_manager->CreateCard(EntityType::NIGHTHAWK));
-	collection.push_back(App->card_manager->CreateCard(EntityType::HARRIER));
+
 	collection.push_back(App->card_manager->CreateCard(EntityType::BLACK_EAGLE));
 
 	combat_deck = new Deck();
@@ -147,4 +143,20 @@ void GameManager::AddCardToCollection(EntityType card_type)
 	}
 
 	if(!found) collection.push_back(App->card_manager->CreateCard(card_type));
+}
+
+bool GameManager::IsInCollection(int card_type)
+{
+	bool ret = false;
+
+	for each (Card* c in collection)
+	{
+		if (c->type == card_type)
+		{
+			ret = true;
+			break;
+		}
+	}
+
+	return ret;
 }

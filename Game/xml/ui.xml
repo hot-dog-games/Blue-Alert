@@ -44,7 +44,7 @@
         <frame x="1708" y="852" width="106" height="106"/>
         <frame x="1708" y="977" width="106" height="106"/>
         <frame x="1708" y="1107" width="106" height="106"/>
-        <frame x="1921" y="745" width="104" height="105"/>
+        <frame x="2030" y="745" width="104" height="105"/>
       </upgrade>
 
       <deck>
@@ -344,7 +344,7 @@
         <frame x="1494" y="853" width="105" height="106"/>
         <frame x="1494" y="977" width="105" height="106"/>
         <frame x="1494" y="1107" width="105" height="106"/>
-        <frame x="1710" y="745" width="104" height="105"/>
+        <frame x="1816" y="745" width="104" height="105"/>
       </upgrade>
 
       <deck>
@@ -425,7 +425,7 @@
         <frame x="2482" y="853" width="105" height="106"/>
         <frame x="2482" y="977" width="105" height="106"/>
         <frame x="2482" y="1107" width="105" height="106"/>
-        <frame x="1615" y="745" width="104" height="105"/>
+        <frame x="1615" y="634" width="104" height="105"/>
       </upgrade>
 
       <deck>
