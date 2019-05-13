@@ -74,9 +74,9 @@ bool UILabel::UIBlit()
 	iPoint screen_pos = GetScreenPos();
 	SDL_Texture* texture = App->fonts->Print(text.c_str(), color, font, rect_box.w);
 	if (clipping && parent)
-		App->render->Blit(texture, screen_pos.x, screen_pos.y, nullptr, 0.0F, 0.0, INT_MAX, INT_MAX, &parent->GetScreenRect());
+		App->render->Blit(texture, screen_pos.x, screen_pos.y, nullptr, 0.0F, 0.0, INT_MAX, INT_MAX, scale_X, scale_Y, &parent->GetScreenRect());
 	else
-		App->render->Blit(texture, screen_pos.x, screen_pos.y, nullptr, 0.0F, 0.0, INT_MAX, INT_MAX);
+		App->render->Blit(texture, screen_pos.x, screen_pos.y, nullptr, 0.0F, 0.0, INT_MAX, INT_MAX, scale_X, scale_Y);
 
 
 	SDL_DestroyTexture(texture);

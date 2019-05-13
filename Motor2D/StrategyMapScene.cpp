@@ -386,4 +386,6 @@ void StrategyMapScene::InitializeUI()
 
 	//Show Info
 	info_image = App->gui->CreateImage({ 30,30 }, { 0,0,100,100 }, troops_background);
+
+	pop_up = App->gui->CreatePopUp({ 100,100, 100, 100 }, "vouoivofeheov hhuvchuir jfrehuofn jfornfjrr rfuhr", { 67,78,103,255 });
 }
