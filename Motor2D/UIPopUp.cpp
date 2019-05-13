@@ -6,23 +6,27 @@
 #include "UILabel.h"
 #include "p2Log.h"
 
-UIPopUp::UIPopUp(SDL_Rect rect, std::string text, SDL_Color color)
+UIPopUp::UIPopUp(SDL_Rect rect, std::string text, int text_size, SDL_Color color)
 {
 	rect_box = rect;
-	rect_sprite = { 3017, 1536, 212,193 };
+
+	//Check if rectangle shape or square
+	if (rect_box.w > (int)(rect_box.h * 1.5))
+		rect_sprite = { 3282, 1538, 374,192 };
+	else
+		rect_sprite = { 3017, 1536, 212,193 };
+
+	//Creates PopUp
 
 	SDL_Rect button_rect[3];
 	button_rect[0] = { 3231,1533,26,26 };
-	button_rect[1] = { 3231,1533,26,26 };
-	button_rect[2] = { 3231,1533,26,26 };
+	button_rect[1] = { 3231,1559,26,26 };
+	button_rect[2] = { 3231,1585,26,26 };
 
-	SetScale((float)rect.w / rect_sprite.w, (float)rect.h / rect_sprite.h);
+	SetScale((float)rect_box.w / rect_sprite.w, (float)rect_box.h / rect_sprite.h);
 
-	popup_label = App->gui->CreateLabel({ 5,5 }, "fonts/red_alert.ttf", 20, text, color, rect.w, this);
-	popup_button = App->gui->CreateButton({ rect.w, rect.h - (int)(10 * scale_Y) }, button_rect, this);
-
-	popup_label->SetScale((float)rect.w / rect_sprite.w, (float)rect.h / rect_sprite.h);
-	popup_button->SetScale((float)rect.w / rect_sprite.w, (float)rect.h / rect_sprite.h);
+	popup_label = App->gui->CreateLabel({ margin_label.x, margin_label.y}, "fonts/red_alert.ttf", 20, text, color, rect_box.w - button_rect->w - margin_button.x - margin_label.x, this);
+	popup_button = App->gui->CreateButton({ rect_box.w - button_rect->w - margin_button.x,(int)((rect_box.h - button_rect->h - margin_button.y)*scale_Y) }, button_rect, this);
 
 }
 
@@ -47,5 +51,10 @@ bool UIPopUp::UIBlit()
 
 bool UIPopUp::Update(float dt)
 {
+	if (popup_button->clicked)
+	{
+		App->gui->DeleteElement(this);
+	}
+
 	return true;
 }

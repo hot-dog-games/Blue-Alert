@@ -387,5 +387,5 @@ void StrategyMapScene::InitializeUI()
 	//Show Info
 	info_image = App->gui->CreateImage({ 30,30 }, { 0,0,100,100 }, troops_background);
 
-	pop_up = App->gui->CreatePopUp({ 100,100, 100, 100 }, "vouoivofeheov hhuvchuir jfrehuofn jfornfjrr rfuhr", { 67,78,103,255 });
+	pop_up = App->gui->CreatePopUp({ 100,100, 512, 193 }, "Hola, bienvenido a España, el gran reino govrenado por un monarca incompetente. bueno, aqui se acaba todo, asi que espero que tengais un buen dia y poco mas. por lo otro, adios", 20, { 255,255,255,255 });
 }

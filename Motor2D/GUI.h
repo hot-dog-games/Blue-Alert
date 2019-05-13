@@ -81,7 +81,7 @@ public:
 	UIScrollBar* CreateScrollBar(iPoint pos, float min, float max, ScrollType type = VERTICAL, UIElement* parent = nullptr);
 	UIAnimatedImage* CreateAnimatedImage(iPoint pos, SDL_Rect * rect, int total_sprites, int speed, UIElement* parent = nullptr);
 	UIBar* CreateBar(iPoint pos, SDL_Rect rect, Stat* value, BarType type = BarType::BAR_VERTICAL, Entity* entity= nullptr, UIElement* parent = nullptr);
-	UIPopUp* CreatePopUp(SDL_Rect rect, std::string text, SDL_Color color, UIElement* parent = nullptr);
+	UIPopUp* CreatePopUp(SDL_Rect rect, std::string text, int text_size, SDL_Color color,  UIElement* parent = nullptr);
 
 	void DeleteElement(UIElement* element);
 	void DisableUI();
