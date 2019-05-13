@@ -281,6 +281,9 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			if (element == collection_buttons_allies[num]) {
 				info_image->SetImage(collection_buttons_allies[num]->GetAnim()[0]);
 			}
+			else if(element == collection_buttons_enemies[num]) {
+				info_image->SetImage(collection_buttons_enemies[num]->GetAnim()[0]);
+			}
 		}
 	}
 
@@ -362,15 +365,15 @@ void StrategyMapScene::InitializeUI()
 	if (App->game_manager->GetPlayerDeck()->cards[3])
 		deck_buttons[3] = App->gui->CreateButton({ 780,99 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[3]->type, "deck"), troops_background);
 
-	collection_buttons_allies[0] = App->gui->CreateButton({ 40,347 }, App->gui->LoadUIButton(1, "upgrade"), troops_background);
-	collection_buttons_allies[1] = App->gui->CreateButton({ 170,347 }, App->gui->LoadUIButton(3, "upgrade"), troops_background);
-	collection_buttons_allies[2] = App->gui->CreateButton({ 110,477 }, App->gui->LoadUIButton(5, "upgrade"), troops_background);
-	collection_buttons_allies[3] = App->gui->CreateButton({ 380,347 }, App->gui->LoadUIButton(7, "upgrade"), troops_background);
-	collection_buttons_allies[4] = App->gui->CreateButton({ 510,347 }, App->gui->LoadUIButton(9, "upgrade"), troops_background);
-	collection_buttons_allies[5] = App->gui->CreateButton({ 445,477 }, App->gui->LoadUIButton(11, "upgrade"), troops_background);
-	collection_buttons_allies[6] = App->gui->CreateButton({ 720,347 }, App->gui->LoadUIButton(13, "upgrade"), troops_background);
-	collection_buttons_allies[7] = App->gui->CreateButton({ 840,347 }, App->gui->LoadUIButton(15, "upgrade"), troops_background);
-	collection_buttons_allies[8] = App->gui->CreateButton({ 780,477 }, App->gui->LoadUIButton(17, "upgrade"), troops_background);
+	collection_buttons_allies[0] = App->gui->CreateButton({ 40,347 }, App->gui->LoadUIButton(1, "upgrade"), troops_background, false);
+	collection_buttons_allies[1] = App->gui->CreateButton({ 170,347 }, App->gui->LoadUIButton(3, "upgrade"), troops_background, false);
+	collection_buttons_allies[2] = App->gui->CreateButton({ 110,477 }, App->gui->LoadUIButton(5, "upgrade"), troops_background, false);
+	collection_buttons_allies[3] = App->gui->CreateButton({ 380,347 }, App->gui->LoadUIButton(7, "upgrade"), troops_background, false);
+	collection_buttons_allies[4] = App->gui->CreateButton({ 510,347 }, App->gui->LoadUIButton(9, "upgrade"), troops_background, false);
+	collection_buttons_allies[5] = App->gui->CreateButton({ 445,477 }, App->gui->LoadUIButton(11, "upgrade"), troops_background, false);
+	collection_buttons_allies[6] = App->gui->CreateButton({ 720,347 }, App->gui->LoadUIButton(13, "upgrade"), troops_background, false);
+	collection_buttons_allies[7] = App->gui->CreateButton({ 840,347 }, App->gui->LoadUIButton(15, "upgrade"), troops_background, false);
+	collection_buttons_allies[8] = App->gui->CreateButton({ 780,477 }, App->gui->LoadUIButton(17, "upgrade"), troops_background, false);
 
 	collection_buttons_enemies[0] = App->gui->CreateButton({ 40,347 }, App->gui->LoadUIButton(2, "upgrade"), troops_background);
 	collection_buttons_enemies[1] = App->gui->CreateButton({ 170,347 }, App->gui->LoadUIButton(4, "upgrade"), troops_background);
