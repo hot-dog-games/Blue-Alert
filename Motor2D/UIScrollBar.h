@@ -9,22 +9,29 @@ enum ScrollType;
 class UIScrollBar : public UIElement
 {
 public:
-	UIScrollBar(iPoint pos, SDL_Rect rect, float initial_value);
+	UIScrollBar(iPoint pos, SDL_Rect rect, int initial_value, int max_value);
 	~UIScrollBar();
-	void Update();
+	bool Update(float dt);
 	void DragSlider();
 	void CalculateValue();
 	bool UIBlit();
 
 
 public:
-	float value = min;
+	int* value;
 
 private:
 	SDL_Rect slider[3];
-	uint min = 0;
-	uint max = 0;
+
+	int minimum = 0;
+	int maximum = 0;
+
 	UIButton* slider_button;
+
+	float current_value = 0;
+	double percentage = 0;
+
+	int max_value = 0;
 
 
 };

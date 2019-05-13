@@ -6,7 +6,7 @@
 #include"Input.h"
 #include"p2Log.h"
 
-UIScrollBar::UIScrollBar(iPoint pos, SDL_Rect rect, float initial_value){
+UIScrollBar::UIScrollBar(iPoint pos, SDL_Rect rect, int initial_value, int max_value){
 	rect_box = { pos.x,pos.y,rect.w,rect.h };
 	this->rect_sprite = rect;
 
@@ -15,10 +15,14 @@ UIScrollBar::UIScrollBar(iPoint pos, SDL_Rect rect, float initial_value){
 	slider[2] = { 3660, 2264,25,51 };
 	slider_button = App->gui->CreateButton({ (int)initial_value, -6 }, slider,this);
 	
+	percentage = initial_value / rect_box.w;
 	
-	min = pos.x;
-	max = pos.x + rect.w - slider_button->GetLocalRect().w;
-	value = initial_value;
+	minimum = pos.x - this->GetLocalPos().x;
+	
+	maximum = pos.x + rect.w - slider_button->GetLocalRect().w - this->GetLocalPos().x;
+	current_value = initial_value;
+	//value = &initial_value;
+	this->max_value = max_value;
 	
 }
 UIScrollBar::~UIScrollBar()
@@ -26,42 +30,39 @@ UIScrollBar::~UIScrollBar()
 
 }
 
-void UIScrollBar::Update()
+bool UIScrollBar::Update(float dt)
 {
-	
 	if (slider_button->clicked)
 	{
-		LOG("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 		DragSlider();
 	}
 	
+	return true;
 }
 
 void UIScrollBar::DragSlider()
 {
 		iPoint mouse;
 		App->input->GetMousePosition(mouse.x, mouse.y);
-		slider_button->SetLocalPos(mouse.x, slider_button->GetLocalPos().y);
+
+		int pos_x = mouse.x - this->GetLocalPos().x - slider_button->GetLocalRect().w / 2;
+		slider_button->SetLocalPos(pos_x, slider_button->GetLocalPos().y);
 
 
-		/*if (position.x < min)
+		if (slider_button->GetLocalPos().x < minimum)
 		{
-			position.x = min;
+			slider_button->SetLocalPos(minimum, slider_button->GetLocalPos().y);
 		}
-		if (position.x > max)
+		if (slider_button->GetLocalPos().x > maximum)
 		{
-			position.x = max;
+			slider_button->SetLocalPos(maximum, slider_button->GetLocalPos().y);
 		}
 
-		CalculateValue();
-		App->gui->SliderAction(this);*/
+		percentage = (float)(pos_x) / 194;
+		current_value = percentage * max_value;
 	
 }
 
-void UIScrollBar::CalculateValue()
-{
-	//value = position.x - min;
-}
 
 bool UIScrollBar::UIBlit()
 {

@@ -50,6 +50,7 @@ bool MainMenuScene::Start()
 	
 	//Initialize UI
 	StartUI();
+	App->audio->PlayMusic("audio/music/9.Destroy-Red Alert2_2.ogg");
 
 	return true;
 }
@@ -65,6 +66,7 @@ bool MainMenuScene::PreUpdate()
 // Called each loop iteration
 bool MainMenuScene::Update(float dt)
 {
+	App->audio->SetMusicVolume();
 	return true;
 }
 
@@ -128,7 +130,7 @@ void MainMenuScene::StartUI() {
 	optionsbackground = App->gui->CreateImage({ 0,0 }, { 1976,1832,1024,768 },nullptr);
 	
 	back_options_button = App->gui->CreateButton({10,720},back_options_rect,optionsbackground);
-	volume_slider = App->gui->CreateScrollBar({ 100,100 }, {3592,2335,218,40}, 30, optionsbackground);
+	volume_slider = App->gui->CreateScrollBar({ 100,100 }, {3592,2335,218,40}, App->audio->volume, 128, optionsbackground);
 	App->gui->DisableElement(optionsbackground);
 
 	exitbutton = App->gui->CreateButton({ 785,650 }, large_button_rect,MenuBackground);
