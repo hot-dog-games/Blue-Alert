@@ -81,6 +81,7 @@ private:
 	UIButton* collection_buttons_allies[9];
 	UIButton* collection_buttons_enemies[9];
 	UILabel* troops_title[3];
+	UIButton* change_side_button;
 
 	//Info Showing
 	UIImage* info_image = nullptr;

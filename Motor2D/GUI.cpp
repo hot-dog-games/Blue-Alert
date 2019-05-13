@@ -342,72 +342,16 @@ SDL_Rect* Gui::LoadUIButton(int num, std::string type)
 	pugi::xml_node buttons_node = buttons_file.first_child().child("ui_button");
 
 	std::string name;
+	int num_type = 0;
 
-	switch (num) {
-	case 1:
-		name = "GI";
-		break;
-	case 2:
-		name = "Conscript";
-		break;
-	case 3:
-		name = "Virus";
-		break;
-	case 4:
-		name = "Sniper";
-		break;
-	case 5:
-		name = "GuardianGI";
-		break;
-	case 6:
-		name = "FlakTrooper";
-		break;
-	case 7:
-		name = "GrizzlyTank";
-		break;
-	case 8:
-		name = "RhinoTank";
-		break;
-	case 9:
-		name = "RobotTank";
-		break;
-	case 10:
-		name = "TerrorDrone";
-		break;
-	case 11:
-		name = "PrismTank";
-		break;
-	case 12:
-		name = "TeslaTank";
-		break;
-	case 13:
-		name = "NightHawk";
-		break;
-	case 14:
-		name = "SiegeChopper";
-		break;
-	case 15:
-		name = "Harrier";
-		break;
-	case 16:
-		name = "MiG";
-		break;
-	case 17:
-		name = "BlackEagle";
-		break;
-  case 18:
-		name = "SpyPlane";
-		break;
-	case 30:
-		name = "Infantry";
-		break;
-	case 31:
-		name = "Aerial";
-		break;
-	case 32:
-		name = "Land";
-
-		break;
+	for (pugi::xml_node it = buttons_node.first_child(); it; it = it.next_sibling())
+	{
+		num_type = it.first_attribute().as_int();
+		if (num_type == num)
+		{
+			name = it.name();
+			break;
+		}
 	}
 
 	SDL_Rect* button_rect = new SDL_Rect[4];
