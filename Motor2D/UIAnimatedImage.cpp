@@ -26,7 +26,7 @@ bool UIAnimatedImage::UIBlit()
 {
 	iPoint screen_pos = GetScreenPos();
 	if (clipping && parent)
-		App->render->Blit(App->gui->GetAtlas(), screen_pos.x, screen_pos.y, &animation_frame, 0.0F, 0.0, INT_MAX, INT_MAX, &parent->GetScreenRect());
+		App->render->Blit(App->gui->GetAtlas(), screen_pos.x, screen_pos.y, &animation_frame, 0.0F, 0.0, INT_MAX, INT_MAX, scale_X, scale_Y, &parent->GetScreenRect());
 	else
 		App->render->Blit(App->gui->GetAtlas(), screen_pos.x, screen_pos.y, &animation_frame, 0.0F, 0.0, INT_MAX, INT_MAX);
 	return true;
