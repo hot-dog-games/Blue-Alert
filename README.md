@@ -1,9 +1,9 @@
-# Blue Alert
+﻿# Blue Alert
 This is the repository for the video game of Project-2 subject.
 Command and Conquer: Blue Alert is a strategy game that combines elements of Deck-building and Tower Defense, the goal of the game is to simplify the classic strategy of an RTS to the point where it becomes an accessible game for a casual player, looking for fast games. The game consists of two phases; the military strategy phase where the player builds his army, improves it and decides where to attack, and then, there is the combat phase, where the player deploys his units to attack the enemy's core. The assets and some mechanics are from Command and Conquer: Red Alert 2.
 
 
-#Current version: V.0.5.1
+# Current version: V.0.5.2
 
 ## Implementations: 
 
