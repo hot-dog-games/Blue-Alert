@@ -7,7 +7,7 @@
 class UIPopUp : public UIElement
 {
 public:
-	UIPopUp(SDL_Rect rect, std::string text, int text_size, SDL_Color color);
+	UIPopUp(SDL_Rect rect, iPoint margin, std::string text, int text_size, SDL_Color color);
 	~UIPopUp();
 	bool UIBlit();
 
@@ -16,9 +16,6 @@ public:
 private:
 	UILabel* popup_label = nullptr;
 	UIButton* popup_button = nullptr;
-
-	iPoint margin_button = { 10,10 };
-	iPoint margin_label = { 12,12 };
 };
 
 #endif // UI_POPUP_H

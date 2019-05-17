@@ -260,9 +260,9 @@ UIBar * Gui::CreateBar(iPoint pos, SDL_Rect rect, Stat* value, BarType type, Ent
 	return bar;
 }
 
-UIPopUp * Gui::CreatePopUp(SDL_Rect rect, std::string text, int text_size, SDL_Color color, UIElement* parent)
+UIPopUp * Gui::CreatePopUp(SDL_Rect rect, iPoint margin, std::string text, int text_size, SDL_Color color, UIElement* parent)
 {
-	UIPopUp* pop_up = new UIPopUp(rect, text, text_size, color);
+	UIPopUp* pop_up = new UIPopUp(rect, margin, text, text_size, color);
 
 	pop_up->parent = parent;
 	elements.push_front(pop_up);
