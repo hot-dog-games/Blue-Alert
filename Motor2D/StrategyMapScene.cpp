@@ -52,7 +52,6 @@ bool StrategyMapScene::Start()
 	uint w, h;
 	App->win->GetWindowSize(w, h);
 
-	
 	iPoint world_position = App->map->MapToWorld((int)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetPosition().x, (int)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetPosition().y);
 
 	App->render->camera.x = -world_position.x + w * 0.5;
@@ -75,10 +74,13 @@ bool StrategyMapScene::PreUpdate()
 
 	if (App->input->GetMouseButtonDown(1) == KEY_REPEAT)
 	{
-		if (abs(mousemotion_x) > drag_threshhold && abs(mousemotion_y) > drag_threshhold)
+		if (IsInsideLimits(mousemotion_x, mousemotion_y))
 		{
-			App->render->camera.x += mousemotion_x;
-			App->render->camera.y += mousemotion_y;
+			if (abs(mousemotion_x) > drag_threshhold && abs(mousemotion_y) > drag_threshhold)
+			{
+				App->render->camera.x += mousemotion_x;
+				App->render->camera.y += mousemotion_y;
+			}
 		}
 	}
 
@@ -95,6 +97,10 @@ bool StrategyMapScene::PreUpdate()
 
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		App->render->camera.x -= 10;
+
+	last_camera_position.x = App->render->camera.x;
+	last_camera_position.y = App->render->camera.y;
+
 	return true;
 }
 
@@ -116,6 +122,7 @@ bool StrategyMapScene::PostUpdate()
 		ret = false;
 
 	App->game_manager->GetEncounterTree()->DrawTreeLines();
+	App->render->DrawCircle(limit_center.x, limit_center.y, limit_radius, 255, 0, 0, 255, true);
 
 	return ret;
 }
@@ -401,4 +408,12 @@ void StrategyMapScene::InitializeUI()
 
 	//Show Info
 	info_image = App->gui->CreateImage({ 30,30 }, { 0,0,100,100 }, troops_background);
+}
+
+bool StrategyMapScene::IsInsideLimits(int mousemotion_x, int mousemotion_y)
+{
+	float distance_center_camera = limit_center.DistanceTo({ -App->render->camera.x - mousemotion_x, -App->render->camera.y - mousemotion_y});
+
+	if (distance_center_camera < limit_radius)return true;
+	else return false;
 }
