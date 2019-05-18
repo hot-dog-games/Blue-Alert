@@ -52,6 +52,7 @@ public:
 	void EntityClicked(StrategyBuilding* entity);
 	void SetCurrentNodeByEntity(StrategyBuilding* entity);
 	void SetFightingNodeByEntity(StrategyBuilding* entity);
+	int GetBuildingsOfType(EntityType type);
 
 	bool is_clickable = true;
 

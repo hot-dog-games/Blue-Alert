@@ -208,3 +208,14 @@ void EncounterTree::SetFightingNodeByEntity(StrategyBuilding * entity)
 		if (en->GetEntity() == entity) SetFightingNode(en);
 	}
 }
+
+int EncounterTree::GetBuildingsOfType(EntityType type)
+{
+	int num = 0;
+
+	for each (EncounterNode* en in map_encounters)
+	{
+		if (en->GetEncounterType() == type)num++;
+	}
+	return 0;
+}
