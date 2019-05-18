@@ -87,8 +87,8 @@ private:
 
 	float drag_threshhold = 0.2f;
 
-	iPoint limit_center = {-480, 767};
-	int limit_radius = 500;
+	iPoint limit_center = {-480, 1117};
+	int limit_radius = 700;
 
 	iPoint last_camera_position;
 
