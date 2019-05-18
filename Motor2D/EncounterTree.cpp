@@ -188,7 +188,6 @@ void EncounterTree::EntityClicked(StrategyBuilding * entity)
 		SetFightingNodeByEntity(entity);
 		App->gui->DisableUI();
 		App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::COMBAT, White);
-		App->transition_manager->CreateZoomTransition(2.0f);
 		App->transition_manager->CreateCameraTranslation(2.0f, { (int)entity->position.x, (int)entity->position.y });
 	}
 }
