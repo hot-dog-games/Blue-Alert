@@ -8,6 +8,7 @@
 
 class Deck;
 struct Card;
+class LeveledUpgrade;
 
 class Core : public StaticEntity
 {
@@ -33,8 +34,9 @@ protected:
 	Deck* deck = nullptr;
 	PerfTimer energy_timer;
 
-	bool CanUseCard(int card_num);
 
+
+	bool CanUseCard(int card_num);
 };
 
 #endif // _CORE_H_

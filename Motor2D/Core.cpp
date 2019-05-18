@@ -3,6 +3,8 @@
 #include "Deck.h"
 #include "CardManager.h"
 #include "Stat.h"
+#include "p2Log.h"
+#include "BuffSourceManager.h"
 #include "Core.h"
 
 Core::Core(pugi::xml_node entity_config, fPoint position, Faction faction, pugi::xml_node stats_node): StaticEntity(entity_config, position, faction)
@@ -16,7 +18,7 @@ Core::Core(pugi::xml_node entity_config, fPoint position, Faction faction, pugi:
 			stat_name,
 			new Stat(iter.attribute("value").as_int())));
 	}
-	stats.find("energy")->second->DecreaseStat(10);
+	stats.find("energy")->second->DecreaseStat(20);
 	current_animation = &animations.find("idle")->second;
 }
 
@@ -26,6 +28,8 @@ Core::~Core()
 
 bool Core::Update(float dt)
 {
+	LOG("energy is %f", stats.find("energy")->second->GetMaxValue());
+	LOG("health is %f", GetHealth()->GetMaxValue());
 	if (energy_timer.ReadMs() >= SECOND_MS) {
 		stats.find("energy")->second->IncreaseStat(stats.find("energy_regen")->second->GetValue());
 		energy_timer.Start();
@@ -120,4 +124,3 @@ Stat * Core::GetHealth() const
 {
 	return stats.find("health")->second;
 }
-

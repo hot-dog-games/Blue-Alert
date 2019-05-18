@@ -22,6 +22,7 @@
 #include "CardManager.h"
 #include "Deck.h"
 #include "BattleScene.h"
+#include "Buff.h"
 #include "GameManager.h"
 #include "EncounterTree.h"
 #include "EncounterNode.h"
@@ -69,6 +70,8 @@ bool BattleScene::Start()
 	allied_core->LoadUnitSprites(App->game_manager->GetPlayerDeck()->GetDeckSize());
 	enemy_core->LoadUnitSprites();
 
+	App->game_manager->health_upgrade->GetBuffs(allied_core->stats);
+	App->game_manager->energy_upgrade->GetBuffs(allied_core->stats);
 	//Initialize UI
 	StartUI();
 
@@ -198,16 +201,23 @@ bool BattleScene::Update(float dt)
 			state = BattleSceneState::WIN;
 			App->audio->PlayFx(win_fx.c_str(), 0);
 			App->PauseGame();
-			if(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() != EntityType::STORE_STRATEGY_BUILDING)App->gui->EnableElement((UIElement*)win_panel_one);
-			else App->gui->EnableElement((UIElement*)store_panel);
+
+			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() != EntityType::STORE_STRATEGY_BUILDING)
+			{
+				App->gui->EnableElement((UIElement*)win_panel_one);
+				App->game_manager->LevelUpgrade();
+			}
+			else 
+			{
+				App->gui->EnableElement((UIElement*)store_panel);
+				current_gold->SetText("Your gold: " + std::to_string(App->game_manager->gold));
+			}
+
 			App->gui->DisableInteractable((UIElement*)unit_panel);
 			App->game_manager->GetEncounterTree()->SetCurrentNode(App->game_manager->GetEncounterTree()->GetFightingNode());
 			App->game_manager->gold += 100;
-			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() == EntityType::STORE_STRATEGY_BUILDING)current_gold->SetText("Your gold: " + std::to_string(App->game_manager->gold));
-			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetChildren().size() == 0) {
+			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetChildren().size() == 0)
 				App->game_manager->stage++;
-
-			}
 		}
 	}
 	break;

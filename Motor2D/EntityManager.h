@@ -9,6 +9,7 @@ class Core;
 struct Card;
 class Deck;
 class StrategyBuilding;
+class BuffSource;
 enum Faction;
 struct SDL_Rect;
 

@@ -9,6 +9,8 @@
 #include "Core.h"
 #include "CoreAI.h"
 #include "Deck.h"
+#include "Stat.h"
+#include "BuffSourceManager.h"
 #include "EntityManager.h"
 #include "Brofiler/Brofiler.h"
 
@@ -296,6 +298,7 @@ bool EntityManager::DeleteEntity(Entity* entity)
 
 bool EntityManager::CreateGroup(int units, EntityType type, fPoint position, Card * card, Faction faction)
 {
+	Entity* entity;
 	for (int i = 0; i < units; i++)
 	{
 		if (i == 1)
@@ -312,8 +315,7 @@ bool EntityManager::CreateGroup(int units, EntityType type, fPoint position, Car
 		{
 			position.y = position.y + 20;
 		}
-		App->entity_manager->CreateEntity(type, position, card, faction);
-
+		entity = App->entity_manager->CreateEntity(type, position, card, faction);
 	}
 	return true;
 }
