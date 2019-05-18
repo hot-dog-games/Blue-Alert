@@ -87,10 +87,10 @@ private:
 	UILabel* attack_label = nullptr;
 	UILabel* defense_label = nullptr;
 	UILabel* units_label = nullptr;
+	UILabel* range_label = nullptr;
 	UIBar*	 energy_bar = nullptr;
 
-	UIPopUp* pop_up = nullptr;
-
+	int num = 4;
 };
 
 #endif

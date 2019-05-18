@@ -21,6 +21,9 @@
 #include "UIButton.h"
 #include "Brofiler/Brofiler.h"
 
+#include <stdio.h>
+#include <string>
+
 StrategyMapScene::StrategyMapScene() : Scene()
 {
 
@@ -402,17 +405,24 @@ void StrategyMapScene::InitializeUI()
 	buildings_title[1] = App->gui->CreateLabel({ 605,385 }, "fonts/button_text.ttf", 22, "Land", { 0,0,0,0 }, 300, buildings_background);
 	buildings_title[2] = App->gui->CreateLabel({ 812,385 }, "fonts/button_text.ttf", 22, "Aerial", { 0,0,0,0 }, 300, buildings_background);
 
+	std::string str = "The infantry building is the place where the soldiers rest and prepare for battle.\n\n Conquered: " + std::to_string(num);
+	
+	//Infantry
 	building_infantry_button = App->gui->CreateSelectableButton({355, 435 }, App->gui->LoadUIButton(30, "button"),buildings_background);
 	building_infantry_image = App->gui->CreateImage({ 365,125 }, App->gui->LoadUIImage(30, "building"), buildings_background);
-	building_infantry_info = App->gui->CreateLabel({ 245,-30 }, "fonts/red_alert.ttf", 23, "The infantry building is the place where the soldiers rest and prepare for battle.\n\nThe infantry troops are upgraded by: 30 %.\n\nConquered: 2 ", { 231,216,145,255 }, 300, building_infantry_image);
-	
+	building_infantry_info = App->gui->CreateLabel({ 245,-30 }, "fonts/red_alert.ttf", 23, str, { 231,216,145,255 }, 300, building_infantry_image);
+
+	//Aerial
+	str = "The aerial building is where the helicopters and planes are parked.\n\n Conquered: " + std::to_string(num);
 	building_aerial_button = App->gui->CreateSelectableButton({ 783,430 }, App->gui->LoadUIButton(31, "button"), buildings_background);
 	building_aerial_image = App->gui->CreateImage({ 345,115 }, App->gui->LoadUIImage(31, "building"), buildings_background);
-	building_aerial_info = App->gui->CreateLabel({ 265,-20 }, "fonts/red_alert.ttf", 23, "The aerial building is where the helicopters and planes are parked.\n\nThe infantry troops are upgraded by: 30 %.\n\nConquered: 2 ", { 231,216,145,255 }, 300, building_aerial_image);
+	building_aerial_info = App->gui->CreateLabel({ 265,-20 }, "fonts/red_alert.ttf", 23, str, { 231,216,145,255 }, 300, building_aerial_image);
 	
+	//Land
+	str = "The land building is where the tanks are waiting for the battle.\n\nConquered: " + std::to_string(num);
 	building_land_button = App->gui->CreateSelectableButton({ 560,445 } , App->gui->LoadUIButton(32, "button"), buildings_background);
 	building_land_image = App->gui->CreateImage({ 350,145 }, App->gui->LoadUIImage(32, "building"), buildings_background);
-	building_land_info = App->gui->CreateLabel({ 260, -50 }, "fonts/red_alert.ttf", 23, "The land building is where the tanks are waiting for the battle.\n\nThe infantry troops are upgraded by: 30 %.\n\nConquered: 2 ", { 231,216,145,255 }, 300, building_land_image);
+	building_land_info = App->gui->CreateLabel({ 260, -50 }, "fonts/red_alert.ttf", 23, str, { 231,216,145,255 }, 300, building_land_image);
 
 	App->gui->DisableElement(buildings_background);
 
@@ -420,4 +430,5 @@ void StrategyMapScene::InitializeUI()
 	info_image = App->gui->CreateImage({ 25,30 }, { 0,0,100,100 }, troops_background);
 	attack_label = App->gui->CreateLabel({ 135,30 }, "fonts/red_alert.ttf", 25, "Attack: ", { 231,216,145,255 }, 120, troops_background);
 	defense_label = App->gui->CreateLabel({ 135,55 }, "fonts/red_alert.ttf", 25, "Defense: ", { 231,216,145,255 }, 120, troops_background);
+
 }
