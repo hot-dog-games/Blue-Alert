@@ -218,5 +218,5 @@ int EncounterTree::GetBuildingsOfType(EntityType type)
 			if(en->visited)
 				num++;
 	}
-	return 0;
+	return num;
 }

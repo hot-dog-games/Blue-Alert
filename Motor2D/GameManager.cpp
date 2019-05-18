@@ -72,10 +72,12 @@ bool GameManager::IsInPlayerDeck(Card * card)
 
 void GameManager::CreatePlayerDeck()
 {
-	collection.push_back(App->card_manager->CreateCard(EntityType::CONSCRIPT));
+	collection.push_back(App->card_manager->CreateCard(EntityType::GI));
+	collection.push_back(App->card_manager->CreateCard(EntityType::VIRUS));
+	collection.push_back(App->card_manager->CreateCard(EntityType::GUARDIAN_GI));
 	collection.push_back(App->card_manager->CreateCard(EntityType::SNIPER));
-	collection.push_back(App->card_manager->CreateCard(EntityType::FLAK_TROOPER));
-	collection.push_back(App->card_manager->CreateCard(EntityType::GRIZZLY));
+
+	collection.push_back(App->card_manager->CreateCard(EntityType::BLACK_EAGLE));
 
 	combat_deck = new Deck();
 	combat_deck->AddCard(GetCardFromCollection(EntityType::CONSCRIPT));
@@ -146,4 +148,20 @@ void GameManager::AddCardToCollection(EntityType card_type)
 	}
 
 	if(!found) collection.push_back(App->card_manager->CreateCard(card_type));
+}
+
+bool GameManager::IsInCollection(int card_type)
+{
+	bool ret = false;
+
+	for each (Card* c in collection)
+	{
+		if (c->type == card_type)
+		{
+			ret = true;
+			break;
+		}
+	}
+
+	return ret;
 }

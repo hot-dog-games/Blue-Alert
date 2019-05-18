@@ -6,7 +6,7 @@
 #include "p2Log.h"
 #include "Entity.h"
 
-UIEntityBar::UIEntityBar(iPoint pos, SDL_Rect sprite_rect, Stat* value, BarType type, Entity* entity): UIBar(pos,sprite_rect,value,type)
+UIEntityBar::UIEntityBar(iPoint pos, SDL_Rect sprite_rect, Stat* value, BarType type, BarState state, Entity* entity): UIBar(pos,sprite_rect,value,type, state)
 {
 	this->entity = entity;
 }
