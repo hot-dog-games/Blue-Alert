@@ -11,7 +11,7 @@
       <stat stat="movement" value ="45"/>
       <stat stat="attack_speed" value ="5"/>
       <stat stat="range" value ="5"/>
-      <stat stat="energy_cost" value ="2"/>
+      <stat stat="energy_cost" value ="3"/>
       <stat stat="units" value ="4"/>
     </stats>
 	
@@ -37,7 +37,7 @@
       <stat stat="movement" value ="45"/>
       <stat stat="attack_speed" value ="5"/>
       <stat stat="range" value ="5"/>
-      <stat stat="energy_cost" value ="2"/>
+      <stat stat="energy_cost" value ="3"/>
       <stat stat="units" value ="4"/>
     </stats>
 
@@ -115,7 +115,7 @@
       <stat stat="movement" value ="25"/>
       <stat stat="attack_speed" value ="2.5"/>
       <stat stat="range" value ="4"/>
-      <stat stat="energy_cost" value ="2"/>
+      <stat stat="energy_cost" value ="3"/>
       <stat stat="units" value ="2"/>
     </stats>
 
@@ -141,7 +141,7 @@
       <stat stat="movement" value ="25"/>
       <stat stat="attack_speed" value ="2.5"/>
       <stat stat="range" value ="4"/>
-      <stat stat="energy_cost" value ="2"/>
+      <stat stat="energy_cost" value ="3"/>
       <stat stat="units" value ="2"/>
     </stats>
 
