@@ -60,6 +60,8 @@ private:
 	UILabel* core_title;
 	UILabel* core_health;
 	UILabel* core_energy;
+	UILabel* core_lvl_up_cost;
+	UILabel* core_info;
 	UIButton* core_lvl_up;
 
 	UIImage* building_infantry_image = nullptr;

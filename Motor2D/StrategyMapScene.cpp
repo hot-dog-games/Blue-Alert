@@ -451,25 +451,30 @@ void StrategyMapScene::InitializeUI()
 	//Core
 	core_image = App->gui->CreateImage({ 70, 80 }, { 1538,23,173,114 }, buildings_background);
 
-	core_title = App->gui->CreateLabel({ 27, 300 }, "fonts/button_text.ttf", 30, "CORE", { 242, 222, 70, 255 }, 300, buildings_background);
+	core_title = App->gui->CreateLabel({ 27, 290 }, "fonts/button_text.ttf", 30, "CORE", { 242, 222, 70, 255 }, 200, buildings_background);
+
+	core_info = App->gui->CreateLabel({ 27, 330 }, "fonts/red_alert.ttf", 23, "The core travels around the map destroying all the enemies bases.", { 231,216,145,255 }, 250, buildings_background);
 
 	str = "Health: ";
-	core_health = App->gui->CreateLabel({ 27, 350 }, "fonts/red_alert.ttf", 30, str, { 231,216,145,255 }, 300, buildings_background);
+	core_health = App->gui->CreateLabel({ 27, 410 }, "fonts/red_alert.ttf", 30, str, { 231,216,145,255 }, 300, buildings_background);
 
 	str = "Energy: ";
-	core_health = App->gui->CreateLabel({ 27,400 }, "fonts/red_alert.ttf", 30, str, { 231,216,145,255 }, 300, buildings_background);
+	core_health = App->gui->CreateLabel({ 27,440 }, "fonts/red_alert.ttf", 30, str, { 231,216,145,255 }, 300, buildings_background);
 
-	core_lvl_up = App->gui->CreateButtonText({ 12, 500 }, { 40,5 }, medium_button_rect, "LEVEL UP", { 231,216,145,255 }, 25, buildings_background);
+	str = "Cost: ";
+	core_lvl_up_cost = App->gui->CreateLabel({ 27,470 }, "fonts/red_alert.ttf", 30, str, { 231,216,145,255 }, 300, buildings_background);
+
+	core_lvl_up = App->gui->CreateButtonText({ 12, 520 }, { 40,5 }, medium_button_rect, "LEVEL UP", { 242, 222, 70, 255 }, 25, buildings_background);
 
 	App->gui->DisableElement(buildings_background);
 
 	//Show Info
-	info_image = App->gui->CreateImage({ 25,30 }, { 0,0,100,100 }, troops_background);
-	health_label = App->gui->CreateLabel({ 135, 30 }, "fonts/red_alert.ttf", 25, "Health: ", { 231,216,145,255 }, 120, troops_background);
-	attack_label = App->gui->CreateLabel({ 135,55 }, "fonts/red_alert.ttf", 25, "Attack: ", { 231,216,145,255 }, 120, troops_background);
-	defense_label = App->gui->CreateLabel({ 135,80 }, "fonts/red_alert.ttf", 25, "Defense: ", { 231,216,145,255 }, 120, troops_background);
-	range_label = App->gui->CreateLabel({ 135, 105 }, "fonts/red_alert.ttf", 25, "Range: ", { 231,216,145,255 }, 120, troops_background);
-	units_label = App->gui->CreateLabel({ 135, 130 }, "fonts/red_alert.ttf", 25, "Units: ", { 231,216,145,255 }, 120, troops_background);
+	info_image = App->gui->CreateImage({ 25,30 }, { 0,0,0,0 }, troops_background);
+	health_label = App->gui->CreateLabel({ 135, 30 }, "fonts/red_alert.ttf", 25, "Health: -", { 231,216,145,255 }, 120, troops_background);
+	attack_label = App->gui->CreateLabel({ 135,55 }, "fonts/red_alert.ttf", 25, "Attack: -", { 231,216,145,255 }, 120, troops_background);
+	defense_label = App->gui->CreateLabel({ 135,80 }, "fonts/red_alert.ttf", 25, "Defense: -", { 231,216,145,255 }, 120, troops_background);
+	range_label = App->gui->CreateLabel({ 135, 105 }, "fonts/red_alert.ttf", 25, "Range: -", { 231,216,145,255 }, 120, troops_background);
+	units_label = App->gui->CreateLabel({ 135, 130 }, "fonts/red_alert.ttf", 25, "Units: -", { 231,216,145,255 }, 120, troops_background);
 
 	energy_bar = App->gui->CreateBar({ 8,188 }, { 2897,1780,267,64 }, App->game_manager->GetCardFromCollection(GI)->info.stats.find("energy_cost")->second, BAR_HORITZONTAL, BAR_STATIC, nullptr, troops_background);
 
