@@ -57,6 +57,17 @@ EncounterTree * EncounterTree::CreateTree()
 		else {
 			map_encounters[i]->FillRandomEncounterDeck();
 		}
+
+		pugi::xml_node rewards = node.child("rewards");
+
+		if (rewards != NULL)
+		{
+			map_encounters[i]->FillPredefinedRewards(rewards);
+		}
+		else {
+			map_encounters[i]->FillRandomdRewards();
+		}
+
 	}
 
 	if (!current_node)
