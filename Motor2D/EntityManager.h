@@ -3,6 +3,7 @@
 
 #include "Module.h"
 #include "p2Point.h"
+#include <map>
 
 class Entity;
 class Core;
@@ -10,6 +11,7 @@ struct Card;
 class Deck;
 class StrategyBuilding;
 class BuffSource;
+class Stat;
 enum Faction;
 struct SDL_Rect;
 
@@ -72,6 +74,7 @@ public:
 	void GetEntitiesInArea(SDL_Rect area, std::list<Entity*> &list, int faction = -1);
 	void GetEntitiesInArea(float radius, fPoint position, std::list<Entity*> &list, int faction = -1);
 	void SetDebug();
+	void GetCoreStats(std::map<std::string, Stat*> *stats);
 
 private:
 	pugi::xml_document entity_file;

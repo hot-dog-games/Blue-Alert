@@ -287,6 +287,21 @@ void EntityManager::SetDebug()
 	}
 }
 
+void EntityManager::GetCoreStats(std::map<std::string, Stat*> *stats)
+{
+	pugi::xml_node entity_node = entity_configs.find_child_by_attribute("type", std::to_string((int)CORE).c_str());
+	pugi::xml_node stats_node = entity_node.child("stats");
+
+	for (pugi::xml_node iter = stats_node.child("stat"); iter; iter = iter.next_sibling("stat"))
+	{
+		std::string stat_name = iter.attribute("stat").as_string();
+		//Create the stat
+		stats->insert(std::pair<std::string, Stat*>(
+			stat_name,
+			new Stat(iter.attribute("value").as_int())));
+	}
+}
+
 bool EntityManager::DeleteEntity(Entity* entity)
 {
 	entity->CleanUp();

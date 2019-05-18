@@ -34,8 +34,6 @@ protected:
 	Deck* deck = nullptr;
 	PerfTimer energy_timer;
 
-
-
 	bool CanUseCard(int card_num);
 };
 

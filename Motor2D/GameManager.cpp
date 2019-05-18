@@ -9,7 +9,7 @@
 #include "EntityManager.h"
 #include "BuffSourceManager.h"
 #include "Buff.h"
-
+#include "Stat.h"
 #include "Input.h"
 #include "Render.h"
 
@@ -29,7 +29,6 @@ GameManager::~GameManager()
 
 bool GameManager::Awake(pugi::xml_node &)
 {
-
 	return true;
 }
 
@@ -38,6 +37,7 @@ bool GameManager::Start()
 	CreateStage();
 	CreateUpgrades();
 	CreatePlayerDeck();
+	CreateCoreStats();
 
 	return true;
 }
@@ -293,6 +293,31 @@ BuffSource* GameManager::GetUpgrade(EntityType unit_type)
 	return nullptr;
 }
 
+void GameManager::UpgradeHealth()
+{
+	if (((LeveledUpgrade*)health_upgrade)->LevelUp())
+	{
+		((LeveledUpgrade*)health_upgrade)->RemoveBuffs(stats);
+		((LeveledUpgrade*)health_upgrade)->GetBuffs(stats);
+	}
+}
+
+void GameManager::UpgradeEnergy()
+{
+	if (((LeveledUpgrade*)energy_upgrade)->LevelUp())
+	{
+		((LeveledUpgrade*)energy_upgrade)->RemoveBuffs(stats);
+		((LeveledUpgrade*)energy_upgrade)->GetBuffs(stats);
+	}
+}
+
+void GameManager::CreateCoreStats()
+{
+	App->entity_manager->GetCoreStats(&stats);
+	((LeveledUpgrade*)health_upgrade)->GetBuffs(stats);
+	((LeveledUpgrade*)energy_upgrade)->GetBuffs(stats);
+}
+
 bool GameManager::IsInCollection(int card_type)
 {
 	bool ret = false;
@@ -308,3 +333,5 @@ bool GameManager::IsInCollection(int card_type)
 
 	return ret;
 }
+
+
