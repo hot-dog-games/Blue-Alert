@@ -83,14 +83,17 @@ bool StrategyMapScene::PreUpdate()
 
 	App->input->GetMouseMotion(mousemotion_x, mousemotion_y);
 
-	if (App->input->GetMouseButtonDown(1) == KEY_REPEAT)
-	{
-		if (IsInsideLimits(mousemotion_x, mousemotion_y))
+	if (dragable) {
+
+		if (App->input->GetMouseButtonDown(1) == KEY_REPEAT)
 		{
-			if (abs(mousemotion_x) > drag_threshhold && abs(mousemotion_y) > drag_threshhold)
+			if (IsInsideLimits(mousemotion_x, mousemotion_y))
 			{
-				App->render->camera.x += mousemotion_x;
-				App->render->camera.y += mousemotion_y;
+				if (abs(mousemotion_x) > drag_threshhold && abs(mousemotion_y) > drag_threshhold)
+				{
+					App->render->camera.x += mousemotion_x;
+					App->render->camera.y += mousemotion_y;
+				}
 			}
 		}
 	}
@@ -131,7 +134,6 @@ bool StrategyMapScene::PostUpdate()
 		ret = false;
 
 	App->game_manager->GetEncounterTree()->DrawTreeLines();
-	App->render->DrawCircle(limit_center.x, limit_center.y, limit_radius, 255, 0, 0, 255, true);
 
 	return ret;
 }
@@ -166,6 +168,7 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			App->gui->DisableElement(buildings_background);
 
 			App->game_manager->GetEncounterTree()->is_clickable = false;
+			dragable = false;
 
 			for (uint i = 0; i < 4; ++i) {
 				if(!App->game_manager->GetPlayerDeck()->cards[i])
@@ -187,6 +190,7 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			App->gui->EnableElement(settings_button);
 
 			App->game_manager->GetEncounterTree()->is_clickable = true;
+			dragable = true;
 
 
 		}
