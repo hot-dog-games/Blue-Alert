@@ -21,6 +21,7 @@
 #include "UIButton.h"
 #include "Brofiler/Brofiler.h"
 #include "Stat.h"
+#include "UIBar.h"
 
 #include <stdio.h>
 #include <string>
@@ -301,19 +302,21 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 				range_label->SetText(str_stat);
 				str_stat = "Units: " + std::to_string((int)App->game_manager->GetCardFromCollection((EntityType)((num * 2) + 1))->info.stats.find("units")->second->GetValue());
 				units_label->SetText(str_stat);
+				energy_bar->ChangeStat(App->game_manager->GetCardFromCollection((EntityType)((num * 2) + 1))->info.stats.find("energy_cost")->second);
 			}
 			else if(element == collection_buttons_enemies[num]) {
 				info_image->SetImage(collection_buttons_enemies[num]->GetAnim()[0]);
-				str_stat = "Health: " + std::to_string((int)App->game_manager->GetCardFromCollection((EntityType)((num * 2) + 1))->info.stats.find("health")->second->GetValue());
+				str_stat = "Health: " + std::to_string((int)App->game_manager->GetCardFromCollection((EntityType)((num * 2) + 2))->info.stats.find("health")->second->GetValue());
 				health_label->SetText(str_stat);
-				str_stat = "Attack: " + std::to_string((int)App->game_manager->GetCardFromCollection((EntityType)((num * 2) + 1))->info.stats.find("damage")->second->GetValue());
+				str_stat = "Attack: " + std::to_string((int)App->game_manager->GetCardFromCollection((EntityType)((num * 2) + 2))->info.stats.find("damage")->second->GetValue());
 				attack_label->SetText(str_stat);
-				str_stat = "Defense: " + std::to_string((int)App->game_manager->GetCardFromCollection((EntityType)((num * 2) + 1))->info.stats.find("defense")->second->GetValue());
+				str_stat = "Defense: " + std::to_string((int)App->game_manager->GetCardFromCollection((EntityType)((num * 2) + 2))->info.stats.find("defense")->second->GetValue());
 				defense_label->SetText(str_stat);
-				str_stat = "Range: " + std::to_string((int)App->game_manager->GetCardFromCollection((EntityType)((num * 2) + 1))->info.stats.find("range")->second->GetValue());
+				str_stat = "Range: " + std::to_string((int)App->game_manager->GetCardFromCollection((EntityType)((num * 2) + 2))->info.stats.find("range")->second->GetValue());
 				range_label->SetText(str_stat);
-				str_stat = "Units: " + std::to_string((int)App->game_manager->GetCardFromCollection((EntityType)((num * 2) + 1))->info.stats.find("units")->second->GetValue());
+				str_stat = "Units: " + std::to_string((int)App->game_manager->GetCardFromCollection((EntityType)((num * 2) + 2))->info.stats.find("units")->second->GetValue());
 				units_label->SetText(str_stat);
+				energy_bar->ChangeStat(App->game_manager->GetCardFromCollection((EntityType)((num * 2) + 2))->info.stats.find("energy_cost")->second);
 			}
 		}
 	}
@@ -454,5 +457,7 @@ void StrategyMapScene::InitializeUI()
 	defense_label = App->gui->CreateLabel({ 135,80 }, "fonts/red_alert.ttf", 25, "Defense: ", { 231,216,145,255 }, 120, troops_background);
 	range_label = App->gui->CreateLabel({ 135, 105 }, "fonts/red_alert.ttf", 25, "Range: ", { 231,216,145,255 }, 120, troops_background);
 	units_label = App->gui->CreateLabel({ 135, 130 }, "fonts/red_alert.ttf", 25, "Units: ", { 231,216,145,255 }, 120, troops_background);
+
+	energy_bar = App->gui->CreateBar({ 8,188 }, { 2897,1780,267,64 }, App->game_manager->GetCardFromCollection(GI)->info.stats.find("energy_cost")->second, BAR_HORITZONTAL, BAR_STATIC, nullptr, troops_background);
 
 }

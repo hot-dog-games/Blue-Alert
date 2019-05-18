@@ -6,11 +6,12 @@
 class Stat;
 
 enum BarType;
+enum BarState;
 
 class UIBar : public UIElement 
 {
 public:
-	UIBar(iPoint pos, SDL_Rect sprite_rect, Stat* value, BarType type);
+	UIBar(iPoint pos, SDL_Rect sprite_rect, Stat* value, BarType type, BarState state);
 	~UIBar() {};
 
 	void DecreaseBar(uint value);
@@ -18,10 +19,13 @@ public:
 	bool UIBlit();
 	bool Update(float dt);
 
+	void ChangeStat(Stat* stat);
+
 protected:
 	Stat*	bar_value = nullptr;
 	uint	current_value = 0;
 	BarType	bar_type;
+	BarState bar_state;
 
 	float decimal_decrease = 0.0f;
 	float decimal_increase = 0.0f;

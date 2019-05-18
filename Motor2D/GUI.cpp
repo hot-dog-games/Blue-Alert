@@ -245,14 +245,14 @@ UIAnimatedImage* Gui::CreateAnimatedImage(iPoint pos, SDL_Rect * rect, int total
 	return image;
 }
 
-UIBar * Gui::CreateBar(iPoint pos, SDL_Rect rect, Stat* value, BarType type, Entity* entity, UIElement * parent)
+UIBar * Gui::CreateBar(iPoint pos, SDL_Rect rect, Stat* value, BarType type, BarState state, Entity* entity, UIElement * parent)
 {
 	UIBar* bar;
 	if (entity) {
-		bar = new UIEntityBar(pos, rect, value, type, entity);
+		bar = new UIEntityBar(pos, rect, value, type, state, entity);
 	}
 	else {
-		bar = new UIBar(pos, rect, value, type);
+		bar = new UIBar(pos, rect, value, type, state);
 	}
 	
 	bar->parent = parent;

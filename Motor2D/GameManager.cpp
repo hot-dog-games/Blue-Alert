@@ -75,6 +75,7 @@ void GameManager::CreatePlayerDeck()
 	collection.push_back(App->card_manager->CreateCard(EntityType::GI));
 	collection.push_back(App->card_manager->CreateCard(EntityType::VIRUS));
 	collection.push_back(App->card_manager->CreateCard(EntityType::GUARDIAN_GI));
+	collection.push_back(App->card_manager->CreateCard(EntityType::SNIPER));
 
 	collection.push_back(App->card_manager->CreateCard(EntityType::BLACK_EAGLE));
 

@@ -90,8 +90,6 @@ private:
 	UILabel* units_label = nullptr;
 	UILabel* range_label = nullptr;
 	UIBar*	 energy_bar = nullptr;
-
-	int num = 4;
 };
 
 #endif
