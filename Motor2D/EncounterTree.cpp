@@ -8,6 +8,7 @@
 #include "StrategyBuilding.h"
 #include "EncounterTree.h"
 #include "GameManager.h"
+#include "Textures.h"
 #include "Deck.h"
 
 
@@ -26,6 +27,11 @@ EncounterTree::~EncounterTree()
 EncounterTree * EncounterTree::CreateTree()
 {
 	LoadDocuments();
+
+	lines_texture = App->tex->Load("sprites/BuildingNodes/lines.png");
+	lines_sprites[0] = { 0, 0, 10, 10 };
+	lines_sprites[1] = { 0, 12, 10, 10 };
+	lines_sprites[2] = { 0, 25, 10, 10 };
 
 	for (int i = 0; i < map01_nodes.attribute("size").as_int(); i++)
 	{
@@ -55,8 +61,6 @@ EncounterTree * EncounterTree::CreateTree()
 
 	if (!current_node)
 		SetCurrentNode(map_encounters.front());
-
-	LOG("NODES", map_encounters.size());
 
 	return this;
 }
@@ -118,7 +122,25 @@ void EncounterTree::SetFightingNode(EncounterNode * fighting_node)
 
 void EncounterTree::DrawTreeLines()
 {
-	node_position_offset = { current_node->GetEntity()->current_frame.w / 2, current_node->GetEntity()->current_frame.h / 2 };
+	node_position_offset = { 0, current_node->GetEntity()->current_frame.h / 2 };
+
+	for each (EncounterNode* n in map_encounters)
+	{
+		DrawTreeLine();			
+	}
+}
+
+void EncounterTree::UpdateTreeState()
+{
+	green_dot_positions.clear();
+	blue_dot_positions.clear();
+	red_dot_positions.clear();
+
+	for (int i = 0; i < current_node->GetChildren().size(); i++)
+	{
+		current_node->GetChildren()[i]->GetEntity()->SetInRange(true);
+	}
+
 	for each (EncounterNode* n in map_encounters)
 	{
 		if (n->GetChildren().size() != 0)
@@ -127,30 +149,38 @@ void EncounterTree::DrawTreeLines()
 			{
 				for (int i = 0; i < n->GetChildren().size(); i++)
 				{
-					iPoint parent_world_position = App->map->MapToWorld(n->GetPosition().x, n->GetPosition().y);
-					iPoint child_world_position = App->map->MapToWorld(n->GetChildren()[i]->GetPosition().x, n->GetChildren()[i]->GetPosition().y);
-					App->render->DrawLine(parent_world_position.x, parent_world_position.y - node_position_offset.y,
-						child_world_position.x, child_world_position.y - node_position_offset.y, 255, 0, 0);
+					if (!n->GetChildren()[i]->visited)
+					{
+						iPoint parent_world_position = App->map->MapToWorld(n->GetPosition().x, n->GetPosition().y);
+						iPoint child_world_position = App->map->MapToWorld(n->GetChildren()[i]->GetPosition().x, n->GetChildren()[i]->GetPosition().y);
+						SetDotsPositions(parent_world_position, child_world_position, 0);
+					}
 				}
+				
 			}
 			else {
 				for (int i = 0; i < n->GetChildren().size(); i++)
 				{
 					iPoint parent_world_position = App->map->MapToWorld(n->GetPosition().x, n->GetPosition().y);
 					iPoint child_world_position = App->map->MapToWorld(n->GetChildren()[i]->GetPosition().x, n->GetChildren()[i]->GetPosition().y);
-					App->render->DrawLine(parent_world_position.x, parent_world_position.y - node_position_offset.y,
-						child_world_position.x, child_world_position.y - node_position_offset.y, 0, 255, 0);
+					SetDotsPositions(parent_world_position, child_world_position, 1);
 				}
 			}
 		}
-	}
-}
 
-void EncounterTree::UpdateTreeState()
-{
-	for (int i = 0; i < current_node->GetChildren().size(); i++)
-	{
-		current_node->GetChildren()[i]->GetEntity()->SetInRange(true);
+		if (n->visited)
+		{
+			for (int i = 0; i < n->GetParents().size(); i++)
+			{
+				if (n->GetParents()[i]->visited)
+				{
+					iPoint parent_world_position = App->map->MapToWorld(n->GetPosition().x, n->GetPosition().y);
+					iPoint child_world_position = App->map->MapToWorld(n->GetParents()[i]->GetPosition().x, n->GetParents()[i]->GetPosition().y);
+					SetDotsPositions(parent_world_position, child_world_position, 2);
+				}
+			}
+		}
+
 	}
 }
 
@@ -219,4 +249,38 @@ int EncounterTree::GetBuildingsOfType(EntityType type)
 				num++;
 	}
 	return num;
+}
+
+void EncounterTree::SetDotsPositions(iPoint origin, iPoint destination, int type)
+{
+	int distance = origin.DistanceTo(destination);
+
+	for (int i = 0; i < distance; i += 16)
+	{
+		float percent = i / (float)distance;
+		if(type == 0)
+			red_dot_positions.push_back({ origin.x + percent * (destination.x - origin.x), origin.y + percent * (destination.y - origin.y) });
+		else if(type == 1)
+			blue_dot_positions.push_back({ origin.x + percent * (destination.x - origin.x), origin.y + percent * (destination.y - origin.y) });
+		else if(type == 2)
+			green_dot_positions.push_back({ origin.x + percent * (destination.x - origin.x), origin.y + percent * (destination.y - origin.y) });
+	}
+}
+
+void EncounterTree::DrawTreeLine()
+{
+	for each (fPoint ip in green_dot_positions)
+	{
+		App->render->Blit(lines_texture, ip.x - node_position_offset.x, ip.y - node_position_offset.y, &lines_sprites[2]);
+	}	
+	
+	for each (fPoint ip in blue_dot_positions)
+	{
+		App->render->Blit(lines_texture, ip.x - node_position_offset.x, ip.y - node_position_offset.y, &lines_sprites[1]);
+	}	
+	
+	for each (fPoint ip in red_dot_positions)
+	{
+		App->render->Blit(lines_texture, ip.x - node_position_offset.x, ip.y - node_position_offset.y, &lines_sprites[0]);
+	}
 }

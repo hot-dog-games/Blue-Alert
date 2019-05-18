@@ -62,6 +62,12 @@ bool StrategyMapScene::Start()
 	App->render->camera.x = -world_position.x + w * 0.5;
 	App->render->camera.y = -world_position.y + h * 0.9;
 
+	if (!IsInsideLimits(0, 0))
+	{
+		App->render->camera.x = -limit_center.x;
+		App->render->camera.y = -limit_center.y;
+	}
+
 	InitializeUI();
 	
 	App->audio->PlayMusic("audio/music/5.InDeep-RedAlert2_2.ogg");
@@ -88,8 +94,6 @@ bool StrategyMapScene::PreUpdate()
 			}
 		}
 	}
-
-	LOG("%i", App->render->camera.x);
 
 	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 		App->render->camera.y += 10;
