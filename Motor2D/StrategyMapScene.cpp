@@ -502,8 +502,7 @@ void StrategyMapScene::InitializeUI()
 	range_label = App->gui->CreateLabel({ 135, 105 }, "fonts/red_alert.ttf", 25, "Range: -", { 231,216,145,255 }, 120, troops_background);
 	units_label = App->gui->CreateLabel({ 135, 130 }, "fonts/red_alert.ttf", 25, "Units: -", { 231,216,145,255 }, 120, troops_background);
 
-	energy_bar = App->gui->CreateBar({ 8,188 }, { 2897,1780,267,64 }, App->game_manager->GetCardFromCollection(GI)->info.stats.find("energy_cost")->second, BAR_HORITZONTAL, BAR_STATIC, nullptr, troops_background);
-
+	energy_bar = App->gui->CreateBar({ 8,188 }, { 2897,1780,267,64 }, App->game_manager->GetCardFromCollection(CONSCRIPT)->info.stats.find("energy_cost")->second, BAR_HORITZONTAL, BAR_STATIC, nullptr, troops_background);
 }
 
 bool StrategyMapScene::IsInsideLimits(int mousemotion_x, int mousemotion_y)
