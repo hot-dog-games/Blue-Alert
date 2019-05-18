@@ -20,6 +20,7 @@
 #include "UILabel.h"
 #include "UIButton.h"
 #include "Brofiler/Brofiler.h"
+#include "Stat.h"
 
 #include <stdio.h>
 #include <string>
@@ -286,12 +287,33 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 	}
 	else if (gui_event == GUI_Event::MOUSE_OVER)
 	{
+	std::string str_stat;
 		for (int num = 0; num < 9; ++num) {
 			if (element == collection_buttons_allies[num]) {
 				info_image->SetImage(collection_buttons_allies[num]->GetAnim()[0]);
+				str_stat = "Health: " + std::to_string((int)App->game_manager->GetCardFromCollection((EntityType)((num * 2) + 1))->info.stats.find("health")->second->GetValue());
+				health_label->SetText(str_stat);
+				str_stat = "Attack: " + std::to_string((int)App->game_manager->GetCardFromCollection((EntityType)((num * 2) + 1))->info.stats.find("damage")->second->GetValue());
+				attack_label->SetText(str_stat);
+				str_stat = "Defense: " + std::to_string((int)App->game_manager->GetCardFromCollection((EntityType)((num * 2) + 1))->info.stats.find("defense")->second->GetValue());
+				defense_label->SetText(str_stat);
+				str_stat = "Range: " + std::to_string((int)App->game_manager->GetCardFromCollection((EntityType)((num * 2) + 1))->info.stats.find("range")->second->GetValue());
+				range_label->SetText(str_stat);
+				str_stat = "Units: " + std::to_string((int)App->game_manager->GetCardFromCollection((EntityType)((num * 2) + 1))->info.stats.find("units")->second->GetValue());
+				units_label->SetText(str_stat);
 			}
 			else if(element == collection_buttons_enemies[num]) {
 				info_image->SetImage(collection_buttons_enemies[num]->GetAnim()[0]);
+				str_stat = "Health: " + std::to_string((int)App->game_manager->GetCardFromCollection((EntityType)((num * 2) + 1))->info.stats.find("health")->second->GetValue());
+				health_label->SetText(str_stat);
+				str_stat = "Attack: " + std::to_string((int)App->game_manager->GetCardFromCollection((EntityType)((num * 2) + 1))->info.stats.find("damage")->second->GetValue());
+				attack_label->SetText(str_stat);
+				str_stat = "Defense: " + std::to_string((int)App->game_manager->GetCardFromCollection((EntityType)((num * 2) + 1))->info.stats.find("defense")->second->GetValue());
+				defense_label->SetText(str_stat);
+				str_stat = "Range: " + std::to_string((int)App->game_manager->GetCardFromCollection((EntityType)((num * 2) + 1))->info.stats.find("range")->second->GetValue());
+				range_label->SetText(str_stat);
+				str_stat = "Units: " + std::to_string((int)App->game_manager->GetCardFromCollection((EntityType)((num * 2) + 1))->info.stats.find("units")->second->GetValue());
+				units_label->SetText(str_stat);
 			}
 		}
 	}
@@ -347,7 +369,6 @@ void StrategyMapScene::InitializeUI()
 	gold = App->gui->CreateLabel({ 90, 30 }, "fonts/button_text.ttf", 20, "GOLD", { 0,0,0,0 }, 0, main_panel);
 	energy = App->gui->CreateLabel({ 450, 30 }, "fonts/button_text.ttf", 20, "ENERGY", { 0,0,0,0 }, 0, main_panel);
 	health = App->gui->CreateLabel({ 860, 30 }, "fonts/button_text.ttf", 20, "HEALTH", { 0,0,0,0 }, 0, main_panel);
-
 
 	// Troops menu
 	troops_background = App->gui->CreateImage({ 20,95 }, { 793,1229,986,593 }, main_panel);
@@ -406,20 +427,20 @@ void StrategyMapScene::InitializeUI()
 	buildings_title[2] = App->gui->CreateLabel({ 812,385 }, "fonts/button_text.ttf", 22, "Aerial", { 0,0,0,0 }, 300, buildings_background);
 
 	//Infantry
-	std::string str = "The infantry building is the place where the soldiers rest and prepare for battle.\n\nConquered: " + std::to_string(num);
+	std::string str = "The infantry building is the place where the soldiers rest and prepare for battle.\n\nConquered: " + std::to_string(App->game_manager->GetEncounterTree()->GetBuildingsOfType(EntityType::INFANTRY_STRATEGY_BUILDING));
 	
 	building_infantry_button = App->gui->CreateSelectableButton({355, 435 }, App->gui->LoadUIButton(30, "button"),buildings_background);
 	building_infantry_image = App->gui->CreateImage({ 365,125 }, App->gui->LoadUIImage(30, "building"), buildings_background);
 	building_infantry_info = App->gui->CreateLabel({ 245,-30 }, "fonts/red_alert.ttf", 23, str, { 231,216,145,255 }, 300, building_infantry_image);
 
 	//Aerial
-	str = "The aerial building is where the helicopters and planes are parked.\n\nConquered: " + std::to_string(num);
+	str = "The aerial building is where the helicopters and planes are parked.\n\nConquered: " + std::to_string(App->game_manager->GetEncounterTree()->GetBuildingsOfType(EntityType::AERIAL_STRATEGY_BUILDING));
 	building_aerial_button = App->gui->CreateSelectableButton({ 783,430 }, App->gui->LoadUIButton(31, "button"), buildings_background);
 	building_aerial_image = App->gui->CreateImage({ 345,115 }, App->gui->LoadUIImage(31, "building"), buildings_background);
 	building_aerial_info = App->gui->CreateLabel({ 265,-20 }, "fonts/red_alert.ttf", 23, str, { 231,216,145,255 }, 300, building_aerial_image);
 	
 	//Land
-	str = "The land building is where the tanks are waiting for the battle.\n\nConquered: " + std::to_string(num);
+	str = "The land building is where the tanks are waiting for the battle.\n\nConquered: " + std::to_string(App->game_manager->GetEncounterTree()->GetBuildingsOfType(EntityType::LAND_STRATEGY_BUILDING));
 	building_land_button = App->gui->CreateSelectableButton({ 560,445 } , App->gui->LoadUIButton(32, "button"), buildings_background);
 	building_land_image = App->gui->CreateImage({ 350,145 }, App->gui->LoadUIImage(32, "building"), buildings_background);
 	building_land_info = App->gui->CreateLabel({ 260, -50 }, "fonts/red_alert.ttf", 23, str, { 231,216,145,255 }, 300, building_land_image);
@@ -428,9 +449,10 @@ void StrategyMapScene::InitializeUI()
 
 	//Show Info
 	info_image = App->gui->CreateImage({ 25,30 }, { 0,0,100,100 }, troops_background);
-	attack_label = App->gui->CreateLabel({ 135,30 }, "fonts/red_alert.ttf", 25, "Attack: ", { 231,216,145,255 }, 120, troops_background);
-	defense_label = App->gui->CreateLabel({ 135,55 }, "fonts/red_alert.ttf", 25, "Defense: ", { 231,216,145,255 }, 120, troops_background);
-	range_label = App->gui->CreateLabel({ 135, 80 }, "fonts/red_alert.ttf", 25, "Range: ", { 231,216,145,255 }, 120, troops_background);
-	units_label = App->gui->CreateLabel({ 135, 105 }, "fonts/red_alert.ttf", 25, "Units: ", { 231,216,145,255 }, 120, troops_background);
+	health_label = App->gui->CreateLabel({ 135, 30 }, "fonts/red_alert.ttf", 25, "Health: ", { 231,216,145,255 }, 120, troops_background);
+	attack_label = App->gui->CreateLabel({ 135,55 }, "fonts/red_alert.ttf", 25, "Attack: ", { 231,216,145,255 }, 120, troops_background);
+	defense_label = App->gui->CreateLabel({ 135,80 }, "fonts/red_alert.ttf", 25, "Defense: ", { 231,216,145,255 }, 120, troops_background);
+	range_label = App->gui->CreateLabel({ 135, 105 }, "fonts/red_alert.ttf", 25, "Range: ", { 231,216,145,255 }, 120, troops_background);
+	units_label = App->gui->CreateLabel({ 135, 130 }, "fonts/red_alert.ttf", 25, "Units: ", { 231,216,145,255 }, 120, troops_background);
 
 }

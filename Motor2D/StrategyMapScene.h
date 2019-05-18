@@ -84,6 +84,7 @@ private:
 
 	//Info Showing
 	UIImage* info_image = nullptr;
+	UILabel* health_label = nullptr;
 	UILabel* attack_label = nullptr;
 	UILabel* defense_label = nullptr;
 	UILabel* units_label = nullptr;
