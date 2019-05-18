@@ -185,22 +185,22 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 				}
 			}
 		}
-		else if (element == deck_buttons[0])
+		else if (element == deck_buttons[0] && App->game_manager->GetPlayerDeck()->GetDeckSize() > 1)
 		{
 			App->gui->DisableElement(deck_buttons[0]);
 			App->game_manager->GetPlayerDeck()->RemoveCard(0);
 		}
-		else if (element == deck_buttons[1])
+		else if (element == deck_buttons[1] && App->game_manager->GetPlayerDeck()->GetDeckSize() > 1)
 		{
 			App->gui->DisableElement(deck_buttons[1]);
 			App->game_manager->GetPlayerDeck()->RemoveCard(1);
 		}
-		else if (element == deck_buttons[2])
+		else if (element == deck_buttons[2] && App->game_manager->GetPlayerDeck()->GetDeckSize() > 1)
 		{
 			App->gui->DisableElement(deck_buttons[2]);
 			App->game_manager->GetPlayerDeck()->RemoveCard(2);
 		}
-		else if (element == deck_buttons[3])
+		else if (element == deck_buttons[3] && App->game_manager->GetPlayerDeck()->GetDeckSize() > 1)
 		{
 			App->gui->DisableElement(deck_buttons[3]);
 			App->game_manager->GetPlayerDeck()->RemoveCard(3);
@@ -348,7 +348,7 @@ void StrategyMapScene::InitializeUI()
 	uint w, h;
 	App->win->GetWindowSize(w, h);
 
-	main_panel = App->gui->CreateImage({ 0,0 }, { 0, 0, 0, 0}, nullptr, false);
+	main_panel = App->gui->CreateImage({ 0,0 }, { 0, 0, 0, 0 }, nullptr, false);
 	banner = App->gui->CreateImage({ 4,5 }, { 1,769,1017,83 }, main_panel);
 
 	SDL_Rect small_button_rect[3];
@@ -367,7 +367,7 @@ void StrategyMapScene::InitializeUI()
 	large_button_rect[2] = { 449, 653, 304, 74 };
 
 	settings_button = App->gui->CreateButton({ 50,700 }, small_button_rect, main_panel);
-	menu_button = App->gui->CreateButtonText({ 700,700 }, {70,0 }, medium_button_rect, "MENU", { 200,200,200,255 }, 33, main_panel);
+	menu_button = App->gui->CreateButtonText({ 700,700 }, { 70,0 }, medium_button_rect, "MENU", { 200,200,200,255 }, 33, main_panel);
 
 	gold = App->gui->CreateLabel({ 90, 30 }, "fonts/button_text.ttf", 20, "GOLD", { 0,0,0,0 }, 0, main_panel);
 	energy = App->gui->CreateLabel({ 450, 30 }, "fonts/button_text.ttf", 20, "ENERGY", { 0,0,0,0 }, 0, main_panel);
@@ -377,9 +377,9 @@ void StrategyMapScene::InitializeUI()
 	troops_background = App->gui->CreateImage({ 20,95 }, { 793,1229,986,593 }, main_panel);
 	change_side_button = App->gui->CreateButton({ 300,300 }, small_button_rect, troops_background);
 
-	backbutton_t_b = App->gui->CreateButtonText({ 961,99 }, {6,3}, small_button_rect, "X", { 200,200,200,255 }, 27);
+	backbutton_t_b = App->gui->CreateButtonText({ 961,99 }, { 6,3 }, small_button_rect, "X", { 200,200,200,255 }, 27);
 	App->gui->DisableElement(backbutton_t_b);
-	troops_button = App->gui->CreateButtonText({ 351,98 }, { 32,0 }, medium_button_rect, "TROOPS", {200,200,200,255},33);
+	troops_button = App->gui->CreateButtonText({ 351,98 }, { 32,0 }, medium_button_rect, "TROOPS", { 200,200,200,255 }, 33);
 	App->gui->DisableElement(troops_button);
 	buildings_button = App->gui->CreateButtonText({ 635,98 }, { 10,16 }, medium_button_rect, "BUILDINGS", { 200,200,200,255 }, 33);
 	App->gui->DisableElement(buildings_button);
@@ -389,7 +389,7 @@ void StrategyMapScene::InitializeUI()
 	troops_title[1] = App->gui->CreateLabel({ 420,285 }, "fonts/button_text.ttf", 33, "Land", { 0,0,0,0 }, 300, troops_background);
 	troops_title[2] = App->gui->CreateLabel({ 733,285 }, "fonts/button_text.ttf", 33, "Aerial", { 0,0,0,0 }, 300, troops_background);
 
-	if(App->game_manager->GetPlayerDeck()->cards[0])
+	if (App->game_manager->GetPlayerDeck()->cards[0])
 		deck_buttons[0] = App->gui->CreateButton({ 360,99 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[0]->type, "deck"), troops_background);
 	if (App->game_manager->GetPlayerDeck()->cards[1])
 		deck_buttons[1] = App->gui->CreateButton({ 500,99 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[1]->type, "deck"), troops_background);
@@ -431,8 +431,8 @@ void StrategyMapScene::InitializeUI()
 
 	//Infantry
 	std::string str = "The infantry building is the place where the soldiers rest and prepare for battle.\n\nConquered: " + std::to_string(App->game_manager->GetEncounterTree()->GetBuildingsOfType(EntityType::INFANTRY_STRATEGY_BUILDING));
-	
-	building_infantry_button = App->gui->CreateSelectableButton({355, 435 }, App->gui->LoadUIButton(30, "button"),buildings_background);
+
+	building_infantry_button = App->gui->CreateSelectableButton({ 355, 435 }, App->gui->LoadUIButton(30, "button"), buildings_background);
 	building_infantry_image = App->gui->CreateImage({ 365,125 }, App->gui->LoadUIImage(30, "building"), buildings_background);
 	building_infantry_info = App->gui->CreateLabel({ 245,-30 }, "fonts/red_alert.ttf", 23, str, { 231,216,145,255 }, 300, building_infantry_image);
 
@@ -441,12 +441,25 @@ void StrategyMapScene::InitializeUI()
 	building_aerial_button = App->gui->CreateSelectableButton({ 783,430 }, App->gui->LoadUIButton(31, "button"), buildings_background);
 	building_aerial_image = App->gui->CreateImage({ 345,115 }, App->gui->LoadUIImage(31, "building"), buildings_background);
 	building_aerial_info = App->gui->CreateLabel({ 265,-20 }, "fonts/red_alert.ttf", 23, str, { 231,216,145,255 }, 300, building_aerial_image);
-	
+
 	//Land
 	str = "The land building is where the tanks are waiting for the battle.\n\nConquered: " + std::to_string(App->game_manager->GetEncounterTree()->GetBuildingsOfType(EntityType::LAND_STRATEGY_BUILDING));
-	building_land_button = App->gui->CreateSelectableButton({ 560,445 } , App->gui->LoadUIButton(32, "button"), buildings_background);
+	building_land_button = App->gui->CreateSelectableButton({ 560,445 }, App->gui->LoadUIButton(32, "button"), buildings_background);
 	building_land_image = App->gui->CreateImage({ 350,145 }, App->gui->LoadUIImage(32, "building"), buildings_background);
 	building_land_info = App->gui->CreateLabel({ 260, -50 }, "fonts/red_alert.ttf", 23, str, { 231,216,145,255 }, 300, building_land_image);
+
+	//Core
+	core_image = App->gui->CreateImage({ 70, 80 }, { 1538,23,173,114 }, buildings_background);
+
+	core_title = App->gui->CreateLabel({ 27, 300 }, "fonts/button_text.ttf", 30, "CORE", { 242, 222, 70, 255 }, 300, buildings_background);
+
+	str = "Health: ";
+	core_health = App->gui->CreateLabel({ 27, 350 }, "fonts/red_alert.ttf", 30, str, { 231,216,145,255 }, 300, buildings_background);
+
+	str = "Energy: ";
+	core_health = App->gui->CreateLabel({ 27,400 }, "fonts/red_alert.ttf", 30, str, { 231,216,145,255 }, 300, buildings_background);
+
+	core_lvl_up = App->gui->CreateButtonText({ 12, 500 }, { 40,5 }, medium_button_rect, "LEVEL UP", { 231,216,145,255 }, 25, buildings_background);
 
 	App->gui->DisableElement(buildings_background);
 

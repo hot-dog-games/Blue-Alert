@@ -24,6 +24,7 @@
       <deck>
         <frame x="9" y="1846" width="147" height="146"/>
         <frame x="9" y="2032" width="147" height="146"/>
+        <frame x="9" y="2192" width="147" height="146"/>
       </deck>
     </GI>
 
@@ -50,6 +51,7 @@
       <deck>
         <frame x="1686" y="1846" width="147" height="146"/>
         <frame x="1686" y="2032" width="147" height="146"/>
+        <frame x="1686" y="2192" width="147" height="146"/>
       </deck>
       
     </Conscript>
@@ -77,6 +79,7 @@
       <deck>
         <frame x="2249" y="1846" width="147" height="146"/>
         <frame x="2249" y="2032" width="147" height="146"/>
+        <frame x="2249" y="2192" width="147" height="146"/>
       </deck>
 
     </Virus>
@@ -104,6 +107,7 @@
       <deck>
         <frame x="388" y="1846" width="147" height="146"/>
         <frame x="388" y="2032" width="147" height="146"/>
+        <frame x="388" y="2192" width="147" height="146"/>
       </deck>
       
     </Sniper>
@@ -132,6 +136,7 @@
       <deck>
         <frame x="2065" y="1846" width="147" height="146"/>
         <frame x="2065" y="2032" width="147" height="146"/>
+        <frame x="2065" y="2192" width="147" height="146"/>
       </deck>
 
     </GuardianGI>
@@ -159,6 +164,7 @@
       <deck>
         <frame x="1875" y="1846" width="147" height="146"/>
         <frame x="1875" y="2032" width="147" height="146"/>
+        <frame x="1875" y="2192" width="147" height="146"/>
       </deck>
 
     </FlakTrooper>
@@ -187,6 +193,7 @@
       <deck>
         <frame x="580" y="1846" width="147" height="146"/>
         <frame x="580" y="2032" width="147" height="146"/>
+        <frame x="580" y="2192" width="147" height="146"/>
       </deck>
       
     </GrizzlyTank>
@@ -214,6 +221,7 @@
       <deck>
         <frame x="769" y="1846" width="147" height="146"/>
         <frame x="769" y="2032" width="147" height="146"/>
+        <frame x="769" y="2192" width="147" height="146"/>
       </deck>
 
     </RhinoTank>
@@ -241,6 +249,7 @@
       <deck>
         <frame x="954" y="1846" width="147" height="146"/>
         <frame x="954" y="2032" width="147" height="146"/>
+        <frame x="954" y="2192" width="147" height="146"/>
       </deck>
       
     </RobotTank>
@@ -269,6 +278,7 @@
       <deck>
         <frame x="957" y="1850" width="145" height="145"/>
         <frame x="949" y="2027" width="159" height="160"/>
+        <frame x="949" y="2192" width="159" height="160"/>
       </deck>
 
     </TerrorDrone>
@@ -296,6 +306,7 @@
       <deck>
         <frame x="3010" y="1846" width="147" height="146"/>
         <frame x="3010" y="2032" width="147" height="146"/>
+        <frame x="3010" y="2192" width="147" height="146"/>
       </deck>
       
     </PrismTank>
@@ -323,6 +334,7 @@
       <deck>
         <frame x="2434" y="1846" width="147" height="146"/>
         <frame x="2434" y="2032" width="147" height="146"/>
+        <frame x="2434" y="2192" width="147" height="146"/>
       </deck>
 
     </TeslaTank>
@@ -350,6 +362,7 @@
       <deck>
         <frame x="1333" y="1846" width="147" height="146"/>
         <frame x="1333" y="2032" width="147" height="146"/>
+        <frame x="1333" y="2192" width="147" height="146"/>
       </deck>
       
     </NightHawk>
@@ -377,6 +390,7 @@
       <deck>
         <frame x="3196" y="1846" width="147" height="146"/>
         <frame x="3196" y="2032" width="147" height="146"/>
+        <frame x="3196" y="2192" width="147" height="146"/>
       </deck>
 
     </SiegeChopper>
@@ -404,6 +418,7 @@
       <deck>
         <frame x="1517" y="1846" width="147" height="146"/>
         <frame x="1517" y="2032" width="147" height="146"/>
+        <frame x="1517" y="2192" width="147" height="146"/>
       </deck>
       
     </Harrier>
@@ -431,6 +446,7 @@
       <deck>
         <frame x="2632" y="1846" width="147" height="146"/>
         <frame x="2632" y="2032" width="147" height="146"/>
+        <frame x="2632" y="2192" width="147" height="146"/>
       </deck>
 
     </MiG>
@@ -458,6 +474,7 @@
       <deck>
         <frame x="1143" y="1846" width="147" height="146"/>
         <frame x="1143" y="2032" width="147" height="146"/>
+        <frame x="1143" y="2192" width="147" height="146"/>
       </deck>
       
     </BlackEagle>
@@ -485,6 +502,7 @@
       <deck>
         <frame x="2821" y="1846" width="147" height="146"/>
         <frame x="2821" y="2032" width="147" height="146"/>
+        <frame x="2821" y="2192" width="147" height="146"/>
       </deck>
 
     </SpyPlane>

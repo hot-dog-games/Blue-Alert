@@ -57,6 +57,10 @@ private:
 	//Building Menu
 	UIImage* buildings_background;
 	UIImage* core_image;
+	UILabel* core_title;
+	UILabel* core_health;
+	UILabel* core_energy;
+	UIButton* core_lvl_up;
 
 	UIImage* building_infantry_image = nullptr;
 	UISelectableButton* building_infantry_button = nullptr;
