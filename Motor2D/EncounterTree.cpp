@@ -37,11 +37,20 @@ EncounterTree * EncounterTree::CreateTree()
 		pugi::xml_node node = map01_nodes.find_child_by_attribute("id", std::to_string((int)i).c_str());
 		map_encounters[i]->SetPosition({ node.attribute("x").as_float(),  node.attribute("y").as_float() });
 		map_encounters[i]->SetEncounterType(node.attribute("type").as_int());
-		for (pugi::xml_node child = node.first_child(); child; child = child.next_sibling())
+		for (pugi::xml_node child = node.child("children").first_child(); child; child = child.next_sibling())
 		{
 			map_encounters[i]->AddChild(map_encounters[child.attribute("id").as_int()]);
 		}
-		map_encounters[i]->FillEncounterDeck();
+
+		pugi::xml_node encounter = node.child("encounter");
+
+		if (encounter != NULL)
+		{
+			map_encounters[i]->FillPredefinedEncounterDeck(encounter);
+		}
+		else {
+			map_encounters[i]->FillRandomEncounterDeck();
+		}
 	}
 
 	if (!current_node)
@@ -198,4 +207,17 @@ void EncounterTree::SetFightingNodeByEntity(StrategyBuilding * entity)
 	{
 		if (en->GetEntity() == entity) SetFightingNode(en);
 	}
+}
+
+int EncounterTree::GetBuildingsOfType(EntityType type)
+{
+	int num = 0;
+
+	for each (EncounterNode* en in map_encounters)
+	{
+		if (en->GetEncounterType() == type)
+			if(en->visited)
+				num++;
+	}
+	return 0;
 }
