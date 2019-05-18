@@ -9,7 +9,7 @@
 			<card value="1" level="1"/>
 		</encounter>
 	</node>
-	<node id="1" x="63" y="62" type="34">
+	<node id="1" x="63" y="62" type="30">
 		<children>
 			<child id="2"/>
 			<child id="3"/>
