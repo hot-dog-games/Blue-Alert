@@ -294,6 +294,7 @@ void DynamicEntity::Attack()
 	if (attack_timer.ReadMs() >= SECOND_MS / entity_card->info.stats.find("attack_speed")->second->GetValue() )
 	{
 		float attack = entity_card->info.stats.find("damage")->second->GetValue();
+		LOG("my attack is %f", attack);
 		switch (entity_card->info.attack_type)
 		{
 		case AttackType::AT_BASIC:

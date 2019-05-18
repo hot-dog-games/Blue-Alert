@@ -8,6 +8,8 @@ struct Card;
 class Deck;
 class EncounterTree;
 class StrategyBuilding;
+class BuffSource;
+class Core;
 
 enum EntityType;
 
@@ -30,6 +32,7 @@ public:
 
 	EncounterTree* GetEncounterTree();
 	Deck* GetPlayerDeck();
+	void LevelUpgrade();
 
 	int gold = 0;
 	int stage = STAGE_TUTORIAL;
@@ -40,6 +43,7 @@ public:
 
 	void CreatePlayerDeck();
 	void CreateStage();
+	void CreateUpgrades();
 
 	//----------------------
 
@@ -51,9 +55,20 @@ public:
 	//----------------------
 	bool Restart();
 	bool restart = false;
+	void ClearUpgrades();
+	BuffSource* GetUpgrade(EntityType unit_type);
+
+
+	BuffSource* health_upgrade = nullptr;
+	BuffSource* energy_upgrade = nullptr;
 
 private:
 	Deck* combat_deck;
+
+	//Maybe put this bitch in a vector?
+	BuffSource* infantry_upgrade = nullptr;
+	BuffSource* land_upgrade = nullptr;
+	BuffSource* aerial_upgrade = nullptr;
 
 	EncounterTree* encounter_tree = nullptr;
 };
