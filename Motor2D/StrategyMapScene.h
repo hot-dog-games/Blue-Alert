@@ -83,6 +83,10 @@ private:
 
 	UIPopUp* pop_up = nullptr;
 
+	float drag_threshhold = 0.2f;
+
+	int cam_x_max, cam_x_min, cam_y_max, cam_y_min;
+
 };
 
 #endif

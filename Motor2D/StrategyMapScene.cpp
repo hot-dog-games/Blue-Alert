@@ -69,6 +69,21 @@ bool StrategyMapScene::Start()
 // Called each loop iteration
 bool StrategyMapScene::PreUpdate()
 {
+	int mousemotion_x, mousemotion_y;
+
+	App->input->GetMouseMotion(mousemotion_x, mousemotion_y);
+
+	if (App->input->GetMouseButtonDown(1) == KEY_REPEAT)
+	{
+		if (abs(mousemotion_x) > drag_threshhold && abs(mousemotion_y) > drag_threshhold)
+		{
+			App->render->camera.x += mousemotion_x;
+			App->render->camera.y += mousemotion_y;
+		}
+	}
+
+	LOG("%i", App->render->camera.x);
+
 	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 		App->render->camera.y += 10;
 
