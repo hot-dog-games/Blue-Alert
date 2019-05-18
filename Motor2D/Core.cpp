@@ -88,6 +88,9 @@ bool Core::UseCard(int number, fPoint position)
 
 bool Core::CanUseCard(int number)
 {
+	if (!deck->cards[number])
+		return false;
+
 	uint energy_cost = deck->cards[number]->info.stats.find("energy_cost")->second->GetValue();
 
 	if (stats.find("energy")->second->GetValue() >= energy_cost)

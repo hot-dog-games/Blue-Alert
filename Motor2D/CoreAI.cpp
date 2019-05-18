@@ -175,7 +175,7 @@ void CoreAI::SelectCard()
 	LOG("piercing: %i, armored: %i, basic: %i, aoe: %i", lanes[selected_lane].enemy_piercing, lanes[selected_lane].enemy_armored, lanes[selected_lane].enemy_basic, lanes[selected_lane].enemy_aoe);
 	LOG("SELECTED COUNTER IS: %i  SELECTED SECONDARY COUNTER IS: %i", (int)counter, (int)secondary_counter);
 
-	for (int i = 0; i < MAX_CARDS; i++)
+	for (int i = 0; i < deck->GetDeckSize(); i++)
 	{
 		if (deck->cards[i]->info.attack_type == counter)
 		{
@@ -191,7 +191,7 @@ void CoreAI::SelectCard()
 
 	if (!has_counter)
 	{
-		for (int i = 0; i < MAX_CARDS; i++)
+		for (int i = 0; i < deck->GetDeckSize(); i++)
 		{
 			if (deck->cards[i]->info.attack_type == secondary_counter)
 			{

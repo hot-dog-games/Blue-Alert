@@ -2,20 +2,57 @@
 
 <tutorial_nodes size="6">
 	<node id="0" x="60" y="59" type="30">
-		<children id="1"/>
+		<children>
+			<child id="1"/>
+		</children>
+		<encounter>
+			<card value="1" level="1"/>
+		</encounter>
 	</node>
 	<node id="1" x="47" y="46" type="30">
-		<children id="2"/>
-		<children id="3"/>
+		<children>
+			<child id="2"/>
+			<child id="3"/>
+		</children>
+		<encounter>
+			<card value="5" level="1"/>
+			<card value="1" level="1"/>
+		</encounter>
 	</node>
 	<node id="2" x="35" y="48" type="32">
-		<children id="4"/>
+		<children>
+			<child id="4"/>
+		</children>
+		<encounter>
+			<card value="5" level="1"/>
+			<card value="1" level="1"/>
+			<card value="3" level="1"/>
+		</encounter>
 	</node>
 	<node id="3" x="45" y="34" type="31">
-		<children id="5"/>
+		<children>
+			<child id="5"/>
+		</children>
+		<encounter>
+			<card value="5" level="1"/>
+			<card value="1" level="1"/>
+			<card value="3" level="1"/>
+		</encounter>
 	</node>
 	<node id="4" x="27" y="43" type="33">
+		<encounter>
+			<card value="5" level="1"/>
+			<card value="1" level="1"/>
+			<card value="3" level="1"/>
+			<card value="15" level="1"/>
+		</encounter>
 	</node>
 	<node id="5" x="36" y="21" type="34">
+		<encounter>
+			<card value="5" level="1"/>
+			<card value="1" level="1"/>
+			<card value="3" level="1"/>
+			<card value="15" level="1"/>
+		</encounter>
 	</node>
 </tutorial_nodes>
