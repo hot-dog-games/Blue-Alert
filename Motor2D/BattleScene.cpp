@@ -218,7 +218,10 @@ bool BattleScene::Update(float dt)
 			App->game_manager->gold += 100;
 			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetChildren().size() == 0)
 				App->game_manager->stage++;
+
 		}
+
+		energy_label->SetText(std::to_string(energy_bar->GetValue()));
 	}
 	break;
 	case BattleScene::BattleSceneState::WIN:
@@ -494,6 +497,8 @@ void BattleScene::StartUI()
 		unit_button_four = App->gui->CreateButton({ 135, 445 }, App->gui->LoadUIButton(allied_core->GetCard(CN_FOURTH)->type, "button"), unit_panel);
 
 	energy_bar = App->gui->CreateBar({ 8, 358 }, { 2388,0,16,274 }, allied_core->GetEnergy(), BAR_VERTICAL, BAR_DYNAMIC, nullptr, unit_panel);
+	energy_image = App->gui->CreateImage({ 2, 632 }, { 637,1742,30,30 }, unit_panel);
+	energy_label = App->gui->CreateLabel({ 765,633 }, "fonts/red_alert.ttf", 27, "0", { 2,5,94,255 }, 120, nullptr, false);
 
 	health_bar_image = App->gui->CreateImage({ 470,730 }, { 25,1399,253,28 });
 	enemy_health_bar_image = App->gui->CreateImage({ 40,20 }, { 25,1474,253,28 });

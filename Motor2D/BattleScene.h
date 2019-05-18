@@ -106,7 +106,6 @@ private:
 	UILabel*		current_gold;
 	UILabel*		total_cost;
 
-
 	//Images
 	UIImage*		win_building;
 
@@ -127,6 +126,10 @@ private:
 	int random_num[3];
 	std::vector<int> random_store_unit;
 	std::list<EntityType> store_units_purchased;
+
+	//Energy Bar
+	UILabel* energy_label = nullptr;
+	UIImage* energy_image = nullptr;
 
 	//Audio fx
 	std::string  win_fx;

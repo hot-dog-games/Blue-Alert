@@ -255,12 +255,12 @@
     </RobotTank>
 
 
-    <TerrorDrone type="10">
+    <BattleFortress type="10">
 
       <button>
-        <frame x="0" y="160" width="100" height="80"/>
-        <frame x="100" y="160" width="100" height="80"/>
-        <frame x="0" y="240" width="100" height="80"/>
+        <frame x="200" y="0" width="100" height="80"/>
+        <frame x="300" y="0" width="100" height="80"/>
+        <frame x="200" y="81" width="100" height="80"/>
         <frame x="0" y="0" width="100" height="80"/>
       </button>
 
@@ -281,7 +281,7 @@
         <frame x="949" y="2192" width="159" height="160"/>
       </deck>
 
-    </TerrorDrone>
+    </BattleFortress>
 
     <PrismTank type="11">
 
