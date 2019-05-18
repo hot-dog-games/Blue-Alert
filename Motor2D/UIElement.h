@@ -50,6 +50,8 @@ public:
 	void SetEnabled(bool enabled);
 	bool IsEnabled() const;
 
+	void UpdateRect();
+
 	virtual void OnMouseClick() {};
 	virtual void OnMouseHover() {};
 	virtual void OnMouseRelease() {};

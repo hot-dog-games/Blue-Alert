@@ -68,7 +68,7 @@ fPoint EncounterNode::GetPosition()
 	return position;
 }
 
-void EncounterNode::FillEncounterDeck()
+void EncounterNode::FillRandomEncounterDeck()
 {
 	std::vector<int> pool = { 1, 3, 5, 7, 9, 11, 13, 15, 17 };
 	std::vector<int>::iterator it;
@@ -81,6 +81,15 @@ void EncounterNode::FillEncounterDeck()
 		it = pool.begin() + position;
 		pool.erase(it);
 	}
+}
+
+void EncounterNode::FillPredefinedEncounterDeck(pugi::xml_node encounter_node)
+{
+	for (pugi::xml_node card = encounter_node.child("card"); card; card = card.next_sibling("card"))
+	{
+		encounter->deck.push_back(card.attribute("value").as_int());
+	}
+
 
 }
 

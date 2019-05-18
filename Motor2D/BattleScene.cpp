@@ -22,6 +22,7 @@
 #include "CardManager.h"
 #include "Deck.h"
 #include "BattleScene.h"
+#include "Buff.h"
 #include "GameManager.h"
 #include "EncounterTree.h"
 #include "EncounterNode.h"
@@ -57,10 +58,10 @@ bool BattleScene::Start()
 
 	Deck* enemy_deck = new Deck();
 	enemy_deck->delete_cards = true;
-	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterDeck()[0]));
-	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterDeck()[1]));
-	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterDeck()[2]));
-	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterDeck()[3]));
+	for (int i = 0; i < App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterDeck().size(); i++)
+	{
+		enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterDeck()[i]));
+	}
 
 	allied_core = App->entity_manager->CreateCore(1, { 30,980 }, App->game_manager->GetPlayerDeck(), FACTION_RUSSIAN);
 	enemy_core = App->entity_manager->CreateCore(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType(), { 25,330 }, enemy_deck, FACTION_AMERICAN, true);
@@ -69,6 +70,8 @@ bool BattleScene::Start()
 	allied_core->LoadUnitSprites(App->game_manager->GetPlayerDeck()->GetDeckSize());
 	enemy_core->LoadUnitSprites();
 
+	App->game_manager->health_upgrade->GetBuffs(allied_core->stats);
+	App->game_manager->energy_upgrade->GetBuffs(allied_core->stats);
 	//Initialize UI
 	StartUI();
 
@@ -198,16 +201,23 @@ bool BattleScene::Update(float dt)
 			state = BattleSceneState::WIN;
 			App->audio->PlayFx(win_fx.c_str(), 0);
 			App->PauseGame();
-			if(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() != EntityType::STORE_STRATEGY_BUILDING)App->gui->EnableElement((UIElement*)win_panel_one);
-			else App->gui->EnableElement((UIElement*)store_panel);
+
+			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() != EntityType::STORE_STRATEGY_BUILDING)
+			{
+				App->gui->EnableElement((UIElement*)win_panel_one);
+				App->game_manager->LevelUpgrade();
+			}
+			else 
+			{
+				App->gui->EnableElement((UIElement*)store_panel);
+				current_gold->SetText("Your gold: " + std::to_string(App->game_manager->gold));
+			}
+
 			App->gui->DisableInteractable((UIElement*)unit_panel);
 			App->game_manager->GetEncounterTree()->SetCurrentNode(App->game_manager->GetEncounterTree()->GetFightingNode());
 			App->game_manager->gold += 100;
-			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() == EntityType::STORE_STRATEGY_BUILDING)current_gold->SetText("Your gold: " + std::to_string(App->game_manager->gold));
-			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetChildren().size() == 0) {
+			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetChildren().size() == 0)
 				App->game_manager->stage++;
-
-			}
 		}
 	}
 	break;
@@ -483,12 +493,12 @@ void BattleScene::StartUI()
 	if (allied_core->GetCard(CN_FOURTH))
 		unit_button_four = App->gui->CreateButton({ 135, 445 }, App->gui->LoadUIButton(allied_core->GetCard(CN_FOURTH)->type, "button"), unit_panel);
 
-	energy_bar = App->gui->CreateBar({ 8, 358 }, { 2388,0,16,274 }, allied_core->GetEnergy(), BAR_VERTICAL, nullptr, unit_panel);
+	energy_bar = App->gui->CreateBar({ 8, 358 }, { 2388,0,16,274 }, allied_core->GetEnergy(), BAR_VERTICAL, BAR_DYNAMIC, nullptr, unit_panel);
 
 	health_bar_image = App->gui->CreateImage({ 470,730 }, { 25,1399,253,28 });
 	enemy_health_bar_image = App->gui->CreateImage({ 40,20 }, { 25,1474,253,28 });
-	health_bar = App->gui->CreateBar({ 28,10 }, { 25,1428,224,16 }, allied_core->GetHealth(), BarType::BAR_HORITZONTAL, nullptr, health_bar_image);
-	enemy_health_bar = App->gui->CreateBar({ 28,10 }, { 25,1428,224,16 }, enemy_core->GetHealth(), BarType::BAR_HORITZONTAL, nullptr, enemy_health_bar_image);
+	health_bar = App->gui->CreateBar({ 28,10 }, { 25,1428,224,16 }, allied_core->GetHealth(), BarType::BAR_HORITZONTAL, BAR_DYNAMIC, nullptr, health_bar_image);
+	enemy_health_bar = App->gui->CreateBar({ 28,10 }, { 25,1428,224,16 }, enemy_core->GetHealth(), BarType::BAR_HORITZONTAL, BAR_DYNAMIC, nullptr, enemy_health_bar_image);
 
 	App->gui->EnableInteractable((UIElement*)unit_panel);
 

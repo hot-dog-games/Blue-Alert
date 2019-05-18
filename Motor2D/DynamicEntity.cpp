@@ -60,7 +60,7 @@ bool DynamicEntity::Start()
 	App->audio->SetFXVolume(attack_fx.c_str(), 30);
 	App->audio->SetFXVolume(explosion_fx.c_str(), 30);
 
-	health_bar = App->gui->CreateBar(bar_position, { 25,1503,current_frame.w, 7 }, stats.find("health")->second, BarType::BAR_HORITZONTAL, this);
+	health_bar = App->gui->CreateBar(bar_position, { 25,1503,current_frame.w, 7 }, stats.find("health")->second, BarType::BAR_HORITZONTAL, BAR_DYNAMIC, this);
 	return true;
 }
 
@@ -294,6 +294,7 @@ void DynamicEntity::Attack()
 	if (attack_timer.ReadMs() >= SECOND_MS / entity_card->info.stats.find("attack_speed")->second->GetValue() )
 	{
 		float attack = entity_card->info.stats.find("damage")->second->GetValue();
+		LOG("my attack is %f", attack);
 		switch (entity_card->info.attack_type)
 		{
 		case AttackType::AT_BASIC:
