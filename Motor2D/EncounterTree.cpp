@@ -215,7 +215,9 @@ int EncounterTree::GetBuildingsOfType(EntityType type)
 
 	for each (EncounterNode* en in map_encounters)
 	{
-		if (en->GetEncounterType() == type)num++;
+		if (en->GetEncounterType() == type)
+			if(en->visited)
+				num++;
 	}
 	return 0;
 }
