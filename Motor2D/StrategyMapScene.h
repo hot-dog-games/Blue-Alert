@@ -44,9 +44,7 @@ private:
 	UIImage* options;
 	UIImage* troops_background;
 	UIImage* main_panel;
-	UILabel* health;
 	UILabel* gold;
-	UILabel* energy;
 	UILabel* text_menu;
 	UIButton* settings_button;
 	UIButtonText* menu_button;

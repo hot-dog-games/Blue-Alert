@@ -538,16 +538,16 @@
   
   <ui_image>
     <Land>
-      <end_screen x="1922" y="494" width="233" height="182"/>
+      <end_screen x="12" y="1691" width="236" height="148"/>
       <building x="14" y="1694" width="230" height="141"/>
     </Land>
     <Infantry>
-      <end_screen x="1918" y="342" width="178" height="148"/>
+      <end_screen x="15" y="1520" width="214" height="173"/>
       <building x="17" y="1525" width="200" height="164"/>
     </Infantry>
     <Aerial>
-      <end_screen x="1917" y="121" width="251" height="226"/>
-      <building x="251" y="1659" width="236n" height="184"/>
+      <end_screen x="250" y="1652" width="245" height="193"/>
+      <building x="251" y="1659" width="236" height="184"/>
     </Aerial>
     <Gold>
       <end_screen x="1916" y="3" width="181" height="115"/>
