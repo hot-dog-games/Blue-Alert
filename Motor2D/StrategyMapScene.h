@@ -99,6 +99,7 @@ private:
 
 
 	float drag_threshhold = 0.2f;
+	bool dragable = true;
 
 	iPoint limit_center = {-480, 1117};
 	int limit_radius = 700;
