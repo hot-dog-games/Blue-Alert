@@ -269,16 +269,16 @@
       </drag>
 
       <upgrade>
-        <frame x="1175" y="852" width="105" height="106"/>
-        <frame x="1175" y="977" width="105" height="106"/>
-        <frame x="1175" y="1107" width="105" height="106"/>
-        <frame x="1175" y="853" width="105" height="106"/>
+        <frame x="853" y="853" width="105" height="106"/>
+        <frame x="853" y="977" width="105" height="106"/>
+        <frame x="853" y="1107" width="105" height="106"/>
+        <frame x="1839" y="634" width="104" height="105"/>
       </upgrade>
 
       <deck>
-        <frame x="957" y="1850" width="145" height="145"/>
-        <frame x="949" y="2027" width="159" height="160"/>
-        <frame x="949" y="2192" width="159" height="160"/>
+        <frame x="197" y="1850" width="145" height="145"/>
+        <frame x="197" y="2027" width="159" height="160"/>
+        <frame x="197" y="2192" width="159" height="160"/>
       </deck>
 
     </BattleFortress>

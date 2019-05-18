@@ -565,6 +565,7 @@ void BattleScene::StartUI()
 	lose_panel = App->gui->CreateImage({ 139,150 }, { 1,852,744,466 });
 	lose_text = App->gui->CreateLabel({ 30,30 }, "fonts/red_alert.ttf", 40, "The enemy troops have defeat yours! Allies have win the battle", { 255,232,2, 255 }, 710, lose_panel);
 	lose_continue = App->gui->CreateButton({ 262,375 }, button_rect, lose_panel);
+	lose_image = App->gui->CreateImage({ 222, 125 }, { 2033,136,321,204 }, lose_panel);
 
 	App->gui->DisableElement((UIElement*)lose_panel);
 }

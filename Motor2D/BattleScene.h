@@ -94,6 +94,7 @@ private:
 	UILabel*		win_text_one;
 	UILabel*		win_text_two;
 	UILabel*		lose_text;
+	UIImage*		lose_image;
 
 	//store
 	UILabel*		store_text;
