@@ -6,10 +6,10 @@
 #include"Input.h"
 #include"p2Log.h"
 
-UIScrollBar::UIScrollBar(iPoint pos, SDL_Rect rect, int initial_value, int max_value){
+UIScrollBar::UIScrollBar(iPoint pos, SDL_Rect rect, SliderType type, int initial_value, int max_value){
 	rect_box = { pos.x,pos.y,rect.w,rect.h };
 	this->rect_sprite = rect;
-
+	slidertype = type;
 	slider[0] = { 3592, 2264,24,51 };
 	slider[1] = { 3625, 2264,25,51 };
 	slider[2] = { 3660, 2264,25,51 };
@@ -60,6 +60,10 @@ void UIScrollBar::DragSlider()
 
 		percentage = (float)(pos_x) / 194;
 		current_value = percentage * max_value;
+
+		
+		App->gui->SliderAction(slidertype, this);
+		
 	
 }
 

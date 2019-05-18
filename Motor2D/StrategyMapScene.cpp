@@ -16,6 +16,9 @@
 #include "StrategyBuilding.h"
 #include "GameManager.h"
 #include "StrategyMapScene.h"
+#include "MainMenuScene.h"
+#include "SceneManager.h"
+#include "Scene.h"
 #include "Brofiler/Brofiler.h"
 
 StrategyMapScene::StrategyMapScene() : Scene()
@@ -110,7 +113,13 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 
 	if (gui_event == GUI_Event::LEFT_CLICK_DOWN) {
 		if (element == settings_button) {
-			//(options = App->gui->CreateImage();
+
+			App->gui->EnableElement(options);
+
+			App->gui->DisableElement(menu_button);
+			App->gui->DisableElement(settings_button);
+
+			App->game_manager->GetEncounterTree()->is_clickable = false;
 		}
 		else if (element == menu_button) {
 			
@@ -143,6 +152,12 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			App->game_manager->GetEncounterTree()->is_clickable = true;
 
 
+		}
+		else if (element == resume_settings_button) {
+			App->gui->DisableElement(options);
+
+			App->gui->EnableElement(menu_button);
+			App->gui->EnableElement(settings_button);
 		}
 		else if (element == deck_buttons[0])
 		{
@@ -234,12 +249,30 @@ void StrategyMapScene::StartUI()
 	small_button_rect[1] = { 60,481,58,51 };
 	small_button_rect[2] = { 119,481,58,51 };
 
-	SDL_Rect large_button_rect[3];
+	SDL_Rect large_button_rect[4];
 	large_button_rect[0] = { 0,533,220,51 };
 	large_button_rect[1] = { 0,585,220,51 };
 	large_button_rect[2] = { 0,637,220,51 };
+	large_button_rect[3] = { 0,637,220,51 };
 
+	SDL_Rect close[3];
+	close[0] = {2798,822,35,35};
+	close[1] = {2798,864,35,35};
+	close[2] = {2798,906,40,42};
+
+	options = App->gui->CreateImage({ 200,100 }, { 3585,809,619,463 }, nullptr);
 	settings_button = App->gui->CreateButton({ 50,700 }, small_button_rect, main_panel);
+	resume_settings_button = App->gui->CreateButton({ 350,380 }, large_button_rect, options);
+	resume_label = App->gui->CreateLabel({ 40,15 }, "fonts/button_text.ttf", 20, "Resume", { 255,255,255,0 }, 0, resume_settings_button);
+	
+	music_slider = App->gui->CreateScrollBar({ 380,150 }, { 3592,2335,218,40 }, MUSIC, App->audio->volume, 128, options);
+	musiclabel = App->gui->CreateLabel({ 100,160 }, "fonts/button_text.ttf", 20, "Music Volume", { 255,255,255,0 }, 0, options);
+	fx_slider = App->gui->CreateScrollBar({380,250 }, { 3592,2335,218,40 }, FX, App->audio->volume, 128, options);
+	fxlabel = App->gui->CreateLabel({ 100,260 }, "fonts/button_text.ttf", 20, "FX Volume", { 255,255,255,0 }, 0, options);
+	savegamebutton = App->gui->CreateButton({ 80,380 }, large_button_rect, options, false);
+	savegamelabel = App->gui->CreateLabel({ 10,15 }, "fonts/button_text.ttf", 20, "Save Game", { 255,0,0,0 }, 0, savegamebutton);
+	App->gui->DisableElement(options);
+
 	menu_button = App->gui->CreateButton({ 700,700 }, large_button_rect, main_panel);
 	text_menu = App->gui->CreateLabel({ 50,10 }, "ui/Fonts/command_and_conquer___logo_font_by_dexistor371-d6k2yvb.ttf", 20, "MENU", { 0,0,0,0 }, 0, menu_button);
 

@@ -42,6 +42,11 @@ enum BarType {
 	BAR_HORITZONTAL
 };
 
+enum SliderType {
+	FX,
+	MUSIC
+};
+
 // ---------------------------------------------------
 class Gui : public Module
 {
@@ -75,9 +80,11 @@ public:
 	UILabel* CreateLabel(iPoint pos, std::string path, int size, std::string text, SDL_Color color, int max_width = 0, UIElement* parent = nullptr);
 	UIButton* CreateButton(iPoint pos, SDL_Rect* sprite_rect, UIElement* parent = nullptr, bool is_interactable = true);
 	UISelectableButton* CreateSelectableButton(iPoint pos, SDL_Rect* sprite_rect, UIElement* parent = nullptr, bool is_interactable = true);
-	UIScrollBar* CreateScrollBar(iPoint pos, SDL_Rect rect, int initial_value, int max_value, UIElement* parent = nullptr);
+	UIScrollBar* CreateScrollBar(iPoint pos, SDL_Rect rect, SliderType type, int initial_value, int max_value, UIElement* parent = nullptr);
 	UIAnimatedImage* CreateAnimatedImage(iPoint pos, SDL_Rect * rect, int total_sprites, int speed, UIElement* parent = nullptr);
 	UIBar* CreateBar(iPoint pos, SDL_Rect rect, Stat* value, BarType type = BarType::BAR_VERTICAL, Entity* entity= nullptr, UIElement* parent = nullptr);
+
+	void SliderAction(SliderType type, UIScrollBar* slider);
 
 	void DeleteElement(UIElement* element);
 	void DisableUI();

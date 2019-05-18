@@ -6,6 +6,7 @@
 #include "EncounterTree.h"
 #include "UIButton.h"
 #include "UIImage.h"
+#include "UIScrollBar.h"
 
 
 
@@ -51,12 +52,19 @@ private:
 	UILabel* troops_text;
 	UILabel* buildings_text;
 	UILabel* back_cross_text;
+	UILabel* musiclabel;
+	UILabel* fxlabel;
+	UILabel* savegamelabel;
+	UILabel* resume_label;
+	UIScrollBar* music_slider;
+	UIScrollBar* fx_slider;
 	UIButton* settings_button;
+	UIButton* resume_settings_button;
 	UIButton* menu_button;
 	UIButton* backbutton_t_b;
 	UIButton* troops_button;
 	UIButton* buildings_button;
-
+	UIButton* savegamebutton;
 	UIButton* deck_buttons[4];
 	UIButton* collection_buttons[9];
 

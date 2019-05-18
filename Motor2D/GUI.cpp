@@ -214,9 +214,9 @@ UISelectableButton * Gui::CreateSelectableButton(iPoint pos, SDL_Rect * sprite_r
 	return button;
 }
 
-UIScrollBar* Gui::CreateScrollBar(iPoint pos, SDL_Rect rect, int initial_value, int max_value, UIElement* parent)
+UIScrollBar* Gui::CreateScrollBar(iPoint pos, SDL_Rect rect, SliderType type, int initial_value, int max_value, UIElement* parent)
 {
-	UIScrollBar* scroll = new UIScrollBar(pos, rect, initial_value, max_value);
+	UIScrollBar* scroll = new UIScrollBar(pos, rect, type, initial_value, max_value);
 	scroll->parent = parent;
 	elements.push_back(scroll);
 
@@ -245,6 +245,18 @@ UIBar * Gui::CreateBar(iPoint pos, SDL_Rect rect, Stat* value, BarType type, Ent
 	elements.push_front(bar);
 	return bar;
 }
+
+void Gui::SliderAction(SliderType type, UIScrollBar * slider)
+{
+	if (type == MUSIC) {
+		App->audio->SetMusicVolume(slider->current_value);
+	}
+	if (type == FX) {
+		//App->audio->SetFXVolume(,slider->current_value);
+	}
+}
+
+
 
 void Gui::DeleteElement(UIElement* ele)
 {

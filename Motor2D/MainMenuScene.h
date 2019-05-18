@@ -47,11 +47,14 @@ private:
 	UILabel* optionslabel;
 	UILabel* newgamelabel;
 	UILabel* continuelabel;
+	UILabel* musiclabel;
+	UILabel* fxlabel;
 	UIButton* optionsbutton;
 	UIButton* newgamebutton;
 	UIButton* continuebutton;
 	UIButton* back_options_button;
-	UIScrollBar* volume_slider;
+	UIScrollBar* music_slider;
+	UIScrollBar* fx_slider;
 	bool gameclose = false;
 };
 
