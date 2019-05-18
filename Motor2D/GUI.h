@@ -44,6 +44,11 @@ enum BarType {
 	BAR_HORITZONTAL
 };
 
+enum BarState {
+	BAR_STATIC,
+	BAR_DYNAMIC
+};
+
 // ---------------------------------------------------
 class Gui : public Module
 {
@@ -80,7 +85,7 @@ public:
 	UIButtonText* CreateButtonText(iPoint pos, iPoint offset, SDL_Rect* sprite_rect, std::string text, SDL_Color color, int size = 20, UIElement* parent = nullptr, bool is_interactable = true);
 	UIScrollBar* CreateScrollBar(iPoint pos, float min, float max, ScrollType type = VERTICAL, UIElement* parent = nullptr);
 	UIAnimatedImage* CreateAnimatedImage(iPoint pos, SDL_Rect * rect, int total_sprites, int speed, UIElement* parent = nullptr);
-	UIBar* CreateBar(iPoint pos, SDL_Rect rect, Stat* value, BarType type = BarType::BAR_VERTICAL, Entity* entity= nullptr, UIElement* parent = nullptr);
+	UIBar* CreateBar(iPoint pos, SDL_Rect rect, Stat* value, BarType type = BarType::BAR_VERTICAL, BarState state = BarState::BAR_DYNAMIC, Entity* entity= nullptr, UIElement* parent = nullptr);
 	UIPopUp* CreatePopUp(SDL_Rect rect, iPoint margin, std::string text, int text_size, SDL_Color color,  UIElement* parent = nullptr);
 
 	void DeleteElement(UIElement* element);

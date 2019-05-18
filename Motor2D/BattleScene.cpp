@@ -493,12 +493,12 @@ void BattleScene::StartUI()
 	if (allied_core->GetCard(CN_FOURTH))
 		unit_button_four = App->gui->CreateButton({ 135, 445 }, App->gui->LoadUIButton(allied_core->GetCard(CN_FOURTH)->type, "button"), unit_panel);
 
-	energy_bar = App->gui->CreateBar({ 8, 358 }, { 2388,0,16,274 }, allied_core->GetEnergy(), BAR_VERTICAL, nullptr, unit_panel);
+	energy_bar = App->gui->CreateBar({ 8, 358 }, { 2388,0,16,274 }, allied_core->GetEnergy(), BAR_VERTICAL, BAR_DYNAMIC, nullptr, unit_panel);
 
 	health_bar_image = App->gui->CreateImage({ 470,730 }, { 25,1399,253,28 });
 	enemy_health_bar_image = App->gui->CreateImage({ 40,20 }, { 25,1474,253,28 });
-	health_bar = App->gui->CreateBar({ 28,10 }, { 25,1428,224,16 }, allied_core->GetHealth(), BarType::BAR_HORITZONTAL, nullptr, health_bar_image);
-	enemy_health_bar = App->gui->CreateBar({ 28,10 }, { 25,1428,224,16 }, enemy_core->GetHealth(), BarType::BAR_HORITZONTAL, nullptr, enemy_health_bar_image);
+	health_bar = App->gui->CreateBar({ 28,10 }, { 25,1428,224,16 }, allied_core->GetHealth(), BarType::BAR_HORITZONTAL, BAR_DYNAMIC, nullptr, health_bar_image);
+	enemy_health_bar = App->gui->CreateBar({ 28,10 }, { 25,1428,224,16 }, enemy_core->GetHealth(), BarType::BAR_HORITZONTAL, BAR_DYNAMIC, nullptr, enemy_health_bar_image);
 
 	App->gui->EnableInteractable((UIElement*)unit_panel);
 

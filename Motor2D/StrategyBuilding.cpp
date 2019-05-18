@@ -32,7 +32,7 @@ bool StrategyBuilding::Update(float dt)
 		{
 			state = STATIC_HOVERED;
 			current_animation = &animations.find("highlight")->second;
-			if (App->input->GetMouseButtonDown(1) == KEY_DOWN)
+			if (App->input->GetMouseButtonDown(1) == KEY_UP)
 				App->game_manager->GetEncounterTree()->EntityClicked(this);
 		}
 		else

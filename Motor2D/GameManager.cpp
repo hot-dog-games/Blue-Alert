@@ -292,3 +292,19 @@ BuffSource* GameManager::GetUpgrade(EntityType unit_type)
 	}
 	return nullptr;
 }
+
+bool GameManager::IsInCollection(int card_type)
+{
+	bool ret = false;
+
+	for each (Card* c in collection)
+	{
+		if (c->type == card_type)
+		{
+			ret = true;
+			break;
+		}
+	}
+
+	return ret;
+}

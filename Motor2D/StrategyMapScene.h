@@ -39,14 +39,14 @@ public:
 
 	void InitializeUI();
 
+	bool IsInsideLimits(int mousemotion_x, int mousemotion_y);
+
 private:
 	UIImage* banner;
 	UIImage* options;
 	UIImage* troops_background;
 	UIImage* main_panel;
-	UILabel* health;
 	UILabel* gold;
-	UILabel* energy;
 	UILabel* text_menu;
 	UIButton* settings_button;
 	UIButtonText* menu_button;
@@ -57,6 +57,12 @@ private:
 	//Building Menu
 	UIImage* buildings_background;
 	UIImage* core_image;
+	UILabel* core_title;
+	UILabel* core_health;
+	UILabel* core_energy;
+	UILabel* core_lvl_up_cost;
+	UILabel* core_info;
+	UIButton* core_lvl_up;
 
 	UIImage* building_infantry_image = nullptr;
 	UISelectableButton* building_infantry_button = nullptr;
@@ -72,16 +78,32 @@ private:
 
 	UIButton* level_up = nullptr;
 	UILabel* building_title = nullptr;
+
+	UILabel* buildings_title[3];
 	
 	// Troops Menu
 	UIButton* deck_buttons[4];
 	UIButton* collection_buttons_allies[9];
+	UIButton* collection_buttons_enemies[9];
 	UILabel* troops_title[3];
+	UIButton* change_side_button;
 
 	//Info Showing
 	UIImage* info_image = nullptr;
+	UILabel* health_label = nullptr;
+	UILabel* attack_label = nullptr;
+	UILabel* defense_label = nullptr;
+	UILabel* units_label = nullptr;
+	UILabel* range_label = nullptr;
+	UIBar*	 energy_bar = nullptr;
 
-	UIPopUp* pop_up = nullptr;
+
+	float drag_threshhold = 0.2f;
+
+	iPoint limit_center = {-480, 1117};
+	int limit_radius = 700;
+
+	iPoint last_camera_position;
 
 };
 
