@@ -502,15 +502,15 @@ void StrategyMapScene::InitializeUI()
 
 	//Aerial
 	str = "The aerial building is where the helicopters and planes are parked.\n\nConquered: " + std::to_string(App->game_manager->GetEncounterTree()->GetBuildingsOfType(EntityType::AERIAL_STRATEGY_BUILDING));
-	building_aerial_button = App->gui->CreateSelectableButton({ 783,430 }, App->gui->LoadUIButton(31, "button"), buildings_background);
-	building_aerial_image = App->gui->CreateImage({ 345,115 }, App->gui->LoadUIImage(31, "building"), buildings_background);
-	building_aerial_info = App->gui->CreateLabel({ 265,-20 }, "fonts/red_alert.ttf", 23, str, { 231,216,145,255 }, 300, building_aerial_image);
+	building_aerial_button = App->gui->CreateSelectableButton({ 783,445 }, App->gui->LoadUIButton(31, "button"), buildings_background);
+	building_aerial_image = App->gui->CreateImage({ 350,145 }, App->gui->LoadUIImage(31, "building"), buildings_background);
+	building_aerial_info = App->gui->CreateLabel({ 260, -50 }, "fonts/red_alert.ttf", 23, str, { 231,216,145,255 }, 300, building_aerial_image);
 
 	//Land
 	str = "The land building is where the tanks are waiting for the battle.\n\nConquered: " + std::to_string(App->game_manager->GetEncounterTree()->GetBuildingsOfType(EntityType::LAND_STRATEGY_BUILDING));
-	building_land_button = App->gui->CreateSelectableButton({ 560,445 }, App->gui->LoadUIButton(32, "button"), buildings_background);
-	building_land_image = App->gui->CreateImage({ 350,145 }, App->gui->LoadUIImage(32, "building"), buildings_background);
-	building_land_info = App->gui->CreateLabel({ 260, -50 }, "fonts/red_alert.ttf", 23, str, { 231,216,145,255 }, 300, building_land_image);
+	building_land_button = App->gui->CreateSelectableButton({ 560,430 } , App->gui->LoadUIButton(32, "button"), buildings_background);
+	building_land_image = App->gui->CreateImage({ 345,115 } , App->gui->LoadUIImage(32, "building"), buildings_background);
+	building_land_info = App->gui->CreateLabel({ 265,-20 } , "fonts/red_alert.ttf", 23, str, { 231,216,145,255 }, 300, building_land_image);
 
 	//Core
 	core_image = App->gui->CreateImage({ 70, 80 }, { 1538,23,173,114 }, buildings_background);
