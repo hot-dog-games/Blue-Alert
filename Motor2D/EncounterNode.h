@@ -13,6 +13,7 @@ struct Encounter {
 	int type = -1;
 	std::vector<int> deck;
 	int deck_size = 4;
+	std::vector<int> rewards;
 	//BUFF
 };
 
@@ -50,6 +51,9 @@ public:
 	void FillRandomEncounterDeck();
 	void FillPredefinedEncounterDeck(pugi::xml_node encounter_node);
 
+	void FillPredefinedRewards(pugi::xml_node rewards_node);
+	void FillRandomdRewards();
+
 	void CreateNodeEntity();
 	void CreateNode();
 
@@ -61,6 +65,7 @@ public:
 	void SetEncounterType(int type);
 
 	std::vector<int> GetEncounterDeck();
+	std::vector<int> GetEncounterRewards();
 
 	SDL_Rect node_rect;
 
