@@ -156,7 +156,7 @@ bool Render::IsOnCamera(const int & x, const int & y, const int & w, const int &
 }
 
 // Blit to screen
-bool Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, double angle, int pivot_x, int pivot_y, SDL_Rect* clip_rect) const
+bool Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, double angle, int pivot_x, int pivot_y, float scaleX, float scaleY, SDL_Rect* clip_rect) const
 {
 	bool ret = true;
 	uint scale = App->win->GetScale();
@@ -177,6 +177,9 @@ bool Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section, f
 
 	rect.w *= scale;
 	rect.h *= scale;
+
+	rect.w *= scaleX;
+	rect.h *= scaleY;
 
 	SDL_Point* p = NULL;
 	SDL_Point pivot;

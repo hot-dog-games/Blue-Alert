@@ -11,6 +11,11 @@ class StrategyBuilding;
 
 enum EntityType;
 
+enum stage {
+	STAGE_TUTORIAL,
+	STAGE_01
+};
+
 class GameManager : public Module
 {
 public:
@@ -27,12 +32,14 @@ public:
 	Deck* GetPlayerDeck();
 
 	int gold = 0;
+	int stage = STAGE_TUTORIAL;
 	
 	bool IsInPlayerDeck(Card* card);
 
 	//----Initialization----
 
 	void CreatePlayerDeck();
+	void CreateStage();
 
 	//----------------------
 

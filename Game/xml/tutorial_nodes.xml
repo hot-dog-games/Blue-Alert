@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<tutorial_nodes size="6">
+	<node id="0" x="60" y="59" type="30">
+		<children id="1"/>
+	</node>
+	<node id="1" x="47" y="46" type="30">
+		<children id="2"/>
+		<children id="3"/>
+	</node>
+	<node id="2" x="35" y="48" type="32">
+		<children id="4"/>
+	</node>
+	<node id="3" x="45" y="34" type="31">
+		<children id="5"/>
+	</node>
+	<node id="4" x="27" y="43" type="33">
+	</node>
+	<node id="5" x="36" y="21" type="34">
+	</node>
+</tutorial_nodes>

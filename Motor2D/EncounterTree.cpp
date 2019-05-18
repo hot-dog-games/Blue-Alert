@@ -54,19 +54,29 @@ EncounterTree * EncounterTree::CreateTree()
 
 bool EncounterTree::LoadDocuments()
 {
-	pugi::xml_parse_result result = encounters.load_file("xml/encounters.xml");
+	pugi::xml_parse_result result;
 
-	if (result == NULL)
-		LOG("Could not load card xml file. pugi error: %s", result.description());
-	else
-		encounter_tree = encounters.child("encounter_tree");
+	switch (App->game_manager->stage)
+	{
+	case STAGE_TUTORIAL:
+		result = nodes_01.load_file("xml/tutorial_nodes.xml");
 
-	result = nodes_01.load_file("xml/map01_nodes.xml");
+		if (result == NULL)
+			LOG("Could not load card xml file. pugi error: %s", result.description());
+		else
+			map01_nodes = nodes_01.child("tutorial_nodes");
+		break;
+	case STAGE_01: 
+		result = nodes_01.load_file("xml/map01_nodes.xml");
 
-	if (result == NULL)
-		LOG("Could not load card xml file. pugi error: %s", result.description());
-	else
-		map01_nodes = nodes_01.child("map01_nodes");
+		if (result == NULL)
+			LOG("Could not load card xml file. pugi error: %s", result.description());
+		else
+			map01_nodes = nodes_01.child("map01_nodes");
+		break;
+	default:
+		break;
+	}
 
 	return true;
 }
