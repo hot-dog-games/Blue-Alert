@@ -80,15 +80,10 @@ bool GameManager::IsInPlayerDeck(Card * card)
 void GameManager::CreatePlayerDeck()
 {
 	AddCardToCollection(EntityType::CONSCRIPT);
-	AddCardToCollection(EntityType::SNIPER);
-	AddCardToCollection(EntityType::FLAK_TROOPER);
-	AddCardToCollection(EntityType::GRIZZLY);
 
 	combat_deck = new Deck();
 	combat_deck->AddCard(GetCardFromCollection(EntityType::CONSCRIPT));
-	combat_deck->AddCard(GetCardFromCollection(EntityType::SNIPER));
-	combat_deck->AddCard(GetCardFromCollection(EntityType::FLAK_TROOPER));
-	combat_deck->AddCard(GetCardFromCollection(EntityType::GRIZZLY));
+
 }
 
 void GameManager::CreateStage()
