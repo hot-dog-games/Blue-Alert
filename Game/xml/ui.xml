@@ -285,9 +285,9 @@
     <PrismTank type="11">
 
       <button>
+        <frame x="1001" y="160" width="100" height="80"/>
         <frame x="1101" y="160" width="100" height="80"/>
-        <frame x="1201" y="160" width="100" height="80"/>
-        <frame x="1101" y="240" width="100" height="80"/>
+        <frame x="1001" y="240" width="100" height="80"/>
         <frame x="0" y="0" width="100" height="80"/>
       </button>
 
