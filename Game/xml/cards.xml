@@ -161,7 +161,7 @@
     <combat attack_type="2" armored="true"/>
     <buff_type value="32"/>
     <stats>
-      <stat stat="health" value ="120"/>
+      <stat stat="health" value ="100"/>
       <stat stat="damage" value ="100"/>
       <stat stat="defense" value ="10"/>
       <stat stat="movement" value ="25"/>
@@ -187,7 +187,7 @@
     <combat attack_type="2" armored="true"/>
     <buff_type value="32"/>
     <stats>
-      <stat stat="health" value ="120"/>
+      <stat stat="health" value ="100"/>
       <stat stat="damage" value ="100"/>
       <stat stat="defense" value ="10"/>
       <stat stat="movement" value ="25"/>
