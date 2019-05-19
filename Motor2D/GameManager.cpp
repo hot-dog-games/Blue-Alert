@@ -6,6 +6,7 @@
 #include "StrategyBuilding.h"
 #include "CardManager.h"
 #include "EntityManager.h"
+#include "BuffSourceManager.h"
 
 #include "GameManager.h"
 
@@ -126,6 +127,70 @@ Card * GameManager::GetCardFromCollection(EntityType card_type)
 		LOG("The card u tried to get is not existent in collection");
 		return nullptr;
 	}
+}
+
+BuffSource* GameManager::GetUpgrade(EntityType unit_type)
+{
+	switch (unit_type)
+	{
+	case GI:
+		return infantry_upgrade;
+		break;
+	case CONSCRIPT:
+		return infantry_upgrade;
+		break;
+	case VIRUS:
+		return infantry_upgrade;
+		break;
+	case SNIPER:
+		return infantry_upgrade;
+		break;
+	case GUARDIAN_GI:
+		return infantry_upgrade;
+		break;
+	case FLAK_TROOPER:
+		return infantry_upgrade;
+		break;
+	case GRIZZLY:
+		return land_upgrade;
+		break;
+	case RHINO:
+		return land_upgrade;
+		break;
+	case ROBOT:
+		return land_upgrade;
+		break;
+	case DRONE:
+		return land_upgrade;
+		break;
+	case PRISM:
+		return land_upgrade;
+		break;
+	case TESLA:
+		return land_upgrade;
+		break;
+	case NIGHTHAWK:
+		return aerial_upgrade;
+		break;
+	case SIEGECHOPPER:
+		return aerial_upgrade;
+		break;
+	case HARRIER:
+		return aerial_upgrade;
+		break;
+	case MIG:
+		return aerial_upgrade;
+		break;
+	case BLACK_EAGLE:
+		return aerial_upgrade;
+		break;
+	case SPY_PLANE:
+		return aerial_upgrade;
+		break;
+	default:
+		break;
+	}
+	return nullptr;
 }
 
 void GameManager::AddCardToCollection(EntityType card_type)

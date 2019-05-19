@@ -1,6 +1,7 @@
 #include "j1App.h"
 #include "BuffSourceManager.h"
 #include "Buff.h"
+#include "Stat.h"
 
 
 
