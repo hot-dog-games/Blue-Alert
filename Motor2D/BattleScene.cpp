@@ -17,6 +17,7 @@
 #include "UISelectableButton.h"
 #include "UIBar.h"
 #include "GUI.h"
+#include "EntityManager.h"
 #include "SceneManager.h"
 #include "TransitionManager.h"
 #include "CardManager.h"
@@ -24,10 +25,41 @@
 #include "BattleScene.h"
 #include "Buff.h"
 #include "GameManager.h"
+#include "Particles.h"
 #include "EncounterTree.h"
 #include "EncounterNode.h"
 #include "UIImage.h"
 #include "UILabel.h"
+
+void Ultimate::Update()
+{
+	if (state == UltimateState::SELECTED)
+	{
+		int x, y;
+		App->input->GetMousePosition(x, y);
+		position = { x - (int)(image->GetScreenRect().w*0.5f),y - (int)(image->GetScreenRect().h*0.5f) };
+		image->SetScreenPos(position.x, position.y);
+		if(App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
+			Use();
+		else if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
+		{
+			App->gui->DisableElement(image);
+			state == UltimateState::READY;
+		}
+	}
+}
+void Ultimate::Select()
+{
+	state = UltimateState::SELECTED;
+	App->gui->EnableElement(image);
+}
+void Ultimate::Use()
+{
+	iPoint world_pos = App->render->ScreenToWorld(position.x, position.y);
+	App->gui->DisableElement(image);
+	App->particles->CreateParticle(ParticleType::NUKE_BOMB, { (float)world_pos.x + (image->GetScreenRect().w*0.5f), 0 }, { (float)world_pos.x + (image->GetScreenRect().w*0.5f),(float)world_pos.y }, radius);
+	state = UltimateState::USED;
+}
 
 const double HELD_DELAY = 175;
 
@@ -72,6 +104,17 @@ bool BattleScene::Start()
 
 	App->game_manager->health_upgrade->GetBuffs(allied_core->stats);
 	App->game_manager->energy_upgrade->GetBuffs(allied_core->stats);
+
+	//Ultimate hardcode
+	ultimate.radius = 140;
+	ultimate.rect = new SDL_Rect[4];
+	ultimate.rect[0] = { 0,2614,300,100 };
+	ultimate.rect[1] = { 300,2614,300,100 };
+	ultimate.rect[2] = { 600,2614,300,100 };
+	ultimate.rect[3] = { 900,2614,300,100 };
+	ultimate.image = App->gui->CreateAnimatedImage({ 0,0 }, ultimate.rect, 4, 10);
+	App->gui->DisableElement(ultimate.image);
+
 	//Initialize UI
 	StartUI();
 
@@ -98,6 +141,12 @@ bool BattleScene::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
 		App->SaveGame("save_game.xml");
+
+
+	if (App->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN)
+		ultimate.Select();
+
+	ultimate.Update();
 
 	switch (state)
 	{
@@ -520,7 +569,6 @@ void BattleScene::StartUI()
 	App->gui->DisableElement((UIElement*)win_panel_two);
 
 	//Store 
-
 	if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() == EntityType::STORE_STRATEGY_BUILDING)
 	{
 		store_panel = App->gui->CreateImage({ 139,100 }, { 2793, 960, 749, 565 });

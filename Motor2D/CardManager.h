@@ -32,8 +32,6 @@ struct CardInfo {
 
 	std::map<std::string, Stat*> stats;
 	bool armored;
-
-
 };
 
 struct Card {

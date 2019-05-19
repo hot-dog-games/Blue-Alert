@@ -22,6 +22,25 @@ enum CardNumber {
 	CN_THIRD,
 	CN_FOURTH
 };
+struct Ultimate
+{
+	enum class UltimateState
+	{
+		READY,
+		SELECTED,
+		USED
+	};
+
+	float radius = 0;
+	iPoint position;
+	UltimateState state = UltimateState::READY;
+	UIAnimatedImage* image;
+	SDL_Rect* rect;
+
+	void Select();
+	void Use();
+	void Update();
+};
 
 class BattleScene : public Scene
 {
@@ -140,6 +159,8 @@ private:
 
 	Core* allied_core;
 	Core* enemy_core;
+
+	Ultimate ultimate;
 };
 
 #endif
