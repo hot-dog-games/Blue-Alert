@@ -17,7 +17,7 @@ bool BuffSourceManager::Awake(pugi::xml_node &)
 	pugi::xml_parse_result result = buff_config.load_file("xml/buffs.xml");
 
 	if (result == NULL)
-		LOG("Could not load entity xml. pugi error: %s", result.description());
+		LOG("Could not load buff xml. pugi error: %s", result.description());
 	else
 		buff_node = buff_config.child("config");
 
@@ -44,11 +44,16 @@ BUFF_TYPE BuffSourceManager::GetBuffType(std::string buff_type)
 
 BuffSource* BuffSourceManager::CreateBuffSource(std::string source_name)
 {
-	pugi::xml_node source_node = buff_config.find_child_by_attribute("name", name.c_str());
+	pugi::xml_node source_node = buff_node.find_child_by_attribute("name", source_name.c_str());
 
 	if (source_node != NULL)
 	{
-		BuffSource* buff_source = new BuffSource(source_node);
+		BuffSource* buff_source = nullptr;
+		std::string type = source_node.attribute("type").as_string();
+		if (type == "leveled_upgrade")
+		{
+			buff_source = new LeveledUpgrade(source_node);
+		}
 		return buff_source;
 	}
 	return nullptr;

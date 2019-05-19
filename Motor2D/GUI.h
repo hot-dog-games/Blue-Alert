@@ -45,6 +45,10 @@ enum BarType {
 enum SliderType {
 	FX,
 	MUSIC
+
+enum BarState {
+	BAR_STATIC,
+	BAR_DYNAMIC
 };
 
 // ---------------------------------------------------
@@ -82,9 +86,10 @@ public:
 	UISelectableButton* CreateSelectableButton(iPoint pos, SDL_Rect* sprite_rect, UIElement* parent = nullptr, bool is_interactable = true);
 	UIScrollBar* CreateScrollBar(iPoint pos, SDL_Rect rect, SliderType type, int initial_value, int max_value, UIElement* parent = nullptr);
 	UIAnimatedImage* CreateAnimatedImage(iPoint pos, SDL_Rect * rect, int total_sprites, int speed, UIElement* parent = nullptr);
-	UIBar* CreateBar(iPoint pos, SDL_Rect rect, Stat* value, BarType type = BarType::BAR_VERTICAL, Entity* entity= nullptr, UIElement* parent = nullptr);
 
 	void SliderAction(SliderType type, UIScrollBar* slider);
+	UIBar* CreateBar(iPoint pos, SDL_Rect rect, Stat* value, BarType type = BarType::BAR_VERTICAL, BarState state = BarState::BAR_DYNAMIC, Entity* entity= nullptr, UIElement* parent = nullptr);
+	UIPopUp* CreatePopUp(SDL_Rect rect, iPoint margin, std::string text, int text_size, SDL_Color color,  UIElement* parent = nullptr);
 
 	void DeleteElement(UIElement* element);
 	void DisableUI();

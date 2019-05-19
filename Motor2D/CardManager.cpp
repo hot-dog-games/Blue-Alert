@@ -65,12 +65,14 @@ Card* CardManager::CreateCard(EntityType type)
 {
 	Card* card = new Card;
 	card->type = type;
+
 	card->level = 0;
 
 	pugi::xml_node card_node = card_configs.find_child_by_attribute("type", std::to_string((int)type).c_str());
 
 	card->name = card_node.child("name").child_value();
 	card->sprite_path = card_node.child("sprite").child_value();
+	card->buff_type = (EntityType)card_node.child("buff_type").attribute("value").as_int();
 
 	LoadCardStats(card, card_node.child("stats"));
 	LoadCardUpgrades(card, card_node.child("upgrades"));

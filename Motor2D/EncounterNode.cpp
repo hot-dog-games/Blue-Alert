@@ -36,6 +36,11 @@ std::vector<int> EncounterNode::GetEncounterDeck()
 	return encounter->deck;
 }
 
+std::vector<int> EncounterNode::GetEncounterRewards()
+{
+	return encounter->rewards;
+}
+
 void EncounterNode::SetParent(EncounterNode * parent)
 {
 	parents.push_back(parent);
@@ -68,20 +73,36 @@ fPoint EncounterNode::GetPosition()
 	return position;
 }
 
-void EncounterNode::FillEncounterDeck()
+void EncounterNode::FillPredefinedEncounterDeck(pugi::xml_node encounter_node)
 {
-	std::vector<int> pool = { 1, 3, 5, 7, 9, 11, 13, 15, 17 };
+	for (pugi::xml_node card = encounter_node.child("card"); card; card = card.next_sibling("card"))
+	{
+		encounter->deck.push_back(card.attribute("value").as_int());
+	}
+}
+
+void EncounterNode::FillPredefinedRewards(pugi::xml_node rewards_node)
+{
+	for (pugi::xml_node card = rewards_node.child("card"); card; card = card.next_sibling("card"))
+	{
+		encounter->rewards.push_back(card.attribute("value").as_int());
+	}
+}
+
+
+void EncounterNode::FillRandomdRewards()
+{
+	std::vector<int> pool = { 2, 4, 6, 8, 10, 12, 14, 16, 18 };
 	std::vector<int>::iterator it;
 
-	for (int i = 0; i < encounter->deck_size; i++)
+	for (int i = 0; i < 3; i++)
 	{
 		int position = rand() % pool.size();
 		int card = pool[position];
-		encounter->deck.push_back(card);
+		encounter->rewards.push_back(card);
 		it = pool.begin() + position;
 		pool.erase(it);
 	}
-
 }
 
 void EncounterNode::CreateNodeEntity()

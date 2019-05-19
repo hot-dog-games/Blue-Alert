@@ -11,7 +11,7 @@ enum BarType;
 class UIEntityBar : public UIBar 
 {
 public:
-	UIEntityBar(iPoint pos, SDL_Rect sprite_rect, Stat* value, BarType type, Entity* entity);
+	UIEntityBar(iPoint pos, SDL_Rect sprite_rect, Stat* value, BarType type, BarState state, Entity* entity);
 	~UIEntityBar();
 
 	bool Update(float dt);

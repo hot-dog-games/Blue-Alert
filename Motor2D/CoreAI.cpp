@@ -24,9 +24,8 @@ bool CoreAI::Update(float dt)
 	Core::Update(dt);
 
 	dt_sum += dt;
-	if (state == STATIC_IDLE)
+	if (state == STATIC_IDLE || state == STATIC_ATTACKING)
 	{
-
 		switch (ai_state)
 		{
 		case CoreAI::AIState::WAITING:
@@ -136,6 +135,7 @@ void CoreAI::SelectCard()
 	AttackType secondary_counter = AttackType::AT_NONE;
 
 	bool has_counter = false;
+	bool has_secondary_counter = false;
 
 	if (lanes[selected_lane].enemy_armored > lanes[selected_lane].enemy_basic)
 	{
@@ -195,6 +195,7 @@ void CoreAI::SelectCard()
 		{
 			if (deck->cards[i]->info.attack_type == secondary_counter)
 			{
+				has_secondary_counter = true;
 				if (CanUseCard(i))
 				{
 					LOG("SECONDARY COUNTER FOUND");
@@ -204,6 +205,7 @@ void CoreAI::SelectCard()
 			}
 			else if (!deck->cards[i]->info.armored && secondary_counter == AttackType::AT_NONE)
 			{
+				has_secondary_counter = true;
 				if (CanUseCard(i))
 				{
 					LOG("SECONDARY COUNTER NON BLINDED FOUND");
@@ -212,9 +214,12 @@ void CoreAI::SelectCard()
 				}
 			}
 		}
-
 	}
 
+	if (!has_secondary_counter && !has_counter)
+	{
+		selected_card = rand() % deck->GetDeckSize();
+	}
 }
 
 bool CoreAI::PostUpdate()
