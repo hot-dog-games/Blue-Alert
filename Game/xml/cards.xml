@@ -426,7 +426,7 @@
     <combat attack_type="2" armored="false"/>
     <buff_type value="31"/>
     <stats>
-      <stat stat="health" value ="70"/>
+      <stat stat="health" value ="80"/>
       <stat stat="damage" value ="150"/>
       <stat stat="defense" value ="4"/>
       <stat stat="movement" value ="50"/>
@@ -452,7 +452,7 @@
     <combat attack_type="2" armored="false"/>
     <buff_type value="31"/>
     <stats>
-      <stat stat="health" value ="70"/>
+      <stat stat="health" value ="80"/>
       <stat stat="damage" value ="150"/>
       <stat stat="defense" value ="4"/>
       <stat stat="movement" value ="50"/>
