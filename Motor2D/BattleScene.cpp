@@ -182,7 +182,7 @@ bool BattleScene::Update(float dt)
 			App->game_manager->gold += 100;
 			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() == EntityType::STORE_STRATEGY_BUILDING)current_gold->SetText("Your gold: " + std::to_string(App->game_manager->gold));
 			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetChildren().size() == 0) {
-				App->game_manager->stage++;
+				if (App->game_manager->stage == STAGE_TUTORIAL)App->game_manager->stage++;
 			}
 		}
 			
@@ -217,7 +217,7 @@ bool BattleScene::Update(float dt)
 			App->game_manager->GetEncounterTree()->SetCurrentNode(App->game_manager->GetEncounterTree()->GetFightingNode());
 			App->game_manager->gold += 100;
 			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetChildren().size() == 0)
-				App->game_manager->stage++;
+				if(App->game_manager->stage == STAGE_TUTORIAL)App->game_manager->stage++;
 		}
 	}
 	break;
