@@ -120,6 +120,15 @@ bool StrategyMapScene::PreUpdate()
 // Called each loop iteration
 bool StrategyMapScene::Update(float dt)
 {	
+	if (!App->game_manager->popups[POPUP_DECISIONMAKING])
+	{
+		if (App->game_manager->GetEncounterTree()->GetCurrentNode()->GetChildren().size() > 1)
+		{
+			if (!App->transition_manager->IsTransitioning())
+				App->game_manager->ShowPopUp(POPUP_DECISIONMAKING);
+		}
+	}
+
 	return true;
 }
 
@@ -572,20 +581,23 @@ void StrategyMapScene::InitializeUI()
 	buildings_title[2] = App->gui->CreateLabel({ 812,385 }, "fonts/button_text.ttf", 22, "Aerial", { 0,0,0,0 }, 300, buildings_background);
 
 	//Infantry
-	str = "The infantry building is the place where the soldiers rest and prepare for battle.\n\nConquered: " + std::to_string(App->game_manager->GetEncounterTree()->GetBuildingsOfType(EntityType::INFANTRY_STRATEGY_BUILDING));
+	str = "The infantry building is the place where the soldiers rest and prepare for battle.\n\nConquered: " + std::to_string(((LeveledUpgrade*)App->game_manager->infantry_upgrade)->GetLevel())
+		+ "\nDamage increase: " + std::to_string(((LeveledUpgrade*)App->game_manager->infantry_upgrade)->GetBuffValue("damage")) + "\nHealth increase: " + std::to_string(((LeveledUpgrade*)App->game_manager->infantry_upgrade)->GetBuffValue("health"));
 
 	building_infantry_button = App->gui->CreateSelectableButton({ 355, 435 }, App->gui->LoadUIButton(30, "button"), buildings_background);
 	building_infantry_image = App->gui->CreateImage({ 365,125 }, App->gui->LoadUIImage(30, "building"), buildings_background);
 	building_infantry_info = App->gui->CreateLabel({ 245,-30 }, "fonts/red_alert.ttf", 23, str, { 231,216,145,255 }, 300, building_infantry_image);
 
 	//Aerial
-	str = "The aerial building is where the helicopters and planes are parked.\n\nConquered: " + std::to_string(App->game_manager->GetEncounterTree()->GetBuildingsOfType(EntityType::AERIAL_STRATEGY_BUILDING));
+	str = "The aerial building is where the helicopters and planes are parked.\n\nConquered: " + std::to_string(((LeveledUpgrade*)App->game_manager->aerial_upgrade)->GetLevel())
+		+ "\nDamage increase: " + std::to_string(((LeveledUpgrade*)App->game_manager->aerial_upgrade)->GetBuffValue("damage")) + "\nHealth increase: " + std::to_string(((LeveledUpgrade*)App->game_manager->aerial_upgrade)->GetBuffValue("health"));
 	building_aerial_button = App->gui->CreateSelectableButton({ 783,445 }, App->gui->LoadUIButton(31, "button"), buildings_background);
 	building_aerial_image = App->gui->CreateImage({ 350,145 }, App->gui->LoadUIImage(31, "building"), buildings_background);
 	building_aerial_info = App->gui->CreateLabel({ 260, -50 }, "fonts/red_alert.ttf", 23, str, { 231,216,145,255 }, 300, building_aerial_image);
 
 	//Land
-	str = "The land building is where the tanks are waiting for the battle.\n\nConquered: " + std::to_string(App->game_manager->GetEncounterTree()->GetBuildingsOfType(EntityType::LAND_STRATEGY_BUILDING));
+	str = "The land building is where the tanks are waiting for the battle.\n\nConquered: " + std::to_string(((LeveledUpgrade*)App->game_manager->land_upgrade)->GetLevel())
+		+ "\nDamage increase: " + std::to_string(((LeveledUpgrade*)App->game_manager->land_upgrade)->GetBuffValue("damage")) + "\nHealth increase: " + std::to_string(((LeveledUpgrade*)App->game_manager->land_upgrade)->GetBuffValue("health"));
 	building_land_button = App->gui->CreateSelectableButton({ 560,430 } , App->gui->LoadUIButton(32, "button"), buildings_background);
 	building_land_image = App->gui->CreateImage({ 345,115 } , App->gui->LoadUIImage(32, "building"), buildings_background);
 	building_land_info = App->gui->CreateLabel({ 265,-20 } , "fonts/red_alert.ttf", 23, str, { 231,216,145,255 }, 300, building_land_image);

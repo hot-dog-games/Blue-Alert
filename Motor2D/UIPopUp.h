@@ -16,6 +16,7 @@ public:
 private:
 	UILabel* popup_label = nullptr;
 	UIButton* popup_button = nullptr;
+	SDL_Rect screen;
 };
 
 #endif // UI_POPUP_H

@@ -83,3 +83,9 @@ void TransitionManager::DestroyTransition(Transition * transition_to_destroy)
 	active_transitions.remove(transition_to_destroy);
 	delete transition_to_destroy;
 }
+
+bool TransitionManager::IsTransitioning()
+{
+	if (active_transitions.empty())return false;
+	else return true;
+}

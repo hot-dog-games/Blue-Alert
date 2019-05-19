@@ -4,11 +4,16 @@
 #include "UIPopUp.h"
 #include "UIButton.h"
 #include "UILabel.h"
+#include "Window.h"
 #include "p2Log.h"
 
 UIPopUp::UIPopUp(SDL_Rect rect, iPoint margin, std::string text, int text_size, SDL_Color color)
 {
 	rect_box = rect;
+	uint width, height;
+	App->win->GetWindowSize(width, height);
+
+	screen = { 0, 0, (int)width, (int)height };
 
 	//Check if rectangle shape or square
 	if (rect_box.w > (int)(rect_box.h * 1.5))
@@ -28,6 +33,7 @@ UIPopUp::UIPopUp(SDL_Rect rect, iPoint margin, std::string text, int text_size, 
 	popup_label = App->gui->CreateLabel({ margin.x, margin.y}, "fonts/red_alert.ttf", 20, text, color, rect_box.w - button_rect->w - margin.x, this);
 	popup_button = App->gui->CreateButton({ rect_sprite.w - button_rect->w - margin.x, rect_sprite.h - button_rect->h - margin.y }, button_rect, this);
 
+	App->PauseGame();
 }
 
 
@@ -39,12 +45,13 @@ bool UIPopUp::UIBlit()
 {
 	iPoint screen_pos = GetScreenPos();
 
+	//SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, 40);
+	//SDL_RenderFillRect(App->render->renderer, &screen);
 
 	if (clipping && parent)
 		App->render->Blit(App->gui->GetAtlas(), screen_pos.x, screen_pos.y, &rect_sprite, 0.0F, 0.0, INT_MAX, INT_MAX, scale_X, scale_Y, &parent->GetScreenRect());
 	else
 		App->render->Blit(App->gui->GetAtlas(), screen_pos.x, screen_pos.y, &rect_sprite, 0.0F, 0.0, INT_MAX, INT_MAX, scale_X, scale_Y);
-
 
 	return true;
 }
@@ -53,6 +60,7 @@ bool UIPopUp::Update(float dt)
 {
 	if (popup_button->clicked)
 	{
+		App->ResumeGame();
 		App->gui->DeleteElement(this);
 	}
 
