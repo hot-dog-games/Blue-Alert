@@ -57,12 +57,12 @@
     <combat attack_type="2" armored="false"/>
     <buff_type value="30"/>
     <stats>
-      <stat stat="health" value ="50"/>
-      <stat stat="damage" value ="40"/>
+      <stat stat="health" value ="40"/>
+      <stat stat="damage" value ="30"/>
       <stat stat="defense" value ="3"/>
       <stat stat="movement" value ="25"/>
-      <stat stat="attack_speed" value ="2"/>
-      <stat stat="range" value ="8"/>
+      <stat stat="attack_speed" value ="1"/>
+      <stat stat="range" value ="7"/>
       <stat stat="energy_cost" value ="4"/>
       <stat stat="units" value ="2"/>
     </stats>
@@ -71,7 +71,7 @@
       <stat stat="health" value ="10"/>
       <stat stat="damage" value ="10"/>
       <stat stat="defense" value ="2"/>
-      <stat stat="movement" value ="10"/>
+      <stat stat="movement" value ="5"/>
       <stat stat="attack_speed" value ="1"/>
       <stat stat="range" value ="0"/>
     </upgrades>
@@ -83,12 +83,12 @@
     <combat attack_type="2" armored="false"/>
     <buff_type value="30"/>
     <stats>
-      <stat stat="health" value ="50"/>
-      <stat stat="damage" value ="40"/>
+      <stat stat="health" value ="40"/>
+      <stat stat="damage" value ="30"/>
       <stat stat="defense" value ="3"/>
       <stat stat="movement" value ="25"/>
-      <stat stat="attack_speed" value ="2"/>
-      <stat stat="range" value ="8"/>
+      <stat stat="attack_speed" value ="1"/>
+      <stat stat="range" value ="7"/>
       <stat stat="energy_cost" value ="4"/>
       <stat stat="units" value ="2"/>
     </stats>
@@ -97,7 +97,7 @@
       <stat stat="health" value ="10"/>
       <stat stat="damage" value ="10"/>
       <stat stat="defense" value ="2"/>
-      <stat stat="movement" value ="10"/>
+      <stat stat="movement" value ="5"/>
       <stat stat="attack_speed" value ="1"/>
       <stat stat="range" value ="0"/>
     </upgrades>
@@ -111,7 +111,7 @@
     <stats>
       <stat stat="health" value ="80"/>
       <stat stat="damage" value ="20"/>
-      <stat stat="defense" value ="7"/>
+      <stat stat="defense" value ="8"/>
       <stat stat="movement" value ="25"/>
       <stat stat="attack_speed" value ="2.5"/>
       <stat stat="range" value ="5"/>
@@ -137,7 +137,7 @@
     <stats>
       <stat stat="health" value ="80"/>
       <stat stat="damage" value ="20"/>
-      <stat stat="defense" value ="7"/>
+      <stat stat="defense" value ="8"/>
       <stat stat="movement" value ="25"/>
       <stat stat="attack_speed" value ="2.5"/>
       <stat stat="range" value ="5"/>
