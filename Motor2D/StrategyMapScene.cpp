@@ -522,10 +522,10 @@ void StrategyMapScene::InitializeUI()
 	core_title = App->gui->CreateLabel({ 27, 290 }, "fonts/button_text.ttf", 30, "CORE", { 242, 222, 70, 255 }, 200, buildings_background);
 	core_info = App->gui->CreateLabel({ 27, 330 }, "fonts/red_alert.ttf", 23, "The core travels around the map destroying all the enemies bases.", { 231,216,145,255 }, 250, buildings_background);
 
-	str = "Health: ";
+	str = "Health: " + std::to_string((int)App->game_manager->stats.find("health")->second->GetValue());
 	core_health = App->gui->CreateLabel({ 27, 410 }, "fonts/red_alert.ttf", 30, str, { 231,216,145,255 }, 300, buildings_background);
 
-	str = "Energy: ";
+	str = "Energy: " + std::to_string((int)App->game_manager->stats.find("energy")->second->GetValue());
 	core_health = App->gui->CreateLabel({ 27,440 }, "fonts/red_alert.ttf", 30, str, { 231,216,145,255 }, 300, buildings_background);
 
 	str = "Cost: " + std::to_string(((LeveledUpgrade*)App->game_manager->health_upgrade)->GetCost());

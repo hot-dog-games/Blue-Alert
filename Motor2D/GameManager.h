@@ -62,14 +62,14 @@ public:
 	void ClearUpgrades();
 	BuffSource* GetUpgrade(EntityType unit_type);
 
+	void UpgradeHealth();
+	void UpgradeEnergy();
 
 	void CreateCoreStats();
 	BuffSource* health_upgrade = nullptr;
 	BuffSource* energy_upgrade = nullptr;
 private:
 	Deck* combat_deck;
-	void UpgradeHealth();
-	void UpgradeEnergy();
 
 	//Maybe put this bitch in a vector?
 	BuffSource* infantry_upgrade = nullptr;
