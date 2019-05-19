@@ -11,9 +11,9 @@ UIScrollBar::UIScrollBar(iPoint pos, SDL_Rect rect, SliderType type, int initial
 	rect_box = { pos.x,pos.y,rect.w,rect.h };
 	this->rect_sprite = rect;
 	slidertype = type;
-	slider[0] = { 4506, 992,24,51 };
-	slider[1] = { 4539, 992,25,51 };
-	slider[2] = { 4574, 992,25,51 };
+	slider[0] = { 2794, 856,24,51 };
+	slider[1] = { 2827, 856,25,51 };
+	slider[2] = { 2862, 856,25,51 };
 	slider_button = App->gui->CreateButton({ (int)initial_value, -6 }, slider, this);
 
 	percentage = initial_value / rect_box.w;

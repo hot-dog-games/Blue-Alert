@@ -99,18 +99,18 @@ void MainMenuScene::StartUI() {
 	large_button_rect[3] = { 0,637,220,51 };
 
 	SDL_Rect back_options_rect[3];
-	back_options_rect[0] = { 4533,789,46,44 };
-	back_options_rect[1] = { 4592,789,46,44 };
-	back_options_rect[2] = { 4651,789,46,44 };
+	back_options_rect[0] = { 2794,912,46,44 };
+	back_options_rect[1] = { 2853,912,46,44 };
+	back_options_rect[2] = { 2912,912,46,44 };
 
-	menu_background = App->gui->CreateImage({ 0,0 }, { 3730,1434,1024,768 }, nullptr);
+	menu_background = App->gui->CreateImage({ 0,0 }, { 3712,1329,1024,768 }, nullptr);
 
-	optionsbackground = App->gui->CreateImage({ 0,0 }, { 3730,2328,1024,768 }, nullptr);
+	optionsbackground = App->gui->CreateImage({ 0,0 }, { 3712,2100,1024,768 }, nullptr);
 
 	back_options_button = App->gui->CreateButton({ 100,500 }, back_options_rect, optionsbackground);
-	music_slider = App->gui->CreateScrollBar({ 400,150 }, { 4506,1062,218,40 }, MUSIC, volume, 128, optionsbackground);
+	music_slider = App->gui->CreateScrollBar({ 400,150 }, { 2962,912,218,40 }, MUSIC, volume, 128, optionsbackground);
 	musiclabel = App->gui->CreateLabel({ 100,160 }, "fonts/button_text.ttf", 20, "Music Volume", { 255,255,255,0 }, 0, optionsbackground);
-	fx_slider = App->gui->CreateScrollBar({ 400,250 }, { 4506,1062,218,40 }, FX, volume, 128, optionsbackground);
+	fx_slider = App->gui->CreateScrollBar({ 400,250 }, { 2962,912,218,40 }, FX, volume, 128, optionsbackground);
 	fxlabel = App->gui->CreateLabel({ 100,260 }, "fonts/button_text.ttf", 20, "FX Volume", { 255,255,255,0 }, 0, optionsbackground);
 	App->gui->DisableElement(optionsbackground);
 
