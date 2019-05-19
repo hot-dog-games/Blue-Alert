@@ -3,6 +3,7 @@
 
 #include "p2Defs.h"
 #include "Module.h"
+#include <map>
 
 struct Card;
 class Deck;
@@ -10,6 +11,7 @@ class EncounterTree;
 class StrategyBuilding;
 class BuffSource;
 class Core;
+class Stat;
 
 enum EntityType;
 
@@ -35,6 +37,7 @@ public:
 	void LevelUpgrade();
 
 	int gold = 0;
+	std::map<std::string, Stat*> stats;
 	int stage = STAGE_TUTORIAL;
 	
 	bool IsInPlayerDeck(Card* card);
@@ -60,11 +63,13 @@ public:
 	BuffSource* GetUpgrade(EntityType unit_type);
 
 
+	void CreateCoreStats();
 	BuffSource* health_upgrade = nullptr;
 	BuffSource* energy_upgrade = nullptr;
-
 private:
 	Deck* combat_deck;
+	void UpgradeHealth();
+	void UpgradeEnergy();
 
 	//Maybe put this bitch in a vector?
 	BuffSource* infantry_upgrade = nullptr;

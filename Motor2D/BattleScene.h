@@ -49,7 +49,6 @@ public:
 private:
 	void CreateDrag(int num, int type, UIElement* element);
 	void ReleaseDrag();
-	void GenerateRandomSovietTroop();
 	void GenerateRandomAlliedTroop();
 
 	void UpdateGoldOnSelect(int unit);
@@ -124,7 +123,6 @@ private:
 
 	UIImage* current_drag;
 	int card_num;
-	int random_num[3];
 	std::vector<int> random_store_unit;
 	std::list<EntityType> store_units_purchased;
 

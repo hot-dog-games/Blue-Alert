@@ -283,17 +283,17 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 		}
 		else if (element == win_continue_two) {
 			if (win_unit_one->IsSelected()) {
-				App->game_manager->AddCardToCollection((EntityType)random_num[0]);
+				App->game_manager->AddCardToCollection((EntityType)App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[0]);
 				App->gui->DisableElement((UIElement*)win_panel_two);
 				App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
 			}
 			else if (win_unit_two->IsSelected()) {
-				App->game_manager->AddCardToCollection((EntityType)random_num[1]);
+				App->game_manager->AddCardToCollection((EntityType)App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[1]);
 				App->gui->DisableElement((UIElement*)win_panel_two);
 				App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
 			}
 			else if (win_unit_three->IsSelected()) {
-				App->game_manager->AddCardToCollection((EntityType)random_num[2]);
+				App->game_manager->AddCardToCollection((EntityType)App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[2]);
 				App->gui->DisableElement((UIElement*)win_panel_two);
 				App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
 			}
@@ -410,16 +410,6 @@ void BattleScene::ReleaseDrag()
 	current_drag = nullptr;
 }
 
-void BattleScene::GenerateRandomSovietTroop()
-{
-	do {
-		random_num[0] = rand() % 18 + 1;
-		random_num[1] = rand() % 18 + 1;
-		random_num[2] = rand() % 18 + 1;
-	} while ((random_num[0] == random_num[1] || random_num[0] == random_num[2] || random_num[1] == random_num[2])
-		|| (random_num[0] % 2 == 0 || random_num[1] % 2 == 0 || random_num[2] % 2 == 0));
-}
-
 void BattleScene::GenerateRandomAlliedTroop()
 {
 	std::vector<int> pool = { 1, 3, 5, 7, 9, 11, 13, 15, 17 };
@@ -483,7 +473,6 @@ void BattleScene::StartUI()
 {
 	//Generate random number
 	GenerateRandomAlliedTroop();
-	GenerateRandomSovietTroop();
 	//Game_UI
 
 	unit_panel = App->gui->CreateImage({ 755,0 }, { 2406,0,269,768 });
@@ -526,9 +515,9 @@ void BattleScene::StartUI()
 	win_continue_one = App->gui->CreateButton({ 262,375 }, button_rect, win_panel_one);
 	win_continue_two = App->gui->CreateButton({ 262,375 }, button_rect, win_panel_two);
 
-	win_unit_one = App->gui->CreateSelectableButton({ 130,200 }, App->gui->LoadUIButton(random_num[0], "upgrade"), win_panel_two);
-	win_unit_two = App->gui->CreateSelectableButton({ 320,200 }, App->gui->LoadUIButton(random_num[1], "upgrade"), win_panel_two);
-	win_unit_three = App->gui->CreateSelectableButton({ 510,200 }, App->gui->LoadUIButton(random_num[2], "upgrade"), win_panel_two);
+	win_unit_one = App->gui->CreateSelectableButton({ 130,200 }, App->gui->LoadUIButton(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[0], "upgrade"), win_panel_two);
+	win_unit_two = App->gui->CreateSelectableButton({ 320,200 }, App->gui->LoadUIButton(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[1], "upgrade"), win_panel_two);
+	win_unit_three = App->gui->CreateSelectableButton({ 510,200 }, App->gui->LoadUIButton(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[2], "upgrade"), win_panel_two);
 
 	win_building = App->gui->CreateImage({ 260,160 }, App->gui->LoadUIImage(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType(), "end_screen"), win_panel_one);
 
