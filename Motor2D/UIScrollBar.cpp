@@ -21,7 +21,6 @@ UIScrollBar::UIScrollBar(iPoint pos, SDL_Rect rect, SliderType type, int initial
 
 	maximum = pos.x + rect.w - slider_button->GetLocalRect().w - this->GetLocalPos().x;
 	current_value = initial_value;
-	//value = &initial_value;
 	this->max_value = max_value;
 
 }

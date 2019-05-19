@@ -48,6 +48,8 @@ bool Gui::Awake(pugi::xml_node& conf)
 
 	button_font = App->fonts->Load("fonts/button_text.ttf", 12);
 
+	App->audio->LoadFx("audio/fx/Ambient_Sounds/Shots/One_shoot.1.wav");
+
 	return ret;
 }
 
@@ -273,7 +275,8 @@ void Gui::SliderAction(SliderType type, UIScrollBar * slider)
 		App->audio->SetMusicVolume(slider->current_value);
 	}
 	if (type == FX) {
-		//App->audio->SetFXVolume(,slider->current_value);
+		App->audio->SetAllFXVolume(slider->current_value);
+		App->audio->PlayFx("audio/fx/Ambient_Sounds/Shots/One_shoot.1.wav", 0, 0);
 	}
 }
 

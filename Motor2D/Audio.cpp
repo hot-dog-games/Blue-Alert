@@ -192,7 +192,6 @@ bool Audio::PlayFx(const char* id, int repeat, int channel)
 void Audio::SetFXVolume(const char * path, int volume)
 {
 	
-
 	std::map<std::string, Mix_Chunk*>::iterator item = fx.find(path);
 
 	if (item != fx.end())
@@ -204,6 +203,16 @@ void Audio::SetFXVolume(const char * path, int volume)
 void Audio::SetMusicVolume(int volume)
 {
 	Mix_VolumeMusic(volume);
+}
+
+void Audio::SetAllFXVolume(int volume)
+{
+	std::map<std::string, Mix_Chunk*>::iterator item;
+
+	for (item = fx.begin(); item != fx.end(); ++item)
+	{
+		Mix_VolumeChunk(item->second, volume);
+	}
 }
 
 

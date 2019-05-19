@@ -36,6 +36,8 @@ public:
 
 	void SetMusicVolume(int volume);
 
+	void SetAllFXVolume(int volume);
+
 private:
 
 	_Mix_Music*	music = NULL;

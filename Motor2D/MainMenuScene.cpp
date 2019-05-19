@@ -1,38 +1,12 @@
 #include "p2Defs.h"
-#include "p2Log.h"
 #include "j1App.h"
-#include "Input.h"
-#include "Textures.h"
 #include "Audio.h"
-#include "Render.h"
-#include "Window.h"
-#include "Map.h"
-#include "EntityManager.h"
-#include "Entity.h"
-#include "Core.h"
-#include "CoreAI.h"
-#include "PathFinding.h"
-#include "UIAnimatedImage.h"
-#include "UIButton.h"
-#include "UIBar.h"
-#include "UIScrollBar.h"
 #include "GUI.h"
+#include "UIButtonText.h"
 #include "Pathfinding.h"
 #include "SceneManager.h"
 #include "TransitionManager.h"
-#include "CardManager.h"
-#include "Deck.h"
 #include "MainMenuScene.h"
-#include "BattleScene.h"
-#include "GameManager.h"
-#include "EncounterTree.h"
-#include "EncounterNode.h"
-#include "UIImage.h"
-#include "UILabel.h"
-#include "GameManager.h"
-#include "Stat.h"
-#include <stdlib.h>
-#include <time.h>
 
 
 MainMenuScene::MainMenuScene() : Scene()
@@ -50,7 +24,7 @@ bool MainMenuScene::Start()
 
 	//Initialize UI
 	StartUI();
-	//App->audio->PlayMusic("audio/music/9.Destroy-Red Alert2_2.ogg");
+	App->audio->PlayMusic("audio/music/menu_music.ogg");
 
 	return true;
 }
@@ -100,13 +74,13 @@ bool MainMenuScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			gameclose = true;
 		}
 		if (element == optionsbutton) {
-			App->gui->DisableElement(MenuBackground);
+			App->gui->DisableElement(menu_background);
 			App->gui->EnableElement(optionsbackground);
 
 
 		}
 		if (element == back_options_button) {
-			App->gui->EnableElement(MenuBackground);
+			App->gui->EnableElement(menu_background);
 			App->gui->DisableElement(optionsbackground);
 		}
 		if (element == newgamebutton) {
@@ -129,7 +103,7 @@ void MainMenuScene::StartUI() {
 	back_options_rect[1] = { 4592,789,46,44 };
 	back_options_rect[2] = { 4651,789,46,44 };
 
-	MenuBackground = App->gui->CreateImage({ 0,0 }, { 3730,1434,1024,768 }, nullptr);
+	menu_background = App->gui->CreateImage({ 0,0 }, { 3730,1434,1024,768 }, nullptr);
 
 	optionsbackground = App->gui->CreateImage({ 0,0 }, { 3730,2328,1024,768 }, nullptr);
 
@@ -140,12 +114,8 @@ void MainMenuScene::StartUI() {
 	fxlabel = App->gui->CreateLabel({ 100,260 }, "fonts/button_text.ttf", 20, "FX Volume", { 255,255,255,0 }, 0, optionsbackground);
 	App->gui->DisableElement(optionsbackground);
 
-	exitbutton = App->gui->CreateButton({ 785,650 }, large_button_rect, MenuBackground);
-	exitlabel = App->gui->CreateLabel({ 20,10 }, "fonts/button_text.ttf", 20, "EXIT GAME", { 0,0,0,0 }, 0, exitbutton);
-	optionsbutton = App->gui->CreateButton({ 785,440 }, large_button_rect, MenuBackground);
-	optionslabel = App->gui->CreateLabel({ 40,10 }, "fonts/button_text.ttf", 20, "OPTIONS", { 0,0,0,0 }, 0, optionsbutton);
-	newgamebutton = App->gui->CreateButton({ 785,320 }, large_button_rect, MenuBackground);
-	newgamelabel = App->gui->CreateLabel({ 20,10 }, "fonts/button_text.ttf", 20, "NEW GAME", { 0,0,0,0 }, 0, newgamebutton);
-	continuebutton = App->gui->CreateButton({ 785,380 }, large_button_rect, MenuBackground, false);
-	continuelabel = App->gui->CreateLabel({ 20,10 }, "fonts/button_text.ttf", 20, "CONTINUE", { 255,0,0,0 }, 0, continuebutton);
+	exitbutton = App->gui->CreateButtonText({ 785,650 }, { 20,10 }, large_button_rect, "EXIT" ,{ 0,0,0,0 }, 20, menu_background);
+	optionsbutton = App->gui->CreateButtonText({ 785,440 }, { 20,10 }, large_button_rect, "OPTIONS", { 0,0,0,0 }, 20, menu_background);
+	newgamebutton = App->gui->CreateButtonText({ 785,320 }, { 20,10 }, large_button_rect, "NEW GAME", { 0,0,0,0 }, 20, menu_background);
+	continuebutton = App->gui->CreateButtonText({ 785,380 }, { 20,10 }, large_button_rect, "CONTINUE", { 0,0,0,0 }, 20, menu_background, false);
 }

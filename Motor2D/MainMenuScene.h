@@ -5,15 +5,12 @@
 #include "p2Point.h"
 #include "EncounterTree.h"
 #include "UIImage.h"
-#include "UIButton.h"
 #include "UILabel.h"
 
 struct SDL_Texture;
 
 class UIBar;
-
-
-
+class UIButtonText;
 
 class MainMenuScene : public Scene
 {
@@ -40,18 +37,14 @@ public:
 
 	void StartUI();
 private:
-	UIImage* MenuBackground;
+	UIImage* menu_background;
 	UIImage* optionsbackground;
-	UIButton* exitbutton;
-	UILabel* exitlabel;
-	UILabel* optionslabel;
-	UILabel* newgamelabel;
-	UILabel* continuelabel;
+	UIButtonText* exitbutton;
 	UILabel* musiclabel;
 	UILabel* fxlabel;
-	UIButton* optionsbutton;
-	UIButton* newgamebutton;
-	UIButton* continuebutton;
+	UIButtonText* optionsbutton;
+	UIButtonText* newgamebutton;
+	UIButtonText* continuebutton;
 	UIButton* back_options_button;
 	UIScrollBar* music_slider;
 	UIScrollBar* fx_slider;
