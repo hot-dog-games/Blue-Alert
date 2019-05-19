@@ -31,8 +31,14 @@ public:
 	bool delete_deck = false;
 
 protected:
+
+	void Attack();
+	bool CheckEnemies();
 	Deck* deck = nullptr;
 	PerfTimer energy_timer;
+	PerfTimer attack_timer;
+	Entity* objective;
+	std::string attack_fx;
 
 	bool CanUseCard(int card_num);
 };
