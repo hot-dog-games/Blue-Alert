@@ -84,6 +84,8 @@ bool Core::CleanUp()
 	if(delete_deck)
 		delete deck;
 
+	StaticEntity::CleanUp();
+
 	return true;
 }
 

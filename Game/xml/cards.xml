@@ -165,7 +165,7 @@
       <stat stat="damage" value ="100"/>
       <stat stat="defense" value ="10"/>
       <stat stat="movement" value ="25"/>
-      <stat stat="attack_speed" value ="1"/>
+      <stat stat="attack_speed" value ="2"/>
       <stat stat="range" value ="5"/>
       <stat stat="energy_cost" value ="5"/>
       <stat stat="units" value ="1"/>
@@ -183,7 +183,7 @@
 
   <card type ="8">
     <name>Rhino Tank</name>
-    <sprite>sprites/Units/LandVehicles/grizzly.png</sprite>
+    <sprite>sprites/Units/LandVehicles/rhinotanksprite.png</sprite>
     <combat attack_type="2" armored="true"/>
     <buff_type value="32"/>
     <stats>
@@ -191,7 +191,7 @@
       <stat stat="damage" value ="100"/>
       <stat stat="defense" value ="10"/>
       <stat stat="movement" value ="25"/>
-      <stat stat="attack_speed" value ="1"/>
+      <stat stat="attack_speed" value ="2"/>
       <stat stat="range" value ="5"/>
       <stat stat="energy_cost" value ="5"/>
       <stat stat="units" value ="1"/>
@@ -209,7 +209,7 @@
 
   <card type ="9">
     <name>Robot Tank</name>
-    <sprite>sprites/Units/LandVehicles/grizzly.png</sprite>
+    <sprite>sprites/Units/LandVehicles/robot_tank.png</sprite>
     <combat attack_type="0" armored="true"/>
     <buff_type value="32"/>
     <stats>
@@ -236,7 +236,7 @@
 
   <card type ="10">
     <name>Terror Drone</name>
-    <sprite>sprites/Units/LandVehicles/grizzly.png</sprite>
+    <sprite>sprites/Units/LandVehicles/terror_drone.png</sprite>
     <combat attack_type="0" armored="true"/>
     <buff_type value="32"/>
     <stats>
@@ -263,7 +263,7 @@
 
   <card type ="11">
     <name>Prism Tank</name>
-    <sprite>sprites/Units/LandVehicles/grizzly.png</sprite>
+    <sprite>sprites/Units/LandVehicles/teslasprite.png</sprite>
     <combat attack_type="1" armored="true"/>
     <buff_type value="32"/>
     <stats>
@@ -290,7 +290,7 @@
   
   <card type ="12">
     <name>Tesla Tank</name>
-    <sprite>sprites/Units/LandVehicles/grizzly.png</sprite>
+    <sprite>sprites/Units/LandVehicles/teslasprite.png</sprite>
     <combat attack_type="1" armored="true"/>
     <buff_type value="32"/>
     <stats>
@@ -317,7 +317,7 @@
 
   <card type ="13">
     <name>Nighthawk</name>
-    <sprite>sprites/Units/AirVehicles/siegechopper.png</sprite>
+    <sprite>sprites/Units/AirVehicles/nighthawksprite.png</sprite>
     <combat attack_type="0" armored="false"/>
     <buff_type value="31"/>
     <stats>
@@ -396,7 +396,7 @@
 
   <card type ="16">
     <name>MiG</name>
-    <sprite>sprites/Units/AirVehicles/harriersprite.png</sprite>
+    <sprite>sprites/Units/AirVehicles/migsprite.png</sprite>
     <combat attack_type="1" armored="true"/>
     <buff_type value="31"/>
     <stats>
@@ -430,8 +430,8 @@
       <stat stat="damage" value ="150"/>
       <stat stat="defense" value ="5"/>
       <stat stat="movement" value ="50"/>
-      <stat stat="attack_speed" value ="2"/>
-      <stat stat="range" value ="5.5"/>
+      <stat stat="attack_speed" value ="3"/>
+      <stat stat="range" value ="5"/>
       <stat stat="energy_cost" value ="5"/>
       <stat stat="units" value ="1"/>
     </stats>
@@ -456,8 +456,8 @@
       <stat stat="damage" value ="100"/>
       <stat stat="defense" value ="4"/>
       <stat stat="movement" value ="50"/>
-      <stat stat="attack_speed" value ="2"/>
-      <stat stat="range" value ="5.5"/>
+      <stat stat="attack_speed" value ="3"/>
+      <stat stat="range" value ="5"/>
       <stat stat="energy_cost" value ="5"/>
       <stat stat="units" value ="1"/>
     </stats>

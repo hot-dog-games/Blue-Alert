@@ -4,6 +4,7 @@
 #include "Render.h"
 #include "Deck.h"
 #include "CardManager.h"
+#include "GameManager.h"
 #include "p2Log.h"
 #include "CoreAI.h"
 
@@ -42,7 +43,21 @@ bool CoreAI::Update(float dt)
 		case CoreAI::AIState::ACTING:
 			UseCard(selected_card, { (float)lanes[selected_lane].area.x + (float)lanes[selected_lane].area.w*0.5f, position.y + 50 });
 			ai_state = AIState::WAITING;
-			break;
+			if (deck->cards[selected_card]->type == EntityType::VIRUS)
+			{
+				if (!App->game_manager->popups[POPUP_SNIPER_COUNTERS])
+					App->game_manager->ShowPopUp(POPUP_SNIPER_COUNTERS);
+			}
+			else if (deck->cards[selected_card]->type == EntityType::HARRIER)
+			{
+				if (!App->game_manager->popups[POPUP_AREA_COUNTERS])
+					App->game_manager->ShowPopUp(POPUP_AREA_COUNTERS);
+			}
+			else if (deck->cards[selected_card]->type == EntityType::GI)
+			{
+				if (!App->game_manager->popups[POPUP_MULTIPLE_COUNTERS])
+					App->game_manager->ShowPopUp(POPUP_MULTIPLE_COUNTERS);
+			}
 		default:
 			break;
 		}

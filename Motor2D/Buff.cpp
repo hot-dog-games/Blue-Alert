@@ -38,6 +38,7 @@ bool Buff::IsCausedBySource(uint source_id) {
 
 BuffSource::BuffSource(pugi::xml_node source_node)
 {
+	source_id = App->buff->GetNewSourceID();
 	for (pugi::xml_node iter = source_node.child("buff"); iter; iter = iter.next_sibling("buff"))
 	{
 		buffs.push_back(new Buff(
@@ -48,12 +49,39 @@ BuffSource::BuffSource(pugi::xml_node source_node)
 	}
 }
 
+void BuffSource::CleanUp()
+{
+	for (int i = 0; i < buffs.size(); i++)
+	{
+		delete buffs[i];
+	}
+	buffs.clear();
+}
+
 void BuffSource::RemoveBuffs(std::map<std::string, Stat*> stats)
 {
 	std::map<std::string, Stat*>::iterator item;
 	for (item = stats.begin(); item != stats.end(); ++item)
 	{
 		item->second->RemoveBuff(source_id);
+	}
+}
+
+void LeveledUpgrade::Reset()
+{
+	level = 0;
+}
+
+uint LeveledUpgrade::GetBuffValue(std::string name)
+{
+	for (uint i = 0; i < buff_amount; ++i)
+	{
+		uint position = i + (level * buff_amount);
+		std::string stat_name = buffs[position]->GetStat();
+		if (stat_name == name)
+		{
+			return buffs[position]->GetValue();
+		}
 	}
 }
 
