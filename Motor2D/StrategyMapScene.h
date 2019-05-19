@@ -48,11 +48,20 @@ private:
 	UIImage* main_panel;
 	UILabel* gold;
 	UILabel* text_menu;
+	UILabel* resume_label;
+	UILabel* musiclabel;
+	UILabel* fxlabel;
+	UILabel* savegamelabel;
 	UIButton* settings_button;
+	UIButton* resume_settings_button;
+	UIButton* savegamebutton;
 	UIButtonText* menu_button;
 	UIButtonText* backbutton_t_b;
 	UIButtonText* troops_button;
 	UIButtonText* buildings_button;
+	UIScrollBar* music_slider;
+	UIScrollBar* fx_slider;
+
 
 	//Building Menu
 	UIImage* buildings_background;
@@ -84,6 +93,7 @@ private:
 	UILabel* buildings_title[3];
 	
 	// Troops Menu
+
 	UIButton* deck_buttons[4] = { nullptr, nullptr, nullptr, nullptr };
 	UIButton* collection_buttons_allies[9];
 	UIButton* collection_buttons_enemies[9];
@@ -108,6 +118,7 @@ private:
 	int limit_radius = 700;
 
 	iPoint last_camera_position;
+	int volume = 64;
 
 };
 

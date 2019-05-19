@@ -160,8 +160,24 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 {
 	if (gui_event == GUI_Event::LEFT_CLICK_DOWN) {
 		if (element == settings_button) {
-			//(options = App->gui->CreateImage();
+			App->gui->EnableElement(options);
+
+			App->gui->DisableElement(menu_button);
+			App->gui->DisableElement(settings_button);
+
+			App->game_manager->GetEncounterTree()->is_clickable = false;
+			dragable = false;
+
 		}
+		else if (element == resume_settings_button) {
+			App->gui->DisableElement(options);
+
+			App->gui->EnableElement(menu_button);
+			App->gui->EnableElement(settings_button);
+			App->game_manager->GetEncounterTree()->is_clickable = true;
+			dragable = true;
+		}
+
 		else if (element == menu_button || (element == troops_button && !troops_background->IsEnabled())) {
 			
 			App->gui->EnableElement(troops_button);
@@ -327,6 +343,7 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			App->game_manager->UpgradeHealth();
 
 			std::string str;
+
 			str = "Health: " + std::to_string((int)App->game_manager->stats.find("health")->second->GetValue());
 			core_health->SetText(str);
 
@@ -465,10 +482,11 @@ void StrategyMapScene::InitializeUI()
 	small_button_rect[1] = { 753, 538, 41, 40 };
 	small_button_rect[2] = { 753, 577, 41, 40 };
 
-	SDL_Rect medium_button_rect[3];
+	SDL_Rect medium_button_rect[4];
 	medium_button_rect[0] = { 800,499,294,67 };
 	medium_button_rect[1] = { 800,569,294,67 };
 	medium_button_rect[2] = { 800,639,294,67 };
+	medium_button_rect[3] = { 800,639,294,67 };
 
 	SDL_Rect little_button_rect[3];
 	little_button_rect[0] = { 1256,379,145,67 };
@@ -480,10 +498,26 @@ void StrategyMapScene::InitializeUI()
 	change_button[1] = { 77,700,53,51 };
 	change_button[2] = { 148,700,53,51 };
 
+	SDL_Rect options_rect[3];
+	options_rect[0] = { 2897,844,81,66 };
+	options_rect[1] = { 2982,844,81,66 };
+	options_rect[2] = { 3067,844,81,66 };
+
 	std::string str;
 
-	settings_button = App->gui->CreateButton({ 50,700 }, small_button_rect, main_panel);
 	menu_button = App->gui->CreateButtonText({ 700,700 }, { 70,0 }, medium_button_rect, "MENU", { 200,200,200,255 }, 33, main_panel);
+	options = App->gui->CreateImage({ 200,100 }, { 14,2374,619,463 }, nullptr);
+	settings_button = App->gui->CreateButton({ 50,700 }, options_rect, main_panel);
+	resume_settings_button = App->gui->CreateButton({ 320,380 }, medium_button_rect, options);
+	resume_label = App->gui->CreateLabel({ 60,15 }, "fonts/button_text.ttf", 20, "Resume", { 255,255,255,0 }, 0, resume_settings_button);
+
+	music_slider = App->gui->CreateScrollBar({ 350,150 }, { 2962,912,218,40 }, MUSIC, volume, 128, options);
+	musiclabel = App->gui->CreateLabel({ 50,160 }, "fonts/button_text.ttf", 20, "Music Volume", { 255,255,255,0 }, 0, options);
+	fx_slider = App->gui->CreateScrollBar({ 350,250 }, { 2962,912,218,40 }, FX, volume, 128, options);
+	fxlabel = App->gui->CreateLabel({ 50,260 }, "fonts/button_text.ttf", 20, "FX Volume", { 255,255,255,0 }, 0, options);
+	savegamebutton = App->gui->CreateButton({ 30,380 }, medium_button_rect, options, false);
+	savegamelabel = App->gui->CreateLabel({ 40,15 }, "fonts/button_text.ttf", 20, "Save Game", { 255,0,0,0 }, 0, savegamebutton);
+	App->gui->DisableElement(options);
 
 	str = "GOLD: " + std::to_string(App->game_manager->gold);
 	gold = App->gui->CreateLabel({ 60, 30 }, "fonts/button_text.ttf", 25, str, { 0,0,0,0 }, 0, main_panel);
