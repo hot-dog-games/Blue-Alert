@@ -1,10 +1,11 @@
-#include"j1App.h"
+#include "j1App.h"
 #include "GUI.h"
+#include "UIElement.h"
 #include "UIScrollBar.h"
 #include "UIButton.h"
-#include"Render.h"
-#include"Input.h"
-#include"p2Log.h"
+#include "Render.h"
+#include "Input.h"
+#include "p2Log.h"
 
 UIScrollBar::UIScrollBar(iPoint pos, SDL_Rect rect, SliderType type, int initial_value, int max_value) {
 	rect_box = { pos.x,pos.y,rect.w,rect.h };
@@ -45,9 +46,11 @@ void UIScrollBar::DragSlider()
 	App->input->GetMousePosition(mouse.x, mouse.y);
 
 	int pos_x = mouse.x - this->GetLocalPos().x - slider_button->GetLocalRect().w / 2;
-	slider_button->SetLocalPos(pos_x, slider_button->GetLocalPos().y);
-
-
+	if (!parent)
+		slider_button->SetLocalPos(pos_x - (int)parent->GetLocalPos().x, slider_button->GetLocalPos().y);
+	else
+		slider_button->SetLocalPos(pos_x - (int)parent->GetLocalPos().x, slider_button->GetLocalPos().y);
+	
 	if (slider_button->GetLocalPos().x < minimum)
 	{
 		slider_button->SetLocalPos(minimum, slider_button->GetLocalPos().y);
@@ -57,12 +60,10 @@ void UIScrollBar::DragSlider()
 		slider_button->SetLocalPos(maximum, slider_button->GetLocalPos().y);
 	}
 
-	percentage = (float)(pos_x) / 194;
+	percentage = (float)(pos_x - (int)parent->GetLocalPos().x) / 194;
 	current_value = percentage * max_value;
 
-
 	App->gui->SliderAction(slidertype, this);
-
 
 }
 
