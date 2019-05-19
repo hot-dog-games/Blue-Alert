@@ -64,17 +64,17 @@ public:
 
 	void UpgradeHealth();
 	void UpgradeEnergy();
+	void ResetBuildingBuffs();
 
 	void CreateCoreStats();
 	BuffSource* health_upgrade = nullptr;
 	BuffSource* energy_upgrade = nullptr;
-private:
-	Deck* combat_deck;
-
-	//Maybe put this bitch in a vector?
 	BuffSource* infantry_upgrade = nullptr;
 	BuffSource* land_upgrade = nullptr;
 	BuffSource* aerial_upgrade = nullptr;
+
+private:
+	Deck* combat_deck;
 
 	EncounterTree* encounter_tree = nullptr;
 };

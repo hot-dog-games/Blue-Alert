@@ -51,6 +51,11 @@ public:
 	void GetBuffs(std::map<std::string, Stat*> stats);
 	uint GetCost();
 	bool LevelUp();
+	void Reset();
+	uint GetLevel() {
+		return level;
+	}
+	uint GetBuffValue(std::string name);
 private:
 	uint max_level = 0;
 	uint level = 0;
