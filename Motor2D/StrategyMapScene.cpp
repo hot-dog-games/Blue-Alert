@@ -202,8 +202,7 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 					App->gui->DisableElement(deck_buttons[i]);
 			}
 
-			building_aerial_button->ChangeState(true);
-			building_title->SetText("Aerial Building:");
+			building_title->SetText("Infantry Building:");
 
 		}
 		else if (element == backbutton_t_b) {
@@ -224,9 +223,11 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 		else if (element == buildings_button) {
 			App->gui->DisableElement(troops_background);
 			App->gui->EnableElement(buildings_background);
-			App->gui->DisableElement(building_infantry_image);
+			App->gui->DisableElement(building_aerial_image);
 			App->gui->DisableElement(building_land_image);
-			building_aerial_button->ChangeState(true);
+			building_infantry_button->ChangeState(true);
+			building_aerial_button->ChangeState(false);
+			building_land_button->ChangeState(false);
 		}
 		else if (element == change_side_button) {
 			if (collection_buttons_allies[0]->IsEnabled()) {
