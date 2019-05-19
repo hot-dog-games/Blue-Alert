@@ -207,12 +207,16 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 				for (int i = 0; i < 9; ++i) {
 					App->gui->EnableElement(collection_buttons_enemies[i]);
 					App->gui->DisableElement(collection_buttons_allies[i]);
+					side_label->SetText("Enemies");
+					side_label->SetColor({ 25,68,160,255 });
 				}
 			}
 			else {
 				for (int i = 0; i < 9; ++i) {
 					App->gui->EnableElement(collection_buttons_allies[i]);
 					App->gui->DisableElement(collection_buttons_enemies[i]);
+					side_label->SetText("Allies");
+					side_label->SetColor({ 160,25,25,255 });
 				}
 			}
 		}
@@ -462,6 +466,11 @@ void StrategyMapScene::InitializeUI()
 	little_button_rect[1] = { 1256,449,145,67 };
 	little_button_rect[2] = { 1256,519,145,67 };
 
+	SDL_Rect change_button[3];
+	change_button[0] = { 3,700,53,51 };
+	change_button[1] = { 77,700,53,51 };
+	change_button[2] = { 148,700,53,51 };
+
 	std::string str;
 
 	settings_button = App->gui->CreateButton({ 50,700 }, small_button_rect, main_panel);
@@ -471,8 +480,10 @@ void StrategyMapScene::InitializeUI()
 	gold = App->gui->CreateLabel({ 60, 30 }, "fonts/button_text.ttf", 25, str, { 0,0,0,0 }, 0, main_panel);
 
 	// Troops menu
-	troops_background = App->gui->CreateImage({ 20,95 }, { 793,1229,986,593 }, main_panel);
-	change_side_button = App->gui->CreateButton({ 300,300 }, small_button_rect, troops_background);
+	troops_background = App->gui->CreateImage({ 20,95 }, { 3711,5,985,659 }, main_panel);
+	change_side_button = App->gui->CreateButton({ 918,597 }, change_button, troops_background);
+	side_label = App->gui->CreateLabel({ 700, 607 }, "fonts/button_text.ttf", 30, "Allies", { 255,255,255,255 }, 300, troops_background);
+	side_label->SetColor({ 160,25,25,255 });
 
 	backbutton_t_b = App->gui->CreateButtonText({ 961,99 }, { 4,3 }, small_button_rect, "X", { 200,200,200,255 }, 27);
 	App->gui->DisableElement(backbutton_t_b);

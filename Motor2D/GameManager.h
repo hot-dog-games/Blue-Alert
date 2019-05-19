@@ -36,7 +36,7 @@ public:
 	Deck* GetPlayerDeck();
 	void LevelUpgrade();
 
-	int gold = 300;
+	int gold = 0;
 	std::map<std::string, Stat*> stats;
 	int stage = STAGE_TUTORIAL;
 	
