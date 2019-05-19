@@ -313,9 +313,9 @@
     <TeslaTank type="12">
 
       <button>
-        <frame x="1000" y="160" width="100" height="80"/>
-        <frame x="1100" y="160" width="100" height="80"/>
-        <frame x="1000" y="240" width="100" height="80"/>
+        <frame x="1001" y="0" width="100" height="80"/>
+        <frame x="1100" y="0" width="100" height="80"/>
+        <frame x="1000" y="80" width="100" height="80"/>
         <frame x="0" y="0" width="100" height="80"/>
       </button>
 
