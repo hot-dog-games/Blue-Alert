@@ -2,11 +2,11 @@
 	<source name="core_health_upgrade" type ="leveled_upgrade">
     <info buff_amount="1" base_cost="50" max_level="5"/>
     <buff stat="health" value ="0" type ="additive"/>
-	  <buff stat="health" value ="20" type ="additive"/>
-    <buff stat="health" value ="40" type ="additive"/>
-    <buff stat="health" value ="60" type ="additive"/>
-    <buff stat="health" value ="80" type ="additive"/>
-    <buff stat="health" value ="100" type ="additive"/>
+	  <buff stat="health" value ="200" type ="additive"/>
+    <buff stat="health" value ="400" type ="additive"/>
+    <buff stat="health" value ="600" type ="additive"/>
+    <buff stat="health" value ="800" type ="additive"/>
+    <buff stat="health" value ="1000" type ="additive"/>
 	</source>
   <source name="core_energy_upgrade" type ="leveled_upgrade">
     <info buff_amount="1" base_cost="50" max_level="5"/>

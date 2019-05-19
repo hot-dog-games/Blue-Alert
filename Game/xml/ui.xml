@@ -254,7 +254,6 @@
       
     </RobotTank>
 
-
     <BattleFortress type="10">
 
       <button>
@@ -426,9 +425,9 @@
     <MiG type="16">
 
       <button>
-        <frame x="800" y="320" width="100" height="80"/>
-        <frame x="900" y="320" width="100" height="80"/>
-        <frame x="800" y="400" width="100" height="80"/>
+        <frame x="800" y="160" width="100" height="80"/>
+        <frame x="900" y="160" width="100" height="80"/>
+        <frame x="800" y="240" width="100" height="80"/>
         <frame x="0" y="0" width="100" height="80"/>
       </button>
 
