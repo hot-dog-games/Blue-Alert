@@ -141,6 +141,37 @@ void GameManager::AddCardToCollection(EntityType card_type)
 		}
 	}
 
-	if(!found) collection.push_back(App->card_manager->CreateCard(card_type));
-	LOG("KAJAWOD");
+	if (!found)
+	{
+		Card* new_card = App->card_manager->CreateCard(card_type);
+		collection.push_back(new_card);
+		GetUpgrade(card_type)->GetBuffs(new_card->info.stats);
+	}
+}
+
+void GameManager::CreateUpgrades()
+{
+	health_upgrade = App->buff->CreateBuffSource("core_health_upgrade");
+	energy_upgrade = App->buff->CreateBuffSource("core_energy_upgrade");
+	infantry_upgrade = App->buff->CreateBuffSource("troop_buff");
+	land_upgrade = App->buff->CreateBuffSource("troop_buff");
+	aerial_upgrade = App->buff->CreateBuffSource("troop_buff");
+}
+void GameManager::ClearUpgrades()
+{
+	for each (Card* c in collection)
+	{
+		infantry_upgrade->RemoveBuffs(c->info.stats);
+		land_upgrade->RemoveBuffs(c->info.stats);
+		aerial_upgrade->RemoveBuffs(c->info.stats);
+	}
+	health_upgrade->RemoveBuffs(stats);
+	energy_upgrade->RemoveBuffs(stats);
+
+	App->buff->CleanUp();
+	health_upgrade = nullptr;
+	energy_upgrade = nullptr;
+	infantry_upgrade = nullptr;
+	land_upgrade = nullptr;
+	aerial_upgrade = nullptr;
 }

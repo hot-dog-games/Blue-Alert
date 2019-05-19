@@ -34,6 +34,13 @@ class BuffSource
 {
 public:
 	BuffSource(pugi::xml_node buff_source_node);
+	virtual void GetBuffs(std::map<std::string, Stat*> stats) {};
+	void CleanUp();
+	void RemoveBuffs(std::map<std::string, Stat*> stats);
+public:
+	uint source_id;
+	std::vector<Buff*> buffs;
+};
 
 public:
 	uint source_id;

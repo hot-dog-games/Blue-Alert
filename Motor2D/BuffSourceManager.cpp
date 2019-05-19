@@ -24,6 +24,16 @@ bool BuffSourceManager::Awake(pugi::xml_node &)
 	return true;
 }
 
+bool BuffSourceManager::CleanUp()
+{
+	for (int i = 0; i < buff_sources.size(); i++)
+	{
+		buff_sources[i]->CleanUp();
+		delete buff_sources[i];
+	}
+	return true;
+}
+
 uint BuffSourceManager::GetNewSourceID()
 {
 	return last_source_id++;
@@ -48,7 +58,13 @@ BuffSource* BuffSourceManager::CreateBuffSource(std::string source_name)
 
 	if (source_node != NULL)
 	{
-		BuffSource* buff_source = new BuffSource(source_node);
+		BuffSource* buff_source = nullptr;
+		std::string type = source_node.attribute("type").as_string();
+		if (type == "leveled_upgrade")
+		{
+			buff_source = new LeveledUpgrade(source_node);
+		}
+		buff_sources.push_back(buff_source);
 		return buff_source;
 	}
 	return nullptr;
