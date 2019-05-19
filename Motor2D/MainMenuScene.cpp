@@ -117,5 +117,5 @@ void MainMenuScene::StartUI() {
 	exitbutton = App->gui->CreateButtonText({ 785,650 }, { 20,10 }, large_button_rect, "EXIT" ,{ 0,0,0,0 }, 20, menu_background);
 	optionsbutton = App->gui->CreateButtonText({ 785,440 }, { 20,10 }, large_button_rect, "OPTIONS", { 0,0,0,0 }, 20, menu_background);
 	newgamebutton = App->gui->CreateButtonText({ 785,320 }, { 20,10 }, large_button_rect, "NEW GAME", { 0,0,0,0 }, 20, menu_background);
-	continuebutton = App->gui->CreateButtonText({ 785,380 }, { 20,10 }, large_button_rect, "CONTINUE", { 0,0,0,0 }, 20, menu_background, false);
+	continuebutton = App->gui->CreateButtonText({ 785,380 }, { 20,10 }, large_button_rect, "CONTINUE", { 255,0,0,0 }, 20, menu_background, false);
 }
