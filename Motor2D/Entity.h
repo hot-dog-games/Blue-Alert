@@ -51,7 +51,6 @@ public:
 	fPoint position;
 	SDL_Rect current_frame;
 	int sorting_layer = 0;
-	std::map<std::string, Stat*> stats;
 
 protected:
 	std::map<std::string, Animation> animations;
@@ -59,7 +58,7 @@ protected:
 	SDL_Texture* sprite = nullptr;
 
 	bool debug = false;
-
+	std::map<std::string, Stat*> stats;
 
 };
 #endif // _ENTITY_H_

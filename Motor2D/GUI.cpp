@@ -231,14 +231,14 @@ UIAnimatedImage* Gui::CreateAnimatedImage(iPoint pos, SDL_Rect * rect, int total
 	return image;
 }
 
-UIBar * Gui::CreateBar(iPoint pos, SDL_Rect rect, Stat* value, BarType type, BarState state, Entity* entity, UIElement * parent)
+UIBar * Gui::CreateBar(iPoint pos, SDL_Rect rect, Stat* value, BarType type, Entity* entity, UIElement * parent)
 {
 	UIBar* bar;
 	if (entity) {
-		bar = new UIEntityBar(pos, rect, value, type, state, entity);
+		bar = new UIEntityBar(pos, rect, value, type, entity);
 	}
 	else {
-		bar = new UIBar(pos, rect, value, type, state);
+		bar = new UIBar(pos, rect, value, type);
 	}
 	
 	bar->parent = parent;
@@ -337,7 +337,6 @@ SDL_Rect* Gui::LoadUIButton(int num, std::string type)
 	pugi::xml_node buttons_node = buttons_file.first_child().child("ui_button");
 
 	std::string name;
-	int num_type = 0;
 
 	switch (num) {
 	case 1:
@@ -394,15 +393,6 @@ SDL_Rect* Gui::LoadUIButton(int num, std::string type)
 	case 18:
 		name = "SpyPlane";
 		break;
-
-	for (pugi::xml_node it = buttons_node.first_child(); it; it = it.next_sibling())
-	{
-		num_type = it.first_attribute().as_int();
-		if (num_type == num)
-		{
-			name = it.name();
-			break;
-		}
 	}
 
 	SDL_Rect* button_rect = new SDL_Rect[4];

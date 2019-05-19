@@ -1,37 +1,30 @@
 <config>
-	<source name="core_health_upgrade" type ="leveled_upgrade">
-    <info buff_amount="1" base_cost="50" max_level="5"/>
-    <buff stat="health" value ="0" type ="additive"/>
-	  <buff stat="health" value ="200" type ="additive"/>
-    <buff stat="health" value ="400" type ="additive"/>
-    <buff stat="health" value ="600" type ="additive"/>
-    <buff stat="health" value ="800" type ="additive"/>
-    <buff stat="health" value ="1000" type ="additive"/>
+	<source name="health_1">
+	  <buff stat="health" value ="20" type ="additive"/>
 	</source>
-  <source name="core_energy_upgrade" type ="leveled_upgrade">
-    <info buff_amount="1" base_cost="50" max_level="5"/>
-    <buff stat="energy" value ="0" type ="additive"/>
-    <buff stat="energy" value ="2" type ="additive"/>
-    <buff stat="energy" value ="4" type ="additive"/>
-    <buff stat="energy" value ="6" type ="additive"/>
-    <buff stat="energy" value ="8" type ="additive"/>
-    <buff stat="energy" value ="10" type ="additive"/>
-  </source>
-
-  <source name="troop_buff" type ="leveled_upgrade">
-    <info buff_amount="2" base_cost="0" max_level="5"/>
-    <buff stat="health" value ="0" type ="additive"/>
-    <buff stat="damage" value ="0" type ="additive"/>
-    <buff stat="health" value ="10" type ="additive"/>
-    <buff stat="damage" value ="1" type ="additive"/>
-    <buff stat="health" value ="20" type ="additive"/>
-    <buff stat="damage" value ="2" type ="additive"/>
-    <buff stat="health" value ="30" type ="additive"/>
-    <buff stat="damage" value ="3" type ="additive"/>
-    <buff stat="health" value ="40" type ="additive"/>
-    <buff stat="damage" value ="4" type ="additive"/>
-    <buff stat="health" value ="50" type ="additive"/>
-    <buff stat="damage" value ="5" type ="additive"/>
-  </source>
 	
-</config>
+	<source name="health_2">
+	  <buff stat="health" value ="20" type ="additive"/>
+	</source>
+
+	<source name="energy_1">
+	  <buff stat="energy" value ="2" type ="additive"/>
+	</source>
+	
+	<source name="energy_2">
+	  <buff stat="energy" value ="4" type ="additive"/>
+	</source>
+
+	<source name="energy_regen_1">
+	  <buff stat="energy_regen" value ="0.2" type ="additive"/>
+	</source>
+
+	<source name="energy_regen_2">
+	  <buff stat="energy_regen" value ="0.4" type ="additive"/>
+	</source>
+	
+	<source name="energy_regen_3">
+	  <buff stat="energy_regen" value ="0.6" type ="additive"/>
+	</source>
+	
+ </config>

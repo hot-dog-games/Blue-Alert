@@ -2,13 +2,11 @@
 #define _BUFF_H_
 
 #include <string>
-#include <vector>
-#include <map>
+#include <list>
 
 #include "PugiXml/src/pugixml.hpp"
 #include "p2Defs.h"
 
-class Stat;
 
 enum class BUFF_TYPE {
 	ADDITIVE, //AKA: Flat, raw
@@ -36,25 +34,10 @@ class BuffSource
 {
 public:
 	BuffSource(pugi::xml_node buff_source_node);
-	virtual void GetBuffs(std::map<std::string, Stat*> stats) {};
-	void RemoveBuffs(std::map<std::string, Stat*> stats);
+
 public:
 	uint source_id;
-	std::vector<Buff*> buffs;
-};
-
-class LeveledUpgrade : public BuffSource
-{
-public:
-	LeveledUpgrade(pugi::xml_node buff_source_node);
-	void GetBuffs(std::map<std::string, Stat*> stats);
-	uint GetCost();
-	bool LevelUp();
-private:
-	uint max_level = 0;
-	uint level = 0;
-	uint base_cost = 0;
-	uint buff_amount = 0;
+	std::list<Buff*> buffs;
 };
 
 #endif //_BUFF_H_

@@ -5,18 +5,14 @@
 #include "Stat.h"
 #include "p2Log.h"
 
-UIBar::UIBar(iPoint pos, SDL_Rect sprite_rect, Stat* value, BarType type, BarState state)
+UIBar::UIBar(iPoint pos, SDL_Rect sprite_rect, Stat* value, BarType type)
 {
 	rect_box = { pos.x, pos.y, sprite_rect.w,sprite_rect.h };
 
 	rect_sprite = sprite_rect;
 	bar_value = value;
 	bar_type = type;
-	bar_state = state;
-	if(state == BAR_DYNAMIC)
-		current_value = value->GetMaxValue();
-	else
-		current_value = rect_sprite.w;
+	current_value = value->GetMaxValue();
 }
 
 void UIBar::DecreaseBar(uint value)
@@ -72,26 +68,13 @@ bool UIBar::UIBlit()
 }
 
 bool UIBar::Update(float dt)
-{
-	if (bar_state == BAR_DYNAMIC) {
-		if (bar_value->GetValue() > current_value) {
-			IncreaseBar(bar_value->GetValue() - current_value);
-		}
-		else if (bar_value->GetValue() < current_value) {
-			DecreaseBar(current_value - bar_value->GetValue());
-		}
+{;
+	if (bar_value->GetValue() > current_value) {
+		IncreaseBar(bar_value->GetValue() - current_value);
+	}
+	else if (bar_value->GetValue() < current_value) {
+		DecreaseBar(current_value - bar_value->GetValue());
 	}
 
 	return true;
-}
-
-void UIBar::ChangeStat(Stat * stat)
-{
-	bar_value = stat;
-	rect_sprite.w = bar_value->GetValue() * (current_value * 0.2);
-}
-
-int UIBar::GetValue() const
-{
-	return current_value;
 }

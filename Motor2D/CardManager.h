@@ -38,8 +38,6 @@ struct CardInfo {
 
 struct Card {
 	EntityType type;
-	EntityType buff_type;
-
 	CardInfo info;
 
 	uint level;

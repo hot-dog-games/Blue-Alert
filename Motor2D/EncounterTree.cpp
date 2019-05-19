@@ -8,7 +8,6 @@
 #include "StrategyBuilding.h"
 #include "EncounterTree.h"
 #include "GameManager.h"
-#include "Textures.h"
 #include "Deck.h"
 
 
@@ -28,11 +27,6 @@ EncounterTree * EncounterTree::CreateTree()
 {
 	LoadDocuments();
 
-	lines_texture = App->tex->Load("sprites/BuildingNodes/lines.png");
-	lines_sprites[0] = { 0, 0, 10, 10 };
-	lines_sprites[1] = { 0, 12, 10, 10 };
-	lines_sprites[2] = { 0, 25, 10, 10 };
-
 	for (int i = 0; i < map01_nodes.attribute("size").as_int(); i++)
 	{
 		map_encounters.push_back(new EncounterNode(i));
@@ -43,64 +37,34 @@ EncounterTree * EncounterTree::CreateTree()
 		pugi::xml_node node = map01_nodes.find_child_by_attribute("id", std::to_string((int)i).c_str());
 		map_encounters[i]->SetPosition({ node.attribute("x").as_float(),  node.attribute("y").as_float() });
 		map_encounters[i]->SetEncounterType(node.attribute("type").as_int());
-		for (pugi::xml_node child = node.child("children").first_child(); child; child = child.next_sibling())
+		for (pugi::xml_node child = node.first_child(); child; child = child.next_sibling())
 		{
 			map_encounters[i]->AddChild(map_encounters[child.attribute("id").as_int()]);
 		}
-
-		pugi::xml_node encounter = node.child("encounter");
-
-		if (encounter != NULL)
-		{
-			map_encounters[i]->FillPredefinedEncounterDeck(encounter);
-		}
-		else {
-			map_encounters[i]->FillRandomEncounterDeck();
-		}
-
-		pugi::xml_node rewards = node.child("rewards");
-
-		if (rewards != NULL)
-		{
-			map_encounters[i]->FillPredefinedRewards(rewards);
-		}
-		else {
-			map_encounters[i]->FillRandomdRewards();
-		}
-
+		map_encounters[i]->FillEncounterDeck();
 	}
 
-	if (!current_node)
-		SetCurrentNode(map_encounters.front());
+
+	LOG("NODES", map_encounters.size());
 
 	return this;
 }
 
 bool EncounterTree::LoadDocuments()
 {
-	pugi::xml_parse_result result;
+	pugi::xml_parse_result result = encounters.load_file("xml/encounters.xml");
 
-	switch (App->game_manager->stage)
-	{
-	case STAGE_TUTORIAL:
-		result = nodes_01.load_file("xml/tutorial_nodes.xml");
+	if (result == NULL)
+		LOG("Could not load card xml file. pugi error: %s", result.description());
+	else
+		encounter_tree = encounters.child("encounter_tree");
 
-		if (result == NULL)
-			LOG("Could not load card xml file. pugi error: %s", result.description());
-		else
-			map01_nodes = nodes_01.child("tutorial_nodes");
-		break;
-	case STAGE_01:
-		result = nodes_01.load_file("xml/map01_nodes.xml");
+	result = nodes_01.load_file("xml/map01_nodes.xml");
 
-		if (result == NULL)
-			LOG("Could not load card xml file. pugi error: %s", result.description());
-		else
-			map01_nodes = nodes_01.child("map01_nodes");
-		break;
-	default:
-		break;
-	}
+	if (result == NULL)
+		LOG("Could not load card xml file. pugi error: %s", result.description());
+	else
+		map01_nodes = nodes_01.child("map01_nodes");
 
 	return true;
 }
@@ -115,43 +79,15 @@ EncounterNode * EncounterTree::GetCurrentNode()
 	return current_node;
 }
 
-EncounterNode * EncounterTree::GetFightingNode()
-{
-	return fighting_node;
-}
-
 void EncounterTree::SetCurrentNode(EncounterNode * current_node)
 {
 	this->current_node = current_node;
+	this->current_node->GetEntity()->im_current_building = true;
 	this->current_node->visited = true;
-}
-
-void EncounterTree::SetFightingNode(EncounterNode * fighting_node)
-{
-	this->fighting_node = fighting_node;
 }
 
 void EncounterTree::DrawTreeLines()
 {
-	node_position_offset = { 0, current_node->GetEntity()->current_frame.h / 2 };
-
-	for each (EncounterNode* n in map_encounters)
-	{
-		DrawTreeLine();
-	}
-}
-
-void EncounterTree::UpdateTreeState()
-{
-	green_dot_positions.clear();
-	blue_dot_positions.clear();
-	red_dot_positions.clear();
-
-	for (int i = 0; i < current_node->GetChildren().size(); i++)
-	{
-		current_node->GetChildren()[i]->GetEntity()->SetInRange(true);
-	}
-
 	for each (EncounterNode* n in map_encounters)
 	{
 		if (n->GetChildren().size() != 0)
@@ -160,38 +96,32 @@ void EncounterTree::UpdateTreeState()
 			{
 				for (int i = 0; i < n->GetChildren().size(); i++)
 				{
-					if (!n->GetChildren()[i]->visited)
-					{
-						iPoint parent_world_position = App->map->MapToWorld(n->GetPosition().x, n->GetPosition().y);
-						iPoint child_world_position = App->map->MapToWorld(n->GetChildren()[i]->GetPosition().x, n->GetChildren()[i]->GetPosition().y);
-						SetDotsPositions(parent_world_position, child_world_position, 0);
-					}
+					iPoint parent_world_position = App->map->MapToWorld(n->GetPosition().x, n->GetPosition().y);
+					iPoint child_world_position = App->map->MapToWorld(n->GetChildren()[i]->GetPosition().x, n->GetChildren()[i]->GetPosition().y);
+					App->render->DrawLine(parent_world_position.x, parent_world_position.y, child_world_position.x, child_world_position.y, 255, 0, 0);
 				}
-
 			}
 			else {
 				for (int i = 0; i < n->GetChildren().size(); i++)
 				{
 					iPoint parent_world_position = App->map->MapToWorld(n->GetPosition().x, n->GetPosition().y);
 					iPoint child_world_position = App->map->MapToWorld(n->GetChildren()[i]->GetPosition().x, n->GetChildren()[i]->GetPosition().y);
-					SetDotsPositions(parent_world_position, child_world_position, 1);
+					App->render->DrawLine(parent_world_position.x, parent_world_position.y, child_world_position.x, child_world_position.y, 0, 255, 0);
 				}
 			}
 		}
+	}
+}
 
-		if (n->visited)
-		{
-			for (int i = 0; i < n->GetParents().size(); i++)
-			{
-				if (n->GetParents()[i]->visited)
-				{
-					iPoint parent_world_position = App->map->MapToWorld(n->GetPosition().x, n->GetPosition().y);
-					iPoint child_world_position = App->map->MapToWorld(n->GetParents()[i]->GetPosition().x, n->GetParents()[i]->GetPosition().y);
-					SetDotsPositions(parent_world_position, child_world_position, 2);
-				}
-			}
-		}
+void EncounterTree::UpdateTreeState()
+{
+	if (!current_node) {
+		SetCurrentNode(map_encounters.front());
+	}
 
+	for (int i = 0; i < current_node->GetChildren().size(); i++)
+	{
+		current_node->GetChildren()[i]->GetEntity()->SetInRange(true);
 	}
 }
 
@@ -211,6 +141,11 @@ pugi::xml_node EncounterTree::GetXmlEncounterNodeById(int id)
 	return encounter;
 }
 
+void EncounterTree::UpdateTree()
+{
+
+}
+
 void EncounterTree::CleanTree()
 {
 	for each (EncounterNode* en in map_encounters)
@@ -225,12 +160,14 @@ void EncounterTree::CleanTree()
 
 void EncounterTree::EntityClicked(StrategyBuilding * entity)
 {
-	if (is_clickable) {
-		SetFightingNodeByEntity(entity);
+	if (App->game_manager->GetPlayerDeck()->cards[0] != nullptr && App->game_manager->GetPlayerDeck()->cards[1] != nullptr && App->game_manager->GetPlayerDeck()->cards[2] != nullptr && App->game_manager->GetPlayerDeck()->cards[3] != nullptr && is_clickable) {
+		SetCurrentNodeByEntity(entity);
 		App->gui->DisableUI();
 		App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::COMBAT, White);
+		App->transition_manager->CreateZoomTransition(2.0f);
 		App->transition_manager->CreateCameraTranslation(2.0f, { (int)entity->position.x, (int)entity->position.y });
 	}
+
 }
 
 void EncounterTree::SetCurrentNodeByEntity(StrategyBuilding * entity)
@@ -238,60 +175,5 @@ void EncounterTree::SetCurrentNodeByEntity(StrategyBuilding * entity)
 	for each (EncounterNode* en in map_encounters)
 	{
 		if (en->GetEntity() == entity) SetCurrentNode(en);
-	}
-}
-
-void EncounterTree::SetFightingNodeByEntity(StrategyBuilding * entity)
-{
-	for each (EncounterNode* en in map_encounters)
-	{
-		if (en->GetEntity() == entity) SetFightingNode(en);
-	}
-}
-
-int EncounterTree::GetBuildingsOfType(EntityType type)
-{
-	int num = 0;
-
-	for each (EncounterNode* en in map_encounters)
-	{
-		if (en->GetEncounterType() == type)
-			if (en->visited)
-				num++;
-	}
-	return num;
-}
-
-void EncounterTree::SetDotsPositions(iPoint origin, iPoint destination, int type)
-{
-	int distance = origin.DistanceTo(destination);
-
-	for (int i = 0; i < distance; i += 16)
-	{
-		float percent = i / (float)distance;
-		if (type == 0)
-			red_dot_positions.push_back({ origin.x + percent * (destination.x - origin.x), origin.y + percent * (destination.y - origin.y) });
-		else if (type == 1)
-			blue_dot_positions.push_back({ origin.x + percent * (destination.x - origin.x), origin.y + percent * (destination.y - origin.y) });
-		else if (type == 2)
-			green_dot_positions.push_back({ origin.x + percent * (destination.x - origin.x), origin.y + percent * (destination.y - origin.y) });
-	}
-}
-
-void EncounterTree::DrawTreeLine()
-{
-	for each (fPoint ip in green_dot_positions)
-	{
-		App->render->Blit(lines_texture, ip.x - node_position_offset.x, ip.y - node_position_offset.y, &lines_sprites[2]);
-	}
-
-	for each (fPoint ip in blue_dot_positions)
-	{
-		App->render->Blit(lines_texture, ip.x - node_position_offset.x, ip.y - node_position_offset.y, &lines_sprites[1]);
-	}
-
-	for each (fPoint ip in red_dot_positions)
-	{
-		App->render->Blit(lines_texture, ip.x - node_position_offset.x, ip.y - node_position_offset.y, &lines_sprites[0]);
 	}
 }

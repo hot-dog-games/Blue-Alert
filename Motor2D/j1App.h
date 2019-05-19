@@ -61,7 +61,6 @@ public:
 
 	void PauseGame();
 	void ResumeGame();
-	bool IsPaused();
 	void LoadGame(const char* file);
 	void SaveGame(const char* file) const;
 	void GetSaveGames(std::list<std::string>& list_to_fill) const;
