@@ -46,8 +46,9 @@ void UIScrollBar::DragSlider()
 	App->input->GetMousePosition(mouse.x, mouse.y);
 
 	int pos_x = mouse.x - this->GetLocalPos().x - slider_button->GetLocalRect().w / 2;
+
 	if (!parent)
-		slider_button->SetLocalPos(pos_x - (int)parent->GetLocalPos().x, slider_button->GetLocalPos().y);
+		slider_button->SetLocalPos(pos_x, slider_button->GetLocalPos().y);
 	else
 		slider_button->SetLocalPos(pos_x - (int)parent->GetLocalPos().x, slider_button->GetLocalPos().y);
 	
