@@ -166,6 +166,16 @@ void GameManager::CreateUpgrades()
 }
 void GameManager::ClearUpgrades()
 {
+	for each (Card* c in collection)
+	{
+		infantry_upgrade->RemoveBuffs(c->info.stats);
+		land_upgrade->RemoveBuffs(c->info.stats);
+		aerial_upgrade->RemoveBuffs(c->info.stats);
+	}
+	health_upgrade->RemoveBuffs(stats);
+	energy_upgrade->RemoveBuffs(stats);
+
+	App->buff->CleanUp();
 	health_upgrade = nullptr;
 	energy_upgrade = nullptr;
 	infantry_upgrade = nullptr;

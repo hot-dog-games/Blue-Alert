@@ -38,6 +38,7 @@ bool Buff::IsCausedBySource(uint source_id) {
 
 BuffSource::BuffSource(pugi::xml_node source_node)
 {
+	source_id = App->buff->GetNewSourceID();
 	for (pugi::xml_node iter = source_node.child("buff"); iter; iter = iter.next_sibling("buff"))
 	{
 		buffs.push_back(new Buff(
@@ -46,6 +47,15 @@ BuffSource::BuffSource(pugi::xml_node source_node)
 			iter.attribute("value").as_float(),
 			source_id));
 	}
+}
+
+void BuffSource::CleanUp()
+{
+	for (int i = 0; i < buffs.size(); i++)
+	{
+		delete buffs[i];
+	}
+	buffs.clear();
 }
 
 void BuffSource::RemoveBuffs(std::map<std::string, Stat*> stats)
