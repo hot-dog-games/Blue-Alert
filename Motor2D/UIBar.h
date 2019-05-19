@@ -21,6 +21,8 @@ public:
 
 	void ChangeStat(Stat* stat);
 
+	int GetValue() const;
+
 protected:
 	Stat*	bar_value = nullptr;
 	uint	current_value = 0;

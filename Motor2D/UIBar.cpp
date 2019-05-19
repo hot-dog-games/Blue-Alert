@@ -90,3 +90,8 @@ void UIBar::ChangeStat(Stat * stat)
 	bar_value = stat;
 	rect_sprite.w = bar_value->GetValue() * (current_value * 0.2);
 }
+
+int UIBar::GetValue() const
+{
+	return current_value;
+}

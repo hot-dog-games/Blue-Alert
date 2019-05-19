@@ -93,6 +93,7 @@ private:
 	UILabel*		win_text_one;
 	UILabel*		win_text_two;
 	UILabel*		lose_text;
+	UIImage*		lose_image;
 
 	//store
 	UILabel*		store_text;
@@ -104,7 +105,6 @@ private:
 	UILabel*		store_unit_06_cost;
 	UILabel*		current_gold;
 	UILabel*		total_cost;
-
 
 	//Images
 	UIImage*		win_building;
@@ -125,6 +125,10 @@ private:
 	int card_num;
 	std::vector<int> random_store_unit;
 	std::list<EntityType> store_units_purchased;
+
+	//Energy Bar
+	UILabel* energy_label = nullptr;
+	UIImage* energy_image = nullptr;
 
 	//Audio fx
 	std::string  win_fx;
