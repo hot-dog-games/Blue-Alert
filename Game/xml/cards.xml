@@ -458,7 +458,7 @@
       <stat stat="movement" value ="50"/>
       <stat stat="attack_speed" value ="3"/>
       <stat stat="range" value ="5"/>
-      <stat stat="energy_cost" value ="5"/>
+      <stat stat="energy_cost" value ="4"/>
       <stat stat="units" value ="1"/>
     </stats>
 
