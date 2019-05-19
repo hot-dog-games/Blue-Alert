@@ -60,9 +60,11 @@ private:
 	UILabel* core_title;
 	UILabel* core_health;
 	UILabel* core_energy;
-	UILabel* core_lvl_up_cost;
+	UILabel* core_lvl_up_health_cost;
+	UILabel* core_lvl_up_energy_cost;
 	UILabel* core_info;
-	UIButton* core_lvl_up;
+	UIButton* core_lvl_up_health;
+	UIButton* core_lvl_up_energy;
 
 	UIImage* building_infantry_image = nullptr;
 	UISelectableButton* building_infantry_button = nullptr;
@@ -87,6 +89,7 @@ private:
 	UIButton* collection_buttons_enemies[9];
 	UILabel* troops_title[3];
 	UIButton* change_side_button;
+	UILabel* side_label;
 
 	//Info Showing
 	UIImage* info_image = nullptr;

@@ -207,12 +207,16 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 				for (int i = 0; i < 9; ++i) {
 					App->gui->EnableElement(collection_buttons_enemies[i]);
 					App->gui->DisableElement(collection_buttons_allies[i]);
+					side_label->SetText("Enemies");
+					side_label->SetColor({ 25,68,160,255 });
 				}
 			}
 			else {
 				for (int i = 0; i < 9; ++i) {
 					App->gui->EnableElement(collection_buttons_allies[i]);
 					App->gui->DisableElement(collection_buttons_enemies[i]);
+					side_label->SetText("Allies");
+					side_label->SetColor({ 160,25,25,255 });
 				}
 			}
 		}
@@ -307,6 +311,35 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 		else if (element == collection_buttons_enemies[8])
 		{
 		AddCardToDeck(element, 17);
+		}
+
+		if (element == core_lvl_up_health && ((int)App->game_manager->gold >= ((LeveledUpgrade*)App->game_manager->health_upgrade)->GetCost())) {
+			App->game_manager->gold -= ((LeveledUpgrade*)App->game_manager->health_upgrade)->GetCost();
+			App->game_manager->UpgradeHealth();
+
+			std::string str;
+			str = "Health: " + std::to_string((int)App->game_manager->stats.find("health")->second->GetValue());
+			core_health->SetText(str);
+
+			str = "Cost Health: " + std::to_string(((LeveledUpgrade*)App->game_manager->health_upgrade)->GetCost());
+			core_lvl_up_health_cost->SetText(str);
+
+			str = "GOLD: " + std::to_string(App->game_manager->gold);
+			gold->SetText(str);
+		}
+		else if (element == core_lvl_up_energy && ((int)App->game_manager->gold >= ((LeveledUpgrade*)App->game_manager->energy_upgrade)->GetCost())) {
+			App->game_manager->gold -= ((LeveledUpgrade*)App->game_manager->energy_upgrade)->GetCost();
+			App->game_manager->UpgradeEnergy();
+
+			std::string str;
+			str = "Energy: " + std::to_string((int)App->game_manager->stats.find("energy")->second->GetValue());
+			core_energy->SetText(str);
+
+			str = "Cost Energy: " + std::to_string(((LeveledUpgrade*)App->game_manager->energy_upgrade)->GetCost());
+			core_lvl_up_energy_cost->SetText(str);
+
+			str = "GOLD: " + std::to_string(App->game_manager->gold);
+			gold->SetText(str);
 		}
 
 		// Building butttons
@@ -428,10 +461,15 @@ void StrategyMapScene::InitializeUI()
 	medium_button_rect[1] = { 800,569,294,67 };
 	medium_button_rect[2] = { 800,639,294,67 };
 
-	SDL_Rect large_button_rect[3];
-	large_button_rect[0] = { 449, 498, 304, 74 };
-	large_button_rect[1] = { 449, 577, 304, 74 };
-	large_button_rect[2] = { 449, 653, 304, 74 };
+	SDL_Rect little_button_rect[3];
+	little_button_rect[0] = { 1256,379,145,67 };
+	little_button_rect[1] = { 1256,449,145,67 };
+	little_button_rect[2] = { 1256,519,145,67 };
+
+	SDL_Rect change_button[3];
+	change_button[0] = { 3,700,53,51 };
+	change_button[1] = { 77,700,53,51 };
+	change_button[2] = { 148,700,53,51 };
 
 	std::string str;
 
@@ -442,8 +480,10 @@ void StrategyMapScene::InitializeUI()
 	gold = App->gui->CreateLabel({ 60, 30 }, "fonts/button_text.ttf", 25, str, { 0,0,0,0 }, 0, main_panel);
 
 	// Troops menu
-	troops_background = App->gui->CreateImage({ 20,95 }, { 793,1229,986,593 }, main_panel);
-	change_side_button = App->gui->CreateButton({ 300,300 }, small_button_rect, troops_background);
+	troops_background = App->gui->CreateImage({ 20,95 }, { 3711,5,985,659 }, main_panel);
+	change_side_button = App->gui->CreateButton({ 918,597 }, change_button, troops_background);
+	side_label = App->gui->CreateLabel({ 700, 607 }, "fonts/button_text.ttf", 30, "Allies", { 255,255,255,255 }, 300, troops_background);
+	side_label->SetColor({ 160,25,25,255 });
 
 	backbutton_t_b = App->gui->CreateButtonText({ 961,99 }, { 4,3 }, small_button_rect, "X", { 200,200,200,255 }, 27);
 	App->gui->DisableElement(backbutton_t_b);
@@ -526,12 +566,16 @@ void StrategyMapScene::InitializeUI()
 	core_health = App->gui->CreateLabel({ 27, 410 }, "fonts/red_alert.ttf", 30, str, { 231,216,145,255 }, 300, buildings_background);
 
 	str = "Energy: " + std::to_string((int)App->game_manager->stats.find("energy")->second->GetValue());
-	core_health = App->gui->CreateLabel({ 27,440 }, "fonts/red_alert.ttf", 30, str, { 231,216,145,255 }, 300, buildings_background);
+	core_energy = App->gui->CreateLabel({ 27,440 }, "fonts/red_alert.ttf", 30, str, { 231,216,145,255 }, 300, buildings_background);
 
-	str = "Cost: " + std::to_string(((LeveledUpgrade*)App->game_manager->health_upgrade)->GetCost());
-	core_lvl_up_cost = App->gui->CreateLabel({ 27,470 }, "fonts/red_alert.ttf", 30, str, { 231,216,145,255 }, 300, buildings_background);
+	str = "Cost Health: " + std::to_string(((LeveledUpgrade*)App->game_manager->health_upgrade)->GetCost());
+	core_lvl_up_health_cost = App->gui->CreateLabel({ 20,500 }, "fonts/red_alert.ttf", 21, str, { 231,216,145,255 }, 300, buildings_background);
 
-	core_lvl_up = App->gui->CreateButtonText({ 12, 520 }, { 40,5 }, medium_button_rect, "LEVEL UP", { 242, 222, 70, 255 }, 25, buildings_background);
+	str = "Cost Energy: " + std::to_string(((LeveledUpgrade*)App->game_manager->energy_upgrade)->GetCost());
+	core_lvl_up_energy_cost = App->gui->CreateLabel({ 159,500 }, "fonts/red_alert.ttf", 21, str, { 231,216,145,255 }, 300, buildings_background);
+
+	core_lvl_up_health = App->gui->CreateButtonText({ 10, 520 }, { 10,5 }, little_button_rect, "HEALTH UP", { 242, 222, 70, 255 }, 14, buildings_background);
+	core_lvl_up_energy = App->gui->CreateButtonText({ 154, 520 }, { 10,5 }, little_button_rect, "ENERGY UP", { 242, 222, 70, 255 }, 14, buildings_background);
 
 	App->gui->DisableElement(buildings_background);
 

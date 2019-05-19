@@ -9,9 +9,9 @@
 			<card value="1" level="1"/>
 		</encounter>
 		<rewards>
-			<card value="1" level="1"/>
-			<card value="1" level="1"/>
-			<card value="1" level="1"/>
+			<card value="4" level="1"/>
+			<card value="8" level="1"/>
+			<card value="18" level="1"/>
 		</rewards>
 	</node>
 	<node id="1" x="63" y="62" type="30">
@@ -20,13 +20,12 @@
 			<child id="3"/>
 		</children>
 		<encounter>
-			<card value="5" level="1"/>
-			<card value="1" level="1"/>
+      <card value="3" level="1"/>
 		</encounter>
 		<rewards>
-			<card value="1" level="1"/>
-			<card value="1" level="1"/>
-			<card value="1" level="1"/>
+			<card value="4" level="1"/>
+			<card value="8" level="1"/>
+			<card value="18" level="1"/>
 		</rewards>
 	</node>
 	<node id="2" x="51" y="64" type="32">
@@ -34,14 +33,12 @@
 			<child id="4"/>
 		</children>
 		<encounter>
-			<card value="5" level="1"/>
-			<card value="1" level="1"/>
-			<card value="3" level="1"/>
+			<card value="15" level="1"/>
 		</encounter>
 		<rewards>
-			<card value="1" level="1"/>
-			<card value="1" level="1"/>
-			<card value="1" level="1"/>
+			<card value="6" level="1"/>
+			<card value="12" level="1"/>
+			<card value="16" level="1"/>
 		</rewards>
 	</node>
 	<node id="3" x="61" y="50" type="31">
@@ -49,40 +46,22 @@
 			<child id="5"/>
 		</children>
 		<encounter>
-			<card value="5" level="1"/>
-			<card value="1" level="1"/>
-			<card value="3" level="1"/>
+			<card value="15" level="1"/>
 		</encounter>
 		<rewards>
-			<card value="1" level="1"/>
-			<card value="1" level="1"/>
-			<card value="1" level="1"/>
+			<card value="6" level="1"/>
+			<card value="12" level="1"/>
+			<card value="16" level="1"/>
 		</rewards>
 	</node>
 	<node id="4" x="43" y="59" type="33">
 		<encounter>
-			<card value="5" level="1"/>
-			<card value="1" level="1"/>
-			<card value="3" level="1"/>
-			<card value="15" level="1"/>
+      <card value="1" level="1"/>
 		</encounter>
-		<rewards>
-			<card value="1" level="1"/>
-			<card value="1" level="1"/>
-			<card value="1" level="1"/>
-		</rewards>
 	</node>
 	<node id="5" x="52" y="37" type="34">
 		<encounter>
-			<card value="5" level="1"/>
 			<card value="1" level="1"/>
-			<card value="3" level="1"/>
-			<card value="15" level="1"/>
 		</encounter>
-		<rewards>
-			<card value="1" level="1"/>
-			<card value="1" level="1"/>
-			<card value="1" level="1"/>
-		</rewards>
 	</node>
 </tutorial_nodes>
