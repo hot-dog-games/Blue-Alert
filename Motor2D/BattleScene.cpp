@@ -361,6 +361,28 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 
 			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
 		}
+
+		if (element == pause_button) {
+			if (!App->IsPaused()) {
+				App->PauseGame();
+				App->gui->EnableElement(pause_panel);
+			}
+			else {
+				App->ResumeGame();
+				App->gui->DisableElement(pause_panel);
+			}
+		}
+
+		if (element == p_continue && App->IsPaused()) {
+			App->ResumeGame();
+			App->gui->DisableElement(pause_panel);
+		}
+		else if (element == p_exit_menu) {
+			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MENU, White);
+		}
+		else if (element == p_exit_level) {
+			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
+		}
 	}
 	else if (gui_event == GUI_Event::LEFT_CLICK_UP) {
 		if (element == current_drag) {
@@ -485,9 +507,15 @@ void BattleScene::StartUI()
 	if (allied_core->GetCard(CN_FOURTH))
 		unit_button_four = App->gui->CreateButton({ 135, 445 }, App->gui->LoadUIButton(allied_core->GetCard(CN_FOURTH)->type, "button"), unit_panel);
 
-	energy_bar = App->gui->CreateBar({ 8, 358 }, { 2388,0,16,274 }, allied_core->GetEnergy(), BAR_VERTICAL, BAR_DYNAMIC, nullptr, unit_panel);
+	energy_bar = App->gui->CreateBar({ 8, 358 }, { 2388,0,16,269 }, allied_core->GetEnergy(), BAR_VERTICAL, BAR_DYNAMIC, nullptr, unit_panel);
 	energy_image = App->gui->CreateImage({ 2, 632 }, { 637,1742,30,30 }, unit_panel);
 	energy_label = App->gui->CreateLabel({ 765,633 }, "fonts/red_alert.ttf", 27, "0", { 2,5,94,255 }, 120, nullptr, false);
+
+	SDL_Rect pause_rect[3];
+	pause_rect[0] = { 3027,1756,78,15 };
+	pause_rect[1] = { 3118,1756,78,15 };
+	pause_rect[2] = { 3207,1756,78,15 };
+	pause_button = App->gui->CreateButton({ 98,646 }, pause_rect, unit_panel);
 
 	health_bar_image = App->gui->CreateImage({ 470,730 }, { 25,1399,253,28 });
 	enemy_health_bar_image = App->gui->CreateImage({ 40,20 }, { 25,1474,253,28 });
@@ -523,6 +551,19 @@ void BattleScene::StartUI()
 
 	App->gui->DisableElement((UIElement*)win_panel_one);
 	App->gui->DisableElement((UIElement*)win_panel_two);
+
+	SDL_Rect pause_buttons_rect[3];
+	pause_buttons_rect[0] = { 0,533,220,51 };
+	pause_buttons_rect[1] = { 0,585,220,51 };
+	pause_buttons_rect[2] = { 0,637,220,51 };
+
+	//Pause
+	pause_panel = App->gui->CreateImage({ 20, 70 }, { 3711,673,722,654 });
+	p_continue = App->gui->CreateButtonText({ 120,180 }, { 21,5 }, pause_buttons_rect, "CONTINUE", {243,242,153,255},20, pause_panel);
+	p_exit_level = App->gui->CreateButtonText({ 370,180 }, { 20,5 }, pause_buttons_rect, "EXIT LEVEL", { 243,242,153,255 }, 20, pause_panel);
+	p_exit_menu = App->gui->CreateButtonText({ 260,470 }, { 14,5 }, pause_buttons_rect, "BACK TO MENU", { 243,242,153,255 }, 17, pause_panel);
+
+	App->gui->DisableElement(pause_panel);
 
 	//Store 
 
