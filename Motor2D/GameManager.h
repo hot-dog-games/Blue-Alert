@@ -92,7 +92,7 @@ public:
 	bool popups[POPUP_MAX];
 
 private:
-	Deck* combat_deck;
+	Deck* combat_deck = nullptr;
 
 public:
 	//Maybe put this bitch in a vector?
