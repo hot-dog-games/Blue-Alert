@@ -375,7 +375,7 @@
     <buff_type value="31"/>
     <stats>
       <stat stat="health" value ="80"/>
-      <stat stat="damage" value ="70"/>
+      <stat stat="damage" value ="50"/>
       <stat stat="defense" value ="3"/>
       <stat stat="movement" value ="40"/>
       <stat stat="attack_speed" value ="2"/>
@@ -423,14 +423,14 @@
   <card type ="17">
     <name>Black Eagle</name>
     <sprite>sprites/Units/AirVehicles/blackeaglesprite.png</sprite>
-    <combat attack_type="2" armored="false"/>
+    <combat attack_type="2" armored="true"/>
     <buff_type value="31"/>
     <stats>
       <stat stat="health" value ="70"/>
       <stat stat="damage" value ="150"/>
       <stat stat="defense" value ="4"/>
       <stat stat="movement" value ="50"/>
-      <stat stat="attack_speed" value ="1"/>
+      <stat stat="attack_speed" value ="2"/>
       <stat stat="range" value ="5"/>
       <stat stat="energy_cost" value ="5"/>
       <stat stat="units" value ="1"/>
@@ -449,14 +449,14 @@
   <card type ="18">
     <name>Spy Plane</name>
     <sprite>sprites/Units/AirVehicles/blackeaglesprite.png</sprite>
-    <combat attack_type="2" armored="false"/>
+    <combat attack_type="2" armored="true"/>
     <buff_type value="31"/>
     <stats>
       <stat stat="health" value ="70"/>
-      <stat stat="damage" value ="150"/>
-      <stat stat="defense" value ="4"/>
+      <stat stat="damage" value ="100"/>
+      <stat stat="defense" value ="3"/>
       <stat stat="movement" value ="50"/>
-      <stat stat="attack_speed" value ="1"/>
+      <stat stat="attack_speed" value ="2"/>
       <stat stat="range" value ="5"/>
       <stat stat="energy_cost" value ="5"/>
       <stat stat="units" value ="1"/>
