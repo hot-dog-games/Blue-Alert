@@ -61,7 +61,7 @@ bool UIPopUp::Update(float dt)
 	if (popup_button->clicked)
 	{
 		App->ResumeGame();
-		App->gui->DeleteElement(this);
+		App->gui->DisableElement(this);
 	}
 
 	return true;
