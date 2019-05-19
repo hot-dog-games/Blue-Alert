@@ -10,6 +10,8 @@
 #include "BuffSourceManager.h"
 #include "Buff.h"
 #include "Stat.h"
+#include "GUI.h"
+#include "Window.h"
 #include "Input.h"
 #include "Render.h"
 
@@ -38,6 +40,7 @@ bool GameManager::Start()
 	CreateUpgrades();
 	CreatePlayerDeck();
 	CreateCoreStats();
+	CreatePopUps();
 
 	return true;
 }
@@ -79,11 +82,9 @@ bool GameManager::IsInPlayerDeck(Card * card)
 
 void GameManager::CreatePlayerDeck()
 {
-	AddCardToCollection(EntityType::CONSCRIPT);
-
 	combat_deck = new Deck();
-	combat_deck->AddCard(GetCardFromCollection(EntityType::CONSCRIPT));
 
+	AddCardToCollection(EntityType::CONSCRIPT);
 }
 
 void GameManager::CreateStage()
@@ -153,6 +154,7 @@ void GameManager::AddCardToCollection(EntityType card_type)
 		Card* new_card = App->card_manager->CreateCard(card_type);
 		collection.push_back(new_card);
 		GetUpgrade(card_type)->GetBuffs(new_card->info.stats);
+		combat_deck->AddCard(new_card);
 	}
 }
 
@@ -321,6 +323,56 @@ void GameManager::CreateCoreStats()
 	App->entity_manager->GetCoreStats(&stats);
 	((LeveledUpgrade*)health_upgrade)->GetBuffs(stats);
 	((LeveledUpgrade*)energy_upgrade)->GetBuffs(stats);
+}
+
+void GameManager::CreatePopUps()
+{
+	for (int i = 0 ; i < POPUP_MAX; i++)
+	{
+		popups[i];
+	}
+}
+
+void GameManager::ShowPopUp(int popup)
+{
+	uint mouse_x, mouse_y, screen_width, screen_height;
+	App->win->GetWindowSize(screen_width, screen_height);
+
+	switch (popup)
+	{
+	case POPUP_BUILDING_NODES: 
+		App->gui->CreatePopUp({ (int)screen_width / 2, (int)screen_height / 3, 300, 90 }, { 10 , 10 }, 
+			"This is an enemy building, you must click on it to begin a fight! Click the button down below to continue", 20, {255,255,255,255});
+		break;
+	case POPUP_USETROOP: 
+		App->gui->CreatePopUp({ ((int)screen_width / 2) - 200, (int)screen_height / 3, 300, 120 }, { 10 , 10 }, 
+			"To deploy a troop you need to drag the button of the specific troop in your troops bar. Try dragging your conscript troop into the battlefield!", 20, { 255,255,255,255 });
+		break;	
+	case POPUP_SNIPER_COUNTERS: 
+		App->gui->CreatePopUp({ ((int)screen_width / 2) - 200, (int)screen_height / 3, 300, 120 }, { 10 , 10 },
+			"The enemy is about to deploy snipers, your conscripts are a good choice to counter them because they attack slow and you have number of units advantadge!", 20, { 255,255,255,255 });
+		break;
+	case POPUP_AREA_COUNTERS:
+		App->gui->CreatePopUp({ ((int)screen_width / 2) - 200, (int)screen_height / 3, 300, 120 }, { 10 , 10 },
+			"The enemy is about to deploy Harriers, your conscripts are a bad choice, try with your new troop because it has a lot of range and piercing ammo!", 20, { 255,255,255,255 });
+		break;
+	case POPUP_MULTIPLE_COUNTERS:
+		App->gui->CreatePopUp({ ((int)screen_width / 2) - 200, (int)screen_height / 3, 300, 120 }, { 10 , 10 },
+			"The enemy is about to deploy GI's, use your new troop to destroy them!", 20, { 255,255,255,255 });
+		break;
+	case POPUP_DECISIONMAKING:
+		App->gui->CreatePopUp({ ((int)screen_width / 2) - 150, (int)screen_height / 2, 300, 150 }, { 10 , 10 },
+			"It's time to choose your path, after conquering a specific building you'll get the building buff. Check the menu for more info about building buffs. And check your new unlocked troop in the troops menu!", 20, { 255,255,255,255 });
+		break;
+	case POPUP_STORE:
+		App->gui->CreatePopUp({ ((int)screen_width / 2) - 150, (int)screen_height / 2, 300, 150 }, { 10 , 10 },
+			"Welcome to the Store! Here you can buy troops from the enemy force that have rebelled to the enemy forces. You buy troops by paying gold you earn 100g per combat.", 20, { 255,255,255,255 });
+		break;
+	default:
+		break;
+	}
+
+	popups[popup] = true;
 }
 
 bool GameManager::IsInCollection(int card_type)

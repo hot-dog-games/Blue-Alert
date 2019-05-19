@@ -100,6 +100,12 @@ bool BattleScene::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
 		App->SaveGame("save_game.xml");
 
+	if (!App->game_manager->popups[POPUP_USETROOP])
+	{
+		if (!App->transition_manager->IsTransitioning())
+			App->game_manager->ShowPopUp(POPUP_USETROOP);
+	}
+
 	switch (state)
 	{
 	case BattleScene::BattleSceneState::SETUP:
@@ -177,7 +183,12 @@ bool BattleScene::Update(float dt)
 			App->audio->PlayFx(win_fx.c_str(), 0);
 			App->PauseGame();
 			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() != EntityType::STORE_STRATEGY_BUILDING)App->gui->EnableElement((UIElement*)win_panel_one);
-			else App->gui->EnableElement((UIElement*)store_panel);
+			else {
+				//if (!App->game_manager->popups[POPUP_STORE])
+				//	App->game_manager->ShowPopUp(POPUP_STORE);
+
+				App->gui->EnableElement((UIElement*)store_panel);
+			}
 			App->gui->DisableInteractable((UIElement*)unit_panel);
 			App->game_manager->GetEncounterTree()->SetCurrentNode(App->game_manager->GetEncounterTree()->GetFightingNode());
 			App->game_manager->gold += 100;
