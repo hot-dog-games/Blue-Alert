@@ -37,17 +37,17 @@ public:
 
 	void StartUI();
 private:
-	UIImage* menu_background;
-	UIImage* optionsbackground;
-	UIButtonText* exitbutton;
-	UILabel* musiclabel;
-	UILabel* fxlabel;
-	UIButtonText* optionsbutton;
-	UIButtonText* newgamebutton;
-	UIButtonText* continuebutton;
-	UIButton* back_options_button;
-	UIScrollBar* music_slider;
-	UIScrollBar* fx_slider;
+	UIImage* menu_background = nullptr;
+	UIImage* optionsbackground = nullptr;
+	UIButtonText* exitbutton = nullptr;
+	UILabel* musiclabel = nullptr;
+	UILabel* fxlabel = nullptr;
+	UIButtonText* optionsbutton = nullptr;
+	UIButtonText* newgamebutton = nullptr;
+	UIButtonText* continuebutton = nullptr;
+	UIButton* back_options_button = nullptr;
+	UIScrollBar* music_slider = nullptr;
+	UIScrollBar* fx_slider = nullptr;
 	bool gameclose = false;
 
 	int volume = 64;
