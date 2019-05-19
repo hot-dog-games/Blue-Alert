@@ -19,6 +19,10 @@
 #include "MainMenuScene.h"
 #include "SceneManager.h"
 #include "Scene.h"
+#include "UISelectableButton.h"
+#include "UILabel.h"
+#include "UIButton.h"
+
 #include "Brofiler/Brofiler.h"
 
 StrategyMapScene::StrategyMapScene() : Scene()
@@ -37,7 +41,13 @@ bool StrategyMapScene::Start()
 
 	BROFILER_CATEGORY("SMStart", Profiler::Color::Red);
 
-	App->map->Load("Nodes Map.tmx");
+	switch (App->game_manager->stage)
+	{
+	case STAGE_TUTORIAL: App->map->Load("Tutorial_Nodes_Map.tmx"); break;
+	case STAGE_01: App->map->Load("Nodes Map.tmx"); break;
+	default:
+		break;
+	}
 	App->ResumeGame();
 
 	App->game_manager->GetEncounterTree()->CreateAllNodes();
@@ -46,7 +56,6 @@ bool StrategyMapScene::Start()
 	uint w, h;
 	App->win->GetWindowSize(w, h);
 
-	
 	iPoint world_position = App->map->MapToWorld((int)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetPosition().x, (int)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetPosition().y);
 
 	App->render->camera.x = -world_position.x + w * 0.5;
@@ -63,6 +72,24 @@ bool StrategyMapScene::Start()
 // Called each loop iteration
 bool StrategyMapScene::PreUpdate()
 {
+	int mousemotion_x, mousemotion_y;
+
+	App->input->GetMouseMotion(mousemotion_x, mousemotion_y);
+
+	if (App->input->GetMouseButtonDown(1) == KEY_REPEAT)
+	{
+		if (IsInsideLimits(mousemotion_x, mousemotion_y))
+		{
+			if (abs(mousemotion_x) > drag_threshhold && abs(mousemotion_y) > drag_threshhold)
+			{
+				App->render->camera.x += mousemotion_x;
+				App->render->camera.y += mousemotion_y;
+			}
+		}
+	}
+
+	LOG("%i", App->render->camera.x);
+
 	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 		App->render->camera.y += 10;
 
@@ -74,6 +101,10 @@ bool StrategyMapScene::PreUpdate()
 
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		App->render->camera.x -= 10;
+
+	last_camera_position.x = App->render->camera.x;
+	last_camera_position.y = App->render->camera.y;
+
 	return true;
 }
 
@@ -95,6 +126,7 @@ bool StrategyMapScene::PostUpdate()
 		ret = false;
 
 	App->game_manager->GetEncounterTree()->DrawTreeLines();
+	App->render->DrawCircle(limit_center.x, limit_center.y, limit_radius, 255, 0, 0, 255, true);
 
 	return ret;
 }
@@ -220,6 +252,14 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			AddCardToDeck(element,9);
 		}
 	}
+	else if (gui_event == GUI_Event::MOUSE_OVER)
+	{
+		for (int num = 0; num < 9; ++num) {
+			if (element == collection_buttons_allies[num]) {
+				info_image->SetImage(collection_buttons_allies[num]->GetAnim()[0]);
+			}
+		}
+	}
 
 	return true;
 }
@@ -309,4 +349,36 @@ void StrategyMapScene::StartUI()
 	collection_buttons[7] = App->gui->CreateButton({ 840,320 }, App->gui->LoadUIButton(16, "upgrade"), troops_background);
 	collection_buttons[8] = App->gui->CreateButton({ 780,450 }, App->gui->LoadUIButton(18, "upgrade"), troops_background);
 	App->gui->DisableElement(troops_background);
+
+
+	//Building Menu
+
+	buildings_background = App->gui->CreateImage({ 20,95 }, { 1780,1229,986,593 }, main_panel);
+	building_title = App->gui->CreateLabel({ 610, 70 }, "fonts/button_text.ttf", 22, "Aerial Building:", { 242, 222, 70, 255 }, 600, buildings_background);
+
+	building_infantry_button = App->gui->CreateSelectableButton({343, 400 }, App->gui->LoadUIButton(30, "button"),buildings_background);
+	building_infantry_image = App->gui->CreateImage({ 365,125 }, App->gui->LoadUIImage(30, "building"), buildings_background);
+	building_infantry_info = App->gui->CreateLabel({ 245,-30 }, "fonts/red_alert.ttf", 20, "The infantry troops are upgraded by %i", { 231,216,145,255 }, 300, building_infantry_image);
+	
+	building_aerial_button = App->gui->CreateSelectableButton({ 770,400 }, App->gui->LoadUIButton(31, "button"), buildings_background);
+	building_aerial_image = App->gui->CreateImage({ 345,115 }, App->gui->LoadUIImage(31, "building"), buildings_background);
+	building_aerial_info = App->gui->CreateLabel({ 265,-20 }, "fonts/red_alert.ttf", 20, "The aerial troops are upgraded by %i", { 231,216,145,255 }, 300, building_aerial_image);
+	
+	building_land_button = App->gui->CreateSelectableButton({ 560,430 } , App->gui->LoadUIButton(32, "button"), buildings_background);
+	building_land_image = App->gui->CreateImage({ 350,145 }, App->gui->LoadUIImage(32, "building"), buildings_background);
+	building_land_info = App->gui->CreateLabel({ 260, -50 }, "fonts/red_alert.ttf", 20, "The land troops are upgraded by %i", { 231,216,145,255 }, 300, building_land_image);
+
+	App->gui->DisableElement(buildings_background);
+
+	//Show Info
+	info_image = App->gui->CreateImage({ 30,30 }, { 0,0,100,100 }, troops_background);
+}
+
+bool StrategyMapScene::IsInsideLimits(int mousemotion_x, int mousemotion_y)
+{
+	float distance_center_camera = limit_center.DistanceTo({ -App->render->camera.x - mousemotion_x, -App->render->camera.y - mousemotion_y});
+
+	if (distance_center_camera < limit_radius)return true;
+	else return false;
+
 }

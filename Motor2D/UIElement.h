@@ -49,6 +49,8 @@ public:
 	void DadEnabled();
 	void SetEnabled(bool enabled);
 
+	void UpdateRect();
+
 	virtual void OnMouseClick() {};
 	virtual void OnMouseHover() {};
 	virtual void OnMouseRelease() {};

@@ -21,6 +21,7 @@ public:
 
 	void ChangeSprite(SDL_Rect* rect);
 	void SetLocked(bool value);
+	SDL_Rect* GetAnim() const;
 	bool CleanUp();
 };
 

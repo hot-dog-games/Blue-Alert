@@ -29,9 +29,7 @@ bool GameManager::Awake(pugi::xml_node &)
 
 bool GameManager::Start()
 {
-	encounter_tree = new EncounterTree();
-	encounter_tree->CreateTree();
-
+	CreateStage();
 	CreatePlayerDeck();
 
 	return true;
@@ -84,6 +82,12 @@ void GameManager::CreatePlayerDeck()
 	combat_deck->AddCard(GetCardFromCollection(EntityType::SNIPER));
 	combat_deck->AddCard(GetCardFromCollection(EntityType::FLAK_TROOPER));
 	combat_deck->AddCard(GetCardFromCollection(EntityType::GRIZZLY));
+}
+
+void GameManager::CreateStage()
+{
+	encounter_tree = new EncounterTree();
+	encounter_tree->CreateTree();
 }
 
 bool GameManager::Restart()

@@ -1,6 +1,7 @@
  #include "j1App.h"
 #include "GUI.h"
 #include "UIElement.h"
+#include "p2Log.h"
 
 
 UIElement::UIElement(UIElement* parent)
@@ -107,3 +108,16 @@ void UIElement::SetEnabled(bool enabled)
 {
 	this->enabled = enabled;
 }
+
+
+bool UIElement::IsEnabled() const
+{
+	return enabled;
+}
+
+void UIElement::UpdateRect()
+{
+	rect_sprite.x = (int)(rect_sprite.x * scale_X);
+	rect_sprite.y = (int)(rect_sprite.y*scale_Y);
+}
+

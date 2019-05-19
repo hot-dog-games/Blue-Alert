@@ -55,10 +55,13 @@ bool BattleScene::Start()
 
 	Deck* enemy_deck = new Deck();
 	enemy_deck->delete_cards = true;
-	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterDeck()[0]));
-	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterDeck()[1]));
-	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterDeck()[2]));
-	enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterDeck()[3]));
+
+
+	for (int i = 0; i < App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterDeck().size(); i++)
+	{
+		enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterDeck()[i]));
+	}
+
 
 	allied_core = App->entity_manager->CreateCore(1, { 30,980 }, App->game_manager->GetPlayerDeck(), FACTION_RUSSIAN);
 	enemy_core = App->entity_manager->CreateCore(App->game_manager->GetEncounterTree()->GetCurrentNode()->GetEncounterType(), { 25,330 }, enemy_deck, FACTION_AMERICAN, true);
@@ -169,8 +172,20 @@ bool BattleScene::Update(float dt)
 		{
 			state = BattleSceneState::WIN;
 			App->PauseGame();
+
 			App->gui->EnableElement((UIElement*)win_panel_one);
 			App->audio->PlayFx(win_fx.c_str(), 0);
+
+			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() != EntityType::STORE_STRATEGY_BUILDING)App->gui->EnableElement((UIElement*)win_panel_one);
+			else App->gui->EnableElement((UIElement*)store_panel);
+			App->gui->DisableInteractable((UIElement*)unit_panel);
+			App->game_manager->GetEncounterTree()->SetCurrentNode(App->game_manager->GetEncounterTree()->GetFightingNode());
+			App->game_manager->gold += 100;
+			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() == EntityType::STORE_STRATEGY_BUILDING)current_gold->SetText("Your gold: " + std::to_string(App->game_manager->gold));
+			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetChildren().size() == 0) {
+				App->game_manager->stage++;
+			}
+
 		}
 			
 
@@ -190,6 +205,15 @@ bool BattleScene::Update(float dt)
 			App->PauseGame();
 			App->gui->EnableElement((UIElement*)win_panel_one);
 			App->gui->DisableInteractable((UIElement*)unit_panel);
+
+			App->game_manager->GetEncounterTree()->SetCurrentNode(App->game_manager->GetEncounterTree()->GetFightingNode());
+			App->game_manager->gold += 100;
+			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() == EntityType::STORE_STRATEGY_BUILDING)current_gold->SetText("Your gold: " + std::to_string(App->game_manager->gold));
+			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetChildren().size() == 0) {
+				App->game_manager->stage++;
+
+			}
+
 		}
 	}
 	break;
@@ -266,6 +290,11 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 				App->gui->DisableElement((UIElement*)win_panel_two);
 				App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
 			}
+
+			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetChildren().size() == 0) {
+				App->game_manager->GetEncounterTree()->CleanTree();
+				App->game_manager->CreateStage();
+			}
 		}
 		else if (element == lose_continue) {
 			App->gui->DisableElement((UIElement*)lose_panel);
@@ -285,6 +314,48 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			win_unit_two->ChangeState(false);
 			win_unit_one->ChangeState(false);
 		}
+
+
+		if (element == store_unit_one) {
+			if(store_unit_one->selected)UpdateGoldOnSelect(random_store_unit[0]);
+			else UpdateGoldOnUnSelect(random_store_unit[0]);
+		}
+		if (element == store_unit_two) {
+			if (store_unit_two->selected)UpdateGoldOnSelect(random_store_unit[1]);
+			else UpdateGoldOnUnSelect(random_store_unit[1]);
+		}
+		if (element == store_unit_three) {
+			if (store_unit_three->selected)UpdateGoldOnSelect(random_store_unit[2]);
+			else UpdateGoldOnUnSelect(random_store_unit[2]);
+		}
+		if (element == store_unit_four) {
+			if (store_unit_four->selected)UpdateGoldOnSelect(random_store_unit[3]);
+			else UpdateGoldOnUnSelect(random_store_unit[3]);
+		}
+		if (element == store_unit_five) {
+			if (store_unit_five->selected)UpdateGoldOnSelect(random_store_unit[4]);
+			else UpdateGoldOnUnSelect(random_store_unit[4]);
+		}
+		if (element == store_unit_six) {
+			if (store_unit_six->selected)UpdateGoldOnSelect(random_store_unit[5]);
+			else UpdateGoldOnUnSelect(random_store_unit[5]);
+		}
+
+		if (element == purchase) {
+			for each (EntityType et in store_units_purchased)
+			{
+				App->game_manager->AddCardToCollection(et);
+			}
+			App->gui->DisableElement((UIElement*)store_panel);
+
+			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetChildren().size() == 0) {
+				App->game_manager->GetEncounterTree()->CleanTree();
+				App->game_manager->CreateStage();
+			}
+
+			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
+		}
+
 	}
 	else if (gui_event == GUI_Event::LEFT_CLICK_UP) {
 		if (element == current_drag) {
