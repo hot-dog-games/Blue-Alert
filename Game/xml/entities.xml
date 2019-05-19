@@ -1641,7 +1641,7 @@
   
   <!--NIGHTHAWK-->
   <entity type ="13">
-    <sprite>sprites/Units/AirVehicles/nighthawksprite.png</sprite>
+    <sprite>sprites/Units/AirVehicles/siegechopper.png.png</sprite>
     <animations>
       <animation speed="5.0F" name="idle">
         <sprite x="0" y="15" w="61" h="52"/>
