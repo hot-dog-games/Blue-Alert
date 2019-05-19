@@ -115,6 +115,7 @@ bool GameManager::Restart()
 
 		delete combat_deck;
 		encounter_tree->CleanTree();
+		ResetBuildingBuffs();
 		ClearUpgrades();
 		Start();
 		restart = false;
@@ -196,21 +197,10 @@ void GameManager::CreateUpgrades()
 }
 void GameManager::ClearUpgrades()
 {
-	for each (Card* c in collection)
-	{
-		infantry_upgrade->RemoveBuffs(c->info.stats);
-		land_upgrade->RemoveBuffs(c->info.stats);
-		aerial_upgrade->RemoveBuffs(c->info.stats);
-	}
 	health_upgrade->RemoveBuffs(stats);
 	energy_upgrade->RemoveBuffs(stats);
-
-	App->buff->CleanUp();
-	health_upgrade = nullptr;
-	energy_upgrade = nullptr;
-	infantry_upgrade = nullptr;
-	land_upgrade = nullptr;
-	aerial_upgrade = nullptr;
+	(((LeveledUpgrade*)infantry_upgrade)->Reset());
+	(((LeveledUpgrade*)infantry_upgrade)->Reset());
 }
 
 void GameManager::LevelUpgrade()
