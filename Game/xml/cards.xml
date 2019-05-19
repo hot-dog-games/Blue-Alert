@@ -317,7 +317,7 @@
 
   <card type ="13">
     <name>Nighthawk</name>
-    <sprite>sprites/Units/AirVehicles/nighthawk.png.png</sprite>
+    <sprite>sprites/Units/AirVehicles/nighthawk.png</sprite>
     <combat attack_type="0" armored="false"/>
     <buff_type value="31"/>
     <stats>
