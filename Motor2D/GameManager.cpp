@@ -31,6 +31,7 @@ GameManager::~GameManager()
 
 bool GameManager::Awake(pugi::xml_node &)
 {
+	CreatePopUps();
 	return true;
 }
 
@@ -40,7 +41,6 @@ bool GameManager::Start()
 	CreateUpgrades();
 	CreatePlayerDeck();
 	CreateCoreStats();
-	CreatePopUps();
 
 	return true;
 }
