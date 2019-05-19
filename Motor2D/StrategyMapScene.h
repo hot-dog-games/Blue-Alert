@@ -84,7 +84,7 @@ private:
 	UILabel* buildings_title[3];
 	
 	// Troops Menu
-	UIButton* deck_buttons[4];
+	UIButton* deck_buttons[4] = {nullptr, nullptr, nullptr, nullptr};
 	UIButton* collection_buttons_allies[9];
 	UIButton* collection_buttons_enemies[9];
 	UILabel* troops_title[3];

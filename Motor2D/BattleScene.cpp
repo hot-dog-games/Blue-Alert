@@ -377,10 +377,7 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			App->gui->DisableElement(pause_panel);
 		}
 		else if (element == p_exit_menu) {
-			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MENU, White);
-		}
-		else if (element == p_exit_level) {
-			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
+			//App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MENU, White);
 		}
 	}
 	else if (gui_event == GUI_Event::LEFT_CLICK_UP) {
@@ -559,7 +556,6 @@ void BattleScene::StartUI()
 	//Pause
 	pause_panel = App->gui->CreateImage({ 20, 70 }, { 3711,673,722,654 });
 	p_continue = App->gui->CreateButtonText({ 120,180 }, { 21,5 }, pause_buttons_rect, "CONTINUE", {243,242,153,255},20, pause_panel);
-	p_exit_level = App->gui->CreateButtonText({ 370,180 }, { 20,5 }, pause_buttons_rect, "EXIT LEVEL", { 243,242,153,255 }, 20, pause_panel);
 	p_exit_menu = App->gui->CreateButtonText({ 260,470 }, { 14,5 }, pause_buttons_rect, "BACK TO MENU", { 243,242,153,255 }, 17, pause_panel);
 
 	App->gui->DisableElement(pause_panel);
