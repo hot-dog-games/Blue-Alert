@@ -28,8 +28,6 @@ Core::~Core()
 
 bool Core::Update(float dt)
 {
-	LOG("energy is %f", stats.find("energy")->second->GetMaxValue());
-	LOG("health is %f", GetHealth()->GetMaxValue());
 	if (energy_timer.ReadMs() >= SECOND_MS) {
 		stats.find("energy")->second->IncreaseStat(stats.find("energy_regen")->second->GetValue());
 		energy_timer.Start();
