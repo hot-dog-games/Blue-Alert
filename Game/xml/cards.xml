@@ -109,12 +109,12 @@
     <combat attack_type="1" armored="false"/>
     <buff_type value="30"/>
     <stats>
-      <stat stat="health" value ="70"/>
+      <stat stat="health" value ="80"/>
       <stat stat="damage" value ="20"/>
       <stat stat="defense" value ="8"/>
       <stat stat="movement" value ="25"/>
       <stat stat="attack_speed" value ="2.5"/>
-      <stat stat="range" value ="4"/>
+      <stat stat="range" value ="5"/>
       <stat stat="energy_cost" value ="3"/>
       <stat stat="units" value ="2"/>
     </stats>
@@ -135,12 +135,12 @@
     <combat attack_type="1" armored="false"/>
     <buff_type value="30"/>
     <stats>
-      <stat stat="health" value ="70"/>
+      <stat stat="health" value ="80"/>
       <stat stat="damage" value ="20"/>
       <stat stat="defense" value ="8"/>
       <stat stat="movement" value ="25"/>
       <stat stat="attack_speed" value ="2.5"/>
-      <stat stat="range" value ="4"/>
+      <stat stat="range" value ="5"/>
       <stat stat="energy_cost" value ="3"/>
       <stat stat="units" value ="2"/>
     </stats>
