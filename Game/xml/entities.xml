@@ -7,7 +7,7 @@
       <stat stat="health" value ="1000"/>
       <stat stat="energy" value ="10"/>
       <stat stat="energy_regen" value ="1"/>
-      <stat stat="damage" value ="10"/>
+      <stat stat="damage" value ="5"/>
       <stat stat="attack_speed" value ="5"/>
       <stat stat ="range" value ="7"/>
     </stats>
