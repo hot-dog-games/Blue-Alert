@@ -206,7 +206,7 @@ bool BattleScene::Update(float dt)
 			}
 
 			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetChildren().size() == 0) {
-				if (App->game_manager->stage == STAGE_TUTORIAL)App->game_manager->stage++;
+				if (App->game_manager->stage == STAGE_TUTORIAL) App->game_manager->stage++;
 			}
 		}
 			
