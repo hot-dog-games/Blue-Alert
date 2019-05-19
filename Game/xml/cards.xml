@@ -431,7 +431,7 @@
       <stat stat="defense" value ="5"/>
       <stat stat="movement" value ="50"/>
       <stat stat="attack_speed" value ="2"/>
-      <stat stat="range" value ="5.5"/>
+      <stat stat="range" value ="5"/>
       <stat stat="energy_cost" value ="5"/>
       <stat stat="units" value ="1"/>
     </stats>
