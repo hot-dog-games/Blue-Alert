@@ -80,7 +80,7 @@ bool UILabel::UIBlit()
 		App->render->Blit(texture, screen_pos.x, screen_pos.y, nullptr, 0.0F, 0.0, INT_MAX, INT_MAX);
 
 
-	SDL_DestroyTexture(texture);
+	App->tex->UnLoad(texture);
 	return true;
 }
 
