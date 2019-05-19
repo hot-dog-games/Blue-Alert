@@ -48,20 +48,17 @@ private:
 	UIImage* main_panel;
 	UILabel* gold;
 	UILabel* text_menu;
-	UILabel* resume_label;
 	UILabel* musiclabel;
 	UILabel* fxlabel;
-	UILabel* savegamelabel;
 	UIButton* settings_button;
-	UIButton* resume_settings_button;
-	UIButton* savegamebutton;
+	UIButtonText* resume_settings_button;
+	UIButtonText* back_menu_button;
 	UIButtonText* menu_button;
 	UIButtonText* backbutton_t_b;
 	UIButtonText* troops_button;
 	UIButtonText* buildings_button;
 	UIScrollBar* music_slider;
 	UIScrollBar* fx_slider;
-
 
 	//Building Menu
 	UIImage* buildings_background;

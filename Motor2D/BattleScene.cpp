@@ -404,7 +404,7 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			App->gui->DisableElement(pause_panel);
 		}
 		else if (element == p_exit_menu) {
-			//App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MENU, White);
+			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MENU, White);
 		}
 	}
 	else if (gui_event == GUI_Event::LEFT_CLICK_UP) {
