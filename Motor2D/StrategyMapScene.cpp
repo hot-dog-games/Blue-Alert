@@ -22,6 +22,7 @@
 #include "Brofiler/Brofiler.h"
 #include "Stat.h"
 #include "UIBar.h"
+#include "SceneManager.h"
 #include "BuffSourceManager.h"
 
 #include <stdio.h>
@@ -342,7 +343,7 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			App->game_manager->gold -= ((LeveledUpgrade*)App->game_manager->health_upgrade)->GetCost();
 			App->game_manager->UpgradeHealth();
 
-			std::string str;
+			std::string str = "";
 
 			str = "Health: " + std::to_string((int)App->game_manager->stats.find("health")->second->GetValue());
 			core_health->SetText(str);
@@ -357,7 +358,7 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			App->game_manager->gold -= ((LeveledUpgrade*)App->game_manager->energy_upgrade)->GetCost();
 			App->game_manager->UpgradeEnergy();
 
-			std::string str;
+			std::string str = "";
 			str = "Energy: " + std::to_string((int)App->game_manager->stats.find("energy")->second->GetValue());
 			core_energy->SetText(str);
 
@@ -411,10 +412,14 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 				building_title->SetText("");
 			}
 		}
+
+		if (element == back_menu_button) {
+			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MENU, White);
+		}
 	}
 	else if (gui_event == GUI_Event::MOUSE_OVER)
 	{
-	std::string str_stat;
+	std::string str_stat = "";
 		for (int num = 0; num < 9; ++num) {
 			if (element == collection_buttons_allies[num]) {
 				info_image->SetImage(collection_buttons_allies[num]->GetAnim()[0]);
@@ -503,20 +508,18 @@ void StrategyMapScene::InitializeUI()
 	options_rect[1] = { 2982,844,81,66 };
 	options_rect[2] = { 3067,844,81,66 };
 
-	std::string str;
+	std::string str = "";
 
 	menu_button = App->gui->CreateButtonText({ 700,700 }, { 70,0 }, medium_button_rect, "MENU", { 200,200,200,255 }, 33, main_panel);
 	options = App->gui->CreateImage({ 200,100 }, { 14,2374,619,463 }, nullptr);
 	settings_button = App->gui->CreateButton({ 50,700 }, options_rect, main_panel);
-	resume_settings_button = App->gui->CreateButton({ 320,380 }, medium_button_rect, options);
-	resume_label = App->gui->CreateLabel({ 60,15 }, "fonts/button_text.ttf", 20, "Resume", { 255,255,255,0 }, 0, resume_settings_button);
+	resume_settings_button = App->gui->CreateButtonText({ 320,380 }, { 60,15 }, medium_button_rect, "Resume", {255,255,255,0}, 20, options);
 
 	music_slider = App->gui->CreateScrollBar({ 350,150 }, { 2962,912,218,40 }, MUSIC, volume, 128, options);
 	musiclabel = App->gui->CreateLabel({ 50,160 }, "fonts/button_text.ttf", 20, "Music Volume", { 255,255,255,0 }, 0, options);
 	fx_slider = App->gui->CreateScrollBar({ 350,250 }, { 2962,912,218,40 }, FX, volume, 128, options);
 	fxlabel = App->gui->CreateLabel({ 50,260 }, "fonts/button_text.ttf", 20, "FX Volume", { 255,255,255,0 }, 0, options);
-	savegamebutton = App->gui->CreateButton({ 30,380 }, medium_button_rect, options, false);
-	savegamelabel = App->gui->CreateLabel({ 40,15 }, "fonts/button_text.ttf", 20, "Save Game", { 255,0,0,0 }, 0, savegamebutton);
+	back_menu_button = App->gui->CreateButtonText({ 30,380 }, { 20,15 }, medium_button_rect, "BACK TO MENU", { 255,255,255,0 }, 20, options);
 	App->gui->DisableElement(options);
 
 	str = "GOLD: " + std::to_string(App->game_manager->gold);

@@ -96,7 +96,7 @@ void MainMenuScene::StartUI() {
 	large_button_rect[0] = { 0,533,220,51 };
 	large_button_rect[1] = { 0,585,220,51 };
 	large_button_rect[2] = { 0,637,220,51 };
-	large_button_rect[3] = { 0,637,220,51 };
+	large_button_rect[3] = { 221,690,220,51 };
 
 	SDL_Rect back_options_rect[3];
 	back_options_rect[0] = { 2794,912,46,44 };
@@ -117,5 +117,5 @@ void MainMenuScene::StartUI() {
 	exitbutton = App->gui->CreateButtonText({ 785,650 }, { 20,10 }, large_button_rect, "EXIT" ,{ 0,0,0,0 }, 20, menu_background);
 	optionsbutton = App->gui->CreateButtonText({ 785,440 }, { 20,10 }, large_button_rect, "OPTIONS", { 0,0,0,0 }, 20, menu_background);
 	newgamebutton = App->gui->CreateButtonText({ 785,320 }, { 20,10 }, large_button_rect, "NEW GAME", { 0,0,0,0 }, 20, menu_background);
-	continuebutton = App->gui->CreateButtonText({ 785,380 }, { 20,10 }, large_button_rect, "CONTINUE", { 255,0,0,0 }, 20, menu_background, false);
+	continuebutton = App->gui->CreateButtonText({ 785,380 }, { 20,10 }, large_button_rect, "CONTINUE", { 75,8,8,255 }, 20, menu_background, false);
 }
