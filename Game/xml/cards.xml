@@ -379,7 +379,7 @@
       <stat stat="defense" value ="3"/>
       <stat stat="movement" value ="40"/>
       <stat stat="attack_speed" value ="2"/>
-      <stat stat="range" value ="5"/>
+      <stat stat="range" value ="4"/>
       <stat stat="energy_cost" value ="5"/>
       <stat stat="units" value ="2"/>
     </stats>
@@ -405,7 +405,7 @@
       <stat stat="defense" value ="3"/>
       <stat stat="movement" value ="40"/>
       <stat stat="attack_speed" value ="2"/>
-      <stat stat="range" value ="5"/>
+      <stat stat="range" value ="4"/>
       <stat stat="energy_cost" value ="5"/>
       <stat stat="units" value ="2"/>
     </stats>
