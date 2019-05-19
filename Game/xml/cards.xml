@@ -317,7 +317,7 @@
 
   <card type ="13">
     <name>Nighthawk</name>
-    <sprite>sprites/Units/AirVehicles/nighthawk.png.png</sprite>
+    <sprite>sprites/Units/AirVehicles/nighthawk.png</sprite>
     <combat attack_type="0" armored="false"/>
     <buff_type value="31"/>
     <stats>
@@ -458,7 +458,7 @@
       <stat stat="movement" value ="50"/>
       <stat stat="attack_speed" value ="3"/>
       <stat stat="range" value ="5"/>
-      <stat stat="energy_cost" value ="5"/>
+      <stat stat="energy_cost" value ="4"/>
       <stat stat="units" value ="1"/>
     </stats>
 
