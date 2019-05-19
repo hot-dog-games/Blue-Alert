@@ -224,7 +224,7 @@ void GameManager::LevelUpgrade()
 		{
 			for each (Card* c in collection)
 			{
-				if (c->buff_type == INFANTRY_STRATEGY_BUILDING)
+				if (c->buff_type == AERIAL_STRATEGY_BUILDING)
 				{
 					aerial_upgrade->RemoveBuffs(c->info.stats);
 					aerial_upgrade->GetBuffs(c->info.stats);
@@ -237,7 +237,7 @@ void GameManager::LevelUpgrade()
 	{
 		for each (Card* c in collection)
 		{
-			if (c->buff_type == INFANTRY_STRATEGY_BUILDING)
+			if (c->buff_type == LAND_STRATEGY_BUILDING)
 			{
 				land_upgrade->RemoveBuffs(c->info.stats);
 				land_upgrade->GetBuffs(c->info.stats);
