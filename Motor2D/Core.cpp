@@ -180,3 +180,8 @@ Stat * Core::GetHealth() const
 {
 	return stats.find("health")->second;
 }
+
+void Core::DecreaseEnergy(uint value)
+{
+	stats.find("energy")->second->DecreaseStat(value);
+}

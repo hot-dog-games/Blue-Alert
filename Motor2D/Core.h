@@ -27,6 +27,7 @@ public:
 
 	Stat* GetEnergy() const;
 	Stat* GetHealth() const;
+	void DecreaseEnergy(uint value);
 
 	bool delete_deck = false;
 
