@@ -58,20 +58,10 @@
 		<encounter>
       <card value="1" level="1"/>
 		</encounter>
-		<rewards>
-			<card value="4" level="1"/>
-			<card value="8" level="1"/>
-			<card value="18" level="1"/>
-		</rewards>
 	</node>
 	<node id="5" x="52" y="37" type="34">
 		<encounter>
 			<card value="1" level="1"/>
 		</encounter>
-		<rewards>
-			<card value="4" level="1"/>
-			<card value="8" level="1"/>
-			<card value="18" level="1"/>
-		</rewards>
 	</node>
 </tutorial_nodes>

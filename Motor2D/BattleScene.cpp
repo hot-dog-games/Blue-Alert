@@ -72,6 +72,7 @@ bool BattleScene::Start()
 
 	App->game_manager->health_upgrade->GetBuffs(allied_core->stats);
 	App->game_manager->energy_upgrade->GetBuffs(allied_core->stats);
+	allied_core->DecreaseEnergy(20);
 	//Initialize UI
 	StartUI();
 
