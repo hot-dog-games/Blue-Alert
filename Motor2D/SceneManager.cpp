@@ -5,6 +5,7 @@
 #include "StrategyMapScene.h"
 #include "Particles.h"
 #include "Audio.h"
+#include "Fonts.h"
 #include "BattleScene.h"
 #include "Map.h"
 #include "SceneManager.h"
