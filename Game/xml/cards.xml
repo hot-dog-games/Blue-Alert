@@ -209,7 +209,7 @@
 
   <card type ="9">
     <name>Robot Tank</name>
-    <sprite>sprites/Units/LandVehicles/grizzly.png</sprite>
+    <sprite>sprites/Units/LandVehicles/robot_tank.png</sprite>
     <combat attack_type="0" armored="true"/>
     <buff_type value="32"/>
     <stats>
@@ -236,7 +236,7 @@
 
   <card type ="10">
     <name>Terror Drone</name>
-    <sprite>sprites/Units/LandVehicles/grizzly.png</sprite>
+    <sprite>sprites/Units/LandVehicles/terror_drone.png</sprite>
     <combat attack_type="0" armored="true"/>
     <buff_type value="32"/>
     <stats>
@@ -263,7 +263,7 @@
 
   <card type ="11">
     <name>Prism Tank</name>
-    <sprite>sprites/Units/LandVehicles/grizzly.png</sprite>
+    <sprite>sprites/Units/LandVehicles/teslasprite.png</sprite>
     <combat attack_type="1" armored="true"/>
     <buff_type value="32"/>
     <stats>
