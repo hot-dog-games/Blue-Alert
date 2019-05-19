@@ -91,9 +91,9 @@ bool Textures::UnLoad(SDL_Texture* texture)
 {
 	std::map<std::string, SDL_Texture*>::iterator item;
 
-	for(item = textures.begin(); item != textures.end(); ++item)
+	for (item = textures.begin(); item != textures.end(); ++item)
 	{
-		if(texture == item->second)
+		if (texture == item->second)
 		{
 			SDL_DestroyTexture(item->second);
 			textures.erase(item);
