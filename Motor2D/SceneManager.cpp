@@ -7,6 +7,7 @@
 #include "Audio.h"
 #include "Fonts.h"
 #include "BattleScene.h"
+#include "MainMenuScene.h"
 #include "Map.h"
 #include "SceneManager.h"
 
@@ -25,7 +26,7 @@ SceneManager::~SceneManager()
 
 bool SceneManager::Awake(pugi::xml_node &)
 {
-	current_scene = new StrategyMapScene();
+	current_scene = new MainMenuScene();
 	return true;
 }
 
@@ -49,8 +50,8 @@ bool SceneManager::Update(float dt)
 
 bool SceneManager::PostUpdate()
 {
-	current_scene->PostUpdate();
-	return true;
+	bool ret = current_scene->PostUpdate();
+	return ret;
 }
 
 bool SceneManager::CleanUp()
@@ -100,6 +101,7 @@ void SceneManager::ChangeScene(int new_scene)
 	switch (new_scene)
 	{
 	case MENU:
+		current_scene = new MainMenuScene();
 		break;
 	case MAP:
 		current_scene = new StrategyMapScene();

@@ -6,6 +6,7 @@
 #include "PugiXml\src\pugixml.hpp"
 #include "EncounterNode.h"
 
+enum EntityType;
 
 class EncounterTree
 {
