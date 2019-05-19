@@ -14,7 +14,9 @@ Textures::Textures() : Module()
 
 // Destructor
 Textures::~Textures()
-{}
+{
+
+}
 
 // Called before render is available
 bool Textures::Awake(pugi::xml_node& config)

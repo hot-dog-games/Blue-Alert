@@ -112,6 +112,24 @@ bool GameManager::Restart()
 	return true;
 }
 
+void GameManager::ResetBuildingBuffs()
+{
+	for each (Card* c in collection)
+	{
+		infantry_upgrade->RemoveBuffs(c->info.stats);
+		land_upgrade->RemoveBuffs(c->info.stats);
+		aerial_upgrade->RemoveBuffs(c->info.stats);
+	}
+
+	((LeveledUpgrade*)infantry_upgrade)->Reset();
+	((LeveledUpgrade*)land_upgrade)->Reset();
+	((LeveledUpgrade*)aerial_upgrade)->Reset();
+
+	for each (Card* c in collection)
+	{
+		GetUpgrade(c->type)->GetBuffs(c->info.stats);
+	}
+}
 
 
 Card * GameManager::GetCardFromCollection(EntityType card_type)

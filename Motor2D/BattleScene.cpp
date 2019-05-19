@@ -309,6 +309,7 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			}
 
 			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetChildren().size() == 0) {
+				App->game_manager->ResetBuildingBuffs();
 				App->game_manager->GetEncounterTree()->CleanTree();
 				App->game_manager->CreateStage();
 			}
@@ -365,6 +366,7 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			App->gui->DisableElement((UIElement*)store_panel);
 
 			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetChildren().size() == 0) {
+				App->game_manager->ResetBuildingBuffs();
 				App->game_manager->GetEncounterTree()->CleanTree();
 				App->game_manager->CreateStage();
 			}

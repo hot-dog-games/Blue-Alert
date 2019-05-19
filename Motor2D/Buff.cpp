@@ -67,6 +67,24 @@ void BuffSource::RemoveBuffs(std::map<std::string, Stat*> stats)
 	}
 }
 
+void LeveledUpgrade::Reset()
+{
+	level = 0;
+}
+
+uint LeveledUpgrade::GetBuffValue(std::string name)
+{
+	for (uint i = 0; i < buff_amount; ++i)
+	{
+		uint position = i + (level * buff_amount);
+		std::string stat_name = buffs[position]->GetStat();
+		if (stat_name == name)
+		{
+			return buffs[position]->GetValue();
+		}
+	}
+}
+
 void LeveledUpgrade::GetBuffs(std::map<std::string, Stat*> stats)
 {
 	for (uint i = 0; i < buff_amount; ++i)
