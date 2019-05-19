@@ -37,20 +37,11 @@ EncounterTree * EncounterTree::CreateTree()
 		pugi::xml_node node = map01_nodes.find_child_by_attribute("id", std::to_string((int)i).c_str());
 		map_encounters[i]->SetPosition({ node.attribute("x").as_float(),  node.attribute("y").as_float() });
 		map_encounters[i]->SetEncounterType(node.attribute("type").as_int());
-		for (pugi::xml_node child = node.child("children").first_child(); child; child = child.next_sibling())
+		for (pugi::xml_node child = node.first_child(); child; child = child.next_sibling())
 		{
 			map_encounters[i]->AddChild(map_encounters[child.attribute("id").as_int()]);
 		}
-
-		pugi::xml_node encounter = node.child("encounter");
-
-		if (encounter != NULL)
-		{
-			map_encounters[i]->FillPredefinedEncounterDeck(encounter);
-		}
-		else {
-			map_encounters[i]->FillRandomEncounterDeck();
-		}
+		map_encounters[i]->FillEncounterDeck();
 	}
 
 
@@ -61,29 +52,19 @@ EncounterTree * EncounterTree::CreateTree()
 
 bool EncounterTree::LoadDocuments()
 {
-	pugi::xml_parse_result result;
+	pugi::xml_parse_result result = encounters.load_file("xml/encounters.xml");
 
-	switch (App->game_manager->stage)
-	{
-	case STAGE_TUTORIAL:
-		result = nodes_01.load_file("xml/tutorial_nodes.xml");
+	if (result == NULL)
+		LOG("Could not load card xml file. pugi error: %s", result.description());
+	else
+		encounter_tree = encounters.child("encounter_tree");
 
-		if (result == NULL)
-			LOG("Could not load card xml file. pugi error: %s", result.description());
-		else
-			map01_nodes = nodes_01.child("tutorial_nodes");
-		break;
-	case STAGE_01: 
-		result = nodes_01.load_file("xml/map01_nodes.xml");
+	result = nodes_01.load_file("xml/map01_nodes.xml");
 
-		if (result == NULL)
-			LOG("Could not load card xml file. pugi error: %s", result.description());
-		else
-			map01_nodes = nodes_01.child("map01_nodes");
-		break;
-	default:
-		break;
-	}
+	if (result == NULL)
+		LOG("Could not load card xml file. pugi error: %s", result.description());
+	else
+		map01_nodes = nodes_01.child("map01_nodes");
 
 	return true;
 }
@@ -183,6 +164,7 @@ void EncounterTree::EntityClicked(StrategyBuilding * entity)
 		SetCurrentNodeByEntity(entity);
 		App->gui->DisableUI();
 		App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::COMBAT, White);
+		App->transition_manager->CreateZoomTransition(2.0f);
 		App->transition_manager->CreateCameraTranslation(2.0f, { (int)entity->position.x, (int)entity->position.y });
 	}
 
@@ -195,26 +177,3 @@ void EncounterTree::SetCurrentNodeByEntity(StrategyBuilding * entity)
 		if (en->GetEntity() == entity) SetCurrentNode(en);
 	}
 }
-
-
-void EncounterTree::SetFightingNodeByEntity(StrategyBuilding * entity)
-{
-	for each (EncounterNode* en in map_encounters)
-	{
-		if (en->GetEntity() == entity) SetFightingNode(en);
-	}
-}
-
-int EncounterTree::GetBuildingsOfType(EntityType type)
-{
-	int num = 0;
-
-	for each (EncounterNode* en in map_encounters)
-	{
-		if (en->GetEncounterType() == type)
-			if(en->visited)
-				num++;
-	}
-	return 0;
-}
-

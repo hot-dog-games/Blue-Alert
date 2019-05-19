@@ -163,9 +163,6 @@
     <ClCompile Include="MainMenuScene.cpp">
       <Filter>Engine\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="UIPopUp.cpp">
-      <Filter>Engine\UI</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
@@ -344,9 +341,6 @@
     </ClInclude>
     <ClInclude Include="MainMenuScene.h">
       <Filter>Engine\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="UIPopUp.h">
-      <Filter>Engine\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

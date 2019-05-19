@@ -157,8 +157,3 @@ void Input::GetMouseMotion(int& x, int& y)
 	x = mouse_motion_x;
 	y = mouse_motion_y;
 }
-
-void Input::SetEnableDrag(bool enable)
-{
-	enable_drag = enable;
-}

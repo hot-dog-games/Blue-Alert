@@ -19,7 +19,6 @@ class UIScrollBar;
 class UIAnimatedImage;
 class UILabel;
 class UIBar;
-class UIPopUp;
 class Stat;
 class Entity;
 
@@ -84,7 +83,6 @@ public:
 	UIScrollBar* CreateScrollBar(iPoint pos, SDL_Rect rect, SliderType type, int initial_value, int max_value, UIElement* parent = nullptr);
 	UIAnimatedImage* CreateAnimatedImage(iPoint pos, SDL_Rect * rect, int total_sprites, int speed, UIElement* parent = nullptr);
 	UIBar* CreateBar(iPoint pos, SDL_Rect rect, Stat* value, BarType type = BarType::BAR_VERTICAL, Entity* entity= nullptr, UIElement* parent = nullptr);
-	UIPopUp* CreatePopUp(SDL_Rect rect, iPoint margin, std::string text, int text_size, SDL_Color color,  UIElement* parent = nullptr);
 
 	void SliderAction(SliderType type, UIScrollBar* slider);
 

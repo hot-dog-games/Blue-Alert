@@ -47,9 +47,7 @@ public:
 	void SetPosition(fPoint position);
 	fPoint GetPosition();
 
-	void FillRandomEncounterDeck();
-	void FillPredefinedEncounterDeck(pugi::xml_node encounter_node);
-
+	void FillEncounterDeck();
 	void CreateNodeEntity();
 	void CreateNode();
 

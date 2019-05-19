@@ -7,9 +7,7 @@
 #include "UIButton.h"
 #include "UIImage.h"
 #include "UIScrollBar.h"
-#include "UILabel.h"
-#include "UIButtonText.h"
-#include "UIPopUp.h"
+
 
 
 struct SDL_Texture;
@@ -42,8 +40,6 @@ public:
 
 	void StartUI();
 
-	bool IsInsideLimits(int mousemotion_x, int mousemotion_y);
-
 private:
 	UIImage* banner;
 	UIImage* options;
@@ -71,18 +67,6 @@ private:
 	UIButton* savegamebutton;
 	UIButton* deck_buttons[4];
 	UIButton* collection_buttons[9];
-
-	//Info Showing
-	UIImage* info_image = nullptr;
-
-	UIPopUp* pop_up = nullptr;
-
-	float drag_threshhold = 0.2f;
-
-	iPoint limit_center = {-480, 767};
-	int limit_radius = 500;
-
-	iPoint last_camera_position;
 
 };
 

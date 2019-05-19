@@ -58,7 +58,7 @@ bool UISelectableButton::IsSelected()
 	return selected;
 }
 
-UISelectableButton::UISelectableButton(iPoint position, SDL_Rect* sprite_rect, bool is_interactable) :UIButton(position, sprite_rect, is_interactable)
+UISelectableButton::UISelectableButton(iPoint position, SDL_Rect* sprite_rect,bool is_interactable) :UIButton(position, sprite_rect, is_interactable)
 {
 	anim = new SDL_Rect[4];
 	anim[0] = sprite_rect[2];

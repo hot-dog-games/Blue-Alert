@@ -19,7 +19,6 @@ private:
 
 	pugi::xml_document nodes_01;
 	pugi::xml_node map01_nodes;
-	pugi::xml_node tutorial_nodes;
 
 public:
 	EncounterTree();
@@ -38,7 +37,6 @@ public:
 
 	void CreateAllNodes();
 
-
 	pugi::xml_node GetXmlEncounterNodeById(int id);
 
 	void UpdateTree();
@@ -47,10 +45,6 @@ public:
 
 	void EntityClicked(StrategyBuilding* entity);
 	void SetCurrentNodeByEntity(StrategyBuilding* entity);
-
-	void SetFightingNodeByEntity(StrategyBuilding* entity);
-	int GetBuildingsOfType(EntityType type);
-
 
 	bool is_clickable = true;
 
