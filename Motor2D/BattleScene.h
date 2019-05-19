@@ -66,62 +66,62 @@ private:
 	BattleSceneState state = BattleSceneState::FIGHT;
 	PerfTimer shortcut_timer;
 
-	UIImage*		unit_panel;
-	UIButton*		unit_button_one;
-	UIButton*		unit_button_two;
-	UIButton*		unit_button_three;
-	UIButton*		unit_button_four;
-	UIBar*			energy_bar;
-	UIBar*			health_bar;
-	UIImage*		health_bar_image;
-	UIBar*			enemy_health_bar;
-	UIImage*		enemy_health_bar_image;
+	UIImage*		unit_panel = nullptr;
+	UIButton*		unit_button_one = nullptr;
+	UIButton*		unit_button_two = nullptr;
+	UIButton*		unit_button_three = nullptr;
+	UIButton*		unit_button_four = nullptr;
+	UIBar*			energy_bar = nullptr;
+	UIBar*			health_bar = nullptr;
+	UIImage*		health_bar_image = nullptr;
+	UIBar*			enemy_health_bar = nullptr;
+	UIImage*		enemy_health_bar_image = nullptr;
 
 	//panels
-	UIImage*		win_panel_one;
-	UIImage*		win_panel_two;
-	UIImage*		store_panel;
-	UIImage*		lose_panel;
+	UIImage*		win_panel_one = nullptr;
+	UIImage*		win_panel_two = nullptr;
+	UIImage*		store_panel = nullptr;
+	UIImage*		lose_panel = nullptr;
 
 	//buttons
-	UIButton*		win_continue_one;
-	UIButton*		win_continue_two;
-	UIButton*		lose_continue;
-	UIButtonText*		purchase;
+	UIButton*		win_continue_one = nullptr;
+	UIButton*		win_continue_two = nullptr;
+	UIButton*		lose_continue = nullptr;
+	UIButtonText*		purchase = nullptr;
 
 	//labels
-	UILabel*		win_text_one;
-	UILabel*		win_text_two;
-	UILabel*		lose_text;
-	UIImage*		lose_image;
+	UILabel*		win_text_one = nullptr;
+	UILabel*		win_text_two = nullptr;
+	UILabel*		lose_text = nullptr;
+	UIImage*		lose_image = nullptr;
 
 	//store
-	UILabel*		store_text;
-	UILabel*		store_unit_01_cost;
-	UILabel*		store_unit_02_cost;
-	UILabel*		store_unit_03_cost;
-	UILabel*		store_unit_04_cost;
-	UILabel*		store_unit_05_cost;
-	UILabel*		store_unit_06_cost;
-	UILabel*		current_gold;
-	UILabel*		total_cost;
+	UILabel*		store_text = nullptr;
+	UILabel*		store_unit_01_cost = nullptr;
+	UILabel*		store_unit_02_cost = nullptr;
+	UILabel*		store_unit_03_cost = nullptr;
+	UILabel*		store_unit_04_cost = nullptr;
+	UILabel*		store_unit_05_cost = nullptr;
+	UILabel*		store_unit_06_cost = nullptr;
+	UILabel*		current_gold = nullptr;
+	UILabel*		total_cost = nullptr;
 
 	//Images
-	UIImage*		win_building;
+	UIImage*		win_building = nullptr;
 
 	//selectable buttons
-	UISelectableButton*		win_unit_one;
-	UISelectableButton*		win_unit_two;
-	UISelectableButton*		win_unit_three;
+	UISelectableButton*		win_unit_one = nullptr;
+	UISelectableButton*		win_unit_two = nullptr;
+	UISelectableButton*		win_unit_three = nullptr;
 
-	UISelectableButton*		store_unit_one;
-	UISelectableButton*		store_unit_two;
-	UISelectableButton*		store_unit_three;
-	UISelectableButton*		store_unit_four;
-	UISelectableButton*		store_unit_five;
-	UISelectableButton*		store_unit_six;
+	UISelectableButton*		store_unit_one = nullptr;
+	UISelectableButton*		store_unit_two = nullptr;
+	UISelectableButton*		store_unit_three = nullptr;
+	UISelectableButton*		store_unit_four = nullptr;
+	UISelectableButton*		store_unit_five = nullptr;
+	UISelectableButton*		store_unit_six = nullptr;
 
-	UIImage* current_drag;
+	UIImage* current_drag = nullptr;
 	int card_num;
 	std::vector<int> random_store_unit;
 	std::list<EntityType> store_units_purchased;
@@ -137,10 +137,10 @@ private:
 	std::string  no_energy;
 
 	//Pause Menu
-	UIButton* pause_button;
-	UIImage* pause_panel;
-	UIButton* p_continue;
-	UIButton* p_exit_menu;
+	UIButton* pause_button = nullptr;
+	UIImage* pause_panel = nullptr;
+	UIButton* p_continue = nullptr;
+	UIButton* p_exit_menu = nullptr;
 
 	int unit_store_cost = 100;
 	int total_cost_acumulated = 0;
@@ -148,8 +148,8 @@ private:
 	uint max_energy;
 	uint current_energy;
 
-	Core* allied_core;
-	Core* enemy_core;
+	Core* allied_core = nullptr;
+	Core* enemy_core = nullptr;
 };
 
 #endif
