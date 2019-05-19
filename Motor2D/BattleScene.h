@@ -140,7 +140,6 @@ private:
 	UIButton* pause_button;
 	UIImage* pause_panel;
 	UIButton* p_continue;
-	UIButton* p_exit_level;
 	UIButton* p_exit_menu;
 
 	int unit_store_cost = 100;

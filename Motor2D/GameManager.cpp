@@ -347,7 +347,7 @@ void GameManager::CreatePopUps()
 {
 	for (int i = 0 ; i < POPUP_MAX; i++)
 	{
-		popups[i];
+		popups[i] = false;
 	}
 }
 
