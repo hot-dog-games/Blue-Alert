@@ -1513,61 +1513,61 @@
   
 <!--PRISM TANK-->
   <entity type ="11">
-    <sprite>sprites/Units/LandVehicles/teslasprite.png</sprite>
+    <sprite>sprites/Units/LandVehicles/prismtank.png</sprite>
     <animations>
       <animation speed="5.0F" name="idle">
-        <sprite x="290" y="63" w="65" h="56"/>
+        <sprite x="226" y="70" w="44" h="37"/>
       </animation>
       <animation speed="5.0F" name="moving_right">
-        <sprite x="454" y="191" w="87" h="60"/>
+        <sprite x="332" y="152" w="58" h="41"/>
       </animation>
       <animation speed="5.0F" name="moving_left">
-        <sprite x="99" y="191" w="86" h="60"/>
+        <sprite x="102" y="152" w="57" h="41"/>
       </animation>
       <animation speed="5.0F" name="moving_up">
-        <sprite x="290" y="63" w="65" h="56"/>
+        <sprite x="226" y="70" w="44" h="37"/>
       </animation>
       <animation speed="5.0F" name="moving_down">
-        <sprite x="265" y="334" w="67" h="65"/>
+        <sprite x="210" y="245" w="45" h="43"/>
       </animation>
       <animation speed="5.0F" name="moving_up_left">
-        <sprite x="143" y="76" w="84" h="60"/>
+        <sprite x="130" y="78" w="56" h="40"/>
       </animation>
       <animation speed="5.0F" name="moving_up_right">
-        <sprite x="432" y="76" w="83" h="60"/>
+        <sprite x="318" y="78" w="56" h="40"/>
       </animation>
       <animation speed="5.0F" name="moving_down_left">
-        <sprite x="99" y="315" w="82" h="69"/>
+        <sprite x="102" y="233" w="54" h="46"/>
       </animation>
       <animation speed="5.0F" name="moving_down_right">
-        <sprite x="422" y="315" w="85" h="69"/>
+        <sprite x="311" y="233" w="58" h="46"/>
       </animation>
       <animation speed="5.0F" name="attacking_up">
-        <sprite x="290" y="63" w="65" h="56"/>
+        <sprite x="226" y="70" w="44" h="37"/>
       </animation>
       <animation speed="5.0F" name="attacking_down">
-        <sprite x="265" y="334" w="67" h="65"/>
+        <sprite x="210" y="245" w="45" h="43"/>
       </animation>
       <animation speed="5.0F" name="attacking_left">
-        <sprite x="99" y="191" w="86" h="60"/>
+        <sprite x="102" y="152" w="57" h="41"/>
       </animation>
       <animation speed="5.0F" name="attacking_right">
-        <sprite x="454" y="191" w="87" h="60"/>
+        <sprite x="332" y="152" w="58" h="41"/>
       </animation>
       <animation speed="5.0F" name="attacking_up_right">
-        <sprite x="432" y="76" w="83" h="60"/>
+        <sprite x="318" y="78" w="56" h="40"/>
       </animation>
       <animation speed="5.0F" name="attacking_up_left">
-        <sprite x="143" y="76" w="84" h="60"/>
+        <sprite x="130" y="78" w="56" h="40"/>
       </animation>
       <animation speed="5.0F" name="attacking_down_right">
-        <sprite x="422" y="315" w="85" h="69"/>
+        <sprite x="311" y="233" w="58" h="46"/>
       </animation>
       <animation speed="5.0F" name="attacking_down_left">
-        <sprite x="99" y="315" w="82" h="69"/>
+        <sprite x="102" y="233" w="54" h="46"/>
       </animation>
       <animation speed="10.0F" loop="false" name="dying">
-        <sprite x="290" y="63" w="65" h="56"/>
+        <sprite x="0" y="0" w="0" h="0"/>
       </animation>
       <animation speed="5.0F" loop="false" name="dead">
         <sprite x="0" y="0" w="0" h="0"/>
@@ -1580,58 +1580,58 @@
     <sprite>sprites/Units/LandVehicles/teslasprite.png</sprite>
     <animations>
       <animation speed="5.0F" name="idle">
-        <sprite x="290" y="63" w="65" h="56"/>
+        <sprite x="226" y="70" w="44" h="37"/>
       </animation>
       <animation speed="5.0F" name="moving_right">
-        <sprite x="454" y="191" w="87" h="60"/>
+        <sprite x="332" y="152" w="58" h="41"/>
       </animation>
       <animation speed="5.0F" name="moving_left">
-        <sprite x="99" y="191" w="86" h="60"/>
+        <sprite x="102" y="152" w="57" h="41"/>
       </animation>
       <animation speed="5.0F" name="moving_up">
-        <sprite x="290" y="63" w="65" h="56"/>
+        <sprite x="226" y="70" w="44" h="37"/>
       </animation>
       <animation speed="5.0F" name="moving_down">
-        <sprite x="265" y="334" w="67" h="65"/>
+        <sprite x="210" y="245" w="45" h="43"/>
       </animation>
       <animation speed="5.0F" name="moving_up_left">
-        <sprite x="143" y="76" w="84" h="60"/>
+        <sprite x="130" y="78" w="56" h="40"/>
       </animation>
       <animation speed="5.0F" name="moving_up_right">
-        <sprite x="432" y="76" w="83" h="60"/>
+        <sprite x="318" y="78" w="56" h="40"/>
       </animation>
       <animation speed="5.0F" name="moving_down_left">
-        <sprite x="99" y="315" w="82" h="69"/>
+        <sprite x="102" y="233" w="54" h="46"/>
       </animation>
       <animation speed="5.0F" name="moving_down_right">
-        <sprite x="422" y="315" w="85" h="69"/>
+        <sprite x="311" y="233" w="58" h="46"/>
       </animation>
       <animation speed="5.0F" name="attacking_up">
-        <sprite x="290" y="63" w="65" h="56"/>
+        <sprite x="226" y="70" w="44" h="37"/>
       </animation>
       <animation speed="5.0F" name="attacking_down">
-        <sprite x="265" y="334" w="67" h="65"/>
+        <sprite x="210" y="245" w="45" h="43"/>
       </animation>
       <animation speed="5.0F" name="attacking_left">
-        <sprite x="99" y="191" w="86" h="60"/>
+        <sprite x="102" y="152" w="57" h="41"/>
       </animation>
       <animation speed="5.0F" name="attacking_right">
-        <sprite x="454" y="191" w="87" h="60"/>
+        <sprite x="332" y="152" w="58" h="41"/>
       </animation>
       <animation speed="5.0F" name="attacking_up_right">
-        <sprite x="432" y="76" w="83" h="60"/>
+        <sprite x="318" y="78" w="56" h="40"/>
       </animation>
       <animation speed="5.0F" name="attacking_up_left">
-        <sprite x="143" y="76" w="84" h="60"/>
+        <sprite x="130" y="78" w="56" h="40"/>
       </animation>
       <animation speed="5.0F" name="attacking_down_right">
-        <sprite x="422" y="315" w="85" h="69"/>
+        <sprite x="311" y="233" w="58" h="46"/>
       </animation>
       <animation speed="5.0F" name="attacking_down_left">
-        <sprite x="99" y="315" w="82" h="69"/>
+        <sprite x="102" y="233" w="54" h="46"/>
       </animation>
       <animation speed="10.0F" loop="false" name="dying">
-        <sprite x="290" y="63" w="65" h="56"/>
+        <sprite x="0" y="0" w="0" h="0"/>
       </animation>
       <animation speed="5.0F" loop="false" name="dead">
         <sprite x="0" y="0" w="0" h="0"/>

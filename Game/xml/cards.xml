@@ -263,7 +263,7 @@
 
   <card type ="11">
     <name>Prism Tank</name>
-    <sprite>sprites/Units/LandVehicles/teslasprite.png</sprite>
+    <sprite>sprites/Units/LandVehicles/prismtank.png</sprite>
     <combat attack_type="1" armored="true"/>
     <buff_type value="32"/>
     <stats>
