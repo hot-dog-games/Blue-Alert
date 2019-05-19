@@ -219,6 +219,7 @@ void EncounterTree::CleanTree()
 	}
 
 	map_encounters.clear();
+	App->tex->UnLoad(lines_texture);
 
 	delete this;
 }

@@ -20,6 +20,22 @@ enum stage {
 	STAGE_01
 };
 
+enum tutorial_popup {
+	POPUP_BUILDING_NODES,
+	POPUP_USETROOP,
+	POPUP_SNIPER_COUNTERS,
+	POPUP_AREA_COUNTERS,
+	POPUP_MULTIPLE_COUNTERS,
+	POPUP_ARMORED_COUNTERS,
+	POPUP_DECISIONMAKING,
+	POPUP_STORE,
+	POPUP_REWARD_TROOP,
+	POPUP_STRATEGY_MAPMENU,
+	POPUP_TROOPS_MENU,
+	POPUP_BUILDINGS_MENU,
+	POPUP_MAX
+};
+
 class GameManager : public Module
 {
 public:
@@ -69,12 +85,22 @@ public:
 	void CreateCoreStats();
 	BuffSource* health_upgrade = nullptr;
 	BuffSource* energy_upgrade = nullptr;
+
+	void CreatePopUps();
+	void ShowPopUp(int popup);
+
+	bool popups[POPUP_MAX];
+
+private:
+	Deck* combat_deck;
+
+public:
+	//Maybe put this bitch in a vector?
 	BuffSource* infantry_upgrade = nullptr;
 	BuffSource* land_upgrade = nullptr;
 	BuffSource* aerial_upgrade = nullptr;
 
 private:
-	Deck* combat_deck;
 
 	EncounterTree* encounter_tree = nullptr;
 };

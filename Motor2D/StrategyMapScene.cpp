@@ -120,6 +120,15 @@ bool StrategyMapScene::PreUpdate()
 // Called each loop iteration
 bool StrategyMapScene::Update(float dt)
 {	
+	if (!App->game_manager->popups[POPUP_DECISIONMAKING])
+	{
+		if (App->game_manager->GetEncounterTree()->GetCurrentNode()->GetChildren().size() > 1)
+		{
+			if (!App->transition_manager->IsTransitioning())
+				App->game_manager->ShowPopUp(POPUP_DECISIONMAKING);
+		}
+	}
+
 	return true;
 }
 
