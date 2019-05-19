@@ -199,8 +199,11 @@ void Audio::SetFXVolume(const char * path, int volume)
 	{
 		Mix_VolumeChunk(item->second,volume);
 	}
-
-
-
 }
+
+void Audio::SetMusicVolume(int volume)
+{
+	Mix_VolumeMusic(volume);
+}
+
 

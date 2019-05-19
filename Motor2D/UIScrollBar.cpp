@@ -1,29 +1,79 @@
+#include"j1App.h"
 #include "GUI.h"
 #include "UIScrollBar.h"
+#include "UIButton.h"
+#include"Render.h"
+#include"Input.h"
+#include"p2Log.h"
 
-UIScrollBar::UIScrollBar(iPoint pos, ScrollType type)
-{
+UIScrollBar::UIScrollBar(iPoint pos, SDL_Rect rect, SliderType type, int initial_value, int max_value) {
+	rect_box = { pos.x,pos.y,rect.w,rect.h };
+	this->rect_sprite = rect;
+	slidertype = type;
+	slider[0] = { 4506, 992,24,51 };
+	slider[1] = { 4539, 992,25,51 };
+	slider[2] = { 4574, 992,25,51 };
+	slider_button = App->gui->CreateButton({ (int)initial_value, -6 }, slider, this);
+
+	percentage = initial_value / rect_box.w;
+
+	minimum = pos.x - this->GetLocalPos().x;
+
+	maximum = pos.x + rect.w - slider_button->GetLocalRect().w - this->GetLocalPos().x;
+	current_value = initial_value;
+	//value = &initial_value;
+	this->max_value = max_value;
+
 }
+UIScrollBar::~UIScrollBar()
+{
+
+}
+
+bool UIScrollBar::Update(float dt)
+{
+	if (slider_button->clicked)
+	{
+		DragSlider();
+	}
+
+	return true;
+}
+
+void UIScrollBar::DragSlider()
+{
+	iPoint mouse;
+	App->input->GetMousePosition(mouse.x, mouse.y);
+
+	int pos_x = mouse.x - this->GetLocalPos().x - slider_button->GetLocalRect().w / 2;
+	slider_button->SetLocalPos(pos_x, slider_button->GetLocalPos().y);
+
+
+	if (slider_button->GetLocalPos().x < minimum)
+	{
+		slider_button->SetLocalPos(minimum, slider_button->GetLocalPos().y);
+	}
+	if (slider_button->GetLocalPos().x > maximum)
+	{
+		slider_button->SetLocalPos(maximum, slider_button->GetLocalPos().y);
+	}
+
+	percentage = (float)(pos_x) / 194;
+	current_value = percentage * max_value;
+
+
+	App->gui->SliderAction(slidertype, this);
+
+
+}
+
 
 bool UIScrollBar::UIBlit()
 {
-	return false;
-}
-
-void UIScrollBar::SetValue(float new_value)
-{
-}
-
-float UIScrollBar::GetValue()
-{
-	return 0.0f;
-}
-
-void UIScrollBar::SetMinMax(float min, float max)
-{
-}
-
-bool UIScrollBar::CleanUp()
-{
-	return false;
+	iPoint screen_pos = GetScreenPos();
+		if (clipping && parent)
+			App->render->Blit(App->gui->GetAtlas(), screen_pos.x, screen_pos.y, &rect_sprite, 0.0F, 0.0, INT_MAX, INT_MAX, scale_X, scale_Y, &parent->GetScreenRect());
+		else
+			App->render->Blit(App->gui->GetAtlas(), screen_pos.x, screen_pos.y, &rect_sprite, 0.0F, 0.0, INT_MAX, INT_MAX);
+	return true;
 }

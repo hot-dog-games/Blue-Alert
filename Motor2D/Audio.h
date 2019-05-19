@@ -34,6 +34,8 @@ public:
 
 	void SetFXVolume(const char* path, int volume);
 
+	void SetMusicVolume(int volume);
+
 private:
 
 	_Mix_Music*	music = NULL;
