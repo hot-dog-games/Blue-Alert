@@ -82,9 +82,19 @@ bool GameManager::IsInPlayerDeck(Card * card)
 
 void GameManager::CreatePlayerDeck()
 {
-	combat_deck = new Deck();
-
-	AddCardToCollection(EntityType::CONSCRIPT);
+	if (STAGE_TUTORIAL)
+	{
+		combat_deck = new Deck();
+		AddCardToCollection(EntityType::CONSCRIPT);
+	}
+	else if (STAGE_01)
+	{
+		combat_deck = new Deck();
+		AddCardToCollection(EntityType::CONSCRIPT);
+		AddCardToCollection(EntityType::SNIPER);
+		AddCardToCollection(EntityType::MIG);
+		AddCardToCollection(EntityType::RHINO);
+	}
 }
 
 void GameManager::CreateStage()
