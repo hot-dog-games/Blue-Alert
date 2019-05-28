@@ -1,5 +1,6 @@
 #include "j1App.h"
 #include "BuffSourceManager.h"
+#include "Stat.h"
 #include "Buff.h"
 
 
@@ -37,6 +38,7 @@ bool Buff::IsCausedBySource(uint source_id) {
 
 BuffSource::BuffSource(pugi::xml_node source_node)
 {
+	source_id = App->buff->GetNewSourceID();
 	for (pugi::xml_node iter = source_node.child("buff"); iter; iter = iter.next_sibling("buff"))
 	{
 		buffs.push_back(new Buff(
@@ -45,4 +47,77 @@ BuffSource::BuffSource(pugi::xml_node source_node)
 			iter.attribute("value").as_float(),
 			source_id));
 	}
+}
+
+void BuffSource::CleanUp()
+{
+	for (int i = 0; i < buffs.size(); i++)
+	{
+		delete buffs[i];
+	}
+	buffs.clear();
+}
+
+void BuffSource::RemoveBuffs(std::map<std::string, Stat*> stats)
+{
+	std::map<std::string, Stat*>::iterator item;
+	for (item = stats.begin(); item != stats.end(); ++item)
+	{
+		item->second->RemoveBuff(source_id);
+	}
+}
+
+void LeveledUpgrade::Reset()
+{
+	level = 0;
+}
+
+uint LeveledUpgrade::GetBuffValue(std::string name)
+{
+	for (uint i = 0; i < buff_amount; ++i)
+	{
+		uint position = i + (level * buff_amount);
+		std::string stat_name = buffs[position]->GetStat();
+		if (stat_name == name)
+		{
+			return buffs[position]->GetValue();
+		}
+	}
+}
+
+void LeveledUpgrade::GetBuffs(std::map<std::string, Stat*> stats)
+{
+	for (uint i = 0; i < buff_amount; ++i)
+	{
+		uint position = i + (level * buff_amount);
+		std::string stat_name = buffs[position]->GetStat();
+		stats[stat_name]->AddBuff(*buffs[position]);
+		stats[stat_name]->CalculateStat();
+	}
+}
+
+uint LeveledUpgrade::GetCost()
+{
+	if (level < max_level)
+		return base_cost * (level + 1);
+	else 
+		return -1;
+}
+
+LeveledUpgrade::LeveledUpgrade(pugi::xml_node source_node) :BuffSource(source_node)
+{
+	base_cost = source_node.child("info").attribute("base_cost").as_uint();
+	max_level = source_node.child("info").attribute("max_level").as_uint();
+	buff_amount = source_node.child("info").attribute("buff_amount").as_uint();
+}
+
+bool LeveledUpgrade::LevelUp()
+{
+	if (level < max_level)
+	{
+		level++;
+		return true;
+	}
+	else
+		return false;
 }

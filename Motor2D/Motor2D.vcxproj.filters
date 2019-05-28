@@ -163,6 +163,12 @@
     <ClCompile Include="UIButtonText.cpp">
       <Filter>Engine\UI</Filter>
     </ClCompile>
+    <ClCompile Include="UIPopUp.cpp">
+      <Filter>Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuScene.cpp">
+      <Filter>Engine\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
@@ -341,6 +347,12 @@
     </ClInclude>
     <ClInclude Include="UIButtonText.h">
       <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIPopUp.h">
+      <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuScene.h">
+      <Filter>Engine\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

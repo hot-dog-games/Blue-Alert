@@ -20,6 +20,7 @@ class UIScrollBar;
 class UIAnimatedImage;
 class UILabel;
 class UIBar;
+class UIPopUp;
 class Stat;
 class Entity;
 
@@ -41,6 +42,16 @@ enum BarType {
 	BAR_NONE = -1,
 	BAR_VERTICAL,
 	BAR_HORITZONTAL
+};
+
+enum BarState {
+	BAR_STATIC,
+	BAR_DYNAMIC
+};
+
+enum SliderType {
+	FX,
+	MUSIC
 };
 
 // ---------------------------------------------------
@@ -77,9 +88,12 @@ public:
 	UIButton* CreateButton(iPoint pos, SDL_Rect* sprite_rect, UIElement* parent = nullptr, bool is_interactable = true);
 	UISelectableButton* CreateSelectableButton(iPoint pos, SDL_Rect* sprite_rect, UIElement* parent = nullptr, bool is_interactable = true);
 	UIButtonText* CreateButtonText(iPoint pos, iPoint offset, SDL_Rect* sprite_rect, std::string text, SDL_Color color, int size = 20, UIElement* parent = nullptr, bool is_interactable = true);
-	UIScrollBar* CreateScrollBar(iPoint pos, float min, float max, ScrollType type = VERTICAL, UIElement* parent = nullptr);
+	UIScrollBar* CreateScrollBar(iPoint pos, SDL_Rect rect, SliderType type, int initial_value, int max_value, UIElement* parent = nullptr);
 	UIAnimatedImage* CreateAnimatedImage(iPoint pos, SDL_Rect * rect, int total_sprites, int speed, UIElement* parent = nullptr);
-	UIBar* CreateBar(iPoint pos, SDL_Rect rect, Stat* value, BarType type = BarType::BAR_VERTICAL, Entity* entity= nullptr, UIElement* parent = nullptr);
+	UIBar* CreateBar(iPoint pos, SDL_Rect rect, Stat* value, BarType type = BarType::BAR_VERTICAL, BarState state = BarState::BAR_DYNAMIC, Entity* entity= nullptr, UIElement* parent = nullptr);
+	UIPopUp* CreatePopUp(SDL_Rect rect, iPoint margin, std::string text, int text_size, SDL_Color color,  UIElement* parent = nullptr);
+
+	void SliderAction(SliderType type, UIScrollBar* slider);
 
 	void DeleteElement(UIElement* element);
 	void DisableUI();

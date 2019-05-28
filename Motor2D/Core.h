@@ -8,6 +8,7 @@
 
 class Deck;
 struct Card;
+class LeveledUpgrade;
 
 class Core : public StaticEntity
 {
@@ -26,15 +27,21 @@ public:
 
 	Stat* GetEnergy() const;
 	Stat* GetHealth() const;
+	void DecreaseEnergy(uint value);
 
 	bool delete_deck = false;
 
 protected:
+
+	void Attack();
+	bool CheckEnemies();
 	Deck* deck = nullptr;
 	PerfTimer energy_timer;
+	PerfTimer attack_timer;
+	Entity* objective;
+	std::string attack_fx;
 
 	bool CanUseCard(int card_num);
-
 };
 
 #endif // _CORE_H_

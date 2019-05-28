@@ -12,6 +12,7 @@ public:
 	~BuffSourceManager();
 
 	bool Awake(pugi::xml_node &) override;
+	bool CleanUp();
 
 	uint GetNewSourceID();
 	BUFF_TYPE GetBuffType(std::string);

@@ -5,22 +5,32 @@
 #include "Stat.h"
 #include "p2Log.h"
 
-UIBar::UIBar(iPoint pos, SDL_Rect sprite_rect, Stat* value, BarType type)
+UIBar::UIBar(iPoint pos, SDL_Rect sprite_rect, Stat* value, BarType type, BarState state)
 {
 	rect_box = { pos.x, pos.y, sprite_rect.w,sprite_rect.h };
 
 	rect_sprite = sprite_rect;
 	bar_value = value;
 	bar_type = type;
-	current_value = value->GetMaxValue();
+	bar_state = state;
+	if(state == BAR_DYNAMIC)
+		current_value = value->GetMaxValue();
+	else
+		current_value = rect_sprite.w;
 }
 
 void UIBar::DecreaseBar(uint value)
 {
 	if (bar_type == BarType::BAR_VERTICAL) {
-		uint height = (rect_box.h / bar_value->GetMaxValue()) * value;
-		rect_sprite.h -= height;
-		rect_box.y += height;
+		float height = (rect_box.h / bar_value->GetMaxValue()) * value;
+		float aux = height - (int)height;
+		decimal_decrease += aux;
+		if (decimal_decrease > 1) {
+			height += 1;
+			decimal_decrease -= 1;
+		}
+		rect_sprite.h -= (int)height;
+		rect_box.y += (int)height;
 		current_value -= value;
 	}
 	else if (bar_type == BarType::BAR_HORITZONTAL) {
@@ -39,9 +49,15 @@ void UIBar::DecreaseBar(uint value)
 void UIBar::IncreaseBar(uint value)
 {
 	if (bar_type == BarType::BAR_VERTICAL) {
-		uint height = (rect_box.h / bar_value->GetMaxValue()) * value;
-		rect_sprite.h += height;
-		rect_box.y -= height;
+		float height = (rect_box.h / bar_value->GetMaxValue()) * value;
+		float aux = height - (int)height;
+		decimal_decrease += aux;
+		if (decimal_decrease > 1) {
+			height += 1;
+			decimal_decrease -= 1;
+		}
+		rect_sprite.h += (int)height;
+		rect_box.y -= (int)height;
 		current_value += value;
 	}
 	else if (bar_type == BarType::BAR_HORITZONTAL) {
@@ -61,23 +77,33 @@ bool UIBar::UIBlit()
 {
 	iPoint screen_pos = GetScreenPos();
 	if (clipping && parent)
-		App->render->Blit(App->gui->GetAtlas(), screen_pos.x, screen_pos.y, &rect_sprite, 0.0F, 0.0, INT_MAX, INT_MAX, &parent->GetScreenRect());
+		App->render->Blit(App->gui->GetAtlas(), screen_pos.x, screen_pos.y, &rect_sprite, 0.0F, 0.0, INT_MAX, INT_MAX, scale_X, scale_Y, &parent->GetScreenRect());
 	else
 		App->render->Blit(App->gui->GetAtlas(), screen_pos.x, screen_pos.y, &rect_sprite, 0.0F, 0.0, INT_MAX, INT_MAX);
 	return true;
 }
 
 bool UIBar::Update(float dt)
-{;
-	if (bar_value->GetValue() > current_value) {
-		IncreaseBar(bar_value->GetValue() - current_value);
+{
+	if (bar_state == BAR_DYNAMIC) {
+		if (bar_value->GetValue() > current_value) {
+			IncreaseBar(bar_value->GetValue() - current_value);
+		}
+		else if (bar_value->GetValue() < current_value) {
+			DecreaseBar(current_value - bar_value->GetValue());
+		}
 	}
-	else if (bar_value->GetValue() < current_value) {
-		DecreaseBar(current_value - bar_value->GetValue());
-	}
-
-	
-		
 
 	return true;
+}
+
+void UIBar::ChangeStat(Stat * stat)
+{
+	bar_value = stat;
+	rect_sprite.w = bar_value->GetValue() * (current_value * 0.2);
+}
+
+int UIBar::GetValue() const
+{
+	return current_value;
 }

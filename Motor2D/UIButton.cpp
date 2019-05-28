@@ -14,7 +14,7 @@ bool UIButton::UIBlit()
 	iPoint screen_pos = GetScreenPos();
 	if (clipping && parent)
 	{
-		App->render->Blit(App->gui->GetAtlas(), screen_pos.x, screen_pos.y, &rect_sprite, 0.0F, 0.0, INT_MAX, INT_MAX, &parent->GetScreenRect());
+		App->render->Blit(App->gui->GetAtlas(), screen_pos.x, screen_pos.y, &rect_sprite, 0.0F, 0.0, INT_MAX, INT_MAX, 1.0F, 1.0F, &parent->GetScreenRect());
 	}
 	else {
 		App->render->Blit(App->gui->GetAtlas(), screen_pos.x, screen_pos.y, &rect_sprite, 0.0F, 0.0, INT_MAX, INT_MAX);
@@ -24,6 +24,7 @@ bool UIButton::UIBlit()
 
 void UIButton::OnMouseClick()
 {
+	//App->audio->PlayFx(button_fx.c_str(), 0);
 	rect_sprite = anim[2];
 }
 
@@ -81,4 +82,6 @@ UIButton::UIButton(iPoint position, SDL_Rect* sprite_rect, bool is_interactable)
 	anim[3] = sprite_rect[3];
 
 	rect_sprite = anim[interactable ? 0 : 3];
+
+	//button_fx=App->audio->LoadFx("audio/fx/UI/button_fx.wav");
 }

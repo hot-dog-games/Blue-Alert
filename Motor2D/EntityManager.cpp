@@ -9,6 +9,8 @@
 #include "Core.h"
 #include "CoreAI.h"
 #include "Deck.h"
+#include "Stat.h"
+#include "BuffSourceManager.h"
 #include "EntityManager.h"
 #include "Brofiler/Brofiler.h"
 
@@ -285,6 +287,21 @@ void EntityManager::SetDebug()
 	}
 }
 
+void EntityManager::GetCoreStats(std::map<std::string, Stat*> *stats)
+{
+	pugi::xml_node entity_node = entity_configs.find_child_by_attribute("type", std::to_string((int)CORE).c_str());
+	pugi::xml_node stats_node = entity_node.child("stats");
+
+	for (pugi::xml_node iter = stats_node.child("stat"); iter; iter = iter.next_sibling("stat"))
+	{
+		std::string stat_name = iter.attribute("stat").as_string();
+		//Create the stat
+		stats->insert(std::pair<std::string, Stat*>(
+			stat_name,
+			new Stat(iter.attribute("value").as_int())));
+	}
+}
+
 bool EntityManager::DeleteEntity(Entity* entity)
 {
 	entity->CleanUp();
@@ -296,6 +313,7 @@ bool EntityManager::DeleteEntity(Entity* entity)
 
 bool EntityManager::CreateGroup(int units, EntityType type, fPoint position, Card * card, Faction faction)
 {
+	Entity* entity;
 	for (int i = 0; i < units; i++)
 	{
 		if (i == 1)
@@ -312,8 +330,7 @@ bool EntityManager::CreateGroup(int units, EntityType type, fPoint position, Car
 		{
 			position.y = position.y + 20;
 		}
-		App->entity_manager->CreateEntity(type, position, card, faction);
-
+		entity = App->entity_manager->CreateEntity(type, position, card, faction);
 	}
 	return true;
 }

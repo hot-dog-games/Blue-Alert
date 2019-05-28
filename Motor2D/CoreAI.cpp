@@ -4,6 +4,7 @@
 #include "Render.h"
 #include "Deck.h"
 #include "CardManager.h"
+#include "GameManager.h"
 #include "p2Log.h"
 #include "CoreAI.h"
 
@@ -24,9 +25,8 @@ bool CoreAI::Update(float dt)
 	Core::Update(dt);
 
 	dt_sum += dt;
-	if (state == STATIC_IDLE)
+	if (state == STATIC_IDLE || state == STATIC_ATTACKING)
 	{
-
 		switch (ai_state)
 		{
 		case CoreAI::AIState::WAITING:
@@ -43,7 +43,21 @@ bool CoreAI::Update(float dt)
 		case CoreAI::AIState::ACTING:
 			UseCard(selected_card, { (float)lanes[selected_lane].area.x + (float)lanes[selected_lane].area.w*0.5f, position.y + 50 });
 			ai_state = AIState::WAITING;
-			break;
+			if (deck->cards[selected_card]->type == EntityType::VIRUS)
+			{
+				if (!App->game_manager->popups[POPUP_SNIPER_COUNTERS])
+					App->game_manager->ShowPopUp(POPUP_SNIPER_COUNTERS);
+			}
+			else if (deck->cards[selected_card]->type == EntityType::HARRIER)
+			{
+				if (!App->game_manager->popups[POPUP_AREA_COUNTERS])
+					App->game_manager->ShowPopUp(POPUP_AREA_COUNTERS);
+			}
+			else if (deck->cards[selected_card]->type == EntityType::GI)
+			{
+				if (!App->game_manager->popups[POPUP_MULTIPLE_COUNTERS])
+					App->game_manager->ShowPopUp(POPUP_MULTIPLE_COUNTERS);
+			}
 		default:
 			break;
 		}
@@ -136,6 +150,7 @@ void CoreAI::SelectCard()
 	AttackType secondary_counter = AttackType::AT_NONE;
 
 	bool has_counter = false;
+	bool has_secondary_counter = false;
 
 	if (lanes[selected_lane].enemy_armored > lanes[selected_lane].enemy_basic)
 	{
@@ -175,7 +190,7 @@ void CoreAI::SelectCard()
 	LOG("piercing: %i, armored: %i, basic: %i, aoe: %i", lanes[selected_lane].enemy_piercing, lanes[selected_lane].enemy_armored, lanes[selected_lane].enemy_basic, lanes[selected_lane].enemy_aoe);
 	LOG("SELECTED COUNTER IS: %i  SELECTED SECONDARY COUNTER IS: %i", (int)counter, (int)secondary_counter);
 
-	for (int i = 0; i < MAX_CARDS; i++)
+	for (int i = 0; i < deck->GetDeckSize(); i++)
 	{
 		if (deck->cards[i]->info.attack_type == counter)
 		{
@@ -191,10 +206,11 @@ void CoreAI::SelectCard()
 
 	if (!has_counter)
 	{
-		for (int i = 0; i < MAX_CARDS; i++)
+		for (int i = 0; i < deck->GetDeckSize(); i++)
 		{
 			if (deck->cards[i]->info.attack_type == secondary_counter)
 			{
+				has_secondary_counter = true;
 				if (CanUseCard(i))
 				{
 					LOG("SECONDARY COUNTER FOUND");
@@ -204,6 +220,7 @@ void CoreAI::SelectCard()
 			}
 			else if (!deck->cards[i]->info.armored && secondary_counter == AttackType::AT_NONE)
 			{
+				has_secondary_counter = true;
 				if (CanUseCard(i))
 				{
 					LOG("SECONDARY COUNTER NON BLINDED FOUND");
@@ -212,9 +229,12 @@ void CoreAI::SelectCard()
 				}
 			}
 		}
-
 	}
 
+	if (!has_secondary_counter && !has_counter)
+	{
+		selected_card = rand() % deck->GetDeckSize();
+	}
 }
 
 bool CoreAI::PostUpdate()

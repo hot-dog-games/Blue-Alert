@@ -14,7 +14,7 @@
     <ProjectGuid>{2AF9969B-F202-497B-AF30-7BEF9CE8005E}</ProjectGuid>
     <RootNamespace>programacio_2</RootNamespace>
     <ProjectName>Blue_Alert</ProjectName>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -100,6 +100,7 @@
     <ClCompile Include="j1App.cpp" />
     <ClCompile Include="Audio.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="MainMenuScene.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Movement.cpp" />
     <ClCompile Include="Particle.cpp" />
@@ -124,6 +125,7 @@
     <ClCompile Include="UIButton.cpp" />
     <ClCompile Include="UIButtonText.cpp" />
     <ClCompile Include="UIEntityBar.cpp" />
+    <ClCompile Include="UIPopUp.cpp" />
     <ClCompile Include="UISelectableButton.cpp" />
     <ClCompile Include="UIElement.cpp" />
     <ClCompile Include="UIImage.cpp" />
@@ -153,6 +155,7 @@
     <ClInclude Include="Fade.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GUI.h" />
+    <ClInclude Include="MainMenuScene.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Movement.h" />
     <ClInclude Include="Particle.h" />
@@ -184,6 +187,7 @@
     <ClInclude Include="UIButton.h" />
     <ClInclude Include="UIButtonText.h" />
     <ClInclude Include="UIEntityBar.h" />
+    <ClInclude Include="UIPopUp.h" />
     <ClInclude Include="UISelectableButton.h" />
     <ClInclude Include="UIElement.h" />
     <ClInclude Include="UIImage.h" />
