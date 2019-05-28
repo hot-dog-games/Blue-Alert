@@ -520,15 +520,18 @@ void BattleScene::StartUI()
 	GenerateRandomAlliedTroop();
 	//Game_UI
 
-	unit_panel = App->gui->CreateImage({ 755,0 }, { 2406,0,269,768 });
+	uint width, height;
+	App->win->GetWindowSize(width, height);
+
+	unit_panel = App->gui->CreateImage({ 94, (int)height-123}, { 1011,41,452,123 });
 	if(allied_core->GetCard(CN_FIRST))
-		unit_button_one = App->gui->CreateButton({ 35, 365 }, App->gui->LoadUIButton(allied_core->GetCard(CN_FIRST)->type, "button"), unit_panel);
+		unit_button_one = App->gui->CreateButton({ 12, 32 }, App->gui->LoadUIButton(allied_core->GetCard(CN_FIRST)->type, "button"), unit_panel);
 	if (allied_core->GetCard(CN_SECOND))
-		unit_button_two = App->gui->CreateButton({ 135, 365 }, App->gui->LoadUIButton(allied_core->GetCard(CN_SECOND)->type, "button"), unit_panel);
+		unit_button_two = App->gui->CreateButton({ 119, 32 }, App->gui->LoadUIButton(allied_core->GetCard(CN_SECOND)->type, "button"), unit_panel);
 	if (allied_core->GetCard(CN_THIRD))
-		unit_button_three = App->gui->CreateButton({ 35, 445 }, App->gui->LoadUIButton(allied_core->GetCard(CN_THIRD)->type, "button"), unit_panel);
+		unit_button_three = App->gui->CreateButton({ 228, 32 }, App->gui->LoadUIButton(allied_core->GetCard(CN_THIRD)->type, "button"), unit_panel);
 	if (allied_core->GetCard(CN_FOURTH))
-		unit_button_four = App->gui->CreateButton({ 135, 445 }, App->gui->LoadUIButton(allied_core->GetCard(CN_FOURTH)->type, "button"), unit_panel);
+		unit_button_four = App->gui->CreateButton({ 336, 32 }, App->gui->LoadUIButton(allied_core->GetCard(CN_FOURTH)->type, "button"), unit_panel);
 
 	energy_bar = App->gui->CreateBar({ 8, 358 }, { 2388,0,16,269 }, allied_core->GetEnergy(), BAR_VERTICAL, BAR_DYNAMIC, nullptr, unit_panel);
 	energy_image = App->gui->CreateImage({ 2, 632 }, { 637,1742,30,30 }, unit_panel);
