@@ -481,7 +481,7 @@ void StrategyMapScene::InitializeUI()
 	App->win->GetWindowSize(w, h);
 
 	main_panel = App->gui->CreateImage({ 0,0 }, { 0, 0, 0, 0 }, nullptr, false);
-	banner = App->gui->CreateImage({ 4,5 }, { 1,769,1017,83 }, main_panel);
+	//banner = App->gui->CreateImage({ 4,5 }, { 1,769,1017,83 }, main_panel);
 
 	SDL_Rect small_button_rect[3];
 	small_button_rect[0] = { 753, 497, 41, 40 };
@@ -511,9 +511,9 @@ void StrategyMapScene::InitializeUI()
 
 	std::string str = "";
 
-	menu_button = App->gui->CreateButtonText({ 700,700 }, { 70,0 }, medium_button_rect, "MENU", { 200,200,200,255 }, 33, main_panel);
+	menu_button = App->gui->CreateButtonText({ 336, 880 }, { 10,0 }, medium_button_rect, "COLLECTION", { 200,200,200,255 }, 27, main_panel);
 	options = App->gui->CreateImage({ 200,100 }, { 14,2374,619,463 }, nullptr);
-	settings_button = App->gui->CreateButton({ 50,700 }, options_rect, main_panel);
+	settings_button = App->gui->CreateButton({ 20, 880 }, options_rect, main_panel);
 	resume_settings_button = App->gui->CreateButtonText({ 320,380 }, { 60,15 }, medium_button_rect, "Resume", {255,255,255,0}, 20, options);
 
 	music_slider = App->gui->CreateScrollBar({ 350,150 }, { 2962,912,218,40 }, MUSIC, volume, 128, options);
@@ -523,8 +523,8 @@ void StrategyMapScene::InitializeUI()
 	back_menu_button = App->gui->CreateButtonText({ 30,380 }, { 20,15 }, medium_button_rect, "BACK TO MENU", { 255,255,255,0 }, 20, options);
 	App->gui->DisableElement(options);
 
-	str = "GOLD: " + std::to_string(App->game_manager->gold);
-	gold = App->gui->CreateLabel({ 60, 30 }, "fonts/button_text.ttf", 25, str, { 0,0,0,0 }, 0, main_panel);
+	//str = "GOLD: " + std::to_string(App->game_manager->gold);
+	//gold = App->gui->CreateLabel({ 60, 30 }, "fonts/button_text.ttf", 25, str, { 0,0,0,0 }, 0, main_panel);
 
 	// Troops menu
 	troops_background = App->gui->CreateImage({ 20,95 }, { 3711,5,985,659 }, main_panel);

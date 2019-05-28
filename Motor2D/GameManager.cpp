@@ -86,6 +86,9 @@ void GameManager::CreatePlayerDeck()
 	{
 		combat_deck = new Deck();
 		AddCardToCollection(EntityType::CONSCRIPT);
+		AddCardToCollection(EntityType::SNIPER);
+		AddCardToCollection(EntityType::MIG);
+		AddCardToCollection(EntityType::RHINO);
 	}
 	else if (stage == STAGE_01)
 	{
