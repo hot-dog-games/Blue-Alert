@@ -54,7 +54,7 @@ bool BattleScene::Start()
 	}
 
 	App->render->camera.x = 290;
-	App->render->camera.y = -640;
+	App->render->camera.y = -635;
 
 	Deck* enemy_deck = new Deck();
 	enemy_deck->delete_cards = true;
@@ -534,10 +534,10 @@ void BattleScene::StartUI()
 	if (allied_core->GetCard(CN_THIRD))
 		unit_button_three = App->gui->CreateButton({ 245, 52 }, App->gui->LoadUIButton(allied_core->GetCard(CN_THIRD)->type, "button"), unit_panel);
 	if (allied_core->GetCard(CN_FOURTH))
-		unit_button_four = App->gui->CreateButton({ 353, 52 }, App->gui->LoadUIButton(allied_core->GetCard(CN_FOURTH)->type, "button"), unit_panel);
+		unit_button_four = App->gui->CreateButton({ 354, 52 }, App->gui->LoadUIButton(allied_core->GetCard(CN_FOURTH)->type, "button"), unit_panel);
 
 	energy_bar = App->gui->CreateBar({ 35, 17 }, { 1244,163,432,17 }, allied_core->GetEnergy(), BAR_HORITZONTAL, BAR_DYNAMIC, nullptr, unit_panel);
-	energy_image = App->gui->CreateImage({ 5, 10 }, { 1238,345,32,32 }, unit_panel);
+	energy_image = App->gui->CreateImage({ 8, 10 }, { 1238,345,32,32 }, unit_panel);
 	energy_label = App->gui->CreateLabel({ 10,4 }, "fonts/gunplay.ttf", 20, "0", { 255,255,255,255 }, 120, energy_image, false);
 
 	SDL_Rect pause_rect[3];
@@ -546,10 +546,10 @@ void BattleScene::StartUI()
 	pause_rect[2] = { 3207,1756,78,15 };
 	pause_button = App->gui->CreateButton({ 98,646 }, pause_rect, unit_panel);
 
-	health_bar_image = App->gui->CreateImage({ 40, 780 }, { 25,1399,253,28 });
-	enemy_health_bar_image = App->gui->CreateImage({ 40,20 }, { 25,1474,253,28 });
-	health_bar = App->gui->CreateBar({ 28,10 }, { 25,1428,224,16 }, allied_core->GetHealth(), BarType::BAR_HORITZONTAL, BAR_DYNAMIC, nullptr, health_bar_image);
-	enemy_health_bar = App->gui->CreateBar({ 28,10 }, { 25,1428,224,16 }, enemy_core->GetHealth(), BarType::BAR_HORITZONTAL, BAR_DYNAMIC, nullptr, enemy_health_bar_image);
+	health_bar_image = App->gui->CreateImage({ 248, 770 }, { 24,1378,144,16 });
+	enemy_health_bar_image = App->gui->CreateImage({ 248, 30 }, { 24,1455,144,16 });
+	health_bar = App->gui->CreateBar({ 16,5 }, { 24,1404,127,10 }, allied_core->GetHealth(), BarType::BAR_HORITZONTAL, BAR_DYNAMIC, nullptr, health_bar_image);
+	enemy_health_bar = App->gui->CreateBar({ 16,6 }, { 24,1404,127,10 }, enemy_core->GetHealth(), BarType::BAR_HORITZONTAL, BAR_DYNAMIC, nullptr, enemy_health_bar_image);
 
 	App->gui->EnableInteractable((UIElement*)unit_panel);
 
