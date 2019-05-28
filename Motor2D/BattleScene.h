@@ -150,6 +150,9 @@ private:
 
 	Core* allied_core = nullptr;
 	Core* enemy_core = nullptr;
+
+	UIImage* energy_cost[4];
+	UILabel* energy_cost_label[4];
 };
 
 #endif
