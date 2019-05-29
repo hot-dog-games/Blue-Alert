@@ -133,6 +133,14 @@ void GameManager::RecoverState()
 			}
 		}
 	}
+	gold = gold_recovery;
+
+
+	ClearUpgrades();
+	((LeveledUpgrade*)health_upgrade)->SetLevel(health_lvl_recovery);
+	((LeveledUpgrade*)health_upgrade)->GetBuffs(stats);
+	((LeveledUpgrade*)energy_upgrade)->SetLevel(energy_lvl_recovery);
+	((LeveledUpgrade*)energy_upgrade)->GetBuffs(stats);
 }
 void GameManager::SaveState()
 {
@@ -239,8 +247,8 @@ void GameManager::ClearUpgrades()
 {
 	health_upgrade->RemoveBuffs(stats);
 	energy_upgrade->RemoveBuffs(stats);
-	(((LeveledUpgrade*)infantry_upgrade)->Reset());
-	(((LeveledUpgrade*)infantry_upgrade)->Reset());
+	(((LeveledUpgrade*)health_upgrade)->Reset());
+	(((LeveledUpgrade*)energy_upgrade)->Reset());
 }
 
 void GameManager::LevelUpgrade()
