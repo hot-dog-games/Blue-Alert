@@ -106,6 +106,7 @@ bool GameManager::Restart()
 	encounter_tree->CleanTree();
 	ResetBuildingBuffs();
 	RecoverState();
+	CreateStage();
 	restart = false;
 
 	return true;
@@ -113,10 +114,43 @@ bool GameManager::Restart()
 
 void GameManager::RecoverState()
 {
+	for each (Card* card in collection_recovery)
+	{
+		collection.push_back(App->card_manager->CopyCard(card));
+	}
 
+	combat_deck = new Deck();
+	for (int i = 0; i < 4; i++)
+	{
+		if (deck_recovery[i] != EntityType::NONE)
+		{
+			for each (Card* card in collection_recovery)
+			{
+				if(card->type == deck_recovery[i])
+				{
+					combat_deck->AddCard(card);
+				}
+			}
+		}
+	}
 }
 void GameManager::SaveState()
 {
+	//---------Clean old state-----------
+	for (std::list<Card*>::iterator card = collection_recovery.begin(); card != collection_recovery.end(); ++card)
+	{
+		App->card_manager->DeleteCard((*card));
+	}
+	collection_recovery.clear();
+
+	for (int i = 0; i < 4; i++)
+	{
+		deck_recovery[i] = EntityType::NONE;
+	}
+	//-----------------------------------
+
+
+	//Save state
 	for each (Card* card in collection)
 	{
 		collection_recovery.push_back(App->card_manager->CopyCard(card));
