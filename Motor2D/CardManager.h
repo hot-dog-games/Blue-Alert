@@ -32,8 +32,6 @@ struct CardInfo {
 
 	std::map<std::string, Stat*> stats;
 	bool armored;
-
-
 };
 
 struct Card {
@@ -68,6 +66,7 @@ public:
 
 	Card* CreateCard(EntityType type);
 	Card* DeleteCard(Card* card);
+	Card* CopyCard(Card* card);
 
 private:
 	void LoadCardStats(Card* card, pugi::xml_node stats_node);

@@ -42,6 +42,8 @@ bool GameManager::Start()
 	CreatePlayerDeck();
 	CreateCoreStats();
 
+	SaveState();
+
 	return true;
 }
 
@@ -82,22 +84,8 @@ bool GameManager::IsInPlayerDeck(Card * card)
 
 void GameManager::CreatePlayerDeck()
 {
-	if (stage == STAGE_TUTORIAL)
-	{
-		combat_deck = new Deck();
-		AddCardToCollection(EntityType::CONSCRIPT);
-		AddCardToCollection(EntityType::SNIPER);
-		AddCardToCollection(EntityType::MIG);
-		AddCardToCollection(EntityType::RHINO);
-	}
-	else if (stage == STAGE_01)
-	{
-		combat_deck = new Deck();
-		AddCardToCollection(EntityType::CONSCRIPT);
-		AddCardToCollection(EntityType::SNIPER);
-		AddCardToCollection(EntityType::MIG);
-		AddCardToCollection(EntityType::RHINO);
-	}
+	combat_deck = new Deck();
+	AddCardToCollection(EntityType::CONSCRIPT);
 }
 
 void GameManager::CreateStage()
@@ -108,23 +96,38 @@ void GameManager::CreateStage()
 
 bool GameManager::Restart()
 {
-	if (restart)
+	for (std::list<Card*>::iterator card = collection.begin(); card != collection.end(); ++card)
 	{
-		for (std::list<Card*>::iterator card = collection.begin(); card != collection.end(); ++card)
-		{
-			App->card_manager->DeleteCard((*card));
-		}
-		collection.clear();
-
-		delete combat_deck;
-		encounter_tree->CleanTree();
-		ResetBuildingBuffs();
-		ClearUpgrades();
-		Start();
-		restart = false;
+		App->card_manager->DeleteCard((*card));
 	}
+	collection.clear();
+	delete combat_deck;
+
+	encounter_tree->CleanTree();
+	ResetBuildingBuffs();
+	RecoverState();
+	restart = false;
 
 	return true;
+}
+
+void GameManager::RecoverState()
+{
+
+}
+void GameManager::SaveState()
+{
+	for each (Card* card in collection)
+	{
+		collection_recovery.push_back(App->card_manager->CopyCard(card));
+	}
+	for (int i = 0; i < combat_deck->GetDeckSize(); i++)
+	{
+		deck_recovery[i] = combat_deck->cards[i]->type;
+	}
+	gold_recovery = gold;
+	health_lvl_recovery = ((LeveledUpgrade*)health_upgrade)->GetLevel();
+	energy_lvl_recovery = ((LeveledUpgrade*)energy_upgrade)->GetLevel();
 }
 
 void GameManager::ResetBuildingBuffs()
