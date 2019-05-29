@@ -5,6 +5,7 @@
 #include <string>
 
 struct _TTF_Font;
+struct SDL_Texture;
 
 class UILabel : public UIElement
 {
@@ -24,7 +25,8 @@ public:
 	void OnMouseHover();
 	void OnMouseRelease();
 	void OnMouseExit();
-
+protected:
+	SDL_Texture* texture;
 };
 
 #endif // !UI_LABEL_H
