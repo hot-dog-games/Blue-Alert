@@ -121,3 +121,11 @@ bool LeveledUpgrade::LevelUp()
 	else
 		return false;
 }
+
+void LeveledUpgrade::SetLevel(int lvl)
+{
+	if (lvl <= max_level)
+	{
+		level = lvl;
+	}
+}

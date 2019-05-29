@@ -69,16 +69,16 @@ public:
 	//----------------------
 
 	//---Collection_Acces----
-
 	Card* GetCardFromCollection(EntityType card_type);
 	void AddCardToCollection(EntityType card_type);
 	bool IsInCollection(int card_type);
-	std::list<Card*> collection;
 	//----------------------
+
 	bool Restart();
 	bool restart = false;
 	void ClearUpgrades();
 	BuffSource* GetUpgrade(EntityType unit_type);
+	void SaveState();
 
 	void UpgradeHealth();
 	void UpgradeEnergy();
@@ -94,10 +94,21 @@ public:
 	bool popups[POPUP_MAX];
 
 private:
+	void RecoverState();
+
+private:
 	Deck* combat_deck = nullptr;
+	std::list<Card*> collection;
+
+	//Recovery state
+	EntityType deck_recovery[4];
+	std::list<Card*> collection_recovery;
+	int health_lvl_recovery = 0;
+	int energy_lvl_recovery = 0;
+	int gold_recovery = 0;
 
 public:
-	//Maybe put this bitch in a vector?
+	//Not good like this but w/e
 	BuffSource* infantry_upgrade = nullptr;
 	BuffSource* land_upgrade = nullptr;
 	BuffSource* aerial_upgrade = nullptr;

@@ -90,6 +90,17 @@ Card* CardManager::DeleteCard(Card* card)
 	return nullptr;
 }
 
+Card * CardManager::CopyCard(Card * card)
+{
+	Card* new_card = CreateCard(card->type);
+	for (int i = 0; i < card->level; ++i)
+	{
+		new_card->Upgrade();
+	}
+
+	return new_card;
+}
+
 void CardManager::LoadCardStats(Card* card, pugi::xml_node stats_node)
 {
 	for (pugi::xml_node iter = stats_node.child("stat"); iter; iter = iter.next_sibling("stat"))

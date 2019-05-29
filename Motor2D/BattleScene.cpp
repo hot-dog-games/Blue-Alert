@@ -334,6 +334,7 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 				App->game_manager->ResetBuildingBuffs();
 				App->game_manager->GetEncounterTree()->CleanTree();
 				App->game_manager->CreateStage();
+				App->game_manager->SaveState();
 			}
 		}
 		else if (element == lose_continue) {
@@ -391,6 +392,7 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 				App->game_manager->ResetBuildingBuffs();
 				App->game_manager->GetEncounterTree()->CleanTree();
 				App->game_manager->CreateStage();
+				App->game_manager->SaveState();
 			}
 
 			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);

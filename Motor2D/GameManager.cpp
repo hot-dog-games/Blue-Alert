@@ -42,6 +42,8 @@ bool GameManager::Start()
 	CreatePlayerDeck();
 	CreateCoreStats();
 
+	SaveState();
+
 	return true;
 }
 
@@ -82,22 +84,8 @@ bool GameManager::IsInPlayerDeck(Card * card)
 
 void GameManager::CreatePlayerDeck()
 {
-	if (stage == STAGE_TUTORIAL)
-	{
-		combat_deck = new Deck();
-		AddCardToCollection(EntityType::CONSCRIPT);
-		AddCardToCollection(EntityType::SNIPER);
-		AddCardToCollection(EntityType::MIG);
-		AddCardToCollection(EntityType::RHINO);
-	}
-	else if (stage == STAGE_01)
-	{
-		combat_deck = new Deck();
-		AddCardToCollection(EntityType::CONSCRIPT);
-		AddCardToCollection(EntityType::SNIPER);
-		AddCardToCollection(EntityType::MIG);
-		AddCardToCollection(EntityType::RHINO);
-	}
+	combat_deck = new Deck();
+	AddCardToCollection(EntityType::CONSCRIPT);
 }
 
 void GameManager::CreateStage()
@@ -108,23 +96,80 @@ void GameManager::CreateStage()
 
 bool GameManager::Restart()
 {
-	if (restart)
+	for (std::list<Card*>::iterator card = collection.begin(); card != collection.end(); ++card)
 	{
-		for (std::list<Card*>::iterator card = collection.begin(); card != collection.end(); ++card)
-		{
-			App->card_manager->DeleteCard((*card));
-		}
-		collection.clear();
-
-		delete combat_deck;
-		encounter_tree->CleanTree();
-		ResetBuildingBuffs();
-		ClearUpgrades();
-		Start();
-		restart = false;
+		App->card_manager->DeleteCard((*card));
 	}
+	collection.clear();
+	delete combat_deck;
+
+	encounter_tree->CleanTree();
+	ResetBuildingBuffs();
+	RecoverState();
+	CreateStage();
+	restart = false;
 
 	return true;
+}
+
+void GameManager::RecoverState()
+{
+	for each (Card* card in collection_recovery)
+	{
+		collection.push_back(App->card_manager->CopyCard(card));
+	}
+
+	combat_deck = new Deck();
+	for (int i = 0; i < 4; i++)
+	{
+		if (deck_recovery[i] != EntityType::NONE)
+		{
+			for each (Card* card in collection_recovery)
+			{
+				if(card->type == deck_recovery[i])
+				{
+					combat_deck->AddCard(card);
+				}
+			}
+		}
+	}
+	gold = gold_recovery;
+
+
+	ClearUpgrades();
+	((LeveledUpgrade*)health_upgrade)->SetLevel(health_lvl_recovery);
+	((LeveledUpgrade*)health_upgrade)->GetBuffs(stats);
+	((LeveledUpgrade*)energy_upgrade)->SetLevel(energy_lvl_recovery);
+	((LeveledUpgrade*)energy_upgrade)->GetBuffs(stats);
+}
+void GameManager::SaveState()
+{
+	//---------Clean old state-----------
+	for (std::list<Card*>::iterator card = collection_recovery.begin(); card != collection_recovery.end(); ++card)
+	{
+		App->card_manager->DeleteCard((*card));
+	}
+	collection_recovery.clear();
+
+	for (int i = 0; i < 4; i++)
+	{
+		deck_recovery[i] = EntityType::NONE;
+	}
+	//-----------------------------------
+
+
+	//Save state
+	for each (Card* card in collection)
+	{
+		collection_recovery.push_back(App->card_manager->CopyCard(card));
+	}
+	for (int i = 0; i < combat_deck->GetDeckSize(); i++)
+	{
+		deck_recovery[i] = combat_deck->cards[i]->type;
+	}
+	gold_recovery = gold;
+	health_lvl_recovery = ((LeveledUpgrade*)health_upgrade)->GetLevel();
+	energy_lvl_recovery = ((LeveledUpgrade*)energy_upgrade)->GetLevel();
 }
 
 void GameManager::ResetBuildingBuffs()
@@ -202,8 +247,8 @@ void GameManager::ClearUpgrades()
 {
 	health_upgrade->RemoveBuffs(stats);
 	energy_upgrade->RemoveBuffs(stats);
-	(((LeveledUpgrade*)infantry_upgrade)->Reset());
-	(((LeveledUpgrade*)infantry_upgrade)->Reset());
+	(((LeveledUpgrade*)health_upgrade)->Reset());
+	(((LeveledUpgrade*)energy_upgrade)->Reset());
 }
 
 void GameManager::LevelUpgrade()

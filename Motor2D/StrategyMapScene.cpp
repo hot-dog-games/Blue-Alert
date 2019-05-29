@@ -40,7 +40,8 @@ StrategyMapScene::~StrategyMapScene()
 // Called before the first frame
 bool StrategyMapScene::Start()
 {
-	App->game_manager->Restart();
+	if(App->game_manager->restart)
+		App->game_manager->Restart();
 
 	BROFILER_CATEGORY("SMStart", Profiler::Color::Red);
 
@@ -352,8 +353,8 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			str = "Cost Health: " + std::to_string(((LeveledUpgrade*)App->game_manager->health_upgrade)->GetCost());
 			core_lvl_up_health_cost->SetText(str);
 
-			str = "GOLD: " + std::to_string(App->game_manager->gold);
-			gold->SetText(str);
+			/*str = "GOLD: " + std::to_string(App->game_manager->gold);
+			gold->SetText(str);*/
 		}
 		else if (element == core_lvl_up_energy && ((int)App->game_manager->gold >= ((LeveledUpgrade*)App->game_manager->energy_upgrade)->GetCost())) {
 			App->game_manager->gold -= ((LeveledUpgrade*)App->game_manager->energy_upgrade)->GetCost();
@@ -366,8 +367,8 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			str = "Cost Energy: " + std::to_string(((LeveledUpgrade*)App->game_manager->energy_upgrade)->GetCost());
 			core_lvl_up_energy_cost->SetText(str);
 
-			str = "GOLD: " + std::to_string(App->game_manager->gold);
-			gold->SetText(str);
+			/*str = "GOLD: " + std::to_string(App->game_manager->gold);
+			gold->SetText(str);*/
 		}
 
 		// Building butttons
