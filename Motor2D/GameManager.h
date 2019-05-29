@@ -55,6 +55,8 @@ public:
 	int gold = 0;
 	std::map<std::string, Stat*> stats;
 	int stage = STAGE_TUTORIAL;
+
+	int enemy_scaling = 0;
 	
 	bool IsInPlayerDeck(Card* card);
 

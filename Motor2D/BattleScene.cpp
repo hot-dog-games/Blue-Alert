@@ -64,6 +64,8 @@ bool BattleScene::Start()
 		enemy_deck->AddCard(App->card_manager->CreateCard((EntityType)App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterDeck()[i]));
 	}
 
+	SetEnemiesUpgrades(enemy_deck);
+
 	iPoint allied_core_world = App->map->MapToWorld(51, 50);
 	iPoint enemy_core_world = App->map->MapToWorld(27, 26);
 
@@ -197,6 +199,7 @@ bool BattleScene::Update(float dt)
 			App->gui->DisableInteractable((UIElement*)unit_panel);
 			App->game_manager->GetEncounterTree()->SetCurrentNode(App->game_manager->GetEncounterTree()->GetFightingNode());
 			App->game_manager->gold += 100;
+			App->game_manager->enemy_scaling += 1;
 
 			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() != EntityType::STORE_STRATEGY_BUILDING)
 			{
@@ -232,6 +235,7 @@ bool BattleScene::Update(float dt)
 			App->gui->DisableInteractable((UIElement*)unit_panel);
 			App->game_manager->GetEncounterTree()->SetCurrentNode(App->game_manager->GetEncounterTree()->GetFightingNode());
 			App->game_manager->gold += 100;
+			App->game_manager->enemy_scaling += 1;
 
 			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() != EntityType::STORE_STRATEGY_BUILDING)
 			{
@@ -516,6 +520,20 @@ void BattleScene::UpdateGoldOnUnSelect(int unit)
 	}
 
 	store_units_purchased.remove((EntityType)unit);
+}
+
+void BattleScene::SetEnemiesUpgrades(Deck* enemy_deck)
+{
+	int aux = 0;
+	for (int i = 0; i < App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterDifficulty(); i++)
+	{
+		enemy_deck->cards[aux]->Upgrade();
+		aux++;
+		if (aux > 3)aux = 0;
+	}
+
+	if(enemy_deck->cards[1] && enemy_deck->cards[2] && enemy_deck->cards[3])
+	LOG("enemy cards level %i, %i, %i, %i", enemy_deck->cards[0]->level, enemy_deck->cards[1]->level, enemy_deck->cards[2]->level, enemy_deck->cards[3]->level);
 }
 
 void BattleScene::StartUI()
