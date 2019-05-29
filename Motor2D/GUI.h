@@ -16,6 +16,7 @@ class UIImage;
 class UIButton;
 class UISelectableButton;
 class UIButtonText;
+class UIButtonTroops;
 class UIScrollBar;
 class UIAnimatedImage;
 class UILabel;
@@ -54,6 +55,13 @@ enum SliderType {
 	MUSIC
 };
 
+enum ButtonLevel {
+	LVL_1,
+	LVL_2,
+	LVL_3,
+	LVL_4
+};
+
 // ---------------------------------------------------
 class Gui : public Module
 {
@@ -88,6 +96,7 @@ public:
 	UIButton* CreateButton(iPoint pos, SDL_Rect* sprite_rect, UIElement* parent = nullptr, bool is_interactable = true);
 	UISelectableButton* CreateSelectableButton(iPoint pos, SDL_Rect* sprite_rect, UIElement* parent = nullptr, bool is_interactable = true);
 	UIButtonText* CreateButtonText(iPoint pos, iPoint offset, SDL_Rect* sprite_rect, std::string text, SDL_Color color, int size = 20, UIElement* parent = nullptr, bool is_interactable = true);
+	UIButtonTroops* CreateButtonTroops(iPoint pos, SDL_Rect* sprite_rect, ButtonLevel lvl, UIElement* parent = nullptr, bool is_interactable = true);
 	UIScrollBar* CreateScrollBar(iPoint pos, SDL_Rect rect, SliderType type, int initial_value, int max_value, UIElement* parent = nullptr);
 	UIAnimatedImage* CreateAnimatedImage(iPoint pos, SDL_Rect * rect, int total_sprites, int speed, UIElement* parent = nullptr);
 	UIBar* CreateBar(iPoint pos, SDL_Rect rect, Stat* value, BarType type = BarType::BAR_VERTICAL, BarState state = BarState::BAR_DYNAMIC, Entity* entity= nullptr, UIElement* parent = nullptr);

@@ -14,6 +14,7 @@
 #include "UIButton.h"
 #include "UISelectableButton.h"
 #include "UIButtonText.h"
+#include "UIButtonTroops.h"
 #include "UILabel.h"
 #include "UIScrollBar.h"
 #include "UIBar.h"
@@ -223,6 +224,15 @@ UISelectableButton * Gui::CreateSelectableButton(iPoint pos, SDL_Rect * sprite_r
 UIButtonText * Gui::CreateButtonText(iPoint pos, iPoint offset, SDL_Rect * sprite_rect, std::string text, SDL_Color color, int size, UIElement* parent, bool is_interactable)
 {
 	UIButtonText* button = new UIButtonText(pos, offset, sprite_rect, text, color, size, is_interactable);
+	button->parent = parent;
+	elements.push_back(button);
+
+	return button;
+}
+
+UIButtonTroops* Gui::CreateButtonTroops(iPoint pos, SDL_Rect* sprite_rect, ButtonLevel lvl, UIElement* parent, bool is_interactable) {
+
+	UIButtonTroops* button = new UIButtonTroops(pos, sprite_rect, is_interactable, lvl);
 	button->parent = parent;
 	elements.push_back(button);
 
