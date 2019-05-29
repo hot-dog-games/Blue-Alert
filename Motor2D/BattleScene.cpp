@@ -498,6 +498,7 @@ void BattleScene::UpdateGoldOnSelect(int unit)
 	}
 
 	store_units_purchased.push_back((EntityType)unit);
+	if (store_units_purchased.size() > 0)purchase->SetText("PURCHASE");
 }
 
 void BattleScene::UpdateGoldOnUnSelect(int unit)
@@ -520,6 +521,8 @@ void BattleScene::UpdateGoldOnUnSelect(int unit)
 	}
 
 	store_units_purchased.remove((EntityType)unit);
+
+	if (store_units_purchased.size() == 0)purchase->SetText("CONTINUE");
 }
 
 void BattleScene::SetEnemiesUpgrades(Deck* enemy_deck)
@@ -646,7 +649,7 @@ void BattleScene::StartUI()
 		current_gold = App->gui->CreateLabel({ 30,450 }, "fonts/red_alert.ttf", 40, "Your gold: " + std::to_string(App->game_manager->gold), { 255,232,2, 255 }, 710, store_panel);
 		total_cost = App->gui->CreateLabel({ 500,450 }, "fonts/red_alert.ttf", 40, "Total cost: " + std::to_string(total_cost_acumulated), { 255,232,2, 255 }, 710, store_panel);
 
-		purchase = App->gui->CreateButtonText({ 263, 505 }, { 20, 0 }, purchase_rect, "PURCHASE", { 255,232,2, 255 }, 20, store_panel);
+		purchase = App->gui->CreateButtonText({ 263, 505 }, { 20, 0 }, purchase_rect, "CONTINUE", { 255,232,2, 255 }, 20, store_panel);
 
 		App->gui->DisableElement((UIElement*)store_panel);
 	}
