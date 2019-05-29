@@ -54,6 +54,8 @@ private:
 	void UpdateGoldOnSelect(int unit);
 	void UpdateGoldOnUnSelect(int unit);
 
+	void SetEnemiesUpgrades(Deck* enemy_deck);
+
 	void StartUI();
 
 private:
@@ -150,6 +152,9 @@ private:
 
 	Core* allied_core = nullptr;
 	Core* enemy_core = nullptr;
+
+	UIImage* energy_cost[4];
+	UILabel* energy_cost_label[4];
 };
 
 #endif

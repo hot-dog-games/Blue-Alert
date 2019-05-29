@@ -39,6 +39,11 @@ void UIButtonText::SetTextColor(SDL_Color color)
 	button_label->color = color;
 }
 
+void UIButtonText::SetText(std::string text)
+{
+	button_label->SetText(text);
+}
+
 bool UIButtonText::CleanUp()
 {
 	delete[] anim;

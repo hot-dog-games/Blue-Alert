@@ -86,6 +86,9 @@ void GameManager::CreatePlayerDeck()
 	{
 		combat_deck = new Deck();
 		AddCardToCollection(EntityType::CONSCRIPT);
+		AddCardToCollection(EntityType::SNIPER);
+		AddCardToCollection(EntityType::MIG);
+		AddCardToCollection(EntityType::RHINO);
 	}
 	else if (stage == STAGE_01)
 	{
@@ -360,7 +363,7 @@ void GameManager::ShowPopUp(int popup)
 	{
 	case POPUP_BUILDING_NODES: 
 		App->gui->CreatePopUp({ (int)screen_width / 2, (int)screen_height / 3, 300, 90 }, { 10 , 10 }, 
-			"This is an enemy building, you must click on it to begin a fight! Click the button down below to continue", 20, {255,255,255,255});
+			"This is an enemy building, you must click on it to begin a fight! Click the button down below to continue.", 20, {255,255,255,255});
 		break;
 	case POPUP_USETROOP: 
 		App->gui->CreatePopUp({ ((int)screen_width / 2) - 200, (int)screen_height / 3, 300, 120 }, { 10 , 10 }, 

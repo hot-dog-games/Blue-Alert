@@ -31,6 +31,16 @@ void EncounterNode::SetEncounterType(int type)
 	encounter->type = type;
 }
 
+int EncounterNode::GetEncounterDifficulty()
+{
+	return encounter->difficulty;
+}
+
+void EncounterNode::SetEncounterDifficulty(int diff)
+{
+	encounter->difficulty = diff;
+}
+
 std::vector<int> EncounterNode::GetEncounterDeck()
 {
 	return encounter->deck;
