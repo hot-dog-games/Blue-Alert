@@ -12,10 +12,10 @@ class StrategyBuilding;
 class BuffSource;
 class Core;
 class Stat;
-
 enum EntityType;
 
 enum stage {
+	STAGE_NONE = -1,
 	STAGE_TUTORIAL,
 	STAGE_01
 };
@@ -34,6 +34,24 @@ enum tutorial_popup {
 	POPUP_TROOPS_MENU,
 	POPUP_BUILDINGS_MENU,
 	POPUP_MAX
+};
+
+struct CardState {
+	int lvl = 0;
+	EntityType type;
+};
+
+struct GameState
+{
+	stage stage = STAGE_NONE;
+	int node = 0;
+	std::list<int> captured_nodes;
+
+	EntityType deck_state[4];
+	std::list<CardState> collection_state;
+	int health_lvl = 0;
+	int energy_lvl = 0;
+	int gold = 0;
 };
 
 class GameManager : public Module
@@ -78,7 +96,7 @@ public:
 	bool restart = false;
 	void ClearUpgrades();
 	BuffSource* GetUpgrade(EntityType unit_type);
-	void SaveState();
+	void SaveRecoveryState();
 
 	void UpgradeHealth();
 	void UpgradeEnergy();
@@ -94,24 +112,20 @@ public:
 	bool popups[POPUP_MAX];
 
 private:
-	void RecoverState();
+	void RecoverState(GameState state);
+	void SaveState(GameState &state);
 
 private:
 	Deck* combat_deck = nullptr;
 	std::list<Card*> collection;
-
-	//Recovery state
-	EntityType deck_recovery[4];
-	std::list<Card*> collection_recovery;
-	int health_lvl_recovery = 0;
-	int energy_lvl_recovery = 0;
-	int gold_recovery = 0;
 
 public:
 	//Not good like this but w/e
 	BuffSource* infantry_upgrade = nullptr;
 	BuffSource* land_upgrade = nullptr;
 	BuffSource* aerial_upgrade = nullptr;
+
+	GameState recovery_state;
 
 private:
 

@@ -42,7 +42,7 @@ bool GameManager::Start()
 	CreatePlayerDeck();
 	CreateCoreStats();
 
-	SaveState();
+	SaveState(recovery_state);
 
 	return true;
 }
@@ -105,71 +105,88 @@ bool GameManager::Restart()
 
 	encounter_tree->CleanTree();
 	ResetBuildingBuffs();
-	RecoverState();
+	RecoverState(recovery_state);
 	CreateStage();
 	restart = false;
 
 	return true;
 }
 
-void GameManager::RecoverState()
+void GameManager::RecoverState(GameState state)
 {
-	for each (Card* card in collection_recovery)
+	for each (CardState card in state.collection_state)
 	{
-		collection.push_back(App->card_manager->CopyCard(card));
+		collection.push_back(App->card_manager->CreateCard(card.type, card.lvl));
 	}
 
 	combat_deck = new Deck();
 	for (int i = 0; i < 4; i++)
 	{
-		if (deck_recovery[i] != EntityType::NONE)
+		if (state.deck_state[i] != EntityType::NONE)
 		{
-			for each (Card* card in collection_recovery)
+			for each (Card* card in collection)
 			{
-				if(card->type == deck_recovery[i])
+				if(card->type == state.deck_state[i])
 				{
 					combat_deck->AddCard(card);
 				}
 			}
 		}
 	}
-	gold = gold_recovery;
+	for (std::list<int>::iterator node = state.captured_nodes.begin(); node != state.captured_nodes.end(); ++node)
+	{
+		encounter_tree->GetNodeById(*node)->visited = true;
+	}
+	encounter_tree->SetCurrentNode(encounter_tree->GetNodeById(state.node));
 
+	gold = state.gold;
 
 	ClearUpgrades();
-	((LeveledUpgrade*)health_upgrade)->SetLevel(health_lvl_recovery);
+	((LeveledUpgrade*)health_upgrade)->SetLevel(state.health_lvl);
 	((LeveledUpgrade*)health_upgrade)->GetBuffs(stats);
-	((LeveledUpgrade*)energy_upgrade)->SetLevel(energy_lvl_recovery);
+	((LeveledUpgrade*)energy_upgrade)->SetLevel(state.energy_lvl);
 	((LeveledUpgrade*)energy_upgrade)->GetBuffs(stats);
 }
-void GameManager::SaveState()
+
+void GameManager::SaveRecoveryState()
+{
+	SaveState(recovery_state);
+}
+void GameManager::SaveState(GameState &state)
 {
 	//---------Clean old state-----------
-	for (std::list<Card*>::iterator card = collection_recovery.begin(); card != collection_recovery.end(); ++card)
-	{
-		App->card_manager->DeleteCard((*card));
-	}
-	collection_recovery.clear();
+	state.collection_state.clear();
+	state.captured_nodes.clear();
 
 	for (int i = 0; i < 4; i++)
 	{
-		deck_recovery[i] = EntityType::NONE;
+		state.deck_state[i] = EntityType::NONE;
 	}
 	//-----------------------------------
-
 
 	//Save state
 	for each (Card* card in collection)
 	{
-		collection_recovery.push_back(App->card_manager->CopyCard(card));
+		CardState c_state;
+		c_state.lvl = card->level;
+		c_state.type = card->type;
+		state.collection_state.push_back(c_state);
 	}
 	for (int i = 0; i < combat_deck->GetDeckSize(); i++)
 	{
-		deck_recovery[i] = combat_deck->cards[i]->type;
+		state.deck_state[i] = combat_deck->cards[i]->type;
 	}
-	gold_recovery = gold;
-	health_lvl_recovery = ((LeveledUpgrade*)health_upgrade)->GetLevel();
-	energy_lvl_recovery = ((LeveledUpgrade*)energy_upgrade)->GetLevel();
+	std::vector<EncounterNode*> nodes = encounter_tree->GetNodes();
+	for each (EncounterNode* node in nodes)
+	{
+		if (node->visited)
+			state.captured_nodes.push_back(node->GetID());
+	}
+
+	state.node = encounter_tree->GetCurrentNode()->GetID();
+	state.gold = gold;
+	state.health_lvl = ((LeveledUpgrade*)health_upgrade)->GetLevel();
+	state.energy_lvl = ((LeveledUpgrade*)energy_upgrade)->GetLevel();
 }
 
 void GameManager::ResetBuildingBuffs()

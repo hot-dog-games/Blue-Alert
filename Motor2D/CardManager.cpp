@@ -61,7 +61,7 @@ bool CardManager::Start()
 	return true;
 }
 
-Card* CardManager::CreateCard(EntityType type)
+Card* CardManager::CreateCard(EntityType type, int lvl)
 {
 	Card* card = new Card;
 	card->type = type;
@@ -77,6 +77,15 @@ Card* CardManager::CreateCard(EntityType type)
 	LoadCardStats(card, card_node.child("stats"));
 	LoadCardUpgrades(card, card_node.child("upgrades"));
 	LoadCardCombat(card, card_node.child("combat"));
+
+	if (lvl > 0)
+	{
+		for (int i = 0; i < card->level; ++i)
+		{
+			card->Upgrade();
+		}
+	}
+
 	cards.push_back(card);
 
 	return card;
@@ -88,17 +97,6 @@ Card* CardManager::DeleteCard(Card* card)
 	to_delete = true;
 
 	return nullptr;
-}
-
-Card * CardManager::CopyCard(Card * card)
-{
-	Card* new_card = CreateCard(card->type);
-	for (int i = 0; i < card->level; ++i)
-	{
-		new_card->Upgrade();
-	}
-
-	return new_card;
 }
 
 void CardManager::LoadCardStats(Card* card, pugi::xml_node stats_node)
