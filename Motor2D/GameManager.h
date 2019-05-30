@@ -68,7 +68,7 @@ public:
 
 	EncounterTree* GetEncounterTree();
 	Deck* GetPlayerDeck();
-	void LevelUpgrade();
+	void LevelUpgrade(EntityType);
 
 	int gold = 0;
 	std::map<std::string, Stat*> stats;
@@ -113,7 +113,9 @@ public:
 
 private:
 	void RecoverState(GameState state);
-	void SaveState(GameState &state);
+	void SaveState(GameState &state) const;
+	void StateToXML(GameState &state, pugi::xml_node&) const;
+	void XMLToState(GameState &state, pugi::xml_node&);
 
 private:
 	Deck* combat_deck = nullptr;
@@ -125,8 +127,8 @@ public:
 	BuffSource* land_upgrade = nullptr;
 	BuffSource* aerial_upgrade = nullptr;
 
-	GameState recovery_state;
-	GameState save_state;
+	mutable GameState recovery_state;
+	mutable GameState save_state;
 private:
 
 	EncounterTree* encounter_tree = nullptr;

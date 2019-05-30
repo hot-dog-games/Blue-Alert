@@ -14,6 +14,7 @@
 #include "Window.h"
 #include "Input.h"
 #include "Render.h"
+#include "SceneManager.h"
 
 #include "GameManager.h"
 
@@ -58,46 +59,31 @@ bool GameManager::CleanUp()
 
 bool GameManager::Load(pugi::xml_node &save_file)
 {
+	XMLToState(save_state, save_file.child("save_state"));
+	XMLToState(recovery_state, save_file.child("recovery_state"));
 
+	for (std::list<Card*>::iterator card = collection.begin(); card != collection.end(); ++card)
+	{
+		App->card_manager->DeleteCard((*card));
+	}
+	collection.clear();
+	delete combat_deck;
 
+	encounter_tree->CleanTree();
+	ResetBuildingBuffs();
+	RecoverState(save_state);
+	App->scene_manager->ChangeScene(SceneType::MAP);
 
 	return true;
 }
 
 bool GameManager::Save(pugi::xml_node &save_file) const
 {
-	pugi::xml_node save_state = save_file.append_child("game_state");
-	save_state.append_child("stage").append_attribute("value").set_value(stage);
-	save_state.append_child("node").append_attribute("value").set_value(encounter_tree->GetCurrentNode()->GetID());
-
-	pugi::xml_node captured_nodes = save_state.append_child("captured_nodes");
-	std::vector<EncounterNode*> nodes = encounter_tree->GetNodes();
-	for each (EncounterNode* node in nodes)
-	{
-		if (node->visited)
-			captured_nodes.append_child("node").append_attribute("id").set_value(node->GetID());
-	}
-
-	pugi::xml_node collection_node = save_state.append_child("collection");
-	for each (Card* card in collection)
-	{
-		CardState c_state;
-		c_state.lvl = card->level;
-		c_state.type = card->type;
-		pugi::xml_node card_node = collection_node.append_child("card");
-		card_node.append_attribute("lvl").set_value(c_state.lvl);
-		card_node.append_attribute("type").set_value((int)c_state.type);
-	}
-
-	pugi::xml_node deck_node = save_state.append_child("deck");
-	for (int i = 0; i < combat_deck->GetDeckSize(); i++)
-	{
-		deck_node.append_child("card").append_attribute("type").set_value((int)combat_deck->cards[i]->type);
-	}
-
-	save_state.append_child("gold").append_attribute("value").set_value(gold);
-	save_state.append_child("health_lvl").append_attribute("value").set_value(((LeveledUpgrade*)health_upgrade)->GetLevel());
-	save_state.append_child("energy_lvl").append_attribute("value").set_value(((LeveledUpgrade*)energy_upgrade)->GetLevel());
+	SaveState(save_state);
+	pugi::xml_node save_state_node = save_file.append_child("save_state");
+	StateToXML(save_state, save_state_node);
+	pugi::xml_node recovery_state_node = save_file.append_child("recovery_state");
+	StateToXML(recovery_state, recovery_state_node);
 
 	return true;
 }
@@ -107,7 +93,7 @@ EncounterTree* GameManager::GetEncounterTree()
 	return encounter_tree;
 }
 
-Deck * GameManager::GetPlayerDeck()
+Deck* GameManager::GetPlayerDeck()
 {
 	return combat_deck;
 }
@@ -152,6 +138,7 @@ bool GameManager::Restart()
 	encounter_tree->CleanTree();
 	ResetBuildingBuffs();
 	RecoverState(recovery_state);
+	App->SaveGame(nullptr);
 
 	restart = false;
 
@@ -185,6 +172,7 @@ void GameManager::RecoverState(GameState state)
 	for (std::list<int>::iterator node = state.captured_nodes.begin(); node != state.captured_nodes.end(); ++node)
 	{
 		encounter_tree->GetNodeById(*node)->visited = true;
+		LevelUpgrade((EntityType)encounter_tree->GetNodeById(*node)->GetEncounterType());
 	}
 	encounter_tree->SetCurrentNode(encounter_tree->GetNodeById(state.node));
 
@@ -201,7 +189,7 @@ void GameManager::SaveRecoveryState()
 {
 	SaveState(recovery_state);
 }
-void GameManager::SaveState(GameState &state)
+void GameManager::SaveState(GameState &state) const
 {
 	//---------Clean old state-----------
 	state.collection_state.clear();
@@ -228,7 +216,7 @@ void GameManager::SaveState(GameState &state)
 	std::vector<EncounterNode*> nodes = encounter_tree->GetNodes();
 	for each (EncounterNode* node in nodes)
 	{
-		if (node->visited)
+		if (node->visited && node->GetID() != 0)
 			state.captured_nodes.push_back(node->GetID());
 	}
 
@@ -237,6 +225,69 @@ void GameManager::SaveState(GameState &state)
 	state.gold = gold;
 	state.health_lvl = ((LeveledUpgrade*)health_upgrade)->GetLevel();
 	state.energy_lvl = ((LeveledUpgrade*)energy_upgrade)->GetLevel();
+}
+
+void GameManager::StateToXML(GameState& state, pugi::xml_node &save_file) const
+{
+	save_file.append_child("stage").append_attribute("value").set_value(state.stage);
+	save_file.append_child("node").append_attribute("value").set_value(state.node);
+
+	pugi::xml_node captured_nodes = save_file.append_child("captured_nodes");
+	for each (int node in state.captured_nodes)
+	{
+		captured_nodes.append_child("node").append_attribute("id").set_value(node);
+	}
+
+	pugi::xml_node collection_node = save_file.append_child("collection");
+	for each (CardState card in state.collection_state)
+	{
+		pugi::xml_node card_node = collection_node.append_child("card");
+		card_node.append_attribute("lvl").set_value(card.lvl);
+		card_node.append_attribute("type").set_value((int)card.type);
+	}
+
+	pugi::xml_node deck_node = save_file.append_child("deck");
+	for (int i = 0; i < 4; i++)
+	{
+		deck_node.append_child("card").append_attribute("type").set_value((int)state.deck_state[i]);
+	}
+
+	save_file.append_child("gold").append_attribute("value").set_value(state.gold);
+	save_file.append_child("health_lvl").append_attribute("value").set_value(state.health_lvl);
+	save_file.append_child("energy_lvl").append_attribute("value").set_value(state.energy_lvl);
+}
+
+void GameManager::XMLToState(GameState & state, pugi::xml_node &save_file)
+{
+	state.stage = save_file.child("stage").attribute("value").as_int();
+	state.node = save_file.child("node").attribute("value").as_int();
+
+	pugi::xml_node captured_nodes = save_file.child("captured_nodes");
+	for (pugi::xml_node iter = captured_nodes.child("node"); iter; iter = iter.next_sibling("node"))
+	{
+		state.captured_nodes.push_back(iter.attribute("id").as_int());
+	}
+
+	pugi::xml_node collection_node = save_file.child("collection");
+	for (pugi::xml_node iter = collection_node.child("card"); iter; iter = iter.next_sibling("card"))
+	{
+		CardState c_state;
+		c_state.lvl = iter.attribute("lvl").as_int();
+		c_state.type = (EntityType)iter.attribute("type").as_int();
+		state.collection_state.push_back(c_state);
+	}
+
+	pugi::xml_node deck_node = save_file.child("deck");
+	int it = 0;
+	for (pugi::xml_node iter = deck_node.child("card"); iter; iter = iter.next_sibling("card"))
+	{
+		state.deck_state[it] = (EntityType)iter.attribute("type").as_int();
+		it++;
+	}
+
+	state.gold = save_file.child("gold").attribute("value").as_int();
+	state.health_lvl = save_file.child("health_lvl").attribute("value").as_int();
+	state.energy_lvl = save_file.child("energy_lvl").attribute("value").as_int();
 }
 
 void GameManager::ResetBuildingBuffs()
@@ -318,9 +369,8 @@ void GameManager::ClearUpgrades()
 	(((LeveledUpgrade*)energy_upgrade)->Reset());
 }
 
-void GameManager::LevelUpgrade()
+void GameManager::LevelUpgrade(EntityType building_type)
 {
-	EntityType building_type = (EntityType)encounter_tree->GetFightingNode()->GetEncounterType();
 	switch (building_type)
 	{
 	case INFANTRY_STRATEGY_BUILDING:

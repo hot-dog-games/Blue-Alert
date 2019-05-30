@@ -42,7 +42,6 @@ bool StrategyMapScene::Start()
 {
 	if(App->game_manager->restart)
 		App->game_manager->Restart();
-	App->SaveGame(nullptr);
 
 	BROFILER_CATEGORY("SMStart", Profiler::Color::Red);
 
@@ -123,6 +122,9 @@ bool StrategyMapScene::PreUpdate()
 // Called each loop iteration
 bool StrategyMapScene::Update(float dt)
 {	
+	if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
+		App->LoadGame(nullptr);
+
 	if (!App->game_manager->popups[POPUP_DECISIONMAKING])
 	{
 		if (App->game_manager->GetEncounterTree()->GetCurrentNode()->GetChildren().size() > 1)

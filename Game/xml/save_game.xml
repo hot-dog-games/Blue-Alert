@@ -6,25 +6,48 @@
 	<audio />
 	<map />
 	<game_manager>
-		<game_state>
-			<stage value="0" />
-			<node value="1" />
-			<captured_nodes>
-				<node id="0" />
-				<node id="1" />
-			</captured_nodes>
+		<save_state>
+			<stage value="1" />
+			<node value="0" />
+			<captured_nodes />
 			<collection>
 				<card lvl="0" type="2" />
-				<card lvl="0" type="4" />
+				<card lvl="0" type="2" />
+				<card lvl="0" type="8" />
+				<card lvl="0" type="6" />
+				<card lvl="0" type="1" />
 			</collection>
 			<deck>
 				<card type="2" />
-				<card type="4" />
+				<card type="2" />
+				<card type="8" />
+				<card type="6" />
 			</deck>
-			<gold value="100" />
+			<gold value="200" />
 			<health_lvl value="0" />
 			<energy_lvl value="0" />
-		</game_state>
+		</save_state>
+		<recovery_state>
+			<stage value="1" />
+			<node value="0" />
+			<captured_nodes />
+			<collection>
+				<card lvl="0" type="2" />
+				<card lvl="0" type="2" />
+				<card lvl="0" type="8" />
+				<card lvl="0" type="6" />
+				<card lvl="0" type="1" />
+			</collection>
+			<deck>
+				<card type="2" />
+				<card type="8" />
+				<card type="6" />
+				<card type="1" />
+			</deck>
+			<gold value="200" />
+			<health_lvl value="0" />
+			<energy_lvl value="0" />
+		</recovery_state>
 	</game_manager>
 	<scene_manager />
 	<card_manager />
@@ -36,6 +59,6 @@
 	<transition_manager />
 	<buff_manager />
 	<renderer>
-		<camera x="290" y="-948" />
+		<camera x="770" y="-1325" />
 	</renderer>
 </game_state>
