@@ -61,6 +61,8 @@ public:
 	UIButton* GetButton();
 	StrategyBuilding* GetEntity();
 
+	int GetID();
+
 	//-----Emcounter Accessors-----
 	int GetEncounterType() const;
 	void SetEncounterType(int type);

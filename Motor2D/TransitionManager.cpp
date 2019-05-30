@@ -9,7 +9,7 @@
 
 TransitionManager::TransitionManager()
 {
-
+	name = "transition_manager";
 }
 
 

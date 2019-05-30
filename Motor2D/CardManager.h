@@ -64,9 +64,8 @@ public:
 	bool Load(pugi::xml_node&) { return true; }
 	bool Save(pugi::xml_node&) const { return true; }
 
-	Card* CreateCard(EntityType type);
+	Card* CreateCard(EntityType type, int lvl = 0);
 	Card* DeleteCard(Card* card);
-	Card* CopyCard(Card* card);
 
 private:
 	void LoadCardStats(Card* card, pugi::xml_node stats_node);

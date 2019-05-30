@@ -133,8 +133,8 @@ private:
 
 	mutable bool		want_to_save;
 	bool				want_to_load;
-	std::string			load_game;
-	mutable std::string	save_game;
+	std::string			load_game = "xml/save_game.xml";
+	mutable std::string	save_game = "xml/save_game.xml";
 };
 
 extern j1App* App;
