@@ -43,7 +43,7 @@ struct CardState {
 
 struct GameState
 {
-	stage stage = STAGE_NONE;
+	int stage = -1;
 	int node = 0;
 	std::list<int> captured_nodes;
 
@@ -63,8 +63,8 @@ public:
 	bool Awake(pugi::xml_node&);
 	bool Start();
 	bool CleanUp();
-	bool Load(pugi::xml_node&) { return true; }
-	bool Save(pugi::xml_node&) const { return true; }
+	bool Load(pugi::xml_node&);
+	bool Save(pugi::xml_node&) const;
 
 	EncounterTree* GetEncounterTree();
 	Deck* GetPlayerDeck();
@@ -126,7 +126,7 @@ public:
 	BuffSource* aerial_upgrade = nullptr;
 
 	GameState recovery_state;
-
+	GameState save_state;
 private:
 
 	EncounterTree* encounter_tree = nullptr;

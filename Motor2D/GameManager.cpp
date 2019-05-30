@@ -21,7 +21,7 @@
 
 GameManager::GameManager()
 {
-
+	name = "game_manager";
 }
 
 
@@ -52,6 +52,52 @@ bool GameManager::CleanUp()
 	delete combat_deck;
 	collection.clear();
 	encounter_tree->CleanTree();
+
+	return true;
+}
+
+bool GameManager::Load(pugi::xml_node &save_file)
+{
+
+
+
+	return true;
+}
+
+bool GameManager::Save(pugi::xml_node &save_file) const
+{
+	pugi::xml_node save_state = save_file.append_child("game_state");
+	save_state.append_child("stage").append_attribute("value").set_value(stage);
+	save_state.append_child("node").append_attribute("value").set_value(encounter_tree->GetCurrentNode()->GetID());
+
+	pugi::xml_node captured_nodes = save_state.append_child("captured_nodes");
+	std::vector<EncounterNode*> nodes = encounter_tree->GetNodes();
+	for each (EncounterNode* node in nodes)
+	{
+		if (node->visited)
+			captured_nodes.append_child("node").append_attribute("id").set_value(node->GetID());
+	}
+
+	pugi::xml_node collection_node = save_state.append_child("collection");
+	for each (Card* card in collection)
+	{
+		CardState c_state;
+		c_state.lvl = card->level;
+		c_state.type = card->type;
+		pugi::xml_node card_node = collection_node.append_child("card");
+		card_node.append_attribute("lvl").set_value(c_state.lvl);
+		card_node.append_attribute("type").set_value((int)c_state.type);
+	}
+
+	pugi::xml_node deck_node = save_state.append_child("deck");
+	for (int i = 0; i < combat_deck->GetDeckSize(); i++)
+	{
+		deck_node.append_child("card").append_attribute("type").set_value((int)combat_deck->cards[i]->type);
+	}
+
+	save_state.append_child("gold").append_attribute("value").set_value(gold);
+	save_state.append_child("health_lvl").append_attribute("value").set_value(((LeveledUpgrade*)health_upgrade)->GetLevel());
+	save_state.append_child("energy_lvl").append_attribute("value").set_value(((LeveledUpgrade*)energy_upgrade)->GetLevel());
 
 	return true;
 }
@@ -106,7 +152,7 @@ bool GameManager::Restart()
 	encounter_tree->CleanTree();
 	ResetBuildingBuffs();
 	RecoverState(recovery_state);
-	CreateStage();
+
 	restart = false;
 
 	return true;
@@ -133,6 +179,9 @@ void GameManager::RecoverState(GameState state)
 			}
 		}
 	}
+
+	stage = state.stage;
+	CreateStage();
 	for (std::list<int>::iterator node = state.captured_nodes.begin(); node != state.captured_nodes.end(); ++node)
 	{
 		encounter_tree->GetNodeById(*node)->visited = true;
@@ -183,6 +232,7 @@ void GameManager::SaveState(GameState &state)
 			state.captured_nodes.push_back(node->GetID());
 	}
 
+	state.stage = stage;
 	state.node = encounter_tree->GetCurrentNode()->GetID();
 	state.gold = gold;
 	state.health_lvl = ((LeveledUpgrade*)health_upgrade)->GetLevel();
