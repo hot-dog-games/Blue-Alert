@@ -538,7 +538,7 @@
   <ui_image>
     <Land>
       <end_screen x="250" y="1652" width="245" height="193"/>
-      <building x="251" y="1659" width="236" height="184"/>
+      <building x="269" y="1677" width="204" height="159"/>
     </Land>
     <Infantry>
       <end_screen x="15" y="1520" width="214" height="173"/>
@@ -546,7 +546,7 @@
     </Infantry>
     <Aerial>
       <end_screen x="12" y="1691" width="236" height="148"/>
-      <building x="14" y="1694" width="230" height="141"/>
+      <building x="33" y="1711" width="187" height="114"/>
     </Aerial>
     <Gold>
       <end_screen x="1785" y="131" width="236" height="209"/>

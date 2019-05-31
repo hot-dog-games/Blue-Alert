@@ -583,54 +583,54 @@ void StrategyMapScene::InitializeUI()
 	//Building Menu
 
 	buildings_background = App->gui->CreateImage({ 8, 20 }, { 3336,6,662,912 }, main_panel);
-	building_title = App->gui->CreateLabel({ 610, 70 }, "fonts/button_text.ttf", 22, "Aerial Building:", { 242, 222, 70, 255 }, 600, buildings_background);
+	building_title = App->gui->CreateLabel({ 260, 360 }, "fonts/button_text.ttf", 22, "Infantry Building:", { 242, 222, 70, 255 }, 600, buildings_background);
 
-	buildings_title[0] = App->gui->CreateLabel({ 343,385 }, "fonts/button_text.ttf", 22, "Infantry", { 0,0,0,0 }, 300, buildings_background);
-	buildings_title[1] = App->gui->CreateLabel({ 605,385 }, "fonts/button_text.ttf", 22, "Land", { 0,0,0,0 }, 300, buildings_background);
-	buildings_title[2] = App->gui->CreateLabel({ 812,385 }, "fonts/button_text.ttf", 22, "Aerial", { 0,0,0,0 }, 300, buildings_background);
+	buildings_title[0] = App->gui->CreateLabel({ 30,635 }, "fonts/button_text.ttf", 20, "Infantry", { 0,0,0,0 }, 300, buildings_background);
+	buildings_title[1] = App->gui->CreateLabel({ 270,635 }, "fonts/button_text.ttf", 20, "Land", { 0,0,0,0 }, 300, buildings_background);
+	buildings_title[2] = App->gui->CreateLabel({ 460,635 }, "fonts/button_text.ttf", 20, "Aerial", { 0,0,0,0 }, 300, buildings_background);
 
 	//Infantry
 	str = "The infantry building is the place where the soldiers rest and prepare for battle.\n\nConquered: " + std::to_string(((LeveledUpgrade*)App->game_manager->infantry_upgrade)->GetLevel())
 		+ "\nDamage increase: " + std::to_string(((LeveledUpgrade*)App->game_manager->infantry_upgrade)->GetBuffValue("damage")) + "\nHealth increase: " + std::to_string(((LeveledUpgrade*)App->game_manager->infantry_upgrade)->GetBuffValue("health"));
 
-	building_infantry_button = App->gui->CreateSelectableButton({ 355, 435 }, App->gui->LoadUIButton(30, "button"), buildings_background);
-	building_infantry_image = App->gui->CreateImage({ 365,125 }, App->gui->LoadUIImage(30, "building"), buildings_background);
-	building_infantry_info = App->gui->CreateLabel({ 245,-30 }, "fonts/red_alert.ttf", 23, str, { 231,216,145,255 }, 300, building_infantry_image);
+	building_infantry_button = App->gui->CreateSelectableButton({ 30, 675 }, App->gui->LoadUIButton(30, "button"), buildings_background);
+	building_infantry_image = App->gui->CreateImage({ 26,395 }, App->gui->LoadUIImage(30, "building"), buildings_background);
+	building_infantry_info = App->gui->CreateLabel({ 235,-5 }, "fonts/red_alert.ttf", 23, str, { 231,216,145,255 }, 350, building_infantry_image);
 
 	//Aerial
 	str = "The aerial building is where the helicopters and planes are parked.\n\nConquered: " + std::to_string(((LeveledUpgrade*)App->game_manager->aerial_upgrade)->GetLevel())
 		+ "\nDamage increase: " + std::to_string(((LeveledUpgrade*)App->game_manager->aerial_upgrade)->GetBuffValue("damage")) + "\nHealth increase: " + std::to_string(((LeveledUpgrade*)App->game_manager->aerial_upgrade)->GetBuffValue("health"));
-	building_aerial_button = App->gui->CreateSelectableButton({ 783,445 }, App->gui->LoadUIButton(31, "button"), buildings_background);
-	building_aerial_image = App->gui->CreateImage({ 350,145 }, App->gui->LoadUIImage(31, "building"), buildings_background);
-	building_aerial_info = App->gui->CreateLabel({ 260, -50 }, "fonts/red_alert.ttf", 23, str, { 231,216,145,255 }, 300, building_aerial_image);
+	building_aerial_button = App->gui->CreateSelectableButton({ 428,685 }, App->gui->LoadUIButton(31, "button"), buildings_background);
+	building_aerial_image = App->gui->CreateImage({ 30,425 }, App->gui->LoadUIImage(31, "building"), buildings_background);
+	building_aerial_info = App->gui->CreateLabel({ 230, -35 }, "fonts/red_alert.ttf", 23, str, { 231,216,145,255 }, 300, building_aerial_image);
 
 	//Land
 	str = "The land building is where the tanks are waiting for the battle.\n\nConquered: " + std::to_string(((LeveledUpgrade*)App->game_manager->land_upgrade)->GetLevel())
 		+ "\nDamage increase: " + std::to_string(((LeveledUpgrade*)App->game_manager->land_upgrade)->GetBuffValue("damage")) + "\nHealth increase: " + std::to_string(((LeveledUpgrade*)App->game_manager->land_upgrade)->GetBuffValue("health"));
-	building_land_button = App->gui->CreateSelectableButton({ 560,430 } , App->gui->LoadUIButton(32, "button"), buildings_background);
-	building_land_image = App->gui->CreateImage({ 345,115 } , App->gui->LoadUIImage(32, "building"), buildings_background);
-	building_land_info = App->gui->CreateLabel({ 265,-20 } , "fonts/red_alert.ttf", 23, str, { 231,216,145,255 }, 300, building_land_image);
+	building_land_button = App->gui->CreateSelectableButton({ 225,670 } , App->gui->LoadUIButton(32, "button"), buildings_background);
+	building_land_image = App->gui->CreateImage({ 26,395 } , App->gui->LoadUIImage(32, "building"), buildings_background);
+	building_land_info = App->gui->CreateLabel({ 235,-5 } , "fonts/red_alert.ttf", 23, str, { 231,216,145,255 }, 300, building_land_image);
 
 	//Core
-	core_image = App->gui->CreateImage({ 70, 80 }, { 1538,23,173,114 }, buildings_background);
+	core_image = App->gui->CreateImage({ 40, 130 }, { 1538,23,173,114 }, buildings_background);
 
-	core_title = App->gui->CreateLabel({ 27, 290 }, "fonts/button_text.ttf", 30, "CORE", { 242, 222, 70, 255 }, 200, buildings_background);
-	core_info = App->gui->CreateLabel({ 27, 330 }, "fonts/red_alert.ttf", 23, "The core travels around the map destroying all the enemies bases.", { 231,216,145,255 }, 250, buildings_background);
+	core_title = App->gui->CreateLabel({ 20, 15 }, "fonts/button_text.ttf", 43, "CORE", { 242, 222, 70, 255 }, 200, buildings_background);
+	core_info = App->gui->CreateLabel({ 260, 72 }, "fonts/red_alert.ttf", 23, "The core travels around the map destroying all the enemies bases.", { 231,216,145,255 }, 400, buildings_background);
 
 	str = "Health: " + std::to_string((int)App->game_manager->stats.find("health")->second->GetValue());
-	core_health = App->gui->CreateLabel({ 27, 410 }, "fonts/red_alert.ttf", 30, str, { 231,216,145,255 }, 300, buildings_background);
+	core_health = App->gui->CreateLabel({ 260, 130 }, "fonts/red_alert.ttf", 30, str, { 231,216,145,255 }, 300, buildings_background);
 
 	str = "Energy: " + std::to_string((int)App->game_manager->stats.find("energy")->second->GetValue());
-	core_energy = App->gui->CreateLabel({ 27,440 }, "fonts/red_alert.ttf", 30, str, { 231,216,145,255 }, 300, buildings_background);
+	core_energy = App->gui->CreateLabel({ 260,160 }, "fonts/red_alert.ttf", 30, str, { 231,216,145,255 }, 300, buildings_background);
 
 	str = "Cost Health: " + std::to_string(((LeveledUpgrade*)App->game_manager->health_upgrade)->GetCost());
-	core_lvl_up_health_cost = App->gui->CreateLabel({ 20,500 }, "fonts/red_alert.ttf", 21, str, { 231,216,145,255 }, 300, buildings_background);
+	core_lvl_up_health_cost = App->gui->CreateLabel({ 270,210 }, "fonts/red_alert.ttf", 21, str, { 231,216,145,255 }, 300, buildings_background);
 
 	str = "Cost Energy: " + std::to_string(((LeveledUpgrade*)App->game_manager->energy_upgrade)->GetCost());
-	core_lvl_up_energy_cost = App->gui->CreateLabel({ 159,500 }, "fonts/red_alert.ttf", 21, str, { 231,216,145,255 }, 300, buildings_background);
+	core_lvl_up_energy_cost = App->gui->CreateLabel({ 440,210 }, "fonts/red_alert.ttf", 21, str, { 231,216,145,255 }, 300, buildings_background);
 
-	core_lvl_up_health = App->gui->CreateButtonText({ 10, 520 }, { 10,5 }, little_button_rect, "HEALTH UP", { 242, 222, 70, 255 }, 14, buildings_background);
-	core_lvl_up_energy = App->gui->CreateButtonText({ 154, 520 }, { 10,5 }, little_button_rect, "ENERGY UP", { 242, 222, 70, 255 }, 14, buildings_background);
+	core_lvl_up_health = App->gui->CreateButtonText({ 260, 230 }, { 10,5 }, little_button_rect, "HEALTH UP", { 242, 222, 70, 255 }, 14, buildings_background);
+	core_lvl_up_energy = App->gui->CreateButtonText({ 430, 230 }, { 10,5 }, little_button_rect, "ENERGY UP", { 242, 222, 70, 255 }, 14, buildings_background);
 
 	App->gui->DisableElement(buildings_background);
 
