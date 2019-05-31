@@ -230,6 +230,7 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			building_infantry_button->ChangeState(true);
 			building_aerial_button->ChangeState(false);
 			building_land_button->ChangeState(false);
+			building_infantry_button->interactable = false;
 		}
 		else if (element == change_side_button) {
 			if (collection_buttons_allies[0]->IsEnabled()) {
@@ -354,8 +355,6 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			str = "Cost Health: " + std::to_string(((LeveledUpgrade*)App->game_manager->health_upgrade)->GetCost());
 			core_lvl_up_health_cost->SetText(str);
 
-			/*str = "GOLD: " + std::to_string(App->game_manager->gold);
-			gold->SetText(str);*/
 		}
 		else if (element == core_lvl_up_energy && ((int)App->game_manager->gold >= ((LeveledUpgrade*)App->game_manager->energy_upgrade)->GetCost())) {
 			App->game_manager->gold -= ((LeveledUpgrade*)App->game_manager->energy_upgrade)->GetCost();
@@ -367,9 +366,6 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 
 			str = "Cost Energy: " + std::to_string(((LeveledUpgrade*)App->game_manager->energy_upgrade)->GetCost());
 			core_lvl_up_energy_cost->SetText(str);
-
-			/*str = "GOLD: " + std::to_string(App->game_manager->gold);
-			gold->SetText(str);*/
 		}
 
 		// Building butttons
@@ -381,10 +377,9 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 				building_aerial_button->ChangeState(false);
 				building_land_button->ChangeState(false);
 				building_title->SetText("Infantry Building:");
-			}
-			else {
-				App->gui->DisableElement(building_infantry_image);
-				building_title->SetText("");
+				building_infantry_button->interactable = false;
+				building_aerial_button->interactable = true;
+				building_land_button->interactable = true;
 			}
 		}
 		else if (element == building_aerial_button) {
@@ -395,6 +390,9 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 				building_infantry_button->ChangeState(false);
 				building_land_button->ChangeState(false);
 				building_title->SetText("Aerial Building:");
+				building_aerial_button->interactable = false;
+				building_infantry_button->interactable = true;
+				building_land_button->interactable = true;
 			}
 			else {
 				App->gui->DisableElement(building_aerial_image);
@@ -409,6 +407,9 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 				building_infantry_button->ChangeState(false);
 				building_aerial_button->ChangeState(false);
 				building_title->SetText("Land Building:");
+				building_land_button->interactable = false;
+				building_infantry_button->interactable = true;
+				building_aerial_button->interactable = true;
 			}
 			else {
 				App->gui->DisableElement(building_land_image);

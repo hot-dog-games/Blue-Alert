@@ -511,7 +511,7 @@
         <frame x="1961" y="342" width="151" height="124"/>
         <frame x="1778" y="343" width="151" height="124"/>
         <frame x="2115" y="342" width="151" height="124"/>
-        <frame x="2135" y="339" width="176" height="152"/>
+        <frame x="1961" y="342" width="151" height="124"/>
       </button>
     </Infantry>
 
@@ -520,7 +520,7 @@
         <frame x="1776" y="5" width="184" height="115"/>
         <frame x="1774" y="1" width="184" height="115"/>
         <frame x="2157" y="7" width="184" height="115"/>
-        <frame x="2154" y="490" width="180" height="115"/>
+        <frame x="1776" y="5" width="184" height="115"/>
       </button>
     </Aerial>
 
@@ -529,7 +529,7 @@
         <frame x="1944" y="488" width="168" height="131"/>
         <frame x="1776" y="491" width="168" height="131"/>
         <frame x="2121" y="491" width="168" height="131"/>
-        <frame x="2154" y="490" width="151" height="124"/>
+        <frame x="1944" y="488" width="168" height="131"/>
       </button>
     </Land>
     
