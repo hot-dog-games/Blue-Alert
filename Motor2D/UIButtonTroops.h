@@ -11,12 +11,18 @@ public:
 	UIButtonTroops(iPoint pos, SDL_Rect* sprite_rect, bool is_interactable, ButtonLevel lvl);
 	~UIButtonTroops();
 
+	void OnMouseClick();
+	void OnMouseHover();
+	void OnMouseRelease();
+	void OnMouseExit();
+
 	bool UIBlit();
 
-
 private:
-	SDL_Rect mark;
+	SDL_Rect* mark;
 	ButtonLevel level;
+
+	SDL_Rect rect_sprite_mark;
 
 };
 

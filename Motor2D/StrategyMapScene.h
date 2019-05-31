@@ -54,7 +54,7 @@ private:
 	UIButton* settings_button = nullptr;
 	UIButtonText* resume_settings_button = nullptr;
 	UIButtonText* back_menu_button = nullptr;
-	UIButtonText* menu_button = nullptr;
+	UIButtonText* collection_button = nullptr;
 	UIButtonText* backbutton_t_b = nullptr;
 	UIButtonText* troops_button = nullptr;
 	UIButtonText* buildings_button = nullptr;
