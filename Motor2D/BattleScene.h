@@ -140,11 +140,7 @@ private:
 
 	//Pause Menu
 	UIButton* pause_button = nullptr;
-	UIButton* bomb_button = nullptr;
-	UIButton* faction_button = nullptr;
 	UIImage* pause_panel = nullptr;
-	UIImage* side_troop_panel = nullptr;
-	UIImage* side_troop_panel_left = nullptr;
 	UIButton* p_continue = nullptr;
 	UIButton* p_exit_menu = nullptr;
 

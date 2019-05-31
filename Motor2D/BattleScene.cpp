@@ -548,9 +548,6 @@ void BattleScene::StartUI()
 	uint width, height;
 	App->win->GetWindowSize(width, height);
 
-	side_troop_panel = App->gui->CreateImage({ 522, 835 }, { 1431,383,108,130 }, nullptr);
-	side_troop_panel_left = App->gui->CreateImage({ 10, 885 }, { 1431,383,108,130 }, nullptr);
-
 	unit_panel = App->gui->CreateImage({ 80, (int)height-145}, { 1231,186,481,155 });
 	if (allied_core->GetCard(CN_FIRST)) {
 		unit_button_one = App->gui->CreateButton({ 27, 52 }, App->gui->LoadUIButton(allied_core->GetCard(CN_FIRST)->type, "button"), unit_panel);
@@ -574,27 +571,15 @@ void BattleScene::StartUI()
 		energy_cost_label[3] = App->gui->CreateLabel({ 7,2 }, "fonts/gunplay.ttf", 18, std::to_string((int)(allied_core->GetCard(CN_FOURTH)->info.stats.find("energy_cost")->second->GetValue())), { 255,255,255,255 }, 120, energy_cost[3], false);
 	}
 
-	energy_bar = App->gui->CreateBar({ 30, 11 }, { 1237,141,446,36 }, allied_core->GetEnergy(), BAR_HORITZONTAL, BAR_DYNAMIC, nullptr, unit_panel);
+	energy_bar = App->gui->CreateBar({ 35, 17 }, { 1244,163,432,17 }, allied_core->GetEnergy(), BAR_HORITZONTAL, BAR_DYNAMIC, nullptr, unit_panel);
 	energy_image = App->gui->CreateImage({ 8, 10 }, { 1238,345,32,32 }, unit_panel);
 	energy_label = App->gui->CreateLabel({ 10,4 }, "fonts/gunplay.ttf", 20, "0", { 255,255,255,255 }, 120, energy_image, false);
 
 	SDL_Rect pause_rect[3];
-	pause_rect[0] = { 3220,860,44,34 };
-	pause_rect[1] = { 3265,860,44,34 };
-	pause_rect[2] = { 3313,860,44,34 };
-	pause_button = App->gui->CreateButton({ 25, 910 }, pause_rect, nullptr);
-
-	SDL_Rect bomb_button_rect[3];
-	bomb_button_rect[0] = { 3370,796,52,52 };
-	bomb_button_rect[1] = { 3426,792,59,57 };
-	bomb_button_rect[2] = { 3488,794,52,52 };
-	bomb_button = App->gui->CreateButton({ 567, 847 }, bomb_button_rect, nullptr);
-
-	SDL_Rect faction_button_rect[3];
-	faction_button_rect[0] = { 3399,858,35,35 };
-	faction_button_rect[1] = { 3438,855,39,39 };
-	faction_button_rect[2] = { 3480,857,35,35 };
-	faction_button = App->gui->CreateButton({ 575, 912 }, faction_button_rect, nullptr);
+	pause_rect[0] = { 3027,1756,78,15 };
+	pause_rect[1] = { 3118,1756,78,15 };
+	pause_rect[2] = { 3207,1756,78,15 };
+	pause_button = App->gui->CreateButton({ 98,646 }, pause_rect, unit_panel);
 
 	health_bar_image = App->gui->CreateImage({ 248, 770 }, { 24,1378,144,16 });
 	enemy_health_bar_image = App->gui->CreateImage({ 248, 30 }, { 24,1455,144,16 });
