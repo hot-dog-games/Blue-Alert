@@ -523,15 +523,16 @@ void StrategyMapScene::InitializeUI()
 
 	// Map Buttons
 	collection_button = App->gui->CreateButtonText({ 336, 880 }, { 10,0 }, medium_button_rect, "COLLECTION", { 200,200,200,255 }, 27, main_panel);
-	options = App->gui->CreateImage({ 200,100 }, { 14,2374,619,463 }, nullptr);
+	options = App->gui->CreateImage({ 1,150 }, { 2705,923,637,593 }, nullptr);
+	options_label = App->gui->CreateLabel({ 120,34 }, "fonts/button_text.ttf", 60, "Options", { 255,255,255,255 }, 500, options);
 	settings_button = App->gui->CreateButton({ 20, 880 }, options_rect, main_panel);
-	resume_settings_button = App->gui->CreateButtonText({ 320,380 }, { 60,15 }, medium_button_rect, "Resume", {255,255,255,0}, 20, options);
+	resume_settings_button = App->gui->CreateButtonText({ 320,480 }, { 60,15 }, medium_button_rect, "Resume", {255,255,255,0}, 20, options);
 
-	music_slider = App->gui->CreateScrollBar({ 350,150 }, { 2962,912,218,40 }, MUSIC, volume, 128, options);
-	musiclabel = App->gui->CreateLabel({ 50,160 }, "fonts/button_text.ttf", 20, "Music Volume", { 255,255,255,0 }, 0, options);
-	fx_slider = App->gui->CreateScrollBar({ 350,250 }, { 2962,912,218,40 }, FX, volume, 128, options);
-	fxlabel = App->gui->CreateLabel({ 50,260 }, "fonts/button_text.ttf", 20, "FX Volume", { 255,255,255,0 }, 0, options);
-	back_menu_button = App->gui->CreateButtonText({ 30,380 }, { 20,15 }, medium_button_rect, "BACK TO MENU", { 255,255,255,0 }, 20, options);
+	music_slider = App->gui->CreateScrollBar({ 350,190 }, { 939,1365,218,40 }, MUSIC, volume, 128, options);
+	musiclabel = App->gui->CreateLabel({ 50,200 }, "fonts/button_text.ttf", 20, "Music Volume", { 255,255,255,0 }, 0, options);
+	fx_slider = App->gui->CreateScrollBar({ 350,290 }, { 939,1365,218,40 }, FX, volume, 128, options);
+	fxlabel = App->gui->CreateLabel({ 50,300 }, "fonts/button_text.ttf", 20, "FX Volume", { 255,255,255,0 }, 0, options);
+	back_menu_button = App->gui->CreateButtonText({ 30,480 }, { 20,15 }, medium_button_rect, "BACK TO MENU", { 255,255,255,0 }, 20, options);
 	App->gui->DisableElement(options);
 
 	// Troops menu
@@ -603,7 +604,7 @@ void StrategyMapScene::InitializeUI()
 	//Aerial
 	str = "The aerial building is where the helicopters and planes are parked.\n\nConquered: " + std::to_string(((LeveledUpgrade*)App->game_manager->aerial_upgrade)->GetLevel())
 		+ "\nDamage increase: " + std::to_string(((LeveledUpgrade*)App->game_manager->aerial_upgrade)->GetBuffValue("damage")) + "\nHealth increase: " + std::to_string(((LeveledUpgrade*)App->game_manager->aerial_upgrade)->GetBuffValue("health"));
-	building_aerial_button = App->gui->CreateSelectableButton({ 402,685 }, App->gui->LoadUIButton(31, "button"), buildings_background);
+	building_aerial_button = App->gui->CreateSelectableButton({ 428,685 }, App->gui->LoadUIButton(31, "button"), buildings_background);
 	building_aerial_image = App->gui->CreateImage({ 30,425 }, App->gui->LoadUIImage(31, "building"), buildings_background);
 	building_aerial_info = App->gui->CreateLabel({ 230, -35 }, "fonts/red_alert.ttf", 23, str, { 231,216,145,255 }, 300, building_aerial_image);
 

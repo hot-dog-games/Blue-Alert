@@ -48,6 +48,7 @@ private:
 	UIImage* troops_background = nullptr;
 	UIImage* main_panel = nullptr;
 	UILabel* gold = nullptr;
+	UILabel* options_label = nullptr;
 	UILabel* text_menu = nullptr;
 	UILabel* musiclabel = nullptr;
 	UILabel* fxlabel = nullptr;

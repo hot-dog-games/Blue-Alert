@@ -109,9 +109,9 @@ void MainMenuScene::StartUI() {
 	optionsbackground = App->gui->CreateImage({ 0,0 }, { 3712,2100,1024,768 }, nullptr);
 
 	back_options_button = App->gui->CreateButton({ 100,500 }, back_options_rect, optionsbackground);
-	music_slider = App->gui->CreateScrollBar({ 400,150 }, { 2962,912,218,40 }, MUSIC, volume, 128, optionsbackground);
+	music_slider = App->gui->CreateScrollBar({ 400,150 }, { 939,1365,218,40 }, MUSIC, volume, 128, optionsbackground);
 	musiclabel = App->gui->CreateLabel({ 100,160 }, "fonts/button_text.ttf", 20, "Music Volume", { 255,255,255,0 }, 0, optionsbackground);
-	fx_slider = App->gui->CreateScrollBar({ 400,250 }, { 2962,912,218,40 }, FX, volume, 128, optionsbackground);
+	fx_slider = App->gui->CreateScrollBar({ 400,250 }, { 939,1365,218,40 }, FX, volume, 128, optionsbackground);
 	fxlabel = App->gui->CreateLabel({ 100,260 }, "fonts/button_text.ttf", 20, "FX Volume", { 255,255,255,0 }, 0, optionsbackground);
 	App->gui->DisableElement(optionsbackground);
 
