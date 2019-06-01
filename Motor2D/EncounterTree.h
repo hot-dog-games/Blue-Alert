@@ -36,6 +36,7 @@ public:
 
 	EncounterNode* GetCurrentNode();
 	EncounterNode* GetFightingNode();
+	EncounterNode* GetNodeById(int id);
 
 	void SetCurrentNode(EncounterNode* current_node);
 	void SetFightingNode(EncounterNode* fighting_node);

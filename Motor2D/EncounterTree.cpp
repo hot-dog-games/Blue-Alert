@@ -121,6 +121,17 @@ EncounterNode * EncounterTree::GetFightingNode()
 	return fighting_node;
 }
 
+EncounterNode * EncounterTree::GetNodeById(int id)
+{
+	for each (EncounterNode* n in map_encounters)
+	{
+		if (n->GetID() == id)
+			return n;
+	}
+
+	return nullptr;
+}
+
 void EncounterTree::SetCurrentNode(EncounterNode * current_node)
 {
 	this->current_node = current_node;

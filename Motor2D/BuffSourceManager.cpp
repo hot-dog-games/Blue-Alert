@@ -5,6 +5,7 @@
 
 BuffSourceManager::BuffSourceManager()
 {
+	name = "buff_manager";
 }
 
 

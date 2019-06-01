@@ -204,7 +204,7 @@ bool BattleScene::Update(float dt)
 			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() != EntityType::STORE_STRATEGY_BUILDING)
 			{
 				App->gui->EnableElement((UIElement*)win_panel_one);
-				App->game_manager->LevelUpgrade();
+				App->game_manager->LevelUpgrade((EntityType)App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType());
 			}
 			else 
 			{
@@ -240,7 +240,7 @@ bool BattleScene::Update(float dt)
 			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() != EntityType::STORE_STRATEGY_BUILDING)
 			{
 				App->gui->EnableElement((UIElement*)win_panel_one);
-				App->game_manager->LevelUpgrade();
+				App->game_manager->LevelUpgrade((EntityType)App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType());
 			}
 			else
 			{
@@ -334,7 +334,9 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 				App->game_manager->ResetBuildingBuffs();
 				App->game_manager->GetEncounterTree()->CleanTree();
 				App->game_manager->CreateStage();
+				App->game_manager->SaveRecoveryState();
 			}
+			App->SaveGame(nullptr);
 		}
 		else if (element == lose_continue) {
 			App->gui->DisableElement((UIElement*)lose_panel);
@@ -391,6 +393,7 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 				App->game_manager->ResetBuildingBuffs();
 				App->game_manager->GetEncounterTree()->CleanTree();
 				App->game_manager->CreateStage();
+				App->game_manager->SaveRecoveryState();
 			}
 
 			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
