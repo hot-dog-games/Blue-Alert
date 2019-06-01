@@ -50,6 +50,7 @@ bool GameManager::Start()
 
 bool GameManager::CleanUp()
 {
+	LOG("GM Cleanup");
 	delete combat_deck;
 	collection.clear();
 	encounter_tree->CleanTree();

@@ -20,6 +20,7 @@ Deck::~Deck()
 
 void Deck::CleanUp()
 {
+	LOG("DECK CLEANUP");
 	for (int i = 0; i < MAX_CARDS; ++i)
 	{
 		if (cards[i])
