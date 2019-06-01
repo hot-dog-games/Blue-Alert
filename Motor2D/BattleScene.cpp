@@ -547,6 +547,16 @@ void BattleScene::SetEnemiesUpgrades(Deck* enemy_deck)
 	LOG("enemy cards level %i, %i, %i, %i", enemy_deck->cards[0]->level, enemy_deck->cards[1]->level, enemy_deck->cards[2]->level, enemy_deck->cards[3]->level);
 }
 
+void BattleScene::DropNukes()
+{
+	App->particles->CreateParticle(ParticleType::NUKE_BOMB, { allied_core->position.x - (allied_core->current_frame.w * 2), 0 },
+		{ allied_core->position.x - (allied_core->current_frame.w * 2), allied_core->position.y }, 140);
+	App->particles->CreateParticle(ParticleType::NUKE_BOMB, { allied_core->position.x, 0 }, 
+		{ allied_core->position.x, allied_core->position.y - (allied_core->current_frame.h * 2) }, 140);
+	App->particles->CreateParticle(ParticleType::NUKE_BOMB, { allied_core->position.x + (allied_core->current_frame.w * 2), 0 },
+		{ allied_core->position.x + (allied_core->current_frame.w * 2), allied_core->position.y }, 140);
+}
+
 void BattleScene::StartUI()
 {
 	//Generate random number

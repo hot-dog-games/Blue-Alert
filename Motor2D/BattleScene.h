@@ -55,6 +55,7 @@ private:
 	void UpdateGoldOnUnSelect(int unit);
 
 	void SetEnemiesUpgrades(Deck* enemy_deck);
+	void DropNukes();
 
 	void StartUI();
 
