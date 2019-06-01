@@ -25,25 +25,6 @@ bool CardManager::CleanUp()
 	return true;
 }
 
-bool CardManager::PostUpdate()
-{
-	if (to_delete)
-	{
-		for (std::list<Card*>::iterator card = cards.begin(); card != cards.end(); ++card)
-		{
-			if ((*card)->to_delete)
-			{
-				App->tex->UnLoad((*card)->sprite_path);
-				delete (*card);
-				cards.erase(card);
-			}				
-		}
-
-		to_delete = false;
-	}
-	return true;
-}
-
 bool CardManager::Awake(pugi::xml_node& conf)
 {
 	pugi::xml_parse_result result = config_file.load_file("xml/cards.xml");
@@ -93,8 +74,9 @@ Card* CardManager::CreateCard(EntityType type, int lvl)
 
 Card* CardManager::DeleteCard(Card* card)
 {
-	card->to_delete = true;
-	to_delete = true;
+	LOG("delete card");
+	cards.remove(card);
+	delete card;
 
 	return nullptr;
 }

@@ -225,6 +225,7 @@ pugi::xml_node EncounterTree::GetXmlEncounterNodeById(int id)
 
 void EncounterTree::CleanTree()
 {
+	LOG("encounter tree cleanup");
 	for each (EncounterNode* en in map_encounters)
 	{
 		delete en;

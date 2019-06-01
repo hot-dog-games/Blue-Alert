@@ -2,6 +2,7 @@
 #include "Render.h"
 #include "Textures.h"
 #include "Fonts.h"
+#include "p2Log.h"
 #include "UILabel.h"
 
 UILabel::UILabel(iPoint pos, _TTF_Font* font, std::string text, SDL_Color color, int max_width, bool is_interactable)
@@ -88,6 +89,7 @@ void UILabel::SetText(std::string text)
 {
 	if (text != this->text)
 	{
+		LOG("unload label text");
 		App->tex->UnLoad(texture);
 		this->text = text;
 		texture = App->fonts->Print(this->text.c_str(), color, font, rect_box.w);
@@ -102,6 +104,7 @@ void UILabel::SetColor(SDL_Color color)
 
 bool UILabel::CleanUp()
 {
+	LOG("label cleanup text");
 	parent = nullptr;
 	font = nullptr;
 	App->tex->UnLoad(texture);
