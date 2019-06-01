@@ -22,9 +22,15 @@ UIBar::UIBar(iPoint pos, SDL_Rect sprite_rect, Stat* value, BarType type, BarSta
 void UIBar::DecreaseBar(uint value)
 {
 	if (bar_type == BarType::BAR_VERTICAL) {
-		uint height = (rect_box.h / bar_value->GetMaxValue()) * value;
-		rect_sprite.h -= height;
-		rect_box.y += height;
+		float height = (rect_box.h / bar_value->GetMaxValue()) * value;
+		float aux = height - (int)height;
+		decimal_decrease += aux;
+		if (decimal_decrease > 1) {
+			height += 1;
+			decimal_decrease -= 1;
+		}
+		rect_sprite.h -= (int)height;
+		rect_box.y += (int)height;
 		current_value -= value;
 	}
 	else if (bar_type == BarType::BAR_HORITZONTAL) {
@@ -43,9 +49,15 @@ void UIBar::DecreaseBar(uint value)
 void UIBar::IncreaseBar(uint value)
 {
 	if (bar_type == BarType::BAR_VERTICAL) {
-		uint height = (rect_box.h / bar_value->GetMaxValue()) * value;
-		rect_sprite.h += height;
-		rect_box.y -= height;
+		float height = (rect_box.h / bar_value->GetMaxValue()) * value;
+		float aux = height - (int)height;
+		decimal_decrease += aux;
+		if (decimal_decrease > 1) {
+			height += 1;
+			decimal_decrease -= 1;
+		}
+		rect_sprite.h += (int)height;
+		rect_box.y -= (int)height;
 		current_value += value;
 	}
 	else if (bar_type == BarType::BAR_HORITZONTAL) {
@@ -89,4 +101,9 @@ void UIBar::ChangeStat(Stat * stat)
 {
 	bar_value = stat;
 	rect_sprite.w = bar_value->GetValue() * (current_value * 0.2);
+}
+
+int UIBar::GetValue() const
+{
+	return current_value;
 }

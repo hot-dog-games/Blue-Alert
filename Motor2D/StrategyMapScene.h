@@ -42,27 +42,35 @@ public:
 	bool IsInsideLimits(int mousemotion_x, int mousemotion_y);
 
 private:
-	UIImage* banner;
-	UIImage* options;
-	UIImage* troops_background;
-	UIImage* main_panel;
-	UILabel* gold;
-	UILabel* text_menu;
-	UIButton* settings_button;
-	UIButtonText* menu_button;
-	UIButtonText* backbutton_t_b;
-	UIButtonText* troops_button;
-	UIButtonText* buildings_button;
+	UIImage* banner = nullptr;
+	UIImage* options = nullptr;
+	UIImage* troops_background = nullptr;
+	UIImage* main_panel = nullptr;
+	UILabel* gold = nullptr;
+	UILabel* text_menu = nullptr;
+	UILabel* musiclabel = nullptr;
+	UILabel* fxlabel = nullptr;
+	UIButton* settings_button = nullptr;
+	UIButtonText* resume_settings_button = nullptr;
+	UIButtonText* back_menu_button = nullptr;
+	UIButtonText* menu_button = nullptr;
+	UIButtonText* backbutton_t_b = nullptr;
+	UIButtonText* troops_button = nullptr;
+	UIButtonText* buildings_button = nullptr;
+	UIScrollBar* music_slider = nullptr;
+	UIScrollBar* fx_slider = nullptr;
 
 	//Building Menu
-	UIImage* buildings_background;
-	UIImage* core_image;
-	UILabel* core_title;
-	UILabel* core_health;
-	UILabel* core_energy;
-	UILabel* core_lvl_up_cost;
-	UILabel* core_info;
-	UIButton* core_lvl_up;
+	UIImage* buildings_background = nullptr;
+	UIImage* core_image = nullptr;
+	UILabel* core_title = nullptr;
+	UILabel* core_health = nullptr;
+	UILabel* core_energy = nullptr;
+	UILabel* core_lvl_up_health_cost = nullptr;
+	UILabel* core_lvl_up_energy_cost = nullptr;
+	UILabel* core_info = nullptr;
+	UIButton* core_lvl_up_health = nullptr;
+	UIButton* core_lvl_up_energy = nullptr;
 
 	UIImage* building_infantry_image = nullptr;
 	UISelectableButton* building_infantry_button = nullptr;
@@ -79,14 +87,16 @@ private:
 	UIButton* level_up = nullptr;
 	UILabel* building_title = nullptr;
 
-	UILabel* buildings_title[3];
+	UILabel* buildings_title[3] = { nullptr, nullptr, nullptr };
 	
 	// Troops Menu
-	UIButton* deck_buttons[4];
-	UIButton* collection_buttons_allies[9];
-	UIButton* collection_buttons_enemies[9];
-	UILabel* troops_title[3];
-	UIButton* change_side_button;
+
+	UIButton* deck_buttons[4] = { nullptr, nullptr, nullptr, nullptr };
+	UIButton* collection_buttons_allies[9] = { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr };
+	UIButton* collection_buttons_enemies[9] = { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr };
+	UILabel* troops_title[3] = {nullptr, nullptr, nullptr};
+	UIButton* change_side_button = nullptr;
+	UILabel* side_label = nullptr;
 
 	//Info Showing
 	UIImage* info_image = nullptr;
@@ -105,6 +115,7 @@ private:
 	int limit_radius = 700;
 
 	iPoint last_camera_position;
+	int volume = 64;
 
 };
 

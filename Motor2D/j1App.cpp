@@ -353,6 +353,11 @@ void j1App::ResumeGame()
 	}
 }
 
+bool j1App::IsPaused()
+{
+	return paused;
+}
+
 // Load / Save
 void j1App::LoadGame(const char* file)
 {

@@ -24,8 +24,7 @@ StaticEntity::~StaticEntity()
 
 bool StaticEntity::CleanUp()
 {
-	if(sprite)
-		App->tex->UnLoad(sprite);
+	App->tex->UnLoad(sprite);
 
 	return true;
 }

@@ -14,6 +14,7 @@ struct Encounter {
 	std::vector<int> deck;
 	int deck_size = 4;
 	std::vector<int> rewards;
+	int difficulty = 0;
 	//BUFF
 };
 
@@ -60,9 +61,14 @@ public:
 	UIButton* GetButton();
 	StrategyBuilding* GetEntity();
 
+	int GetID();
+
 	//-----Emcounter Accessors-----
-	int EncounterNode::GetEncounterType() const;
+	int GetEncounterType() const;
 	void SetEncounterType(int type);
+
+	int GetEncounterDifficulty();
+	void SetEncounterDifficulty(int diff);
 
 	std::vector<int> GetEncounterDeck();
 	std::vector<int> GetEncounterRewards();

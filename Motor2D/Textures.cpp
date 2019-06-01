@@ -14,7 +14,9 @@ Textures::Textures() : Module()
 
 // Destructor
 Textures::~Textures()
-{}
+{
+
+}
 
 // Called before render is available
 bool Textures::Awake(pugi::xml_node& config)
@@ -91,10 +93,11 @@ bool Textures::UnLoad(SDL_Texture* texture)
 {
 	std::map<std::string, SDL_Texture*>::iterator item;
 
-	for(item = textures.begin(); item != textures.end(); ++item)
+	for (item = textures.begin(); item != textures.end(); ++item)
 	{
-		if(texture == item->second)
+		if (texture == item->second)
 		{
+			LOG("Unloaded texture: %s", item->first.c_str());
 			SDL_DestroyTexture(item->second);
 			textures.erase(item);
 			return true;
@@ -111,6 +114,7 @@ bool Textures::UnLoad(std::string path)
 
 	if (item != textures.end())
 	{
+		LOG("Unloaded texture: %s", path.c_str());
 		SDL_DestroyTexture(item->second);
 		textures.erase(item);
 		return true;
@@ -130,6 +134,7 @@ SDL_Texture* const Textures::LoadSurface(SDL_Surface* surface, const char* path)
 	}
 	else
 	{
+		LOG("Loaded texture: %s", path);
 		textures.insert({path,texture});
 	}
 

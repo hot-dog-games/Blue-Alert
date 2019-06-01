@@ -5,6 +5,7 @@
 
 BuffSourceManager::BuffSourceManager()
 {
+	name = "buff_manager";
 }
 
 
@@ -21,6 +22,16 @@ bool BuffSourceManager::Awake(pugi::xml_node &)
 	else
 		buff_node = buff_config.child("config");
 
+	return true;
+}
+
+bool BuffSourceManager::CleanUp()
+{
+	for (int i = 0; i < buff_sources.size(); i++)
+	{
+		buff_sources[i]->CleanUp();
+		delete buff_sources[i];
+	}
 	return true;
 }
 
@@ -54,6 +65,7 @@ BuffSource* BuffSourceManager::CreateBuffSource(std::string source_name)
 		{
 			buff_source = new LeveledUpgrade(source_node);
 		}
+		buff_sources.push_back(buff_source);
 		return buff_source;
 	}
 	return nullptr;

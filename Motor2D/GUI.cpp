@@ -48,6 +48,8 @@ bool Gui::Awake(pugi::xml_node& conf)
 
 	button_font = App->fonts->Load("fonts/button_text.ttf", 12);
 
+	App->audio->LoadFx("audio/fx/Ambient_Sounds/Shots/One_shoot.1.wav");
+
 	return ret;
 }
 
@@ -227,16 +229,14 @@ UIButtonText * Gui::CreateButtonText(iPoint pos, iPoint offset, SDL_Rect * sprit
 	return button;
 }
 
-UIScrollBar* Gui::CreateScrollBar(iPoint pos, float min, float max, ScrollType type, UIElement* parent)
+UIScrollBar* Gui::CreateScrollBar(iPoint pos, SDL_Rect rect, SliderType type, int initial_value, int max_value, UIElement* parent)
 {
-	UIScrollBar* scroll = new UIScrollBar(pos, type);
+	UIScrollBar* scroll = new UIScrollBar(pos, rect, type, initial_value, max_value);
 	scroll->parent = parent;
-	scroll->SetMinMax(min, max);
 	elements.push_back(scroll);
 
 	return scroll;
 }
-
 UIAnimatedImage* Gui::CreateAnimatedImage(iPoint pos, SDL_Rect * rect, int total_sprites, int speed, UIElement* parent)
 {
 	UIAnimatedImage* image = new UIAnimatedImage(pos, rect, total_sprites, speed);
@@ -267,6 +267,17 @@ UIPopUp * Gui::CreatePopUp(SDL_Rect rect, iPoint margin, std::string text, int t
 	pop_up->parent = parent;
 	elements.push_front(pop_up);
 	return pop_up;
+}
+
+void Gui::SliderAction(SliderType type, UIScrollBar * slider)
+{
+	if (type == MUSIC) {
+		App->audio->SetMusicVolume(slider->current_value);
+	}
+	if (type == FX) {
+		App->audio->SetAllFXVolume(slider->current_value);
+		App->audio->PlayFx("audio/fx/Ambient_Sounds/Shots/One_shoot.1.wav", 0, 0);
+	}
 }
 
 void Gui::DeleteElement(UIElement* ele)

@@ -45,6 +45,7 @@ bool Fonts::CleanUp()
 
 	for (std::map<std::string, TTF_Font*>::iterator item = fonts.begin(); item != fonts.end(); ++item)
 	{	
+		App->tex->UnLoad(item->first);
 		TTF_CloseFont(item->second);
 		fonts.erase(item);
 	}

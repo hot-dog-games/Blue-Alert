@@ -43,6 +43,8 @@ public:
 	void CreateZoomTransition(float transition_time, float scale = 2);
 	void CreateCameraTranslation(float transition_time, iPoint destination);
 	void DestroyTransition(Transition* transition_to_destroy);
+
+	bool IsTransitioning();
 };
 
 #endif

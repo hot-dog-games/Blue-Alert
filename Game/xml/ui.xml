@@ -201,9 +201,9 @@
     <RhinoTank type="8">
 
       <button>
-        <frame x="400" y="160" width="100" height="80"/>
-        <frame x="500" y="160" width="100" height="80"/>
-        <frame x="400" y="240" width="100" height="80"/>
+        <frame x="200" y="160" width="100" height="80"/>
+        <frame x="300" y="160" width="100" height="80"/>
+        <frame x="200" y="240" width="100" height="80"/>
         <frame x="0" y="0" width="100" height="80"/>
       </button>
 
@@ -212,9 +212,9 @@
       </drag>
 
       <upgrade>
-        <frame x="1067" y="852" width="105" height="106"/>
-        <frame x="1067" y="977" width="105" height="106"/>
-        <frame x="1067" y="1107" width="105" height="106"/>
+        <frame x="1175" y="852" width="105" height="106"/>
+        <frame x="1175" y="977" width="105" height="106"/>
+        <frame x="1175" y="1107" width="105" height="106"/>
         <frame x="1497" y="745" width="104" height="105"/>
       </upgrade>
 
@@ -254,13 +254,12 @@
       
     </RobotTank>
 
-
-    <TerrorDrone type="10">
+    <BattleFortress type="10">
 
       <button>
-        <frame x="0" y="160" width="100" height="80"/>
-        <frame x="100" y="160" width="100" height="80"/>
-        <frame x="0" y="240" width="100" height="80"/>
+        <frame x="200" y="0" width="100" height="80"/>
+        <frame x="300" y="0" width="100" height="80"/>
+        <frame x="200" y="81" width="100" height="80"/>
         <frame x="0" y="0" width="100" height="80"/>
       </button>
 
@@ -269,26 +268,26 @@
       </drag>
 
       <upgrade>
-        <frame x="1175" y="852" width="105" height="106"/>
-        <frame x="1175" y="977" width="105" height="106"/>
-        <frame x="1175" y="1107" width="105" height="106"/>
-        <frame x="1175" y="853" width="105" height="106"/>
+        <frame x="853" y="853" width="105" height="106"/>
+        <frame x="853" y="977" width="105" height="106"/>
+        <frame x="853" y="1107" width="105" height="106"/>
+        <frame x="1839" y="634" width="104" height="105"/>
       </upgrade>
 
       <deck>
-        <frame x="957" y="1850" width="145" height="145"/>
-        <frame x="949" y="2027" width="159" height="160"/>
-        <frame x="949" y="2192" width="159" height="160"/>
+        <frame x="197" y="1850" width="145" height="145"/>
+        <frame x="197" y="2027" width="159" height="160"/>
+        <frame x="197" y="2192" width="159" height="160"/>
       </deck>
 
-    </TerrorDrone>
+    </BattleFortress>
 
     <PrismTank type="11">
 
       <button>
+        <frame x="1001" y="160" width="100" height="80"/>
         <frame x="1101" y="160" width="100" height="80"/>
-        <frame x="1201" y="160" width="100" height="80"/>
-        <frame x="1101" y="240" width="100" height="80"/>
+        <frame x="1001" y="240" width="100" height="80"/>
         <frame x="0" y="0" width="100" height="80"/>
       </button>
 
@@ -314,9 +313,9 @@
     <TeslaTank type="12">
 
       <button>
-        <frame x="1000" y="160" width="100" height="80"/>
-        <frame x="1100" y="160" width="100" height="80"/>
-        <frame x="1000" y="240" width="100" height="80"/>
+        <frame x="1001" y="0" width="100" height="80"/>
+        <frame x="1100" y="0" width="100" height="80"/>
+        <frame x="1000" y="80" width="100" height="80"/>
         <frame x="0" y="0" width="100" height="80"/>
       </button>
 
@@ -426,9 +425,9 @@
     <MiG type="16">
 
       <button>
-        <frame x="800" y="320" width="100" height="80"/>
-        <frame x="900" y="320" width="100" height="80"/>
-        <frame x="800" y="400" width="100" height="80"/>
+        <frame x="800" y="160" width="100" height="80"/>
+        <frame x="900" y="160" width="100" height="80"/>
+        <frame x="800" y="240" width="100" height="80"/>
         <frame x="0" y="0" width="100" height="80"/>
       </button>
 
@@ -518,19 +517,19 @@
 
     <Aerial type="31">
       <button>
-        <frame x="1944" y="488" width="168" height="131"/>
-        <frame x="1776" y="491" width="168" height="131"/>
-        <frame x="2121" y="491" width="168" height="131"/>
-        <frame x="2154" y="490" width="151" height="124"/>
+        <frame x="1776" y="5" width="184" height="115"/>
+        <frame x="1774" y="1" width="184" height="115"/>
+        <frame x="2157" y="7" width="184" height="115"/>
+        <frame x="2154" y="490" width="180" height="115"/>
       </button>
     </Aerial>
 
     <Land type="32">
       <button>
-        <frame x="1776" y="5" width="184" height="115"/>
-        <frame x="1774" y="1" width="184" height="115"/>
-        <frame x="2157" y="7" width="184" height="115"/>
-        <frame x="2154" y="490" width="180" height="115"/>
+        <frame x="1944" y="488" width="168" height="131"/>
+        <frame x="1776" y="491" width="168" height="131"/>
+        <frame x="2121" y="491" width="168" height="131"/>
+        <frame x="2154" y="490" width="151" height="124"/>
       </button>
     </Land>
     
@@ -538,19 +537,19 @@
   
   <ui_image>
     <Land>
-      <end_screen x="12" y="1691" width="236" height="148"/>
-      <building x="14" y="1694" width="230" height="141"/>
+      <end_screen x="250" y="1652" width="245" height="193"/>
+      <building x="251" y="1659" width="236" height="184"/>
     </Land>
     <Infantry>
       <end_screen x="15" y="1520" width="214" height="173"/>
       <building x="17" y="1525" width="200" height="164"/>
     </Infantry>
     <Aerial>
-      <end_screen x="250" y="1652" width="245" height="193"/>
-      <building x="251" y="1659" width="236" height="184"/>
+      <end_screen x="12" y="1691" width="236" height="148"/>
+      <building x="14" y="1694" width="230" height="141"/>
     </Aerial>
     <Gold>
-      <end_screen x="1916" y="3" width="181" height="115"/>
+      <end_screen x="1785" y="131" width="236" height="209"/>
     </Gold>
     <Store>
       <end_screen x="1946" y="731" width="148" height="162"/>

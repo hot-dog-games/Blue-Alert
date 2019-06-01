@@ -37,6 +37,7 @@ class BuffSource
 public:
 	BuffSource(pugi::xml_node buff_source_node);
 	virtual void GetBuffs(std::map<std::string, Stat*> stats) {};
+	void CleanUp();
 	void RemoveBuffs(std::map<std::string, Stat*> stats);
 public:
 	uint source_id;
@@ -50,6 +51,12 @@ public:
 	void GetBuffs(std::map<std::string, Stat*> stats);
 	uint GetCost();
 	bool LevelUp();
+	void SetLevel(int lvl);
+	void Reset();
+	uint GetLevel() {
+		return level;
+	}
+	uint GetBuffValue(std::string name);
 private:
 	uint max_level = 0;
 	uint level = 0;

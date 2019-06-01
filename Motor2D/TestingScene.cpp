@@ -76,7 +76,7 @@ bool TestingScene::Start()
 	test_deck->AddCard(App->card_manager->CreateCard(EntityType::HARRIER));
 
 	test_core = App->entity_manager->CreateCore(1, { 30,980 }, test_deck, FACTION_RUSSIAN);
-	test_enemy_core = App->entity_manager->CreateCore(33, { 25,330 }, enemy_deck, FACTION_AMERICAN, true);
+	test_enemy_core = App->entity_manager->CreateCore(33, { 25,330 }, enemy_deck, FACTION_AMERICAN);
 	test_core->LoadUnitSprites();
 	test_enemy_core->LoadUnitSprites();
 
@@ -101,22 +101,10 @@ bool TestingScene::PreUpdate()
 
 	int x, y;
 	App->input->GetMousePosition(x, y);
-	iPoint p = App->render->ScreenToWorld(x, y);
-	p = App->map->WorldToMap(p.x, p.y);
+	iPoint p1 = App->render->ScreenToWorld(x, y);
+	iPoint p2 = App->map->WorldToMap(p1.x, p1.y);
 
-	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
-	{
-		if (origin_selected == true)
-		{
-			App->pathfinding->CreatePath(origin, p);
-			origin_selected = false;
-		}
-		else
-		{
-			origin = p;
-			origin_selected = true;
-		}
-	}
+	LOG("casilla %i,%i   mouse world %i %i", p2.x, p2.y, p1.x,p1.y);
 
 	return true;
 }
@@ -259,14 +247,6 @@ bool TestingScene::PostUpdate()
 	p = App->map->MapToWorld(p.x, p.y);
 
 	App->render->Blit(debug_tex, p.x, p.y);
-
-	const std::vector<iPoint> path = App->pathfinding->GetLastPath();
-
-	for (uint i = 0; i < path.size(); ++i)
-	{
-		iPoint pos = App->map->MapToWorld(path.at(i).x, path.at(i).y);
-		App->render->Blit(debug_tex, pos.x, pos.y);
-	}
 
 
 	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
