@@ -206,6 +206,9 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 
 			building_title->SetText("Infantry Building:");
 
+			troops_button->SetLocked(false);
+			buildings_button->SetLocked(true);
+
 		}
 		else if (element == backbutton_t_b) {
 			App->gui->DisableElement(troops_background);
@@ -220,7 +223,6 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			App->game_manager->GetEncounterTree()->is_clickable = true;
 			dragable = true;
 
-
 		}
 		else if (element == buildings_button) {
 			App->gui->DisableElement(troops_background);
@@ -233,6 +235,11 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			building_infantry_button->interactable = false;
 			building_aerial_button->interactable = true;
 			building_land_button->interactable = true;
+
+			troops_button->SetLocked(true);
+		
+			buildings_button->SetLocked(false);
+
 		}
 		else if (element == change_side_button) {
 			if (collection_buttons_allies[0]->IsEnabled()) {
@@ -543,9 +550,9 @@ void StrategyMapScene::InitializeUI()
 
 	backbutton_t_b = App->gui->CreateButtonText({ 589,24 }, { 4,3 }, small_button_rect, "X", { 200,200,200,255 }, 27);
 	App->gui->DisableElement(backbutton_t_b);
-	troops_button = App->gui->CreateButtonText({ 16,851 }, { 32,0 }, big_button_rect, "TROOPS", { 200,200,200,255 }, 33);
+	troops_button = App->gui->CreateButtonText({ 16,843 }, { 32,0 }, big_button_rect, "TROOPS", { 200,200,200,255 }, 33);
 	App->gui->DisableElement(troops_button);
-	buildings_button = App->gui->CreateButtonText({ 319,851 }, { 10,16 }, big_button_rect, "BUILDINGS", { 200,200,200,255 }, 33);
+	buildings_button = App->gui->CreateButtonText({ 319,843 }, { 10,16 }, big_button_rect, "BUILDINGS", { 200,200,200,255 }, 33);
 	App->gui->DisableElement(buildings_button);
 
 
@@ -604,7 +611,7 @@ void StrategyMapScene::InitializeUI()
 	//Aerial
 	str = "The aerial building is where the helicopters and planes are parked.\n\nConquered: " + std::to_string(((LeveledUpgrade*)App->game_manager->aerial_upgrade)->GetLevel())
 		+ "\nDamage increase: " + std::to_string(((LeveledUpgrade*)App->game_manager->aerial_upgrade)->GetBuffValue("damage")) + "\nHealth increase: " + std::to_string(((LeveledUpgrade*)App->game_manager->aerial_upgrade)->GetBuffValue("health"));
-	building_aerial_button = App->gui->CreateSelectableButton({ 428,685 }, App->gui->LoadUIButton(31, "button"), buildings_background);
+	building_aerial_button = App->gui->CreateSelectableButton({ 401,685 }, App->gui->LoadUIButton(31, "button"), buildings_background);
 	building_aerial_image = App->gui->CreateImage({ 30,425 }, App->gui->LoadUIImage(31, "building"), buildings_background);
 	building_aerial_info = App->gui->CreateLabel({ 230, -35 }, "fonts/red_alert.ttf", 23, str, { 231,216,145,255 }, 300, building_aerial_image);
 

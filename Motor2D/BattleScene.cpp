@@ -581,7 +581,7 @@ void BattleScene::StartUI()
 	pause_rect[0] = { 3027,1756,78,15 };
 	pause_rect[1] = { 3118,1756,78,15 };
 	pause_rect[2] = { 3207,1756,78,15 };
-	pause_button = App->gui->CreateButton({ 98,646 }, pause_rect, unit_panel);
+	pause_button = App->gui->CreateButton({ 0,0 }, pause_rect, unit_panel);
 
 	health_bar_image = App->gui->CreateImage({ 248, 770 }, { 24,1378,144,16 });
 	enemy_health_bar_image = App->gui->CreateImage({ 248, 30 }, { 24,1455,144,16 });
@@ -591,10 +591,11 @@ void BattleScene::StartUI()
 	App->gui->EnableInteractable((UIElement*)unit_panel);
 
 	// End Game Screen Win
-	SDL_Rect button_rect[3];
-	button_rect[0] = { 221,533,220,51 };
-	button_rect[1] = { 221,585,220,51 };
-	button_rect[2] = { 221,637,220,51 };
+	SDL_Rect button_rect[4];
+	button_rect[0] = { 800,499,294,67 };
+	button_rect[1] = { 800,569,294,67 };
+	button_rect[2] = { 800,639,294,67 };
+	button_rect[3] = { 800,639,294,67 };
 
 	SDL_Rect purchase_rect[4];
 	purchase_rect[0] = {2795, 1536, 220, 51};
@@ -602,31 +603,27 @@ void BattleScene::StartUI()
 	purchase_rect[2] = {2795, 1640, 220, 51};
 	purchase_rect[3] = {2795, 1692, 220, 51};
 
-	win_panel_one = App->gui->CreateImage({ 139,150 }, { 1,852,744,466 });
-	win_panel_two = App->gui->CreateImage({ 139,150 }, { 1,852,744,466 });
-	win_text_one = App->gui->CreateLabel({ 30,30 }, "fonts/red_alert.ttf", 40, "Congratulations, you've conquered this zone and unlocked the next building!", { 255,232,2, 255 }, 710, win_panel_one);
-	win_text_two = App->gui->CreateLabel({ 30,30 }, "fonts/red_alert.ttf", 40, "Upgrade a troop or choose a new one to add to your deck", { 255,232,2, 255 }, 710, win_panel_two);
-	win_continue_one = App->gui->CreateButton({ 262,375 }, button_rect, win_panel_one);
-	win_continue_two = App->gui->CreateButton({ 262,375 }, button_rect, win_panel_two);
+	win_panel_one = App->gui->CreateImage({ 17,120 }, { 3986,1646,605,660 });
+	win_panel_two = App->gui->CreateImage({ 17,120 }, { 3986,1646,605,660 });
+	win_text_one = App->gui->CreateLabel({ 30,30 }, "fonts/red_alert.ttf", 40, "Congratulations, you've conquered this zone and unlocked the next building!", { 255,232,2, 255 }, 600, win_panel_one);
+	win_text_two = App->gui->CreateLabel({ 30,30 }, "fonts/red_alert.ttf", 40, "Upgrade a troop or choose a new one to add to your deck", { 255,232,2, 255 }, 600, win_panel_two);
+	win_continue_one = App->gui->CreateButtonText({ 170, 560 }, { 30,0}, button_rect, "CONTINUE", { 200,200,200,255 }, 27, win_panel_one);
+	win_continue_two = App->gui->CreateButtonText({ 170, 560 }, { 30,0 }, button_rect, "CONTINUE", { 200,200,200,255 }, 27, win_panel_two);
 
 	win_unit_one = App->gui->CreateSelectableButton({ 130,200 }, App->gui->LoadUIButton(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[0], "upgrade"), win_panel_two);
 	win_unit_two = App->gui->CreateSelectableButton({ 320,200 }, App->gui->LoadUIButton(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[1], "upgrade"), win_panel_two);
 	win_unit_three = App->gui->CreateSelectableButton({ 510,200 }, App->gui->LoadUIButton(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[2], "upgrade"), win_panel_two);
 
-	win_building = App->gui->CreateImage({ 260,160 }, App->gui->LoadUIImage(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType(), "end_screen"), win_panel_one);
+	win_building = App->gui->CreateImage({ 195,240 }, App->gui->LoadUIImage(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType(), "end_screen"), win_panel_one);
 
 	App->gui->DisableElement((UIElement*)win_panel_one);
 	App->gui->DisableElement((UIElement*)win_panel_two);
 
-	SDL_Rect pause_buttons_rect[3];
-	pause_buttons_rect[0] = { 0,533,220,51 };
-	pause_buttons_rect[1] = { 0,585,220,51 };
-	pause_buttons_rect[2] = { 0,637,220,51 };
 
 	//Pause
-	pause_panel = App->gui->CreateImage({ 20, 70 }, { 3711,673,722,654 });
-	p_continue = App->gui->CreateButtonText({ 120,180 }, { 21,5 }, pause_buttons_rect, "CONTINUE", {243,242,153,255},20, pause_panel);
-	p_exit_menu = App->gui->CreateButtonText({ 260,470 }, { 14,5 }, pause_buttons_rect, "BACK TO MENU", { 243,242,153,255 }, 17, pause_panel);
+	pause_panel = App->gui->CreateImage({ 2, 87 }, { 3967,961,636,671 });
+	p_continue = App->gui->CreateButtonText({ 180, 130 }, { 37,5 }, button_rect, "CONTINUE", {243,242,153,255}, 27, pause_panel);
+	p_exit_menu = App->gui->CreateButtonText({ 180, 590 }, { 14,5 }, button_rect, "BACK TO MENU", { 243,242,153,255 }, 22, pause_panel);
 
 	App->gui->DisableElement(pause_panel);
 
@@ -657,10 +654,10 @@ void BattleScene::StartUI()
 	}
 
 	//End Game Screen Lose
-	lose_panel = App->gui->CreateImage({ 139,150 }, { 1,852,744,466 });
-	lose_text = App->gui->CreateLabel({ 30,30 }, "fonts/red_alert.ttf", 40, "The enemy troops have defeat yours! Allies have win the battle", { 255,232,2, 255 }, 710, lose_panel);
-	lose_continue = App->gui->CreateButton({ 262,375 }, button_rect, lose_panel);
-	lose_image = App->gui->CreateImage({ 222, 125 }, { 2033,136,321,204 }, lose_panel);
+	lose_panel = App->gui->CreateImage({ 17,120 }, { 3986,1646,605,660 });
+	lose_text = App->gui->CreateLabel({ 30,30 }, "fonts/red_alert.ttf", 40, "The enemy troops have defeat yours! Allies have win the battle", { 255,232,2, 255 }, 600, lose_panel);
+	lose_continue = App->gui->CreateButtonText({ 170, 560 }, { 30,0 }, button_rect, "CONTINUE", { 200,200,200,255 }, 27, lose_panel);
+	lose_image = App->gui->CreateImage({ 170, 250 }, { 2033,136,321,204 }, lose_panel);
 
 	App->gui->DisableElement((UIElement*)lose_panel);
 }

@@ -86,9 +86,9 @@ private:
 	UIImage*		lose_panel = nullptr;
 
 	//buttons
-	UIButton*		win_continue_one = nullptr;
-	UIButton*		win_continue_two = nullptr;
-	UIButton*		lose_continue = nullptr;
+	UIButtonText*		win_continue_one = nullptr;
+	UIButtonText*		win_continue_two = nullptr;
+	UIButtonText*		lose_continue = nullptr;
 	UIButtonText*		purchase = nullptr;
 
 	//labels
