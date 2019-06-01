@@ -203,6 +203,7 @@ void Audio::SetFXVolume(const char * path, int volume)
 void Audio::SetMusicVolume(int volume)
 {
 	Mix_VolumeMusic(volume);
+	music_volume = volume;
 }
 
 void Audio::SetAllFXVolume(int volume)
@@ -213,6 +214,18 @@ void Audio::SetAllFXVolume(int volume)
 	{
 		Mix_VolumeChunk(item->second, volume);
 	}
+
+	fx_volume = volume;
+}
+
+int Audio::GetMusicVolume()
+{
+	return music_volume;
+}
+
+int Audio::GetFxVolume()
+{
+	return fx_volume;
 }
 
 

@@ -535,9 +535,9 @@ void StrategyMapScene::InitializeUI()
 	settings_button = App->gui->CreateButton({ 20, 880 }, options_rect, main_panel);
 	resume_settings_button = App->gui->CreateButtonText({ 320,480 }, { 60,15 }, medium_button_rect, "Resume", {255,255,255,0}, 20, options);
 
-	music_slider = App->gui->CreateScrollBar({ 350,190 }, { 939,1365,218,40 }, MUSIC, volume, 128, options);
+	music_slider = App->gui->CreateScrollBar({ 350,190 }, { 939,1365,218,40 }, MUSIC, App->audio->GetMusicVolume(), 128, options);
 	musiclabel = App->gui->CreateLabel({ 50,200 }, "fonts/button_text.ttf", 20, "Music Volume", { 255,255,255,0 }, 0, options);
-	fx_slider = App->gui->CreateScrollBar({ 350,290 }, { 939,1365,218,40 }, FX, volume, 128, options);
+	fx_slider = App->gui->CreateScrollBar({ 350,290 }, { 939,1365,218,40 }, FX, App->audio->GetFxVolume(), 128, options);
 	fxlabel = App->gui->CreateLabel({ 50,300 }, "fonts/button_text.ttf", 20, "FX Volume", { 255,255,255,0 }, 0, options);
 	back_menu_button = App->gui->CreateButtonText({ 30,480 }, { 20,15 }, medium_button_rect, "BACK TO MENU", { 255,255,255,0 }, 20, options);
 	App->gui->DisableElement(options);

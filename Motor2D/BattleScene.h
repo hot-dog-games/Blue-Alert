@@ -141,8 +141,13 @@ private:
 	//Pause Menu
 	UIButton* pause_button = nullptr;
 	UIImage* pause_panel = nullptr;
-	UIButton* p_continue = nullptr;
-	UIButton* p_exit_menu = nullptr;
+	UIButton* pause_continue = nullptr;
+	UIButton* pause_exit = nullptr;
+	UILabel* pause_music_label = nullptr;
+	UILabel* pause_fx_label = nullptr;
+	UILabel* options_label = nullptr;
+	UIScrollBar* pause_music = nullptr;
+	UIScrollBar* pause_fx = nullptr;
 
 	int unit_store_cost = 100;
 	int total_cost_acumulated = 0;

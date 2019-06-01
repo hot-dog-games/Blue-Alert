@@ -409,11 +409,11 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			}
 		}
 
-		if (element == p_continue && App->IsPaused()) {
+		if (element == pause_continue && App->IsPaused()) {
 			App->ResumeGame();
 			App->gui->DisableElement(pause_panel);
 		}
-		else if (element == p_exit_menu) {
+		else if (element == pause_exit) {
 			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MENU, White);
 		}
 	}
@@ -622,8 +622,14 @@ void BattleScene::StartUI()
 
 	//Pause
 	pause_panel = App->gui->CreateImage({ 2, 87 }, { 3967,961,636,671 });
-	p_continue = App->gui->CreateButtonText({ 180, 130 }, { 37,5 }, button_rect, "CONTINUE", {243,242,153,255}, 27, pause_panel);
-	p_exit_menu = App->gui->CreateButtonText({ 180, 590 }, { 14,5 }, button_rect, "BACK TO MENU", { 243,242,153,255 }, 22, pause_panel);
+	options_label = App->gui->CreateLabel({ 180, 130 }, "fonts/button_text.ttf", 40, "Options", { 255,255,255,255 }, 400, pause_panel);
+	pause_continue = App->gui->CreateButtonText({ 180, 480 }, { 37,5 }, button_rect, "CONTINUE", {243,242,153,255}, 27, pause_panel);
+	pause_exit = App->gui->CreateButtonText({ 180, 590 }, { 14,5 }, button_rect, "BACK TO MENU", { 234,132,132,255 }, 22, pause_panel);
+	pause_music_label = App->gui->CreateLabel({ 80, 200 }, "fonts/button_text.ttf", 25, "Music", { 255,255,255,255 }, 400, pause_panel);
+	pause_music = App->gui->CreateScrollBar({ 100,260 }, { 771,1245,413,40 }, MUSIC, App->audio->GetMusicVolume(), 128, pause_panel);
+
+	pause_fx_label = App->gui->CreateLabel({ 80, 340 }, "fonts/button_text.ttf", 25, "Sound Effect", { 255,255,255,255 }, 400, pause_panel);
+	pause_fx = App->gui->CreateScrollBar({100,400 }, { 771,1245,413,40 }, FX, App->audio->GetFxVolume(), 128, pause_panel);
 
 	App->gui->DisableElement(pause_panel);
 
