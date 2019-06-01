@@ -60,7 +60,7 @@ bool DynamicEntity::Start()
 	App->audio->SetFXVolume(attack_fx.c_str(), 30);
 	App->audio->SetFXVolume(explosion_fx.c_str(), 30);
 
-	health_bar = App->gui->CreateBar(bar_position, { 25,1503,current_frame.w, 7 }, stats.find("health")->second, BarType::BAR_HORITZONTAL, BAR_DYNAMIC, this);
+	health_bar = App->gui->CreateBar(bar_position, { 25, 1503, current_frame.w, 7 }, stats.find("health")->second, BarType::BAR_HORITZONTAL, BAR_DYNAMIC, this);
 	return true;
 }
 

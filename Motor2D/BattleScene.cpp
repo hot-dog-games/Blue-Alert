@@ -17,6 +17,7 @@
 #include "UISelectableButton.h"
 #include "UIBar.h"
 #include "GUI.h"
+#include "EntityManager.h"
 #include "SceneManager.h"
 #include "TransitionManager.h"
 #include "CardManager.h"
@@ -25,6 +26,7 @@
 #include "BattleScene.h"
 #include "Buff.h"
 #include "GameManager.h"
+#include "Particles.h"
 #include "EncounterTree.h"
 #include "EncounterNode.h"
 #include "UIImage.h"
@@ -78,7 +80,10 @@ bool BattleScene::Start()
 
 	App->game_manager->health_upgrade->GetBuffs(allied_core->stats);
 	App->game_manager->energy_upgrade->GetBuffs(allied_core->stats);
+
+
 	allied_core->DecreaseEnergy(20);
+
 	//Initialize UI
 	StartUI();
 
@@ -399,6 +404,13 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
 		}
 
+		if (element == bomb_button)
+		{
+			DropNukes();
+			bomb_button->SetLocked(false);
+		}
+
+
 		if (element == pause_button) {
 			if (!App->IsPaused()) {
 				App->PauseGame();
@@ -542,6 +554,16 @@ void BattleScene::SetEnemiesUpgrades(Deck* enemy_deck)
 	LOG("enemy cards level %i, %i, %i, %i", enemy_deck->cards[0]->level, enemy_deck->cards[1]->level, enemy_deck->cards[2]->level, enemy_deck->cards[3]->level);
 }
 
+void BattleScene::DropNukes()
+{
+	App->particles->CreateParticle(ParticleType::NUKE_BOMB, { allied_core->position.x - (allied_core->current_frame.w * 2), 0 },
+		{ allied_core->position.x - (allied_core->current_frame.w * 2), allied_core->position.y - allied_core->current_frame.h }, 140);
+	App->particles->CreateParticle(ParticleType::NUKE_BOMB, { allied_core->position.x, 0 }, 
+		{ allied_core->position.x, allied_core->position.y - (allied_core->current_frame.h * 1.75f) }, 130);
+	App->particles->CreateParticle(ParticleType::NUKE_BOMB, { allied_core->position.x + (allied_core->current_frame.w * 2), 0 },
+		{ allied_core->position.x + (allied_core->current_frame.w * 2), allied_core->position.y - allied_core->current_frame.h }, 140);
+}
+
 void BattleScene::StartUI()
 {
 	//Generate random number
@@ -647,7 +669,6 @@ void BattleScene::StartUI()
 	App->gui->DisableElement(pause_panel);
 
 	//Store 
-
 	if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() == EntityType::STORE_STRATEGY_BUILDING)
 	{
 		store_panel = App->gui->CreateImage({ 139,100 }, { 2793, 960, 749, 565 });

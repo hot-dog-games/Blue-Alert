@@ -9,7 +9,9 @@ class SDL_Texture;
 enum class ParticleType {
 	NONE = -1,
 	ATTACK_EXPLOSION,
-	ATTACK_BASIC_SHOT
+	ATTACK_BASIC_SHOT,
+	NUKE_BOMB,
+	NUKE_EXPLOSION,
 };
 
 class Particles : public Module
@@ -28,7 +30,7 @@ public:
 	bool Resume();
 	bool Start();
 
-	Particle* CreateParticle(const ParticleType &particle, const fPoint &pos, const fPoint &dest = {0.0F,0.0F});
+	Particle* CreateParticle(const ParticleType &particle, const fPoint &pos, const fPoint &dest = {0.0F,0.0F}, float radius = 0.0f);
 
 private:
 	SDL_Texture* particle_atlas = nullptr;
