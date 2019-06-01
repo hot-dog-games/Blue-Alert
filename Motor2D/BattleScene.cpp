@@ -32,36 +32,6 @@
 #include "UIImage.h"
 #include "UILabel.h"
 
-void Ultimate::Update()
-{
-	if (state == UltimateState::SELECTED)
-	{
-		int x, y;
-		App->input->GetMousePosition(x, y);
-		position = { x - (int)(image->GetScreenRect().w*0.5f),y - (int)(image->GetScreenRect().h*0.5f) };
-		image->SetScreenPos(position.x, position.y);
-		if(App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
-			Use();
-		else if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
-		{
-			App->gui->DisableElement(image);
-			state == UltimateState::READY;
-		}
-	}
-}
-void Ultimate::Select()
-{
-	state = UltimateState::SELECTED;
-	App->gui->EnableElement(image);
-}
-void Ultimate::Use()
-{
-	iPoint world_pos = App->render->ScreenToWorld(position.x, position.y);
-	App->gui->DisableElement(image);
-	App->particles->CreateParticle(ParticleType::NUKE_BOMB, { (float)world_pos.x + (image->GetScreenRect().w*0.5f), 0 }, { (float)world_pos.x + (image->GetScreenRect().w*0.5f),(float)world_pos.y }, radius);
-	state = UltimateState::USED;
-}
-
 const double HELD_DELAY = 175;
 
 BattleScene::BattleScene() : Scene()
