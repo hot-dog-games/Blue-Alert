@@ -404,6 +404,13 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
 		}
 
+		if (element == bomb_button)
+		{
+			DropNukes();
+			bomb_button->SetLocked(false);
+		}
+
+
 		if (element == pause_button) {
 			if (!App->IsPaused()) {
 				App->PauseGame();
@@ -550,11 +557,11 @@ void BattleScene::SetEnemiesUpgrades(Deck* enemy_deck)
 void BattleScene::DropNukes()
 {
 	App->particles->CreateParticle(ParticleType::NUKE_BOMB, { allied_core->position.x - (allied_core->current_frame.w * 2), 0 },
-		{ allied_core->position.x - (allied_core->current_frame.w * 2), allied_core->position.y }, 140);
+		{ allied_core->position.x - (allied_core->current_frame.w * 2), allied_core->position.y - allied_core->current_frame.h }, 140);
 	App->particles->CreateParticle(ParticleType::NUKE_BOMB, { allied_core->position.x, 0 }, 
-		{ allied_core->position.x, allied_core->position.y - (allied_core->current_frame.h * 2) }, 140);
+		{ allied_core->position.x, allied_core->position.y - (allied_core->current_frame.h * 1.75f) }, 130);
 	App->particles->CreateParticle(ParticleType::NUKE_BOMB, { allied_core->position.x + (allied_core->current_frame.w * 2), 0 },
-		{ allied_core->position.x + (allied_core->current_frame.w * 2), allied_core->position.y }, 140);
+		{ allied_core->position.x + (allied_core->current_frame.w * 2), allied_core->position.y - allied_core->current_frame.h }, 140);
 }
 
 void BattleScene::StartUI()
