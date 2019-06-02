@@ -14,8 +14,8 @@ public:
 	UIBar(iPoint pos, SDL_Rect sprite_rect, Stat* value, BarType type, BarState state);
 	~UIBar() {};
 
-	void DecreaseBar(uint value);
-	void IncreaseBar(uint value);
+	void DecreaseBar(float value);
+	void IncreaseBar(float value);
 	bool UIBlit();
 	bool Update(float dt);
 
@@ -25,7 +25,7 @@ public:
 
 protected:
 	Stat*	bar_value = nullptr;
-	uint	current_value = 0;
+	float	current_value = 0;
 	BarType	bar_type;
 	BarState bar_state;
 
