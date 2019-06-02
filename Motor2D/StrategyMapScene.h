@@ -5,6 +5,7 @@
 #include "p2Point.h"
 #include "EncounterTree.h"
 #include "UIButton.h"
+#include "UIButtonTroops.h"
 #include "UIImage.h"
 #include "UIButtonText.h"
 #include "UIPopUp.h"
@@ -47,13 +48,14 @@ private:
 	UIImage* troops_background = nullptr;
 	UIImage* main_panel = nullptr;
 	UILabel* gold = nullptr;
+	UILabel* options_label = nullptr;
 	UILabel* text_menu = nullptr;
 	UILabel* musiclabel = nullptr;
 	UILabel* fxlabel = nullptr;
 	UIButton* settings_button = nullptr;
 	UIButtonText* resume_settings_button = nullptr;
 	UIButtonText* back_menu_button = nullptr;
-	UIButtonText* menu_button = nullptr;
+	UIButtonText* collection_button = nullptr;
 	UIButtonText* backbutton_t_b = nullptr;
 	UIButtonText* troops_button = nullptr;
 	UIButtonText* buildings_button = nullptr;
@@ -92,7 +94,7 @@ private:
 	// Troops Menu
 
 	UIButton* deck_buttons[4] = { nullptr, nullptr, nullptr, nullptr };
-	UIButton* collection_buttons_allies[9] = { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr };
+	UIButtonTroops* collection_buttons_allies[9] = { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr };
 	UIButton* collection_buttons_enemies[9] = { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr };
 	UILabel* troops_title[3] = {nullptr, nullptr, nullptr};
 	UIButton* change_side_button = nullptr;

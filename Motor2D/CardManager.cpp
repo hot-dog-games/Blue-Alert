@@ -6,7 +6,7 @@
 #include "Stat.h"
 #include "CardManager.h"
 
-
+#define MAX_LEVEL 6
 
 CardManager::CardManager()
 {
@@ -112,13 +112,16 @@ void CardManager::LoadCardUpgrades(Card * card, pugi::xml_node upgrades_node)
 
 void Card::Upgrade()
 {
-	level++;
-	info.stats.find("health")->second->IncreaseMaxValue(info.scaling.health_upgrade);
-	info.stats.find("damage")->second->IncreaseMaxValue(info.scaling.attack_damage_upgrade);
-	info.stats.find("defense")->second->IncreaseMaxValue(info.scaling.defense_upgrade);
-	info.stats.find("movement")->second->IncreaseMaxValue(info.scaling.movement_speed_upgrade);
-	info.stats.find("attack_speed")->second->IncreaseMaxValue(info.scaling.attack_speed_upgrade);
-	info.stats.find("range")->second->IncreaseMaxValue(info.scaling.range_upgrade);
+	if (level < MAX_LEVEL)
+	{
+		level++;
+		info.stats.find("health")->second->IncreaseMaxValue(info.scaling.health_upgrade);
+		info.stats.find("damage")->second->IncreaseMaxValue(info.scaling.attack_damage_upgrade);
+		info.stats.find("defense")->second->IncreaseMaxValue(info.scaling.defense_upgrade);
+		info.stats.find("movement")->second->IncreaseMaxValue(info.scaling.movement_speed_upgrade);
+		info.stats.find("attack_speed")->second->IncreaseMaxValue(info.scaling.attack_speed_upgrade);
+		info.stats.find("range")->second->IncreaseMaxValue(info.scaling.range_upgrade);
+	}
 }
 
 void Card::LoadSprite()
