@@ -14,17 +14,17 @@
       <stat stat="energy_cost" value ="3"/>
       <stat stat="units" value ="4"/>
     </stats>
-	
-	<upgrades>
-	  <stat stat="health" value ="20"/>
+
+    <upgrades>
+      <stat stat="health" value ="20"/>
       <stat stat="damage" value ="2"/>
       <stat stat="defense" value ="2"/>
       <stat stat="movement" value ="5"/>
-      <stat stat="attack_speed" value ="1"/>
+      <stat stat="attack_speed" value ="0"/>
       <stat stat="range" value ="0"/>
-	</upgrades>
+    </upgrades>
   </card>
-  
+
   <card type ="2">
     <name>Conscript</name>
     <sprite>sprites/Units/Infantry/conscript.png</sprite>
@@ -46,11 +46,11 @@
       <stat stat="damage" value ="2"/>
       <stat stat="defense" value ="2"/>
       <stat stat="movement" value ="5"/>
-      <stat stat="attack_speed" value ="1"/>
+      <stat stat="attack_speed" value ="0"/>
       <stat stat="range" value ="0"/>
     </upgrades>
   </card>
-  
+
   <card type ="3">
     <name>Virus</name>
     <sprite>sprites/Units/Infantry/virus.png</sprite>
@@ -72,7 +72,7 @@
       <stat stat="damage" value ="10"/>
       <stat stat="defense" value ="2"/>
       <stat stat="movement" value ="5"/>
-      <stat stat="attack_speed" value ="1"/>
+      <stat stat="attack_speed" value ="0"/>
       <stat stat="range" value ="0"/>
     </upgrades>
   </card>
@@ -98,10 +98,10 @@
       <stat stat="damage" value ="10"/>
       <stat stat="defense" value ="2"/>
       <stat stat="movement" value ="5"/>
-      <stat stat="attack_speed" value ="1"/>
+      <stat stat="attack_speed" value ="0"/>
       <stat stat="range" value ="0"/>
     </upgrades>
-  </card> 
+  </card>
 
   <card type ="5">
     <name>Guardian GI</name>
@@ -124,7 +124,7 @@
       <stat stat="damage" value ="5"/>
       <stat stat="defense" value ="1"/>
       <stat stat="movement" value ="5"/>
-      <stat stat="attack_speed" value ="2"/>
+      <stat stat="attack_speed" value ="0"/>
       <stat stat="range" value ="0"/>
     </upgrades>
   </card>
@@ -150,7 +150,7 @@
       <stat stat="damage" value ="5"/>
       <stat stat="defense" value ="1"/>
       <stat stat="movement" value ="5"/>
-      <stat stat="attack_speed" value ="2"/>
+      <stat stat="attack_speed" value ="0"/>
       <stat stat="range" value ="0"/>
     </upgrades>
   </card>
@@ -166,19 +166,19 @@
       <stat stat="defense" value ="10"/>
       <stat stat="movement" value ="25"/>
       <stat stat="attack_speed" value ="2"/>
-      <stat stat="range" value ="5"/>
+      <stat stat="range" value ="4"/>
       <stat stat="energy_cost" value ="5"/>
       <stat stat="units" value ="1"/>
     </stats>
-	
-	<upgrades>
-	  <stat stat="health" value ="20"/>
-      <stat stat="damage" value ="20"/>
+
+    <upgrades>
+      <stat stat="health" value ="20"/>
+      <stat stat="damage" value ="15"/>
       <stat stat="defense" value ="2"/>
       <stat stat="movement" value ="5"/>
-      <stat stat="attack_speed" value ="1"/>
+      <stat stat="attack_speed" value ="0"/>
       <stat stat="range" value ="0"/>
-	</upgrades>
+    </upgrades>
   </card>
 
   <card type ="8">
@@ -192,17 +192,17 @@
       <stat stat="defense" value ="10"/>
       <stat stat="movement" value ="25"/>
       <stat stat="attack_speed" value ="2"/>
-      <stat stat="range" value ="5"/>
+      <stat stat="range" value ="4"/>
       <stat stat="energy_cost" value ="5"/>
       <stat stat="units" value ="1"/>
     </stats>
 
     <upgrades>
       <stat stat="health" value ="20"/>
-      <stat stat="damage" value ="20"/>
+      <stat stat="damage" value ="15"/>
       <stat stat="defense" value ="2"/>
       <stat stat="movement" value ="5"/>
-      <stat stat="attack_speed" value ="1"/>
+      <stat stat="attack_speed" value ="0"/>
       <stat stat="range" value ="0"/>
     </upgrades>
   </card>
@@ -222,15 +222,15 @@
       <stat stat="energy_cost" value ="3"/>
       <stat stat="units" value ="3"/>
     </stats>
-	
-	<upgrades>
-	  <stat stat="health" value ="10"/>
+
+    <upgrades>
+      <stat stat="health" value ="10"/>
       <stat stat="damage" value ="1"/>
       <stat stat="defense" value ="2"/>
       <stat stat="movement" value ="5"/>
-      <stat stat="attack_speed" value ="1"/>
+      <stat stat="attack_speed" value ="0"/>
       <stat stat="range" value ="0"/>
-	</upgrades>
+    </upgrades>
 
   </card>
 
@@ -255,7 +255,7 @@
       <stat stat="damage" value ="1"/>
       <stat stat="defense" value ="2"/>
       <stat stat="movement" value ="5"/>
-      <stat stat="attack_speed" value ="1"/>
+      <stat stat="attack_speed" value ="0"/>
       <stat stat="range" value ="0"/>
     </upgrades>
 
@@ -276,18 +276,18 @@
       <stat stat="energy_cost" value ="4"/>
       <stat stat="units" value ="1"/>
     </stats>
-	
-	<upgrades>
-	  <stat stat="health" value ="15"/>
+
+    <upgrades>
+      <stat stat="health" value ="15"/>
       <stat stat="damage" value ="5"/>
       <stat stat="defense" value ="1"/>
       <stat stat="movement" value ="10"/>
-      <stat stat="attack_speed" value ="2"/>
+      <stat stat="attack_speed" value ="0"/>
       <stat stat="range" value ="0"/>
-	</upgrades>
+    </upgrades>
 
   </card>
-  
+
   <card type ="12">
     <name>Tesla Tank</name>
     <sprite>sprites/Units/LandVehicles/teslasprite.png</sprite>
@@ -309,7 +309,7 @@
       <stat stat="damage" value ="5"/>
       <stat stat="defense" value ="1"/>
       <stat stat="movement" value ="10"/>
-      <stat stat="attack_speed" value ="2"/>
+      <stat stat="attack_speed" value ="0"/>
       <stat stat="range" value ="0"/>
     </upgrades>
 
@@ -330,17 +330,17 @@
       <stat stat="energy_cost" value ="3"/>
       <stat stat="units" value ="3"/>
     </stats>
-	
-	<upgrades>
-	  <stat stat="health" value ="20"/>
+
+    <upgrades>
+      <stat stat="health" value ="20"/>
       <stat stat="damage" value ="1"/>
       <stat stat="defense" value ="2"/>
       <stat stat="movement" value ="5"/>
-      <stat stat="attack_speed" value ="1"/>
+      <stat stat="attack_speed" value ="0"/>
       <stat stat="range" value ="0"/>
-	</upgrades>
+    </upgrades>
   </card>
-  
+
   <card type ="14">
     <name>Siegechopper</name>
     <sprite>sprites/Units/AirVehicles/siegechopper.png</sprite>
@@ -362,7 +362,7 @@
       <stat stat="damage" value ="1"/>
       <stat stat="defense" value ="2"/>
       <stat stat="movement" value ="5"/>
-      <stat stat="attack_speed" value ="1"/>
+      <stat stat="attack_speed" value ="0"/>
       <stat stat="range" value ="0"/>
     </upgrades>
 
@@ -383,15 +383,15 @@
       <stat stat="energy_cost" value ="5"/>
       <stat stat="units" value ="2"/>
     </stats>
-	
-	<upgrades>
-	  <stat stat="health" value ="10"/>
+
+    <upgrades>
+      <stat stat="health" value ="10"/>
       <stat stat="damage" value ="10"/>
       <stat stat="defense" value ="2"/>
       <stat stat="movement" value ="5"/>
-      <stat stat="attack_speed" value ="1"/>
+      <stat stat="attack_speed" value ="0"/>
       <stat stat="range" value ="0"/>
-	</upgrades>
+    </upgrades>
   </card>
 
   <card type ="16">
@@ -415,7 +415,7 @@
       <stat stat="damage" value ="10"/>
       <stat stat="defense" value ="2"/>
       <stat stat="movement" value ="5"/>
-      <stat stat="attack_speed" value ="1"/>
+      <stat stat="attack_speed" value ="0"/>
       <stat stat="range" value ="0"/>
     </upgrades>
   </card>
@@ -435,17 +435,17 @@
       <stat stat="energy_cost" value ="4"/>
       <stat stat="units" value ="1"/>
     </stats>
-	
-	<upgrades>
-	  <stat stat="health" value ="10"/>
+
+    <upgrades>
+      <stat stat="health" value ="10"/>
       <stat stat="damage" value ="20"/>
       <stat stat="defense" value ="1"/>
       <stat stat="movement" value ="5"/>
-      <stat stat="attack_speed" value ="1"/>
+      <stat stat="attack_speed" value ="0"/>
       <stat stat="range" value ="0"/>
-	</upgrades>
+    </upgrades>
   </card>
-  
+
   <card type ="18">
     <name>Spy Plane</name>
     <sprite>sprites/Units/AirVehicles/spyplane.png</sprite>
@@ -467,10 +467,10 @@
       <stat stat="damage" value ="20"/>
       <stat stat="defense" value ="1"/>
       <stat stat="movement" value ="5"/>
-      <stat stat="attack_speed" value ="1"/>
+      <stat stat="attack_speed" value ="0"/>
       <stat stat="range" value ="0"/>
     </upgrades>
 
   </card>
-  
+
 </config>
