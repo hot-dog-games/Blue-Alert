@@ -606,21 +606,21 @@ void BattleScene::StartUI()
 	energy_label = App->gui->CreateLabel({ 10,4 }, "fonts/gunplay.ttf", 20, "0", { 255,255,255,255 }, 120, energy_image, false);
 
 	SDL_Rect pause_rect[3];
-	pause_rect[0] = { 3220,860,44,34 };
-	pause_rect[1] = { 3265,860,44,34 };
-	pause_rect[2] = { 3313,860,44,34 };
+	pause_rect[0] = { 1168,1371,44,36 };
+	pause_rect[1] = { 1215,1371,44,36 };
+	pause_rect[2] = { 1262,1371,44,36 };
 	pause_button = App->gui->CreateButton({ 25, 910 }, pause_rect, nullptr);
 
 	SDL_Rect bomb_button_rect[3];
-	bomb_button_rect[0] = { 3370,796,52,52 };
-	bomb_button_rect[1] = { 3426,792,59,57 };
-	bomb_button_rect[2] = { 3488,794,52,52 };
+	bomb_button_rect[0] = { 1316,1304,58,57 };
+	bomb_button_rect[1] = { 1376,1303,58,57 };
+	bomb_button_rect[2] = { 1434,1303,58,57 };
 	bomb_button = App->gui->CreateButton({ 567, 847 }, bomb_button_rect, nullptr);
 
 	SDL_Rect faction_button_rect[3];
-	faction_button_rect[0] = { 3399,858,35,35 };
-	faction_button_rect[1] = { 3438,855,39,39 };
-	faction_button_rect[2] = { 3480,857,35,35 };
+	faction_button_rect[0] = { 1346,1366,39,39};
+	faction_button_rect[1] = { 1387,1366,39,39 };
+	faction_button_rect[2] = { 1427,1366,39,39 };
 	faction_button = App->gui->CreateButton({ 575, 912 }, faction_button_rect, nullptr);
 
 	health_bar_image = App->gui->CreateImage({ 248, 770 }, { 24,1378,144,16 });
@@ -650,9 +650,9 @@ void BattleScene::StartUI()
 	win_continue_one = App->gui->CreateButtonText({ 170, 560 }, { 30,0}, button_rect, "CONTINUE", { 200,200,200,255 }, 27, win_panel_one);
 	win_continue_two = App->gui->CreateButtonText({ 170, 560 }, { 30,0 }, button_rect, "CONTINUE", { 200,200,200,255 }, 27, win_panel_two);
 
-	win_unit_one = App->gui->CreateSelectableButton({ 130,200 }, App->gui->LoadUIButton(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[0], "upgrade"), win_panel_two);
-	win_unit_two = App->gui->CreateSelectableButton({ 320,200 }, App->gui->LoadUIButton(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[1], "upgrade"), win_panel_two);
-	win_unit_three = App->gui->CreateSelectableButton({ 510,200 }, App->gui->LoadUIButton(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[2], "upgrade"), win_panel_two);
+	win_unit_one = App->gui->CreateSelectableButton({ 160,200 }, App->gui->LoadUIButton(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[0], "upgrade"), win_panel_two);
+	win_unit_two = App->gui->CreateSelectableButton({ 350,200 }, App->gui->LoadUIButton(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[1], "upgrade"), win_panel_two);
+	win_unit_three = App->gui->CreateSelectableButton({ 260,370 }, App->gui->LoadUIButton(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[2], "upgrade"), win_panel_two);
 
 	win_building = App->gui->CreateImage({ 195,240 }, App->gui->LoadUIImage(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType(), "end_screen"), win_panel_one);
 

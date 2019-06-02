@@ -219,7 +219,7 @@ bool TestingScene::Update(float dt)
 			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() != EntityType::STORE_STRATEGY_BUILDING)
 			{
 				App->gui->EnableElement((UIElement*)win_panel_one);
-				App->game_manager->LevelUpgrade();
+				//App->game_manager->LevelUpgrade();
 			}
 
 			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetChildren().size() == 0) {
