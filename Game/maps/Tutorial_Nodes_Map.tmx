@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="isometric" renderorder="right-down" width="100" height="100" tilewidth="60" tileheight="29" infinite="0" nextlayerid="65" nextobjectid="26">
+<map version="1.0" tiledversion="1.1.5" orientation="isometric" renderorder="right-down" width="100" height="100" tilewidth="60" tileheight="29" infinite="0" nextobjectid="26">
  <tileset firstgid="1" name="Grass FlatTiles Spritesheet" tilewidth="60" tileheight="29" spacing="1" margin="1" tilecount="260" columns="13">
   <image source="../sprites/Environment/Grass/flatTiles/Grass FlatTiles Spritesheet.png" width="800" height="600"/>
  </tileset>
@@ -21,7 +21,7 @@
  <tileset firstgid="1381" name="Ramps" tilewidth="60" tileheight="29" spacing="1" margin="1" tilecount="260" columns="13">
   <image source="../sprites/Environment/Grass/flatTiles/Ramps.png" width="800" height="600"/>
  </tileset>
- <layer id="57" name="Grass" width="100" height="100">
+ <layer name="Grass" width="100" height="100">
   <properties>
    <property name="Nodraw" type="int" value="0"/>
   </properties>
@@ -10028,7 +10028,7 @@
    <tile gid="33"/>
   </data>
  </layer>
- <layer id="58" name="Nucleos" width="100" height="100">
+ <layer name="Nucleos" width="100" height="100">
   <properties>
    <property name="Nodraw" type="int" value="0"/>
   </properties>
@@ -20035,7 +20035,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="59" name="Path" width="100" height="100">
+ <layer name="Path" width="100" height="100">
   <properties>
    <property name="Nodraw" type="int" value="0"/>
   </properties>
@@ -30042,7 +30042,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="60" name="Rocks" width="100" height="100">
+ <layer name="Rocks" width="100" height="100">
   <data>
    <tile/>
    <tile/>
@@ -40046,7 +40046,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="61" name="River" width="100" height="100">
+ <layer name="River" width="100" height="100">
   <data>
    <tile/>
    <tile/>
@@ -50050,7 +50050,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="62" name="Trees" width="100" height="100">
+ <layer name="Trees" width="100" height="100">
   <data>
    <tile/>
    <tile/>
@@ -60054,7 +60054,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="63" name="Extras" width="100" height="100">
+ <layer name="Extras" width="100" height="100">
   <data>
    <tile/>
    <tile/>
@@ -70058,7 +70058,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="64" name="Capa de patrones 8" width="100" height="100">
+ <layer name="Capa de patrones 8" width="100" height="100">
   <data>
    <tile/>
    <tile/>
