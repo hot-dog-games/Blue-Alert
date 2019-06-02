@@ -121,6 +121,17 @@ EncounterNode * EncounterTree::GetFightingNode()
 	return fighting_node;
 }
 
+EncounterNode * EncounterTree::GetNodeById(int id)
+{
+	for each (EncounterNode* n in map_encounters)
+	{
+		if (n->GetID() == id)
+			return n;
+	}
+
+	return nullptr;
+}
+
 void EncounterTree::SetCurrentNode(EncounterNode * current_node)
 {
 	this->current_node = current_node;
@@ -190,6 +201,11 @@ void EncounterTree::UpdateTreeState()
 					iPoint child_world_position = App->map->MapToWorld(n->GetParents()[i]->GetPosition().x, n->GetParents()[i]->GetPosition().y);
 					SetDotsPositions(parent_world_position, child_world_position, 2);
 				}
+				else {
+					iPoint parent_world_position = App->map->MapToWorld(n->GetPosition().x, n->GetPosition().y);
+					iPoint child_world_position = App->map->MapToWorld(n->GetParents()[i]->GetPosition().x, n->GetParents()[i]->GetPosition().y);
+					SetDotsPositions(parent_world_position, child_world_position, 0);
+				}
 			}
 		}
 
@@ -214,6 +230,7 @@ pugi::xml_node EncounterTree::GetXmlEncounterNodeById(int id)
 
 void EncounterTree::CleanTree()
 {
+	LOG("encounter tree cleanup");
 	for each (EncounterNode* en in map_encounters)
 	{
 		delete en;

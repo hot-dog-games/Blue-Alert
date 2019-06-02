@@ -25,25 +25,6 @@ bool CardManager::CleanUp()
 	return true;
 }
 
-bool CardManager::PostUpdate()
-{
-	if (to_delete)
-	{
-		for (std::list<Card*>::iterator card = cards.begin(); card != cards.end(); ++card)
-		{
-			if ((*card)->to_delete)
-			{
-				App->tex->UnLoad((*card)->sprite_path);
-				delete (*card);
-				cards.erase(card);
-			}				
-		}
-
-		to_delete = false;
-	}
-	return true;
-}
-
 bool CardManager::Awake(pugi::xml_node& conf)
 {
 	pugi::xml_parse_result result = config_file.load_file("xml/cards.xml");
@@ -61,7 +42,7 @@ bool CardManager::Start()
 	return true;
 }
 
-Card* CardManager::CreateCard(EntityType type)
+Card* CardManager::CreateCard(EntityType type, int lvl)
 {
 	Card* card = new Card;
 	card->type = type;
@@ -77,6 +58,15 @@ Card* CardManager::CreateCard(EntityType type)
 	LoadCardStats(card, card_node.child("stats"));
 	LoadCardUpgrades(card, card_node.child("upgrades"));
 	LoadCardCombat(card, card_node.child("combat"));
+
+	if (lvl > 0)
+	{
+		for (int i = 0; i < card->level; ++i)
+		{
+			card->Upgrade();
+		}
+	}
+
 	cards.push_back(card);
 
 	return card;
@@ -84,21 +74,11 @@ Card* CardManager::CreateCard(EntityType type)
 
 Card* CardManager::DeleteCard(Card* card)
 {
-	card->to_delete = true;
-	to_delete = true;
+	LOG("delete card");
+	cards.remove(card);
+	delete card;
 
 	return nullptr;
-}
-
-Card * CardManager::CopyCard(Card * card)
-{
-	Card* new_card = CreateCard(card->type);
-	for (int i = 0; i < card->level; ++i)
-	{
-		new_card->Upgrade();
-	}
-
-	return new_card;
 }
 
 void CardManager::LoadCardStats(Card* card, pugi::xml_node stats_node)

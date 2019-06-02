@@ -149,3 +149,8 @@ StrategyBuilding * EncounterNode::GetEntity()
 {
 	return entity;
 }
+
+int EncounterNode::GetID()
+{
+	return id;
+}

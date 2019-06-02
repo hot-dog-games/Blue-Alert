@@ -55,6 +55,7 @@ private:
 	void UpdateGoldOnUnSelect(int unit);
 
 	void SetEnemiesUpgrades(Deck* enemy_deck);
+	void DropNukes();
 
 	void StartUI();
 
@@ -140,6 +141,8 @@ private:
 
 	//Pause Menu
 	UIButton* pause_button = nullptr;
+	UIButton* bomb_button = nullptr;
+	UIButton* faction_button = nullptr;
 	UIImage* pause_panel = nullptr;
 	UIButton* pause_continue = nullptr;
 	UIButton* pause_exit = nullptr;
@@ -148,6 +151,8 @@ private:
 	UILabel* options_label = nullptr;
 	UIScrollBar* pause_music = nullptr;
 	UIScrollBar* pause_fx = nullptr;
+	UIImage* side_troop_panel = nullptr;
+	UIImage* side_troop_panel_left = nullptr;
 
 	int unit_store_cost = 100;
 	int total_cost_acumulated = 0;

@@ -304,6 +304,7 @@ void EntityManager::GetCoreStats(std::map<std::string, Stat*> *stats)
 
 bool EntityManager::DeleteEntity(Entity* entity)
 {
+	LOG("delete entity");
 	entity->CleanUp();
 	entities.remove(entity);
 	delete entity;

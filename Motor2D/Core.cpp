@@ -71,6 +71,7 @@ bool Core::Update(float dt)
 
 bool Core::CleanUp()
 {
+	LOG("CORE CLEANUP");
 	std::map<std::string, Stat*>::iterator item;
 	for (item = stats.begin(); item != stats.end(); ++item)
 	{

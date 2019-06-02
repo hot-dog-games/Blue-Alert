@@ -17,6 +17,7 @@
 #include "UISelectableButton.h"
 #include "UIBar.h"
 #include "GUI.h"
+#include "EntityManager.h"
 #include "SceneManager.h"
 #include "TransitionManager.h"
 #include "CardManager.h"
@@ -25,6 +26,7 @@
 #include "BattleScene.h"
 #include "Buff.h"
 #include "GameManager.h"
+#include "Particles.h"
 #include "EncounterTree.h"
 #include "EncounterNode.h"
 #include "UIImage.h"
@@ -78,7 +80,10 @@ bool BattleScene::Start()
 
 	App->game_manager->health_upgrade->GetBuffs(allied_core->stats);
 	App->game_manager->energy_upgrade->GetBuffs(allied_core->stats);
+
+
 	allied_core->DecreaseEnergy(20);
+
 	//Initialize UI
 	StartUI();
 
@@ -206,7 +211,7 @@ bool BattleScene::Update(float dt)
 			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() != EntityType::STORE_STRATEGY_BUILDING)
 			{
 				App->gui->EnableElement((UIElement*)win_panel_one);
-				App->game_manager->LevelUpgrade();
+				App->game_manager->LevelUpgrade((EntityType)App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType());
 			}
 			else 
 			{
@@ -242,7 +247,7 @@ bool BattleScene::Update(float dt)
 			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() != EntityType::STORE_STRATEGY_BUILDING)
 			{
 				App->gui->EnableElement((UIElement*)win_panel_one);
-				App->game_manager->LevelUpgrade();
+				App->game_manager->LevelUpgrade((EntityType)App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType());
 			}
 			else
 			{
@@ -336,8 +341,9 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 				App->game_manager->ResetBuildingBuffs();
 				App->game_manager->GetEncounterTree()->CleanTree();
 				App->game_manager->CreateStage();
-				App->game_manager->SaveState();
+				App->game_manager->SaveRecoveryState();
 			}
+			App->SaveGame(nullptr);
 		}
 		else if (element == lose_continue) {
 			App->gui->DisableElement((UIElement*)lose_panel);
@@ -394,11 +400,18 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 				App->game_manager->ResetBuildingBuffs();
 				App->game_manager->GetEncounterTree()->CleanTree();
 				App->game_manager->CreateStage();
-				App->game_manager->SaveState();
+				App->game_manager->SaveRecoveryState();
 			}
 
 			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
 		}
+
+		if (element == bomb_button)
+		{
+			DropNukes();
+			bomb_button->SetLocked(false);
+		}
+
 
 		if (element == pause_button) {
 			if (!App->IsPaused()) {
@@ -543,6 +556,16 @@ void BattleScene::SetEnemiesUpgrades(Deck* enemy_deck)
 	LOG("enemy cards level %i, %i, %i, %i", enemy_deck->cards[0]->level, enemy_deck->cards[1]->level, enemy_deck->cards[2]->level, enemy_deck->cards[3]->level);
 }
 
+void BattleScene::DropNukes()
+{
+	App->particles->CreateParticle(ParticleType::NUKE_BOMB, { allied_core->position.x - (allied_core->current_frame.w * 2), 0 },
+		{ allied_core->position.x - (allied_core->current_frame.w * 2), allied_core->position.y - allied_core->current_frame.h }, 140);
+	App->particles->CreateParticle(ParticleType::NUKE_BOMB, { allied_core->position.x, 0 }, 
+		{ allied_core->position.x, allied_core->position.y - (allied_core->current_frame.h * 1.75f) }, 130);
+	App->particles->CreateParticle(ParticleType::NUKE_BOMB, { allied_core->position.x + (allied_core->current_frame.w * 2), 0 },
+		{ allied_core->position.x + (allied_core->current_frame.w * 2), allied_core->position.y - allied_core->current_frame.h }, 140);
+}
+
 void BattleScene::StartUI()
 {
 	//Generate random number
@@ -551,6 +574,9 @@ void BattleScene::StartUI()
 
 	uint width, height;
 	App->win->GetWindowSize(width, height);
+
+	side_troop_panel = App->gui->CreateImage({ 522, 835 }, { 1431,383,108,130 }, nullptr);
+	side_troop_panel_left = App->gui->CreateImage({ 10, 885 }, { 1431,383,108,130 }, nullptr);
 
 	unit_panel = App->gui->CreateImage({ 80, (int)height-145}, { 1231,186,481,155 });
 	if (allied_core->GetCard(CN_FIRST)) {
@@ -575,15 +601,27 @@ void BattleScene::StartUI()
 		energy_cost_label[3] = App->gui->CreateLabel({ 7,2 }, "fonts/gunplay.ttf", 18, std::to_string((int)(allied_core->GetCard(CN_FOURTH)->info.stats.find("energy_cost")->second->GetValue())), { 255,255,255,255 }, 120, energy_cost[3], false);
 	}
 
-	energy_bar = App->gui->CreateBar({ 35, 17 }, { 1244,163,432,17 }, allied_core->GetEnergy(), BAR_HORITZONTAL, BAR_DYNAMIC, nullptr, unit_panel);
+	energy_bar = App->gui->CreateBar({ 30, 11 }, { 1237,141,446,36 }, allied_core->GetEnergy(), BAR_HORITZONTAL, BAR_DYNAMIC, nullptr, unit_panel);
 	energy_image = App->gui->CreateImage({ 8, 10 }, { 1238,345,32,32 }, unit_panel);
 	energy_label = App->gui->CreateLabel({ 10,4 }, "fonts/gunplay.ttf", 20, "0", { 255,255,255,255 }, 120, energy_image, false);
 
 	SDL_Rect pause_rect[3];
-	pause_rect[0] = { 3027,1756,78,15 };
-	pause_rect[1] = { 3118,1756,78,15 };
-	pause_rect[2] = { 3207,1756,78,15 };
-	pause_button = App->gui->CreateButton({ 0,0 }, pause_rect, unit_panel);
+	pause_rect[0] = { 3220,860,44,34 };
+	pause_rect[1] = { 3265,860,44,34 };
+	pause_rect[2] = { 3313,860,44,34 };
+	pause_button = App->gui->CreateButton({ 25, 910 }, pause_rect, nullptr);
+
+	SDL_Rect bomb_button_rect[3];
+	bomb_button_rect[0] = { 3370,796,52,52 };
+	bomb_button_rect[1] = { 3426,792,59,57 };
+	bomb_button_rect[2] = { 3488,794,52,52 };
+	bomb_button = App->gui->CreateButton({ 567, 847 }, bomb_button_rect, nullptr);
+
+	SDL_Rect faction_button_rect[3];
+	faction_button_rect[0] = { 3399,858,35,35 };
+	faction_button_rect[1] = { 3438,855,39,39 };
+	faction_button_rect[2] = { 3480,857,35,35 };
+	faction_button = App->gui->CreateButton({ 575, 912 }, faction_button_rect, nullptr);
 
 	health_bar_image = App->gui->CreateImage({ 248, 770 }, { 24,1378,144,16 });
 	enemy_health_bar_image = App->gui->CreateImage({ 248, 30 }, { 24,1455,144,16 });
@@ -636,7 +674,6 @@ void BattleScene::StartUI()
 	App->gui->DisableElement(pause_panel);
 
 	//Store 
-
 	if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() == EntityType::STORE_STRATEGY_BUILDING)
 	{
 		store_panel = App->gui->CreateImage({ 139,100 }, { 2793, 960, 749, 565 });
