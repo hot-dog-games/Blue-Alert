@@ -83,7 +83,12 @@ bool MainMenuScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			App->gui->DisableElement(optionsbackground);
 		}
 		if (element == newgamebutton) {
+			App->game_manager->NewGame();
 			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, Black);
+		}
+		if (element == continuebutton)
+		{
+			App->transition_manager->CreateFadeTransition(2.0f, false, 0, Black, true);S
 		}
 	}
 	return true;
@@ -118,5 +123,5 @@ void MainMenuScene::StartUI() {
 	exitbutton = App->gui->CreateButtonText({ 180,865 }, { 90,10 }, large_button_rect, "EXIT" ,{ 255,255,255,255 }, 23, menu_background);
 	optionsbutton = App->gui->CreateButtonText({ 180,770 }, { 60,10 }, large_button_rect, "OPTIONS", { 255,255,255,255 }, 23, menu_background);
 	newgamebutton = App->gui->CreateButtonText({ 180,580 }, { 50,10 }, large_button_rect, "NEW GAME", { 255,255,255,255 }, 23, menu_background);
-	continuebutton = App->gui->CreateButtonText({ 180,675 }, { 50,10 }, large_button_rect, "CONTINUE", { 75,8,8,255 }, 23, menu_background, false);
+	continuebutton = App->gui->CreateButtonText({ 180,675 }, { 50,10 }, large_button_rect, "CONTINUE", { 255,255,255,255 }, 23, menu_background, App->HasSave());
 }

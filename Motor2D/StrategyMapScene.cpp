@@ -43,6 +43,10 @@ bool StrategyMapScene::Start()
 {
 	if(App->game_manager->restart)
 		App->game_manager->Restart();
+	else if (App->game_manager->change_stage)
+		App->game_manager->ChangeStage();
+
+	App->SaveGame(nullptr);
 
 	BROFILER_CATEGORY("SMStart", Profiler::Color::Red);
 

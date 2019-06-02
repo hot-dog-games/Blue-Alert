@@ -112,11 +112,6 @@ bool TestingScene::PreUpdate()
 // Called each loop iteration
 bool TestingScene::Update(float dt)
 {
-	if (App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
-		App->LoadGame("save_game.xml");
-
-	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
-		App->SaveGame("save_game.xml");
 
 	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 		App->render->camera.y += 100 * dt;
