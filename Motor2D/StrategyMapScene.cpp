@@ -52,8 +52,18 @@ bool StrategyMapScene::Start()
 
 	switch (App->game_manager->stage)
 	{
-	case STAGE_TUTORIAL: App->map->Load("Tutorial_Nodes_Map.tmx"); break;
-	case STAGE_01: App->map->Load("Nodes Map.tmx"); break;
+	case STAGE_TUTORIAL: 
+		App->map->Load("Tutorial_Nodes_Map.tmx"); 
+		map_camera_limit = { 0, 0, 2000, 1692 };
+		break;
+	case STAGE_01: 
+		App->map->Load("Nodes Map.tmx");
+		map_camera_limit = { 0, 0, 2600, 1792 };
+		break;
+	case STAGE_02: 
+		App->map->Load("Nodes Map Snow.tmx"); 
+		map_camera_limit = { 0, 0, 2600, 1992 };
+		break;
 	default:
 		break;
 	}

@@ -100,6 +100,15 @@ bool EncounterTree::LoadDocuments()
 		else
 			map01_nodes = nodes_01.child("map01_nodes");
 		break;
+	case STAGE_02:
+		result = nodes_01.load_file("xml/map02_nodes.xml");
+
+		if (result == NULL)
+			LOG("Could not load card xml file. pugi error: %s", result.description());
+		else
+			map01_nodes = nodes_01.child("map02_nodes");
+
+		break;
 	default:
 		break;
 	}

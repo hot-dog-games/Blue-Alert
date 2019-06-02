@@ -114,7 +114,7 @@ private:
 	float drag_threshhold = 0.2f;
 	bool dragable = true;
 
-	SDL_Rect map_camera_limit = { 0, 0, 2600, 1592 };
+	SDL_Rect map_camera_limit;
 
 	iPoint last_camera_position;
 	int volume = 64;
