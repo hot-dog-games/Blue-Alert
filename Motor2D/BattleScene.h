@@ -87,9 +87,9 @@ private:
 	UIImage*		lose_panel = nullptr;
 
 	//buttons
-	UIButton*		win_continue_one = nullptr;
-	UIButton*		win_continue_two = nullptr;
-	UIButton*		lose_continue = nullptr;
+	UIButtonText*		win_continue_one = nullptr;
+	UIButtonText*		win_continue_two = nullptr;
+	UIButtonText*		lose_continue = nullptr;
 	UIButtonText*		purchase = nullptr;
 
 	//labels
@@ -144,10 +144,15 @@ private:
 	UIButton* bomb_button = nullptr;
 	UIButton* faction_button = nullptr;
 	UIImage* pause_panel = nullptr;
+	UIButton* pause_continue = nullptr;
+	UIButton* pause_exit = nullptr;
+	UILabel* pause_music_label = nullptr;
+	UILabel* pause_fx_label = nullptr;
+	UILabel* options_label = nullptr;
+	UIScrollBar* pause_music = nullptr;
+	UIScrollBar* pause_fx = nullptr;
 	UIImage* side_troop_panel = nullptr;
 	UIImage* side_troop_panel_left = nullptr;
-	UIButton* p_continue = nullptr;
-	UIButton* p_exit_menu = nullptr;
 
 	int unit_store_cost = 100;
 	int total_cost_acumulated = 0;

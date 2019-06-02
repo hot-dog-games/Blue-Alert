@@ -7,53 +7,39 @@
 	<map />
 	<game_manager>
 		<save_state>
-			<stage value="1" />
-			<node value="3" />
+			<stage value="0" />
+			<node value="1" />
 			<captured_nodes>
 				<node id="1" />
-				<node id="3" />
 			</captured_nodes>
 			<collection>
-				<card lvl="2" type="2" />
-				<card lvl="2" type="8" />
-				<card lvl="0" type="16" />
-				<card lvl="0" type="3" />
-				<card lvl="3" type="4" />
-				<card lvl="0" type="10" />
-				<card lvl="2" type="6" />
-				<card lvl="1" type="12" />
+				<card lvl="0" type="2" />
+				<card lvl="0" type="18" />
 			</collection>
 			<deck>
 				<card type="2" />
-				<card type="8" />
-				<card type="16" />
-				<card type="3" />
+				<card type="18" />
+				<card type="-1" />
+				<card type="-1" />
 			</deck>
-			<gold value="1900" />
+			<gold value="100" />
 			<health_lvl value="0" />
 			<energy_lvl value="0" />
 		</save_state>
 		<recovery_state>
-			<stage value="1" />
+			<stage value="0" />
 			<node value="0" />
 			<captured_nodes />
 			<collection>
-				<card lvl="1" type="2" />
-				<card lvl="2" type="8" />
-				<card lvl="0" type="16" />
-				<card lvl="0" type="3" />
-				<card lvl="2" type="4" />
-				<card lvl="0" type="10" />
-				<card lvl="2" type="6" />
-				<card lvl="1" type="12" />
+				<card lvl="0" type="2" />
 			</collection>
 			<deck>
 				<card type="2" />
-				<card type="8" />
-				<card type="16" />
-				<card type="3" />
+				<card type="-1" />
+				<card type="-1" />
+				<card type="-1" />
 			</deck>
-			<gold value="1700" />
+			<gold value="0" />
 			<health_lvl value="0" />
 			<energy_lvl value="0" />
 		</recovery_state>

@@ -93,6 +93,8 @@ bool BattleScene::Start()
 	no_energy = App->audio->LoadFx("audio/fx/UI/gpsyampa.wav");
 	App->audio->PlayMusic("audio/music/9.Destroy-Red Alert2_2.ogg");
 
+	App->audio->SetAllFXVolume(App->audio->GetFxVolume());
+
 	return true;
 }
 
@@ -422,11 +424,11 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			}
 		}
 
-		if (element == p_continue && App->IsPaused()) {
+		if (element == pause_continue && App->IsPaused()) {
 			App->ResumeGame();
 			App->gui->DisableElement(pause_panel);
 		}
-		else if (element == p_exit_menu) {
+		else if (element == pause_exit) {
 			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MENU, White);
 		}
 	}
@@ -604,21 +606,21 @@ void BattleScene::StartUI()
 	energy_label = App->gui->CreateLabel({ 10,4 }, "fonts/gunplay.ttf", 20, "0", { 255,255,255,255 }, 120, energy_image, false);
 
 	SDL_Rect pause_rect[3];
-	pause_rect[0] = { 3220,860,44,34 };
-	pause_rect[1] = { 3265,860,44,34 };
-	pause_rect[2] = { 3313,860,44,34 };
+	pause_rect[0] = { 1168,1371,44,36 };
+	pause_rect[1] = { 1215,1371,44,36 };
+	pause_rect[2] = { 1262,1371,44,36 };
 	pause_button = App->gui->CreateButton({ 25, 910 }, pause_rect, nullptr);
 
 	SDL_Rect bomb_button_rect[3];
-	bomb_button_rect[0] = { 3370,796,52,52 };
-	bomb_button_rect[1] = { 3426,792,59,57 };
-	bomb_button_rect[2] = { 3488,794,52,52 };
+	bomb_button_rect[0] = { 1316,1304,58,57 };
+	bomb_button_rect[1] = { 1376,1303,58,57 };
+	bomb_button_rect[2] = { 1434,1303,58,57 };
 	bomb_button = App->gui->CreateButton({ 567, 847 }, bomb_button_rect, nullptr);
 
 	SDL_Rect faction_button_rect[3];
-	faction_button_rect[0] = { 3399,858,35,35 };
-	faction_button_rect[1] = { 3438,855,39,39 };
-	faction_button_rect[2] = { 3480,857,35,35 };
+	faction_button_rect[0] = { 1346,1366,39,39};
+	faction_button_rect[1] = { 1387,1366,39,39 };
+	faction_button_rect[2] = { 1427,1366,39,39 };
 	faction_button = App->gui->CreateButton({ 575, 912 }, faction_button_rect, nullptr);
 
 	health_bar_image = App->gui->CreateImage({ 248, 770 }, { 24,1378,144,16 });
@@ -629,10 +631,11 @@ void BattleScene::StartUI()
 	App->gui->EnableInteractable((UIElement*)unit_panel);
 
 	// End Game Screen Win
-	SDL_Rect button_rect[3];
-	button_rect[0] = { 221,533,220,51 };
-	button_rect[1] = { 221,585,220,51 };
-	button_rect[2] = { 221,637,220,51 };
+	SDL_Rect button_rect[4];
+	button_rect[0] = { 800,499,294,67 };
+	button_rect[1] = { 800,569,294,67 };
+	button_rect[2] = { 800,639,294,67 };
+	button_rect[3] = { 800,639,294,67 };
 
 	SDL_Rect purchase_rect[4];
 	purchase_rect[0] = {2795, 1536, 220, 51};
@@ -640,64 +643,67 @@ void BattleScene::StartUI()
 	purchase_rect[2] = {2795, 1640, 220, 51};
 	purchase_rect[3] = {2795, 1692, 220, 51};
 
-	win_panel_one = App->gui->CreateImage({ 139,150 }, { 1,852,744,466 });
-	win_panel_two = App->gui->CreateImage({ 139,150 }, { 1,852,744,466 });
-	win_text_one = App->gui->CreateLabel({ 30,30 }, "fonts/red_alert.ttf", 40, "Congratulations, you've conquered this zone and unlocked the next building!", { 255,232,2, 255 }, 710, win_panel_one);
-	win_text_two = App->gui->CreateLabel({ 30,30 }, "fonts/red_alert.ttf", 40, "Upgrade a troop or choose a new one to add to your deck", { 255,232,2, 255 }, 710, win_panel_two);
-	win_continue_one = App->gui->CreateButton({ 262,375 }, button_rect, win_panel_one);
-	win_continue_two = App->gui->CreateButton({ 262,375 }, button_rect, win_panel_two);
+	win_panel_one = App->gui->CreateImage({ 17,120 }, { 3986,1646,605,660 });
+	win_panel_two = App->gui->CreateImage({ 17,120 }, { 3986,1646,605,660 });
+	win_text_one = App->gui->CreateLabel({ 30,30 }, "fonts/red_alert.ttf", 40, "Congratulations, you've conquered this zone and unlocked the next building!", { 255,232,2, 255 }, 600, win_panel_one);
+	win_text_two = App->gui->CreateLabel({ 30,30 }, "fonts/red_alert.ttf", 40, "Upgrade a troop or choose a new one to add to your deck", { 255,232,2, 255 }, 600, win_panel_two);
+	win_continue_one = App->gui->CreateButtonText({ 170, 560 }, { 30,0}, button_rect, "CONTINUE", { 200,200,200,255 }, 27, win_panel_one);
+	win_continue_two = App->gui->CreateButtonText({ 170, 560 }, { 30,0 }, button_rect, "CONTINUE", { 200,200,200,255 }, 27, win_panel_two);
 
-	win_unit_one = App->gui->CreateSelectableButton({ 130,200 }, App->gui->LoadUIButton(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[0], "upgrade"), win_panel_two);
-	win_unit_two = App->gui->CreateSelectableButton({ 320,200 }, App->gui->LoadUIButton(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[1], "upgrade"), win_panel_two);
-	win_unit_three = App->gui->CreateSelectableButton({ 510,200 }, App->gui->LoadUIButton(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[2], "upgrade"), win_panel_two);
+	win_unit_one = App->gui->CreateSelectableButton({ 160,200 }, App->gui->LoadUIButton(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[0], "upgrade"), win_panel_two);
+	win_unit_two = App->gui->CreateSelectableButton({ 350,200 }, App->gui->LoadUIButton(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[1], "upgrade"), win_panel_two);
+	win_unit_three = App->gui->CreateSelectableButton({ 260,370 }, App->gui->LoadUIButton(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[2], "upgrade"), win_panel_two);
 
-	win_building = App->gui->CreateImage({ 260,160 }, App->gui->LoadUIImage(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType(), "end_screen"), win_panel_one);
+	win_building = App->gui->CreateImage({ 195,240 }, App->gui->LoadUIImage(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType(), "end_screen"), win_panel_one);
 
 	App->gui->DisableElement((UIElement*)win_panel_one);
 	App->gui->DisableElement((UIElement*)win_panel_two);
 
-	SDL_Rect pause_buttons_rect[3];
-	pause_buttons_rect[0] = { 0,533,220,51 };
-	pause_buttons_rect[1] = { 0,585,220,51 };
-	pause_buttons_rect[2] = { 0,637,220,51 };
 
 	//Pause
-	pause_panel = App->gui->CreateImage({ 20, 70 }, { 3711,673,722,654 });
-	p_continue = App->gui->CreateButtonText({ 120,180 }, { 21,5 }, pause_buttons_rect, "CONTINUE", {243,242,153,255},20, pause_panel);
-	p_exit_menu = App->gui->CreateButtonText({ 260,470 }, { 14,5 }, pause_buttons_rect, "BACK TO MENU", { 243,242,153,255 }, 17, pause_panel);
+	pause_panel = App->gui->CreateImage({ 2, 87 }, { 3967,961,636,671 });
+	options_label = App->gui->CreateLabel({ 180, 130 }, "fonts/button_text.ttf", 40, "Options", { 255,255,255,255 }, 400, pause_panel);
+	pause_continue = App->gui->CreateButtonText({ 180, 480 }, { 37,5 }, button_rect, "CONTINUE", {243,242,153,255}, 27, pause_panel);
+	pause_exit = App->gui->CreateButtonText({ 180, 590 }, { 14,5 }, button_rect, "BACK TO MENU", { 234,132,132,255 }, 22, pause_panel);
+	pause_music_label = App->gui->CreateLabel({ 80, 200 }, "fonts/button_text.ttf", 25, "Music", { 255,255,255,255 }, 400, pause_panel);
+	pause_music = App->gui->CreateScrollBar({ 100,260 }, { 771,1245,413,40 }, MUSIC, App->audio->GetMusicVolume(), 128, pause_panel);
+
+	pause_fx_label = App->gui->CreateLabel({ 80, 340 }, "fonts/button_text.ttf", 25, "Sound Effect", { 255,255,255,255 }, 400, pause_panel);
+	pause_fx = App->gui->CreateScrollBar({100,400 }, { 771,1245,413,40 }, FX, App->audio->GetFxVolume(), 128, pause_panel);
 
 	App->gui->DisableElement(pause_panel);
 
 	//Store 
 	if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() == EntityType::STORE_STRATEGY_BUILDING)
 	{
-		store_panel = App->gui->CreateImage({ 139,100 }, { 2793, 960, 749, 565 });
-		store_unit_one = App->gui->CreateSelectableButton({ 50, 115 }, App->gui->LoadUIButton(random_store_unit[0], "upgrade"), store_panel);
-		store_unit_01_cost = App->gui->CreateLabel({ 80, 220 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
-		store_unit_two = App->gui->CreateSelectableButton({ 325, 115 }, App->gui->LoadUIButton(random_store_unit[1], "upgrade"), store_panel);
-		store_unit_02_cost = App->gui->CreateLabel({ 355, 220 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
-		store_unit_three = App->gui->CreateSelectableButton({ 595, 115 }, App->gui->LoadUIButton(random_store_unit[2], "upgrade"), store_panel);
-		store_unit_03_cost = App->gui->CreateLabel({ 625, 220 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
-		store_unit_four = App->gui->CreateSelectableButton({ 50,300 }, App->gui->LoadUIButton(random_store_unit[3], "upgrade"), store_panel);
-		store_unit_04_cost = App->gui->CreateLabel({ 80,405 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
-		store_unit_five = App->gui->CreateSelectableButton({ 325,300 }, App->gui->LoadUIButton(random_store_unit[4], "upgrade"), store_panel);
-		store_unit_05_cost = App->gui->CreateLabel({ 355,405 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
-		store_unit_six = App->gui->CreateSelectableButton({ 595,300 }, App->gui->LoadUIButton(random_store_unit[5], "upgrade"), store_panel);
-		store_unit_06_cost = App->gui->CreateLabel({ 625,405 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
+		store_panel = App->gui->CreateImage({ 5,4 }, { 3967, 6, 630, 951 });
+		store_unit_one = App->gui->CreateSelectableButton({ 75, 145 }, App->gui->LoadUIButton(random_store_unit[0], "upgrade"), store_panel);
+		store_unit_01_cost = App->gui->CreateLabel({ 105, 275 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
+		store_unit_two = App->gui->CreateSelectableButton({ 450, 145 }, App->gui->LoadUIButton(random_store_unit[1], "upgrade"), store_panel);
+		store_unit_02_cost = App->gui->CreateLabel({ 480, 275 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
+		store_unit_three = App->gui->CreateSelectableButton({ 75, 395 }, App->gui->LoadUIButton(random_store_unit[2], "upgrade"), store_panel);
+		store_unit_03_cost = App->gui->CreateLabel({ 105, 525 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
+		store_unit_four = App->gui->CreateSelectableButton({ 450,395 }, App->gui->LoadUIButton(random_store_unit[3], "upgrade"), store_panel);
+		store_unit_04_cost = App->gui->CreateLabel({ 480,525 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
+		store_unit_five = App->gui->CreateSelectableButton({ 75,640 }, App->gui->LoadUIButton(random_store_unit[4], "upgrade"), store_panel);
+		store_unit_05_cost = App->gui->CreateLabel({ 105,770 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
+		store_unit_six = App->gui->CreateSelectableButton({ 450,640 }, App->gui->LoadUIButton(random_store_unit[5], "upgrade"), store_panel);
+		store_unit_06_cost = App->gui->CreateLabel({ 480,770 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
 
-		current_gold = App->gui->CreateLabel({ 30,450 }, "fonts/red_alert.ttf", 40, "Your gold: " + std::to_string(App->game_manager->gold), { 255,232,2, 255 }, 710, store_panel);
-		total_cost = App->gui->CreateLabel({ 500,450 }, "fonts/red_alert.ttf", 40, "Total cost: " + std::to_string(total_cost_acumulated), { 255,232,2, 255 }, 710, store_panel);
+		current_gold = App->gui->CreateLabel({ 30,860 }, "fonts/red_alert.ttf", 40, "Your gold: " + std::to_string(App->game_manager->gold), { 255,232,2, 255 }, 710, store_panel);
+		total_cost = App->gui->CreateLabel({ 30,900 }, "fonts/red_alert.ttf", 40, "Total cost: " + std::to_string(total_cost_acumulated), { 255,232,2, 255 }, 710, store_panel);
 
-		purchase = App->gui->CreateButtonText({ 263, 505 }, { 20, 0 }, purchase_rect, "CONTINUE", { 255,232,2, 255 }, 20, store_panel);
+		purchase = App->gui->CreateButtonText({ 350, 870 }, { 20, 0 }, purchase_rect, "CONTINUE", { 255,232,2, 255 }, 20, store_panel);
 
 		App->gui->DisableElement((UIElement*)store_panel);
 	}
+	
 
 	//End Game Screen Lose
-	lose_panel = App->gui->CreateImage({ 139,150 }, { 1,852,744,466 });
-	lose_text = App->gui->CreateLabel({ 30,30 }, "fonts/red_alert.ttf", 40, "The enemy troops have defeat yours! Allies have win the battle", { 255,232,2, 255 }, 710, lose_panel);
-	lose_continue = App->gui->CreateButton({ 262,375 }, button_rect, lose_panel);
-	lose_image = App->gui->CreateImage({ 222, 125 }, { 2033,136,321,204 }, lose_panel);
+	lose_panel = App->gui->CreateImage({ 17,120 }, { 3986,1646,605,660 });
+	lose_text = App->gui->CreateLabel({ 30,30 }, "fonts/red_alert.ttf", 40, "The enemy troops have defeat yours! Allies have win the battle", { 255,232,2, 255 }, 600, lose_panel);
+	lose_continue = App->gui->CreateButtonText({ 170, 560 }, { 30,0 }, button_rect, "CONTINUE", { 200,200,200,255 }, 27, lose_panel);
+	lose_image = App->gui->CreateImage({ 170, 250 }, { 2033,136,321,204 }, lose_panel);
 
 	App->gui->DisableElement((UIElement*)lose_panel);
 }
