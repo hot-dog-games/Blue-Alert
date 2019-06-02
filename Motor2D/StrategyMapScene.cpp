@@ -132,7 +132,19 @@ bool StrategyMapScene::Update(float dt)
 			if (!App->transition_manager->IsTransitioning())
 				App->game_manager->ShowPopUp(POPUP_DECISIONMAKING);
 		}
-	}
+	};
+
+	if (!App->game_manager->popups[POPUP_TUTORIAL_END])
+	{
+		if (App->game_manager->stage == STAGE_01)
+		{
+			if (!App->transition_manager->IsTransitioning())
+				App->game_manager->ShowPopUp(POPUP_TUTORIAL_END);
+		}
+	};
+
+	if (App->gui->popup_active)dragable = false;
+	else dragable = true;
 
 	return true;
 }

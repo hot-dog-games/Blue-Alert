@@ -34,6 +34,7 @@ UIPopUp::UIPopUp(SDL_Rect rect, iPoint margin, std::string text, int text_size, 
 	popup_button = App->gui->CreateButton({ rect_sprite.w - button_rect->w - margin.x, rect_sprite.h - button_rect->h - margin.y }, button_rect, this);
 
 	App->PauseGame();
+	App->gui->popup_active = true;
 }
 
 
@@ -62,6 +63,7 @@ bool UIPopUp::Update(float dt)
 	{
 		App->ResumeGame();
 		App->gui->DisableElement(this);
+		App->gui->popup_active = false;
 	}
 
 	return true;

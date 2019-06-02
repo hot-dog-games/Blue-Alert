@@ -33,7 +33,7 @@ bool StrategyBuilding::Update(float dt)
 			state = STATIC_HOVERED;
 			current_animation = &animations.find("highlight")->second;
 			if (!App->game_manager->popups[POPUP_BUILDING_NODES])App->game_manager->ShowPopUp(POPUP_BUILDING_NODES);
-			if (App->input->GetMouseButtonDown(1) == KEY_UP)
+			if (App->input->GetMouseButtonDown(1) == KEY_DOWN)
 				App->game_manager->GetEncounterTree()->EntityClicked(this);
 		}
 		else
