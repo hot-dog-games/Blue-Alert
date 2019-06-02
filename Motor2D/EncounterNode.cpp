@@ -41,6 +41,11 @@ void EncounterNode::SetEncounterDifficulty(int diff)
 	encounter->difficulty = diff;
 }
 
+void EncounterNode::SetEncounterDeckSize(int deck_size)
+{
+	encounter->deck_size = deck_size;
+}
+
 std::vector<int> EncounterNode::GetEncounterDeck()
 {
 	return encounter->deck;

@@ -56,6 +56,7 @@ EncounterTree * EncounterTree::CreateTree()
 			map_encounters[i]->FillPredefinedEncounterDeck(encounter);
 		}
 		else {
+			map_encounters[i]->SetEncounterDeckSize(node.attribute("deck_size").as_int());
 			map_encounters[i]->FillRandomEncounterDeck();
 		}
 

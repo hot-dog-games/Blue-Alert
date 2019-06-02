@@ -70,6 +70,8 @@ public:
 	int GetEncounterDifficulty();
 	void SetEncounterDifficulty(int diff);
 
+	void SetEncounterDeckSize(int deck_size);
+
 	std::vector<int> GetEncounterDeck();
 	std::vector<int> GetEncounterRewards();
 
