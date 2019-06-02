@@ -15,13 +15,13 @@
 			</captured_nodes>
 			<collection>
 				<card lvl="0" type="2" />
-				<card lvl="0" type="8" />
-				<card lvl="0" type="16" />
+				<card lvl="0" type="4" />
+				<card lvl="0" type="6" />
 			</collection>
 			<deck>
 				<card type="2" />
-				<card type="8" />
-				<card type="16" />
+				<card type="4" />
+				<card type="6" />
 				<card type="-1" />
 			</deck>
 			<gold value="200" />

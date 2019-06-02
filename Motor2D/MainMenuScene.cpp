@@ -83,7 +83,7 @@ bool MainMenuScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			App->gui->DisableElement(optionsbackground);
 		}
 		if (element == newgamebutton) {
-			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
+			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, Black);
 		}
 	}
 	return true;

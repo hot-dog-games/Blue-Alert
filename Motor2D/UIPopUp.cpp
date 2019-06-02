@@ -30,7 +30,7 @@ UIPopUp::UIPopUp(SDL_Rect rect, iPoint margin, std::string text, int text_size, 
 
 	SetScale((float)rect_box.w / rect_sprite.w, (float)rect_box.h / rect_sprite.h);
 
-	popup_label = App->gui->CreateLabel({ margin.x, margin.y}, "fonts/gunplay.ttf", 16, text, color, rect_box.w - button_rect->w - margin.x, this);
+	popup_label = App->gui->CreateLabel({ margin.x, margin.y}, "fonts/button_text.ttf", 12, text, color, rect_box.w - button_rect->w - margin.x, this);
 	popup_button = App->gui->CreateButton({ rect_sprite.w - button_rect->w - margin.x, rect_sprite.h - button_rect->h - margin.y }, button_rect, this);
 
 	App->PauseGame();

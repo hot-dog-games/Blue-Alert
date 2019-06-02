@@ -61,16 +61,13 @@ bool StrategyMapScene::Start()
 	uint w, h;
 	App->win->GetWindowSize(w, h);
 
+	map_camera_limit.x -= map_camera_limit.w*0.5;
+	map_camera_limit.y = (App->map->data.height*0.5*App->map->data.tile_height) - map_camera_limit.h*0.5;
+
 	iPoint world_position = App->map->MapToWorld((int)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetPosition().x, (int)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetPosition().y);
 
 	App->render->camera.x = -world_position.x + w * 0.5;
 	App->render->camera.y = -world_position.y + h * 0.9;
-
-	if (!IsInsideLimits(0, 0))
-	{
-		App->render->camera.x = -limit_center.x;
-		App->render->camera.y = -limit_center.y;
-	}
 
 	InitializeUI();
 	
@@ -91,14 +88,13 @@ bool StrategyMapScene::PreUpdate()
 
 		if (App->input->GetMouseButtonDown(1) == KEY_REPEAT)
 		{
-			if (IsInsideLimits(mousemotion_x, mousemotion_y))
+
+			if (abs(mousemotion_x) > drag_threshhold && abs(mousemotion_y) > drag_threshhold)
 			{
-				if (abs(mousemotion_x) > drag_threshhold && abs(mousemotion_y) > drag_threshhold)
-				{
-					App->render->camera.x += mousemotion_x;
-					App->render->camera.y += mousemotion_y;
-				}
+				App->render->camera.x += mousemotion_x;
+				App->render->camera.y += mousemotion_y;
 			}
+		
 		}
 	}
 
@@ -113,6 +109,9 @@ bool StrategyMapScene::PreUpdate()
 
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		App->render->camera.x -= 10;
+
+
+	KeepInBounds();
 
 	last_camera_position.x = App->render->camera.x;
 	last_camera_position.y = App->render->camera.y;
@@ -430,7 +429,7 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 		}
 
 		if (element == back_menu_button) {
-			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MENU, White);
+			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MENU, Black);
 		}
 	}
 	else if (gui_event == GUI_Event::MOUSE_OVER)
@@ -609,39 +608,39 @@ void StrategyMapScene::InitializeUI()
 
 	building_infantry_button = App->gui->CreateSelectableButton({ 17, 665 }, App->gui->LoadUIButton(30, "button"), buildings_background);
 	building_infantry_image = App->gui->CreateImage({ 26,395 }, App->gui->LoadUIImage(30, "building"), buildings_background);
-	building_infantry_info = App->gui->CreateLabel({ 235,-5 }, "fonts/red_alert.ttf", 23, str, { 231,216,145,255 }, 350, building_infantry_image);
+	building_infantry_info = App->gui->CreateLabel({ 235,-5 }, "fonts/button_text.ttf", 15, str, { 231,216,145,255 }, 350, building_infantry_image);
 
 	//Aerial
 	str = "The aerial building is where the helicopters and planes are parked.\n\nConquered: " + std::to_string(((LeveledUpgrade*)App->game_manager->aerial_upgrade)->GetLevel())
 		+ "\nDamage increase: " + std::to_string(((LeveledUpgrade*)App->game_manager->aerial_upgrade)->GetBuffValue("damage")) + "\nHealth increase: " + std::to_string(((LeveledUpgrade*)App->game_manager->aerial_upgrade)->GetBuffValue("health"));
 	building_aerial_button = App->gui->CreateSelectableButton({ 401,685 }, App->gui->LoadUIButton(31, "button"), buildings_background);
 	building_aerial_image = App->gui->CreateImage({ 30,425 }, App->gui->LoadUIImage(31, "building"), buildings_background);
-	building_aerial_info = App->gui->CreateLabel({ 230, -35 }, "fonts/red_alert.ttf", 23, str, { 231,216,145,255 }, 300, building_aerial_image);
+	building_aerial_info = App->gui->CreateLabel({ 230, -35 }, "fonts/button_text.ttf", 15, str, { 231,216,145,255 }, 300, building_aerial_image);
 
 	//Land
 	str = "The land building is where the tanks are waiting for the battle.\n\nConquered: " + std::to_string(((LeveledUpgrade*)App->game_manager->land_upgrade)->GetLevel())
 		+ "\nDamage increase: " + std::to_string(((LeveledUpgrade*)App->game_manager->land_upgrade)->GetBuffValue("damage")) + "\nHealth increase: " + std::to_string(((LeveledUpgrade*)App->game_manager->land_upgrade)->GetBuffValue("health"));
 	building_land_button = App->gui->CreateSelectableButton({ 210,652 } , App->gui->LoadUIButton(32, "button"), buildings_background);
 	building_land_image = App->gui->CreateImage({ 26,395 } , App->gui->LoadUIImage(32, "building"), buildings_background);
-	building_land_info = App->gui->CreateLabel({ 235,-5 } , "fonts/red_alert.ttf", 23, str, { 231,216,145,255 }, 300, building_land_image);
+	building_land_info = App->gui->CreateLabel({ 235,-5 } , "fonts/button_text.ttf", 15, str, { 231,216,145,255 }, 300, building_land_image);
 
 	//Core
 	core_image = App->gui->CreateImage({ 40, 130 }, { 1538,23,173,114 }, buildings_background);
 
 	core_title = App->gui->CreateLabel({ 20, 15 }, "fonts/button_text.ttf", 43, "CORE", { 242, 222, 70, 255 }, 200, buildings_background);
-	core_info = App->gui->CreateLabel({ 260, 72 }, "fonts/red_alert.ttf", 23, "The core travels around the map destroying all the enemies bases.", { 231,216,145,255 }, 400, buildings_background);
+	core_info = App->gui->CreateLabel({ 260, 72 }, "fonts/button_text.ttf", 15, "The core travels around the map destroying all the enemies bases.", { 231,216,145,255 }, 400, buildings_background);
 
 	str = "Health: " + std::to_string((int)App->game_manager->stats.find("health")->second->GetValue());
-	core_health = App->gui->CreateLabel({ 260, 130 }, "fonts/red_alert.ttf", 30, str, { 231,216,145,255 }, 300, buildings_background);
+	core_health = App->gui->CreateLabel({ 260, 150 }, "fonts/button_text.ttf", 16, str, { 231,216,145,255 }, 200, buildings_background);
 
 	str = "Energy: " + std::to_string((int)App->game_manager->stats.find("energy")->second->GetValue());
-	core_energy = App->gui->CreateLabel({ 260,160 }, "fonts/red_alert.ttf", 30, str, { 231,216,145,255 }, 300, buildings_background);
+	core_energy = App->gui->CreateLabel({ 260, 170 }, "fonts/button_text.ttf", 16, str, { 231,216,145,255 }, 200, buildings_background);
 
 	str = "Cost Health: " + std::to_string(((LeveledUpgrade*)App->game_manager->health_upgrade)->GetCost());
-	core_lvl_up_health_cost = App->gui->CreateLabel({ 270,210 }, "fonts/red_alert.ttf", 21, str, { 231,216,145,255 }, 300, buildings_background);
+	core_lvl_up_health_cost = App->gui->CreateLabel({ 262,210 }, "fonts/button_text.ttf", 10, str, { 231,216,145,255 }, 200, buildings_background);
 
 	str = "Cost Energy: " + std::to_string(((LeveledUpgrade*)App->game_manager->energy_upgrade)->GetCost());
-	core_lvl_up_energy_cost = App->gui->CreateLabel({ 440,210 }, "fonts/red_alert.ttf", 21, str, { 231,216,145,255 }, 300, buildings_background);
+	core_lvl_up_energy_cost = App->gui->CreateLabel({ 432,210 }, "fonts/button_text.ttf", 10, str, { 231,216,145,255 }, 200, buildings_background);
 
 	core_lvl_up_health = App->gui->CreateButtonText({ 260, 230 }, { 10,5 }, little_button_rect, "HEALTH UP", { 242, 222, 70, 255 }, 14, buildings_background);
 	core_lvl_up_energy = App->gui->CreateButtonText({ 430, 230 }, { 10,5 }, little_button_rect, "ENERGY UP", { 242, 222, 70, 255 }, 14, buildings_background);
@@ -649,20 +648,41 @@ void StrategyMapScene::InitializeUI()
 	App->gui->DisableElement(buildings_background);
 
 	//Show Info
-	info_image = App->gui->CreateImage({ 25,30 }, { 0,0,0,0 }, troops_background);
-	health_label = App->gui->CreateLabel({ 135, 30 }, "fonts/red_alert.ttf", 25, "Health: -", { 231,216,145,255 }, 120, troops_background);
-	attack_label = App->gui->CreateLabel({ 135,55 }, "fonts/red_alert.ttf", 25, "Attack: -", { 231,216,145,255 }, 120, troops_background);
-	defense_label = App->gui->CreateLabel({ 135,80 }, "fonts/red_alert.ttf", 25, "Defense: -", { 231,216,145,255 }, 120, troops_background);
-	range_label = App->gui->CreateLabel({ 135, 105 }, "fonts/red_alert.ttf", 25, "Range: -", { 231,216,145,255 }, 120, troops_background);
-	units_label = App->gui->CreateLabel({ 135, 130 }, "fonts/red_alert.ttf", 25, "Units: -", { 231,216,145,255 }, 120, troops_background);
+	info_image = App->gui->CreateImage({ 25,37 }, { 0,0,0,0 }, troops_background);
+	health_label = App->gui->CreateLabel({ 135, 40 }, "fonts/button_text.ttf", 12, "Health: -", { 231,216,145,255 }, 120, troops_background);
+	attack_label = App->gui->CreateLabel({ 135, 60 }, "fonts/button_text.ttf", 12, "Attack: -", { 231,216,145,255 }, 120, troops_background);
+	defense_label = App->gui->CreateLabel({ 135, 80 }, "fonts/button_text.ttf", 12, "Defense: -", { 231,216,145,255 }, 120, troops_background);
+	range_label = App->gui->CreateLabel({ 135, 100 }, "fonts/button_text.ttf", 12, "Range: -", { 231,216,145,255 }, 120, troops_background);
+	units_label = App->gui->CreateLabel({ 135, 120 }, "fonts/button_text.ttf", 12, "Units: -", { 231,216,145,255 }, 120, troops_background);
 
 	energy_bar = App->gui->CreateBar({ 8,188 }, { 2897,1780,260,65 }, App->game_manager->GetCardFromCollection(CONSCRIPT)->info.stats.find("energy_cost")->second, BAR_HORITZONTAL, BAR_STATIC, nullptr, troops_background);
 }
 
 bool StrategyMapScene::IsInsideLimits(int mousemotion_x, int mousemotion_y)
 {
-	float distance_center_camera = limit_center.DistanceTo({ -App->render->camera.x - mousemotion_x, -App->render->camera.y - mousemotion_y});
 
-	if (distance_center_camera < limit_radius)return true;
+	int camera_x = -App->render->camera.x;
+	int camera_y = -App->render->camera.y;
+
+	if (camera_x + App->render->camera.w - mousemotion_x < map_camera_limit.x + map_camera_limit.w && camera_y + App->render->camera.h - mousemotion_y < map_camera_limit.y + map_camera_limit.h
+		&& camera_x - mousemotion_x > map_camera_limit.x && camera_y - mousemotion_y > map_camera_limit.y) return true;
 	else return false;
+}
+
+void StrategyMapScene::KeepInBounds()
+{
+	int camera_x = -App->render->camera.x;
+	int camera_y = -App->render->camera.y;
+
+	if (camera_x + App->render->camera.w > map_camera_limit.x + map_camera_limit.w)
+		App->render->camera.x = -((map_camera_limit.x + map_camera_limit.w) - App->render->camera.w);
+
+	if (camera_y + App->render->camera.h > map_camera_limit.y + map_camera_limit.h)
+		App->render->camera.y = -((map_camera_limit.y + map_camera_limit.h) - App->render->camera.h);
+
+	if (camera_x < map_camera_limit.x)
+		App->render->camera.x = -map_camera_limit.x;
+
+	if (camera_y < map_camera_limit.y)
+		App->render->camera.y = -map_camera_limit.y;
 }
