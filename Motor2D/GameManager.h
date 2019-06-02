@@ -18,6 +18,7 @@ enum stage {
 	STAGE_NONE = -1,
 	STAGE_TUTORIAL,
 	STAGE_01,
+	STAGE_02,
 	STAGE_TOTAL
 };
 

@@ -88,7 +88,7 @@ bool MainMenuScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 		}
 		if (element == continuebutton)
 		{
-			App->transition_manager->CreateFadeTransition(2.0f, false, 0, Black, true);S
+			App->transition_manager->CreateFadeTransition(2.0f, false, 0, Black, true);
 		}
 	}
 	return true;
