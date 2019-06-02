@@ -8,21 +8,23 @@
 	<game_manager>
 		<save_state>
 			<stage value="0" />
-			<node value="1" />
+			<node value="2" />
 			<captured_nodes>
 				<node id="1" />
+				<node id="2" />
 			</captured_nodes>
 			<collection>
 				<card lvl="0" type="2" />
-				<card lvl="0" type="18" />
+				<card lvl="0" type="8" />
+				<card lvl="0" type="12" />
 			</collection>
 			<deck>
 				<card type="2" />
-				<card type="18" />
-				<card type="-1" />
+				<card type="8" />
+				<card type="12" />
 				<card type="-1" />
 			</deck>
-			<gold value="100" />
+			<gold value="200" />
 			<health_lvl value="0" />
 			<energy_lvl value="0" />
 		</save_state>
