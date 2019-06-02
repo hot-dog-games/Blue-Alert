@@ -13,6 +13,7 @@ public:
 	bool image = true;
 
 	void SetImage(SDL_Rect rect);
+	void SetHeight(int h);
 };
 
 #endif // !1
