@@ -25,7 +25,12 @@ public:
 	void OnMouseHover();
 	void OnMouseRelease();
 	void OnMouseExit();
+
+	void SetCentered(bool);
+
 protected:
+	void Center();
+	bool centered = false;
 	SDL_Texture* texture;
 };
 

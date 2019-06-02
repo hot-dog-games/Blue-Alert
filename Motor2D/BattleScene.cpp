@@ -25,6 +25,7 @@
 #include "Stat.h"
 #include "BattleScene.h"
 #include "Buff.h"
+#include "Fonts.h"
 #include "GameManager.h"
 #include "Particles.h"
 #include "EncounterTree.h"
@@ -247,6 +248,7 @@ bool BattleScene::Update(float dt)
 		}
 
 		energy_label->SetText(std::to_string(energy_bar->GetValue()));
+
 		UpdateCooldowns();
 	}
 	break;
@@ -609,6 +611,7 @@ void BattleScene::StartUI()
 	energy_bar = App->gui->CreateBar({ 30, 10 }, { 1237,141,446,36 }, allied_core->GetEnergy(), BAR_HORITZONTAL, BAR_DYNAMIC, nullptr, unit_panel);
 	energy_image = App->gui->CreateImage({ 8, 10 }, { 1238,345,32,32 }, unit_panel);
 	energy_label = App->gui->CreateLabel({ 10,4 }, "fonts/gunplay.ttf", 20, "0", { 255,255,255,255 }, 120, energy_image, false);
+	energy_label->SetCentered(true);
 
 	SDL_Rect pause_rect[3];
 	pause_rect[0] = { 1168,1371,44,36 };
