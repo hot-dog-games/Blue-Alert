@@ -16,6 +16,7 @@ public:
 	void OnMouseRelease();
 	void OnMouseExit();
 	void SetTextColor(SDL_Color color);
+	void SetText(std::string text);
 
 	bool CleanUp();
 

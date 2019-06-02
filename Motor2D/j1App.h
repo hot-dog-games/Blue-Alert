@@ -66,6 +66,7 @@ public:
 	void SaveGame(const char* file) const;
 	void GetSaveGames(std::list<std::string>& list_to_fill) const;
 	float GetFrameRate();
+	bool HasSave();
 
 private:
 
@@ -133,8 +134,9 @@ private:
 
 	mutable bool		want_to_save;
 	bool				want_to_load;
-	std::string			load_game;
-	mutable std::string	save_game;
+	std::string			load_game = "xml/save_game.xml";
+	mutable std::string	save_game = "xml/save_game.xml";
+	bool				save_exists = false;
 };
 
 extern j1App* App;

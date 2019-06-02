@@ -2,6 +2,7 @@
 #include "Render.h"
 #include "Textures.h"
 #include "Fonts.h"
+#include "p2Log.h"
 #include "UILabel.h"
 
 UILabel::UILabel(iPoint pos, _TTF_Font* font, std::string text, SDL_Color color, int max_width, bool is_interactable)
@@ -65,6 +66,7 @@ UILabel::UILabel(iPoint pos, _TTF_Font* font, std::string text, SDL_Color color,
 	this->text = text;
 	this->color = color;
 	this->original_color = color;
+	texture = App->fonts->Print(this->text.c_str(), color, font, rect_box.w);
 }
 UILabel::~UILabel()
 {
@@ -73,20 +75,25 @@ UILabel::~UILabel()
 bool UILabel::UIBlit()
 {
 	iPoint screen_pos = GetScreenPos();
-	SDL_Texture* texture = App->fonts->Print(text.c_str(), color, font, rect_box.w);
+
 	if (clipping && parent)
 		App->render->Blit(texture, screen_pos.x, screen_pos.y, nullptr, 0.0F, 0.0, INT_MAX, INT_MAX, 1.0F, 1.0F, &parent->GetScreenRect());
 	else
 		App->render->Blit(texture, screen_pos.x, screen_pos.y, nullptr, 0.0F, 0.0, INT_MAX, INT_MAX);
 
 
-	App->tex->UnLoad(texture);
 	return true;
 }
 
 void UILabel::SetText(std::string text)
 {
-	this->text = text;
+	if (text != this->text)
+	{
+		LOG("unload label text");
+		App->tex->UnLoad(texture);
+		this->text = text;
+		texture = App->fonts->Print(this->text.c_str(), color, font, rect_box.w);
+	}
 }
 
 void UILabel::SetColor(SDL_Color color)
@@ -97,8 +104,10 @@ void UILabel::SetColor(SDL_Color color)
 
 bool UILabel::CleanUp()
 {
+	LOG("label cleanup text");
 	parent = nullptr;
 	font = nullptr;
+	App->tex->UnLoad(texture);
 
 	return true;
 }

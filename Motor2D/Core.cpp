@@ -34,10 +34,8 @@ Core::~Core()
 
 bool Core::Update(float dt)
 {
-	if (energy_timer.ReadMs() >= SECOND_MS) {
-		stats.find("energy")->second->IncreaseStat(stats.find("energy_regen")->second->GetValue());
-		energy_timer.Start();
-	}
+
+	stats.find("energy")->second->IncreaseStat(stats.find("energy_regen")->second->GetValue()/App->GetFrameRate());
 
 	if (state == STATIC_DIE && current_animation->isDone())
 	{
@@ -71,6 +69,7 @@ bool Core::Update(float dt)
 
 bool Core::CleanUp()
 {
+	LOG("CORE CLEANUP");
 	std::map<std::string, Stat*>::iterator item;
 	for (item = stats.begin(); item != stats.end(); ++item)
 	{

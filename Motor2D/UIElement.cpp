@@ -47,8 +47,8 @@ void UIElement::SetScreenPos(int x, int y)
 	}
 	else
 	{
-		rect_box.x = rect_box.x;
-		rect_box.y = rect_box.y;
+		rect_box.x = x;
+		rect_box.y = y;
 	}
 }
 

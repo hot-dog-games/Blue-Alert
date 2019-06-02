@@ -54,6 +54,11 @@ private:
 	void UpdateGoldOnSelect(int unit);
 	void UpdateGoldOnUnSelect(int unit);
 
+	void UpdateCooldowns();
+
+	void SetEnemiesUpgrades(Deck* enemy_deck);
+	void DropNukes();
+
 	void StartUI();
 
 private:
@@ -68,6 +73,7 @@ private:
 
 	UIImage*		unit_panel = nullptr;
 	UIButton*		unit_button_one = nullptr;
+	UIImage*		unit_cooldown[4];
 	UIButton*		unit_button_two = nullptr;
 	UIButton*		unit_button_three = nullptr;
 	UIButton*		unit_button_four = nullptr;
@@ -84,9 +90,9 @@ private:
 	UIImage*		lose_panel = nullptr;
 
 	//buttons
-	UIButton*		win_continue_one = nullptr;
-	UIButton*		win_continue_two = nullptr;
-	UIButton*		lose_continue = nullptr;
+	UIButtonText*		win_continue_one = nullptr;
+	UIButtonText*		win_continue_two = nullptr;
+	UIButtonText*		lose_continue = nullptr;
 	UIButtonText*		purchase = nullptr;
 
 	//labels
@@ -138,18 +144,33 @@ private:
 
 	//Pause Menu
 	UIButton* pause_button = nullptr;
+	UIButton* bomb_button = nullptr;
+	UIButton* faction_button = nullptr;
 	UIImage* pause_panel = nullptr;
-	UIButton* p_continue = nullptr;
-	UIButton* p_exit_menu = nullptr;
+	UIButton* pause_continue = nullptr;
+	UIButton* pause_exit = nullptr;
+	UILabel* pause_music_label = nullptr;
+	UILabel* pause_fx_label = nullptr;
+	UILabel* options_label = nullptr;
+	UIScrollBar* pause_music = nullptr;
+	UIScrollBar* pause_fx = nullptr;
+	UIImage* side_troop_panel = nullptr;
+	UIImage* side_troop_panel_left = nullptr;
 
 	int unit_store_cost = 100;
 	int total_cost_acumulated = 0;
+
+	float lerp_speed = 1 / 60;
+	float lerp_percent = 0;
 
 	uint max_energy;
 	uint current_energy;
 
 	Core* allied_core = nullptr;
 	Core* enemy_core = nullptr;
+
+	UIImage* energy_cost[4];
+	UILabel* energy_cost_label[4];
 };
 
 #endif

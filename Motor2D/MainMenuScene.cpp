@@ -77,15 +77,18 @@ bool MainMenuScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 		if (element == optionsbutton) {
 			App->gui->DisableElement(menu_background);
 			App->gui->EnableElement(optionsbackground);
-
-
 		}
 		if (element == back_options_button) {
 			App->gui->EnableElement(menu_background);
 			App->gui->DisableElement(optionsbackground);
 		}
 		if (element == newgamebutton) {
-			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
+			App->game_manager->NewGame();
+			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, Black);
+		}
+		if (element == continuebutton)
+		{
+			App->transition_manager->CreateFadeTransition(2.0f, false, 0, Black, true);S
 		}
 	}
 	return true;
@@ -94,29 +97,31 @@ bool MainMenuScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 void MainMenuScene::StartUI() {
 
 	SDL_Rect large_button_rect[4];
-	large_button_rect[0] = { 0,533,220,51 };
-	large_button_rect[1] = { 0,585,220,51 };
-	large_button_rect[2] = { 0,637,220,51 };
-	large_button_rect[3] = { 221,690,220,51 };
+	large_button_rect[0] = { 800,499,294,67 };
+	large_button_rect[1] = { 800,569,294,67 };
+	large_button_rect[2] = { 800,639,294,67 };
+	large_button_rect[3] = { 800,639,294,67 };
 
 	SDL_Rect back_options_rect[3];
-	back_options_rect[0] = { 2794,912,46,44 };
-	back_options_rect[1] = { 2853,912,46,44 };
-	back_options_rect[2] = { 2912,912,46,44 };
+	back_options_rect[0] = { 771,1365,46,44 };
+	back_options_rect[1] = { 830,1365,46,44 };
+	back_options_rect[2] = { 889,1365,46,44 };
 
-	menu_background = App->gui->CreateImage({ 0,0 }, { 3712,1329,1024,768 }, nullptr);
+	menu_background = App->gui->CreateImage({ 0,0 }, { 3345,1734,640,960 }, nullptr);
 
-	optionsbackground = App->gui->CreateImage({ 0,0 }, { 3712,2100,1024,768 }, nullptr);
+	optionsbackground = App->gui->CreateImage({ 0,0 }, { 4607,9,640,960 }, nullptr);
 
-	back_options_button = App->gui->CreateButton({ 100,500 }, back_options_rect, optionsbackground);
-	music_slider = App->gui->CreateScrollBar({ 400,150 }, { 2962,912,218,40 }, MUSIC, volume, 128, optionsbackground);
-	musiclabel = App->gui->CreateLabel({ 100,160 }, "fonts/button_text.ttf", 20, "Music Volume", { 255,255,255,0 }, 0, optionsbackground);
-	fx_slider = App->gui->CreateScrollBar({ 400,250 }, { 2962,912,218,40 }, FX, volume, 128, optionsbackground);
-	fxlabel = App->gui->CreateLabel({ 100,260 }, "fonts/button_text.ttf", 20, "FX Volume", { 255,255,255,0 }, 0, optionsbackground);
+	options_label = App->gui->CreateLabel({ 170, 600 }, "fonts/button_text.ttf", 40, "Options", { 255,255,255,0 }, 0, optionsbackground);
+
+	back_options_button = App->gui->CreateButton({ 520,875 }, back_options_rect, optionsbackground);
+	music_slider = App->gui->CreateScrollBar({ 340,680 }, { 939,1365,218,40 }, MUSIC, volume, 128, optionsbackground);
+	musiclabel = App->gui->CreateLabel({ 80,690 }, "fonts/button_text.ttf", 20, "Music Volume", { 255,255,255,0 }, 0, optionsbackground);
+	fx_slider = App->gui->CreateScrollBar({ 340,780 }, { 939,1365,218,40 }, FX, volume, 128, optionsbackground);
+	fxlabel = App->gui->CreateLabel({ 80,790 }, "fonts/button_text.ttf", 20, "FX Volume", { 255,255,255,0 }, 0, optionsbackground);
 	App->gui->DisableElement(optionsbackground);
 
-	exitbutton = App->gui->CreateButtonText({ 785,650 }, { 20,10 }, large_button_rect, "EXIT" ,{ 0,0,0,0 }, 20, menu_background);
-	optionsbutton = App->gui->CreateButtonText({ 785,440 }, { 20,10 }, large_button_rect, "OPTIONS", { 0,0,0,0 }, 20, menu_background);
-	newgamebutton = App->gui->CreateButtonText({ 785,320 }, { 20,10 }, large_button_rect, "NEW GAME", { 0,0,0,0 }, 20, menu_background);
-	continuebutton = App->gui->CreateButtonText({ 785,380 }, { 20,10 }, large_button_rect, "CONTINUE", { 75,8,8,255 }, 20, menu_background, false);
+	exitbutton = App->gui->CreateButtonText({ 180,865 }, { 90,10 }, large_button_rect, "EXIT" ,{ 255,255,255,255 }, 23, menu_background);
+	optionsbutton = App->gui->CreateButtonText({ 180,770 }, { 60,10 }, large_button_rect, "OPTIONS", { 255,255,255,255 }, 23, menu_background);
+	newgamebutton = App->gui->CreateButtonText({ 180,580 }, { 50,10 }, large_button_rect, "NEW GAME", { 255,255,255,255 }, 23, menu_background);
+	continuebutton = App->gui->CreateButtonText({ 180,675 }, { 50,10 }, large_button_rect, "CONTINUE", { 255,255,255,255 }, 23, menu_background, App->HasSave());
 }

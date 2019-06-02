@@ -1,10 +1,13 @@
 #include "j1App.h"
 #include "Render.h"
+#include "Particles.h"
+#include "EntityManager.h"
+#include "Entity.h"
 #include "ProjectileParticle.h"
 
 const float SNAP_RANGE = 100.0f;
 
-ProjectileParticle::ProjectileParticle(const pugi::xml_node &config, const fPoint &pos, const fPoint &dest, SDL_Texture* sprite):Particle(config,pos,sprite)
+ProjectileParticle::ProjectileParticle(const pugi::xml_node &config, const fPoint &pos, const fPoint &dest, SDL_Texture* sprite, bool rotate, float radius, ParticleType effect):Particle(config,pos,sprite)
 {
 	destination = dest;
 	speed = config.child("stats").attribute("speed").as_float();
@@ -18,9 +21,16 @@ ProjectileParticle::ProjectileParticle(const pugi::xml_node &config, const fPoin
 	direction = { move_pos.x, move_pos.y };
 	fPoint base_vector = { 1.0f,0.0f };
 
-	float dot = base_vector.x * direction.x + base_vector.y * direction.y;
-	float det = base_vector.x * direction.y - direction.x * base_vector.y;
-	angle = atan2(det, dot)*180 / M_PI;
+	if (rotate)
+	{
+		float dot = base_vector.x * direction.x + base_vector.y * direction.y;
+		float det = base_vector.x * direction.y - direction.x * base_vector.y;
+		angle = atan2(det, dot) * 180 / M_PI;
+	}
+	
+	this->effect = effect;
+	this->callback = callback;
+	this->radius = radius;
 }
 
 
@@ -32,7 +42,21 @@ ProjectileParticle::~ProjectileParticle()
 bool ProjectileParticle::Update(float dt)
 {
 	if (reached_dest)
+	{
+		if(effect != ParticleType::NONE) 
+		{
+			App->particles->CreateParticle(effect, { position.x, position.y + (current_frame.h*0.5f) });
+			std::list<Entity*> entities;
+			App->entity_manager->GetEntitiesInArea(radius, { (float)position.x, (float)position.y }, entities, FACTION_RUSSIAN);
+
+			for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
+			{
+				if((*entity)->type != EntityType::CORE)
+					(*entity)->DecreaseLife(10000.0f, true);
+			}
+		}
 		return false;
+	}
 	else
 		Move(dt);
 
@@ -63,6 +87,6 @@ void ProjectileParticle::Move(float dt)
 
 bool ProjectileParticle::PostUpdate()
 {
-	App->render->Blit(sprite, position.x, position.y - current_frame.h*0.5f, &current_frame, 1.0, (double)angle, 0, current_frame.h*0.5f);
+	App->render->Blit(sprite, position.x - (current_frame.w*0.5f), position.y - (current_frame.h*0.5f), &current_frame, 1.0, (double)angle, 0, current_frame.h*0.5f);
 	return true;
 }

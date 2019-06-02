@@ -34,3 +34,8 @@ void UIImage::SetImage(SDL_Rect rect)
 {
 	rect_sprite = rect;
 }
+
+void UIImage::SetHeight(int h)
+{
+	rect_sprite.h = h;
+}

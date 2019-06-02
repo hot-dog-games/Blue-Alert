@@ -20,13 +20,14 @@ Deck::~Deck()
 
 void Deck::CleanUp()
 {
+	LOG("DECK CLEANUP");
 	for (int i = 0; i < MAX_CARDS; ++i)
 	{
 		if (cards[i])
 		{
 			App->tex->UnLoad(cards[i]->sprite_path);
 			if (delete_cards)
-				App->card_manager->DeleteCard(cards[i]);
+				cards[i] = App->card_manager->DeleteCard(cards[i]);
 		}
 	}
 }

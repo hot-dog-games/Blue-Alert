@@ -9,7 +9,7 @@
 
 TransitionManager::TransitionManager()
 {
-
+	name = "transition_manager";
 }
 
 
@@ -63,9 +63,9 @@ bool TransitionManager::CleanUp()
 	return true;
 }
 
-void TransitionManager::CreateFadeTransition(float transition_time, bool is_scene_change, int scene_to_transition, Color color)
+void TransitionManager::CreateFadeTransition(float transition_time, bool is_scene_change, int scene_to_transition, Color color, bool load)
 {
-	active_transitions.push_back(new Fade(transition_time, is_scene_change, scene_to_transition, color));
+	active_transitions.push_back(new Fade(transition_time, is_scene_change, scene_to_transition, color, load));
 }
 
 void TransitionManager::CreateZoomTransition(float transition_time, float scale)

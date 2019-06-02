@@ -112,11 +112,6 @@ bool TestingScene::PreUpdate()
 // Called each loop iteration
 bool TestingScene::Update(float dt)
 {
-	if (App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
-		App->LoadGame("save_game.xml");
-
-	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
-		App->SaveGame("save_game.xml");
 
 	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 		App->render->camera.y += 100 * dt;
@@ -199,6 +194,34 @@ bool TestingScene::Update(float dt)
 			test_enemy_core->UseCard(CN_FOURTH, { float(p.x),float(p.y) });
 		}
 
+
+		if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_UP)
+		{
+			state = BattleSceneState::WIN;
+			App->PauseGame();
+			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() != EntityType::STORE_STRATEGY_BUILDING)App->gui->EnableElement((UIElement*)win_panel_one);
+			else {
+				//if (!App->game_manager->popups[POPUP_STORE])
+				//	App->game_manager->ShowPopUp(POPUP_STORE);
+
+			}
+
+			App->gui->DisableInteractable((UIElement*)unit_panel);
+			App->game_manager->GetEncounterTree()->SetCurrentNode(App->game_manager->GetEncounterTree()->GetFightingNode());
+			App->game_manager->gold += 100;
+			App->game_manager->enemy_scaling += 1;
+
+			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() != EntityType::STORE_STRATEGY_BUILDING)
+			{
+				App->gui->EnableElement((UIElement*)win_panel_one);
+				//App->game_manager->LevelUpgrade();
+			}
+
+			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetChildren().size() == 0) {
+				if (App->game_manager->stage == STAGE_TUTORIAL) App->game_manager->stage++;
+			}
+		}
+
 		if (!test_core->IsAlive())
 		{
 			state = BattleSceneState::LOSE;
@@ -222,7 +245,7 @@ bool TestingScene::Update(float dt)
 	case TestingScene::BattleSceneState::LOSE:
 	{
 		if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
-			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
+			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, Black);
 	}
 		break;
 	default:
@@ -319,10 +342,10 @@ void TestingScene::StartUI()
 	button_rect[1] = { 221,585,220,51 };
 	button_rect[2] = { 221,637,220,51 };
 
-	win_panel_one = App->gui->CreateImage({ 139,150 }, { 1,852,744,466 });
+	win_panel_one = App->gui->CreateImage({ 139,150 }, { 3986,1646,605,660 });
 	win_panel_two = App->gui->CreateImage({ 139,150 }, { 1,852,744,466 });
-	win_text_one = App->gui->CreateLabel({ 30,30 }, "fonts/red_alert.ttf", 40, "Congratulations, you've conquered this zone and unlocked the next building!", { 255,232,2, 255 }, 710, win_panel_one);
-	win_text_two = App->gui->CreateLabel({ 30,30 }, "fonts/red_alert.ttf", 40, "Upgrade a troop or choose a new one to add to your deck", { 255,232,2, 255 }, 710, win_panel_two);
+	win_text_one = App->gui->CreateLabel({ 30,30 }, "fonts/button_text.ttf", 40, "Congratulations, you've conquered this zone and unlocked the next building!", { 255,232,2, 255 }, 710, win_panel_one);
+	win_text_two = App->gui->CreateLabel({ 30,30 }, "fonts/button_text.ttf", 40, "Upgrade a troop or choose a new one to add to your deck", { 255,232,2, 255 }, 710, win_panel_two);
 	win_continue_one = App->gui->CreateButton({ 262,375 }, button_rect, win_panel_one);
 	win_continue_two = App->gui->CreateButton({ 262,375 }, button_rect, win_panel_two);
 

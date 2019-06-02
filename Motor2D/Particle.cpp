@@ -41,7 +41,7 @@ bool Particle::Update(float dt)
 
 bool Particle::PostUpdate()
 {
-	App->render->Blit(sprite, position.x - (current_frame.w*0.5), position.y - current_frame.h, &current_frame);
+	App->render->Blit(sprite, position.x - (current_frame.w * 0.5f), position.y - current_frame.h, &current_frame);
 
 	return true;
 }

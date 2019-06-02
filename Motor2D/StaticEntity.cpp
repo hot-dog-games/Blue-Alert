@@ -24,6 +24,7 @@ StaticEntity::~StaticEntity()
 
 bool StaticEntity::CleanUp()
 {
+	LOG("static cleanup");
 	App->tex->UnLoad(sprite);
 
 	return true;
