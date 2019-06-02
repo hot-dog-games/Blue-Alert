@@ -84,12 +84,11 @@ bool MainMenuScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 		}
 		if (element == newgamebutton) {
 			App->game_manager->NewGame();
-			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
+			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, Black);
 		}
 		if (element == continuebutton)
 		{
-			App->LoadGame(nullptr);
-			App->transition_manager->CreateFadeTransition(2.0f, false, 0, White);
+			App->transition_manager->CreateFadeTransition(2.0f, false, 0, Black, true);
 		}
 	}
 	return true;
