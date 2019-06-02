@@ -11,15 +11,20 @@
 			<node value="0" />
 			<captured_nodes />
 			<collection>
-				<card lvl="0" type="2" />
+				<card lvl="3" type="2" />
+				<card lvl="0" type="6" />
+				<card lvl="0" type="4" />
+				<card lvl="1" type="18" />
+				<card lvl="0" type="12" />
+				<card lvl="0" type="16" />
 			</collection>
 			<deck>
 				<card type="2" />
-				<card type="-1" />
-				<card type="-1" />
-				<card type="-1" />
+				<card type="6" />
+				<card type="4" />
+				<card type="18" />
 			</deck>
-			<gold value="100" />
+			<gold value="900" />
 			<health_lvl value="0" />
 			<energy_lvl value="0" />
 		</save_state>
@@ -28,15 +33,20 @@
 			<node value="0" />
 			<captured_nodes />
 			<collection>
-				<card lvl="0" type="2" />
+				<card lvl="3" type="2" />
+				<card lvl="0" type="6" />
+				<card lvl="0" type="4" />
+				<card lvl="1" type="18" />
+				<card lvl="0" type="12" />
+				<card lvl="0" type="16" />
 			</collection>
 			<deck>
 				<card type="2" />
-				<card type="-1" />
-				<card type="-1" />
-				<card type="-1" />
+				<card type="6" />
+				<card type="4" />
+				<card type="18" />
 			</deck>
-			<gold value="100" />
+			<gold value="900" />
 			<health_lvl value="0" />
 			<energy_lvl value="0" />
 		</recovery_state>
@@ -51,6 +61,6 @@
 	<transition_manager />
 	<buff_manager />
 	<renderer>
-		<camera x="290" y="-1286" />
+		<camera x="290" y="-1325" />
 	</renderer>
 </game_state>

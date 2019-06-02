@@ -116,7 +116,6 @@ void GameManager::CreateStage()
 
 bool GameManager::Restart()
 {
-	ClearCards();
 	encounter_tree->CleanTree();
 	ResetBuildingBuffs();
 	RecoverState(recovery_state);
@@ -152,6 +151,8 @@ void GameManager::NewGame()
 
 void GameManager::ChangeStage()
 {
+	change_stage = false;
+
 	if (stage == stage::STAGE_TUTORIAL)
 	{
 		ClearCards();
