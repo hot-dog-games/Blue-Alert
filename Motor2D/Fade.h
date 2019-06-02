@@ -7,10 +7,11 @@ private:
 	Color color = Black;
 	bool is_scene_change = false;
 	int scene_to_change = 0;
+	bool load_save = false;
 
 	SDL_Rect screen;
 public:
-	Fade(float transition_time, bool is_scene_change = false, int scene_to_change = 0, Color color = Black);
+	Fade(float transition_time, bool is_scene_change = false, int scene_to_change = 0, Color color = Black, bool load = false);
 	~Fade();
 
 	void Entering();
