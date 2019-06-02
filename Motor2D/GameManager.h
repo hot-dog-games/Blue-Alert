@@ -97,6 +97,7 @@ public:
 
 	bool Restart();
 	bool restart = false;
+	bool change_stage = false;
 	void ClearUpgrades();
 	BuffSource* GetUpgrade(EntityType unit_type);
 

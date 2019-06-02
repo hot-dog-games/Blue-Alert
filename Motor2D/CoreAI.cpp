@@ -146,7 +146,7 @@ void CoreAI::AnalyzeLane(uint lane)
 void CoreAI::SelectCard()
 {
 	selected_card = -1;
-	AttackType counter = AttackType::AT_BASIC;
+	AttackType counter = AttackType::AT_NONE;
 	AttackType secondary_counter = AttackType::AT_NONE;
 
 	bool has_counter = false;
@@ -159,14 +159,14 @@ void CoreAI::SelectCard()
 			counter = AttackType::AT_PIERCING;
 			if (lanes[selected_lane].enemy_aoe > lanes[selected_lane].enemy_piercing)
 				secondary_counter = AttackType::AT_AOE;
-			else
+			else if (lanes[selected_lane].enemy_aoe < lanes[selected_lane].enemy_piercing)
 				secondary_counter = AttackType::AT_BASIC;
 		}
 		else
 		{
 			if (lanes[selected_lane].enemy_aoe > lanes[selected_lane].enemy_piercing)
 				counter = AttackType::AT_PIERCING;
-			else
+			else if (lanes[selected_lane].enemy_aoe < lanes[selected_lane].enemy_piercing)
 				counter = AttackType::AT_BASIC;
 		}
 	}
@@ -181,7 +181,7 @@ void CoreAI::SelectCard()
 		{
 			if (lanes[selected_lane].enemy_aoe > lanes[selected_lane].enemy_piercing)
 				counter = AttackType::AT_PIERCING;
-			else
+			else if (lanes[selected_lane].enemy_aoe < lanes[selected_lane].enemy_piercing)
 				counter = AttackType::AT_BASIC;
 		}
 
@@ -190,51 +190,63 @@ void CoreAI::SelectCard()
 	LOG("piercing: %i, armored: %i, basic: %i, aoe: %i", lanes[selected_lane].enemy_piercing, lanes[selected_lane].enemy_armored, lanes[selected_lane].enemy_basic, lanes[selected_lane].enemy_aoe);
 	LOG("SELECTED COUNTER IS: %i  SELECTED SECONDARY COUNTER IS: %i", (int)counter, (int)secondary_counter);
 
-	for (int i = 0; i < deck->GetDeckSize(); i++)
+	if (counter != AttackType::AT_NONE)
 	{
-		if (deck->cards[i]->info.attack_type == counter)
-		{
-			has_counter = true;
-			if (CanUseCard(i))
-			{
-				LOG("COUNTER FOUND");
-				selected_card = i;
-				break;
-			}
-		}
-	}
-
-	if (!has_counter)
-	{
+		//Find Counter
 		for (int i = 0; i < deck->GetDeckSize(); i++)
 		{
-			if (deck->cards[i]->info.attack_type == secondary_counter)
+			if (deck->cards[i]->info.attack_type == counter)
 			{
-				has_secondary_counter = true;
+				has_counter = true;
 				if (CanUseCard(i))
 				{
-					LOG("SECONDARY COUNTER FOUND");
-					selected_card = i;
-					break;
-				}
-			}
-			else if (!deck->cards[i]->info.armored && secondary_counter == AttackType::AT_NONE)
-			{
-				has_secondary_counter = true;
-				if (CanUseCard(i))
-				{
-					LOG("SECONDARY COUNTER NON BLINDED FOUND");
+					LOG("COUNTER FOUND");
 					selected_card = i;
 					break;
 				}
 			}
 		}
-	}
 
-	if (!has_secondary_counter && !has_counter)
+		
+		if (!has_counter) //No counter found in deck
+		{
+			for (int i = 0; i < deck->GetDeckSize(); i++)
+			{
+				if (deck->cards[i]->info.attack_type == secondary_counter)
+				{
+					has_secondary_counter = true;
+					if (CanUseCard(i))
+					{
+						LOG("SECONDARY COUNTER FOUND");
+						selected_card = i;
+						break;
+					}
+				}
+				else if (!deck->cards[i]->info.armored && secondary_counter == AttackType::AT_NONE)
+				{
+					has_secondary_counter = true;
+					if (CanUseCard(i))
+					{
+						LOG("SECONDARY COUNTER NON BLINDED FOUND");
+						selected_card = i;
+						break;
+					}
+				}
+			}
+		}
+
+		if (!has_secondary_counter && !has_counter)
+		{
+			selected_card = rand() % deck->GetDeckSize();
+		}
+	}
+	else
 	{
 		selected_card = rand() % deck->GetDeckSize();
 	}
+
+
+	
 }
 
 bool CoreAI::PostUpdate()

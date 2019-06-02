@@ -121,7 +121,6 @@ bool GameManager::Restart()
 	encounter_tree->CleanTree();
 	ResetBuildingBuffs();
 	RecoverState(recovery_state);
-	App->SaveGame(nullptr);
 
 	restart = false;
 

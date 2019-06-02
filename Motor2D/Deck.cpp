@@ -27,7 +27,7 @@ void Deck::CleanUp()
 		{
 			App->tex->UnLoad(cards[i]->sprite_path);
 			if (delete_cards)
-				App->card_manager->DeleteCard(cards[i]);
+				cards[i] = App->card_manager->DeleteCard(cards[i]);
 		}
 	}
 }

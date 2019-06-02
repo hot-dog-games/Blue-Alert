@@ -107,12 +107,6 @@ bool BattleScene::PreUpdate()
 // Called each loop iteration
 bool BattleScene::Update(float dt)
 {
-	if (App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
-		App->LoadGame("save_game.xml");
-
-	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
-		App->SaveGame("save_game.xml");
-
 	if (!App->game_manager->popups[POPUP_USETROOP])
 	{
 		if (!App->transition_manager->IsTransitioning())
@@ -329,11 +323,9 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 				App->gui->DisableElement((UIElement*)win_panel_two);
 				App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
 			}
-
 			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetChildren().size() == 0) {
-				App->game_manager->ChangeStage();
+				App->game_manager->change_stage = true;
 			}
-			App->SaveGame(nullptr);
 		}
 		else if (element == lose_continue) {
 			App->gui->DisableElement((UIElement*)lose_panel);
@@ -386,9 +378,8 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			}
 			App->gui->DisableElement((UIElement*)store_panel);
 
-			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetChildren().size() == 0) {
-				App->game_manager->ChangeStage();
-			}
+			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetChildren().size() == 0)
+				App->game_manager->change_stage = true;
 
 			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
 		}
