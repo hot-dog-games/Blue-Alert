@@ -32,7 +32,6 @@ GameManager::~GameManager()
 
 bool GameManager::Awake(pugi::xml_node &)
 {
-	CreatePopUps();
 	return true;
 }
 
@@ -40,10 +39,7 @@ bool GameManager::Start()
 {
 	CreateStage();
 	CreateUpgrades();
-	CreatePlayerDeck();
 	CreateCoreStats();
-
-	SaveState(recovery_state);
 
 	return true;
 }
@@ -63,15 +59,7 @@ bool GameManager::Load(pugi::xml_node &save_file)
 	XMLToState(save_state, save_file.child("save_state"));
 	XMLToState(recovery_state, save_file.child("recovery_state"));
 
-	for (std::list<Card*>::iterator card = collection.begin(); card != collection.end(); ++card)
-	{
-		App->card_manager->DeleteCard((*card));
-	}
-	collection.clear();
-	delete combat_deck;
-
-	encounter_tree->CleanTree();
-	ResetBuildingBuffs();
+	DeletePopUps();
 	RecoverState(save_state);
 	App->scene_manager->ChangeScene(SceneType::MAP);
 
@@ -129,13 +117,7 @@ void GameManager::CreateStage()
 
 bool GameManager::Restart()
 {
-	for (std::list<Card*>::iterator card = collection.begin(); card != collection.end(); ++card)
-	{
-		App->card_manager->DeleteCard((*card));
-	}
-	collection.clear();
-	delete combat_deck;
-
+	ClearCards();
 	encounter_tree->CleanTree();
 	ResetBuildingBuffs();
 	RecoverState(recovery_state);
@@ -144,6 +126,38 @@ bool GameManager::Restart()
 	restart = false;
 
 	return true;
+}
+
+void GameManager::NewGame()
+{
+	if (!App->HasSave())
+	{
+		CreatePopUps();
+		stage = 0;
+	}
+	else
+	{
+		DeletePopUps();
+		stage = 1;
+	}
+
+	ClearCards();
+	encounter_tree->CleanTree();
+	ClearUpgrades();
+	ResetBuildingBuffs();
+
+	CreateStage();
+	CreatePlayerDeck();
+
+	SaveState(recovery_state);
+}
+
+void GameManager::ChangeStage()
+{
+	ResetBuildingBuffs();
+	encounter_tree->CleanTree();
+	CreateStage();
+	SaveState(recovery_state);
 }
 
 void GameManager::RecoverState(GameState state)
@@ -186,10 +200,6 @@ void GameManager::RecoverState(GameState state)
 	((LeveledUpgrade*)energy_upgrade)->GetBuffs(stats);
 }
 
-void GameManager::SaveRecoveryState()
-{
-	SaveState(recovery_state);
-}
 void GameManager::SaveState(GameState &state) const
 {
 	//---------Clean old state-----------
@@ -289,6 +299,16 @@ void GameManager::XMLToState(GameState & state, pugi::xml_node &save_file)
 	state.gold = save_file.child("gold").attribute("value").as_int();
 	state.health_lvl = save_file.child("health_lvl").attribute("value").as_int();
 	state.energy_lvl = save_file.child("energy_lvl").attribute("value").as_int();
+}
+
+void GameManager::ClearCards()
+{
+	for (std::list<Card*>::iterator card = collection.begin(); card != collection.end(); ++card)
+	{
+		App->card_manager->DeleteCard((*card));
+	}
+	collection.clear();
+	delete combat_deck;
 }
 
 void GameManager::ResetBuildingBuffs()
@@ -514,6 +534,14 @@ void GameManager::CreatePopUps()
 	for (int i = 0 ; i < POPUP_MAX; i++)
 	{
 		popups[i] = false;
+	}
+}
+
+void GameManager::DeletePopUps()
+{
+	for (int i = 0; i < POPUP_MAX; i++)
+	{
+		popups[i] = true;
 	}
 }
 

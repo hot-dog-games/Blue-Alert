@@ -83,6 +83,8 @@ public:
 	void CreatePlayerDeck();
 	void CreateStage();
 	void CreateUpgrades();
+	void NewGame();
+	void ChangeStage();
 
 	//----------------------
 
@@ -96,7 +98,6 @@ public:
 	bool restart = false;
 	void ClearUpgrades();
 	BuffSource* GetUpgrade(EntityType unit_type);
-	void SaveRecoveryState();
 
 	void UpgradeHealth();
 	void UpgradeEnergy();
@@ -107,6 +108,7 @@ public:
 	BuffSource* energy_upgrade = nullptr;
 
 	void CreatePopUps();
+	void DeletePopUps();
 	void ShowPopUp(int popup);
 
 	bool popups[POPUP_MAX];
@@ -116,6 +118,7 @@ private:
 	void SaveState(GameState &state) const;
 	void StateToXML(GameState &state, pugi::xml_node&) const;
 	void XMLToState(GameState &state, pugi::xml_node&);
+	void ClearCards();
 
 private:
 	Deck* combat_deck = nullptr;

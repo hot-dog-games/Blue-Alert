@@ -256,7 +256,8 @@ bool BattleScene::Update(float dt)
 			}
 
 			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetChildren().size() == 0) {
-				if (App->game_manager->stage == STAGE_TUTORIAL)App->game_manager->stage++;
+				if (App->game_manager->stage == STAGE_TUTORIAL)
+					App->game_manager->stage++;
 			}
 		}
 
@@ -338,10 +339,7 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			}
 
 			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetChildren().size() == 0) {
-				App->game_manager->ResetBuildingBuffs();
-				App->game_manager->GetEncounterTree()->CleanTree();
-				App->game_manager->CreateStage();
-				App->game_manager->SaveRecoveryState();
+				App->game_manager->ChangeStage();
 			}
 			App->SaveGame(nullptr);
 		}
@@ -397,10 +395,7 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			App->gui->DisableElement((UIElement*)store_panel);
 
 			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetChildren().size() == 0) {
-				App->game_manager->ResetBuildingBuffs();
-				App->game_manager->GetEncounterTree()->CleanTree();
-				App->game_manager->CreateStage();
-				App->game_manager->SaveRecoveryState();
+				App->game_manager->ChangeStage();
 			}
 
 			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
