@@ -560,32 +560,36 @@ void GameManager::ShowPopUp(int popup)
 	switch (popup)
 	{
 	case POPUP_BUILDING_NODES: 
-		App->gui->CreatePopUp({ (int)screen_width / 2, (int)screen_height / 3, 300, 90 }, { 10 , 10 }, 
+		App->gui->CreatePopUp({ (int)screen_width / 2, (int)screen_height / 3, 300, 95 }, { 15 , 15 }, 
 			"This is an enemy building, you must click on it to begin a fight! Click the button down below to continue.", 20, {255,255,255,255});
 		break;
 	case POPUP_USETROOP: 
-		App->gui->CreatePopUp({ ((int)screen_width / 2) - 200, (int)screen_height / 3, 300, 120 }, { 10 , 10 }, 
+		App->gui->CreatePopUp({ ((int)screen_width / 2) - 200, (int)screen_height / 2 + 100, 380, 135 }, { 15 , 15 }, 
 			"To deploy a troop you need to drag the button of the specific troop in your troops bar. Try dragging your conscript troop into the battlefield!", 20, { 255,255,255,255 });
 		break;	
 	case POPUP_SNIPER_COUNTERS: 
-		App->gui->CreatePopUp({ ((int)screen_width / 2) - 200, (int)screen_height / 3, 300, 120 }, { 10 , 10 },
+		App->gui->CreatePopUp({ ((int)screen_width / 2) - 200, (int)screen_height / 4, 400, 135 }, { 15 , 15 },
 			"The enemy is about to deploy snipers, your conscripts are a good choice to counter them because they attack slow and you have number of units advantadge!", 20, { 255,255,255,255 });
 		break;
 	case POPUP_AREA_COUNTERS:
-		App->gui->CreatePopUp({ ((int)screen_width / 2) - 200, (int)screen_height / 3, 300, 120 }, { 10 , 10 },
+		App->gui->CreatePopUp({ ((int)screen_width / 2) - 200, (int)screen_height / 4, 400, 135 }, { 15 , 15 },
 			"The enemy is about to deploy Harriers, your conscripts are a bad choice, try with your new troop because it has a lot of range and piercing ammo!", 20, { 255,255,255,255 });
 		break;
 	case POPUP_MULTIPLE_COUNTERS:
-		App->gui->CreatePopUp({ ((int)screen_width / 2) - 200, (int)screen_height / 3, 300, 120 }, { 10 , 10 },
+		App->gui->CreatePopUp({ ((int)screen_width / 2) - 200, (int)screen_height / 4, 400, 105 }, { 15 , 15 },
 			"The enemy is about to deploy GI's, use your new troop to destroy them!", 20, { 255,255,255,255 });
 		break;
 	case POPUP_DECISIONMAKING:
-		App->gui->CreatePopUp({ ((int)screen_width / 2) - 150, (int)screen_height / 2, 300, 150 }, { 10 , 10 },
+		App->gui->CreatePopUp({ ((int)screen_width / 2) - 150, (int)screen_height / 2, 400, 175 }, { 15 , 15 },
 			"It's time to choose your path, after conquering a specific building you'll get the building buff. Check the menu for more info about building buffs. And check your new unlocked troop in the troops menu!", 20, { 255,255,255,255 });
 		break;
 	case POPUP_STORE:
-		App->gui->CreatePopUp({ ((int)screen_width / 2) - 150, (int)screen_height / 2, 300, 150 }, { 10 , 10 },
+		App->gui->CreatePopUp({ ((int)screen_width / 2) - 150, (int)screen_height / 2, 300, 145 }, { 15 , 15 },
 			"Welcome to the Store! Here you can buy troops from the enemy force that have rebelled to the enemy forces. You buy troops by paying gold you earn 100g per combat.", 20, { 255,255,255,255 });
+		break;
+	case POPUP_TUTORIAL_END:
+		App->gui->CreatePopUp({ ((int)screen_width / 2) - 150, (int)screen_height / 2, 300, 145 }, { 15 , 15 },
+			"You've finished the tutorial! The real war starts now, you start from zero with your Coscript troop.", 20, { 255,255,255,255 });
 		break;
 	default:
 		break;

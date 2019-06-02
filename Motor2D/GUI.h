@@ -121,6 +121,8 @@ public:
 	SDL_Texture* GetAtlas() const;
 	_TTF_Font*	 GetButtonFont() const;
 
+	bool popup_active = false;
+
 private:
 	std::list<UIElement*> elements;
 	SDL_Texture* atlas;
@@ -134,6 +136,7 @@ private:
 	bool is_world_ui = false;
 
 	_TTF_Font* button_font = nullptr;
+
 };
 
 #endif // __j1GUI_H__

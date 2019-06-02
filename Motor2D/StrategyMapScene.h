@@ -41,6 +41,7 @@ public:
 	void InitializeUI();
 
 	bool IsInsideLimits(int mousemotion_x, int mousemotion_y);
+	void KeepInBounds();
 
 private:
 	UIImage* banner = nullptr;
@@ -113,8 +114,7 @@ private:
 	float drag_threshhold = 0.2f;
 	bool dragable = true;
 
-	iPoint limit_center = {-480, 1117};
-	int limit_radius = 700;
+	SDL_Rect map_camera_limit = { 0, 0, 2600, 1592 };
 
 	iPoint last_camera_position;
 	int volume = 64;
