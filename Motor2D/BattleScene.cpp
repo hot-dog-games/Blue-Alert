@@ -259,6 +259,7 @@ bool BattleScene::Update(float dt)
 		}
 
 		energy_label->SetText(std::to_string(energy_bar->GetValue()));
+		UpdateCooldowns();
 	}
 	break;
 	case BattleScene::BattleSceneState::WIN:
@@ -540,6 +541,29 @@ void BattleScene::UpdateGoldOnUnSelect(int unit)
 	if (store_units_purchased.size() == 0)purchase->SetText("CONTINUE");
 }
 
+void BattleScene::UpdateCooldowns()
+{
+	float current_value;
+	uint max_value;
+	uint max_height = 79;
+	uint current_height;
+	for (int i = 0; i < App->game_manager->GetPlayerDeck()->GetDeckSize(); i++)
+	{
+		max_value = allied_core->GetCard(i)->info.stats.find("energy_cost")->second->GetValue();
+		current_value = allied_core->GetEnergy()->GetValue();
+		if (current_value <= max_value)
+		{
+			if (current_value > 0)
+			{
+				float percent = (float)current_value * (1 / (float)max_value);
+				current_height = percent * (max_height);
+			}
+			else current_height = 0;
+			unit_cooldown[i]->SetHeight(max_height - current_height);
+		}
+	}
+}
+
 void BattleScene::SetEnemiesUpgrades(Deck* enemy_deck)
 {
 	int aux = 0;
@@ -579,27 +603,31 @@ void BattleScene::StartUI()
 	unit_panel = App->gui->CreateImage({ 80, (int)height-145}, { 1231,186,481,155 });
 	if (allied_core->GetCard(CN_FIRST)) {
 		unit_button_one = App->gui->CreateButton({ 27, 52 }, App->gui->LoadUIButton(allied_core->GetCard(CN_FIRST)->type, "button"), unit_panel);
+		unit_cooldown[0] = App->gui->CreateImage({ 0, 0 }, { 1130, 429, 101, 79 }, unit_button_one);
 		energy_cost[0] = App->gui->CreateImage({ -8, 60 }, { 1282,349,25,25 }, unit_button_one);
 		energy_cost_label[0] = App->gui->CreateLabel({ 7,2 }, "fonts/gunplay.ttf", 18, std::to_string((int)allied_core->GetCard(CN_FIRST)->info.stats.find("energy_cost")->second->GetValue()), { 255,255,255,255 }, 120, energy_cost[0], false);
 	}
 	if (allied_core->GetCard(CN_SECOND))
 	{
 		unit_button_two = App->gui->CreateButton({ 136, 52 }, App->gui->LoadUIButton(allied_core->GetCard(CN_SECOND)->type, "button"), unit_panel);
+		unit_cooldown[1] = App->gui->CreateImage({ 0, 0 }, { 1130, 429, 101, 79 }, unit_button_two);
 		energy_cost[1] = App->gui->CreateImage({ -8, 60 }, { 1282,349,25,25 }, unit_button_two);
 		energy_cost_label[1] = App->gui->CreateLabel({ 7,2 }, "fonts/gunplay.ttf", 18, std::to_string((int)allied_core->GetCard(CN_SECOND)->info.stats.find("energy_cost")->second->GetValue()), { 255,255,255,255 }, 120, energy_cost[1], false);
 	}
 	if (allied_core->GetCard(CN_THIRD)) {
 		unit_button_three = App->gui->CreateButton({ 245, 52 }, App->gui->LoadUIButton(allied_core->GetCard(CN_THIRD)->type, "button"), unit_panel);
+		unit_cooldown[2] = App->gui->CreateImage({ 245, 52 }, { 1130, 429, 101, 79 }, unit_panel);
 		energy_cost[2] = App->gui->CreateImage({ -8, 60 }, { 1282,349,25,25 }, unit_button_three);
 		energy_cost_label[2] = App->gui->CreateLabel({ 7,2 }, "fonts/gunplay.ttf", 18, std::to_string((int)allied_core->GetCard(CN_THIRD)->info.stats.find("energy_cost")->second->GetValue()), { 255,255,255,255 }, 120, energy_cost[2], false);
 	}
 	if (allied_core->GetCard(CN_FOURTH)) {
 		unit_button_four = App->gui->CreateButton({ 354, 52 }, App->gui->LoadUIButton(allied_core->GetCard(CN_FOURTH)->type, "button"), unit_panel);
+		unit_cooldown[3] = App->gui->CreateImage({ 354, 52 }, { 1130, 429, 101, 79 }, unit_panel);
 		energy_cost[3] = App->gui->CreateImage({ -8, 60 }, { 1282,349,25,25 }, unit_button_four);
 		energy_cost_label[3] = App->gui->CreateLabel({ 7,2 }, "fonts/gunplay.ttf", 18, std::to_string((int)(allied_core->GetCard(CN_FOURTH)->info.stats.find("energy_cost")->second->GetValue())), { 255,255,255,255 }, 120, energy_cost[3], false);
 	}
 
-	energy_bar = App->gui->CreateBar({ 30, 11 }, { 1237,141,446,36 }, allied_core->GetEnergy(), BAR_HORITZONTAL, BAR_DYNAMIC, nullptr, unit_panel);
+	energy_bar = App->gui->CreateBar({ 30, 10 }, { 1237,141,446,36 }, allied_core->GetEnergy(), BAR_HORITZONTAL, BAR_DYNAMIC, nullptr, unit_panel);
 	energy_image = App->gui->CreateImage({ 8, 10 }, { 1238,345,32,32 }, unit_panel);
 	energy_label = App->gui->CreateLabel({ 10,4 }, "fonts/gunplay.ttf", 20, "0", { 255,255,255,255 }, 120, energy_image, false);
 
