@@ -61,11 +61,14 @@ UILabel::UILabel(iPoint pos, _TTF_Font* font, std::string text, SDL_Color color,
 
 	rect_box.x = pos.x;
 	rect_box.y = pos.y;
+	w = rect_box.w;
+	h = rect_box.h;
 
 	this->font = font;
 	this->text = text;
 	this->color = color;
 	this->original_color = color;
+	this->centered = centered;
 	texture = App->fonts->Print(this->text.c_str(), color, font, rect_box.w);
 }
 UILabel::~UILabel()
@@ -93,6 +96,12 @@ void UILabel::SetText(std::string text)
 		App->tex->UnLoad(texture);
 		this->text = text;
 		texture = App->fonts->Print(this->text.c_str(), color, font, rect_box.w);
+
+		if (centered)
+		{
+			Center();
+		}
+
 	}
 }
 
@@ -130,4 +139,19 @@ void UILabel::OnMouseRelease()
 void UILabel::OnMouseExit()
 {
 	color = original_color;
+}
+
+void UILabel::SetCentered(bool value)
+{
+	centered = value;
+	if(centered)
+		Center();
+}
+
+void UILabel::Center()
+{
+	int w, h;
+	App->fonts->CalcSize(this->text.c_str(), w, h, font);
+	rect_box.x = (parent->GetLocalRect().w * 0.5f) - (w * 0.5f);
+	rect_box.y = (parent->GetLocalRect().h * 0.5f) - (h * 0.5f);
 }

@@ -59,7 +59,6 @@ bool GameManager::Load(pugi::xml_node &save_file)
 	XMLToState(save_state, save_file.child("save_state"));
 	XMLToState(recovery_state, save_file.child("recovery_state"));
 
-	DeletePopUps();
 	RecoverState(save_state);
 	App->scene_manager->ChangeScene(SceneType::MAP);
 
@@ -117,7 +116,6 @@ void GameManager::CreateStage()
 
 bool GameManager::Restart()
 {
-	ClearCards();
 	encounter_tree->CleanTree();
 	ResetBuildingBuffs();
 	RecoverState(recovery_state);
@@ -153,6 +151,8 @@ void GameManager::NewGame()
 
 void GameManager::ChangeStage()
 {
+	change_stage = false;
+
 	if (stage == stage::STAGE_TUTORIAL)
 	{
 		ClearCards();
@@ -169,6 +169,7 @@ void GameManager::ChangeStage()
 
 void GameManager::RecoverState(GameState state)
 {
+	ClearCards();
 	for each (CardState card in state.collection_state)
 	{
 		collection.push_back(App->card_manager->CreateCard(card.type, card.lvl));
@@ -189,7 +190,11 @@ void GameManager::RecoverState(GameState state)
 		}
 	}
 
+	ResetBuildingBuffs();
+	encounter_tree->CleanTree();
 	stage = state.stage;
+	if(stage != stage::STAGE_TUTORIAL)
+		DeletePopUps();
 	CreateStage();
 	for (std::list<int>::iterator node = state.captured_nodes.begin(); node != state.captured_nodes.end(); ++node)
 	{
@@ -277,6 +282,13 @@ void GameManager::StateToXML(GameState& state, pugi::xml_node &save_file) const
 
 void GameManager::XMLToState(GameState & state, pugi::xml_node &save_file)
 {
+	state.collection_state.clear();
+	state.captured_nodes.clear();
+	for (int i = 0; i < 4; i++)
+	{
+		state.deck_state[i] = EntityType::NONE;
+	}
+
 	state.stage = save_file.child("stage").attribute("value").as_int();
 	state.node = save_file.child("node").attribute("value").as_int();
 

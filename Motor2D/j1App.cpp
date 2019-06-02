@@ -114,9 +114,6 @@ bool j1App::Awake()
 		title = app_config.child("title").child_value();
 		organization = app_config.child("organization").child_value();
 		frame_rate = app_config.attribute("framerate_cap").as_float();
-
-		pugi::xml_document temp_file;
-		save_exists = temp_file.load_file("xml/save_game.xml");
 	}
 
 	if(ret == true)
@@ -465,5 +462,8 @@ float j1App::GetFrameRate()
 
 bool j1App::HasSave()
 {
+	pugi::xml_document temp_file;
+	save_exists = temp_file.load_file("xml/save_game.xml");
+
 	return save_exists;
 }
