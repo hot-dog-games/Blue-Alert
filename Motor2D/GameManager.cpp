@@ -154,6 +154,14 @@ void GameManager::NewGame()
 
 void GameManager::ChangeStage()
 {
+	if (stage == stage::STAGE_TUTORIAL)
+	{
+		ClearCards();
+		CreatePlayerDeck();
+	}
+	if(stage < stage::STAGE_TOTAL - 1)
+		stage++;
+
 	ResetBuildingBuffs();
 	encounter_tree->CleanTree();
 	CreateStage();
