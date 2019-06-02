@@ -11,12 +11,13 @@
 			<node value="2" />
 			<captured_nodes>
 				<node id="1" />
-				<node id="2" />
+				<node id="3" />
 			</captured_nodes>
 			<collection>
 				<card lvl="0" type="2" />
 				<card lvl="0" type="8" />
 				<card lvl="0" type="12" />
+				<card lvl="0" type="16" />
 			</collection>
 			<deck>
 				<card type="2" />

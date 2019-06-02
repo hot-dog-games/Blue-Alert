@@ -19,7 +19,7 @@ UIBar::UIBar(iPoint pos, SDL_Rect sprite_rect, Stat* value, BarType type, BarSta
 		current_value = rect_sprite.w;
 }
 
-void UIBar::DecreaseBar(uint value)
+void UIBar::DecreaseBar(float value)
 {
 	if (bar_type == BarType::BAR_VERTICAL) {
 		float height = (rect_box.h / bar_value->GetMaxValue()) * value;
@@ -46,7 +46,7 @@ void UIBar::DecreaseBar(uint value)
 	}
 }
 
-void UIBar::IncreaseBar(uint value)
+void UIBar::IncreaseBar(float value)
 {
 	if (bar_type == BarType::BAR_VERTICAL) {
 		float height = (rect_box.h / bar_value->GetMaxValue()) * value;
