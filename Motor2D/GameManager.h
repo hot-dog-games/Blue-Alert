@@ -17,7 +17,8 @@ enum EntityType;
 enum stage {
 	STAGE_NONE = -1,
 	STAGE_TUTORIAL,
-	STAGE_01
+	STAGE_01,
+	STAGE_TOTAL
 };
 
 enum tutorial_popup {

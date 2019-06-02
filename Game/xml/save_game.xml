@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<game_state>
+	<input />
+	<window />
+	<textures />
+	<audio />
+	<map />
+	<game_manager>
+		<save_state>
+			<stage value="1" />
+			<node value="2" />
+			<captured_nodes>
+				<node id="2" />
+			</captured_nodes>
+			<collection>
+				<card lvl="1" type="2" />
+				<card lvl="1" type="6" />
+				<card lvl="0" type="3" />
+				<card lvl="1" type="14" />
+			</collection>
+			<deck>
+				<card type="2" />
+				<card type="6" />
+				<card type="3" />
+				<card type="14" />
+			</deck>
+			<gold value="800" />
+			<health_lvl value="0" />
+			<energy_lvl value="0" />
+		</save_state>
+		<recovery_state>
+			<stage value="1" />
+			<node value="0" />
+			<captured_nodes />
+			<collection>
+				<card lvl="1" type="2" />
+				<card lvl="1" type="6" />
+				<card lvl="0" type="3" />
+				<card lvl="0" type="14" />
+			</collection>
+			<deck>
+				<card type="2" />
+				<card type="6" />
+				<card type="3" />
+				<card type="14" />
+			</deck>
+			<gold value="700" />
+			<health_lvl value="0" />
+			<energy_lvl value="0" />
+		</recovery_state>
+	</game_manager>
+	<scene_manager />
+	<card_manager />
+	<fonts />
+	<entity_manager />
+	<pathfinding />
+	<particles />
+	<gui />
+	<transition_manager />
+	<buff_manager />
+	<renderer>
+		<camera x="290" y="-635" />
+	</renderer>
+</game_state>
