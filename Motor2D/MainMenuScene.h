@@ -42,12 +42,14 @@ private:
 	UIButtonText* exitbutton = nullptr;
 	UILabel* musiclabel = nullptr;
 	UILabel* fxlabel = nullptr;
+	UILabel* options_label = nullptr;
 	UIButtonText* optionsbutton = nullptr;
 	UIButtonText* newgamebutton = nullptr;
 	UIButtonText* continuebutton = nullptr;
 	UIButton* back_options_button = nullptr;
 	UIScrollBar* music_slider = nullptr;
 	UIScrollBar* fx_slider = nullptr;
+
 	bool gameclose = false;
 
 	int volume = 64;

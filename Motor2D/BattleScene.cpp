@@ -88,6 +88,8 @@ bool BattleScene::Start()
 	no_energy = App->audio->LoadFx("audio/fx/UI/gpsyampa.wav");
 	App->audio->PlayMusic("audio/music/9.Destroy-Red Alert2_2.ogg");
 
+	App->audio->SetAllFXVolume(App->audio->GetFxVolume());
+
 	return true;
 }
 
