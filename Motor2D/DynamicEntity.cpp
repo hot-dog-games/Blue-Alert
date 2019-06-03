@@ -291,8 +291,8 @@ void DynamicEntity::Attack()
 		{
 		case AttackType::AT_BASIC:
 			objective->DecreaseLife(attack);
-			App->particles->CreateParticle(ParticleType::ATTACK_BASIC_SHOT, { position.x, position.y - current_frame.h * 0.5f }, 
-				{ objective->GetCenterPosition() });
+			App->particles->CreateParticle(ParticleType::ATTACK_BASIC_SHOT, GetCenterPosition(),
+				objective->GetCenterPosition());
 			App->audio->PlayFx(attack_fx.c_str(), 0, 1);
 			break;
 		case AttackType::AT_AOE:
@@ -311,8 +311,8 @@ void DynamicEntity::Attack()
 			break;
 		case AttackType::AT_PIERCING:
 			objective->DecreaseLife(attack, true);
-			App->particles->CreateParticle(ParticleType::ATTACK_BASIC_SHOT, { position.x, position.y - current_frame.h * 0.5f },
-				{ objective->GetCenterPosition() });
+			App->particles->CreateParticle(ParticleType::ATTACK_BASIC_SHOT, GetCenterPosition(),
+				objective->GetCenterPosition());
 			App->audio->PlayFx(attack_fx.c_str(), 0, 1);
 			break;
 		default:
@@ -454,7 +454,7 @@ void DynamicEntity::MovementAnimationCheck() {
 		break;
 	}
 
-	current_animation->speed = (entity_card->info.stats.find("movement")->second->GetValue() * current_animation->base_speed) / entity_card->info.stats.find("movement")->second->GetBaseValue();
+	//current_animation->speed = (entity_card->info.stats.find("movement")->second->GetValue() * current_animation->base_speed) / entity_card->info.stats.find("movement")->second->GetBaseValue();
 }
 void DynamicEntity::AttackingAnimationCheck() {
 	switch (direction)
