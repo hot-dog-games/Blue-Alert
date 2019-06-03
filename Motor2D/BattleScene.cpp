@@ -70,12 +70,17 @@ bool BattleScene::Start()
 
 	SetEnemiesUpgrades(enemy_deck);
 
-	iPoint allied_core_world = App->map->MapToWorld(51, 50);
-	iPoint enemy_core_world = App->map->MapToWorld(27, 26);
+	iPoint allied_core_world = App->map->MapToWorld(48, 48);
+	iPoint enemy_core_world = App->map->MapToWorld(25, 25);
 
-	allied_core = App->entity_manager->CreateCore(1, { (float)allied_core_world.x,  (float)allied_core_world.y }, App->game_manager->GetPlayerDeck(), FACTION_RUSSIAN);
-	enemy_core = App->entity_manager->CreateCore(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType(), { (float)enemy_core_world.x,  (float)enemy_core_world.y }, enemy_deck, FACTION_AMERICAN, true);
+	allied_core = App->entity_manager->CreateCore(1, { (float)allied_core_world.x + App->map->data.tile_width*0.5f,  (float)allied_core_world.y + App->map->data.tile_height*0.5f },
+		App->game_manager->GetPlayerDeck(), FACTION_RUSSIAN);
+	enemy_core = App->entity_manager->CreateCore(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType(),
+		{ (float)enemy_core_world.x + App->map->data.tile_width*0.5f,  (float)enemy_core_world.y}, enemy_deck, FACTION_AMERICAN, true);
 	enemy_core->delete_deck = true;
+
+	allied_core->SetPivot(PivotType::PVT_CENTER);
+	enemy_core->SetPivot(PivotType::PVT_CENTER);
 
 	allied_core->LoadUnitSprites(App->game_manager->GetPlayerDeck()->GetDeckSize());
 	enemy_core->LoadUnitSprites();

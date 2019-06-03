@@ -299,7 +299,7 @@ void DynamicEntity::Attack()
 		case AttackType::AT_BASIC:
 			objective->DecreaseLife(attack);
 			App->particles->CreateParticle(ParticleType::ATTACK_BASIC_SHOT, { position.x, position.y - current_frame.h * 0.5f }, 
-				{ objective->position.x, objective->position.y - objective->current_frame.h * 0.5f });
+				{ objective->GetCenterPosition() });
 			App->audio->PlayFx(attack_fx.c_str(), 0, 1);
 			break;
 		case AttackType::AT_AOE:
@@ -319,7 +319,7 @@ void DynamicEntity::Attack()
 		case AttackType::AT_PIERCING:
 			objective->DecreaseLife(attack, true);
 			App->particles->CreateParticle(ParticleType::ATTACK_BASIC_SHOT, { position.x, position.y - current_frame.h * 0.5f },
-				{ objective->position.x, objective->position.y - objective->current_frame.h * 0.5f });
+				{ objective->GetCenterPosition() });
 			App->audio->PlayFx(attack_fx.c_str(), 0, 1);
 			break;
 		default:

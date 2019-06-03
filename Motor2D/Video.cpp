@@ -115,6 +115,7 @@ int ReadThread(void *param) {
 
 Video::Video()
 {
+	name = "video";
 }
 
 

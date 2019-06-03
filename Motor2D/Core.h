@@ -32,7 +32,6 @@ public:
 	bool delete_deck = false;
 
 protected:
-
 	void Attack();
 	bool CheckEnemies();
 	Deck* deck = nullptr;
