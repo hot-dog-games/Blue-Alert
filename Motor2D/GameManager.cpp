@@ -116,8 +116,6 @@ void GameManager::CreateStage()
 
 bool GameManager::Restart()
 {
-	encounter_tree->CleanTree();
-	ResetBuildingBuffs();
 	RecoverState(recovery_state);
 
 	restart = false;
@@ -193,8 +191,11 @@ void GameManager::RecoverState(GameState state)
 	ResetBuildingBuffs();
 	encounter_tree->CleanTree();
 	stage = state.stage;
-	if(stage != stage::STAGE_TUTORIAL)
+	if (stage != stage::STAGE_TUTORIAL)
 		DeletePopUps();
+	else
+		CreatePopUps();
+
 	CreateStage();
 	for (std::list<int>::iterator node = state.captured_nodes.begin(); node != state.captured_nodes.end(); ++node)
 	{
