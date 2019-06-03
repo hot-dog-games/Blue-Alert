@@ -161,13 +161,13 @@
     <combat attack_type="2" armored="true"/>
     <buff_type value="32"/>
     <stats>
-      <stat stat="health" value ="100"/>
+      <stat stat="health" value ="120"/>
       <stat stat="damage" value ="100"/>
       <stat stat="defense" value ="10"/>
       <stat stat="movement" value ="25"/>
       <stat stat="attack_speed" value ="2"/>
       <stat stat="range" value ="4"/>
-      <stat stat="energy_cost" value ="5"/>
+      <stat stat="energy_cost" value ="4"/>
       <stat stat="units" value ="1"/>
     </stats>
 
@@ -187,13 +187,13 @@
     <combat attack_type="2" armored="true"/>
     <buff_type value="32"/>
     <stats>
-      <stat stat="health" value ="100"/>
+      <stat stat="health" value ="120"/>
       <stat stat="damage" value ="100"/>
       <stat stat="defense" value ="10"/>
       <stat stat="movement" value ="25"/>
       <stat stat="attack_speed" value ="2"/>
       <stat stat="range" value ="4"/>
-      <stat stat="energy_cost" value ="5"/>
+      <stat stat="energy_cost" value ="4"/>
       <stat stat="units" value ="1"/>
     </stats>
 
@@ -268,7 +268,7 @@
     <buff_type value="32"/>
     <stats>
       <stat stat="health" value ="100"/>
-      <stat stat="damage" value ="40"/>
+      <stat stat="damage" value ="30"/>
       <stat stat="defense" value ="8"/>
       <stat stat="movement" value ="20"/>
       <stat stat="attack_speed" value ="2.5"/>
@@ -295,7 +295,7 @@
     <buff_type value="32"/>
     <stats>
       <stat stat="health" value ="100"/>
-      <stat stat="damage" value ="40"/>
+      <stat stat="damage" value ="30"/>
       <stat stat="defense" value ="8"/>
       <stat stat="movement" value ="20"/>
       <stat stat="attack_speed" value ="2.5"/>
@@ -432,7 +432,7 @@
       <stat stat="movement" value ="50"/>
       <stat stat="attack_speed" value ="2"/>
       <stat stat="range" value ="5"/>
-      <stat stat="energy_cost" value ="4"/>
+      <stat stat="energy_cost" value ="5"/>
       <stat stat="units" value ="1"/>
     </stats>
 
@@ -458,7 +458,7 @@
       <stat stat="movement" value ="50"/>
       <stat stat="attack_speed" value ="2"/>
       <stat stat="range" value ="5"/>
-      <stat stat="energy_cost" value ="4"/>
+      <stat stat="energy_cost" value ="5"/>
       <stat stat="units" value ="1"/>
     </stats>
 
