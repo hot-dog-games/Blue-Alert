@@ -16,6 +16,7 @@ public:
 
 	bool Update(float dt);
 	bool UIBlit();
+	bool CleanUp();
 
 private:
 	SDL_Texture* bar_texture = nullptr;

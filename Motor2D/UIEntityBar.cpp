@@ -70,3 +70,9 @@ void UIEntityBar::ChangeColor()
 	}
 	SDL_SetTextureColorMod(bar_texture, (int)r, (int)g, (int)b);
 }
+
+bool UIEntityBar::CleanUp()
+{
+	SDL_DestroyTexture(bar_texture);
+	bar_texture = nullptr;
+}
