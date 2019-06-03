@@ -5,6 +5,7 @@
 #include "Deck.h"
 #include "CardManager.h"
 #include "GameManager.h"
+#include "Map.h"
 #include "p2Log.h"
 #include "CoreAI.h"
 
@@ -41,7 +42,7 @@ bool CoreAI::Update(float dt)
 			}
 			break;
 		case CoreAI::AIState::ACTING:
-			UseCard(selected_card, { (float)lanes[selected_lane].area.x + (float)lanes[selected_lane].area.w*0.5f, position.y + 50 });
+			UseCard(selected_card, { (float)lanes[selected_lane].area.x + (float)lanes[selected_lane].area.w*0.5f, position.y + (float)(App->map->data.tile_height * 3)});
 			ai_state = AIState::WAITING;
 			if (deck->cards[selected_card]->type == EntityType::VIRUS)
 			{
@@ -265,9 +266,11 @@ bool CoreAI::PostUpdate()
 
 bool CoreAI::Start()
 {
-	lanes[0].area = { -150, 0 , 120, 1000 };
-	lanes[1].area = { -30, 0 , 120, 1000 };
-	lanes[2].area = { 90, 0 , 120, 1000 };
+	int area_width = App->map->data.tile_width * 2; // 2 tiles width
+	int area_height = App->map->data.tile_height * 30; // 30 tiles height
+	lanes[0].area = { (int)position.x - area_width - (int)(App->map->data.tile_width), (int)position.y , area_width, area_height };
+	lanes[1].area = { (int)position.x - (int)(App->map->data.tile_width), (int)position.y , area_width, area_height };
+	lanes[2].area = { (int)position.x + area_width - (int)(App->map->data.tile_width), (int)position.y , area_width, area_height };
 
 	return true;
 }

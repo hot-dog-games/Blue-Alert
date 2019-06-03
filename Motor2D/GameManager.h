@@ -87,7 +87,6 @@ public:
 	void CreateStage();
 	void CreateUpgrades();
 	void NewGame();
-	void ChangeStage();
 
 	//----------------------
 
@@ -96,6 +95,9 @@ public:
 	void AddCardToCollection(EntityType card_type);
 	bool IsInCollection(int card_type);
 	//----------------------
+
+	void ChangeStage();
+	std::string GetBattleMap();
 
 	bool Restart();
 	bool restart = false;

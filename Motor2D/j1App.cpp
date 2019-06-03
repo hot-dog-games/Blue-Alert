@@ -22,7 +22,6 @@
 #include "TransitionManager.h"
 #include "GameManager.h"
 #include "Brofiler/Brofiler.h"
-#include "Movement.h"
 #include "Video.h"
 #include "j1App.h"
 
@@ -50,7 +49,6 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	buff = new BuffSourceManager();
 	game_manager = new GameManager();
 	video = new Video();
-	//movement = new Movement();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp

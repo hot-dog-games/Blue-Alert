@@ -48,7 +48,7 @@ BattleScene::~BattleScene()
 // Called before the first frame
 bool BattleScene::Start()
 {
-	if (App->map->Load("test_grande.tmx") == true)
+	if (App->map->Load(App->game_manager->GetBattleMap().c_str()) == true)
 	{
 		int w, h;
 		uchar* data = NULL;
