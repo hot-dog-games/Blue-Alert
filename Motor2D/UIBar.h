@@ -16,7 +16,7 @@ public:
 
 	void DecreaseBar(float value);
 	void IncreaseBar(float value);
-	bool UIBlit();
+	virtual bool UIBlit();
 	bool Update(float dt);
 
 	void ChangeStat(Stat* stat);

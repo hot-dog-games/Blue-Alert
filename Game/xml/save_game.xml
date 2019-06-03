@@ -7,46 +7,36 @@
 	<map />
 	<game_manager>
 		<save_state>
-			<stage value="2" />
-			<node value="2" />
-			<captured_nodes>
-				<node id="1" />
-				<node id="2" />
-				<node id="3" />
-			</captured_nodes>
+			<stage value="1" />
+			<node value="0" />
+			<captured_nodes />
 			<collection>
 				<card lvl="0" type="2" />
-				<card lvl="0" type="4" />
-				<card lvl="3" type="6" />
-				<card lvl="0" type="10" />
 			</collection>
 			<deck>
 				<card type="2" />
-				<card type="4" />
-				<card type="6" />
-				<card type="10" />
+				<card type="-1" />
+				<card type="-1" />
+				<card type="-1" />
 			</deck>
-			<gold value="600" />
+			<gold value="0" />
 			<health_lvl value="0" />
 			<energy_lvl value="0" />
 		</save_state>
 		<recovery_state>
-			<stage value="2" />
+			<stage value="1" />
 			<node value="0" />
 			<captured_nodes />
 			<collection>
-				<card lvl="1" type="2" />
-				<card lvl="1" type="4" />
-				<card lvl="1" type="6" />
-				<card lvl="0" type="10" />
+				<card lvl="0" type="2" />
 			</collection>
 			<deck>
 				<card type="2" />
-				<card type="4" />
-				<card type="6" />
-				<card type="10" />
+				<card type="-1" />
+				<card type="-1" />
+				<card type="-1" />
 			</deck>
-			<gold value="300" />
+			<gold value="0" />
 			<health_lvl value="0" />
 			<energy_lvl value="0" />
 		</recovery_state>
@@ -62,6 +52,6 @@
 	<buff_manager />
 	<video />
 	<renderer>
-		<camera x="860" y="-1224" />
+		<camera x="290" y="-1325" />
 	</renderer>
 </game_state>
