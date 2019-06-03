@@ -24,46 +24,58 @@
 			<card value="3" level="1"/>
 		</encounter>
 	</node>
-	<node id="3" x="54" y="71" type="31" difficulty="1" deck_size="2">
+	<node id="3" x="54" y="71" type="31" difficulty="0" deck_size="2">
 		<children>
 			<child id="6"/>
 			<child id="7"/>
 		</children>
+    <encounter>
+      <card value="1" level="1"/>
+      <card value="3" level="1"/>
+    </encounter>
 	</node>
-	<node id="4" x="56" y="57" type="33" difficulty="1" deck_size="2">
+	<node id="4" x="56" y="57" type="33" difficulty="0" deck_size="2">
 		<children>
 			<child id="7"/>
 		</children>
+    <encounter>
+      <card value="1" level="1"/>
+      <card value="3" level="1"/>
+    </encounter>
 	</node>
-	<node id="5" x="62" y="47" type="34" difficulty="1" deck_size="2">
+	<node id="5" x="62" y="47" type="34" difficulty="0" deck_size="2">
 		<children>
 			<child id="8"/>
 			<child id="9"/>
 			<child id="10"/>
 		</children>
+    <encounter>
+      <card value="1" level="1"/>
+      <card value="3" level="1"/>
+    </encounter>
 	</node>
-	<node id="6" x="35" y="70" type="32" difficulty="2" deck_size="3">
+	<node id="6" x="35" y="70" type="32" difficulty="1" deck_size="3">
 		<children>
 			<child id="11"/>
 		</children>
 	</node>
-	<node id="7" x="43" y="58" type="34" difficulty="2" deck_size="3">
+	<node id="7" x="43" y="58" type="34" difficulty="1" deck_size="3">
 		<children>
 			<child id="11"/>
 			<child id="12"/>
 		</children>
 	</node>
-	<node id="8" x="51" y="47" type="33" difficulty="2" deck_size="3">
+	<node id="8" x="51" y="47" type="33" difficulty="1" deck_size="3">
 		<children>
 			<child id="12"/>
 		</children>
 	</node>
-	<node id="9" x="52" y="37" type="30" difficulty="2" deck_size="3">
+	<node id="9" x="52" y="37" type="30" difficulty="1" deck_size="3">
 		<children>
 			<child id="13"/>
 		</children>
 	</node>
-	<node id="10" x="64" y="33" type="32" difficulty="2" deck_size="3">
+	<node id="10" x="64" y="33" type="32" difficulty="1" deck_size="3">
 		<children>
 			<child id="13"/>
 		</children>
@@ -83,6 +95,6 @@
 			<child id="14"/>
 		</children>
 	</node>
-	<node id="14" x="30" y="29" type="30" difficulty="4" deck_size="4">
+	<node id="14" x="30" y="29" type="30" difficulty="5" deck_size="4">
 	</node>
 </map01_nodes>
