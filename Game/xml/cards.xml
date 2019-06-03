@@ -20,7 +20,7 @@
       <stat stat="damage" value ="2"/>
       <stat stat="defense" value ="2"/>
       <stat stat="movement" value ="5"/>
-      <stat stat="attack_speed" value ="0"/>
+      <stat stat="attack_speed" value ="0.1"/>
       <stat stat="range" value ="0"/>
     </upgrades>
   </card>
@@ -46,7 +46,7 @@
       <stat stat="damage" value ="2"/>
       <stat stat="defense" value ="2"/>
       <stat stat="movement" value ="5"/>
-      <stat stat="attack_speed" value ="0"/>
+      <stat stat="attack_speed" value ="0.1"/>
       <stat stat="range" value ="0"/>
     </upgrades>
   </card>
@@ -72,7 +72,7 @@
       <stat stat="damage" value ="10"/>
       <stat stat="defense" value ="2"/>
       <stat stat="movement" value ="5"/>
-      <stat stat="attack_speed" value ="0"/>
+      <stat stat="attack_speed" value ="0.1"/>
       <stat stat="range" value ="0"/>
     </upgrades>
   </card>
@@ -98,7 +98,7 @@
       <stat stat="damage" value ="10"/>
       <stat stat="defense" value ="2"/>
       <stat stat="movement" value ="5"/>
-      <stat stat="attack_speed" value ="0"/>
+      <stat stat="attack_speed" value ="0.1"/>
       <stat stat="range" value ="0"/>
     </upgrades>
   </card>
@@ -113,7 +113,7 @@
       <stat stat="damage" value ="20"/>
       <stat stat="defense" value ="8"/>
       <stat stat="movement" value ="25"/>
-      <stat stat="attack_speed" value ="2.5"/>
+      <stat stat="attack_speed" value ="2"/>
       <stat stat="range" value ="5"/>
       <stat stat="energy_cost" value ="3"/>
       <stat stat="units" value ="2"/>
@@ -124,7 +124,7 @@
       <stat stat="damage" value ="5"/>
       <stat stat="defense" value ="1"/>
       <stat stat="movement" value ="5"/>
-      <stat stat="attack_speed" value ="0"/>
+      <stat stat="attack_speed" value ="0.1"/>
       <stat stat="range" value ="0"/>
     </upgrades>
   </card>
@@ -139,7 +139,7 @@
       <stat stat="damage" value ="20"/>
       <stat stat="defense" value ="8"/>
       <stat stat="movement" value ="25"/>
-      <stat stat="attack_speed" value ="2.5"/>
+      <stat stat="attack_speed" value ="2"/>
       <stat stat="range" value ="5"/>
       <stat stat="energy_cost" value ="3"/>
       <stat stat="units" value ="2"/>
@@ -150,7 +150,7 @@
       <stat stat="damage" value ="5"/>
       <stat stat="defense" value ="1"/>
       <stat stat="movement" value ="5"/>
-      <stat stat="attack_speed" value ="0"/>
+      <stat stat="attack_speed" value ="0.1"/>
       <stat stat="range" value ="0"/>
     </upgrades>
   </card>
@@ -176,7 +176,7 @@
       <stat stat="damage" value ="15"/>
       <stat stat="defense" value ="2"/>
       <stat stat="movement" value ="5"/>
-      <stat stat="attack_speed" value ="0"/>
+      <stat stat="attack_speed" value ="0.1"/>
       <stat stat="range" value ="0"/>
     </upgrades>
   </card>
@@ -202,7 +202,7 @@
       <stat stat="damage" value ="15"/>
       <stat stat="defense" value ="2"/>
       <stat stat="movement" value ="5"/>
-      <stat stat="attack_speed" value ="0"/>
+      <stat stat="attack_speed" value ="0.1"/>
       <stat stat="range" value ="0"/>
     </upgrades>
   </card>
@@ -228,7 +228,7 @@
       <stat stat="damage" value ="1"/>
       <stat stat="defense" value ="2"/>
       <stat stat="movement" value ="5"/>
-      <stat stat="attack_speed" value ="0"/>
+      <stat stat="attack_speed" value ="0.1"/>
       <stat stat="range" value ="0"/>
     </upgrades>
 
@@ -255,7 +255,7 @@
       <stat stat="damage" value ="1"/>
       <stat stat="defense" value ="2"/>
       <stat stat="movement" value ="5"/>
-      <stat stat="attack_speed" value ="0"/>
+      <stat stat="attack_speed" value ="0.1"/>
       <stat stat="range" value ="0"/>
     </upgrades>
 
@@ -282,7 +282,7 @@
       <stat stat="damage" value ="5"/>
       <stat stat="defense" value ="1"/>
       <stat stat="movement" value ="10"/>
-      <stat stat="attack_speed" value ="0"/>
+      <stat stat="attack_speed" value ="0.1"/>
       <stat stat="range" value ="0"/>
     </upgrades>
 
@@ -309,7 +309,7 @@
       <stat stat="damage" value ="5"/>
       <stat stat="defense" value ="1"/>
       <stat stat="movement" value ="10"/>
-      <stat stat="attack_speed" value ="0"/>
+      <stat stat="attack_speed" value ="0.1"/>
       <stat stat="range" value ="0"/>
     </upgrades>
 
@@ -336,7 +336,7 @@
       <stat stat="damage" value ="1"/>
       <stat stat="defense" value ="2"/>
       <stat stat="movement" value ="5"/>
-      <stat stat="attack_speed" value ="0"/>
+      <stat stat="attack_speed" value ="0.1"/>
       <stat stat="range" value ="0"/>
     </upgrades>
   </card>
@@ -362,7 +362,7 @@
       <stat stat="damage" value ="1"/>
       <stat stat="defense" value ="2"/>
       <stat stat="movement" value ="5"/>
-      <stat stat="attack_speed" value ="0"/>
+      <stat stat="attack_speed" value ="0.1"/>
       <stat stat="range" value ="0"/>
     </upgrades>
 
@@ -389,7 +389,7 @@
       <stat stat="damage" value ="10"/>
       <stat stat="defense" value ="2"/>
       <stat stat="movement" value ="5"/>
-      <stat stat="attack_speed" value ="0"/>
+      <stat stat="attack_speed" value ="0.1"/>
       <stat stat="range" value ="0"/>
     </upgrades>
   </card>
@@ -415,7 +415,7 @@
       <stat stat="damage" value ="10"/>
       <stat stat="defense" value ="2"/>
       <stat stat="movement" value ="5"/>
-      <stat stat="attack_speed" value ="0"/>
+      <stat stat="attack_speed" value ="0.1"/>
       <stat stat="range" value ="0"/>
     </upgrades>
   </card>
@@ -441,7 +441,7 @@
       <stat stat="damage" value ="20"/>
       <stat stat="defense" value ="1"/>
       <stat stat="movement" value ="5"/>
-      <stat stat="attack_speed" value ="0"/>
+      <stat stat="attack_speed" value ="0.1"/>
       <stat stat="range" value ="0"/>
     </upgrades>
   </card>
@@ -467,7 +467,7 @@
       <stat stat="damage" value ="20"/>
       <stat stat="defense" value ="1"/>
       <stat stat="movement" value ="5"/>
-      <stat stat="attack_speed" value ="0"/>
+      <stat stat="attack_speed" value ="0.1"/>
       <stat stat="range" value ="0"/>
     </upgrades>
 
