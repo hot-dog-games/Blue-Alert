@@ -156,6 +156,9 @@ private:
 	UIScrollBar* pause_fx = nullptr;
 	UIImage* side_troop_panel = nullptr;
 	UIImage* side_troop_panel_left = nullptr;
+	UIImage* counters_panel = nullptr;
+	UIButton* counters_panel_continue = nullptr;
+	UIImage* counters_image = nullptr;
 
 	int unit_store_cost = 100;
 	int total_cost_acumulated = 0;
