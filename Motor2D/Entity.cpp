@@ -117,5 +117,5 @@ void Entity::Draw()
 	fPoint render_position = GetPosition();
 	App->render->Blit(sprite, render_position.x, render_position.y, &current_frame);
 	if(debug)
-		App->render->DrawCircle(position.x, position.y, 5, 255, 0, 255);
+		App->render->DrawQuad({ (int)(position.x - 2.5f), (int)(position.y - 2.5f), 5, 5 },255,0,0);
 }

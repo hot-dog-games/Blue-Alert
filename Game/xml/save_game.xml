@@ -50,6 +50,7 @@
 	<gui />
 	<transition_manager />
 	<buff_manager />
+	<video />
 	<renderer>
 		<camera x="290" y="-1325" />
 	</renderer>

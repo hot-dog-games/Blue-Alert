@@ -2,7 +2,6 @@
 #include "j1App.h"
 #include "Render.h"
 #include "Audio.h"
-#include "Movement.h"
 #include "GUI.h"
 #include "UIBar.h"
 #include "CardManager.h"
@@ -106,7 +105,6 @@ bool DynamicEntity::PreUpdate()
 
 	CalcDirection();
 	AnimationCheck();
-	pivot.x = position.x - current_frame.w / 2; pivot.y = position.y; pivot.w = current_frame.w; pivot.h = -current_frame.h / 2;
 	return true;
 }
 
@@ -118,7 +116,6 @@ bool DynamicEntity::PostUpdate()
 	{
 		//Range debug 
 		App->render->DrawCircle(position.x, position.y, entity_card->info.stats.find("range")->second->GetValue()*App->map->data.tile_height, 255, 0, 0);
-		App->render->DrawQuad(pivot, 255, 0, 0);
 	}
 
 	return true;
