@@ -15,9 +15,14 @@ public:
 	~UIEntityBar();
 
 	bool Update(float dt);
+	bool UIBlit();
 
 private:
+	SDL_Texture* bar_texture = nullptr;
+	void ChangeColor();
 	Entity* entity = nullptr;
+	int entity_height = 0;
+	int bar_margin = 15;
 };
 
 #endif // !UI_BAR_ELEMENT_H
