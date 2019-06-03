@@ -165,6 +165,26 @@ void GameManager::ChangeStage()
 	SaveState(recovery_state);
 }
 
+std::string GameManager::GetBattleMap()
+{
+	int choice = rand() % 2;
+	switch (stage)
+	{
+	case STAGE_TUTORIAL:
+		if (choice == 0)
+			return "grass_map.tmx";
+		else
+			return "river_map.tmx";
+	case STAGE_01:
+		if (choice == 0)
+			return "grass_map.tmx";
+		else
+			return "river_map.tmx";
+	case STAGE_02:
+		return "snow_map.tmx";
+	}
+}
+
 void GameManager::RecoverState(GameState state)
 {
 	ClearCards();
