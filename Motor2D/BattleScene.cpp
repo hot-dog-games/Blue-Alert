@@ -34,6 +34,7 @@
 #include "UILabel.h"
 
 const double HELD_DELAY = 175;
+const double BOMB_CD = 30;
 
 BattleScene::BattleScene() : Scene()
 {
@@ -248,6 +249,15 @@ bool BattleScene::Update(float dt)
 		}
 
 		energy_label->SetText(std::to_string(energy_bar->GetValue()));
+		if (bomb_cd_timer < BOMB_CD)
+		{
+			bomb_cd_timer += 1 * dt;
+			if (bomb_cd_timer >= BOMB_CD)
+			{
+				bomb_cd_timer = BOMB_CD;
+				bomb_button->SetLocked(true);
+			}
+		}
 
 		UpdateCooldowns();
 	}
@@ -389,6 +399,7 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 		if (element == bomb_button)
 		{
 			DropNukes();
+			bomb_cd_timer = 0;
 			bomb_button->SetLocked(false);
 		}
 
@@ -543,6 +554,20 @@ void BattleScene::UpdateCooldowns()
 			unit_cooldown[i]->SetHeight(max_height - current_height);
 		}
 	}
+
+	max_height = 57;
+	max_value = BOMB_CD;
+	current_value = bomb_cd_timer;
+	if (current_value <= max_value)
+	{
+		if (current_value > 0)
+		{
+			float percent = (float)current_value * (1 / (float)max_value);
+			current_height = percent * (max_height);
+		}
+		else current_height = 0;
+		bomb_cd_image->SetHeight(max_height - current_height);
+	}
 }
 
 void BattleScene::SetEnemiesUpgrades(Deck* enemy_deck)
@@ -621,9 +646,10 @@ void BattleScene::StartUI()
 
 	SDL_Rect bomb_button_rect[3];
 	bomb_button_rect[0] = { 1316,1304,58,57 };
-	bomb_button_rect[1] = { 1376,1303,58,57 };
-	bomb_button_rect[2] = { 1434,1303,58,57 };
+	bomb_button_rect[1] = { 1376,1304,58,57 };
+	bomb_button_rect[2] = { 1434,1304,58,57 };
 	bomb_button = App->gui->CreateButton({ 567, 847 }, bomb_button_rect, nullptr);
+	bomb_cd_image = App->gui->CreateImage({ 0,0 }, { 1143, 546, 58, 57 }, bomb_button);
 
 	SDL_Rect faction_button_rect[3];
 	faction_button_rect[0] = { 1346,1366,39,39};

@@ -162,6 +162,7 @@ private:
 
 	float lerp_speed = 1 / 60;
 	float lerp_percent = 0;
+	float bomb_cd_timer = 30;
 
 	uint max_energy;
 	uint current_energy;
@@ -171,6 +172,7 @@ private:
 
 	UIImage* energy_cost[4];
 	UILabel* energy_cost_label[4];
+	UIImage* bomb_cd_image = nullptr;
 };
 
 #endif
