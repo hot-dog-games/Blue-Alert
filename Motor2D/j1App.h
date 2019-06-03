@@ -27,6 +27,7 @@ class BuffSourceManager;
 class GameManager;
 class Movement;
 class Particles;
+class Video;
 
 class j1App
 {
@@ -112,6 +113,7 @@ public:
 	GameManager* game_manager;
 	Movement* movement;
 	Particles*	particles;
+	Video* video;
 
 private:
 

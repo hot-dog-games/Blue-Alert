@@ -23,6 +23,7 @@
 #include "GameManager.h"
 #include "Brofiler/Brofiler.h"
 #include "Movement.h"
+#include "Video.h"
 #include "j1App.h"
 
 
@@ -48,6 +49,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	transition_manager = new TransitionManager();
 	buff = new BuffSourceManager();
 	game_manager = new GameManager();
+	video = new Video();
 	//movement = new Movement();
 
 	// Ordered for awake / Start / Update
@@ -67,6 +69,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(gui);
 	AddModule(transition_manager);
 	AddModule(buff);
+	AddModule(video);
 
 	// render last to swap buffer
 	AddModule(render);

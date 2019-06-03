@@ -172,6 +172,9 @@
     <ClCompile Include="UIButtonTroops.cpp">
       <Filter>Engine\UI</Filter>
     </ClCompile>
+    <ClCompile Include="Video.cpp">
+      <Filter>Engine\Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
@@ -359,6 +362,9 @@
     </ClInclude>
     <ClInclude Include="UIButtonTroops.h">
       <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Video.h">
+      <Filter>Engine\Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

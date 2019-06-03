@@ -555,7 +555,7 @@ void BattleScene::UpdateCooldowns()
 		}
 	}
 
-	max_height = 52;
+	max_height = 50;
 	max_value = BOMB_CD;
 	current_value = bomb_cd_timer;
 	if (current_value <= max_value)
@@ -649,7 +649,7 @@ void BattleScene::StartUI()
 	bomb_button_rect[1] = { 1376,1304,58,57 };
 	bomb_button_rect[2] = { 1434,1304,58,57 };
 	bomb_button = App->gui->CreateButton({ 567, 847 }, bomb_button_rect, nullptr);
-	bomb_cd_image = App->gui->CreateImage({ 0,3 }, { 1143, 549, 58, 52 }, bomb_button);
+	bomb_cd_image = App->gui->CreateImage({ 0,3 }, { 1143, 551, 58, 50 }, bomb_button);
 
 	SDL_Rect faction_button_rect[3];
 	faction_button_rect[0] = { 1346,1366,39,39};
