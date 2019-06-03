@@ -286,13 +286,14 @@ void DynamicEntity::Attack()
 {
 	if (attack_timer.ReadMs() >= SECOND_MS / entity_card->info.stats.find("attack_speed")->second->GetValue() )
 	{
+		current_animation->Reset();
 		float attack = entity_card->info.stats.find("damage")->second->GetValue();
 		switch (entity_card->info.attack_type)
 		{
 		case AttackType::AT_BASIC:
 			objective->DecreaseLife(attack);
-			App->particles->CreateParticle(ParticleType::ATTACK_BASIC_SHOT, { position.x, position.y - current_frame.h * 0.5f }, 
-				{ objective->GetCenterPosition() });
+			App->particles->CreateParticle(ParticleType::ATTACK_BASIC_SHOT, GetCenterPosition(),
+				objective->GetCenterPosition());
 			App->audio->PlayFx(attack_fx.c_str(), 0, 1);
 			break;
 		case AttackType::AT_AOE:
@@ -311,8 +312,8 @@ void DynamicEntity::Attack()
 			break;
 		case AttackType::AT_PIERCING:
 			objective->DecreaseLife(attack, true);
-			App->particles->CreateParticle(ParticleType::ATTACK_BASIC_SHOT, { position.x, position.y - current_frame.h * 0.5f },
-				{ objective->GetCenterPosition() });
+			App->particles->CreateParticle(ParticleType::ATTACK_BASIC_SHOT, GetCenterPosition(),
+				objective->GetCenterPosition());
 			App->audio->PlayFx(attack_fx.c_str(), 0, 1);
 			break;
 		default:
@@ -486,6 +487,6 @@ void DynamicEntity::AttackingAnimationCheck() {
 	default:
 		break;
 	}
-
-	current_animation->speed = current_animation->GetFrameAmount() * entity_card->info.stats.find("attack_speed")->second->GetValue();
+	int frames_per_second = current_animation->GetFrameAmount() * entity_card->info.stats.find("attack_speed")->second->GetValue();
+	current_animation->speed = current_animation->speed < frames_per_second ? frames_per_second : current_animation->speed;
 }

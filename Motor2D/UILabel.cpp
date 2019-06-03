@@ -113,7 +113,6 @@ void UILabel::SetColor(SDL_Color color)
 
 bool UILabel::CleanUp()
 {
-	LOG("label cleanup text");
 	parent = nullptr;
 	font = nullptr;
 	App->tex->UnLoad(texture);

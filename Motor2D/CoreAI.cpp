@@ -140,7 +140,7 @@ void CoreAI::AnalyzeLane(uint lane)
 
 
 	lanes[lane].unit_value = enemy_damage - player_damage;
-	lanes[lane].distance_value = LINEAR_INTERPOLATION(closest_enemy_distance, 0, 1000, 1000, 0);
+	lanes[lane].distance_value = LINEAR_INTERPOLATION(closest_enemy_distance, 0, lanes[lane].area.h, lanes[lane].area.h, 0);
 	lanes[lane].lane_priority = lanes[lane].unit_value + lanes[lane].distance_value;
 }
 

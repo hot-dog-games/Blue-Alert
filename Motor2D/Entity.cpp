@@ -74,7 +74,7 @@ fPoint Entity::GetCenterPosition()
 	switch (pivot)
 	{
 	case PVT_BOTTOM_CENTER:
-		ret = { position.x, position.y + current_frame.h * 0.5f };
+		ret = { position.x, position.y - current_frame.h * 0.5f };
 		break;
 	case PVT_CENTER:
 		ret = position;

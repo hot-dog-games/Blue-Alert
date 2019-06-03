@@ -20,7 +20,6 @@ CardManager::~CardManager()
 
 bool CardManager::CleanUp()
 {
-	LOG("card manager cleanup");
 	while (!cards.empty()) delete cards.front(), cards.pop_front();
 	return true;
 }
