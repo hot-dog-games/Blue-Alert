@@ -408,6 +408,24 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			bomb_button->SetLocked(false);
 		}
 
+		if (element == faction_button)
+		{
+			if (!App->IsPaused()) {
+				App->PauseGame();
+				App->gui->EnableElement(counters_panel);
+			}
+			else {
+				App->ResumeGame();
+				App->gui->DisableElement(counters_panel);
+			}
+		}
+
+		if (element == counters_panel_continue)
+		{
+			App->gui->DisableElement(counters_panel);
+			App->ResumeGame();
+		}
+
 
 		if (element == pause_button) {
 			if (!App->IsPaused()) {
@@ -711,6 +729,12 @@ void BattleScene::StartUI()
 	pause_fx = App->gui->CreateScrollBar({100,400 }, { 771,1245,413,40 }, FX, App->audio->GetFxVolume(), 128, pause_panel);
 
 	App->gui->DisableElement(pause_panel);
+
+	//Counter Table
+
+	counters_panel = App->gui->CreateImage({ 2, 87 }, { 3967,961,636,671 });
+	counters_panel_continue = App->gui->CreateButtonText({ 180, 480 }, { 37,5 }, button_rect, "CONTINUE", { 243,242,153,255 }, 27, counters_panel);
+	App->gui->DisableElement(counters_panel);
 
 	//Store 
 	if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() == EntityType::STORE_STRATEGY_BUILDING)
