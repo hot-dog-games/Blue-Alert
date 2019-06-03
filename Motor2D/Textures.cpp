@@ -97,7 +97,6 @@ bool Textures::UnLoad(SDL_Texture* texture)
 	{
 		if (texture == item->second)
 		{
-			LOG("Unloaded texture: %s", item->first.c_str());
 			SDL_DestroyTexture(item->second);
 			textures.erase(item);
 			return true;
@@ -114,7 +113,6 @@ bool Textures::UnLoad(std::string path)
 
 	if (item != textures.end())
 	{
-		LOG("Unloaded texture: %s", path.c_str());
 		SDL_DestroyTexture(item->second);
 		textures.erase(item);
 		return true;
@@ -134,7 +132,6 @@ SDL_Texture* const Textures::LoadSurface(SDL_Surface* surface, const char* path)
 	}
 	else
 	{
-		LOG("Loaded texture: %s", path);
 		textures.insert({path,texture});
 	}
 

@@ -286,6 +286,7 @@ void DynamicEntity::Attack()
 {
 	if (attack_timer.ReadMs() >= SECOND_MS / entity_card->info.stats.find("attack_speed")->second->GetValue() )
 	{
+		current_animation->Reset();
 		float attack = entity_card->info.stats.find("damage")->second->GetValue();
 		switch (entity_card->info.attack_type)
 		{
@@ -454,7 +455,7 @@ void DynamicEntity::MovementAnimationCheck() {
 		break;
 	}
 
-	//current_animation->speed = (entity_card->info.stats.find("movement")->second->GetValue() * current_animation->base_speed) / entity_card->info.stats.find("movement")->second->GetBaseValue();
+	current_animation->speed = (entity_card->info.stats.find("movement")->second->GetValue() * current_animation->base_speed) / entity_card->info.stats.find("movement")->second->GetBaseValue();
 }
 void DynamicEntity::AttackingAnimationCheck() {
 	switch (direction)
@@ -486,6 +487,6 @@ void DynamicEntity::AttackingAnimationCheck() {
 	default:
 		break;
 	}
-
-	current_animation->speed = current_animation->GetFrameAmount() * entity_card->info.stats.find("attack_speed")->second->GetValue();
+	int frames_per_second = current_animation->GetFrameAmount() * entity_card->info.stats.find("attack_speed")->second->GetValue();
+	current_animation->speed = current_animation->speed < frames_per_second ? frames_per_second : current_animation->speed;
 }

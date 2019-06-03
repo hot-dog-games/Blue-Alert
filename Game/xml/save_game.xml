@@ -8,18 +8,22 @@
 	<game_manager>
 		<save_state>
 			<stage value="1" />
-			<node value="0" />
-			<captured_nodes />
+			<node value="3" />
+			<captured_nodes>
+				<node id="1" />
+				<node id="3" />
+			</captured_nodes>
 			<collection>
-				<card lvl="0" type="2" />
+				<card lvl="1" type="2" />
+				<card lvl="0" type="4" />
 			</collection>
 			<deck>
 				<card type="2" />
-				<card type="-1" />
+				<card type="4" />
 				<card type="-1" />
 				<card type="-1" />
 			</deck>
-			<gold value="500" />
+			<gold value="200" />
 			<health_lvl value="0" />
 			<energy_lvl value="0" />
 		</save_state>
@@ -36,7 +40,7 @@
 				<card type="-1" />
 				<card type="-1" />
 			</deck>
-			<gold value="500" />
+			<gold value="0" />
 			<health_lvl value="0" />
 			<energy_lvl value="0" />
 		</recovery_state>
@@ -52,6 +56,6 @@
 	<buff_manager />
 	<video />
 	<renderer>
-		<camera x="290" y="-1325" />
+		<camera x="830" y="-948" />
 	</renderer>
 </game_state>
