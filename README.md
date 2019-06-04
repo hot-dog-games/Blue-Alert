@@ -76,7 +76,7 @@ Select the reward that you want with RIGHT CLICK and then click continue, in the
 On the bottom-right side of the screen you have the "collection" botton that leads you to the deck costumization menu, there you can change troops that you've obtained in the diferrent battle you had. Be aware, right now the units that you cant use dosen't show so you have to be sure you first chosed it on the reward screen of the battle
 
 ### Building Upgrade:
-On 
+On the collection menu you have on the left right side of the screen the "buildings" button the will get you to the building upgrade menu. There, you can upgrade the enery and the health of the building useing gold.
 
 
 
