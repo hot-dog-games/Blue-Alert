@@ -649,11 +649,13 @@ void BattleScene::StartUI()
 	pause_rect[2] = { 1262,1371,44,36 };
 	pause_button = App->gui->CreateButton({ 25, 910 }, pause_rect, nullptr);
 
-	SDL_Rect bomb_button_rect[3];
+	SDL_Rect bomb_button_rect[4];
 	bomb_button_rect[0] = { 1316,1304,58,57 };
 	bomb_button_rect[1] = { 1376,1304,58,57 };
 	bomb_button_rect[2] = { 1434,1304,58,57 };
+	bomb_button_rect[3] = { 1316,1304,58,57 };
 	bomb_button = App->gui->CreateButton({ 567, 847 }, bomb_button_rect, nullptr);
+	bomb_button->SetLocked(false);
 	bomb_cd_image = App->gui->CreateImage({ 0,3 }, { 1143, 551, 58, 50 }, bomb_button);
 
 	SDL_Rect faction_button_rect[3];
