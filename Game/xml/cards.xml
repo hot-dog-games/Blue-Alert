@@ -16,9 +16,9 @@
     </stats>
 
     <upgrades>
-      <stat stat="health" value ="20"/>
+      <stat stat="health" value ="10"/>
       <stat stat="damage" value ="2"/>
-      <stat stat="defense" value ="2"/>
+      <stat stat="defense" value ="1"/>
       <stat stat="movement" value ="5"/>
       <stat stat="attack_speed" value ="0.1"/>
       <stat stat="range" value ="0"/>
@@ -42,9 +42,9 @@
     </stats>
 
     <upgrades>
-      <stat stat="health" value ="20"/>
+      <stat stat="health" value ="10"/>
       <stat stat="damage" value ="2"/>
-      <stat stat="defense" value ="2"/>
+      <stat stat="defense" value ="1"/>
       <stat stat="movement" value ="5"/>
       <stat stat="attack_speed" value ="0.1"/>
       <stat stat="range" value ="0"/>
@@ -70,7 +70,7 @@
     <upgrades>
       <stat stat="health" value ="10"/>
       <stat stat="damage" value ="10"/>
-      <stat stat="defense" value ="2"/>
+      <stat stat="defense" value ="1"/>
       <stat stat="movement" value ="5"/>
       <stat stat="attack_speed" value ="0.1"/>
       <stat stat="range" value ="0"/>
@@ -96,7 +96,7 @@
     <upgrades>
       <stat stat="health" value ="10"/>
       <stat stat="damage" value ="10"/>
-      <stat stat="defense" value ="2"/>
+      <stat stat="defense" value ="1"/>
       <stat stat="movement" value ="5"/>
       <stat stat="attack_speed" value ="0.1"/>
       <stat stat="range" value ="0"/>
