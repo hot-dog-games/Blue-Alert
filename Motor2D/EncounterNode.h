@@ -61,6 +61,9 @@ public:
 	UIButton* GetButton();
 	StrategyBuilding* GetEntity();
 
+	int GetGoldReward();
+	void SetGoldReward();
+
 	int GetID();
 
 	//-----Emcounter Accessors-----
@@ -76,6 +79,7 @@ public:
 	std::vector<int> GetEncounterRewards();
 
 	SDL_Rect node_rect;
+	int gold_reward = 100;
 
 public:
 
