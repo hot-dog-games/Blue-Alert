@@ -46,7 +46,7 @@ Card* CardManager::CreateCard(EntityType type, int lvl)
 	Card* card = new Card;
 	card->type = type;
 
-	card->level = 0;
+	card->level = 1;
 
 	pugi::xml_node card_node = card_configs.find_child_by_attribute("type", std::to_string((int)type).c_str());
 
@@ -58,7 +58,7 @@ Card* CardManager::CreateCard(EntityType type, int lvl)
 	LoadCardUpgrades(card, card_node.child("upgrades"));
 	LoadCardCombat(card, card_node.child("combat"));
 
-	if (lvl > 0)
+	if (lvl > 1)
 	{
 		while(card->level != lvl)
 		{
