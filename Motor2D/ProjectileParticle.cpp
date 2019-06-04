@@ -56,6 +56,10 @@ bool ProjectileParticle::Update(float dt)
 				(*entity)->DecreaseLife(damage);
 			}
 		}
+		if (target != nullptr && target->IsAlive())
+		{
+			target->DecreaseLife(damage, pierce);
+		}
 		return false;
 	}
 	else
@@ -101,4 +105,11 @@ void ProjectileParticle::SetCollisionEffect(ParticleType effect, float radius, F
 
 	fx = App->audio->LoadFx("audio/fx/Ambient_Sounds/Explosions/Explosion2.wav");
 	App->audio->SetFXVolume(fx.c_str(), 30);
+}
+
+void ProjectileParticle::SetTarget(Entity* target, float damage, bool pierce)
+{
+	this->target = target;
+	this->damage = damage;
+	this->pierce = pierce;
 }

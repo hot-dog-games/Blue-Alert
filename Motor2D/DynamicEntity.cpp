@@ -287,29 +287,31 @@ void DynamicEntity::Attack()
 {
 	if (attack_timer.ReadMs() >= SECOND_MS / entity_card->info.stats.find("attack_speed")->second->GetValue() )
 	{
+		ProjectileParticle* particle;
 		current_animation->Reset();
 		float attack = entity_card->info.stats.find("damage")->second->GetValue();
 		switch (entity_card->info.attack_type)
 		{
 		case AttackType::AT_BASIC:
-			objective->DecreaseLife(attack);
-			App->particles->CreateParticle(ParticleType::ATTACK_BASIC_SHOT, GetCenterPosition(),
+			particle = (ProjectileParticle*)App->particles->CreateParticle(ParticleType::ATTACK_BASIC_SHOT, GetCenterPosition(),
 				objective->GetCenterPosition());
+			particle->SetTarget(objective, attack);
 			App->audio->PlayFx(attack_fx.c_str(), 0, 1);
 			break;
 		case AttackType::AT_AOE:
 		{
 			float radius = EXPLOSION_RANGE_TILES * App->map->data.tile_height;
 			App->audio->PlayFx(aoe_fx.c_str(), 0, 2);
-			ProjectileParticle* particle = (ProjectileParticle*)App->particles->CreateParticle(ParticleType::ATTACK_MISSILE, GetCenterPosition(),
+			particle = (ProjectileParticle*)App->particles->CreateParticle(ParticleType::ATTACK_MISSILE, GetCenterPosition(),
 				objective->position);
 			particle->SetCollisionEffect(ParticleType::ATTACK_EXPLOSION, radius, faction, attack);
 		}
 			break;
 		case AttackType::AT_PIERCING:
 			objective->DecreaseLife(attack, true);
-			App->particles->CreateParticle(ParticleType::ATTACK_BASIC_SHOT, GetCenterPosition(),
+			particle = (ProjectileParticle*)App->particles->CreateParticle(ParticleType::ATTACK_BASIC_SHOT, GetCenterPosition(),
 				objective->GetCenterPosition());
+			particle->SetTarget(objective, attack, true);
 			App->audio->PlayFx(piercing_fx.c_str(), 0, 3);
 			break;
 		default:
