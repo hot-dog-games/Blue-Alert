@@ -19,8 +19,8 @@ public:
 protected:
 	void Move(float dt);
 	bool reached_dest = false;
-	float speed;
-	float angle;
+	float speed = 0.0f;
+	float angle = 0.0f;
 	float radius = 0.0f;
 
 	void(*callback)() = nullptr;
