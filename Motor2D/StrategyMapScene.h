@@ -110,6 +110,9 @@ private:
 	UILabel* range_label = nullptr;
 	UIBar*	 energy_bar = nullptr;
 
+	//Gold
+	UILabel* gold_quantity = nullptr;
+
 
 	float drag_threshhold = 0.2f;
 	bool dragable = true;

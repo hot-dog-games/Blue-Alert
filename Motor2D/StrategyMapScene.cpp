@@ -383,6 +383,7 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			{
 				App->game_manager->gold -= cost;
 				App->game_manager->UpgradeHealth();
+				gold_quantity->SetText("Gold: " + std::to_string(App->game_manager->gold) + "g");
 
 				std::string str = "";
 
@@ -402,6 +403,7 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			{
 				App->game_manager->gold -= cost;
 				App->game_manager->UpgradeEnergy();
+				gold_quantity->SetText("Gold: " + std::to_string(App->game_manager->gold));
 
 				std::string str = "";
 
@@ -666,7 +668,7 @@ void StrategyMapScene::InitializeUI()
 	core_image = App->gui->CreateImage({ 40, 130 }, { 1538,23,173,114 }, buildings_background);
 
 	core_title = App->gui->CreateLabel({ 20, 15 }, "fonts/button_text.ttf", 43, "CORE", { 242, 222, 70, 255 }, 200, buildings_background);
-	core_info = App->gui->CreateLabel({ 260, 72 }, "fonts/button_text.ttf", 15, "The core travels around the map destroying all the enemies bases.", { 231,216,145,255 }, 400, buildings_background);
+	core_info = App->gui->CreateLabel({ 260, 72 }, "fonts/button_text.ttf", 15, "The core travels around the map destroying all the enemies bases.", { 231,216,145,255 }, 300, buildings_background);
 
 	str = "Health: " + std::to_string((int)App->game_manager->stats.find("health")->second->GetValue());
 	core_health = App->gui->CreateLabel({ 260, 150 }, "fonts/button_text.ttf", 16, str, { 231,216,145,255 }, 200, buildings_background);
@@ -676,15 +678,15 @@ void StrategyMapScene::InitializeUI()
 
 	uint cost = ((LeveledUpgrade*)App->game_manager->health_upgrade)->GetCost();
 	str = cost > 0 ? "Cost Health: " + std::to_string(cost) : "Maxed";
-	core_lvl_up_health_cost = App->gui->CreateLabel({ 262,210 }, "fonts/button_text.ttf", 10, str, { 231,216,145,255 }, 200, buildings_background);
-	core_lvl_up_health = App->gui->CreateButtonText({ 260, 230 }, { 10,5 }, little_button_rect, "HEALTH UP", { 242, 222, 70, 255 }, 14, buildings_background);
+	core_lvl_up_health_cost = App->gui->CreateLabel({ 272,210 }, "fonts/button_text.ttf", 10, str, { 231,216,145,255 }, 200, buildings_background);
+	core_lvl_up_health = App->gui->CreateButtonText({ 270, 230 }, { 10,5 }, little_button_rect, "HEALTH UP", { 242, 222, 70, 255 }, 14, buildings_background);
 	if (cost == 0)
 		core_lvl_up_health->SetLocked(false);
 
 	cost = ((LeveledUpgrade*)App->game_manager->energy_upgrade)->GetCost();
 	str = cost > 0 ? "Cost Energy: " + std::to_string(cost) : "Maxed";
-	core_lvl_up_energy_cost = App->gui->CreateLabel({ 432,210 }, "fonts/button_text.ttf", 10, str, { 231,216,145,255 }, 200, buildings_background);
-	core_lvl_up_energy = App->gui->CreateButtonText({ 430, 230 }, { 10,5 }, little_button_rect, "ENERGY UP", { 242, 222, 70, 255 }, 14, buildings_background);
+	core_lvl_up_energy_cost = App->gui->CreateLabel({ 442,210 }, "fonts/button_text.ttf", 10, str, { 231,216,145,255 }, 200, buildings_background);
+	core_lvl_up_energy = App->gui->CreateButtonText({ 440, 230 }, { 10,5 }, little_button_rect, "ENERGY UP", { 242, 222, 70, 255 }, 14, buildings_background);
 	if (cost == 0)
 		core_lvl_up_energy->SetLocked(false);
 
@@ -700,6 +702,10 @@ void StrategyMapScene::InitializeUI()
 	units_label = App->gui->CreateLabel({ 135, 120 }, "fonts/button_text.ttf", 12, "Units: -", { 231,216,145,255 }, 120, troops_background);
 
 	energy_bar = App->gui->CreateBar({ 8,188 }, { 2897,1780,260,65 }, App->game_manager->GetCardFromCollection(CONSCRIPT)->info.stats.find("energy_cost")->second, BAR_HORITZONTAL, BAR_STATIC, nullptr, troops_background);
+
+	//Gold
+	str = "Gold: " + std::to_string(App->game_manager->gold) + "g";
+	gold_quantity = App->gui->CreateLabel({ 460, 150 }, "fonts/button_text.ttf", 16, str, { 231,216,145,255 }, 200, buildings_background);
 }
 
 bool StrategyMapScene::IsInsideLimits(int mousemotion_x, int mousemotion_y)

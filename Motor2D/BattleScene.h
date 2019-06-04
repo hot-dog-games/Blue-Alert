@@ -173,6 +173,8 @@ private:
 	UIImage* energy_cost[4];
 	UILabel* energy_cost_label[4];
 	UIImage* bomb_cd_image = nullptr;
+
+	UILabel* gol_reward_text = nullptr;
 };
 
 #endif
