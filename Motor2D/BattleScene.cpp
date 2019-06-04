@@ -208,7 +208,7 @@ bool BattleScene::Update(float dt)
 
 			App->gui->DisableInteractable((UIElement*)unit_panel);
 			App->game_manager->GetEncounterTree()->SetCurrentNode(App->game_manager->GetEncounterTree()->GetFightingNode());
-			App->game_manager->gold += 100;
+			App->game_manager->gold += App->game_manager->GetEncounterTree()->GetFightingNode()->GetGoldReward();
 			App->game_manager->enemy_scaling += 1;
 
 			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() != EntityType::STORE_STRATEGY_BUILDING)
@@ -240,7 +240,7 @@ bool BattleScene::Update(float dt)
 			App->PauseGame();
 			App->gui->DisableInteractable((UIElement*)unit_panel);
 			App->game_manager->GetEncounterTree()->SetCurrentNode(App->game_manager->GetEncounterTree()->GetFightingNode());
-			App->game_manager->gold += 100;
+			App->game_manager->gold += App->game_manager->GetEncounterTree()->GetFightingNode()->GetGoldReward();
 			App->game_manager->enemy_scaling += 1;
 
 			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() != EntityType::STORE_STRATEGY_BUILDING)
@@ -700,7 +700,7 @@ void BattleScene::StartUI()
 	win_panel_one = App->gui->CreateImage({ 17,120 }, { 3986,1646,605,660 });
 	win_panel_two = App->gui->CreateImage({ 17,120 }, { 3986,1646,605,660 });
 	win_text_one = App->gui->CreateLabel({ 30,30 }, "fonts/button_text.ttf", 23, "Congratulations, you've conquered this zone and unlocked the next building!", { 255,232,2, 255 }, 565, win_panel_one);
-	gol_reward_text = App->gui->CreateLabel({ 30, 480 }, "fonts/button_text.ttf", 23, "Gold earned: " + std::to_string(100) + "g", { 255,232,2, 255 }, 565, win_panel_one);
+	gol_reward_text = App->gui->CreateLabel({ 30, 480 }, "fonts/button_text.ttf", 23, "Gold earned: " + std::to_string(App->game_manager->GetEncounterTree()->GetFightingNode()->GetGoldReward()) + "g", { 255,232,2, 255 }, 565, win_panel_one);
 	win_text_two = App->gui->CreateLabel({ 30,30 }, "fonts/button_text.ttf", 23, "Upgrade a troop or choose a new one to add it to your deck", { 255,232,2, 255 }, 565, win_panel_two);
 	win_continue_one = App->gui->CreateButtonText({ 170, 560 }, { 30,0}, button_rect, "CONTINUE", { 200,200,200,255 }, 27, win_panel_one);
 	win_continue_two = App->gui->CreateButtonText({ 170, 560 }, { 30,0 }, button_rect, "CONTINUE", { 200,200,200,255 }, 27, win_panel_two);

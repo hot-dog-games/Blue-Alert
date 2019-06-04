@@ -155,6 +155,17 @@ StrategyBuilding * EncounterNode::GetEntity()
 	return entity;
 }
 
+int EncounterNode::GetGoldReward()
+{
+	return gold_reward;
+}
+
+void EncounterNode::SetGoldReward()
+{
+	if (encounter->type == EntityType::GOLD_STRATEGY_BUILDING)gold_reward = 300;
+	else gold_reward = 100;
+}
+
 int EncounterNode::GetID()
 {
 	return id;
