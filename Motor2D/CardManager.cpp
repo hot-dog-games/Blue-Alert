@@ -60,7 +60,7 @@ Card* CardManager::CreateCard(EntityType type, int lvl)
 
 	if (lvl > 0)
 	{
-		for (int i = 0; i < card->level; ++i)
+		while(card->level != lvl)
 		{
 			card->Upgrade();
 		}

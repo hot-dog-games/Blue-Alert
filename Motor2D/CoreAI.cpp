@@ -42,7 +42,7 @@ bool CoreAI::Update(float dt)
 			}
 			break;
 		case CoreAI::AIState::ACTING:
-			UseCard(selected_card, { (float)lanes[selected_lane].area.x + (float)lanes[selected_lane].area.w*0.5f, position.y + (float)(App->map->data.tile_height * 3)});
+			UseCard(selected_card, spawns[selected_lane]);
 			ai_state = AIState::WAITING;
 			if (deck->cards[selected_card]->type == EntityType::VIRUS)
 			{
@@ -271,6 +271,13 @@ bool CoreAI::Start()
 	lanes[0].area = { (int)position.x - area_width - (int)(App->map->data.tile_width), (int)position.y , area_width, area_height };
 	lanes[1].area = { (int)position.x - (int)(App->map->data.tile_width), (int)position.y , area_width, area_height };
 	lanes[2].area = { (int)position.x + area_width - (int)(App->map->data.tile_width), (int)position.y , area_width, area_height };
+
+	iPoint world_pos = App->map->MapToWorld(25,28);
+	spawns[0] = { (float)world_pos.x + App->map->data.tile_width*0.5f, (float)world_pos.y + App->map->data.tile_height*0.5f };
+	world_pos = App->map->MapToWorld(28,28);
+	spawns[1] = { (float)world_pos.x + App->map->data.tile_width*0.5f, (float)world_pos.y + App->map->data.tile_height*0.5f };
+	world_pos = App->map->MapToWorld(28,25);
+	spawns[2] = { (float)world_pos.x + App->map->data.tile_width*0.5f, (float)world_pos.y + App->map->data.tile_height*0.5f };
 
 	return true;
 }

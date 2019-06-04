@@ -29,9 +29,6 @@ DynamicEntity::DynamicEntity(pugi::xml_node config, fPoint position, Card* card,
 	std::string stat_name = "health";
 	sprite = entity_card->texture;
 
-	//singleUnit = new SingleUnit(this, nullptr);
-	//App->movement->CreateGroupFromUnit(this);
-
 	stats.insert({ "health", new Stat(card->info.stats.find("health")->second->GetMaxValue())});
 }
 

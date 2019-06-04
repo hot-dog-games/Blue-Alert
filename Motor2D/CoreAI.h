@@ -57,6 +57,7 @@ private:
 	float dt_sum = THINK_DELAY;
 
 	AILane lanes[3];
+	fPoint spawns[3];
 	int selected_lane = 0;
 	int selected_card = 0;
 };
