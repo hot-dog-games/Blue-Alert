@@ -157,8 +157,8 @@ bool StrategyMapScene::Update(float dt)
 		}
 	};
 
-	if (App->gui->popup_active)dragable = false;
-	else dragable = true;
+	if (App->gui->popup_active)
+		dragable = false;
 
 	return true;
 }
