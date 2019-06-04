@@ -101,7 +101,7 @@ uint LeveledUpgrade::GetCost()
 	if (level < max_level)
 		return base_cost * (level + 1);
 	else 
-		return -1;
+		return 0;
 }
 
 LeveledUpgrade::LeveledUpgrade(pugi::xml_node source_node) :BuffSource(source_node)

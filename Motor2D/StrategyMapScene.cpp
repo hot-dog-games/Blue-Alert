@@ -136,9 +136,6 @@ bool StrategyMapScene::PreUpdate()
 // Called each loop iteration
 bool StrategyMapScene::Update(float dt)
 {	
-	if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
-		App->LoadGame(nullptr);
-
 	if (!App->game_manager->popups[POPUP_DECISIONMAKING])
 	{
 		if (App->game_manager->GetEncounterTree()->GetCurrentNode()->GetChildren().size() > 1)
@@ -380,29 +377,43 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 		AddCardToDeck(element, 17);
 		}
 
-		if (element == core_lvl_up_health && ((int)App->game_manager->gold >= ((LeveledUpgrade*)App->game_manager->health_upgrade)->GetCost())) {
-			App->game_manager->gold -= ((LeveledUpgrade*)App->game_manager->health_upgrade)->GetCost();
-			App->game_manager->UpgradeHealth();
+		if (element == core_lvl_up_health) {
+			uint cost = ((LeveledUpgrade*)App->game_manager->health_upgrade)->GetCost();
+			if (App->game_manager->gold >= cost)
+			{
+				App->game_manager->gold -= cost;
+				App->game_manager->UpgradeHealth();
 
-			std::string str = "";
+				std::string str = "";
 
-			str = "Health: " + std::to_string((int)App->game_manager->stats.find("health")->second->GetValue());
-			core_health->SetText(str);
+				str = "Health: " + std::to_string((int)App->game_manager->stats.find("health")->second->GetValue());
+				core_health->SetText(str);
 
-			str = "Cost Health: " + std::to_string(((LeveledUpgrade*)App->game_manager->health_upgrade)->GetCost());
-			core_lvl_up_health_cost->SetText(str);
-
+				cost = ((LeveledUpgrade*)App->game_manager->health_upgrade)->GetCost();
+				str = cost > 0 ? "Cost Health: " + std::to_string(cost) : "Maxed";
+				core_lvl_up_health_cost->SetText(str);
+				if (cost == 0)
+					core_lvl_up_health->SetLocked(false);
+			}
 		}
-		else if (element == core_lvl_up_energy && ((int)App->game_manager->gold >= ((LeveledUpgrade*)App->game_manager->energy_upgrade)->GetCost())) {
-			App->game_manager->gold -= ((LeveledUpgrade*)App->game_manager->energy_upgrade)->GetCost();
-			App->game_manager->UpgradeEnergy();
+		else if (element == core_lvl_up_energy) {
+			uint cost = ((LeveledUpgrade*)App->game_manager->energy_upgrade)->GetCost();
+			if (App->game_manager->gold >= cost)
+			{
+				App->game_manager->gold -= cost;
+				App->game_manager->UpgradeEnergy();
 
-			std::string str = "";
-			str = "Energy: " + std::to_string((int)App->game_manager->stats.find("energy")->second->GetValue());
-			core_energy->SetText(str);
+				std::string str = "";
 
-			str = "Cost Energy: " + std::to_string(((LeveledUpgrade*)App->game_manager->energy_upgrade)->GetCost());
-			core_lvl_up_energy_cost->SetText(str);
+				str = "Energy: " + std::to_string((int)App->game_manager->stats.find("energy")->second->GetValue());
+				core_energy->SetText(str);
+
+				cost = ((LeveledUpgrade*)App->game_manager->energy_upgrade)->GetCost();
+				str = cost > 0 ? "Cost Energy: " + std::to_string(cost) : "Maxed";
+				core_lvl_up_energy_cost->SetText(str);
+				if (cost == 0)
+					core_lvl_up_energy->SetLocked(false);
+			}
 		}
 
 		// Building butttons
@@ -543,6 +554,7 @@ void StrategyMapScene::InitializeUI()
 	little_button_rect[0] = { 1256,379,145,67 };
 	little_button_rect[1] = { 1256,449,145,67 };
 	little_button_rect[2] = { 1256,519,145,67 };
+	little_button_rect[3] = { 1256,379,145,67 };
 
 	SDL_Rect change_button[3];
 	change_button[0] = { 3,700,53,51 };
@@ -662,14 +674,20 @@ void StrategyMapScene::InitializeUI()
 	str = "Energy: " + std::to_string((int)App->game_manager->stats.find("energy")->second->GetValue());
 	core_energy = App->gui->CreateLabel({ 260, 170 }, "fonts/button_text.ttf", 16, str, { 231,216,145,255 }, 200, buildings_background);
 
-	str = "Cost Health: " + std::to_string(((LeveledUpgrade*)App->game_manager->health_upgrade)->GetCost());
+	uint cost = ((LeveledUpgrade*)App->game_manager->health_upgrade)->GetCost();
+	str = cost > 0 ? "Cost Health: " + std::to_string(cost) : "Maxed";
 	core_lvl_up_health_cost = App->gui->CreateLabel({ 262,210 }, "fonts/button_text.ttf", 10, str, { 231,216,145,255 }, 200, buildings_background);
-
-	str = "Cost Energy: " + std::to_string(((LeveledUpgrade*)App->game_manager->energy_upgrade)->GetCost());
-	core_lvl_up_energy_cost = App->gui->CreateLabel({ 432,210 }, "fonts/button_text.ttf", 10, str, { 231,216,145,255 }, 200, buildings_background);
-
 	core_lvl_up_health = App->gui->CreateButtonText({ 260, 230 }, { 10,5 }, little_button_rect, "HEALTH UP", { 242, 222, 70, 255 }, 14, buildings_background);
+	if (cost == 0)
+		core_lvl_up_health->SetLocked(false);
+
+	cost = ((LeveledUpgrade*)App->game_manager->energy_upgrade)->GetCost();
+	str = cost > 0 ? "Cost Energy: " + std::to_string(cost) : "Maxed";
+	core_lvl_up_energy_cost = App->gui->CreateLabel({ 432,210 }, "fonts/button_text.ttf", 10, str, { 231,216,145,255 }, 200, buildings_background);
 	core_lvl_up_energy = App->gui->CreateButtonText({ 430, 230 }, { 10,5 }, little_button_rect, "ENERGY UP", { 242, 222, 70, 255 }, 14, buildings_background);
+	if (cost == 0)
+		core_lvl_up_energy->SetLocked(false);
+
 
 	App->gui->DisableElement(buildings_background);
 
