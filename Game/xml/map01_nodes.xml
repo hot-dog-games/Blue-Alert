@@ -80,21 +80,21 @@
 			<child id="13"/>
 		</children>
 	</node>
-	<node id="11" x="32" y="46" type="30" difficulty="5" deck_size="4">
+	<node id="11" x="32" y="46" type="30" difficulty="3" deck_size="4">
 		<children>
 			<child id="14"/>
 		</children>
 	</node>
-	<node id="12" x="38" y="38" type="31" difficulty="5" deck_size="4">
+	<node id="12" x="38" y="38" type="31" difficulty="3" deck_size="4">
 		<children>
 			<child id="14"/>
 		</children>
 	</node>
-	<node id="13" x="43" y="31" type="32" difficulty="5" deck_size="4">
+	<node id="13" x="43" y="31" type="32" difficulty="3" deck_size="4">
 		<children>
 			<child id="14"/>
 		</children>
 	</node>
-	<node id="14" x="30" y="29" type="30" difficulty="7" deck_size="4">
+	<node id="14" x="30" y="29" type="30" difficulty="5" deck_size="4">
 	</node>
 </map01_nodes>
