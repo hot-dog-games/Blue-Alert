@@ -550,7 +550,7 @@ void StrategyMapScene::InitializeUI()
 	medium_button_rect[2] = { 800,639,289,66 };
 	medium_button_rect[3] = { 800,639,289,66 };
 
-	SDL_Rect little_button_rect[3];
+	SDL_Rect little_button_rect[4];
 	little_button_rect[0] = { 1256,379,145,67 };
 	little_button_rect[1] = { 1256,449,145,67 };
 	little_button_rect[2] = { 1256,519,145,67 };

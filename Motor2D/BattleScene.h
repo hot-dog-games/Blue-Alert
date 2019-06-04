@@ -162,7 +162,7 @@ private:
 
 	float lerp_speed = 1 / 60;
 	float lerp_percent = 0;
-	float bomb_cd_timer = 30;
+	float bomb_cd_timer = 0;
 
 	uint max_energy;
 	uint current_energy;
