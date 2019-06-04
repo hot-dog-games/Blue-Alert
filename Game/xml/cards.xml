@@ -375,7 +375,7 @@
     <buff_type value="31"/>
     <stats>
       <stat stat="health" value ="80"/>
-      <stat stat="damage" value ="70"/>
+      <stat stat="damage" value ="90"/>
       <stat stat="defense" value ="3"/>
       <stat stat="movement" value ="40"/>
       <stat stat="attack_speed" value ="2"/>
@@ -401,7 +401,7 @@
     <buff_type value="31"/>
     <stats>
       <stat stat="health" value ="80"/>
-      <stat stat="damage" value ="70"/>
+      <stat stat="damage" value ="90"/>
       <stat stat="defense" value ="3"/>
       <stat stat="movement" value ="40"/>
       <stat stat="attack_speed" value ="2"/>
