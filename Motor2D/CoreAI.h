@@ -3,7 +3,7 @@
 
 #include "Core.h"
 
-const float THINK_DELAY = 4.0F;
+const float THINK_DELAY = 3.0F;
 
 struct AILane{
 	SDL_Rect area;
