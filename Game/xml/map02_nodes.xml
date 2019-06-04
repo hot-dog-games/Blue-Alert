@@ -12,7 +12,7 @@
 			<child id="4"/>
 		</children>
 	</node>
-	<node id="2" x="63" y="81" type="30" difficulty="9" deck_size="4"><!--3r combate-->
+	<node id="2" x="63" y="81" type="30" difficulty="11" deck_size="4"><!--3r combate-->
 		<children>
 			<child id="6"/>
 		</children>
@@ -29,17 +29,17 @@
 			<child id="5"/>
 		</children>
 	</node>
-	<node id="5" x="78" y="58" type="34" difficulty="9" deck_size="4"><!--3r combate-->
+	<node id="5" x="78" y="58" type="34" difficulty="11" deck_size="4"><!--3r combate-->
 		<children>
 			<child id="10"/>
 		</children>
 	</node>
-	<node id="6" x="51" y="82" type="32" difficulty="11" deck_size="4"><!--4o combate-->
+	<node id="6" x="51" y="82" type="32" difficulty="13" deck_size="4"><!--4o combate-->
 		<children>
 			<child id="7"/>
 		</children>
 	</node>
-	<node id="7" x="45" y="68" type="34" difficulty="11" deck_size="4"><!--5o combate-->
+	<node id="7" x="45" y="68" type="34" difficulty="15" deck_size="4"><!--5o combate-->
 		<children>
 			<child id="11"/>
 		</children>
@@ -49,31 +49,31 @@
 			<child id="9"/>
 		</children>
 	</node>
-	<node id="9" x="55" y="43" type="30" difficulty="11" deck_size="4"><!--4o combate-->
+	<node id="9" x="55" y="43" type="30" difficulty="13" deck_size="4"><!--4o combate-->
 		<children>
 			<child id="13"/>
 		</children>
 	</node>
-	<node id="10" x="70" y="42" type="32" difficulty="11" deck_size="4"><!--4o combate-->
+	<node id="10" x="70" y="42" type="32" difficulty="13" deck_size="4"><!--4o combate-->
 		<children>
 			<child id="13"/>
 		</children>
 	</node>
-	<node id="11" x="35" y="51" type="30" difficulty="11" deck_size="4"><!--6o combate arriba izquierda-->
+	<node id="11" x="35" y="51" type="30" difficulty="17" deck_size="4"><!--6o combate arriba izquierda-->
 		<children>
 			<child id="12"/>
 		</children>
 	</node>
-	<node id="12" x="37" y="32" type="31" difficulty="12" deck_size="4"><!--7o combate centro arriba, antes del ultimo-->
+	<node id="12" x="37" y="32" type="31" difficulty="17" deck_size="4"><!--7o combate centro arriba, antes del ultimo-->
 		<children>
 			<child id="14"/>
 		</children>
 	</node>
-	<node id="13" x="55" y="25" type="32" difficulty="12" deck_size="4"><!--5o combate arriba derecha-->
+	<node id="13" x="55" y="25" type="32" difficulty="15" deck_size="4"><!--5o combate arriba derecha-->
 		<children>
 			<child id="12"/>
 		</children>
 	</node>
-	<node id="14" x="27" y="25" type="30" difficulty="14" deck_size="4"><!--ultimo combate-->
+	<node id="14" x="27" y="25" type="30" difficulty="19" deck_size="4"><!--ultimo combate-->
 	</node>
 </map02_nodes>

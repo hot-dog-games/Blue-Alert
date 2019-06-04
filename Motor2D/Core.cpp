@@ -24,7 +24,7 @@ Core::Core(pugi::xml_node entity_config, fPoint position, Faction faction, pugi:
 	stats.find("energy")->second->DecreaseStat(20);
 	current_animation = &animations.find("idle")->second;
 
-	attack_fx = App->audio->LoadFx("audio/fx/Ambient_Sounds/Shots/One_shoot2.wav");
+	attack_fx = App->audio->LoadFx("audio/fx/Ambient_Sounds/Shots/basic_shot.wav");
 	App->audio->SetFXVolume(attack_fx.c_str(), 30);
 }
 

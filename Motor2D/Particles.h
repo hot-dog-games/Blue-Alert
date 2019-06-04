@@ -12,6 +12,7 @@ enum class ParticleType {
 	ATTACK_BASIC_SHOT,
 	NUKE_BOMB,
 	NUKE_EXPLOSION,
+	ATTACK_MISSILE
 };
 
 class Particles : public Module
@@ -30,7 +31,7 @@ public:
 	bool Resume();
 	bool Start();
 
-	Particle* CreateParticle(const ParticleType &particle, const fPoint &pos, const fPoint &dest = {0.0F,0.0F}, float radius = 0.0f);
+	Particle* CreateParticle(const ParticleType &particle, const fPoint &pos, const fPoint &dest = {0.0F,0.0F});
 
 private:
 	SDL_Texture* particle_atlas = nullptr;

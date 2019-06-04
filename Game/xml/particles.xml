@@ -87,4 +87,11 @@
       <frame x="2640" y="2048" width="306" height="374"/>
     </animation>
   </particle>
+  <!--MISSILE-->
+  <particle type="4">
+    <stats speed ="1000"/>
+    <animation speed="1">
+      <frame x="377" y="1252" width="19" height="8"/>
+    </animation>
+  </particle>
 </config>

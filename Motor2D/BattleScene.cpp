@@ -30,6 +30,7 @@
 #include "Particles.h"
 #include "EncounterTree.h"
 #include "EncounterNode.h"
+#include "ProjectileParticle.h"
 #include "UIImage.h"
 #include "UILabel.h"
 
@@ -97,6 +98,7 @@ bool BattleScene::Start()
 	win_fx = App->audio->LoadFx("audio/fx/Mission/Mission_accomplished.wav");
 	lose_fx = App->audio->LoadFx("audio/fx/Mission/Mission_Failed.wav");
 	deployment_fx = App->audio->LoadFx("audio/fx/Voice_Over/Unit_ready.wav");
+	nuke_fx = App->audio->LoadFx("audio/fx/Ambient_Sounds/Shots/nuke_fall.wav");
 	no_energy = App->audio->LoadFx("audio/fx/UI/gpsyampa.wav");
 	App->audio->PlayMusic("audio/music/9.Destroy-Red Alert2_2.ogg");
 
@@ -301,7 +303,6 @@ bool BattleScene::PostUpdate()
 bool BattleScene::CleanUp()
 {
 	LOG("Freeing scene");
-
 	return true;
 }
 
@@ -593,12 +594,22 @@ void BattleScene::SetEnemiesUpgrades(Deck* enemy_deck)
 
 void BattleScene::DropNukes()
 {
-	App->particles->CreateParticle(ParticleType::NUKE_BOMB, { allied_core->position.x - (allied_core->current_frame.w * 2), 0 },
-		{ allied_core->position.x - (allied_core->current_frame.w * 2), allied_core->position.y - allied_core->current_frame.h }, 140);
-	App->particles->CreateParticle(ParticleType::NUKE_BOMB, { allied_core->position.x, 0 }, 
-		{ allied_core->position.x, allied_core->position.y - (allied_core->current_frame.h * 1.75f) }, 130);
-	App->particles->CreateParticle(ParticleType::NUKE_BOMB, { allied_core->position.x + (allied_core->current_frame.w * 2), 0 },
-		{ allied_core->position.x + (allied_core->current_frame.w * 2), allied_core->position.y - allied_core->current_frame.h }, 140);
+	ProjectileParticle* particle;
+
+	particle = (ProjectileParticle*)App->particles->CreateParticle(ParticleType::NUKE_BOMB, { allied_core->position.x - (allied_core->current_frame.w * 2), 0 },
+		{ allied_core->position.x - (allied_core->current_frame.w * 2), allied_core->position.y - allied_core->current_frame.h });
+	particle->SetCollisionEffect(ParticleType::NUKE_EXPLOSION, 130, Faction::FACTION_RUSSIAN, 10000.0f);
+	App->audio->PlayFx(nuke_fx.c_str(), 0, 4);
+
+	particle = (ProjectileParticle*)App->particles->CreateParticle(ParticleType::NUKE_BOMB, { allied_core->position.x, 0 },
+		{ allied_core->position.x, allied_core->position.y - (allied_core->current_frame.h * 1.75f) });
+	particle->SetCollisionEffect(ParticleType::NUKE_EXPLOSION, 130, Faction::FACTION_RUSSIAN, 10000.0f);
+	App->audio->PlayFx(nuke_fx.c_str(), 0, 4);
+
+	particle = (ProjectileParticle*)App->particles->CreateParticle(ParticleType::NUKE_BOMB, { allied_core->position.x + (allied_core->current_frame.w * 2), 0 },
+		{ allied_core->position.x + (allied_core->current_frame.w * 2), allied_core->position.y - allied_core->current_frame.h });
+	particle->SetCollisionEffect(ParticleType::NUKE_EXPLOSION, 130, Faction::FACTION_RUSSIAN, 10000.0f);
+	App->audio->PlayFx(nuke_fx.c_str(), 0, 4);
 }
 
 void BattleScene::StartUI()

@@ -376,10 +376,10 @@
     <stats>
       <stat stat="health" value ="80"/>
       <stat stat="damage" value ="90"/>
-      <stat stat="defense" value ="3"/>
-      <stat stat="movement" value ="40"/>
+      <stat stat="defense" value ="5"/>
+      <stat stat="movement" value ="50"/>
       <stat stat="attack_speed" value ="2"/>
-      <stat stat="range" value ="4"/>
+      <stat stat="range" value ="4.5"/>
       <stat stat="energy_cost" value ="4"/>
       <stat stat="units" value ="2"/>
     </stats>
@@ -402,10 +402,10 @@
     <stats>
       <stat stat="health" value ="80"/>
       <stat stat="damage" value ="90"/>
-      <stat stat="defense" value ="3"/>
-      <stat stat="movement" value ="40"/>
+      <stat stat="defense" value ="5"/>
+      <stat stat="movement" value ="50"/>
       <stat stat="attack_speed" value ="2"/>
-      <stat stat="range" value ="4"/>
+      <stat stat="range" value ="4.5"/>
       <stat stat="energy_cost" value ="4"/>
       <stat stat="units" value ="2"/>
     </stats>
