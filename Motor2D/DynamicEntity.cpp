@@ -308,7 +308,6 @@ void DynamicEntity::Attack()
 		}
 			break;
 		case AttackType::AT_PIERCING:
-			objective->DecreaseLife(attack, true);
 			particle = (ProjectileParticle*)App->particles->CreateParticle(ParticleType::ATTACK_BASIC_SHOT, GetCenterPosition(),
 				objective->GetCenterPosition());
 			particle->SetTarget(objective, attack, true);
