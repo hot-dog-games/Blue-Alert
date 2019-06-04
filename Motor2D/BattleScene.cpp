@@ -640,13 +640,13 @@ void BattleScene::StartUI()
 	}
 	if (allied_core->GetCard(CN_THIRD)) {
 		unit_button_three = App->gui->CreateButton({ 245, 52 }, App->gui->LoadUIButton(allied_core->GetCard(CN_THIRD)->type, "button"), unit_panel);
-		unit_cooldown[2] = App->gui->CreateImage({ 245, 52 }, { 1123, 442, 101, 79 }, unit_panel);
+		unit_cooldown[2] = App->gui->CreateImage({ 245, 52 }, { 1123, 442, 101, 79 }, unit_button_three);
 		energy_cost[2] = App->gui->CreateImage({ -8, 60 }, { 1282,349,25,25 }, unit_button_three);
 		energy_cost_label[2] = App->gui->CreateLabel({ 7,2 }, "fonts/gunplay.ttf", 18, std::to_string((int)allied_core->GetCard(CN_THIRD)->info.stats.find("energy_cost")->second->GetValue()), { 255,255,255,255 }, 120, energy_cost[2], false);
 	}
 	if (allied_core->GetCard(CN_FOURTH)) {
 		unit_button_four = App->gui->CreateButton({ 354, 52 }, App->gui->LoadUIButton(allied_core->GetCard(CN_FOURTH)->type, "button"), unit_panel);
-		unit_cooldown[3] = App->gui->CreateImage({ 354, 52 }, { 1123, 442, 101, 79 }, unit_panel);
+		unit_cooldown[3] = App->gui->CreateImage({ 354, 52 }, { 1123, 442, 101, 79 }, unit_button_four);
 		energy_cost[3] = App->gui->CreateImage({ -8, 60 }, { 1282,349,25,25 }, unit_button_four);
 		energy_cost_label[3] = App->gui->CreateLabel({ 7,2 }, "fonts/gunplay.ttf", 18, std::to_string((int)(allied_core->GetCard(CN_FOURTH)->info.stats.find("energy_cost")->second->GetValue())), { 255,255,255,255 }, 120, energy_cost[3], false);
 	}
