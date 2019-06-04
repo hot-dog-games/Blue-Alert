@@ -106,6 +106,8 @@ void GameManager::CreatePlayerDeck()
 {
 	combat_deck = new Deck();
 	AddCardToCollection(EntityType::CONSCRIPT);
+	AddCardToCollection(EntityType::SIEGECHOPPER);
+	AddCardToCollection(EntityType::ROBOT);
 }
 
 void GameManager::CreateStage()
