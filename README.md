@@ -3,7 +3,7 @@ This is the repository for the video game of Project-2 subject.
 Command and Conquer: Blue Alert is a strategy game that combines elements of Deck-building and Tower Defense, the goal of the game is to simplify the classic strategy of an RTS to the point where it becomes an accessible game for a casual player, looking for fast games. The game consists of two phases; the military strategy phase where the player builds his army, improves it and decides where to attack, and then, there is the combat phase, where the player deploys his units to attack the enemy's core. The assets and some mechanics are from Command and Conquer: Red Alert 2.
 
 
-# Current version: V.0.6.5
+# Current version: V.0.7
 
 ## Implementations: 
 
@@ -60,6 +60,8 @@ Command and Conquer: Blue Alert is a strategy game that combines elements of Dec
 - Pause menu
 
 
+
+
 ### Nodes Menu:
 
 When the menu opens click on one of the two buildings and the battle will start.
@@ -71,7 +73,11 @@ The IA will spawn troops to defeat you and you will have to defend and attack th
 Select the reward that you want with RIGHT CLICK and then click continue, in the next game the troop that you upgrade will recive the buff. DISCLAIMER: Deck costumization is not implemented yet so new cards can't be used
 
 ### Deck Costumization: 
-On the bottom-right side of the screen you have the "menu" botton that leads you to the deck costumization menu, there you can change troops that you've obtained in the diferrent battle you had. Be aware, right now the units that you cant use dosen't show so you have to be sure you first chosed it on the reward screen of the battle
+On the bottom-right side of the screen you have the "collection" botton that leads you to the deck costumization menu, there you can change troops that you've obtained in the diferrent battle you had. Be aware, right now the units that you cant use dosen't show so you have to be sure you first chosed it on the reward screen of the battle
+
+### Building Upgrade:
+On 
+
 
 
 # HotDogGames
