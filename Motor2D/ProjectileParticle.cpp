@@ -1,5 +1,6 @@
 #include "j1App.h"
 #include "Render.h"
+#include "Audio.h"
 #include "Particles.h"
 #include "EntityManager.h"
 #include "Entity.h"
@@ -7,7 +8,7 @@
 
 const float SNAP_RANGE = 100.0f;
 
-ProjectileParticle::ProjectileParticle(const pugi::xml_node &config, const fPoint &pos, const fPoint &dest, SDL_Texture* sprite, bool rotate, float radius, ParticleType effect):Particle(config,pos,sprite)
+ProjectileParticle::ProjectileParticle(const pugi::xml_node &config, const fPoint &pos, const fPoint &dest, SDL_Texture* sprite, bool rotate):Particle(config,pos,sprite)
 {
 	destination = dest;
 	speed = config.child("stats").attribute("speed").as_float();
@@ -27,10 +28,6 @@ ProjectileParticle::ProjectileParticle(const pugi::xml_node &config, const fPoin
 		float det = base_vector.x * direction.y - direction.x * base_vector.y;
 		angle = atan2(det, dot) * 180 / M_PI;
 	}
-	
-	this->effect = effect;
-	this->callback = callback;
-	this->radius = radius;
 }
 
 
@@ -45,14 +42,18 @@ bool ProjectileParticle::Update(float dt)
 	{
 		if(effect != ParticleType::NONE) 
 		{
-			App->particles->CreateParticle(effect, { position.x, position.y + (current_frame.h*0.5f) });
+			if(effect == ParticleType::NUKE_EXPLOSION)
+				App->particles->CreateParticle(effect, { position.x, position.y + (current_frame.h*0.5f) });
+			else
+				App->particles->CreateParticle(effect, { position.x, position.y });
+
 			std::list<Entity*> entities;
-			App->entity_manager->GetEntitiesInArea(radius, { (float)position.x, (float)position.y }, entities, FACTION_RUSSIAN);
+			App->entity_manager->GetEntitiesInArea(radius, { (float)position.x, (float)position.y }, entities, faction);
+			App->audio->PlayFx(fx.c_str(), 0, 6);
 
 			for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
 			{
-				if((*entity)->type != EntityType::CORE)
-					(*entity)->DecreaseLife(10000.0f, true);
+				(*entity)->DecreaseLife(damage);
 			}
 		}
 		return false;
@@ -89,4 +90,15 @@ bool ProjectileParticle::PostUpdate()
 {
 	App->render->Blit(sprite, position.x - (current_frame.w*0.5f), position.y - (current_frame.h*0.5f), &current_frame, 1.0, (double)angle, 0, current_frame.h*0.5f);
 	return true;
+}
+
+void ProjectileParticle::SetCollisionEffect(ParticleType effect, float radius, Faction own_faction, float damage)
+{
+	this->effect = effect;
+	this->radius = radius;
+	this->faction = own_faction;
+	this->damage = damage;
+
+	fx = App->audio->LoadFx("audio/fx/Ambient_Sounds/Explosions/Explosion2.wav");
+	App->audio->SetFXVolume(fx.c_str(), 30);
 }

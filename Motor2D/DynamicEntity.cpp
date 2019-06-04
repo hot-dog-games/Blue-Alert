@@ -9,6 +9,7 @@
 #include "Stat.h"
 #include "Map.h"
 #include "Particles.h"
+#include "ProjectileParticle.h"
 #include "DynamicEntity.h"
 
 const float DELETE_TIME = 5.0f;
@@ -50,11 +51,14 @@ bool DynamicEntity::Start()
 		*point = App->map->MapToWorld((*point).x, (*point).y);
 		*point = { (*point).x + (int)(App->map->data.tile_width * 0.5), (*point).y + (int)(App->map->data.tile_height * 0.5) };
 	}
-	explosion_fx = App->audio->LoadFx("audio/fx/Ambient_Sounds/Explosions/Explosion2.wav");
-	attack_fx = App->audio->LoadFx("audio/fx/Ambient_Sounds/Shots/One_shoot2.wav");
+	attack_fx = App->audio->LoadFx("audio/fx/Ambient_Sounds/Shots/basic_shot.wav");
+	aoe_fx = App->audio->LoadFx("audio/fx/Ambient_Sounds/Shots/aoe_shot.wav");
+	piercing_fx = App->audio->LoadFx("audio/fx/Ambient_Sounds/Shots/pierce_shot.wav");
+
 
 	App->audio->SetFXVolume(attack_fx.c_str(), 30);
-	App->audio->SetFXVolume(explosion_fx.c_str(), 30);
+	App->audio->SetFXVolume(aoe_fx.c_str(), 30);
+	App->audio->SetFXVolume(piercing_fx.c_str(), 30);
 
 	health_bar = App->gui->CreateBar(bar_position, { 25, 1503, current_frame.w, 7 }, stats.find("health")->second, BarType::BAR_HORITZONTAL, BAR_DYNAMIC, this, false, true);
 	return true;
@@ -295,23 +299,18 @@ void DynamicEntity::Attack()
 			break;
 		case AttackType::AT_AOE:
 		{
-			App->audio->PlayFx(explosion_fx.c_str(), 0, 2);
-			std::list<Entity*> entities;
 			float radius = EXPLOSION_RANGE_TILES * App->map->data.tile_height;
-			App->entity_manager->GetEntitiesInArea(radius, objective->position, entities, faction);
-
-			for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
-			{
-				(*entity)->DecreaseLife(attack);
-			}
-			App->particles->CreateParticle(ParticleType::ATTACK_EXPLOSION, objective->position);
+			App->audio->PlayFx(aoe_fx.c_str(), 0, 2);
+			ProjectileParticle* particle = (ProjectileParticle*)App->particles->CreateParticle(ParticleType::ATTACK_MISSILE, GetCenterPosition(),
+				objective->position);
+			particle->SetCollisionEffect(ParticleType::ATTACK_EXPLOSION, radius, faction, attack);
 		}
 			break;
 		case AttackType::AT_PIERCING:
 			objective->DecreaseLife(attack, true);
 			App->particles->CreateParticle(ParticleType::ATTACK_BASIC_SHOT, GetCenterPosition(),
 				objective->GetCenterPosition());
-			App->audio->PlayFx(attack_fx.c_str(), 0, 1);
+			App->audio->PlayFx(piercing_fx.c_str(), 0, 3);
 			break;
 		default:
 			break;
