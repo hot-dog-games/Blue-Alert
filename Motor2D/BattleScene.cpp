@@ -59,8 +59,8 @@ bool BattleScene::Start()
 		RELEASE_ARRAY(data);
 	}
 
-	App->render->camera.x = 290;
-	App->render->camera.y = -635;
+	App->render->camera.x = (int)(290 * App->win->GetScale());
+	App->render->camera.y = (int)(-635 * App->win->GetScale());
 
 	Deck* enemy_deck = new Deck();
 	enemy_deck->delete_cards = true;
@@ -624,7 +624,7 @@ void BattleScene::StartUI()
 	side_troop_panel = App->gui->CreateImage({ 522, 835 }, { 1431,383,108,130 }, nullptr);
 	side_troop_panel_left = App->gui->CreateImage({ 10, 885 }, { 1431,383,108,130 }, nullptr);
 
-	unit_panel = App->gui->CreateImage({ 80, (int)height-145}, { 1231,186,481,155 });
+	unit_panel = App->gui->CreateImage({ 80, 820}, { 1231,186,481,155 });
 	if (allied_core->GetCard(CN_FIRST)) {
 		unit_button_one = App->gui->CreateButton({ 27, 52 }, App->gui->LoadUIButton(allied_core->GetCard(CN_FIRST)->type, "button"), unit_panel);
 		unit_cooldown[0] = App->gui->CreateImage({ 0, 0 }, { 1123, 442, 101, 79 }, unit_button_one);

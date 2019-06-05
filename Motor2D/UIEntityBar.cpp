@@ -23,8 +23,8 @@ bool UIEntityBar::Update(float dt)
 	}
 
 	iPoint entity_pos = App->render->WorldToScreen((int)entity->position.x, (int)entity->position.y);
-	rect_box.x = entity_pos.x - rect_box.w * 0.5;
-	rect_box.y = entity_pos.y - entity_height - bar_margin;
+	rect_box.x = (int)(entity_pos.x - rect_box.w * 0.5);
+	rect_box.y = (int)(entity_pos.y - entity_height - bar_margin);
 
 	return true;
 }
