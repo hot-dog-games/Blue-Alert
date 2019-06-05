@@ -40,7 +40,7 @@ bool Window::Awake(pugi::xml_node& config)
 
 		scale = config.child("resolution").attribute("scale").as_float(1);
 		width = config.child("resolution").attribute("width").as_int(640) * scale;
-		height = config.child("resolution").attribute("height").as_int(480) * scale;
+		height = config.child("resolution").attribute("height").as_int(960) * scale;
 
 		if(fullscreen == true)
 		{
