@@ -13,6 +13,7 @@ class BuffSource;
 class Core;
 class Stat;
 enum EntityType;
+enum ButtonLevel;
 
 enum stage {
 	STAGE_NONE = -1,
@@ -92,6 +93,7 @@ public:
 
 	//---Collection_Acces----
 	Card* GetCardFromCollection(EntityType card_type);
+	ButtonLevel GetLevelFromCollection(EntityType card_type);
 	void AddCardToCollection(EntityType card_type);
 	bool IsInCollection(int card_type);
 	//----------------------

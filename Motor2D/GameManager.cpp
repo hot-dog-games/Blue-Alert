@@ -15,6 +15,7 @@
 #include "Input.h"
 #include "Render.h"
 #include "SceneManager.h"
+#include "UIButtonTroops.h"
 
 #include "GameManager.h"
 
@@ -395,6 +396,22 @@ Card * GameManager::GetCardFromCollection(EntityType card_type)
 		LOG("The card u tried to get is not existent in collection");
 		return nullptr;
 	}
+}
+
+ButtonLevel GameManager::GetLevelFromCollection(EntityType card_type)
+{
+	Card* card = nullptr;
+	ButtonLevel level = LVL_1;
+
+	for each (Card* c in collection)
+	{
+		if (c->type == card_type)
+		{
+			level = (ButtonLevel)c->level;
+		}
+	}
+
+	return level;
 }
 
 void GameManager::AddCardToCollection(EntityType card_type)

@@ -27,7 +27,7 @@ SceneManager::~SceneManager()
 
 bool SceneManager::Awake(pugi::xml_node &)
 {
-	current_scene = new GameStart();
+	current_scene = new MainMenuScene();
 	return true;
 }
 
