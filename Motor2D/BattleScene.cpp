@@ -697,10 +697,29 @@ void BattleScene::StartUI()
 	win_panel_one = App->gui->CreateImage({ 17,120 }, { 3986,1646,605,660 });
 	win_panel_two = App->gui->CreateImage({ 17,120 }, { 3986,1646,605,660 });
 	win_text_one = App->gui->CreateLabel({ 30,30 }, "fonts/button_text.ttf", 23, "Congratulations, you've conquered this zone and unlocked the next building!", { 255,232,2, 255 }, 565, win_panel_one);
-	gol_reward_text = App->gui->CreateLabel({ 30, 480 }, "fonts/button_text.ttf", 23, "Gold earned: " + std::to_string(App->game_manager->GetEncounterTree()->GetFightingNode()->GetGoldReward()) + "g", { 255,232,2, 255 }, 565, win_panel_one);
+	gol_reward_text = App->gui->CreateLabel({ 30, 480 }, "fonts/button_text.ttf", 23, "Gold earned: " + std::to_string(App->game_manager->GetEncounterTree()->GetFightingNode()->GetGoldReward()) + "g", { 234,208,31, 255 }, 565, win_panel_one);
 	win_text_two = App->gui->CreateLabel({ 30,30 }, "fonts/button_text.ttf", 23, "Upgrade a troop or choose a new one to add it to your deck", { 255,232,2, 255 }, 565, win_panel_two);
 	win_continue_one = App->gui->CreateButtonText({ 170, 560 }, { 30,0}, button_rect, "CONTINUE", { 200,200,200,255 }, 27, win_panel_one);
 	win_continue_two = App->gui->CreateButtonText({ 170, 560 }, { 30,0 }, button_rect, "CONTINUE", { 200,200,200,255 }, 27, win_panel_two);
+
+	std::string str[3];
+	SDL_Color color[3];
+
+	for (int i = 0; i < 3; ++i) {
+
+		if (App->game_manager->IsInCollection(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[i])) {
+			str[i] = "Upgrade";
+			color[i] = {238,238,0,255};
+		}
+		else {
+			str[i] = "       New";
+			color[i] = { 1,255,31,255 };
+		}
+	}
+
+	App->gui->CreateLabel({ 140, 175 }, "fonts/button_text.ttf", 20, str[0], color[0], 400, win_panel_two);
+	App->gui->CreateLabel({ 330, 175 }, "fonts/button_text.ttf", 20, str[1], color[1], 400, win_panel_two);
+	App->gui->CreateLabel({ 240, 345 }, "fonts/button_text.ttf", 20, str[2], color[2], 400, win_panel_two);
 
 	win_unit_one = App->gui->CreateSelectableButton({ 160,200 }, App->gui->LoadUIButton(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[0], "upgrade"), win_panel_two);
 	win_unit_two = App->gui->CreateSelectableButton({ 350,200 }, App->gui->LoadUIButton(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[1], "upgrade"), win_panel_two);
