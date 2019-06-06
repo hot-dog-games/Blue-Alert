@@ -39,8 +39,8 @@ bool Window::Awake(pugi::xml_node& config)
 		bool fullscreen_window = config.child("fullscreen_window").attribute("value").as_bool(false);
 
 		scale = config.child("resolution").attribute("scale").as_float(1);
-		width = config.child("resolution").attribute("width").as_int(640) * scale;
-		height = config.child("resolution").attribute("height").as_int(960) * scale;
+		width = config.child("resolution").attribute("width").as_int(640);
+		height = config.child("resolution").attribute("height").as_int(960);
 
 		if(fullscreen == true)
 		{
@@ -62,7 +62,7 @@ bool Window::Awake(pugi::xml_node& config)
 			flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
 		}
 
-		window = SDL_CreateWindow(App->GetTitle(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, flags);
+		window = SDL_CreateWindow(App->GetTitle(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width * scale, height * scale, flags);
 
 		if(window == NULL)
 		{

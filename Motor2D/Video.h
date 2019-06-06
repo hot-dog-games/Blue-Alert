@@ -10,6 +10,9 @@ struct SwsContext;
 struct SwrContext;
 struct AVPacket;
 struct AVPacketList;
+struct SDL_mutex;
+struct SDL_cond;
+struct SDL_Thread;
 
 #include "Module.h"
 
