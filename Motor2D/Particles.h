@@ -9,7 +9,10 @@ class SDL_Texture;
 enum class ParticleType {
 	NONE = -1,
 	ATTACK_EXPLOSION,
-	ATTACK_BASIC_SHOT
+	ATTACK_BASIC_SHOT,
+	NUKE_BOMB,
+	NUKE_EXPLOSION,
+	ATTACK_MISSILE
 };
 
 class Particles : public Module

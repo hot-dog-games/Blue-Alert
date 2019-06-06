@@ -180,7 +180,7 @@
       </button>
 
       <drag>
-        <frame x="523" y="1482" width="27" height="47"/>
+        <frame x="560" y="1584" width="27" height="45"/>
       </drag>
 
       <upgrade>
@@ -208,7 +208,7 @@
       </button>
 
       <drag>
-        <frame x="523" y="1482" width="27" height="47"/>
+        <frame x="513" y="1581" width="33" height="47"/>
       </drag>
 
       <upgrade>
@@ -236,7 +236,7 @@
       </button>
 
       <drag>
-        <frame x="523" y="1482" width="27" height="47"/>
+        <frame x="564" y="1479" width="41" height="39"/>
       </drag>
 
       <upgrade>
@@ -264,7 +264,7 @@
       </button>
 
       <drag>
-        <frame x="523" y="1482" width="27" height="47"/>
+        <frame x="513" y="1479" width="41" height="39"/>
       </drag>
 
       <upgrade>
@@ -285,14 +285,14 @@
     <PrismTank type="11">
 
       <button>
+        <frame x="1001" y="160" width="100" height="80"/>
         <frame x="1101" y="160" width="100" height="80"/>
-        <frame x="1201" y="160" width="100" height="80"/>
-        <frame x="1101" y="240" width="100" height="80"/>
+        <frame x="1001" y="240" width="100" height="80"/>
         <frame x="0" y="0" width="100" height="80"/>
       </button>
 
       <drag>
-        <frame x="523" y="1482" width="27" height="47"/>
+        <frame x="564" y="1536" width="44" height="37"/>
       </drag>
 
       <upgrade>
@@ -320,7 +320,7 @@
       </button>
 
       <drag>
-        <frame x="523" y="1482" width="27" height="47"/>
+        <frame x="510" y="1536" width="44" height="37"/>
       </drag>
 
       <upgrade>
@@ -348,7 +348,7 @@
       </button>
 
       <drag>
-        <frame x="492" y="1637" width="60" height="51"/>
+        <frame x="563" y="1639" width="61" height="52"/>
       </drag>
 
       <upgrade>
@@ -376,7 +376,7 @@
       </button>
 
       <drag>
-        <frame x="492" y="1637" width="60" height="51"/>
+        <frame x="493" y="1637" width="59" height="51"/>
       </drag>
 
       <upgrade>
@@ -404,7 +404,7 @@
       </button>
 
       <drag>
-        <frame x="500" y="1706" width="53" height="33"/>
+        <frame x="562" y="1704" width="53" height="34"/>
       </drag>
 
       <upgrade>
@@ -432,7 +432,7 @@
       </button>
 
       <drag>
-        <frame x="500" y="1706" width="53" height="33"/>
+        <frame x="508" y="1703" width="40" height="35"/>
       </drag>
       
       <upgrade>
@@ -460,7 +460,7 @@
       </button>
 
       <drag>
-        <frame x="503" y="1753" width="47" height="33"/>
+        <frame x="565" y="1752" width="47" height="33"/>
       </drag>
 
       <upgrade>
@@ -488,7 +488,7 @@
       </button>
 
       <drag>
-        <frame x="503" y="1753" width="47" height="33"/>
+        <frame x="506" y="1751" width="48" height="33"/>
       </drag>
 
       <upgrade>
@@ -508,28 +508,28 @@
 
     <Infantry type="30">
       <button>
-        <frame x="1961" y="342" width="151" height="124"/>
-        <frame x="1778" y="343" width="151" height="124"/>
-        <frame x="2115" y="342" width="151" height="124"/>
-        <frame x="2135" y="339" width="176" height="152"/>
+        <frame x="686" y="1436" width="176" height="141"/>
+        <frame x="870" y="1430" width="176" height="141"/>
+        <frame x="1054" y="1427" width="176" height="141"/>
+        <frame x="686" y="1436" width="176" height="141"/>
       </button>
     </Infantry>
 
     <Aerial type="31">
       <button>
-        <frame x="1776" y="5" width="184" height="115"/>
-        <frame x="1774" y="1" width="184" height="115"/>
-        <frame x="2157" y="7" width="184" height="115"/>
-        <frame x="2154" y="490" width="180" height="115"/>
+        <frame x="1241" y="1439" width="219" height="138"/>
+        <frame x="1503" y="1439" width="219" height="138"/>
+        <frame x="1778" y="1439" width="219" height="138"/>
+        <frame x="1241" y="1439" width="219" height="138"/>
       </button>
     </Aerial>
 
     <Land type="32">
       <button>
-        <frame x="1944" y="488" width="168" height="131"/>
-        <frame x="1776" y="491" width="168" height="131"/>
-        <frame x="2121" y="491" width="168" height="131"/>
-        <frame x="2154" y="490" width="151" height="124"/>
+        <frame x="784" y="1610" width="210" height="160"/>
+        <frame x="1055" y="1610" width="210" height="160"/>
+        <frame x="1321" y="1610" width="210" height="160"/>
+        <frame x="784" y="1610" width="210" height="160"/>
       </button>
     </Land>
     
@@ -538,7 +538,7 @@
   <ui_image>
     <Land>
       <end_screen x="250" y="1652" width="245" height="193"/>
-      <building x="251" y="1659" width="236" height="184"/>
+      <building x="269" y="1677" width="204" height="159"/>
     </Land>
     <Infantry>
       <end_screen x="15" y="1520" width="214" height="173"/>
@@ -546,7 +546,7 @@
     </Infantry>
     <Aerial>
       <end_screen x="12" y="1691" width="236" height="148"/>
-      <building x="14" y="1694" width="230" height="141"/>
+      <building x="33" y="1711" width="187" height="114"/>
     </Aerial>
     <Gold>
       <end_screen x="1785" y="131" width="236" height="209"/>

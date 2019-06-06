@@ -5,6 +5,7 @@
 #include "p2Point.h"
 #include "EncounterTree.h"
 #include "UIButton.h"
+#include "UIButtonTroops.h"
 #include "UIImage.h"
 #include "UIButtonText.h"
 #include "UIPopUp.h"
@@ -40,6 +41,7 @@ public:
 	void InitializeUI();
 
 	bool IsInsideLimits(int mousemotion_x, int mousemotion_y);
+	void KeepInBounds();
 
 private:
 	UIImage* banner = nullptr;
@@ -47,13 +49,14 @@ private:
 	UIImage* troops_background = nullptr;
 	UIImage* main_panel = nullptr;
 	UILabel* gold = nullptr;
+	UILabel* options_label = nullptr;
 	UILabel* text_menu = nullptr;
 	UILabel* musiclabel = nullptr;
 	UILabel* fxlabel = nullptr;
 	UIButton* settings_button = nullptr;
 	UIButtonText* resume_settings_button = nullptr;
 	UIButtonText* back_menu_button = nullptr;
-	UIButtonText* menu_button = nullptr;
+	UIButtonText* collection_button = nullptr;
 	UIButtonText* backbutton_t_b = nullptr;
 	UIButtonText* troops_button = nullptr;
 	UIButtonText* buildings_button = nullptr;
@@ -92,7 +95,7 @@ private:
 	// Troops Menu
 
 	UIButton* deck_buttons[4] = { nullptr, nullptr, nullptr, nullptr };
-	UIButton* collection_buttons_allies[9] = { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr };
+	UIButtonTroops* collection_buttons_allies[9] = { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr };
 	UIButton* collection_buttons_enemies[9] = { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr };
 	UILabel* troops_title[3] = {nullptr, nullptr, nullptr};
 	UIButton* change_side_button = nullptr;
@@ -107,12 +110,14 @@ private:
 	UILabel* range_label = nullptr;
 	UIBar*	 energy_bar = nullptr;
 
+	//Gold
+	UILabel* gold_quantity = nullptr;
+
 
 	float drag_threshhold = 0.2f;
 	bool dragable = true;
 
-	iPoint limit_center = {-480, 1117};
-	int limit_radius = 700;
+	SDL_Rect map_camera_limit;
 
 	iPoint last_camera_position;
 	int volume = 64;

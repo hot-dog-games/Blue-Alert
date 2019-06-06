@@ -6,7 +6,7 @@
 #include "Stat.h"
 #include "CardManager.h"
 
-
+#define MAX_LEVEL 6
 
 CardManager::CardManager()
 {
@@ -20,27 +20,7 @@ CardManager::~CardManager()
 
 bool CardManager::CleanUp()
 {
-	LOG("card manager cleanup");
 	while (!cards.empty()) delete cards.front(), cards.pop_front();
-	return true;
-}
-
-bool CardManager::PostUpdate()
-{
-	if (to_delete)
-	{
-		for (std::list<Card*>::iterator card = cards.begin(); card != cards.end(); ++card)
-		{
-			if ((*card)->to_delete)
-			{
-				App->tex->UnLoad((*card)->sprite_path);
-				delete (*card);
-				cards.erase(card);
-			}				
-		}
-
-		to_delete = false;
-	}
 	return true;
 }
 
@@ -61,12 +41,12 @@ bool CardManager::Start()
 	return true;
 }
 
-Card* CardManager::CreateCard(EntityType type)
+Card* CardManager::CreateCard(EntityType type, int lvl)
 {
 	Card* card = new Card;
 	card->type = type;
 
-	card->level = 0;
+	card->level = 1;
 
 	pugi::xml_node card_node = card_configs.find_child_by_attribute("type", std::to_string((int)type).c_str());
 
@@ -77,6 +57,15 @@ Card* CardManager::CreateCard(EntityType type)
 	LoadCardStats(card, card_node.child("stats"));
 	LoadCardUpgrades(card, card_node.child("upgrades"));
 	LoadCardCombat(card, card_node.child("combat"));
+
+	if (lvl > 1)
+	{
+		while(card->level != lvl)
+		{
+			card->Upgrade();
+		}
+	}
+
 	cards.push_back(card);
 
 	return card;
@@ -84,8 +73,9 @@ Card* CardManager::CreateCard(EntityType type)
 
 Card* CardManager::DeleteCard(Card* card)
 {
-	card->to_delete = true;
-	to_delete = true;
+	LOG("delete card");
+	cards.remove(card);
+	delete card;
 
 	return nullptr;
 }
@@ -121,13 +111,16 @@ void CardManager::LoadCardUpgrades(Card * card, pugi::xml_node upgrades_node)
 
 void Card::Upgrade()
 {
-	level++;
-	info.stats.find("health")->second->IncreaseMaxValue(info.scaling.health_upgrade);
-	info.stats.find("damage")->second->IncreaseMaxValue(info.scaling.attack_damage_upgrade);
-	info.stats.find("defense")->second->IncreaseMaxValue(info.scaling.defense_upgrade);
-	info.stats.find("movement")->second->IncreaseMaxValue(info.scaling.movement_speed_upgrade);
-	info.stats.find("attack_speed")->second->IncreaseMaxValue(info.scaling.attack_speed_upgrade);
-	info.stats.find("range")->second->IncreaseMaxValue(info.scaling.range_upgrade);
+	if (level < MAX_LEVEL)
+	{
+		level++;
+		info.stats.find("health")->second->IncreaseMaxValue(info.scaling.health_upgrade);
+		info.stats.find("damage")->second->IncreaseMaxValue(info.scaling.attack_damage_upgrade);
+		info.stats.find("defense")->second->IncreaseMaxValue(info.scaling.defense_upgrade);
+		info.stats.find("movement")->second->IncreaseMaxValue(info.scaling.movement_speed_upgrade);
+		info.stats.find("attack_speed")->second->IncreaseMaxValue(info.scaling.attack_speed_upgrade);
+		info.stats.find("range")->second->IncreaseMaxValue(info.scaling.range_upgrade);
+	}
 }
 
 void Card::LoadSprite()

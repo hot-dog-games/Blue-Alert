@@ -83,5 +83,5 @@ UIButton::UIButton(iPoint position, SDL_Rect* sprite_rect, bool is_interactable)
 
 	rect_sprite = anim[interactable ? 0 : 3];
 
-	//button_fx=App->audio->LoadFx("audio/fx/UI/button_fx.wav");
+	button_fx = App->audio->LoadFx("audio/fx/UI/button_fx.wav");
 }

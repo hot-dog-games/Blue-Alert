@@ -22,9 +22,10 @@ public:
 	void ChangeSprite(SDL_Rect* rect);
 	void SetLocked(bool value);
 	SDL_Rect* GetAnim() const;
+	
 	bool CleanUp();
 
-//	std::string button_fx;
+	std::string button_fx = " ";
 };
 
 #endif // !UI_BUTTON_H

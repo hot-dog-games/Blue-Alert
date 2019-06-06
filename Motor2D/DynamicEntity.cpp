@@ -2,7 +2,6 @@
 #include "j1App.h"
 #include "Render.h"
 #include "Audio.h"
-#include "Movement.h"
 #include "GUI.h"
 #include "UIBar.h"
 #include "CardManager.h"
@@ -10,6 +9,7 @@
 #include "Stat.h"
 #include "Map.h"
 #include "Particles.h"
+#include "ProjectileParticle.h"
 #include "DynamicEntity.h"
 
 const float DELETE_TIME = 5.0f;
@@ -29,9 +29,6 @@ DynamicEntity::DynamicEntity(pugi::xml_node config, fPoint position, Card* card,
 	entity_card = card;
 	std::string stat_name = "health";
 	sprite = entity_card->texture;
-
-	//singleUnit = new SingleUnit(this, nullptr);
-	//App->movement->CreateGroupFromUnit(this);
 
 	stats.insert({ "health", new Stat(card->info.stats.find("health")->second->GetMaxValue())});
 }
@@ -54,13 +51,16 @@ bool DynamicEntity::Start()
 		*point = App->map->MapToWorld((*point).x, (*point).y);
 		*point = { (*point).x + (int)(App->map->data.tile_width * 0.5), (*point).y + (int)(App->map->data.tile_height * 0.5) };
 	}
-	explosion_fx = App->audio->LoadFx("audio/fx/Ambient_Sounds/Explosions/Explosion2.wav");
-	attack_fx = App->audio->LoadFx("audio/fx/Ambient_Sounds/Shots/One_shoot2.wav");
+	attack_fx = App->audio->LoadFx("audio/fx/Ambient_Sounds/Shots/basic_shot.wav");
+	aoe_fx = App->audio->LoadFx("audio/fx/Ambient_Sounds/Shots/aoe_shot.wav");
+	piercing_fx = App->audio->LoadFx("audio/fx/Ambient_Sounds/Shots/pierce_shot.wav");
+
 
 	App->audio->SetFXVolume(attack_fx.c_str(), 30);
-	App->audio->SetFXVolume(explosion_fx.c_str(), 30);
+	App->audio->SetFXVolume(aoe_fx.c_str(), 30);
+	App->audio->SetFXVolume(piercing_fx.c_str(), 30);
 
-	health_bar = App->gui->CreateBar(bar_position, { 25,1503,current_frame.w, 7 }, stats.find("health")->second, BarType::BAR_HORITZONTAL, BAR_DYNAMIC, this);
+	health_bar = App->gui->CreateBar(bar_position, { 25, 1503, current_frame.w, 7 }, stats.find("health")->second, BarType::BAR_HORITZONTAL, BAR_DYNAMIC, this, false, true);
 	return true;
 }
 
@@ -106,7 +106,6 @@ bool DynamicEntity::PreUpdate()
 
 	CalcDirection();
 	AnimationCheck();
-	pivot.x = position.x - current_frame.w / 2; pivot.y = position.y; pivot.w = current_frame.w; pivot.h = -current_frame.h / 2;
 	return true;
 }
 
@@ -118,7 +117,6 @@ bool DynamicEntity::PostUpdate()
 	{
 		//Range debug 
 		App->render->DrawCircle(position.x, position.y, entity_card->info.stats.find("range")->second->GetValue()*App->map->data.tile_height, 255, 0, 0);
-		App->render->DrawQuad(pivot, 255, 0, 0);
 	}
 
 	return true;
@@ -216,10 +214,6 @@ void DynamicEntity::CheckDestination()
 			state = DYNAMIC_IDLE;
 	}
 	fPoint move_pos;
-	/*if (CheckAllies())
-	{
-		move_pos = { path[current_point].x - position.x - 20, path[current_point].y - position.y };
-	}else*/
 	move_pos = { path[current_point].x - position.x, path[current_point].y - position.y };
 	
 	float m = sqrtf(pow(move_pos.x, 2.0f) + pow(move_pos.y, 2.0f));
@@ -293,34 +287,31 @@ void DynamicEntity::Attack()
 {
 	if (attack_timer.ReadMs() >= SECOND_MS / entity_card->info.stats.find("attack_speed")->second->GetValue() )
 	{
+		ProjectileParticle* particle;
+		current_animation->Reset();
 		float attack = entity_card->info.stats.find("damage")->second->GetValue();
 		switch (entity_card->info.attack_type)
 		{
 		case AttackType::AT_BASIC:
-			objective->DecreaseLife(attack);
-			App->particles->CreateParticle(ParticleType::ATTACK_BASIC_SHOT, { position.x, position.y - current_frame.h * 0.5f }, 
-				{ objective->position.x, objective->position.y - objective->current_frame.h * 0.5f });
+			particle = (ProjectileParticle*)App->particles->CreateParticle(ParticleType::ATTACK_BASIC_SHOT, GetCenterPosition(),
+				objective->GetCenterPosition());
+			particle->SetTarget(objective, attack);
 			App->audio->PlayFx(attack_fx.c_str(), 0, 1);
 			break;
 		case AttackType::AT_AOE:
 		{
-			App->audio->PlayFx(explosion_fx.c_str(), 0, 2);
-			std::list<Entity*> entities;
 			float radius = EXPLOSION_RANGE_TILES * App->map->data.tile_height;
-			App->entity_manager->GetEntitiesInArea(radius, objective->position, entities, faction);
-
-			for (std::list<Entity*>::iterator entity = entities.begin(); entity != entities.end(); ++entity)
-			{
-				(*entity)->DecreaseLife(attack);
-			}
-			App->particles->CreateParticle(ParticleType::ATTACK_EXPLOSION, objective->position);
+			App->audio->PlayFx(aoe_fx.c_str(), 0, 2);
+			particle = (ProjectileParticle*)App->particles->CreateParticle(ParticleType::ATTACK_MISSILE, GetCenterPosition(),
+				objective->position);
+			particle->SetCollisionEffect(ParticleType::ATTACK_EXPLOSION, radius, faction, attack);
 		}
 			break;
 		case AttackType::AT_PIERCING:
-			objective->DecreaseLife(attack, true);
-			App->particles->CreateParticle(ParticleType::ATTACK_BASIC_SHOT, { position.x, position.y - current_frame.h * 0.5f },
-				{ objective->position.x, objective->position.y - objective->current_frame.h * 0.5f });
-			App->audio->PlayFx(attack_fx.c_str(), 0, 1);
+			particle = (ProjectileParticle*)App->particles->CreateParticle(ParticleType::ATTACK_BASIC_SHOT, GetCenterPosition(),
+				objective->GetCenterPosition());
+			particle->SetTarget(objective, attack, true);
+			App->audio->PlayFx(piercing_fx.c_str(), 0, 3);
 			break;
 		default:
 			break;
@@ -493,6 +484,6 @@ void DynamicEntity::AttackingAnimationCheck() {
 	default:
 		break;
 	}
-
-	current_animation->speed = current_animation->GetFrameAmount() * entity_card->info.stats.find("attack_speed")->second->GetValue();
+	int frames_per_second = current_animation->GetFrameAmount() * entity_card->info.stats.find("attack_speed")->second->GetValue();
+	current_animation->speed = current_animation->speed < frames_per_second ? frames_per_second : current_animation->speed;
 }

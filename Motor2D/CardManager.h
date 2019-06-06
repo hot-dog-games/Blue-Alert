@@ -32,8 +32,6 @@ struct CardInfo {
 
 	std::map<std::string, Stat*> stats;
 	bool armored;
-
-
 };
 
 struct Card {
@@ -46,8 +44,6 @@ struct Card {
 	std::string name = " ";
 	std::string sprite_path = " ";
 	SDL_Texture* texture = nullptr;
-
-	bool to_delete = false;
 
 	void Upgrade();
 	void LoadSprite();
@@ -62,11 +58,10 @@ public:
 	bool Awake(pugi::xml_node&);
 	bool Start();
 	bool CleanUp();
-	bool PostUpdate();
 	bool Load(pugi::xml_node&) { return true; }
 	bool Save(pugi::xml_node&) const { return true; }
 
-	Card* CreateCard(EntityType type);
+	Card* CreateCard(EntityType type, int lvl = 0);
 	Card* DeleteCard(Card* card);
 
 private:
@@ -75,7 +70,6 @@ private:
 	void LoadCardCombat(Card* card, pugi::xml_node combat_node);
 
 private:
-	bool to_delete = false;
 	pugi::xml_document config_file;
 	pugi::xml_node card_configs;
 	std::list<Card*> cards;

@@ -38,10 +38,17 @@ public:
 
 	void SetAllFXVolume(int volume);
 
+	int GetMusicVolume();
+
+	int GetFxVolume();
+
 private:
 
 	_Mix_Music*	music = NULL;
 	std::map<std::string, Mix_Chunk*>	fx;
+
+	int music_volume = 64;
+	int fx_volume = 64;
 };
 
 #endif // __Audio_H__

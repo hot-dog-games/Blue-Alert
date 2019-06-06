@@ -38,9 +38,9 @@ bool Window::Awake(pugi::xml_node& config)
 		bool resizable = config.child("resizable").attribute("value").as_bool(false);
 		bool fullscreen_window = config.child("fullscreen_window").attribute("value").as_bool(false);
 
-		width = config.child("resolution").attribute("width").as_int(640);
-		height = config.child("resolution").attribute("height").as_int(480);
-		scale = config.child("resolution").attribute("scale").as_int(1);
+		scale = config.child("resolution").attribute("scale").as_float(1);
+		width = config.child("resolution").attribute("width").as_int(640) * scale;
+		height = config.child("resolution").attribute("height").as_int(960) * scale;
 
 		if(fullscreen == true)
 		{
@@ -108,7 +108,7 @@ void Window::GetWindowSize(uint& width, uint& height) const
 	height = this->height;
 }
 
-uint Window::GetScale() const
+float Window::GetScale() const
 {
 	return scale;
 }

@@ -5,12 +5,13 @@
 #include <string>
 
 struct _TTF_Font;
+struct SDL_Texture;
 
 class UILabel : public UIElement
 {
 public:
 	_TTF_Font* font;
-	std::string text;
+	std::string text = " ";
 	SDL_Color color;
 	SDL_Color original_color;
 	UILabel(iPoint pos, _TTF_Font* font, std::string text, SDL_Color color, int max_width, bool is_interactable);
@@ -25,6 +26,12 @@ public:
 	void OnMouseRelease();
 	void OnMouseExit();
 
+	void SetCentered(bool);
+
+protected:
+	void Center();
+	bool centered = false;
+	SDL_Texture* texture;
 };
 
 #endif // !UI_LABEL_H

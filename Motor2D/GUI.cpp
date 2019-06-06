@@ -14,6 +14,7 @@
 #include "UIButton.h"
 #include "UISelectableButton.h"
 #include "UIButtonText.h"
+#include "UIButtonTroops.h"
 #include "UILabel.h"
 #include "UIScrollBar.h"
 #include "UIBar.h"
@@ -229,6 +230,15 @@ UIButtonText * Gui::CreateButtonText(iPoint pos, iPoint offset, SDL_Rect * sprit
 	return button;
 }
 
+UIButtonTroops* Gui::CreateButtonTroops(iPoint pos, SDL_Rect* sprite_rect, ButtonLevel lvl, UIElement* parent, bool is_interactable) {
+
+	UIButtonTroops* button = new UIButtonTroops(pos, sprite_rect, is_interactable, lvl);
+	button->parent = parent;
+	elements.push_back(button);
+
+	return button;
+}
+
 UIScrollBar* Gui::CreateScrollBar(iPoint pos, SDL_Rect rect, SliderType type, int initial_value, int max_value, UIElement* parent)
 {
 	UIScrollBar* scroll = new UIScrollBar(pos, rect, type, initial_value, max_value);
@@ -245,14 +255,14 @@ UIAnimatedImage* Gui::CreateAnimatedImage(iPoint pos, SDL_Rect * rect, int total
 	return image;
 }
 
-UIBar * Gui::CreateBar(iPoint pos, SDL_Rect rect, Stat* value, BarType type, BarState state, Entity* entity, UIElement * parent)
+UIBar * Gui::CreateBar(iPoint pos, SDL_Rect rect, Stat* value, BarType type, BarState state, Entity* entity, UIElement * parent, bool color_change)
 {
 	UIBar* bar;
 	if (entity) {
-		bar = new UIEntityBar(pos, rect, value, type, state, entity);
+		bar = new UIEntityBar(pos, rect, value, type, state, entity, color_change);
 	}
 	else {
-		bar = new UIBar(pos, rect, value, type, state);
+		bar = new UIBar(pos, rect, value, type, state, color_change);
 	}
 	
 	bar->parent = parent;

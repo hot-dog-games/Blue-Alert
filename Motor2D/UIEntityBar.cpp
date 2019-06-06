@@ -4,11 +4,13 @@
 #include "UIEntityBar.h"
 #include "Stat.h"
 #include "p2Log.h"
+#include "p2Defs.h"
 #include "Entity.h"
 
-UIEntityBar::UIEntityBar(iPoint pos, SDL_Rect sprite_rect, Stat* value, BarType type, BarState state, Entity* entity): UIBar(pos,sprite_rect,value,type, state)
+UIEntityBar::UIEntityBar(iPoint pos, SDL_Rect sprite_rect, Stat* value, BarType type, BarState state, Entity* entity, bool color_change): UIBar(pos,sprite_rect,value,type, state, color_change)
 {
 	this->entity = entity;
+	entity_height = entity->current_frame.h;
 }
 
 bool UIEntityBar::Update(float dt)
@@ -21,8 +23,8 @@ bool UIEntityBar::Update(float dt)
 	}
 
 	iPoint entity_pos = App->render->WorldToScreen((int)entity->position.x, (int)entity->position.y);
-	rect_box.x = entity_pos.x - rect_box.w * 0.5;
-	rect_box.y = entity_pos.y - entity->current_frame.h;
+	rect_box.x = (int)(entity_pos.x - rect_box.w * 0.5);
+	rect_box.y = (int)(entity_pos.y - entity_height - bar_margin);
 
 	return true;
 }

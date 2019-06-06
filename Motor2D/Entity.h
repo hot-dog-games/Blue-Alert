@@ -13,6 +13,10 @@ struct SDL_Texture;
 class Stat;
 enum EntityType;
 
+enum PivotType {
+	PVT_BOTTOM_CENTER,
+	PVT_CENTER,
+};
 enum Faction {
 	FACTION_NONE = -1,
 	FACTION_RUSSIAN,
@@ -38,6 +42,8 @@ public:
 	bool IsAlive();
 	virtual bool IsArmored() { return false; };
 	virtual int GetAttackType() { return -1; };
+	void SetPivot(PivotType);
+	fPoint GetCenterPosition();
 
 protected:
 	void LoadAnimations(pugi::xml_node anim_config);
@@ -46,14 +52,16 @@ protected:
 	virtual void Draw();
 
 public:
+	fPoint position;
 	Faction faction;
 	EntityType type;
-	fPoint position;
 	SDL_Rect current_frame;
 	int sorting_layer = 0;
 	std::map<std::string, Stat*> stats;
 
 protected:
+	fPoint GetPosition();
+	PivotType pivot = PVT_BOTTOM_CENTER;
 	std::map<std::string, Animation> animations;
 	Animation* current_animation = nullptr;
 	SDL_Texture* sprite = nullptr;

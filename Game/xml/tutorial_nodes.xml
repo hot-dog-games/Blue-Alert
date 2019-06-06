@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <tutorial_nodes size="6">
-	<node id="0" x="76" y="75" type="30">
+	<node id="0" x="76" y="75" type="30" difficulty="0">
 		<children>
 			<child id="1"/>
 		</children>
@@ -14,7 +14,7 @@
 			<card value="18" level="1"/>
 		</rewards>
 	</node>
-	<node id="1" x="63" y="62" type="30">
+	<node id="1" x="63" y="62" type="30" difficulty="0">
 		<children>
 			<child id="2"/>
 			<child id="3"/>
@@ -28,7 +28,7 @@
 			<card value="18" level="1"/>
 		</rewards>
 	</node>
-	<node id="2" x="51" y="64" type="32">
+	<node id="2" x="51" y="64" type="32" difficulty="0">
 		<children>
 			<child id="4"/>
 		</children>
@@ -41,7 +41,7 @@
 			<card value="16" level="1"/>
 		</rewards>
 	</node>
-	<node id="3" x="61" y="50" type="31">
+	<node id="3" x="61" y="50" type="31" difficulty="0">
 		<children>
 			<child id="5"/>
 		</children>
@@ -54,12 +54,12 @@
 			<card value="16" level="1"/>
 		</rewards>
 	</node>
-	<node id="4" x="43" y="59" type="33">
+	<node id="4" x="43" y="59" type="33" difficulty="0">
 		<encounter>
       <card value="1" level="1"/>
 		</encounter>
 	</node>
-	<node id="5" x="52" y="37" type="34">
+	<node id="5" x="52" y="37" type="34" difficulty="0">
 		<encounter>
 			<card value="1" level="1"/>
 		</encounter>

@@ -24,7 +24,7 @@ Core::Core(pugi::xml_node entity_config, fPoint position, Faction faction, pugi:
 	stats.find("energy")->second->DecreaseStat(20);
 	current_animation = &animations.find("idle")->second;
 
-	attack_fx = App->audio->LoadFx("audio/fx/Ambient_Sounds/Shots/One_shoot2.wav");
+	attack_fx = App->audio->LoadFx("audio/fx/Ambient_Sounds/Shots/basic_shot.wav");
 	App->audio->SetFXVolume(attack_fx.c_str(), 30);
 }
 
@@ -34,10 +34,8 @@ Core::~Core()
 
 bool Core::Update(float dt)
 {
-	if (energy_timer.ReadMs() >= SECOND_MS) {
-		stats.find("energy")->second->IncreaseStat(stats.find("energy_regen")->second->GetValue());
-		energy_timer.Start();
-	}
+
+	stats.find("energy")->second->IncreaseStat(stats.find("energy_regen")->second->GetValue()/App->GetFrameRate());
 
 	if (state == STATIC_DIE && current_animation->isDone())
 	{
@@ -71,6 +69,7 @@ bool Core::Update(float dt)
 
 bool Core::CleanUp()
 {
+	LOG("CORE CLEANUP");
 	std::map<std::string, Stat*>::iterator item;
 	for (item = stats.begin(); item != stats.end(); ++item)
 	{

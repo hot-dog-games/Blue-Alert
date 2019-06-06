@@ -78,14 +78,14 @@ protected:
 
 	//Pathfinding
 	std::vector<iPoint> path;
-	SDL_Rect pivot;
 	int current_point = 0;
 	int previous_point = 0;
 	float dead_timer = 0.0f;
 
 private:
-	std::string attack_fx;
-	std::string explosion_fx;
+	std::string attack_fx = "";
+	std::string aoe_fx = "";
+	std::string piercing_fx = "";
 	
 	UIBar*	health_bar = nullptr;
 };

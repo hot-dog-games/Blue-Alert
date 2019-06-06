@@ -39,6 +39,11 @@ void UIButtonText::SetTextColor(SDL_Color color)
 	button_label->color = color;
 }
 
+void UIButtonText::SetText(std::string text)
+{
+	button_label->SetText(text);
+}
+
 bool UIButtonText::CleanUp()
 {
 	delete[] anim;
@@ -49,4 +54,5 @@ bool UIButtonText::CleanUp()
 UIButtonText::UIButtonText(iPoint position, iPoint offset, SDL_Rect* sprite_rect, std::string text, SDL_Color color, int size, bool is_interactable): UIButton(position,sprite_rect,is_interactable)
 {
 	button_label = App->gui->CreateLabel({ offset.x, (int)(rect_sprite.h * 0.5 - size*0.5)}, "fonts/button_text.ttf", size, text, color, 1000, this, false);
+	button_label->SetCentered(true);
 }
