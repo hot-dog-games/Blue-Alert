@@ -3,7 +3,7 @@
 
 #include "Core.h"
 
-const float THINK_DELAY = 4.0F;
+const float THINK_DELAY = 3.0F;
 
 struct AILane{
 	SDL_Rect area;
@@ -57,6 +57,7 @@ private:
 	float dt_sum = THINK_DELAY;
 
 	AILane lanes[3];
+	fPoint spawns[3];
 	int selected_lane = 0;
 	int selected_card = 0;
 };

@@ -91,8 +91,8 @@ bool Render::CleanUp()
 // Load Game State
 bool Render::Load(pugi::xml_node& data)
 {
-	camera.x = data.child("camera").attribute("x").as_int();
-	camera.y = data.child("camera").attribute("y").as_int();
+	/*camera.x = data.child("camera").attribute("x").as_int();
+	camera.y = data.child("camera").attribute("y").as_int();*/
 
 	return true;
 }
@@ -126,7 +126,7 @@ void Render::ResetViewPort()
 iPoint Render::ScreenToWorld(int x, int y) const
 {
 	iPoint ret;
-	int scale = App->win->GetScale();
+	float scale = App->win->GetScale();
 
 	ret.x = (x - camera.x / scale);
 	ret.y = (y - camera.y / scale);
@@ -137,17 +137,17 @@ iPoint Render::ScreenToWorld(int x, int y) const
 iPoint Render::WorldToScreen(int x, int y) const
 {
 	iPoint ret;
-	int scale = App->win->GetScale();
+	float scale = App->win->GetScale();
 
-	ret.x = (x + camera.x * scale);
-	ret.y = (y + camera.y * scale);
+	ret.x = (x + camera.x / scale);
+	ret.y = (y + camera.y / scale);
 
 	return ret;
 }
 
 bool Render::IsOnCamera(const int & x, const int & y, const int & w, const int & h) const
 {
-	int scale = App->win->GetScale();
+	float scale = App->win->GetScale();
 
 	SDL_Rect r = { x*scale,y*scale,w*scale,h*scale };
 	SDL_Rect cam = { -camera.x,-camera.y,camera.w,camera.h };
@@ -159,11 +159,11 @@ bool Render::IsOnCamera(const int & x, const int & y, const int & w, const int &
 bool Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, double angle, int pivot_x, int pivot_y, float scaleX, float scaleY, SDL_Rect* clip_rect) const
 {
 	bool ret = true;
-	uint scale = App->win->GetScale();
+	float scale = App->win->GetScale();
 
 	SDL_Rect rect;
-	rect.x = (int)(camera.x * speed) + x * scale;
-	rect.y = (int)(camera.y * speed) + y * scale;
+	rect.x = (int)((camera.x * speed) + x * scale);
+	rect.y = (int)((camera.y * speed) + y * scale);
 
 	if(section != NULL)
 	{
@@ -203,7 +203,7 @@ bool Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section, f
 bool Render::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool filled, bool use_camera) const
 {
 	bool ret = true;
-	uint scale = App->win->GetScale();
+	float scale = App->win->GetScale();
 
 	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 	SDL_SetRenderDrawColor(renderer, r, g, b, a);
@@ -231,7 +231,7 @@ bool Render::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, 
 bool Render::DrawLine(int x1, int y1, int x2, int y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool use_camera) const
 {
 	bool ret = true;
-	uint scale = App->win->GetScale();
+	float scale = App->win->GetScale();
 
 	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 	SDL_SetRenderDrawColor(renderer, r, g, b, a);
@@ -255,7 +255,7 @@ bool Render::DrawLine(int x1, int y1, int x2, int y2, Uint8 r, Uint8 g, Uint8 b,
 bool Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool use_camera) const
 {
 	bool ret = true;
-	uint scale = App->win->GetScale();
+	float scale = App->win->GetScale();
 
 	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 	SDL_SetRenderDrawColor(renderer, r, g, b, a);

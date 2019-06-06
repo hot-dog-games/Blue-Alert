@@ -25,14 +25,17 @@
 #include "Stat.h"
 #include "BattleScene.h"
 #include "Buff.h"
+#include "Fonts.h"
 #include "GameManager.h"
 #include "Particles.h"
 #include "EncounterTree.h"
 #include "EncounterNode.h"
+#include "ProjectileParticle.h"
 #include "UIImage.h"
 #include "UILabel.h"
 
 const double HELD_DELAY = 175;
+const double BOMB_CD = 30;
 
 BattleScene::BattleScene() : Scene()
 {
@@ -46,7 +49,7 @@ BattleScene::~BattleScene()
 // Called before the first frame
 bool BattleScene::Start()
 {
-	if (App->map->Load("test_grande.tmx") == true)
+	if (App->map->Load(App->game_manager->GetBattleMap().c_str()) == true)
 	{
 		int w, h;
 		uchar* data = NULL;
@@ -56,8 +59,8 @@ bool BattleScene::Start()
 		RELEASE_ARRAY(data);
 	}
 
-	App->render->camera.x = 290;
-	App->render->camera.y = -635;
+	App->render->camera.x = (int)(290 * App->win->GetScale());
+	App->render->camera.y = (int)(-635 * App->win->GetScale());
 
 	Deck* enemy_deck = new Deck();
 	enemy_deck->delete_cards = true;
@@ -68,12 +71,17 @@ bool BattleScene::Start()
 
 	SetEnemiesUpgrades(enemy_deck);
 
-	iPoint allied_core_world = App->map->MapToWorld(51, 50);
-	iPoint enemy_core_world = App->map->MapToWorld(27, 26);
+	iPoint allied_core_world = App->map->MapToWorld(48, 48);
+	iPoint enemy_core_world = App->map->MapToWorld(25, 25);
 
-	allied_core = App->entity_manager->CreateCore(1, { (float)allied_core_world.x,  (float)allied_core_world.y }, App->game_manager->GetPlayerDeck(), FACTION_RUSSIAN);
-	enemy_core = App->entity_manager->CreateCore(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType(), { (float)enemy_core_world.x,  (float)enemy_core_world.y }, enemy_deck, FACTION_AMERICAN, true);
+	allied_core = App->entity_manager->CreateCore(1, { (float)allied_core_world.x + App->map->data.tile_width*0.5f,  (float)allied_core_world.y + App->map->data.tile_height*0.5f },
+		App->game_manager->GetPlayerDeck(), FACTION_RUSSIAN);
+	enemy_core = App->entity_manager->CreateCore(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType(),
+		{ (float)enemy_core_world.x + App->map->data.tile_width*0.5f,  (float)enemy_core_world.y}, enemy_deck, FACTION_AMERICAN, true);
 	enemy_core->delete_deck = true;
+
+	allied_core->SetPivot(PivotType::PVT_CENTER);
+	enemy_core->SetPivot(PivotType::PVT_CENTER);
 
 	allied_core->LoadUnitSprites(App->game_manager->GetPlayerDeck()->GetDeckSize());
 	enemy_core->LoadUnitSprites();
@@ -90,6 +98,7 @@ bool BattleScene::Start()
 	win_fx = App->audio->LoadFx("audio/fx/Mission/Mission_accomplished.wav");
 	lose_fx = App->audio->LoadFx("audio/fx/Mission/Mission_Failed.wav");
 	deployment_fx = App->audio->LoadFx("audio/fx/Voice_Over/Unit_ready.wav");
+	nuke_fx = App->audio->LoadFx("audio/fx/Ambient_Sounds/Shots/nuke_fall.wav");
 	no_energy = App->audio->LoadFx("audio/fx/UI/gpsyampa.wav");
 	App->audio->PlayMusic("audio/music/9.Destroy-Red Alert2_2.ogg");
 
@@ -107,12 +116,6 @@ bool BattleScene::PreUpdate()
 // Called each loop iteration
 bool BattleScene::Update(float dt)
 {
-	if (App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
-		App->LoadGame("save_game.xml");
-
-	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
-		App->SaveGame("save_game.xml");
-
 	if (!App->game_manager->popups[POPUP_USETROOP])
 	{
 		if (!App->transition_manager->IsTransitioning())
@@ -205,7 +208,7 @@ bool BattleScene::Update(float dt)
 
 			App->gui->DisableInteractable((UIElement*)unit_panel);
 			App->game_manager->GetEncounterTree()->SetCurrentNode(App->game_manager->GetEncounterTree()->GetFightingNode());
-			App->game_manager->gold += 100;
+			App->game_manager->gold += App->game_manager->GetEncounterTree()->GetFightingNode()->GetGoldReward();
 			App->game_manager->enemy_scaling += 1;
 
 			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() != EntityType::STORE_STRATEGY_BUILDING)
@@ -216,11 +219,7 @@ bool BattleScene::Update(float dt)
 			else 
 			{
 				App->gui->EnableElement((UIElement*)store_panel);
-				current_gold->SetText("Your gold: " + std::to_string(App->game_manager->gold));
-			}
-
-			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetChildren().size() == 0) {
-				if (App->game_manager->stage == STAGE_TUTORIAL) App->game_manager->stage++;
+				current_gold->SetText("Your gold: " + std::to_string(App->game_manager->gold) + "g");
 			}
 		}
 			
@@ -241,7 +240,7 @@ bool BattleScene::Update(float dt)
 			App->PauseGame();
 			App->gui->DisableInteractable((UIElement*)unit_panel);
 			App->game_manager->GetEncounterTree()->SetCurrentNode(App->game_manager->GetEncounterTree()->GetFightingNode());
-			App->game_manager->gold += 100;
+			App->game_manager->gold += App->game_manager->GetEncounterTree()->GetFightingNode()->GetGoldReward();
 			App->game_manager->enemy_scaling += 1;
 
 			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() != EntityType::STORE_STRATEGY_BUILDING)
@@ -252,15 +251,22 @@ bool BattleScene::Update(float dt)
 			else
 			{
 				App->gui->EnableElement((UIElement*)store_panel);
-				current_gold->SetText("Your gold: " + std::to_string(App->game_manager->gold));
-			}
-
-			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetChildren().size() == 0) {
-				if (App->game_manager->stage == STAGE_TUTORIAL)App->game_manager->stage++;
+				current_gold->SetText("Your gold: " + std::to_string(App->game_manager->gold) + "g");
 			}
 		}
 
 		energy_label->SetText(std::to_string(energy_bar->GetValue()));
+		if (bomb_cd_timer < BOMB_CD)
+		{
+			bomb_cd_timer += 1 * dt;
+			if (bomb_cd_timer >= BOMB_CD)
+			{
+				bomb_cd_timer = BOMB_CD;
+				bomb_button->SetLocked(true);
+			}
+		}
+
+		UpdateCooldowns();
 	}
 	break;
 	case BattleScene::BattleSceneState::WIN:
@@ -287,9 +293,6 @@ bool BattleScene::PostUpdate()
 
 	App->map->Draw();
 
-	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-		ret = false;
-
 	return ret;
 }
 
@@ -297,7 +300,6 @@ bool BattleScene::PostUpdate()
 bool BattleScene::CleanUp()
 {
 	LOG("Freeing scene");
-
 	return true;
 }
 
@@ -324,31 +326,26 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			if (win_unit_one->IsSelected()) {
 				App->game_manager->AddCardToCollection((EntityType)App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[0]);
 				App->gui->DisableElement((UIElement*)win_panel_two);
-				App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
+				App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, Black);
 			}
 			else if (win_unit_two->IsSelected()) {
 				App->game_manager->AddCardToCollection((EntityType)App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[1]);
 				App->gui->DisableElement((UIElement*)win_panel_two);
-				App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
+				App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, Black);
 			}
 			else if (win_unit_three->IsSelected()) {
 				App->game_manager->AddCardToCollection((EntityType)App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[2]);
 				App->gui->DisableElement((UIElement*)win_panel_two);
-				App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
+				App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, Black);
 			}
-
 			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetChildren().size() == 0) {
-				App->game_manager->ResetBuildingBuffs();
-				App->game_manager->GetEncounterTree()->CleanTree();
-				App->game_manager->CreateStage();
-				App->game_manager->SaveRecoveryState();
+				App->game_manager->change_stage = true;
 			}
-			App->SaveGame(nullptr);
 		}
 		else if (element == lose_continue) {
 			App->gui->DisableElement((UIElement*)lose_panel);
 			App->game_manager->restart = true;
-			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
+			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, Black);
 		}
 
 		if (element == win_unit_one) {
@@ -396,19 +393,16 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			}
 			App->gui->DisableElement((UIElement*)store_panel);
 
-			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetChildren().size() == 0) {
-				App->game_manager->ResetBuildingBuffs();
-				App->game_manager->GetEncounterTree()->CleanTree();
-				App->game_manager->CreateStage();
-				App->game_manager->SaveRecoveryState();
-			}
+			if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetChildren().size() == 0)
+				App->game_manager->change_stage = true;
 
-			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
+			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, Black);
 		}
 
 		if (element == bomb_button)
 		{
 			DropNukes();
+			bomb_cd_timer = 0;
 			bomb_button->SetLocked(false);
 		}
 
@@ -429,7 +423,7 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			App->gui->DisableElement(pause_panel);
 		}
 		else if (element == pause_exit) {
-			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MENU, White);
+			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MENU, Black);
 		}
 	}
 	else if (gui_event == GUI_Event::LEFT_CLICK_UP) {
@@ -482,7 +476,7 @@ void BattleScene::ReleaseDrag()
 
 void BattleScene::GenerateRandomAlliedTroop()
 {
-	std::vector<int> pool = { 1, 3, 5, 7, 9, 11, 13, 15, 17 };
+	std::vector<int> pool = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18 };
 	std::vector<int>::iterator it;
 
 	for (int i = 0; i < 6; i++)
@@ -499,8 +493,6 @@ void BattleScene::UpdateGoldOnSelect(int unit)
 {
 	total_cost_acumulated += 100;
 	App->game_manager->gold -= 100;
-	current_gold->SetText("Your gold: " + std::to_string(App->game_manager->gold));
-	total_cost->SetText("Total cost: " + std::to_string(total_cost_acumulated));
 
 	if (App->game_manager->gold < 0)
 	{
@@ -513,6 +505,9 @@ void BattleScene::UpdateGoldOnSelect(int unit)
 		purchase->interactable = true;
 		purchase->SetTextColor({ 255,232,2, 255 });
 	}
+
+	current_gold->SetText("Your gold: " + std::to_string(App->game_manager->gold) + "g");
+	total_cost->SetText("Total cost: " + std::to_string(total_cost_acumulated) + "g");
 
 	store_units_purchased.push_back((EntityType)unit);
 	if (store_units_purchased.size() > 0)purchase->SetText("PURCHASE");
@@ -522,8 +517,6 @@ void BattleScene::UpdateGoldOnUnSelect(int unit)
 {
 	total_cost_acumulated -= 100;
 	App->game_manager->gold += 100;
-	current_gold->SetText("Your gold: " + std::to_string(App->game_manager->gold));
-	total_cost->SetText("Total cost: " + std::to_string(total_cost_acumulated));
 
 	if (App->game_manager->gold < 0)
 	{
@@ -537,9 +530,49 @@ void BattleScene::UpdateGoldOnUnSelect(int unit)
 		purchase->SetTextColor({ 255,232,2, 255 });
 	}
 
+	current_gold->SetText("Your gold: " + std::to_string(App->game_manager->gold) + "g");
+	total_cost->SetText("Total cost: " + std::to_string(total_cost_acumulated) + "g");
+
 	store_units_purchased.remove((EntityType)unit);
 
 	if (store_units_purchased.size() == 0)purchase->SetText("CONTINUE");
+}
+
+void BattleScene::UpdateCooldowns()
+{
+	float current_value;
+	uint max_value;
+	uint max_height = 79;
+	uint current_height;
+	for (int i = 0; i < App->game_manager->GetPlayerDeck()->GetDeckSize(); i++)
+	{
+		max_value = allied_core->GetCard(i)->info.stats.find("energy_cost")->second->GetValue();
+		current_value = allied_core->GetEnergy()->GetValue();
+		if (current_value <= max_value)
+		{
+			if (current_value > 0)
+			{
+				float percent = (float)current_value * (1 / (float)max_value);
+				current_height = percent * (max_height);
+			}
+			else current_height = 0;
+			unit_cooldown[i]->SetHeight(max_height - current_height);
+		}
+	}
+
+	max_height = 50;
+	max_value = BOMB_CD;
+	current_value = bomb_cd_timer;
+	if (current_value <= max_value)
+	{
+		if (current_value > 0)
+		{
+			float percent = (float)current_value * (1 / (float)max_value);
+			current_height = percent * (max_height);
+		}
+		else current_height = 0;
+		bomb_cd_image->SetHeight(max_height - current_height);
+	}
 }
 
 void BattleScene::SetEnemiesUpgrades(Deck* enemy_deck)
@@ -558,12 +591,22 @@ void BattleScene::SetEnemiesUpgrades(Deck* enemy_deck)
 
 void BattleScene::DropNukes()
 {
-	App->particles->CreateParticle(ParticleType::NUKE_BOMB, { allied_core->position.x - (allied_core->current_frame.w * 2), 0 },
-		{ allied_core->position.x - (allied_core->current_frame.w * 2), allied_core->position.y - allied_core->current_frame.h }, 140);
-	App->particles->CreateParticle(ParticleType::NUKE_BOMB, { allied_core->position.x, 0 }, 
-		{ allied_core->position.x, allied_core->position.y - (allied_core->current_frame.h * 1.75f) }, 130);
-	App->particles->CreateParticle(ParticleType::NUKE_BOMB, { allied_core->position.x + (allied_core->current_frame.w * 2), 0 },
-		{ allied_core->position.x + (allied_core->current_frame.w * 2), allied_core->position.y - allied_core->current_frame.h }, 140);
+	ProjectileParticle* particle;
+
+	particle = (ProjectileParticle*)App->particles->CreateParticle(ParticleType::NUKE_BOMB, { allied_core->position.x - (allied_core->current_frame.w * 2), 0 },
+		{ allied_core->position.x - (allied_core->current_frame.w * 2), allied_core->position.y - allied_core->current_frame.h });
+	particle->SetCollisionEffect(ParticleType::NUKE_EXPLOSION, 130, Faction::FACTION_RUSSIAN, 10000.0f);
+	App->audio->PlayFx(nuke_fx.c_str(), 0, 4);
+
+	particle = (ProjectileParticle*)App->particles->CreateParticle(ParticleType::NUKE_BOMB, { allied_core->position.x, 0 },
+		{ allied_core->position.x, allied_core->position.y - (allied_core->current_frame.h * 1.75f) });
+	particle->SetCollisionEffect(ParticleType::NUKE_EXPLOSION, 130, Faction::FACTION_RUSSIAN, 10000.0f);
+	App->audio->PlayFx(nuke_fx.c_str(), 0, 4);
+
+	particle = (ProjectileParticle*)App->particles->CreateParticle(ParticleType::NUKE_BOMB, { allied_core->position.x + (allied_core->current_frame.w * 2), 0 },
+		{ allied_core->position.x + (allied_core->current_frame.w * 2), allied_core->position.y - allied_core->current_frame.h });
+	particle->SetCollisionEffect(ParticleType::NUKE_EXPLOSION, 130, Faction::FACTION_RUSSIAN, 10000.0f);
+	App->audio->PlayFx(nuke_fx.c_str(), 0, 4);
 }
 
 void BattleScene::StartUI()
@@ -578,32 +621,37 @@ void BattleScene::StartUI()
 	side_troop_panel = App->gui->CreateImage({ 522, 835 }, { 1431,383,108,130 }, nullptr);
 	side_troop_panel_left = App->gui->CreateImage({ 10, 885 }, { 1431,383,108,130 }, nullptr);
 
-	unit_panel = App->gui->CreateImage({ 80, (int)height-145}, { 1231,186,481,155 });
+	unit_panel = App->gui->CreateImage({ 80, 820}, { 1231,186,481,155 });
 	if (allied_core->GetCard(CN_FIRST)) {
 		unit_button_one = App->gui->CreateButton({ 27, 52 }, App->gui->LoadUIButton(allied_core->GetCard(CN_FIRST)->type, "button"), unit_panel);
+		unit_cooldown[0] = App->gui->CreateImage({ 0, 0 }, { 1123, 442, 101, 79 }, unit_button_one);
 		energy_cost[0] = App->gui->CreateImage({ -8, 60 }, { 1282,349,25,25 }, unit_button_one);
 		energy_cost_label[0] = App->gui->CreateLabel({ 7,2 }, "fonts/gunplay.ttf", 18, std::to_string((int)allied_core->GetCard(CN_FIRST)->info.stats.find("energy_cost")->second->GetValue()), { 255,255,255,255 }, 120, energy_cost[0], false);
 	}
 	if (allied_core->GetCard(CN_SECOND))
 	{
 		unit_button_two = App->gui->CreateButton({ 136, 52 }, App->gui->LoadUIButton(allied_core->GetCard(CN_SECOND)->type, "button"), unit_panel);
+		unit_cooldown[1] = App->gui->CreateImage({ 0, 0 }, { 1123, 442, 101, 79 }, unit_button_two);
 		energy_cost[1] = App->gui->CreateImage({ -8, 60 }, { 1282,349,25,25 }, unit_button_two);
 		energy_cost_label[1] = App->gui->CreateLabel({ 7,2 }, "fonts/gunplay.ttf", 18, std::to_string((int)allied_core->GetCard(CN_SECOND)->info.stats.find("energy_cost")->second->GetValue()), { 255,255,255,255 }, 120, energy_cost[1], false);
 	}
 	if (allied_core->GetCard(CN_THIRD)) {
 		unit_button_three = App->gui->CreateButton({ 245, 52 }, App->gui->LoadUIButton(allied_core->GetCard(CN_THIRD)->type, "button"), unit_panel);
+		unit_cooldown[2] = App->gui->CreateImage({ 0, 0 }, { 1123, 442, 101, 79 }, unit_button_three);
 		energy_cost[2] = App->gui->CreateImage({ -8, 60 }, { 1282,349,25,25 }, unit_button_three);
 		energy_cost_label[2] = App->gui->CreateLabel({ 7,2 }, "fonts/gunplay.ttf", 18, std::to_string((int)allied_core->GetCard(CN_THIRD)->info.stats.find("energy_cost")->second->GetValue()), { 255,255,255,255 }, 120, energy_cost[2], false);
 	}
 	if (allied_core->GetCard(CN_FOURTH)) {
 		unit_button_four = App->gui->CreateButton({ 354, 52 }, App->gui->LoadUIButton(allied_core->GetCard(CN_FOURTH)->type, "button"), unit_panel);
+		unit_cooldown[3] = App->gui->CreateImage({ 0, 0 }, { 1123, 442, 101, 79 }, unit_button_four);
 		energy_cost[3] = App->gui->CreateImage({ -8, 60 }, { 1282,349,25,25 }, unit_button_four);
 		energy_cost_label[3] = App->gui->CreateLabel({ 7,2 }, "fonts/gunplay.ttf", 18, std::to_string((int)(allied_core->GetCard(CN_FOURTH)->info.stats.find("energy_cost")->second->GetValue())), { 255,255,255,255 }, 120, energy_cost[3], false);
 	}
 
-	energy_bar = App->gui->CreateBar({ 30, 11 }, { 1237,141,446,36 }, allied_core->GetEnergy(), BAR_HORITZONTAL, BAR_DYNAMIC, nullptr, unit_panel);
+	energy_bar = App->gui->CreateBar({ 30, 10 }, { 1237,141,446,36 }, allied_core->GetEnergy(), BAR_HORITZONTAL, BAR_DYNAMIC, nullptr, unit_panel);
 	energy_image = App->gui->CreateImage({ 8, 10 }, { 1238,345,32,32 }, unit_panel);
 	energy_label = App->gui->CreateLabel({ 10,4 }, "fonts/gunplay.ttf", 20, "0", { 255,255,255,255 }, 120, energy_image, false);
+	energy_label->SetCentered(true);
 
 	SDL_Rect pause_rect[3];
 	pause_rect[0] = { 1168,1371,44,36 };
@@ -611,11 +659,14 @@ void BattleScene::StartUI()
 	pause_rect[2] = { 1262,1371,44,36 };
 	pause_button = App->gui->CreateButton({ 25, 910 }, pause_rect, nullptr);
 
-	SDL_Rect bomb_button_rect[3];
+	SDL_Rect bomb_button_rect[4];
 	bomb_button_rect[0] = { 1316,1304,58,57 };
-	bomb_button_rect[1] = { 1376,1303,58,57 };
-	bomb_button_rect[2] = { 1434,1303,58,57 };
+	bomb_button_rect[1] = { 1376,1304,58,57 };
+	bomb_button_rect[2] = { 1434,1304,58,57 };
+	bomb_button_rect[3] = { 1316,1304,58,57 };
 	bomb_button = App->gui->CreateButton({ 567, 847 }, bomb_button_rect, nullptr);
+	bomb_button->SetLocked(false);
+	bomb_cd_image = App->gui->CreateImage({ 0,3 }, { 1143, 551, 58, 50 }, bomb_button);
 
 	SDL_Rect faction_button_rect[3];
 	faction_button_rect[0] = { 1346,1366,39,39};
@@ -625,8 +676,8 @@ void BattleScene::StartUI()
 
 	health_bar_image = App->gui->CreateImage({ 248, 770 }, { 24,1378,144,16 });
 	enemy_health_bar_image = App->gui->CreateImage({ 248, 30 }, { 24,1455,144,16 });
-	health_bar = App->gui->CreateBar({ 16,5 }, { 24,1404,127,10 }, allied_core->GetHealth(), BarType::BAR_HORITZONTAL, BAR_DYNAMIC, nullptr, health_bar_image);
-	enemy_health_bar = App->gui->CreateBar({ 16,6 }, { 24,1404,127,10 }, enemy_core->GetHealth(), BarType::BAR_HORITZONTAL, BAR_DYNAMIC, nullptr, enemy_health_bar_image);
+	health_bar = App->gui->CreateBar({ 16,5 }, { 24,1404,127,10 }, allied_core->GetHealth(), BarType::BAR_HORITZONTAL, BAR_DYNAMIC, nullptr, health_bar_image, true);
+	enemy_health_bar = App->gui->CreateBar({ 16,6 }, { 24,1404,127,10 }, enemy_core->GetHealth(), BarType::BAR_HORITZONTAL, BAR_DYNAMIC, nullptr, enemy_health_bar_image, true);
 
 	App->gui->EnableInteractable((UIElement*)unit_panel);
 
@@ -645,8 +696,9 @@ void BattleScene::StartUI()
 
 	win_panel_one = App->gui->CreateImage({ 17,120 }, { 3986,1646,605,660 });
 	win_panel_two = App->gui->CreateImage({ 17,120 }, { 3986,1646,605,660 });
-	win_text_one = App->gui->CreateLabel({ 30,30 }, "fonts/red_alert.ttf", 40, "Congratulations, you've conquered this zone and unlocked the next building!", { 255,232,2, 255 }, 600, win_panel_one);
-	win_text_two = App->gui->CreateLabel({ 30,30 }, "fonts/red_alert.ttf", 40, "Upgrade a troop or choose a new one to add to your deck", { 255,232,2, 255 }, 600, win_panel_two);
+	win_text_one = App->gui->CreateLabel({ 30,30 }, "fonts/button_text.ttf", 23, "Congratulations, you've conquered this zone and unlocked the next building!", { 255,232,2, 255 }, 565, win_panel_one);
+	gol_reward_text = App->gui->CreateLabel({ 30, 480 }, "fonts/button_text.ttf", 23, "Gold earned: " + std::to_string(App->game_manager->GetEncounterTree()->GetFightingNode()->GetGoldReward()) + "g", { 255,232,2, 255 }, 565, win_panel_one);
+	win_text_two = App->gui->CreateLabel({ 30,30 }, "fonts/button_text.ttf", 23, "Upgrade a troop or choose a new one to add it to your deck", { 255,232,2, 255 }, 565, win_panel_two);
 	win_continue_one = App->gui->CreateButtonText({ 170, 560 }, { 30,0}, button_rect, "CONTINUE", { 200,200,200,255 }, 27, win_panel_one);
 	win_continue_two = App->gui->CreateButtonText({ 170, 560 }, { 30,0 }, button_rect, "CONTINUE", { 200,200,200,255 }, 27, win_panel_two);
 
@@ -678,22 +730,22 @@ void BattleScene::StartUI()
 	{
 		store_panel = App->gui->CreateImage({ 5,4 }, { 3967, 6, 630, 951 });
 		store_unit_one = App->gui->CreateSelectableButton({ 75, 145 }, App->gui->LoadUIButton(random_store_unit[0], "upgrade"), store_panel);
-		store_unit_01_cost = App->gui->CreateLabel({ 105, 275 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
+		store_unit_01_cost = App->gui->CreateLabel({ 83, 275 }, "fonts/button_text.ttf", 25, std::to_string(unit_store_cost) + "g", { 255,232,2, 255 }, 710, store_panel);
 		store_unit_two = App->gui->CreateSelectableButton({ 450, 145 }, App->gui->LoadUIButton(random_store_unit[1], "upgrade"), store_panel);
-		store_unit_02_cost = App->gui->CreateLabel({ 480, 275 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
+		store_unit_02_cost = App->gui->CreateLabel({ 458, 275 }, "fonts/button_text.ttf", 25, std::to_string(unit_store_cost) + "g", { 255,232,2, 255 }, 710, store_panel);
 		store_unit_three = App->gui->CreateSelectableButton({ 75, 395 }, App->gui->LoadUIButton(random_store_unit[2], "upgrade"), store_panel);
-		store_unit_03_cost = App->gui->CreateLabel({ 105, 525 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
+		store_unit_03_cost = App->gui->CreateLabel({ 83, 525 }, "fonts/button_text.ttf", 25, std::to_string(unit_store_cost) + "g", { 255,232,2, 255 }, 710, store_panel);
 		store_unit_four = App->gui->CreateSelectableButton({ 450,395 }, App->gui->LoadUIButton(random_store_unit[3], "upgrade"), store_panel);
-		store_unit_04_cost = App->gui->CreateLabel({ 480,525 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
+		store_unit_04_cost = App->gui->CreateLabel({ 458,525 }, "fonts/button_text.ttf", 25, std::to_string(unit_store_cost) + "g", { 255,232,2, 255 }, 710, store_panel);
 		store_unit_five = App->gui->CreateSelectableButton({ 75,640 }, App->gui->LoadUIButton(random_store_unit[4], "upgrade"), store_panel);
-		store_unit_05_cost = App->gui->CreateLabel({ 105,770 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
+		store_unit_05_cost = App->gui->CreateLabel({ 83,770 }, "fonts/button_text.ttf", 25, std::to_string(unit_store_cost) + "g", { 255,232,2, 255 }, 710, store_panel);
 		store_unit_six = App->gui->CreateSelectableButton({ 450,640 }, App->gui->LoadUIButton(random_store_unit[5], "upgrade"), store_panel);
-		store_unit_06_cost = App->gui->CreateLabel({ 480,770 }, "fonts/red_alert.ttf", 40, std::to_string(unit_store_cost), { 255,232,2, 255 }, 710, store_panel);
+		store_unit_06_cost = App->gui->CreateLabel({ 458,770 }, "fonts/button_text.ttf", 25, std::to_string(unit_store_cost) + "g", { 255,232,2, 255 }, 710, store_panel);
 
-		current_gold = App->gui->CreateLabel({ 30,860 }, "fonts/red_alert.ttf", 40, "Your gold: " + std::to_string(App->game_manager->gold), { 255,232,2, 255 }, 710, store_panel);
-		total_cost = App->gui->CreateLabel({ 30,900 }, "fonts/red_alert.ttf", 40, "Total cost: " + std::to_string(total_cost_acumulated), { 255,232,2, 255 }, 710, store_panel);
+		current_gold = App->gui->CreateLabel({ 30,860 }, "fonts/button_text.ttf", 20, "Your gold: " + std::to_string(App->game_manager->gold) + "g", { 255,232,2, 255 }, 710, store_panel);
+		total_cost = App->gui->CreateLabel({ 30,900 }, "fonts/button_text.ttf", 20, "Total cost: " + std::to_string(total_cost_acumulated) + "g", { 255,232,2, 255 }, 710, store_panel);
 
-		purchase = App->gui->CreateButtonText({ 350, 870 }, { 20, 0 }, purchase_rect, "CONTINUE", { 255,232,2, 255 }, 20, store_panel);
+		purchase = App->gui->CreateButtonText({ 350, 870 }, { 25, 0 }, purchase_rect, "CONTINUE", { 255,232,2, 255 }, 20, store_panel);
 
 		App->gui->DisableElement((UIElement*)store_panel);
 	}
@@ -701,7 +753,7 @@ void BattleScene::StartUI()
 
 	//End Game Screen Lose
 	lose_panel = App->gui->CreateImage({ 17,120 }, { 3986,1646,605,660 });
-	lose_text = App->gui->CreateLabel({ 30,30 }, "fonts/red_alert.ttf", 40, "The enemy troops have defeat yours! Allies have win the battle", { 255,232,2, 255 }, 600, lose_panel);
+	lose_text = App->gui->CreateLabel({ 30,30 }, "fonts/button_text.ttf", 23, "The enemy troops have defeat yours! Allies have win the battle", { 255,232,2, 255 }, 565, lose_panel);
 	lose_continue = App->gui->CreateButtonText({ 170, 560 }, { 30,0 }, button_rect, "CONTINUE", { 200,200,200,255 }, 27, lose_panel);
 	lose_image = App->gui->CreateImage({ 170, 250 }, { 2033,136,321,204 }, lose_panel);
 

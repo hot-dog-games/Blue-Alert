@@ -22,7 +22,7 @@
 #include "TransitionManager.h"
 #include "GameManager.h"
 #include "Brofiler/Brofiler.h"
-#include "Movement.h"
+#include "Video.h"
 #include "j1App.h"
 
 
@@ -48,7 +48,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	transition_manager = new TransitionManager();
 	buff = new BuffSourceManager();
 	game_manager = new GameManager();
-	//movement = new Movement();
+	video = new Video();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -67,6 +67,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(gui);
 	AddModule(transition_manager);
 	AddModule(buff);
+	AddModule(video);
 
 	// render last to swap buffer
 	AddModule(render);
@@ -458,4 +459,12 @@ bool j1App::SavegameNow() const
 float j1App::GetFrameRate()
 {
 	return frame_rate;
+}
+
+bool j1App::HasSave()
+{
+	pugi::xml_document temp_file;
+	save_exists = temp_file.load_file("xml/save_game.xml");
+
+	return save_exists;
 }

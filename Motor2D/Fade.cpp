@@ -5,11 +5,12 @@
 #include "Window.h"
 #include "p2Log.h"
 
-Fade::Fade(float transition_time, bool is_scene_change, int scene_to_change, Color color) : Transition(transition_time)
+Fade::Fade(float transition_time, bool is_scene_change, int scene_to_change, Color color, bool load) : Transition(transition_time)
 {
 	this->is_scene_change = is_scene_change;
 	this->scene_to_change = scene_to_change;
 	this->color = color;
+	load_save = load;
 
 	uint width, height;
 
@@ -40,6 +41,8 @@ void Fade::Action()
 	{
 		App->scene_manager->ChangeScene(scene_to_change);
 	}
+	else if (load_save)
+		App->LoadGame(nullptr);
 
 	Transition::Action();
 }

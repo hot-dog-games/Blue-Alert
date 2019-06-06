@@ -112,11 +112,6 @@ bool TestingScene::PreUpdate()
 // Called each loop iteration
 bool TestingScene::Update(float dt)
 {
-	if (App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
-		App->LoadGame("save_game.xml");
-
-	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
-		App->SaveGame("save_game.xml");
 
 	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 		App->render->camera.y += 100 * dt;
@@ -250,7 +245,7 @@ bool TestingScene::Update(float dt)
 	case TestingScene::BattleSceneState::LOSE:
 	{
 		if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
-			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, White);
+			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, Black);
 	}
 		break;
 	default:
@@ -349,8 +344,8 @@ void TestingScene::StartUI()
 
 	win_panel_one = App->gui->CreateImage({ 139,150 }, { 3986,1646,605,660 });
 	win_panel_two = App->gui->CreateImage({ 139,150 }, { 1,852,744,466 });
-	win_text_one = App->gui->CreateLabel({ 30,30 }, "fonts/red_alert.ttf", 40, "Congratulations, you've conquered this zone and unlocked the next building!", { 255,232,2, 255 }, 710, win_panel_one);
-	win_text_two = App->gui->CreateLabel({ 30,30 }, "fonts/red_alert.ttf", 40, "Upgrade a troop or choose a new one to add to your deck", { 255,232,2, 255 }, 710, win_panel_two);
+	win_text_one = App->gui->CreateLabel({ 30,30 }, "fonts/button_text.ttf", 40, "Congratulations, you've conquered this zone and unlocked the next building!", { 255,232,2, 255 }, 710, win_panel_one);
+	win_text_two = App->gui->CreateLabel({ 30,30 }, "fonts/button_text.ttf", 40, "Upgrade a troop or choose a new one to add to your deck", { 255,232,2, 255 }, 710, win_panel_two);
 	win_continue_one = App->gui->CreateButton({ 262,375 }, button_rect, win_panel_one);
 	win_continue_two = App->gui->CreateButton({ 262,375 }, button_rect, win_panel_two);
 

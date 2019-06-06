@@ -17,7 +17,9 @@ enum EntityType;
 enum stage {
 	STAGE_NONE = -1,
 	STAGE_TUTORIAL,
-	STAGE_01
+	STAGE_01,
+	STAGE_02,
+	STAGE_TOTAL
 };
 
 enum tutorial_popup {
@@ -33,6 +35,7 @@ enum tutorial_popup {
 	POPUP_STRATEGY_MAPMENU,
 	POPUP_TROOPS_MENU,
 	POPUP_BUILDINGS_MENU,
+	POPUP_TUTORIAL_END,
 	POPUP_MAX
 };
 
@@ -83,6 +86,7 @@ public:
 	void CreatePlayerDeck();
 	void CreateStage();
 	void CreateUpgrades();
+	void NewGame();
 
 	//----------------------
 
@@ -92,11 +96,14 @@ public:
 	bool IsInCollection(int card_type);
 	//----------------------
 
+	void ChangeStage();
+	std::string GetBattleMap();
+
 	bool Restart();
 	bool restart = false;
+	bool change_stage = false;
 	void ClearUpgrades();
 	BuffSource* GetUpgrade(EntityType unit_type);
-	void SaveRecoveryState();
 
 	void UpgradeHealth();
 	void UpgradeEnergy();
@@ -107,6 +114,7 @@ public:
 	BuffSource* energy_upgrade = nullptr;
 
 	void CreatePopUps();
+	void DeletePopUps();
 	void ShowPopUp(int popup);
 
 	bool popups[POPUP_MAX];
@@ -116,6 +124,7 @@ private:
 	void SaveState(GameState &state) const;
 	void StateToXML(GameState &state, pugi::xml_node&) const;
 	void XMLToState(GameState &state, pugi::xml_node&);
+	void ClearCards();
 
 private:
 	Deck* combat_deck = nullptr;

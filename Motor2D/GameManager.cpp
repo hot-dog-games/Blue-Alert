@@ -32,7 +32,6 @@ GameManager::~GameManager()
 
 bool GameManager::Awake(pugi::xml_node &)
 {
-	CreatePopUps();
 	return true;
 }
 
@@ -40,10 +39,7 @@ bool GameManager::Start()
 {
 	CreateStage();
 	CreateUpgrades();
-	CreatePlayerDeck();
 	CreateCoreStats();
-
-	SaveState(recovery_state);
 
 	return true;
 }
@@ -63,15 +59,6 @@ bool GameManager::Load(pugi::xml_node &save_file)
 	XMLToState(save_state, save_file.child("save_state"));
 	XMLToState(recovery_state, save_file.child("recovery_state"));
 
-	for (std::list<Card*>::iterator card = collection.begin(); card != collection.end(); ++card)
-	{
-		App->card_manager->DeleteCard((*card));
-	}
-	collection.clear();
-	delete combat_deck;
-
-	encounter_tree->CleanTree();
-	ResetBuildingBuffs();
 	RecoverState(save_state);
 	App->scene_manager->ChangeScene(SceneType::MAP);
 
@@ -119,6 +106,11 @@ void GameManager::CreatePlayerDeck()
 {
 	combat_deck = new Deck();
 	AddCardToCollection(EntityType::CONSCRIPT);
+	if (stage != stage::STAGE_TUTORIAL)
+	{
+		AddCardToCollection(EntityType::SIEGECHOPPER);
+		AddCardToCollection(EntityType::DRONE);
+	}
 }
 
 void GameManager::CreateStage()
@@ -129,25 +121,78 @@ void GameManager::CreateStage()
 
 bool GameManager::Restart()
 {
-	for (std::list<Card*>::iterator card = collection.begin(); card != collection.end(); ++card)
-	{
-		App->card_manager->DeleteCard((*card));
-	}
-	collection.clear();
-	delete combat_deck;
-
-	encounter_tree->CleanTree();
-	ResetBuildingBuffs();
 	RecoverState(recovery_state);
-	App->SaveGame(nullptr);
 
 	restart = false;
 
 	return true;
 }
 
+void GameManager::NewGame()
+{
+	if (!App->HasSave())
+	{
+		CreatePopUps();
+		stage = 0;
+	}
+	else
+	{
+		DeletePopUps();
+		stage = 1;
+	}
+
+	ClearCards();
+	encounter_tree->CleanTree();
+	ClearUpgrades();
+	ResetBuildingBuffs();
+
+	CreateStage();
+	CreatePlayerDeck();
+
+	SaveState(recovery_state);
+}
+
+void GameManager::ChangeStage()
+{
+	change_stage = false;
+
+	if (stage == stage::STAGE_TUTORIAL)
+	{
+		ClearCards();
+		CreatePlayerDeck();
+	}
+	if(stage < stage::STAGE_TOTAL - 1)
+		stage++;
+
+	ResetBuildingBuffs();
+	encounter_tree->CleanTree();
+	CreateStage();
+	SaveState(recovery_state);
+}
+
+std::string GameManager::GetBattleMap()
+{
+	int choice = rand() % 2;
+	switch (stage)
+	{
+	case STAGE_TUTORIAL:
+		if (choice == 0)
+			return "grass_map.tmx";
+		else
+			return "river_map.tmx";
+	case STAGE_01:
+		if (choice == 0)
+			return "grass_map.tmx";
+		else
+			return "river_map.tmx";
+	case STAGE_02:
+		return "snow_map.tmx";
+	}
+}
+
 void GameManager::RecoverState(GameState state)
 {
+	ClearCards();
 	for each (CardState card in state.collection_state)
 	{
 		collection.push_back(App->card_manager->CreateCard(card.type, card.lvl));
@@ -168,7 +213,14 @@ void GameManager::RecoverState(GameState state)
 		}
 	}
 
+	ResetBuildingBuffs();
+	encounter_tree->CleanTree();
 	stage = state.stage;
+	if (stage != stage::STAGE_TUTORIAL)
+		DeletePopUps();
+	else
+		CreatePopUps();
+
 	CreateStage();
 	for (std::list<int>::iterator node = state.captured_nodes.begin(); node != state.captured_nodes.end(); ++node)
 	{
@@ -186,10 +238,6 @@ void GameManager::RecoverState(GameState state)
 	((LeveledUpgrade*)energy_upgrade)->GetBuffs(stats);
 }
 
-void GameManager::SaveRecoveryState()
-{
-	SaveState(recovery_state);
-}
 void GameManager::SaveState(GameState &state) const
 {
 	//---------Clean old state-----------
@@ -260,6 +308,13 @@ void GameManager::StateToXML(GameState& state, pugi::xml_node &save_file) const
 
 void GameManager::XMLToState(GameState & state, pugi::xml_node &save_file)
 {
+	state.collection_state.clear();
+	state.captured_nodes.clear();
+	for (int i = 0; i < 4; i++)
+	{
+		state.deck_state[i] = EntityType::NONE;
+	}
+
 	state.stage = save_file.child("stage").attribute("value").as_int();
 	state.node = save_file.child("node").attribute("value").as_int();
 
@@ -289,6 +344,16 @@ void GameManager::XMLToState(GameState & state, pugi::xml_node &save_file)
 	state.gold = save_file.child("gold").attribute("value").as_int();
 	state.health_lvl = save_file.child("health_lvl").attribute("value").as_int();
 	state.energy_lvl = save_file.child("energy_lvl").attribute("value").as_int();
+}
+
+void GameManager::ClearCards()
+{
+	for (std::list<Card*>::iterator card = collection.begin(); card != collection.end(); ++card)
+	{
+		App->card_manager->DeleteCard((*card));
+	}
+	collection.clear();
+	delete combat_deck;
 }
 
 void GameManager::ResetBuildingBuffs()
@@ -517,6 +582,14 @@ void GameManager::CreatePopUps()
 	}
 }
 
+void GameManager::DeletePopUps()
+{
+	for (int i = 0; i < POPUP_MAX; i++)
+	{
+		popups[i] = true;
+	}
+}
+
 void GameManager::ShowPopUp(int popup)
 {
 	uint mouse_x, mouse_y, screen_width, screen_height;
@@ -525,32 +598,36 @@ void GameManager::ShowPopUp(int popup)
 	switch (popup)
 	{
 	case POPUP_BUILDING_NODES: 
-		App->gui->CreatePopUp({ (int)screen_width / 2, (int)screen_height / 3, 300, 90 }, { 10 , 10 }, 
+		App->gui->CreatePopUp({ (int)screen_width / 2, (int)screen_height / 3, 300, 95 }, { 15 , 15 }, 
 			"This is an enemy building, you must click on it to begin a fight! Click the button down below to continue.", 20, {255,255,255,255});
 		break;
 	case POPUP_USETROOP: 
-		App->gui->CreatePopUp({ ((int)screen_width / 2) - 200, (int)screen_height / 3, 300, 120 }, { 10 , 10 }, 
+		App->gui->CreatePopUp({ ((int)screen_width / 2) - 200, (int)screen_height / 2 + 100, 380, 135 }, { 15 , 15 }, 
 			"To deploy a troop you need to drag the button of the specific troop in your troops bar. Try dragging your conscript troop into the battlefield!", 20, { 255,255,255,255 });
 		break;	
 	case POPUP_SNIPER_COUNTERS: 
-		App->gui->CreatePopUp({ ((int)screen_width / 2) - 200, (int)screen_height / 3, 300, 120 }, { 10 , 10 },
+		App->gui->CreatePopUp({ ((int)screen_width / 2) - 200, (int)screen_height / 4, 400, 135 }, { 15 , 15 },
 			"The enemy is about to deploy snipers, your conscripts are a good choice to counter them because they attack slow and you have number of units advantadge!", 20, { 255,255,255,255 });
 		break;
 	case POPUP_AREA_COUNTERS:
-		App->gui->CreatePopUp({ ((int)screen_width / 2) - 200, (int)screen_height / 3, 300, 120 }, { 10 , 10 },
+		App->gui->CreatePopUp({ ((int)screen_width / 2) - 200, (int)screen_height / 4, 400, 135 }, { 15 , 15 },
 			"The enemy is about to deploy Harriers, your conscripts are a bad choice, try with your new troop because it has a lot of range and piercing ammo!", 20, { 255,255,255,255 });
 		break;
 	case POPUP_MULTIPLE_COUNTERS:
-		App->gui->CreatePopUp({ ((int)screen_width / 2) - 200, (int)screen_height / 3, 300, 120 }, { 10 , 10 },
+		App->gui->CreatePopUp({ ((int)screen_width / 2) - 200, (int)screen_height / 4, 400, 105 }, { 15 , 15 },
 			"The enemy is about to deploy GI's, use your new troop to destroy them!", 20, { 255,255,255,255 });
 		break;
 	case POPUP_DECISIONMAKING:
-		App->gui->CreatePopUp({ ((int)screen_width / 2) - 150, (int)screen_height / 2, 300, 150 }, { 10 , 10 },
+		App->gui->CreatePopUp({ ((int)screen_width / 2) - 150, (int)screen_height / 2, 400, 175 }, { 15 , 15 },
 			"It's time to choose your path, after conquering a specific building you'll get the building buff. Check the menu for more info about building buffs. And check your new unlocked troop in the troops menu!", 20, { 255,255,255,255 });
 		break;
 	case POPUP_STORE:
-		App->gui->CreatePopUp({ ((int)screen_width / 2) - 150, (int)screen_height / 2, 300, 150 }, { 10 , 10 },
+		App->gui->CreatePopUp({ ((int)screen_width / 2) - 150, (int)screen_height / 2, 300, 145 }, { 15 , 15 },
 			"Welcome to the Store! Here you can buy troops from the enemy force that have rebelled to the enemy forces. You buy troops by paying gold you earn 100g per combat.", 20, { 255,255,255,255 });
+		break;
+	case POPUP_TUTORIAL_END:
+		App->gui->CreatePopUp({ ((int)screen_width / 2) - 150, (int)screen_height / 2, 300, 145 }, { 15 , 15 },
+			"You've finished the tutorial! The real war starts now, you start from zero with your Coscript troop.", 20, { 255,255,255,255 });
 		break;
 	default:
 		break;

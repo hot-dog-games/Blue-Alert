@@ -133,9 +133,6 @@
     <ClCompile Include="EntityManager.cpp">
       <Filter>Engine\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Movement.cpp">
-      <Filter>Engine\Modules</Filter>
-    </ClCompile>
     <ClCompile Include="CoreAI.cpp">
       <Filter>Engine\Entities</Filter>
     </ClCompile>
@@ -171,6 +168,12 @@
     </ClCompile>
     <ClCompile Include="UIButtonTroops.cpp">
       <Filter>Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Video.cpp">
+      <Filter>Engine\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStart.cpp">
+      <Filter>Engine\Scenes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -321,9 +324,6 @@
     <ClInclude Include="EntityManager.h">
       <Filter>Engine\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="Movement.h">
-      <Filter>Engine\Modules</Filter>
-    </ClInclude>
     <ClInclude Include="CoreAI.h">
       <Filter>Engine\Entities</Filter>
     </ClInclude>
@@ -359,6 +359,12 @@
     </ClInclude>
     <ClInclude Include="UIButtonTroops.h">
       <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Video.h">
+      <Filter>Engine\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStart.h">
+      <Filter>Engine\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

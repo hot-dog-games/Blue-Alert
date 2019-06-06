@@ -54,6 +54,8 @@ private:
 	void UpdateGoldOnSelect(int unit);
 	void UpdateGoldOnUnSelect(int unit);
 
+	void UpdateCooldowns();
+
 	void SetEnemiesUpgrades(Deck* enemy_deck);
 	void DropNukes();
 
@@ -68,9 +70,11 @@ private:
 	};
 	BattleSceneState state = BattleSceneState::FIGHT;
 	PerfTimer shortcut_timer;
+	std::string nuke_fx = "";
 
 	UIImage*		unit_panel = nullptr;
 	UIButton*		unit_button_one = nullptr;
+	UIImage*		unit_cooldown[4];
 	UIButton*		unit_button_two = nullptr;
 	UIButton*		unit_button_three = nullptr;
 	UIButton*		unit_button_four = nullptr;
@@ -157,6 +161,10 @@ private:
 	int unit_store_cost = 100;
 	int total_cost_acumulated = 0;
 
+	float lerp_speed = 1 / 60;
+	float lerp_percent = 0;
+	float bomb_cd_timer = 0;
+
 	uint max_energy;
 	uint current_energy;
 
@@ -165,6 +173,9 @@ private:
 
 	UIImage* energy_cost[4];
 	UILabel* energy_cost_label[4];
+	UIImage* bomb_cd_image = nullptr;
+
+	UILabel* gol_reward_text = nullptr;
 };
 
 #endif

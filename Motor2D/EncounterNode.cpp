@@ -41,6 +41,11 @@ void EncounterNode::SetEncounterDifficulty(int diff)
 	encounter->difficulty = diff;
 }
 
+void EncounterNode::SetEncounterDeckSize(int deck_size)
+{
+	encounter->deck_size = deck_size;
+}
+
 std::vector<int> EncounterNode::GetEncounterDeck()
 {
 	return encounter->deck;
@@ -148,6 +153,17 @@ UIButton * EncounterNode::GetButton()
 StrategyBuilding * EncounterNode::GetEntity()
 {
 	return entity;
+}
+
+int EncounterNode::GetGoldReward()
+{
+	return gold_reward;
+}
+
+void EncounterNode::SetGoldReward()
+{
+	if (encounter->type == EntityType::GOLD_STRATEGY_BUILDING)gold_reward = 300;
+	else gold_reward = 100;
 }
 
 int EncounterNode::GetID()

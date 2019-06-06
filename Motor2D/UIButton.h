@@ -25,7 +25,7 @@ public:
 	
 	bool CleanUp();
 
-//	std::string button_fx;
+	std::string button_fx = " ";
 };
 
 #endif // !UI_BUTTON_H

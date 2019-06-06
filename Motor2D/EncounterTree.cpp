@@ -43,6 +43,7 @@ EncounterTree * EncounterTree::CreateTree()
 		pugi::xml_node node = map01_nodes.find_child_by_attribute("id", std::to_string((int)i).c_str());
 		map_encounters[i]->SetPosition({ node.attribute("x").as_float(),  node.attribute("y").as_float() });
 		map_encounters[i]->SetEncounterType(node.attribute("type").as_int());
+		map_encounters[i]->SetGoldReward();
 		map_encounters[i]->SetEncounterDifficulty(node.attribute("difficulty").as_int());
 		for (pugi::xml_node child = node.child("children").first_child(); child; child = child.next_sibling())
 		{
@@ -56,6 +57,7 @@ EncounterTree * EncounterTree::CreateTree()
 			map_encounters[i]->FillPredefinedEncounterDeck(encounter);
 		}
 		else {
+			map_encounters[i]->SetEncounterDeckSize(node.attribute("deck_size").as_int());
 			map_encounters[i]->FillRandomEncounterDeck();
 		}
 
@@ -98,6 +100,15 @@ bool EncounterTree::LoadDocuments()
 			LOG("Could not load card xml file. pugi error: %s", result.description());
 		else
 			map01_nodes = nodes_01.child("map01_nodes");
+		break;
+	case STAGE_02:
+		result = nodes_01.load_file("xml/map02_nodes.xml");
+
+		if (result == NULL)
+			LOG("Could not load card xml file. pugi error: %s", result.description());
+		else
+			map01_nodes = nodes_01.child("map02_nodes");
+
 		break;
 	default:
 		break;
@@ -247,8 +258,8 @@ void EncounterTree::EntityClicked(StrategyBuilding * entity)
 	if (is_clickable) {
 		SetFightingNodeByEntity(entity);
 		App->gui->DisableUI();
-		App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::COMBAT, White);
-		App->transition_manager->CreateCameraTranslation(2.0f, { (int)entity->position.x, (int)entity->position.y });
+		App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::COMBAT, Black);
+		//App->transition_manager->CreateCameraTranslation(2.0f, { (int)entity->position.x, (int)entity->position.y });
 	}
 }
 

@@ -25,8 +25,8 @@ class Fonts;
 class TransitionManager;
 class BuffSourceManager;
 class GameManager;
-class Movement;
 class Particles;
+class Video;
 
 class j1App
 {
@@ -66,6 +66,7 @@ public:
 	void SaveGame(const char* file) const;
 	void GetSaveGames(std::list<std::string>& list_to_fill) const;
 	float GetFrameRate();
+	bool HasSave();
 
 private:
 
@@ -109,8 +110,8 @@ public:
 	TransitionManager* transition_manager;
 	BuffSourceManager* buff;
 	GameManager* game_manager;
-	Movement* movement;
 	Particles*	particles;
+	Video* video;
 
 private:
 
@@ -135,6 +136,7 @@ private:
 	bool				want_to_load;
 	std::string			load_game = "xml/save_game.xml";
 	mutable std::string	save_game = "xml/save_game.xml";
+	bool				save_exists = false;
 };
 
 extern j1App* App;

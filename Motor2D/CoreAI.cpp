@@ -5,6 +5,7 @@
 #include "Deck.h"
 #include "CardManager.h"
 #include "GameManager.h"
+#include "Map.h"
 #include "p2Log.h"
 #include "CoreAI.h"
 
@@ -41,7 +42,7 @@ bool CoreAI::Update(float dt)
 			}
 			break;
 		case CoreAI::AIState::ACTING:
-			UseCard(selected_card, { (float)lanes[selected_lane].area.x + (float)lanes[selected_lane].area.w*0.5f, position.y + 50 });
+			UseCard(selected_card, spawns[selected_lane]);
 			ai_state = AIState::WAITING;
 			if (deck->cards[selected_card]->type == EntityType::VIRUS)
 			{
@@ -139,14 +140,14 @@ void CoreAI::AnalyzeLane(uint lane)
 
 
 	lanes[lane].unit_value = enemy_damage - player_damage;
-	lanes[lane].distance_value = LINEAR_INTERPOLATION(closest_enemy_distance, 0, 1000, 1000, 0);
+	lanes[lane].distance_value = LINEAR_INTERPOLATION(closest_enemy_distance, 0, lanes[lane].area.h, lanes[lane].area.h, 0);
 	lanes[lane].lane_priority = lanes[lane].unit_value + lanes[lane].distance_value;
 }
 
 void CoreAI::SelectCard()
 {
 	selected_card = -1;
-	AttackType counter = AttackType::AT_BASIC;
+	AttackType counter = AttackType::AT_NONE;
 	AttackType secondary_counter = AttackType::AT_NONE;
 
 	bool has_counter = false;
@@ -159,14 +160,14 @@ void CoreAI::SelectCard()
 			counter = AttackType::AT_PIERCING;
 			if (lanes[selected_lane].enemy_aoe > lanes[selected_lane].enemy_piercing)
 				secondary_counter = AttackType::AT_AOE;
-			else
+			else if (lanes[selected_lane].enemy_aoe < lanes[selected_lane].enemy_piercing)
 				secondary_counter = AttackType::AT_BASIC;
 		}
 		else
 		{
 			if (lanes[selected_lane].enemy_aoe > lanes[selected_lane].enemy_piercing)
 				counter = AttackType::AT_PIERCING;
-			else
+			else if (lanes[selected_lane].enemy_aoe < lanes[selected_lane].enemy_piercing)
 				counter = AttackType::AT_BASIC;
 		}
 	}
@@ -181,7 +182,7 @@ void CoreAI::SelectCard()
 		{
 			if (lanes[selected_lane].enemy_aoe > lanes[selected_lane].enemy_piercing)
 				counter = AttackType::AT_PIERCING;
-			else
+			else if (lanes[selected_lane].enemy_aoe < lanes[selected_lane].enemy_piercing)
 				counter = AttackType::AT_BASIC;
 		}
 
@@ -190,51 +191,63 @@ void CoreAI::SelectCard()
 	LOG("piercing: %i, armored: %i, basic: %i, aoe: %i", lanes[selected_lane].enemy_piercing, lanes[selected_lane].enemy_armored, lanes[selected_lane].enemy_basic, lanes[selected_lane].enemy_aoe);
 	LOG("SELECTED COUNTER IS: %i  SELECTED SECONDARY COUNTER IS: %i", (int)counter, (int)secondary_counter);
 
-	for (int i = 0; i < deck->GetDeckSize(); i++)
+	if (counter != AttackType::AT_NONE)
 	{
-		if (deck->cards[i]->info.attack_type == counter)
-		{
-			has_counter = true;
-			if (CanUseCard(i))
-			{
-				LOG("COUNTER FOUND");
-				selected_card = i;
-				break;
-			}
-		}
-	}
-
-	if (!has_counter)
-	{
+		//Find Counter
 		for (int i = 0; i < deck->GetDeckSize(); i++)
 		{
-			if (deck->cards[i]->info.attack_type == secondary_counter)
+			if (deck->cards[i]->info.attack_type == counter)
 			{
-				has_secondary_counter = true;
+				has_counter = true;
 				if (CanUseCard(i))
 				{
-					LOG("SECONDARY COUNTER FOUND");
-					selected_card = i;
-					break;
-				}
-			}
-			else if (!deck->cards[i]->info.armored && secondary_counter == AttackType::AT_NONE)
-			{
-				has_secondary_counter = true;
-				if (CanUseCard(i))
-				{
-					LOG("SECONDARY COUNTER NON BLINDED FOUND");
+					LOG("COUNTER FOUND");
 					selected_card = i;
 					break;
 				}
 			}
 		}
-	}
 
-	if (!has_secondary_counter && !has_counter)
+		
+		if (!has_counter) //No counter found in deck
+		{
+			for (int i = 0; i < deck->GetDeckSize(); i++)
+			{
+				if (deck->cards[i]->info.attack_type == secondary_counter)
+				{
+					has_secondary_counter = true;
+					if (CanUseCard(i))
+					{
+						LOG("SECONDARY COUNTER FOUND");
+						selected_card = i;
+						break;
+					}
+				}
+				else if (!deck->cards[i]->info.armored && secondary_counter == AttackType::AT_NONE)
+				{
+					has_secondary_counter = true;
+					if (CanUseCard(i))
+					{
+						LOG("SECONDARY COUNTER NON BLINDED FOUND");
+						selected_card = i;
+						break;
+					}
+				}
+			}
+		}
+
+		if (!has_secondary_counter && !has_counter)
+		{
+			selected_card = rand() % deck->GetDeckSize();
+		}
+	}
+	else
 	{
 		selected_card = rand() % deck->GetDeckSize();
 	}
+
+
+	
 }
 
 bool CoreAI::PostUpdate()
@@ -253,9 +266,18 @@ bool CoreAI::PostUpdate()
 
 bool CoreAI::Start()
 {
-	lanes[0].area = { -150, 0 , 120, 1000 };
-	lanes[1].area = { -30, 0 , 120, 1000 };
-	lanes[2].area = { 90, 0 , 120, 1000 };
+	int area_width = App->map->data.tile_width * 2; // 2 tiles width
+	int area_height = App->map->data.tile_height * 30; // 30 tiles height
+	lanes[0].area = { (int)position.x - area_width - (int)(App->map->data.tile_width), (int)position.y , area_width, area_height };
+	lanes[1].area = { (int)position.x - (int)(App->map->data.tile_width), (int)position.y , area_width, area_height };
+	lanes[2].area = { (int)position.x + area_width - (int)(App->map->data.tile_width), (int)position.y , area_width, area_height };
+
+	iPoint world_pos = App->map->MapToWorld(25,28);
+	spawns[0] = { (float)world_pos.x + App->map->data.tile_width*0.5f, (float)world_pos.y + App->map->data.tile_height*0.5f };
+	world_pos = App->map->MapToWorld(28,28);
+	spawns[1] = { (float)world_pos.x + App->map->data.tile_width*0.5f, (float)world_pos.y + App->map->data.tile_height*0.5f };
+	world_pos = App->map->MapToWorld(28,25);
+	spawns[2] = { (float)world_pos.x + App->map->data.tile_width*0.5f, (float)world_pos.y + App->map->data.tile_height*0.5f };
 
 	return true;
 }

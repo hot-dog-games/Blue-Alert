@@ -6,7 +6,7 @@
 #include "Stat.h"
 #include "CardManager.h"
 
-
+#define MAX_LEVEL 6
 
 CardManager::CardManager()
 {
@@ -20,7 +20,6 @@ CardManager::~CardManager()
 
 bool CardManager::CleanUp()
 {
-	LOG("card manager cleanup");
 	while (!cards.empty()) delete cards.front(), cards.pop_front();
 	return true;
 }
@@ -47,7 +46,7 @@ Card* CardManager::CreateCard(EntityType type, int lvl)
 	Card* card = new Card;
 	card->type = type;
 
-	card->level = 0;
+	card->level = 1;
 
 	pugi::xml_node card_node = card_configs.find_child_by_attribute("type", std::to_string((int)type).c_str());
 
@@ -59,9 +58,9 @@ Card* CardManager::CreateCard(EntityType type, int lvl)
 	LoadCardUpgrades(card, card_node.child("upgrades"));
 	LoadCardCombat(card, card_node.child("combat"));
 
-	if (lvl > 0)
+	if (lvl > 1)
 	{
-		for (int i = 0; i < card->level; ++i)
+		while(card->level != lvl)
 		{
 			card->Upgrade();
 		}
@@ -112,13 +111,16 @@ void CardManager::LoadCardUpgrades(Card * card, pugi::xml_node upgrades_node)
 
 void Card::Upgrade()
 {
-	level++;
-	info.stats.find("health")->second->IncreaseMaxValue(info.scaling.health_upgrade);
-	info.stats.find("damage")->second->IncreaseMaxValue(info.scaling.attack_damage_upgrade);
-	info.stats.find("defense")->second->IncreaseMaxValue(info.scaling.defense_upgrade);
-	info.stats.find("movement")->second->IncreaseMaxValue(info.scaling.movement_speed_upgrade);
-	info.stats.find("attack_speed")->second->IncreaseMaxValue(info.scaling.attack_speed_upgrade);
-	info.stats.find("range")->second->IncreaseMaxValue(info.scaling.range_upgrade);
+	if (level < MAX_LEVEL)
+	{
+		level++;
+		info.stats.find("health")->second->IncreaseMaxValue(info.scaling.health_upgrade);
+		info.stats.find("damage")->second->IncreaseMaxValue(info.scaling.attack_damage_upgrade);
+		info.stats.find("defense")->second->IncreaseMaxValue(info.scaling.defense_upgrade);
+		info.stats.find("movement")->second->IncreaseMaxValue(info.scaling.movement_speed_upgrade);
+		info.stats.find("attack_speed")->second->IncreaseMaxValue(info.scaling.attack_speed_upgrade);
+		info.stats.find("range")->second->IncreaseMaxValue(info.scaling.range_upgrade);
+	}
 }
 
 void Card::LoadSprite()

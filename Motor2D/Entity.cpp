@@ -46,6 +46,46 @@ bool Entity::IsAlive()
 	return (stats.find("health")->second->GetValue() > 0);
 }
 
+fPoint Entity::GetPosition()
+{
+	fPoint ret;
+	switch (pivot)
+	{
+	case PVT_BOTTOM_CENTER:
+		ret = { position.x - current_frame.w*0.5f, position.y - current_frame.h };
+		break;
+	case PVT_CENTER:
+		ret = { position.x - current_frame.w*0.5f, position.y - current_frame.h * 0.5f };
+		break;
+	default:
+		ret = position;
+		break;
+	}
+
+	return ret;
+}
+void Entity::SetPivot(PivotType type)
+{
+	pivot = type;
+}
+fPoint Entity::GetCenterPosition()
+{
+	fPoint ret;
+	switch (pivot)
+	{
+	case PVT_BOTTOM_CENTER:
+		ret = { position.x, position.y - current_frame.h * 0.5f };
+		break;
+	case PVT_CENTER:
+		ret = position;
+		break;
+	default:
+		ret = position;
+		break;
+	}
+
+	return ret;
+}
 float Entity::CalculateDamage(float attack, float defense)
 {
 	return (attack - ((attack * defense) / 25));
@@ -74,6 +114,8 @@ void Entity::LoadAnimations(pugi::xml_node anim_config)
 
 void Entity::Draw()
 {
-	fPoint render_position = { position.x - current_frame.w*0.5f, position.y - current_frame.h };
+	fPoint render_position = GetPosition();
 	App->render->Blit(sprite, render_position.x, render_position.y, &current_frame);
+	if(debug)
+		App->render->DrawQuad({ (int)(position.x - 2.5f), (int)(position.y - 2.5f), 5, 5 },255,0,0);
 }
