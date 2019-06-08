@@ -63,6 +63,9 @@ Command and Conquer: Blue Alert is a strategy game that combines elements of Dec
 
 - Mobile resolution
 
+- Fullscreen
+
+
 
 
 
