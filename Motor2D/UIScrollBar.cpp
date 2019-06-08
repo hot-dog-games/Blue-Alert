@@ -24,6 +24,8 @@ UIScrollBar::UIScrollBar(iPoint pos, SDL_Rect rect, SliderType type, int initial
 	current_value = initial_value;
 	this->max_value = max_value;
 
+	interactable = true;
+
 }
 UIScrollBar::~UIScrollBar()
 {
@@ -32,7 +34,7 @@ UIScrollBar::~UIScrollBar()
 
 bool UIScrollBar::Update(float dt)
 {
-	if (slider_button->clicked)
+	if (slider_button->clicked || this->clicked)
 	{
 		DragSlider();
 	}
