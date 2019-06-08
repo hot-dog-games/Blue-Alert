@@ -418,6 +418,14 @@ int GameManager::GetCardStat(EntityType card_type, std::string name) {
 	return 0;
 }
 
+int GameManager::GetCardUpgrade(EntityType card_type, std::string name) {
+
+	pugi::xml_node card_node = config_file.child("config").find_child_by_attribute("type", std::to_string((int)card_type).c_str());
+
+	return card_node.child("upgrades").find_child_by_attribute("stat", name.c_str()).attribute("value").as_uint();
+
+}
+
 ButtonLevel GameManager::GetLevelFromCollection(EntityType card_type)
 {
 	Card* card = nullptr;

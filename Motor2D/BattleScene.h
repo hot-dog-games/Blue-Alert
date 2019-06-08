@@ -164,6 +164,13 @@ private:
 	UILabel* units_label = nullptr;
 	UILabel* range_label = nullptr;
 
+	UIImage* info_image_upgrade = nullptr;
+	UILabel* health_label_upgrade = nullptr;
+	UILabel* attack_label_upgrade = nullptr;
+	UILabel* defense_label_upgrade = nullptr;
+	UILabel* units_label_upgrade = nullptr;
+	UILabel* range_label_upgrade = nullptr;
+
 	int unit_store_cost = 100;
 	int total_cost_acumulated = 0;
 

@@ -94,6 +94,7 @@ public:
 	//---Collection_Acces----
 	Card* GetCardFromCollection(EntityType card_type);
 	int GetCardStat(EntityType card_type, std::string name);
+	int GetCardUpgrade(EntityType card_type, std::string name);
 	ButtonLevel GetLevelFromCollection(EntityType card_type);
 	void AddCardToCollection(EntityType card_type);
 	bool IsInCollection(int card_type);
