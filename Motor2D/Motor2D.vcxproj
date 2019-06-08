@@ -14,7 +14,7 @@
     <ProjectGuid>{2AF9969B-F202-497B-AF30-7BEF9CE8005E}</ProjectGuid>
     <RootNamespace>programacio_2</RootNamespace>
     <ProjectName>Blue_Alert</ProjectName>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -97,6 +97,7 @@
     <ClCompile Include="Fonts.cpp" />
     <ClCompile Include="Fade.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="GameStart.cpp" />
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="j1App.cpp" />
@@ -157,6 +158,7 @@
     <ClInclude Include="Fonts.h" />
     <ClInclude Include="Fade.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="GameStart.h" />
     <ClInclude Include="GUI.h" />
     <ClInclude Include="MainMenuScene.h" />
     <ClInclude Include="Map.h" />

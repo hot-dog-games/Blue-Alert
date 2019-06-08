@@ -293,9 +293,6 @@ bool BattleScene::PostUpdate()
 
 	App->map->Draw();
 
-	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-		ret = false;
-
 	return ret;
 }
 

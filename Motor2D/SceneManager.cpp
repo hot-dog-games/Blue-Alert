@@ -7,6 +7,7 @@
 #include "Audio.h"
 #include "Fonts.h"
 #include "BattleScene.h"
+#include "GameStart.h"
 #include "MainMenuScene.h"
 #include "Map.h"
 #include "SceneManager.h"
@@ -26,7 +27,7 @@ SceneManager::~SceneManager()
 
 bool SceneManager::Awake(pugi::xml_node &)
 {
-	current_scene = new MainMenuScene();
+	current_scene = new GameStart();
 	return true;
 }
 
@@ -112,6 +113,8 @@ void SceneManager::ChangeScene(int new_scene)
 	case TESTING:
 		current_scene = new TestingScene();
 		break;
+	case GAME_START:
+		current_scene = new GameStart();
 	}
 
 	current_scene->Start();

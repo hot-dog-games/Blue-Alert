@@ -8,7 +8,8 @@ enum SceneType{
 	MENU,
 	MAP,
 	COMBAT,
-	TESTING
+	TESTING,
+	GAME_START
 };
 
 class SceneManager :

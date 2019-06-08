@@ -76,12 +76,12 @@ bool StrategyMapScene::Start()
 	App->win->GetWindowSize(w, h);
 
 	map_camera_limit.x -= (map_camera_limit.w * 0.5);
-	map_camera_limit.y = ((App->map->data.height*0.5*App->map->data.tile_height) * App->win->GetScale()) - map_camera_limit.h*0.5;
+	map_camera_limit.y = ((App->map->data.height * 0.5 * App->map->data.tile_height) * App->win->GetScale()) - map_camera_limit.h * 0.5;
 
 	iPoint world_position = App->map->MapToWorld((int)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetPosition().x, (int)App->game_manager->GetEncounterTree()->GetCurrentNode()->GetPosition().y);
 
-	App->render->camera.x = -((world_position.x * App->win->GetScale()) - w * 0.5);
-	App->render->camera.y = -((world_position.y * App->win->GetScale()) - h * 0.9);
+	App->render->camera.x = -((world_position.x - w * 0.5) * App->win->GetScale());
+	App->render->camera.y = -((world_position.y - h * 0.9) * App->win->GetScale());
 
 	InitializeUI();
 	
