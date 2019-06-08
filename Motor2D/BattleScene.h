@@ -117,9 +117,7 @@ private:
 	UIImage*		win_building = nullptr;
 
 	//selectable buttons
-	UISelectableButton*		win_unit_one = nullptr;
-	UISelectableButton*		win_unit_two = nullptr;
-	UISelectableButton*		win_unit_three = nullptr;
+	UISelectableButton*		win_unit[3] = { nullptr, nullptr, nullptr };
 
 	UISelectableButton*		store_unit_one = nullptr;
 	UISelectableButton*		store_unit_two = nullptr;
@@ -157,6 +155,14 @@ private:
 	UIScrollBar* pause_fx = nullptr;
 	UIImage* side_troop_panel = nullptr;
 	UIImage* side_troop_panel_left = nullptr;
+
+	//Info
+	UIImage* info_image = nullptr;
+	UILabel* health_label = nullptr;
+	UILabel* attack_label = nullptr;
+	UILabel* defense_label = nullptr;
+	UILabel* units_label = nullptr;
+	UILabel* range_label = nullptr;
 
 	int unit_store_cost = 100;
 	int total_cost_acumulated = 0;

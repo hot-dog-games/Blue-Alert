@@ -323,17 +323,17 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			App->gui->EnableElement((UIElement*)win_panel_two);
 		}
 		else if (element == win_continue_two) {
-			if (win_unit_one->IsSelected()) {
+			if (win_unit[0]->IsSelected()) {
 				App->game_manager->AddCardToCollection((EntityType)App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[0]);
 				App->gui->DisableElement((UIElement*)win_panel_two);
 				App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, Black);
 			}
-			else if (win_unit_two->IsSelected()) {
+			else if (win_unit[1]->IsSelected()) {
 				App->game_manager->AddCardToCollection((EntityType)App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[1]);
 				App->gui->DisableElement((UIElement*)win_panel_two);
 				App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, Black);
 			}
-			else if (win_unit_three->IsSelected()) {
+			else if (win_unit[2]->IsSelected()) {
 				App->game_manager->AddCardToCollection((EntityType)App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[2]);
 				App->gui->DisableElement((UIElement*)win_panel_two);
 				App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, Black);
@@ -348,17 +348,17 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, Black);
 		}
 
-		if (element == win_unit_one) {
-			win_unit_two->ChangeState(false);
-			win_unit_three->ChangeState(false);
+		if (element == win_unit[0]) {
+			win_unit[1]->ChangeState(false);
+			win_unit[2]->ChangeState(false);
 		}
-		else if (element == win_unit_two) {
-			win_unit_one->ChangeState(false);
-			win_unit_three->ChangeState(false);
+		else if (element == win_unit[1]) {
+			win_unit[0]->ChangeState(false);
+			win_unit[2]->ChangeState(false);
 		}
-		else if (element == win_unit_three) {
-			win_unit_two->ChangeState(false);
-			win_unit_one->ChangeState(false);
+		else if (element == win_unit[2]) {
+			win_unit[1]->ChangeState(false);
+			win_unit[0]->ChangeState(false);
 		}
 
 		if (element == store_unit_one) {
@@ -431,7 +431,25 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			ReleaseDrag();
 		}
 	}
-
+	else if (gui_event == GUI_Event::MOUSE_OVER)
+	{
+		std::string str_stat = "";
+		for (int num = 0; num < 3; ++num) {
+			if (element == win_unit[num]) {
+				info_image->SetImage(win_unit[num]->GetAnim()[0]);
+				str_stat = "Health: " + std::to_string(App->game_manager->GetCardStat((EntityType)(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[num]), "health"));
+				health_label->SetText(str_stat);
+				str_stat = "Attack: " + std::to_string(App->game_manager->GetCardStat((EntityType)(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[num]), "damage"));
+				attack_label->SetText(str_stat);
+				str_stat = "Defense: " + std::to_string(App->game_manager->GetCardStat((EntityType)(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[num]), "defense"));
+				defense_label->SetText(str_stat);
+				str_stat = "Range: " + std::to_string(App->game_manager->GetCardStat((EntityType)(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[num]), "range"));
+				range_label->SetText(str_stat);
+				str_stat = "Units: " + std::to_string(App->game_manager->GetCardStat((EntityType)(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[num]), "units"));
+				units_label->SetText(str_stat);
+			}
+		}
+	}
 	return true;
 }
 
@@ -717,19 +735,26 @@ void BattleScene::StartUI()
 		}
 	}
 
-	App->gui->CreateLabel({ 140, 175 }, "fonts/button_text.ttf", 20, str[0], color[0], 400, win_panel_two);
-	App->gui->CreateLabel({ 330, 175 }, "fonts/button_text.ttf", 20, str[1], color[1], 400, win_panel_two);
-	App->gui->CreateLabel({ 240, 345 }, "fonts/button_text.ttf", 20, str[2], color[2], 400, win_panel_two);
+	App->gui->CreateLabel({ 90, 195 }, "fonts/button_text.ttf", 20, str[0], color[0], 400, win_panel_two);
+	App->gui->CreateLabel({ 240, 195 }, "fonts/button_text.ttf", 20, str[1], color[1], 400, win_panel_two);
+	App->gui->CreateLabel({ 390, 195 }, "fonts/button_text.ttf", 20, str[2], color[2], 400, win_panel_two);
 
-	win_unit_one = App->gui->CreateSelectableButton({ 160,200 }, App->gui->LoadUIButton(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[0], "upgrade"), win_panel_two);
-	win_unit_two = App->gui->CreateSelectableButton({ 350,200 }, App->gui->LoadUIButton(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[1], "upgrade"), win_panel_two);
-	win_unit_three = App->gui->CreateSelectableButton({ 260,370 }, App->gui->LoadUIButton(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[2], "upgrade"), win_panel_two);
+	win_unit[0] = App->gui->CreateSelectableButton({ 100, 220 }, App->gui->LoadUIButton(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[0], "upgrade"), win_panel_two);
+	win_unit[1] = App->gui->CreateSelectableButton({ 260, 220 }, App->gui->LoadUIButton(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[1], "upgrade"), win_panel_two);
+	win_unit[2] = App->gui->CreateSelectableButton({ 420, 220 }, App->gui->LoadUIButton(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[2], "upgrade"), win_panel_two);
 
 	win_building = App->gui->CreateImage({ 195,240 }, App->gui->LoadUIImage(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType(), "end_screen"), win_panel_one);
 
 	App->gui->DisableElement((UIElement*)win_panel_one);
 	App->gui->DisableElement((UIElement*)win_panel_two);
 
+		//Info
+	info_image = App->gui->CreateImage({ 110, 370 }, { 636,853,106,106 }, win_panel_two);
+	health_label = App->gui->CreateLabel({ 240, 370 }, "fonts/button_text.ttf", 18, "Health: -", { 231,216,145,255 }, 300, win_panel_two);
+	attack_label = App->gui->CreateLabel({ 240, 390 }, "fonts/button_text.ttf", 18, "Attack: -", { 231,216,145,255 }, 300, win_panel_two);
+	defense_label = App->gui->CreateLabel({ 240, 410 }, "fonts/button_text.ttf", 18, "Defense: -", { 231,216,145,255 }, 300, win_panel_two);
+	range_label = App->gui->CreateLabel({ 240, 430 }, "fonts/button_text.ttf", 18, "Range: -", { 231,216,145,255 }, 300, win_panel_two);
+	units_label = App->gui->CreateLabel({ 240, 450 }, "fonts/button_text.ttf", 18, "Units: -", { 231,216,145,255 }, 300, win_panel_two);
 
 	//Pause
 	pause_panel = App->gui->CreateImage({ 2, 87 }, { 3967,961,636,671 });
@@ -769,7 +794,6 @@ void BattleScene::StartUI()
 		App->gui->DisableElement((UIElement*)store_panel);
 	}
 	
-
 	//End Game Screen Lose
 	lose_panel = App->gui->CreateImage({ 17,120 }, { 3986,1646,605,660 });
 	lose_text = App->gui->CreateLabel({ 30,30 }, "fonts/button_text.ttf", 23, "The enemy troops have defeat yours! Allies have win the battle", { 255,232,2, 255 }, 565, lose_panel);

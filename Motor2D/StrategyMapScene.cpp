@@ -694,7 +694,7 @@ void StrategyMapScene::InitializeUI()
 	App->gui->DisableElement(buildings_background);
 
 	//Show Info
-	info_image = App->gui->CreateImage({ 25,37 }, { 0,0,0,0 }, troops_background);
+	info_image = App->gui->CreateImage({ 25,37 }, { 636,853,106,106 }, troops_background);
 	health_label = App->gui->CreateLabel({ 135, 40 }, "fonts/button_text.ttf", 12, "Health: -", { 231,216,145,255 }, 120, troops_background);
 	attack_label = App->gui->CreateLabel({ 135, 60 }, "fonts/button_text.ttf", 12, "Attack: -", { 231,216,145,255 }, 120, troops_background);
 	defense_label = App->gui->CreateLabel({ 135, 80 }, "fonts/button_text.ttf", 12, "Defense: -", { 231,216,145,255 }, 120, troops_background);
