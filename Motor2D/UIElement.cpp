@@ -1,4 +1,6 @@
 #include "j1App.h"
+#include "Window.h"
+#include "Render.h"
 #include "GUI.h"
 #include "UIElement.h"
 #include "p2Log.h"
@@ -27,15 +29,21 @@ bool UIElement::UICleanUp()
 bool UIElement::IsInside(int x, int y)
 {
 	SDL_Rect screen_rect = GetScreenRect();
+	screen_rect.x += App->render->scaled_viewport.x;
+	screen_rect.y += App->render->scaled_viewport.y;
+	x *= App->win->GetScale();
+	y *= App->win->GetScale();
+
+	LOG("m %i, m%i, %i %i", x, y, screen_rect.x, screen_rect.y);
 	return((x < screen_rect.x + screen_rect.w) && (screen_rect.x < x) && (y < screen_rect.y + screen_rect.h) && (screen_rect.y < y));
 }
 
 SDL_Rect UIElement::GetScreenRect()
 {
 	if (parent)
-		return { (int)(parent->GetScreenPos().x + (rect_box.x * parent->scale_X)), (int)(parent->GetScreenPos().y + (rect_box.y * parent->scale_Y)), (int)(rect_box.w * scale_X), (int)(rect_box.h * scale_Y) };
+		return { (int)((parent->GetScreenPos().x + (rect_box.x * parent->scale_X)) * App->win->GetScale()), (int)((parent->GetScreenPos().y + (rect_box.y * parent->scale_Y))* App->win->GetScale()), (int)((rect_box.w * scale_X)* App->win->GetScale()), (int)((rect_box.h * scale_Y) * App->win->GetScale()) };
 	else
-		return  { rect_box.x, rect_box.y, (int)(rect_box.w * scale_X), (int)(rect_box.h * scale_Y) };
+		return  { (int)(rect_box.x * App->win->GetScale()), (int)(rect_box.y * App->win->GetScale()), (int)((rect_box.w * scale_X) * App->win->GetScale()), (int)((rect_box.h * scale_Y) * App->win->GetScale()) };
 }
 
 void UIElement::SetScreenPos(int x, int y)
@@ -62,7 +70,7 @@ iPoint UIElement::GetScreenPos()
 	if (parent)
 		return { (int)(parent->GetScreenPos().x + (rect_box.x * parent->scale_X)), (int)(parent->GetScreenPos().y + (rect_box.y * parent->scale_Y)) };
 	else
-		return { rect_box.x, rect_box.y };
+		return { rect_box.x, rect_box.y};
 }
 
 iPoint UIElement::GetLocalPos()
