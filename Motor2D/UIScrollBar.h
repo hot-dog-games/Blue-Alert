@@ -15,7 +15,6 @@ public:
 	void DragSlider();
 	bool UIBlit();
 
-
 public:
 	int* value;
 	float current_value = 0;

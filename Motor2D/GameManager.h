@@ -13,6 +13,7 @@ class BuffSource;
 class Core;
 class Stat;
 enum EntityType;
+enum ButtonLevel;
 
 enum stage {
 	STAGE_NONE = -1,
@@ -92,6 +93,9 @@ public:
 
 	//---Collection_Acces----
 	Card* GetCardFromCollection(EntityType card_type);
+	int GetCardStat(EntityType card_type, std::string name);
+	int GetCardUpgrade(EntityType card_type, std::string name);
+	ButtonLevel GetLevelFromCollection(EntityType card_type);
 	void AddCardToCollection(EntityType card_type);
 	bool IsInCollection(int card_type);
 	//----------------------
@@ -129,6 +133,7 @@ private:
 private:
 	Deck* combat_deck = nullptr;
 	std::list<Card*> collection;
+	pugi::xml_document config_file;
 
 public:
 	//Not good like this but w/e

@@ -94,9 +94,9 @@ private:
 	
 	// Troops Menu
 
-	UIButton* deck_buttons[4] = { nullptr, nullptr, nullptr, nullptr };
+	UIButtonTroops* deck_buttons[4] = { nullptr, nullptr, nullptr, nullptr };
 	UIButtonTroops* collection_buttons_allies[9] = { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr };
-	UIButton* collection_buttons_enemies[9] = { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr };
+	UIButtonTroops* collection_buttons_enemies[9] = { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr };
 	UILabel* troops_title[3] = {nullptr, nullptr, nullptr};
 	UIButton* change_side_button = nullptr;
 	UILabel* side_label = nullptr;

@@ -56,7 +56,7 @@ enum SliderType {
 };
 
 enum ButtonLevel {
-	LVL_1,
+	LVL_1 = 1,
 	LVL_2,
 	LVL_3,
 	LVL_4

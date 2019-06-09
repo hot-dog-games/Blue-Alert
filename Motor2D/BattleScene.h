@@ -117,16 +117,9 @@ private:
 	UIImage*		win_building = nullptr;
 
 	//selectable buttons
-	UISelectableButton*		win_unit_one = nullptr;
-	UISelectableButton*		win_unit_two = nullptr;
-	UISelectableButton*		win_unit_three = nullptr;
+	UISelectableButton*		win_unit[3] = { nullptr, nullptr, nullptr };
 
-	UISelectableButton*		store_unit_one = nullptr;
-	UISelectableButton*		store_unit_two = nullptr;
-	UISelectableButton*		store_unit_three = nullptr;
-	UISelectableButton*		store_unit_four = nullptr;
-	UISelectableButton*		store_unit_five = nullptr;
-	UISelectableButton*		store_unit_six = nullptr;
+	UISelectableButton*		store_unit[6] = { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr };
 
 	UIImage* current_drag = nullptr;
 	int card_num;
@@ -157,6 +150,21 @@ private:
 	UIScrollBar* pause_fx = nullptr;
 	UIImage* side_troop_panel = nullptr;
 	UIImage* side_troop_panel_left = nullptr;
+
+	//Info
+	UIImage* info_image = nullptr;
+	UILabel* health_label = nullptr;
+	UILabel* attack_label = nullptr;
+	UILabel* defense_label = nullptr;
+	UILabel* units_label = nullptr;
+	UILabel* range_label = nullptr;
+
+	UIImage* info_image_upgrade = nullptr;
+	UILabel* health_label_upgrade = nullptr;
+	UILabel* attack_label_upgrade = nullptr;
+	UILabel* defense_label_upgrade = nullptr;
+	UILabel* units_label_upgrade = nullptr;
+	UILabel* range_label_upgrade = nullptr;
 
 	int unit_store_cost = 100;
 	int total_cost_acumulated = 0;

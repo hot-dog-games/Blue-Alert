@@ -15,6 +15,7 @@
 #include "Input.h"
 #include "Render.h"
 #include "SceneManager.h"
+#include "UIButtonTroops.h"
 
 #include "GameManager.h"
 
@@ -32,6 +33,8 @@ GameManager::~GameManager()
 
 bool GameManager::Awake(pugi::xml_node &)
 {
+	pugi::xml_parse_result result = config_file.load_file("xml/cards.xml");
+
 	return true;
 }
 
@@ -395,6 +398,48 @@ Card * GameManager::GetCardFromCollection(EntityType card_type)
 		LOG("The card u tried to get is not existent in collection");
 		return nullptr;
 	}
+}
+
+int GameManager::GetCardStat(EntityType card_type, std::string name) {
+
+	if (IsInCollection((int)card_type)) {
+		return GetCardFromCollection(card_type)->info.stats.find(name)->second->GetValue();
+	 }
+	else {
+		pugi::xml_node card_node = config_file.child("config").find_child_by_attribute("type", std::to_string((int)card_type).c_str());
+
+		for (pugi::xml_node iter = card_node.child("stats").child("stat"); iter; iter = iter.next_sibling("stat"))
+		{
+			if(iter.attribute("stat").as_string() == name)
+				return iter.attribute("value").as_int();
+		}
+	}
+
+	return 0;
+}
+
+int GameManager::GetCardUpgrade(EntityType card_type, std::string name) {
+
+	pugi::xml_node card_node = config_file.child("config").find_child_by_attribute("type", std::to_string((int)card_type).c_str());
+
+	return card_node.child("upgrades").find_child_by_attribute("stat", name.c_str()).attribute("value").as_uint();
+
+}
+
+ButtonLevel GameManager::GetLevelFromCollection(EntityType card_type)
+{
+	Card* card = nullptr;
+	ButtonLevel level = LVL_1;
+
+	for each (Card* c in collection)
+	{
+		if (c->type == card_type)
+		{
+			level = (ButtonLevel)c->level;
+		}
+	}
+
+	return level;
 }
 
 void GameManager::AddCardToCollection(EntityType card_type)
