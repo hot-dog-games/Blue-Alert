@@ -43,6 +43,8 @@ public:
 	bool IsInsideLimits(int mousemotion_x, int mousemotion_y);
 	void KeepInBounds();
 
+	bool dragable = true;
+
 private:
 	UIImage* banner = nullptr;
 	UIImage* options = nullptr;
@@ -115,7 +117,7 @@ private:
 
 
 	float drag_threshhold = 0.2f;
-	bool dragable = true;
+
 
 	SDL_Rect map_camera_limit;
 
