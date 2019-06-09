@@ -47,6 +47,61 @@ void UIButtonTroops::OnMouseExit()
 	rect_sprite_mark = mark[0];
 }
 
+void UIButtonTroops::ChangeSprite(SDL_Rect* rect, ButtonLevel level)
+{
+	anim[0] = rect[0];
+	anim[1] = rect[1];
+	anim[2] = rect[2];
+	anim[3] = rect[3];
+	rect_sprite = anim[0];
+
+	switch (level) {
+	case LVL_1:
+		mark[0] = { 2370,745,100,100 };
+		mark[1] = { 2370,333,100,100 };
+		mark[2] = { 2370,539,100,100 };
+		mark[3] = { 2482,436,100,100 };
+		break;
+
+	case LVL_2:
+		mark[0] = { 2482,745,100,100 };
+		mark[1] = { 2482,333,100,100 };
+		mark[2] = { 2482,539,100,100 };
+		mark[3] = { 2482,436,100,100 };
+		break;
+
+	case LVL_3:
+		mark[0] = { 2594,745,100,100 };
+		mark[1] = { 2594,333,100,100 };
+		mark[2] = { 2594,539,100,100 };
+		mark[3] = { 2482,436,100,100 };
+		break;
+
+	case LVL_4:
+		mark[0] = { 2594,642,100,100 };
+		mark[1] = { 2594,230,100,100 };
+		mark[2] = { 2594,539,100,100 };
+		mark[3] = { 2482,436,100,100 };
+		break;
+
+	case LVL_5:
+		mark[0] = { 2370,642,100,100 };
+		mark[1] = { 2370,230,100,100 };
+		mark[2] = { 2370,539,100,100 };
+		mark[3] = { 2482,436,100,100 };
+		break;
+
+	default:
+		mark[0] = { 2482,436,100,100 };
+		mark[1] = { 2482,436,100,100 };
+		mark[2] = { 2482,436,100,100 };
+		mark[3] = { 2482,436,100,100 };
+		break;
+	}
+
+	rect_sprite_mark = mark[interactable ? 0 : 3];
+}
+
 UIButtonTroops::UIButtonTroops(iPoint position, SDL_Rect* sprite_rect, bool is_interactable, ButtonLevel lvl) :UIButton(position, sprite_rect, is_interactable)
 {
 	level = lvl;
@@ -77,8 +132,15 @@ UIButtonTroops::UIButtonTroops(iPoint position, SDL_Rect* sprite_rect, bool is_i
 
 	case LVL_4:
 		mark[0] = { 2594,642,100,100 };
-		mark[1] = { 2594,239,100,100 };
+		mark[1] = { 2594,230,100,100 };
 		mark[2] = { 2594,539,100,100 };
+		mark[3] = { 2482,436,100,100 };
+		break;
+
+	case LVL_5:
+		mark[0] = { 2370,642,100,100 };
+		mark[1] = { 2370,230,100,100 };
+		mark[2] = { 2370,436,100,100 };
 		mark[3] = { 2482,436,100,100 };
 		break;
 
