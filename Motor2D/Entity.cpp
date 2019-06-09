@@ -116,6 +116,10 @@ void Entity::Draw()
 {
 	fPoint render_position = GetPosition();
 	App->render->Blit(sprite, render_position.x, render_position.y, &current_frame);
-	if(debug)
-		App->render->DrawQuad({ (int)(position.x - 2.5f), (int)(position.y - 2.5f), 5, 5 },255,0,0);
+	if (debug)
+	{
+		App->render->DrawQuad({ (int)render_position.x, (int)render_position.y, current_frame.w, current_frame.h}, 255, 255, 0, 255, false);
+		App->render->DrawQuad({ (int)(position.x - 2.5f), (int)(position.y - 2.5f), 5, 5 }, 255, 0, 0);
+	}
+
 }
