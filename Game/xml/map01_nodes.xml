@@ -7,75 +7,57 @@
 			<child id="2"/>
 		</children>
 	</node>
-	<node id="1" x="65" y="72" type="32" difficulty="0" deck_size="1">
+	<node id="1" x="65" y="72" type="32" difficulty="0" deck_size="4">
 		<children>
 			<child id="3"/>
 		</children>
-		<encounter>
-			<card value="3" level="1"/>
-		</encounter>
 	</node>
-	<node id="2" x="70" y="61" type="30" difficulty="0" deck_size="1">
+	<node id="2" x="70" y="61" type="30" difficulty="0" deck_size="4">
 		<children>
 			<child id="4"/>
 			<child id="5"/>
 		</children>
-		<encounter>
-			<card value="3" level="1"/>
-		</encounter>
 	</node>
-	<node id="3" x="54" y="71" type="31" difficulty="0" deck_size="2">
+	<node id="3" x="54" y="71" type="31" difficulty="0" deck_size="4">
 		<children>
 			<child id="6"/>
 			<child id="7"/>
 		</children>
-    <encounter>
-      <card value="1" level="1"/>
-      <card value="3" level="1"/>
-    </encounter>
 	</node>
-	<node id="4" x="56" y="57" type="33" difficulty="0" deck_size="2">
+	<node id="4" x="56" y="57" type="33" difficulty="0" deck_size="4">
 		<children>
 			<child id="7"/>
 		</children>
-    <encounter>
-      <card value="1" level="1"/>
-      <card value="3" level="1"/>
-    </encounter>
 	</node>
-	<node id="5" x="62" y="47" type="34" difficulty="0" deck_size="2">
+	<node id="5" x="62" y="47" type="34" difficulty="0" deck_size="4">
 		<children>
 			<child id="8"/>
 			<child id="9"/>
 			<child id="10"/>
 		</children>
-    <encounter>
-      <card value="1" level="1"/>
-      <card value="3" level="1"/>
-    </encounter>
 	</node>
-	<node id="6" x="35" y="70" type="32" difficulty="1" deck_size="3">
+	<node id="6" x="35" y="70" type="32" difficulty="1" deck_size="4">
 		<children>
 			<child id="11"/>
 		</children>
 	</node>
-	<node id="7" x="43" y="58" type="34" difficulty="1" deck_size="3">
+	<node id="7" x="43" y="58" type="34" difficulty="1" deck_size="4">
 		<children>
 			<child id="11"/>
 			<child id="12"/>
 		</children>
 	</node>
-	<node id="8" x="51" y="47" type="33" difficulty="1" deck_size="3">
+	<node id="8" x="51" y="47" type="33" difficulty="1" deck_size="4">
 		<children>
 			<child id="12"/>
 		</children>
 	</node>
-	<node id="9" x="52" y="37" type="30" difficulty="1" deck_size="3">
+	<node id="9" x="52" y="37" type="30" difficulty="1" deck_size="4">
 		<children>
 			<child id="13"/>
 		</children>
 	</node>
-	<node id="10" x="64" y="33" type="32" difficulty="1" deck_size="3">
+	<node id="10" x="64" y="33" type="32" difficulty="1" deck_size="4">
 		<children>
 			<child id="13"/>
 		</children>
