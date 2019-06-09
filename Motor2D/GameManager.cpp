@@ -63,6 +63,7 @@ bool GameManager::Load(pugi::xml_node &save_file)
 	XMLToState(recovery_state, save_file.child("recovery_state"));
 
 	RecoverState(save_state);
+	DeletePopUps();
 	App->scene_manager->ChangeScene(SceneType::MAP);
 
 	return true;
