@@ -153,6 +153,7 @@ private:
 
 	//Info
 	UIImage* info_image = nullptr;
+	UIImage* counter_panel = nullptr;
 	UILabel* health_label = nullptr;
 	UILabel* attack_label = nullptr;
 	UILabel* defense_label = nullptr;

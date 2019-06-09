@@ -405,7 +405,18 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			bomb_cd_timer = 0;
 			bomb_button->SetLocked(false);
 		}
-
+		 
+		if (element == faction_button)
+		{
+			if (!App->IsPaused()) {
+				App->PauseGame();
+				App->gui->EnableElement(counter_panel);
+			}
+			else {
+				App->ResumeGame();
+				App->gui->DisableElement(counter_panel);
+			}
+		}
 
 		if (element == pause_button) {
 			if (!App->IsPaused()) {
@@ -757,6 +768,9 @@ void BattleScene::StartUI()
 	faction_button_rect[1] = { 1387,1366,39,39 };
 	faction_button_rect[2] = { 1427,1366,39,39 };
 	faction_button = App->gui->CreateButton({ 575, 912 }, faction_button_rect, nullptr);
+
+	counter_panel = App->gui->CreateImage({ 60, 180 }, { 2761,967,518,479 }, nullptr);
+	App->gui->DisableElement(counter_panel);
 
 	health_bar_image = App->gui->CreateImage({ 248, 770 }, { 24,1378,144,16 });
 	enemy_health_bar_image = App->gui->CreateImage({ 248, 30 }, { 24,1455,144,16 });
