@@ -361,28 +361,28 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			win_unit[0]->ChangeState(false);
 		}
 
-		if (element == store_unit_one) {
-			if(store_unit_one->selected)UpdateGoldOnSelect(random_store_unit[0]);
+		if (element == store_unit[0]) {
+			if (store_unit[0]->selected)UpdateGoldOnSelect(random_store_unit[0]);
 			else UpdateGoldOnUnSelect(random_store_unit[0]);
 		}
-		if (element == store_unit_two) {
-			if (store_unit_two->selected)UpdateGoldOnSelect(random_store_unit[1]);
+		if (element == store_unit[1]) {
+			if (store_unit[1]->selected)UpdateGoldOnSelect(random_store_unit[1]);
 			else UpdateGoldOnUnSelect(random_store_unit[1]);
 		}
-		if (element == store_unit_three) {
-			if (store_unit_three->selected)UpdateGoldOnSelect(random_store_unit[2]);
+		if (element == store_unit[2]) {
+			if (store_unit[2]->selected)UpdateGoldOnSelect(random_store_unit[2]);
 			else UpdateGoldOnUnSelect(random_store_unit[2]);
 		}
-		if (element == store_unit_four) {
-			if (store_unit_four->selected)UpdateGoldOnSelect(random_store_unit[3]);
+		if (element == store_unit[3]) {
+			if (store_unit[3]->selected)UpdateGoldOnSelect(random_store_unit[3]);
 			else UpdateGoldOnUnSelect(random_store_unit[3]);
 		}
-		if (element == store_unit_five) {
-			if (store_unit_five->selected)UpdateGoldOnSelect(random_store_unit[4]);
+		if (element == store_unit[4]) {
+			if (store_unit[4]->selected)UpdateGoldOnSelect(random_store_unit[4]);
 			else UpdateGoldOnUnSelect(random_store_unit[4]);
 		}
-		if (element == store_unit_six) {
-			if (store_unit_six->selected)UpdateGoldOnSelect(random_store_unit[5]);
+		if (element == store_unit[5]) {
+			if (store_unit[5]->selected)UpdateGoldOnSelect(random_store_unit[5]);
 			else UpdateGoldOnUnSelect(random_store_unit[5]);
 		}
 
@@ -468,6 +468,45 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 					range_label->SetText(str_stat);
 					range_label_upgrade->SetText("");
 					str_stat = "Units: " + std::to_string(App->game_manager->GetCardStat((EntityType)(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[num]), "units"));
+					units_label->SetText(str_stat);
+					units_label_upgrade->SetText("");
+				}
+			}
+		}
+		for (int num = 0; num < 6; ++num) {
+			if (element == store_unit[num]) {
+				info_image->SetImage(store_unit[num]->GetAnim()[0]);
+				if (App->game_manager->IsInCollection(random_store_unit[num])) {
+					str_stat = "Health: " + std::to_string(App->game_manager->GetCardStat((EntityType)(random_store_unit[num]), "health"));
+					health_label->SetText(str_stat);
+					health_label_upgrade->SetText(" + " + std::to_string(App->game_manager->GetCardUpgrade((EntityType)(random_store_unit[num]), "health")));
+					str_stat = "Attack: " + std::to_string(App->game_manager->GetCardStat((EntityType)(random_store_unit[num]), "damage"));
+					attack_label->SetText(str_stat);
+					attack_label_upgrade->SetText(" + " + std::to_string(App->game_manager->GetCardUpgrade((EntityType)(random_store_unit[num]), "damage")));
+					str_stat = "Defense: " + std::to_string(App->game_manager->GetCardStat((EntityType)(random_store_unit[num]), "defense"));
+					defense_label->SetText(str_stat);
+					defense_label_upgrade->SetText(" + " + std::to_string(App->game_manager->GetCardUpgrade((EntityType)(random_store_unit[num]), "defense")));
+					str_stat = "Range: " + std::to_string(App->game_manager->GetCardStat((EntityType)(random_store_unit[num]), "range"));
+					range_label->SetText(str_stat);
+					range_label_upgrade->SetText(" + " + std::to_string(App->game_manager->GetCardUpgrade((EntityType)(random_store_unit[num]), "range")));
+					str_stat = "Units: " + std::to_string(App->game_manager->GetCardStat((EntityType)(random_store_unit[num]), "units"));
+					units_label->SetText(str_stat);
+					units_label_upgrade->SetText(" + " + std::to_string(App->game_manager->GetCardUpgrade((EntityType)(random_store_unit[num]), "units")));
+				}
+				else {
+					str_stat = "Health: " + std::to_string(App->game_manager->GetCardStat((EntityType)(random_store_unit[num]), "health"));
+					health_label->SetText(str_stat);
+					health_label_upgrade->SetText("");
+					str_stat = "Attack: " + std::to_string(App->game_manager->GetCardStat((EntityType)(random_store_unit[num]), "damage"));
+					attack_label->SetText(str_stat);
+					attack_label_upgrade->SetText("");
+					str_stat = "Defense: " + std::to_string(App->game_manager->GetCardStat((EntityType)(random_store_unit[num]), "defense"));
+					defense_label->SetText(str_stat);
+					defense_label_upgrade->SetText("");
+					str_stat = "Range: " + std::to_string(App->game_manager->GetCardStat((EntityType)(random_store_unit[num]), "range"));
+					range_label->SetText(str_stat);
+					range_label_upgrade->SetText("");
+					str_stat = "Units: " + std::to_string(App->game_manager->GetCardStat((EntityType)(random_store_unit[num]), "units"));
 					units_label->SetText(str_stat);
 					units_label_upgrade->SetText("");
 				}
@@ -800,29 +839,66 @@ void BattleScene::StartUI()
 	App->gui->DisableElement(pause_panel);
 
 	//Store 
-	if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() == EntityType::STORE_STRATEGY_BUILDING)
-	{
+	/*if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() == EntityType::STORE_STRATEGY_BUILDING)
+	{*/
+
+	std::string str_store[6];
+	SDL_Color color_store[6];
+
+	for (int i = 0; i < 6; ++i) {
+
+		if (App->game_manager->IsInCollection(random_store_unit[i])) {
+			str_store[i] = "Upgrade";
+			color_store[i] = { 238,238,0,255 };
+		}
+		else {
+			str_store[i] = "       New";
+			color_store[i] = { 1,255,31,255 };
+		}
+	}
+
 		store_panel = App->gui->CreateImage({ 5,4 }, { 3967, 6, 630, 951 });
-		store_unit_one = App->gui->CreateSelectableButton({ 64,159 }, App->gui->LoadUIButton(random_store_unit[0], "upgrade"), store_panel);
+		store_unit[0] = App->gui->CreateSelectableButton({ 64,159 }, App->gui->LoadUIButton(random_store_unit[0], "upgrade"), store_panel);
 		store_unit_01_cost = App->gui->CreateLabel({ 72, 289 }, "fonts/button_text.ttf", 25, std::to_string(unit_store_cost) + "g", { 255,232,2, 255 }, 710, store_panel);
-		store_unit_two = App->gui->CreateSelectableButton({ 264,159 }, App->gui->LoadUIButton(random_store_unit[1], "upgrade"), store_panel);
+		store_unit[1] = App->gui->CreateSelectableButton({ 264,159 }, App->gui->LoadUIButton(random_store_unit[1], "upgrade"), store_panel);
 		store_unit_02_cost = App->gui->CreateLabel({ 272, 289 }, "fonts/button_text.ttf", 25, std::to_string(unit_store_cost) + "g", { 255,232,2, 255 }, 710, store_panel);
-		store_unit_three = App->gui->CreateSelectableButton({ 466,159 }, App->gui->LoadUIButton(random_store_unit[2], "upgrade"), store_panel);
+		store_unit[2] = App->gui->CreateSelectableButton({ 466,159 }, App->gui->LoadUIButton(random_store_unit[2], "upgrade"), store_panel);
 		store_unit_03_cost = App->gui->CreateLabel({474, 289 }, "fonts/button_text.ttf", 25, std::to_string(unit_store_cost) + "g", { 255,232,2, 255 }, 710, store_panel);
-		store_unit_four = App->gui->CreateSelectableButton({ 64,376 }, App->gui->LoadUIButton(random_store_unit[3], "upgrade"), store_panel);
+		store_unit[3] = App->gui->CreateSelectableButton({ 64,376 }, App->gui->LoadUIButton(random_store_unit[3], "upgrade"), store_panel);
 		store_unit_04_cost = App->gui->CreateLabel({ 72,506 }, "fonts/button_text.ttf", 25, std::to_string(unit_store_cost) + "g", { 255,232,2, 255 }, 710, store_panel);
-		store_unit_five = App->gui->CreateSelectableButton({ 264,376 }, App->gui->LoadUIButton(random_store_unit[4], "upgrade"), store_panel);
+		store_unit[4] = App->gui->CreateSelectableButton({ 264,376 }, App->gui->LoadUIButton(random_store_unit[4], "upgrade"), store_panel);
 		store_unit_05_cost = App->gui->CreateLabel({ 272,506 }, "fonts/button_text.ttf", 25, std::to_string(unit_store_cost) + "g", { 255,232,2, 255 }, 710, store_panel);
-		store_unit_six = App->gui->CreateSelectableButton({ 466,376 }, App->gui->LoadUIButton(random_store_unit[5], "upgrade"), store_panel);
+		store_unit[5] = App->gui->CreateSelectableButton({ 466,376 }, App->gui->LoadUIButton(random_store_unit[5], "upgrade"), store_panel);
 		store_unit_06_cost = App->gui->CreateLabel({ 474,506 }, "fonts/button_text.ttf", 25, std::to_string(unit_store_cost) + "g", { 255,232,2, 255 }, 710, store_panel);
+
+		App->gui->CreateLabel({ 50, 113 }, "fonts/button_text.ttf", 20, str_store[0], color_store[0], 400, store_panel);
+		App->gui->CreateLabel({ 250, 113 }, "fonts/button_text.ttf", 20, str_store[1], color_store[1], 400, store_panel);
+		App->gui->CreateLabel({ 452, 113 }, "fonts/button_text.ttf", 20, str_store[2], color_store[2], 400, store_panel);
+		App->gui->CreateLabel({ 50, 338 }, "fonts/button_text.ttf", 20, str_store[3], color_store[3], 400, store_panel);
+		App->gui->CreateLabel({ 250, 338 }, "fonts/button_text.ttf", 20, str_store[4], color_store[4], 400, store_panel);
+		App->gui->CreateLabel({ 452, 338 }, "fonts/button_text.ttf", 20, str_store[5], color_store[5], 400, store_panel);
 
 		current_gold = App->gui->CreateLabel({ 30,860 }, "fonts/button_text.ttf", 20, "Your gold: " + std::to_string(App->game_manager->gold) + "g", { 255,232,2, 255 }, 710, store_panel);
 		total_cost = App->gui->CreateLabel({ 30,900 }, "fonts/button_text.ttf", 20, "Total cost: " + std::to_string(total_cost_acumulated) + "g", { 255,232,2, 255 }, 710, store_panel);
 
 		purchase = App->gui->CreateButtonText({ 350, 870 }, { 25, 0 }, purchase_rect, "CONTINUE", { 255,232,2, 255 }, 20, store_panel);
 
+		//Info
+		info_image = App->gui->CreateImage({ 64, 630 }, { 636,853,106,106 }, store_panel);
+		health_label = App->gui->CreateLabel({ 220, 630 }, "fonts/button_text.ttf", 25, "Health: -", { 231,216,145,255 }, 235, store_panel);
+		attack_label = App->gui->CreateLabel({ 220, 660 }, "fonts/button_text.ttf", 25, "Attack: -", { 231,216,145,255 }, 235, store_panel);
+		defense_label = App->gui->CreateLabel({ 220, 690 }, "fonts/button_text.ttf", 25, "Defense: -", { 231,216,145,255 }, 235, store_panel);
+		range_label = App->gui->CreateLabel({ 220, 720 }, "fonts/button_text.ttf", 25, "Range: -", { 231,216,145,255 }, 200, store_panel);
+		units_label = App->gui->CreateLabel({ 220, 750 }, "fonts/button_text.ttf", 25, "Units: -", { 231,216,145,255 }, 190, store_panel);
+
+		health_label_upgrade = App->gui->CreateLabel({ health_label->GetLocalPos().x + health_label->GetLocalRect().w, 630 }, "fonts/button_text.ttf", 25, "", { 48,169,14,255 }, 300, store_panel);
+		attack_label_upgrade = App->gui->CreateLabel({ attack_label->GetLocalPos().x + attack_label->GetLocalRect().w, 660 }, "fonts/button_text.ttf", 25, "", { 48,169,14,255 }, 300, store_panel);
+		defense_label_upgrade = App->gui->CreateLabel({ defense_label->GetLocalPos().x + defense_label->GetLocalRect().w, 690 }, "fonts/button_text.ttf", 25, "", { 48,169,14,255 }, 300, store_panel);
+		range_label_upgrade = App->gui->CreateLabel({ range_label->GetLocalPos().x + range_label->GetLocalRect().w, 720 }, "fonts/button_text.ttf", 25, "", { 48,169,14,255 }, 300, store_panel);
+		units_label_upgrade = App->gui->CreateLabel({ units_label->GetLocalPos().x + units_label->GetLocalRect().w, 750 }, "fonts/button_text.ttf", 25, "", { 48,169,14,255 }, 300, store_panel);
+
 		//App->gui->DisableElement((UIElement*)store_panel);
-	}
+	/*}*/
 	
 	//End Game Screen Lose
 	lose_panel = App->gui->CreateImage({ 17,120 }, { 3986,1646,605,660 });

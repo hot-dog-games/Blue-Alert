@@ -119,12 +119,7 @@ private:
 	//selectable buttons
 	UISelectableButton*		win_unit[3] = { nullptr, nullptr, nullptr };
 
-	UISelectableButton*		store_unit_one = nullptr;
-	UISelectableButton*		store_unit_two = nullptr;
-	UISelectableButton*		store_unit_three = nullptr;
-	UISelectableButton*		store_unit_four = nullptr;
-	UISelectableButton*		store_unit_five = nullptr;
-	UISelectableButton*		store_unit_six = nullptr;
+	UISelectableButton*		store_unit[6] = { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr };
 
 	UIImage* current_drag = nullptr;
 	int card_num;
