@@ -515,14 +515,14 @@ void  StrategyMapScene::AddCardToDeck(UIElement * element, uint num) {
 		if (deck_buttons[i] && deck_buttons[i]->enabled == false && card && !App->game_manager->IsInPlayerDeck(card)) {
 			App->gui->EnableElement(deck_buttons[i]);
 			App->game_manager->GetPlayerDeck()->AddCard(card);
-			deck_buttons[i]->ChangeSprite(App->gui->LoadUIButton((App->game_manager->GetPlayerDeck()->cards[i]->type), "upgrade"));
+			deck_buttons[i]->ChangeSprite(App->gui->LoadUIButton((App->game_manager->GetPlayerDeck()->cards[i]->type), "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)num));
 			break;
 		}
 		else if (!deck_buttons[i] && card && !App->game_manager->IsInPlayerDeck(card)) {
 			App->game_manager->GetPlayerDeck()->AddCard(card);
 			deck_buttons[i] = App->gui->CreateButtonTroops({ (int)(360 + i * 140), 99 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[i]->type, "upgrade"), LVL_1,troops_background);
 			App->gui->EnableElement(deck_buttons[i]);
-			deck_buttons[i]->ChangeSprite(App->gui->LoadUIButton((App->game_manager->GetPlayerDeck()->cards[i]->type), "upgrade"));
+			deck_buttons[i]->ChangeSprite(App->gui->LoadUIButton((App->game_manager->GetPlayerDeck()->cards[i]->type), "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)num));
 			break;
 		}
 	}
