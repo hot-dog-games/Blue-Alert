@@ -153,6 +153,7 @@ private:
 
 	//Info
 	UIImage* info_image = nullptr;
+	UIImage* counter_info = nullptr;
 	UILabel* health_label = nullptr;
 	UILabel* attack_label = nullptr;
 	UILabel* defense_label = nullptr;
@@ -175,6 +176,8 @@ private:
 
 	uint max_energy;
 	uint current_energy;
+
+	
 
 	Core* allied_core = nullptr;
 	Core* enemy_core = nullptr;
