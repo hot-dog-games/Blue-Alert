@@ -520,7 +520,7 @@ void  StrategyMapScene::AddCardToDeck(UIElement * element, uint num) {
 		}
 		else if (!deck_buttons[i] && card && !App->game_manager->IsInPlayerDeck(card)) {
 			App->game_manager->GetPlayerDeck()->AddCard(card);
-			deck_buttons[i] = App->gui->CreateButton({ (int)(360 + i * 140), 99 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[i]->type, "upgrade"), troops_background);
+			deck_buttons[i] = App->gui->CreateButtonTroops({ (int)(360 + i * 140), 99 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[i]->type, "upgrade"), LVL_1,troops_background);
 			App->gui->EnableElement(deck_buttons[i]);
 			deck_buttons[i]->ChangeSprite(App->gui->LoadUIButton((App->game_manager->GetPlayerDeck()->cards[i]->type), "upgrade"));
 			break;
@@ -603,13 +603,13 @@ void StrategyMapScene::InitializeUI()
 	troops_title[2] = App->gui->CreateLabel({ 223,605 }, "fonts/button_text.ttf", 33, "Aerial", { 0,0,0,0 }, 300, troops_background);
 
 	if (App->game_manager->GetPlayerDeck()->cards[0])
-		deck_buttons[0] = App->gui->CreateButton({ 320,30 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[0]->type, "upgrade"), troops_background);
+		deck_buttons[0] = App->gui->CreateButtonTroops({ 320,30 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[0]->type, "upgrade"), App->game_manager->GetLevelFromCollection(App->game_manager->GetPlayerDeck()->cards[0]->type), troops_background);
 	if (App->game_manager->GetPlayerDeck()->cards[1])
-		deck_buttons[1] = App->gui->CreateButton({ 450,30 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[1]->type, "upgrade"), troops_background);
+		deck_buttons[1] = App->gui->CreateButtonTroops({ 450,30 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[1]->type, "upgrade"), App->game_manager->GetLevelFromCollection(App->game_manager->GetPlayerDeck()->cards[1]->type), troops_background);
 	if (App->game_manager->GetPlayerDeck()->cards[2])
-		deck_buttons[2] = App->gui->CreateButton({ 320, 140 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[2]->type, "upgrade"), troops_background);
+		deck_buttons[2] = App->gui->CreateButtonTroops({ 320, 140 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[2]->type, "upgrade"), App->game_manager->GetLevelFromCollection(App->game_manager->GetPlayerDeck()->cards[2]->type), troops_background);
 	if (App->game_manager->GetPlayerDeck()->cards[3])
-		deck_buttons[3] = App->gui->CreateButton({ 450, 140 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[3]->type, "upgrade"), troops_background);
+		deck_buttons[3] = App->gui->CreateButtonTroops({ 450, 140 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[3]->type, "upgrade"), App->game_manager->GetLevelFromCollection(App->game_manager->GetPlayerDeck()->cards[3]->type), troops_background);
 
 	collection_buttons_allies[0] = App->gui->CreateButtonTroops({ 40,347 }, App->gui->LoadUIButton(2, "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)2), troops_background, App->game_manager->IsInCollection(2));
 	collection_buttons_allies[1] = App->gui->CreateButtonTroops({ 170,347 }, App->gui->LoadUIButton(4, "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)4), troops_background, App->game_manager->IsInCollection(4));

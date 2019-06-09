@@ -812,18 +812,18 @@ void BattleScene::StartUI()
 	App->gui->DisableElement((UIElement*)win_panel_two);
 
 		//Info
-	info_image = App->gui->CreateImage({ 110, 370 }, { 636,853,106,106 }, win_panel_two);
-	health_label = App->gui->CreateLabel({ 240, 370 }, "fonts/button_text.ttf", 18, "Health: -", { 231,216,145,255 }, 175, win_panel_two);
-	attack_label = App->gui->CreateLabel({ 240, 390 }, "fonts/button_text.ttf", 18, "Attack: -", { 231,216,145,255 }, 175, win_panel_two);
-	defense_label = App->gui->CreateLabel({ 240, 410 }, "fonts/button_text.ttf", 18, "Defense: -", { 231,216,145,255 }, 175, win_panel_two);
-	range_label = App->gui->CreateLabel({ 240, 430 }, "fonts/button_text.ttf", 18, "Range: -", { 231,216,145,255 }, 130, win_panel_two);
-	units_label = App->gui->CreateLabel({ 240, 450 }, "fonts/button_text.ttf", 18, "Units: -", { 231,216,145,255 }, 115, win_panel_two);
+	info_image = App->gui->CreateImage({ 140, 380 }, { 636,853,106,106 }, win_panel_two);
+	health_label = App->gui->CreateLabel({ 260, 380 }, "fonts/button_text.ttf", 18, "Health: -", { 231,216,145,255 }, 175, win_panel_two);
+	attack_label = App->gui->CreateLabel({ 260, 400 }, "fonts/button_text.ttf", 18, "Attack: -", { 231,216,145,255 }, 175, win_panel_two);
+	defense_label = App->gui->CreateLabel({ 260, 420 }, "fonts/button_text.ttf", 18, "Defense: -", { 231,216,145,255 }, 175, win_panel_two);
+	range_label = App->gui->CreateLabel({ 260, 440 }, "fonts/button_text.ttf", 18, "Range: -", { 231,216,145,255 }, 130, win_panel_two);
+	units_label = App->gui->CreateLabel({ 260, 460 }, "fonts/button_text.ttf", 18, "Units: -", { 231,216,145,255 }, 115, win_panel_two);
 	
-	health_label_upgrade = App->gui->CreateLabel({ health_label->GetLocalPos().x + health_label->GetLocalRect().w, 370 }, "fonts/button_text.ttf", 18, "", { 48,169,14,255 }, 300, win_panel_two);
-	attack_label_upgrade = App->gui->CreateLabel({ attack_label->GetLocalPos().x + attack_label->GetLocalRect().w, 390 }, "fonts/button_text.ttf", 18, "", { 48,169,14,255 }, 300, win_panel_two);
-	defense_label_upgrade = App->gui->CreateLabel({ defense_label->GetLocalPos().x + defense_label->GetLocalRect().w, 410 }, "fonts/button_text.ttf", 18, "", { 48,169,14,255 }, 300, win_panel_two);
-	range_label_upgrade = App->gui->CreateLabel({ range_label->GetLocalPos().x + range_label->GetLocalRect().w, 430 }, "fonts/button_text.ttf", 18, "", { 48,169,14,255 }, 300, win_panel_two);
-	units_label_upgrade = App->gui->CreateLabel({ units_label->GetLocalPos().x + units_label->GetLocalRect().w, 450 }, "fonts/button_text.ttf", 18, "", { 48,169,14,255 }, 300, win_panel_two);
+	health_label_upgrade = App->gui->CreateLabel({ health_label->GetLocalPos().x + health_label->GetLocalRect().w, 380 }, "fonts/button_text.ttf", 18, "", { 48,169,14,255 }, 300, win_panel_two);
+	attack_label_upgrade = App->gui->CreateLabel({ attack_label->GetLocalPos().x + attack_label->GetLocalRect().w, 400 }, "fonts/button_text.ttf", 18, "", { 48,169,14,255 }, 300, win_panel_two);
+	defense_label_upgrade = App->gui->CreateLabel({ defense_label->GetLocalPos().x + defense_label->GetLocalRect().w, 420 }, "fonts/button_text.ttf", 18, "", { 48,169,14,255 }, 300, win_panel_two);
+	range_label_upgrade = App->gui->CreateLabel({ range_label->GetLocalPos().x + range_label->GetLocalRect().w, 440 }, "fonts/button_text.ttf", 18, "", { 48,169,14,255 }, 300, win_panel_two);
+	units_label_upgrade = App->gui->CreateLabel({ units_label->GetLocalPos().x + units_label->GetLocalRect().w, 460 }, "fonts/button_text.ttf", 18, "", { 48,169,14,255 }, 300, win_panel_two);
 
 	//Pause
 	pause_panel = App->gui->CreateImage({ 2, 87 }, { 3967,961,636,671 });
@@ -839,23 +839,23 @@ void BattleScene::StartUI()
 	App->gui->DisableElement(pause_panel);
 
 	//Store 
-	/*if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() == EntityType::STORE_STRATEGY_BUILDING)
-	{*/
+	if (App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType() == EntityType::STORE_STRATEGY_BUILDING)
+	{
 
-	std::string str_store[6];
-	SDL_Color color_store[6];
+		std::string str_store[6];
+		SDL_Color color_store[6];
 
-	for (int i = 0; i < 6; ++i) {
+		for (int i = 0; i < 6; ++i) {
 
-		if (App->game_manager->IsInCollection(random_store_unit[i])) {
-			str_store[i] = "Upgrade";
-			color_store[i] = { 238,238,0,255 };
+			if (App->game_manager->IsInCollection(random_store_unit[i])) {
+				str_store[i] = "Upgrade";
+				color_store[i] = { 238,238,0,255 };
+			}
+			else {
+				str_store[i] = "       New";
+				color_store[i] = { 1,255,31,255 };
+			}
 		}
-		else {
-			str_store[i] = "       New";
-			color_store[i] = { 1,255,31,255 };
-		}
-	}
 
 		store_panel = App->gui->CreateImage({ 5,4 }, { 3967, 6, 630, 951 });
 		store_unit[0] = App->gui->CreateSelectableButton({ 64,159 }, App->gui->LoadUIButton(random_store_unit[0], "upgrade"), store_panel);
@@ -863,7 +863,7 @@ void BattleScene::StartUI()
 		store_unit[1] = App->gui->CreateSelectableButton({ 264,159 }, App->gui->LoadUIButton(random_store_unit[1], "upgrade"), store_panel);
 		store_unit_02_cost = App->gui->CreateLabel({ 272, 289 }, "fonts/button_text.ttf", 25, std::to_string(unit_store_cost) + "g", { 255,232,2, 255 }, 710, store_panel);
 		store_unit[2] = App->gui->CreateSelectableButton({ 466,159 }, App->gui->LoadUIButton(random_store_unit[2], "upgrade"), store_panel);
-		store_unit_03_cost = App->gui->CreateLabel({474, 289 }, "fonts/button_text.ttf", 25, std::to_string(unit_store_cost) + "g", { 255,232,2, 255 }, 710, store_panel);
+		store_unit_03_cost = App->gui->CreateLabel({ 474, 289 }, "fonts/button_text.ttf", 25, std::to_string(unit_store_cost) + "g", { 255,232,2, 255 }, 710, store_panel);
 		store_unit[3] = App->gui->CreateSelectableButton({ 64,376 }, App->gui->LoadUIButton(random_store_unit[3], "upgrade"), store_panel);
 		store_unit_04_cost = App->gui->CreateLabel({ 72,506 }, "fonts/button_text.ttf", 25, std::to_string(unit_store_cost) + "g", { 255,232,2, 255 }, 710, store_panel);
 		store_unit[4] = App->gui->CreateSelectableButton({ 264,376 }, App->gui->LoadUIButton(random_store_unit[4], "upgrade"), store_panel);
@@ -897,8 +897,8 @@ void BattleScene::StartUI()
 		range_label_upgrade = App->gui->CreateLabel({ range_label->GetLocalPos().x + range_label->GetLocalRect().w, 720 }, "fonts/button_text.ttf", 25, "", { 48,169,14,255 }, 300, store_panel);
 		units_label_upgrade = App->gui->CreateLabel({ units_label->GetLocalPos().x + units_label->GetLocalRect().w, 750 }, "fonts/button_text.ttf", 25, "", { 48,169,14,255 }, 300, store_panel);
 
-		//App->gui->DisableElement((UIElement*)store_panel);
-	/*}*/
+		App->gui->DisableElement((UIElement*)store_panel);
+	}
 	
 	//End Game Screen Lose
 	lose_panel = App->gui->CreateImage({ 17,120 }, { 3986,1646,605,660 });

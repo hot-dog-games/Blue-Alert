@@ -81,7 +81,14 @@ UIButtonTroops::UIButtonTroops(iPoint position, SDL_Rect* sprite_rect, bool is_i
 		mark[2] = { 2594,539,100,100 };
 		mark[3] = { 2482,436,100,100 };
 		break;
+
+	default:
+		mark[0] = { 2482,436,100,100 };
+		mark[1] = { 2482,436,100,100 };
+		mark[2] = { 2482,436,100,100 };
+		mark[3] = { 2482,436,100,100 };
+		break;
 	}
 
-	rect_sprite_mark = mark[0];
+	rect_sprite_mark = mark[interactable ? 0 : 3];
 }
