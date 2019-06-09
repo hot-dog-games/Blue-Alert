@@ -16,6 +16,8 @@ public:
 	void OnMouseRelease();
 	void OnMouseExit();
 
+	void ChangeSprite(SDL_Rect * rect, ButtonLevel level);
+
 	bool UIBlit();
 
 private:
