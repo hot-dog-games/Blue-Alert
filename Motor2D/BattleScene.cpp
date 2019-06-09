@@ -758,8 +758,6 @@ void BattleScene::StartUI()
 	faction_button_rect[2] = { 1427,1366,39,39 };
 	faction_button = App->gui->CreateButton({ 575, 912 }, faction_button_rect, nullptr);
 
-	counter_info = App->gui->CreateImage({ 0,3 }, { 1143, 551, 58, 50 }, bomb_button);
-
 	health_bar_image = App->gui->CreateImage({ 248, 770 }, { 24,1378,144,16 });
 	enemy_health_bar_image = App->gui->CreateImage({ 248, 30 }, { 24,1455,144,16 });
 	health_bar = App->gui->CreateBar({ 16,5 }, { 24,1404,127,10 }, allied_core->GetHealth(), BarType::BAR_HORITZONTAL, BAR_DYNAMIC, nullptr, health_bar_image, true);
