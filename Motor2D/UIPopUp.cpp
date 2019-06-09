@@ -1,6 +1,8 @@
 #include "j1App.h"
 #include "Render.h"
 #include "GUI.h"
+#include "SceneManager.h"
+#include "StrategyMapScene.h"
 #include "UIPopUp.h"
 #include "UIButton.h"
 #include "UILabel.h"
@@ -64,6 +66,13 @@ bool UIPopUp::Update(float dt)
 		App->ResumeGame();
 		App->gui->DisableElement(this);
 		App->gui->popup_active = false;
+
+		Scene* scene = App->scene_manager->current_scene;
+		StrategyMapScene* map_scene = dynamic_cast<StrategyMapScene*>(scene);
+		if (map_scene != nullptr)
+		{
+			map_scene->dragable = true;
+		}
 	}
 
 	return true;

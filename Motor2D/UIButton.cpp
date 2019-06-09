@@ -24,7 +24,7 @@ bool UIButton::UIBlit()
 
 void UIButton::OnMouseClick()
 {
-	//App->audio->PlayFx(button_fx.c_str(), 0);
+	App->audio->PlayFx(button_fx.c_str(), 0);
 	rect_sprite = anim[2];
 }
 

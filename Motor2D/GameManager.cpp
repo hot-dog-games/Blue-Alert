@@ -109,11 +109,11 @@ void GameManager::CreatePlayerDeck()
 {
 	combat_deck = new Deck();
 	AddCardToCollection(EntityType::CONSCRIPT);
-	if (stage != stage::STAGE_TUTORIAL)
-	{
-		AddCardToCollection(EntityType::SIEGECHOPPER);
-		AddCardToCollection(EntityType::DRONE);
-	}
+
+	Card* new_card = App->card_manager->CreateCard(EntityType::SIEGECHOPPER);
+	collection.push_back(new_card);
+	new_card = App->card_manager->CreateCard(EntityType::DRONE);
+	collection.push_back(new_card);
 }
 
 void GameManager::CreateStage()
@@ -134,15 +134,11 @@ bool GameManager::Restart()
 void GameManager::NewGame()
 {
 	if (!App->HasSave())
-	{
 		CreatePopUps();
-		stage = 0;
-	}
 	else
-	{
 		DeletePopUps();
-		stage = 1;
-	}
+
+	stage = stage::STAGE_TUTORIAL;
 
 	ClearCards();
 	encounter_tree->CleanTree();
@@ -159,11 +155,6 @@ void GameManager::ChangeStage()
 {
 	change_stage = false;
 
-	if (stage == stage::STAGE_TUTORIAL)
-	{
-		ClearCards();
-		CreatePlayerDeck();
-	}
 	if(stage < stage::STAGE_TOTAL - 1)
 		stage++;
 
@@ -179,10 +170,7 @@ std::string GameManager::GetBattleMap()
 	switch (stage)
 	{
 	case STAGE_TUTORIAL:
-		if (choice == 0)
 			return "grass_map.tmx";
-		else
-			return "river_map.tmx";
 	case STAGE_01:
 		if (choice == 0)
 			return "grass_map.tmx";

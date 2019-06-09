@@ -551,6 +551,7 @@ void BattleScene::ReleaseDrag()
 		}
 		else App->audio->PlayFx(no_energy.c_str(), 0);
 	}
+	else App->audio->PlayFx(no_energy.c_str(), 0);
 
 	App->map->SetDrawable("Spawn", 1);
 	App->gui->DeleteElement(current_drag);
