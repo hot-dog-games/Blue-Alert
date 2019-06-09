@@ -18,7 +18,7 @@ GameStart::~GameStart()
 
 bool GameStart::Start()
 {
-	App->video->PlayVideo("videos/hotdogpresents.mp4");
+	App->video->PlayVideo("videos/cinematic_trailer.mp4");
 	return true;
 }
 

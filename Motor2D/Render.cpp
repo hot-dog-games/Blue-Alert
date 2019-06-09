@@ -46,6 +46,9 @@ bool Render::Awake(pugi::xml_node& config)
 		camera.h = App->win->screen_surface->h;
 		camera.x = 0;
 		camera.y = 0;
+
+		viewport = { 0,0,0,0 };
+		SDL_RenderGetViewport(renderer, &viewport);
 	}
 
 	return ret;
@@ -56,7 +59,7 @@ bool Render::Start()
 {
 	LOG("render start");
 	// back background
-	SDL_RenderGetViewport(renderer, &viewport);
+
 	return true;
 }
 
@@ -75,7 +78,16 @@ bool Render::Update(float dt)
 bool Render::PostUpdate()
 {
 	SDL_SetRenderDrawColor(renderer, background.r, background.g, background.g, background.a);
-	SDL_RenderSetViewport(renderer, &viewport);
+
+	uint w, h;
+	App->win->GetWindowSize(w, h);
+
+	scaled_viewport.x = (viewport.w / 2) - ((w * App->win->GetScale()) / 2);
+	scaled_viewport.y = (viewport.h - (h * App->win->GetScale())) / 2;
+	scaled_viewport.w = w * App->win->GetScale();
+	scaled_viewport.h = h * App->win->GetScale();
+
+	SDL_RenderSetViewport(renderer, &scaled_viewport);
 	SDL_RenderPresent(renderer);
 	return true;
 }

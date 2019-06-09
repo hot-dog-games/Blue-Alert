@@ -538,6 +538,8 @@ void BattleScene::ReleaseDrag()
 {
 	int x, y;
 	App->input->GetMousePosition(x, y);
+	x -= App->render->scaled_viewport.x;
+	y -= App->render->scaled_viewport.y;
 	iPoint world_pos = App->render->ScreenToWorld(x, y);
 	iPoint map_pos = App->map->WorldToMap(world_pos.x, world_pos.y);
 

@@ -1,6 +1,7 @@
 #include "p2Log.h"
 #include "j1App.h"
 #include "Render.h"
+#include "Window.h"
 #include "Input.h"
 #include "GameManager.h"
 #include "EncounterTree.h"
@@ -21,14 +22,17 @@ StrategyBuilding::~StrategyBuilding()
 bool StrategyBuilding::Update(float dt)
 {
 	int mouse_x, mouse_y;
-
 	App->input->GetMousePosition(mouse_x, mouse_y);
+	mouse_x -= App->render->scaled_viewport.x;
+	mouse_y -= App->render->scaled_viewport.y;
 
 	iPoint mouse_world = App->render->ScreenToWorld(mouse_x, mouse_y);
 
+
 	if (in_range)
 	{
-		if (mouse_world.x > position.x - current_frame.w / 2 && mouse_world.x < position.x + current_frame.w / 2 && mouse_world.y < position.y && mouse_world.y > position.y - current_frame.h)
+		if (mouse_world.x > position.x - ((current_frame.w / 2) * App->win->GetScale())  && mouse_world.x < position.x + ((current_frame.w / 2) * App->win->GetScale())
+			&& mouse_world.y < position.y && mouse_world.y > position.y - (current_frame.h * App->win->GetScale()))
 		{
 			state = STATIC_HOVERED;
 			current_animation = &animations.find("highlight")->second;
