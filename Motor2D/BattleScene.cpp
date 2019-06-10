@@ -769,7 +769,7 @@ void BattleScene::StartUI()
 	faction_button_rect[2] = { 1427,1366,39,39 };
 	faction_button = App->gui->CreateButton({ 575, 912 }, faction_button_rect, nullptr);
 
-	counter_panel = App->gui->CreateImage({ 60, 180 }, { 2761,967,518,479 }, nullptr);
+	counter_panel = App->gui->CreateImage({ 60, 180 }, { 3393,992,518,479 }, nullptr);
 	App->gui->DisableElement(counter_panel);
 
 	health_bar_image = App->gui->CreateImage({ 248, 770 }, { 24,1378,144,16 });
