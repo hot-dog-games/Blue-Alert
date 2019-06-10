@@ -55,14 +55,17 @@ bool StrategyMapScene::Start()
 	case STAGE_TUTORIAL: 
 		App->map->Load("Tutorial_Nodes_Map.tmx"); 
 		map_camera_limit = { 0, 0, (int)(2000 * App->win->GetScale()), (int)(1692 * App->win->GetScale()) };
+		level_name_str = "Tutorial";
 		break;
 	case STAGE_01: 
 		App->map->Load("Nodes Map.tmx");
 		map_camera_limit = { 0, 0, (int)(2600 * App->win->GetScale()), (int)(1792 * App->win->GetScale()) };
+		level_name_str = "Stage 01";
 		break;
 	case STAGE_02: 
 		App->map->Load("Nodes Map Snow.tmx"); 
 		map_camera_limit = { 0, 0, (int)(2600 * App->win->GetScale()), (int)(1992 * App->win->GetScale()) };
+		level_name_str = "Stage 02";
 		break;
 	default:
 		break;
@@ -220,6 +223,7 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			App->gui->DisableElement(collection_button);
 			App->gui->DisableElement(settings_button);
 			App->gui->DisableElement(buildings_background);
+			App->gui->DisableElement(banner);
 
 			App->game_manager->GetEncounterTree()->is_clickable = false;
 			dragable = false;
@@ -244,6 +248,7 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 
 			App->gui->EnableElement(collection_button);
 			App->gui->EnableElement(settings_button);
+			App->gui->EnableElement(banner);
 
 			App->game_manager->GetEncounterTree()->is_clickable = true;
 			dragable = true;
@@ -520,7 +525,7 @@ void  StrategyMapScene::AddCardToDeck(UIElement * element, uint num) {
 		}
 		else if (!deck_buttons[i] && card && !App->game_manager->IsInPlayerDeck(card)) {
 			App->game_manager->GetPlayerDeck()->AddCard(card);
-			deck_buttons[i] = App->gui->CreateButtonTroops({ (int)(360 + i * 140), 99 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[i]->type, "upgrade"), LVL_1,troops_background);
+			deck_buttons[i] = App->gui->CreateButtonTroops({ (int)(360 + i * 140), 99 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[i]->type, "upgrade"), LVL_1, COLLECTION, troops_background);
 			App->gui->EnableElement(deck_buttons[i]);
 			deck_buttons[i]->ChangeSprite(App->gui->LoadUIButton((App->game_manager->GetPlayerDeck()->cards[i]->type), "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)num));
 			break;
@@ -534,6 +539,11 @@ void StrategyMapScene::InitializeUI()
 	App->win->GetWindowSize(w, h);
 
 	main_panel = App->gui->CreateImage({ 0,0 }, { 0, 0, 0, 0 }, nullptr, false);
+
+	banner = App->gui->CreateImage({ 46,10 }, { 3345,923,547,44 }, main_panel);
+	level_name = App->gui->CreateLabel({150,4 }, "fonts/button_text.ttf", 30, level_name_str, { 255,255,255,255 }, 300, banner);
+	gold_image = App->gui->CreateImage({ 425,8 }, { 3908,924,28,28 }, banner);
+	gold_quantity = App->gui->CreateLabel({ 455, 4 }, "fonts/quantico.ttf", 25, std::to_string(App->game_manager->gold) + " g", { 231,216,145,255 }, 200, banner);
 
 	SDL_Rect small_button_rect[3];
 	small_button_rect[0] = { 753, 497, 41, 40 };
@@ -603,33 +613,33 @@ void StrategyMapScene::InitializeUI()
 	troops_title[2] = App->gui->CreateLabel({ 223,605 }, "fonts/button_text.ttf", 33, "Aerial", { 0,0,0,0 }, 300, troops_background);
 
 	if (App->game_manager->GetPlayerDeck()->cards[0])
-		deck_buttons[0] = App->gui->CreateButtonTroops({ 320,30 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[0]->type, "upgrade"), App->game_manager->GetLevelFromCollection(App->game_manager->GetPlayerDeck()->cards[0]->type), troops_background);
+		deck_buttons[0] = App->gui->CreateButtonTroops({ 320,30 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[0]->type, "upgrade"), App->game_manager->GetLevelFromCollection(App->game_manager->GetPlayerDeck()->cards[0]->type), COLLECTION, troops_background);
 	if (App->game_manager->GetPlayerDeck()->cards[1])
-		deck_buttons[1] = App->gui->CreateButtonTroops({ 450,30 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[1]->type, "upgrade"), App->game_manager->GetLevelFromCollection(App->game_manager->GetPlayerDeck()->cards[1]->type), troops_background);
+		deck_buttons[1] = App->gui->CreateButtonTroops({ 450,30 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[1]->type, "upgrade"), App->game_manager->GetLevelFromCollection(App->game_manager->GetPlayerDeck()->cards[1]->type), COLLECTION, troops_background);
 	if (App->game_manager->GetPlayerDeck()->cards[2])
-		deck_buttons[2] = App->gui->CreateButtonTroops({ 320, 140 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[2]->type, "upgrade"), App->game_manager->GetLevelFromCollection(App->game_manager->GetPlayerDeck()->cards[2]->type), troops_background);
+		deck_buttons[2] = App->gui->CreateButtonTroops({ 320, 140 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[2]->type, "upgrade"), App->game_manager->GetLevelFromCollection(App->game_manager->GetPlayerDeck()->cards[2]->type), COLLECTION, troops_background);
 	if (App->game_manager->GetPlayerDeck()->cards[3])
-		deck_buttons[3] = App->gui->CreateButtonTroops({ 450, 140 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[3]->type, "upgrade"), App->game_manager->GetLevelFromCollection(App->game_manager->GetPlayerDeck()->cards[3]->type), troops_background);
+		deck_buttons[3] = App->gui->CreateButtonTroops({ 450, 140 }, App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[3]->type, "upgrade"), App->game_manager->GetLevelFromCollection(App->game_manager->GetPlayerDeck()->cards[3]->type), COLLECTION, troops_background);
 
-	collection_buttons_allies[0] = App->gui->CreateButtonTroops({ 40,347 }, App->gui->LoadUIButton(2, "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)2), troops_background, App->game_manager->IsInCollection(2));
-	collection_buttons_allies[1] = App->gui->CreateButtonTroops({ 170,347 }, App->gui->LoadUIButton(4, "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)4), troops_background, App->game_manager->IsInCollection(4));
-	collection_buttons_allies[2] = App->gui->CreateButtonTroops({ 110,477 }, App->gui->LoadUIButton(6, "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)6), troops_background, App->game_manager->IsInCollection(6));
-	collection_buttons_allies[3] = App->gui->CreateButtonTroops({ 350,347 }, App->gui->LoadUIButton(8, "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)8), troops_background, App->game_manager->IsInCollection(8));
-	collection_buttons_allies[4] = App->gui->CreateButtonTroops({ 480,347 }, App->gui->LoadUIButton(10, "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)10), troops_background, App->game_manager->IsInCollection(10));
-	collection_buttons_allies[5] = App->gui->CreateButtonTroops({ 420,477 }, App->gui->LoadUIButton(12, "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)12), troops_background, App->game_manager->IsInCollection(12));
-	collection_buttons_allies[6] = App->gui->CreateButtonTroops({ 90,685 }, App->gui->LoadUIButton(14, "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)14), troops_background, App->game_manager->IsInCollection(14));
-	collection_buttons_allies[7] = App->gui->CreateButtonTroops({ 260,685 }, App->gui->LoadUIButton(16, "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)16), troops_background, App->game_manager->IsInCollection(16));
-	collection_buttons_allies[8] = App->gui->CreateButtonTroops({ 430,685 }, App->gui->LoadUIButton(18, "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)18), troops_background, App->game_manager->IsInCollection(18));
+	collection_buttons_allies[0] = App->gui->CreateButtonTroops({ 40,347 }, App->gui->LoadUIButton(2, "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)2), COLLECTION, troops_background, App->game_manager->IsInCollection(2));
+	collection_buttons_allies[1] = App->gui->CreateButtonTroops({ 170,347 }, App->gui->LoadUIButton(4, "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)4), COLLECTION, troops_background, App->game_manager->IsInCollection(4));
+	collection_buttons_allies[2] = App->gui->CreateButtonTroops({ 110,477 }, App->gui->LoadUIButton(6, "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)6), COLLECTION, troops_background, App->game_manager->IsInCollection(6));
+	collection_buttons_allies[3] = App->gui->CreateButtonTroops({ 350,347 }, App->gui->LoadUIButton(8, "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)8), COLLECTION, troops_background, App->game_manager->IsInCollection(8));
+	collection_buttons_allies[4] = App->gui->CreateButtonTroops({ 480,347 }, App->gui->LoadUIButton(10, "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)10), COLLECTION, troops_background, App->game_manager->IsInCollection(10));
+	collection_buttons_allies[5] = App->gui->CreateButtonTroops({ 420,477 }, App->gui->LoadUIButton(12, "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)12), COLLECTION, troops_background, App->game_manager->IsInCollection(12));
+	collection_buttons_allies[6] = App->gui->CreateButtonTroops({ 90,685 }, App->gui->LoadUIButton(14, "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)14), COLLECTION, troops_background, App->game_manager->IsInCollection(14));
+	collection_buttons_allies[7] = App->gui->CreateButtonTroops({ 260,685 }, App->gui->LoadUIButton(16, "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)16), COLLECTION, troops_background, App->game_manager->IsInCollection(16));
+	collection_buttons_allies[8] = App->gui->CreateButtonTroops({ 430,685 }, App->gui->LoadUIButton(18, "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)18), COLLECTION, troops_background, App->game_manager->IsInCollection(18));
 
-	collection_buttons_enemies[0] = App->gui->CreateButtonTroops({ 40,347 }, App->gui->LoadUIButton(1, "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)1), troops_background, App->game_manager->IsInCollection(1));
-	collection_buttons_enemies[1] = App->gui->CreateButtonTroops({ 170,347 }, App->gui->LoadUIButton(3, "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)3), troops_background, App->game_manager->IsInCollection(3));
-	collection_buttons_enemies[2] = App->gui->CreateButtonTroops({ 110,477 }, App->gui->LoadUIButton(5, "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)5), troops_background, App->game_manager->IsInCollection(5));
-	collection_buttons_enemies[3] = App->gui->CreateButtonTroops({ 350,347 }, App->gui->LoadUIButton(7, "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)7), troops_background, App->game_manager->IsInCollection(7));
-	collection_buttons_enemies[4] = App->gui->CreateButtonTroops({ 480,347 }, App->gui->LoadUIButton(9, "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)9), troops_background, App->game_manager->IsInCollection(9));
-	collection_buttons_enemies[5] = App->gui->CreateButtonTroops({ 420,477 }, App->gui->LoadUIButton(11, "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)11), troops_background, App->game_manager->IsInCollection(11));
-	collection_buttons_enemies[6] = App->gui->CreateButtonTroops({ 90,685 }, App->gui->LoadUIButton(13, "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)13), troops_background, App->game_manager->IsInCollection(13));
-	collection_buttons_enemies[7] = App->gui->CreateButtonTroops({ 260,685 }, App->gui->LoadUIButton(15, "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)15), troops_background, App->game_manager->IsInCollection(15));
-	collection_buttons_enemies[8] = App->gui->CreateButtonTroops({ 430,685 }, App->gui->LoadUIButton(17, "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)17), troops_background, App->game_manager->IsInCollection(17));
+	collection_buttons_enemies[0] = App->gui->CreateButtonTroops({ 40,347 }, App->gui->LoadUIButton(1, "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)1), COLLECTION, troops_background, App->game_manager->IsInCollection(1));
+	collection_buttons_enemies[1] = App->gui->CreateButtonTroops({ 170,347 }, App->gui->LoadUIButton(3, "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)3), COLLECTION, troops_background, App->game_manager->IsInCollection(3));
+	collection_buttons_enemies[2] = App->gui->CreateButtonTroops({ 110,477 }, App->gui->LoadUIButton(5, "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)5), COLLECTION, troops_background, App->game_manager->IsInCollection(5));
+	collection_buttons_enemies[3] = App->gui->CreateButtonTroops({ 350,347 }, App->gui->LoadUIButton(7, "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)7), COLLECTION, troops_background, App->game_manager->IsInCollection(7));
+	collection_buttons_enemies[4] = App->gui->CreateButtonTroops({ 480,347 }, App->gui->LoadUIButton(9, "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)9), COLLECTION, troops_background, App->game_manager->IsInCollection(9));
+	collection_buttons_enemies[5] = App->gui->CreateButtonTroops({ 420,477 }, App->gui->LoadUIButton(11, "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)11), COLLECTION, troops_background, App->game_manager->IsInCollection(11));
+	collection_buttons_enemies[6] = App->gui->CreateButtonTroops({ 90,685 }, App->gui->LoadUIButton(13, "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)13), COLLECTION, troops_background, App->game_manager->IsInCollection(13));
+	collection_buttons_enemies[7] = App->gui->CreateButtonTroops({ 260,685 }, App->gui->LoadUIButton(15, "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)15), COLLECTION, troops_background, App->game_manager->IsInCollection(15));
+	collection_buttons_enemies[8] = App->gui->CreateButtonTroops({ 430,685 }, App->gui->LoadUIButton(17, "upgrade"), App->game_manager->GetLevelFromCollection((EntityType)17), COLLECTION, troops_background, App->game_manager->IsInCollection(17));
 
 	App->gui->DisableElement(troops_background);
 
@@ -648,30 +658,30 @@ void StrategyMapScene::InitializeUI()
 
 	building_infantry_button = App->gui->CreateSelectableButton({ 17, 665 }, App->gui->LoadUIButton(30, "button"), buildings_background);
 	building_infantry_image = App->gui->CreateImage({ 26,395 }, App->gui->LoadUIImage(30, "building"), buildings_background);
-	building_infantry_info = App->gui->CreateLabel({ 235,-5 }, "fonts/button_text.ttf", 15, str, { 231,216,145,255 }, 350, building_infantry_image);
+	building_infantry_info = App->gui->CreateLabel({ 235,-5 }, "fonts/quantico.ttf", 20, str, { 231,216,145,255 }, 350, building_infantry_image);
 
 	//Aerial
 	str = "The aerial building is where the helicopters and planes are parked.\n\nConquered: " + std::to_string(((LeveledUpgrade*)App->game_manager->aerial_upgrade)->GetLevel())
 		+ "\nDamage increase: " + std::to_string(((LeveledUpgrade*)App->game_manager->aerial_upgrade)->GetBuffValue("damage")) + "\nHealth increase: " + std::to_string(((LeveledUpgrade*)App->game_manager->aerial_upgrade)->GetBuffValue("health"));
 	building_aerial_button = App->gui->CreateSelectableButton({ 401,685 }, App->gui->LoadUIButton(31, "button"), buildings_background);
 	building_aerial_image = App->gui->CreateImage({ 30,425 }, App->gui->LoadUIImage(31, "building"), buildings_background);
-	building_aerial_info = App->gui->CreateLabel({ 230, -35 }, "fonts/button_text.ttf", 15, str, { 231,216,145,255 }, 300, building_aerial_image);
+	building_aerial_info = App->gui->CreateLabel({ 230, -35 }, "fonts/quantico.ttf", 20, str, { 231,216,145,255 }, 300, building_aerial_image);
 
 	//Land
 	str = "The land building is where the tanks are waiting for the battle.\n\nConquered: " + std::to_string(((LeveledUpgrade*)App->game_manager->land_upgrade)->GetLevel())
 		+ "\nDamage increase: " + std::to_string(((LeveledUpgrade*)App->game_manager->land_upgrade)->GetBuffValue("damage")) + "\nHealth increase: " + std::to_string(((LeveledUpgrade*)App->game_manager->land_upgrade)->GetBuffValue("health"));
 	building_land_button = App->gui->CreateSelectableButton({ 210,652 } , App->gui->LoadUIButton(32, "button"), buildings_background);
 	building_land_image = App->gui->CreateImage({ 26,395 } , App->gui->LoadUIImage(32, "building"), buildings_background);
-	building_land_info = App->gui->CreateLabel({ 235,-5 } , "fonts/button_text.ttf", 15, str, { 231,216,145,255 }, 300, building_land_image);
+	building_land_info = App->gui->CreateLabel({ 235,-5 } , "fonts/quantico.ttf", 20, str, { 231,216,145,255 }, 300, building_land_image);
 
 	//Core
 	core_image = App->gui->CreateImage({ 40, 130 }, { 1538,23,173,114 }, buildings_background);
 
-	core_title = App->gui->CreateLabel({ 20, 15 }, "fonts/button_text.ttf", 43, "CORE", { 242, 222, 70, 255 }, 200, buildings_background);
-	core_info = App->gui->CreateLabel({ 260, 72 }, "fonts/button_text.ttf", 15, "The core travels around the map destroying all the enemies bases.", { 231,216,145,255 }, 300, buildings_background);
+	core_title = App->gui->CreateLabel({ 20, 15 }, "fonts/quantico.ttf", 43, "CORE", { 242, 222, 70, 255 }, 200, buildings_background);
+	core_info = App->gui->CreateLabel({ 260, 72 }, "fonts/quantico.ttf", 18, "The core travels around the map destroying all the enemies bases.", { 231,216,145,255 }, 300, buildings_background);
 
 	str = "Health: " + std::to_string((int)App->game_manager->stats.find("health")->second->GetValue());
-	core_health = App->gui->CreateLabel({ 260, 150 }, "fonts/button_text.ttf", 16, str, { 231,216,145,255 }, 200, buildings_background);
+	core_health = App->gui->CreateLabel({ 260, 140 }, "fonts/button_text.ttf", 16, str, { 231,216,145,255 }, 200, buildings_background);
 
 	str = "Energy: " + std::to_string((int)App->game_manager->stats.find("energy")->second->GetValue());
 	core_energy = App->gui->CreateLabel({ 260, 170 }, "fonts/button_text.ttf", 16, str, { 231,216,145,255 }, 200, buildings_background);
@@ -695,17 +705,14 @@ void StrategyMapScene::InitializeUI()
 
 	//Show Info
 	info_image = App->gui->CreateImage({ 25,37 }, { 636,853,106,106 }, troops_background);
-	health_label = App->gui->CreateLabel({ 135, 40 }, "fonts/button_text.ttf", 12, "Health: -", { 231,216,145,255 }, 120, troops_background);
-	attack_label = App->gui->CreateLabel({ 135, 60 }, "fonts/button_text.ttf", 12, "Attack: -", { 231,216,145,255 }, 120, troops_background);
-	defense_label = App->gui->CreateLabel({ 135, 80 }, "fonts/button_text.ttf", 12, "Defense: -", { 231,216,145,255 }, 120, troops_background);
-	range_label = App->gui->CreateLabel({ 135, 100 }, "fonts/button_text.ttf", 12, "Range: -", { 231,216,145,255 }, 120, troops_background);
-	units_label = App->gui->CreateLabel({ 135, 120 }, "fonts/button_text.ttf", 12, "Units: -", { 231,216,145,255 }, 120, troops_background);
+	health_label = App->gui->CreateLabel({ 135, 30 }, "fonts/quantico.ttf", 20, "Health: -", { 231,216,145,255 }, 120, troops_background);
+	attack_label = App->gui->CreateLabel({ 135, 50 }, "fonts/quantico.ttf", 20, "Attack: -", { 231,216,145,255 }, 120, troops_background);
+	defense_label = App->gui->CreateLabel({ 135, 70 }, "fonts/quantico.ttf", 20, "Defense: -", { 231,216,145,255 }, 120, troops_background);
+	range_label = App->gui->CreateLabel({ 135, 90 }, "fonts/quantico.ttf", 20, "Range: -", { 231,216,145,255 }, 120, troops_background);
+	units_label = App->gui->CreateLabel({ 135, 110 }, "fonts/quantico.ttf", 20, "Units: -", { 231,216,145,255 }, 120, troops_background);
 
 	energy_bar = App->gui->CreateBar({ 8,188 }, { 2897,1780,260,65 }, App->game_manager->GetCardFromCollection(CONSCRIPT)->info.stats.find("energy_cost")->second, BAR_HORITZONTAL, BAR_STATIC, nullptr, troops_background);
 
-	//Gold
-	str = "Gold: " + std::to_string(App->game_manager->gold) + "g";
-	gold_quantity = App->gui->CreateLabel({ 460, 150 }, "fonts/button_text.ttf", 16, str, { 231,216,145,255 }, 200, buildings_background);
 }
 
 bool StrategyMapScene::IsInsideLimits(int mousemotion_x, int mousemotion_y)

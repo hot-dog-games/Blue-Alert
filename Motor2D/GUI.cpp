@@ -237,9 +237,9 @@ UIButtonText * Gui::CreateButtonText(iPoint pos, iPoint offset, SDL_Rect * sprit
 	return button;
 }
 
-UIButtonTroops* Gui::CreateButtonTroops(iPoint pos, SDL_Rect* sprite_rect, ButtonLevel lvl, UIElement* parent, bool is_interactable) {
+UIButtonTroops* Gui::CreateButtonTroops(iPoint pos, SDL_Rect* sprite_rect, ButtonLevel lvl, ButtonTroopType type, UIElement* parent, bool is_interactable) {
 
-	UIButtonTroops* button = new UIButtonTroops(pos, sprite_rect, is_interactable, lvl);
+	UIButtonTroops* button = new UIButtonTroops(pos, sprite_rect, is_interactable, lvl, type);
 	button->parent = parent;
 	elements.push_back(button);
 

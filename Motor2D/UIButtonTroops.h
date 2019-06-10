@@ -4,11 +4,12 @@
 #include"UIButton.h"
 
 enum ButtonLevel;
+enum ButtonTroopType;
 
 class UIButtonTroops : public UIButton
 {
 public:
-	UIButtonTroops(iPoint pos, SDL_Rect* sprite_rect, bool is_interactable, ButtonLevel lvl);
+	UIButtonTroops(iPoint pos, SDL_Rect* sprite_rect, bool is_interactable, ButtonLevel lvl, ButtonTroopType type);
 	~UIButtonTroops();
 
 	void OnMouseClick();

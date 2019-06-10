@@ -47,6 +47,10 @@ public:
 
 private:
 	UIImage* banner = nullptr;
+	UILabel* level_name = nullptr;
+	UIImage* gold_image = nullptr;
+	std::string level_name_str = "";
+
 	UIImage* options = nullptr;
 	UIImage* troops_background = nullptr;
 	UIImage* main_panel = nullptr;
