@@ -31,13 +31,11 @@ _Drag card inside spawn area deploys unit_
 	* Player ultimate ability
 	* All damage calculations
 	
-<img src="Readme_Files/basicattack.gif" width="320" height="480">
-_Basic attack with particle_
-<img src="Readme_Files/aoegif.gif" width="320" height="480">
-_AOE attack with particles_
-<img src="Readme_Files/penetrating.gif" width="320" height="480">
-_Penetrating attack with particle_
+<img src="Readme_Files/basicattack.gif" width="160" height="240">
 
+<img src="Readme_Files/aoegif.gif" width="160" height="240">
+
+<img src="Readme_Files/penetrating.gif" width="160" height="240">
 
 * Basic AI of units
 	* Unit moves to the enemy Core
