@@ -15,10 +15,10 @@
 ### Units
 * Implemented unit spawn through card usage
 * Limited spawn of units inside spawn area
+* Unit movement through A* pathfinding
 
 	<img src="Readme_Files/deploygif.gif" width="320" height="480">
 
-* Unit movement through A* pathfinding
 * Animations
 	* Implemented animations for each unit in the game
 	* Adjust animations pivot for units
