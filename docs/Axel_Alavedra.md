@@ -17,7 +17,6 @@
 * Limited spawn of units inside spawn area
 
 <img src="Readme_Files/deploygif.gif" width="320" height="480">
-_Drag card inside spawn area deploys unit_
 
 * Unit movement through A* pathfinding
 * Animations
@@ -31,11 +30,7 @@ _Drag card inside spawn area deploys unit_
 	* Player ultimate ability
 	* All damage calculations
 	
-<img src="Readme_Files/basicattack.gif" width="160" height="240">
-
-<img src="Readme_Files/aoegif.gif" width="160" height="240">
-
-<img src="Readme_Files/penetrating.gif" width="160" height="240">
+<img src="Readme_Files/basicattack.gif" width="160" height="240"><img src="Readme_Files/aoegif.gif" width="160" height="240"><img src="Readme_Files/penetrating.gif" width="160" height="240">
 
 * Basic AI of units
 	* Unit moves to the enemy Core
@@ -47,7 +42,6 @@ _Drag card inside spawn area deploys unit_
 * Prioritizes zone of the map to spawn depending on amount of enemies, damage and proximity to Core.
 
 <img src="Readme_Files/aispawn.gif" width="320" height="480">
-_AI spawns to lane where enemies are_
 
 ### Save/Load
 * Game automatically saves each time a battle has finished.
@@ -61,7 +55,6 @@ _AI spawns to lane where enemies are_
 * Implemented color change on life bars depending on value
 
 <img src="Readme_Files/lifebargif.gif" width="320" height="480">
-_Health bar goes from green to red_
 
 * Implemented Video module to the engine from my research (link)
 * Helped as much as I could with code issues of other team members
