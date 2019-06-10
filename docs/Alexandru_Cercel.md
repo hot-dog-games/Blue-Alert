@@ -4,9 +4,6 @@
 > Disclaimer: All the art is made by our Artist [Laia Martínez](https://github.com/LaiaMartinezMotis).
 
 
-
-   
-
 ### QA
 - **Backlog of the bugs and issues**  ![Issues backlog](https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/IssuesBackLog.jpg)
 - **Tracked categorizied and priorized bugs** ![Issue Report](https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/IssuesReport.jpg)
@@ -21,6 +18,6 @@
 - **Wiki** [QA Plan](https://github.com/hot-dog-games/Blue-Alert/wiki/8.--QA-Plan).
 - **Contribuited to Team, Vertical Slice and Aplha presentation**
 - **Made playtestings** ![formulario](https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/formulario.jpg)
-
+- **Social media updates** ![Twitter Image](https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/twitterimage.jpg)
 ## Code
- - **Added SFX and music to the game:** 
+ - **Added SFX and music to the game** 
