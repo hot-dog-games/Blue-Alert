@@ -7,14 +7,14 @@ As the member in charge of the development of the design part of the game, I've 
 ### Blue Alert Design
 
  - Create Background History for the game.
-	 <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/trump.png" width="500" height="400">
+	 <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/trump.png?raw=true" width="500" height="400">
 	 
 	 - Battle system and business system of the game.
 	 
  - Created balancing system for the game.
  
     - Atribute system.
-    <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/tabla_tipos.png" width="500" height="400">
+    <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/tabla_tipos.png?raw=true" width="500" height="400">
 
 	- Building buff Design
 	<img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Troops%20Menu%20Vertical.png?raw=true" width="350" height="550"/> <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Buildings%20Menu%20Vetical.png?raw=true" width="350" height="550"/> 
