@@ -436,7 +436,7 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 		std::string str_stat = "";
 		for (int num = 0; num < 3; ++num) {
 			if (element == win_unit[num]) {
-				info_image->SetImage(win_unit[num]->GetAnim()[0]);
+				info_image->SetImage(win_unit[num]->GetAnim()[1]);
 				if (App->game_manager->IsInCollection((EntityType)(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[num]))) {
 					str_stat = "Health: " + std::to_string(App->game_manager->GetCardStat((EntityType)(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[num]), "health"));
 					health_label->SetText(str_stat);
@@ -780,9 +780,9 @@ void BattleScene::StartUI()
 
 	win_panel_one = App->gui->CreateImage({ 17,120 }, { 3986,1646,605,660 });
 	win_panel_two = App->gui->CreateImage({ 17,120 }, { 4602,1646,605,660 });
-	win_text_one = App->gui->CreateLabel({ 30,30 }, "fonts/button_text.ttf", 23, "Congratulations, you've conquered this zone and unlocked the next building!", { 255,232,2, 255 }, 565, win_panel_one);
+	win_text_one = App->gui->CreateLabel({ 30,30 }, "fonts/quantico.ttf", 30, "Congratulations, you've conquered this zone and unlocked the next building!", { 255,232,2, 255 }, 565, win_panel_one);
 	gol_reward_text = App->gui->CreateLabel({ 30, 480 }, "fonts/button_text.ttf", 23, "Gold earned: " + std::to_string(App->game_manager->GetEncounterTree()->GetFightingNode()->GetGoldReward()) + "g", { 234,208,31, 255 }, 565, win_panel_one);
-	win_text_two = App->gui->CreateLabel({ 30,30 }, "fonts/button_text.ttf", 23, "Upgrade a troop or choose a new one to add it to your deck", { 255,232,2, 255 }, 565, win_panel_two);
+	win_text_two = App->gui->CreateLabel({ 30,30 }, "fonts/quantico.ttf", 30, "Upgrade a troop or choose a new one to add it to your deck", { 255,232,2, 255 }, 565, win_panel_two);
 	win_continue_one = App->gui->CreateButtonText({ 170, 560 }, { 30,0}, button_rect, "CONTINUE", { 200,200,200,255 }, 27, win_panel_one);
 	win_continue_two = App->gui->CreateButtonText({ 170, 560 }, { 30,0 }, button_rect, "CONTINUE", { 200,200,200,255 }, 27, win_panel_two);
 
@@ -816,17 +816,17 @@ void BattleScene::StartUI()
 
 		//Info
 	info_image = App->gui->CreateImage({ 140, 380 }, { 636,853,106,106 }, win_panel_two);
-	health_label = App->gui->CreateLabel({ 260, 380 }, "fonts/button_text.ttf", 18, "Health: -", { 231,216,145,255 }, 175, win_panel_two);
-	attack_label = App->gui->CreateLabel({ 260, 400 }, "fonts/button_text.ttf", 18, "Attack: -", { 231,216,145,255 }, 175, win_panel_two);
-	defense_label = App->gui->CreateLabel({ 260, 420 }, "fonts/button_text.ttf", 18, "Defense: -", { 231,216,145,255 }, 175, win_panel_two);
-	range_label = App->gui->CreateLabel({ 260, 440 }, "fonts/button_text.ttf", 18, "Range: -", { 231,216,145,255 }, 130, win_panel_two);
-	units_label = App->gui->CreateLabel({ 260, 460 }, "fonts/button_text.ttf", 18, "Units: -", { 231,216,145,255 }, 115, win_panel_two);
+	health_label = App->gui->CreateLabel({ 260, 370 }, "fonts/quantico.ttf", 23, "Health: -", { 231,216,145,255 }, 130, win_panel_two);
+	attack_label = App->gui->CreateLabel({ 260, 390 }, "fonts/quantico.ttf", 23, "Attack: -", { 231,216,145,255 }, 130, win_panel_two);
+	defense_label = App->gui->CreateLabel({ 260, 410 }, "fonts/quantico.ttf", 23, "Defense: -", { 231,216,145,255 }, 135, win_panel_two);
+	range_label = App->gui->CreateLabel({ 260, 430 }, "fonts/quantico.ttf", 23, "Range: -", { 231,216,145,255 }, 105, win_panel_two);
+	units_label = App->gui->CreateLabel({ 260, 450 }, "fonts/quantico.ttf", 23, "Units: -", { 231,216,145,255 }, 90, win_panel_two);
 	
-	health_label_upgrade = App->gui->CreateLabel({ health_label->GetLocalPos().x + health_label->GetLocalRect().w, 380 }, "fonts/button_text.ttf", 18, "", { 48,169,14,255 }, 300, win_panel_two);
-	attack_label_upgrade = App->gui->CreateLabel({ attack_label->GetLocalPos().x + attack_label->GetLocalRect().w, 400 }, "fonts/button_text.ttf", 18, "", { 48,169,14,255 }, 300, win_panel_two);
-	defense_label_upgrade = App->gui->CreateLabel({ defense_label->GetLocalPos().x + defense_label->GetLocalRect().w, 420 }, "fonts/button_text.ttf", 18, "", { 48,169,14,255 }, 300, win_panel_two);
-	range_label_upgrade = App->gui->CreateLabel({ range_label->GetLocalPos().x + range_label->GetLocalRect().w, 440 }, "fonts/button_text.ttf", 18, "", { 48,169,14,255 }, 300, win_panel_two);
-	units_label_upgrade = App->gui->CreateLabel({ units_label->GetLocalPos().x + units_label->GetLocalRect().w, 460 }, "fonts/button_text.ttf", 18, "", { 48,169,14,255 }, 300, win_panel_two);
+	health_label_upgrade = App->gui->CreateLabel({ health_label->GetLocalPos().x + health_label->GetLocalRect().w, 370 }, "fonts/quantico.ttf", 23, "", { 48,169,14,255 }, 300, win_panel_two);
+	attack_label_upgrade = App->gui->CreateLabel({ attack_label->GetLocalPos().x + attack_label->GetLocalRect().w, 390 }, "fonts/quantico.ttf", 23, "", { 48,169,14,255 }, 300, win_panel_two);
+	defense_label_upgrade = App->gui->CreateLabel({ defense_label->GetLocalPos().x + defense_label->GetLocalRect().w, 410 }, "fonts/quantico.ttf", 23, "", { 48,169,14,255 }, 300, win_panel_two);
+	range_label_upgrade = App->gui->CreateLabel({ range_label->GetLocalPos().x + range_label->GetLocalRect().w, 430 }, "fonts/quantico.ttf", 23, "", { 48,169,14,255 }, 300, win_panel_two);
+	units_label_upgrade = App->gui->CreateLabel({ units_label->GetLocalPos().x + units_label->GetLocalRect().w, 450 }, "fonts/quantico.ttf", 23, "", { 48,169,14,255 }, 300, win_panel_two);
 
 	//Pause
 	pause_panel = App->gui->CreateImage({ 2, 87 }, { 3967,961,636,671 });
@@ -888,24 +888,24 @@ void BattleScene::StartUI()
 
 		//Info
 		info_image = App->gui->CreateImage({ 64, 630 }, { 636,853,106,106 }, store_panel);
-		health_label = App->gui->CreateLabel({ 220, 630 }, "fonts/button_text.ttf", 25, "Health: -", { 231,216,145,255 }, 235, store_panel);
-		attack_label = App->gui->CreateLabel({ 220, 660 }, "fonts/button_text.ttf", 25, "Attack: -", { 231,216,145,255 }, 235, store_panel);
-		defense_label = App->gui->CreateLabel({ 220, 690 }, "fonts/button_text.ttf", 25, "Defense: -", { 231,216,145,255 }, 235, store_panel);
-		range_label = App->gui->CreateLabel({ 220, 720 }, "fonts/button_text.ttf", 25, "Range: -", { 231,216,145,255 }, 200, store_panel);
-		units_label = App->gui->CreateLabel({ 220, 750 }, "fonts/button_text.ttf", 25, "Units: -", { 231,216,145,255 }, 190, store_panel);
+		health_label = App->gui->CreateLabel({ 220, 620 }, "fonts/quantico.ttf", 30, "Health: -", { 231,216,145,255 }, 170, store_panel);
+		attack_label = App->gui->CreateLabel({ 220, 650 }, "fonts/quantico.ttf", 30, "Attack: -", { 231,216,145,255 }, 170, store_panel);
+		defense_label = App->gui->CreateLabel({ 220, 680 }, "fonts/quantico.ttf", 30, "Defense: -", { 231,216,145,255 }, 175, store_panel);
+		range_label = App->gui->CreateLabel({ 220, 710 }, "fonts/quantico.ttf", 30, "Range: -", { 231,216,145,255 }, 170, store_panel);
+		units_label = App->gui->CreateLabel({ 220, 740 }, "fonts/quantico.ttf", 30, "Units: -", { 231,216,145,255 }, 155, store_panel);
 
-		health_label_upgrade = App->gui->CreateLabel({ health_label->GetLocalPos().x + health_label->GetLocalRect().w, 630 }, "fonts/button_text.ttf", 25, "", { 48,169,14,255 }, 300, store_panel);
-		attack_label_upgrade = App->gui->CreateLabel({ attack_label->GetLocalPos().x + attack_label->GetLocalRect().w, 660 }, "fonts/button_text.ttf", 25, "", { 48,169,14,255 }, 300, store_panel);
-		defense_label_upgrade = App->gui->CreateLabel({ defense_label->GetLocalPos().x + defense_label->GetLocalRect().w, 690 }, "fonts/button_text.ttf", 25, "", { 48,169,14,255 }, 300, store_panel);
-		range_label_upgrade = App->gui->CreateLabel({ range_label->GetLocalPos().x + range_label->GetLocalRect().w, 720 }, "fonts/button_text.ttf", 25, "", { 48,169,14,255 }, 300, store_panel);
-		units_label_upgrade = App->gui->CreateLabel({ units_label->GetLocalPos().x + units_label->GetLocalRect().w, 750 }, "fonts/button_text.ttf", 25, "", { 48,169,14,255 }, 300, store_panel);
+		health_label_upgrade = App->gui->CreateLabel({ health_label->GetLocalPos().x + health_label->GetLocalRect().w, 620 }, "fonts/quantico.ttf", 30, "", { 48,169,14,255 }, 300, store_panel);
+		attack_label_upgrade = App->gui->CreateLabel({ attack_label->GetLocalPos().x + attack_label->GetLocalRect().w, 650 }, "fonts/quantico.ttf", 30, "", { 48,169,14,255 }, 300, store_panel);
+		defense_label_upgrade = App->gui->CreateLabel({ defense_label->GetLocalPos().x + defense_label->GetLocalRect().w, 680 }, "fonts/quantico.ttf", 30, "", { 48,169,14,255 }, 300, store_panel);
+		range_label_upgrade = App->gui->CreateLabel({ range_label->GetLocalPos().x + range_label->GetLocalRect().w, 710 }, "fonts/quantico.ttf", 30, "", { 48,169,14,255 }, 300, store_panel);
+		units_label_upgrade = App->gui->CreateLabel({ units_label->GetLocalPos().x + units_label->GetLocalRect().w, 740 }, "fonts/quantico.ttf", 30, "", { 48,169,14,255 }, 300, store_panel);
 
 		App->gui->DisableElement((UIElement*)store_panel);
 	}
 	
 	//End Game Screen Lose
 	lose_panel = App->gui->CreateImage({ 17,120 }, { 3986,1646,605,660 });
-	lose_text = App->gui->CreateLabel({ 30,30 }, "fonts/button_text.ttf", 23, "The enemy troops have defeat yours! Allies have win the battle", { 255,232,2, 255 }, 565, lose_panel);
+	lose_text = App->gui->CreateLabel({ 30,30 }, "fonts/quantico.ttf", 30, "The enemy troops have defeat yours! Allies have win the battle", { 255,232,2, 255 }, 565, lose_panel);
 	lose_continue = App->gui->CreateButtonText({ 170, 560 }, { 30,0 }, button_rect, "CONTINUE", { 200,200,200,255 }, 27, lose_panel);
 	lose_image = App->gui->CreateImage({ 170, 250 }, { 2033,136,321,204 }, lose_panel);
 

@@ -82,6 +82,14 @@ bool MainMenuScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			App->gui->EnableElement(menu_background);
 			App->gui->DisableElement(optionsbackground);
 		}
+		if (element == credits_button) {
+			App->gui->EnableElement(credits_background);
+			App->gui->DisableElement(menu_background);
+		}
+		if (element == back_credits_button) {
+			App->gui->EnableElement(menu_background);
+			App->gui->DisableElement(credits_background);
+		}
 		if (element == newgamebutton) {
 			App->game_manager->NewGame();
 			App->transition_manager->CreateFadeTransition(2.0f, true, SceneType::MAP, Black);
@@ -90,6 +98,32 @@ bool MainMenuScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 		{
 			App->transition_manager->CreateFadeTransition(2.0f, false, 0, Black, true);
 		}
+
+		if (element == team_pages[0]) {
+			ShellExecuteA(NULL, "open", "https://github.com/AxelAlavedra", NULL, NULL, SW_SHOWNORMAL);
+		}
+		else if(element == team_pages[1]) {
+			ShellExecuteA(NULL, "open", "https://github.com/AlbertCayuela", NULL, NULL, SW_SHOWNORMAL);
+		}
+		else if (element == team_pages[2]) {
+			ShellExecuteA(NULL, "open", "https://github.com/AlexandruC5", NULL, NULL, SW_SHOWNORMAL);
+		}
+		else if (element == team_pages[3]) {
+			ShellExecuteA(NULL, "open", "https://github.com/Marcgs96", NULL, NULL, SW_SHOWNORMAL);
+		}
+		else if (element == team_pages[4]) {
+			ShellExecuteA(NULL, "open", "https://github.com/LaiaMartinezMotis", NULL, NULL, SW_SHOWNORMAL);
+		}
+		else if (element == team_pages[5]) {
+			ShellExecuteA(NULL, "open", "https://github.com/AlexMoralesGarcia", NULL, NULL, SW_SHOWNORMAL);
+		}
+		else if (element == team_pages[6]) {
+			ShellExecuteA(NULL, "open", "https://github.com/lakaens", NULL, NULL, SW_SHOWNORMAL);
+		}
+		else if (element == team_pages[7]) {
+			ShellExecuteA(NULL, "open", "https://github.com/AlejandroParis", NULL, NULL, SW_SHOWNORMAL);
+		}
+		
 	}
 	return true;
 }
@@ -114,9 +148,9 @@ void MainMenuScene::StartUI() {
 	options_label = App->gui->CreateLabel({ 170, 600 }, "fonts/button_text.ttf", 40, "Options", { 255,255,255,0 }, 0, optionsbackground);
 
 	back_options_button = App->gui->CreateButton({ 520,875 }, back_options_rect, optionsbackground);
-	music_slider = App->gui->CreateScrollBar({ 340,680 }, { 939,1365,218,40 }, MUSIC, volume, 128, optionsbackground);
+	music_slider = App->gui->CreateScrollBar({ 340,680 }, { 939,1365,218,40 }, MUSIC, App->audio->GetMusicVolume(), 128, optionsbackground);
 	musiclabel = App->gui->CreateLabel({ 80,690 }, "fonts/button_text.ttf", 20, "Music Volume", { 255,255,255,0 }, 0, optionsbackground);
-	fx_slider = App->gui->CreateScrollBar({ 340,780 }, { 939,1365,218,40 }, FX, volume, 128, optionsbackground);
+	fx_slider = App->gui->CreateScrollBar({ 340,780 }, { 939,1365,218,40 }, FX, App->audio->GetFxVolume(), 128, optionsbackground);
 	fxlabel = App->gui->CreateLabel({ 80,790 }, "fonts/button_text.ttf", 20, "FX Volume", { 255,255,255,0 }, 0, optionsbackground);
 	App->gui->DisableElement(optionsbackground);
 
@@ -124,4 +158,76 @@ void MainMenuScene::StartUI() {
 	optionsbutton = App->gui->CreateButtonText({ 180,770 }, { 60,10 }, large_button_rect, "OPTIONS", { 255,255,255,255 }, 23, menu_background);
 	newgamebutton = App->gui->CreateButtonText({ 180,580 }, { 50,10 }, large_button_rect, "NEW GAME", { 255,255,255,255 }, 23, menu_background);
 	continuebutton = App->gui->CreateButtonText({ 180,675 }, { 50,10 }, large_button_rect, "CONTINUE", { 255,255,255,255 }, 23, menu_background, App->HasSave());
+
+	//Credits
+	SDL_Rect credits_rect[3];
+	credits_rect[0] = { 2770,1885,27,26 };
+	credits_rect[1] = { 2800,1885,27,26 };
+	credits_rect[2] = { 2830,1885,27,26 };
+
+	SDL_Rect red_button[3];
+	red_button[0] = { 12,1861,225,43 };
+	red_button[1] = { 12,2101,225,43 };
+	red_button[2] = { 12,2341,225,43 };
+
+	SDL_Rect orange_button[3];
+	orange_button[0] = { 12,1906,225,43 };
+	orange_button[1] = { 12,2146,225,43 };
+	orange_button[2] = { 12,2386,225,43 };
+
+	SDL_Rect yellow_green_button[3];
+	yellow_green_button[0] = { 12,1951,225,43 };
+	yellow_green_button[1] = { 12,2191,225,43 };
+	yellow_green_button[2] = { 12,2431,225,43 };
+
+	SDL_Rect blue_light_button[3];
+	blue_light_button[0] = { 12,1997,225,43 };
+	blue_light_button[1] = { 12,2237,225,43 };
+	blue_light_button[2] = { 12,2477,225,43 };
+
+	SDL_Rect purple_light_button[3];
+	purple_light_button[0] = { 12,2042,225,43 };
+	purple_light_button[1] = { 12,2282,225,43 };
+	purple_light_button[2] = { 12,2522,225,43 };
+
+	SDL_Rect pink_button[3];
+	pink_button[0] = { 251,1861,225,43 };
+	pink_button[1] = { 251,2101,225,43 };
+	pink_button[2] = { 251,2341,225,43 };
+
+	SDL_Rect purple_dark_button[3];
+	purple_dark_button[0] = { 251,1906,225,43 };
+	purple_dark_button[1] = { 251,2146,225,43 };
+	purple_dark_button[2] = { 251,2386,225,43 };
+
+	SDL_Rect blue_dark_button[3];
+	blue_dark_button[0] = { 251,1951,225,43 };
+	blue_dark_button[1] = { 251,2191,225,43 };
+	blue_dark_button[2] = { 251,2431,225,43 };
+
+	credits_button = App->gui->CreateButton({ 500, 600 }, credits_rect, menu_background);
+
+	credits_background = App->gui->CreateImage({ 0,0 }, { 2056,1220,640,960 }, nullptr);
+	back_credits_button = App->gui->CreateButton({ 520,875 }, back_options_rect, credits_background);
+
+	team_pages[0] = App->gui->CreateButtonText({ 90,590 }, { 20,0 }, red_button, "Axel Alavedra", {0,0,0,0}, 15, credits_background);
+	team_pages[1] = App->gui->CreateButtonText({ 90,665 }, { 20,0 }, orange_button, "Albert Cayuela", { 0,0,0,0 }, 14, credits_background);
+	team_pages[2] = App->gui->CreateButtonText({ 90,740 }, { 20,0 }, yellow_green_button, "Drum Cercel", { 0,0,0,0 }, 15, credits_background);
+	team_pages[3] = App->gui->CreateButtonText({ 90,815 }, { 20,0 }, blue_light_button, "Marc Guillen", { 0,0,0,0 }, 15, credits_background);
+	team_pages[4] = App->gui->CreateButtonText({ 90,890 }, { 20,0 }, purple_light_button, "Laia Martinez", { 0,0,0,0 }, 15, credits_background);
+	team_pages[5] = App->gui->CreateButtonText({ 340,590 }, { 20,0 }, pink_button, "Alex Morales", { 0,0,0,0 }, 15, credits_background);
+	team_pages[6] = App->gui->CreateButtonText({ 340,665 }, { 20,0 }, purple_dark_button, "Eric Navarro", { 0,0,0,0 }, 15, credits_background);
+	team_pages[7] = App->gui->CreateButtonText({ 340,740 }, { 20,0 }, blue_dark_button, "Alejandro Paris", { 0,0,0,0 }, 14, credits_background);
+
+	team_label[0] = App->gui->CreateLabel({ 130, 565 }, "fonts/gunplay.ttf", 17, "Code Programmer", { 255,57,57,255 }, 200, credits_background);
+	team_label[1] = App->gui->CreateLabel({ 170, 640 }, "fonts/gunplay.ttf", 17, "Manager", { 255,112,57,255 }, 200, credits_background);
+	team_label[2] = App->gui->CreateLabel({ 190, 715 }, "fonts/gunplay.ttf", 17, "QA", { 255,199,57,255 }, 200, credits_background);
+	team_label[3] = App->gui->CreateLabel({ 185, 790 }, "fonts/gunplay.ttf", 17, "Lead", { 57,57,255,255 }, 200, credits_background);
+	team_label[4] = App->gui->CreateLabel({ 180, 865 }, "fonts/gunplay.ttf", 17, "Artist", { 203,72,240,255 }, 200, credits_background);
+	team_label[5] = App->gui->CreateLabel({ 420, 565 }, "fonts/gunplay.ttf", 17, "UI Lead", { 255,57,151,255 }, 200, credits_background);
+	team_label[6] = App->gui->CreateLabel({ 440, 640 }, "fonts/gunplay.ttf", 17, "UI", { 169,131,180,255 }, 200, credits_background);
+	team_label[7] = App->gui->CreateLabel({ 425, 715 }, "fonts/gunplay.ttf", 17, "Design", { 57,166,255,255 }, 200, credits_background);
+
+
+	App->gui->DisableElement(credits_background);
 }

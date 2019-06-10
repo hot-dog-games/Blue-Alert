@@ -648,30 +648,30 @@ void StrategyMapScene::InitializeUI()
 
 	building_infantry_button = App->gui->CreateSelectableButton({ 17, 665 }, App->gui->LoadUIButton(30, "button"), buildings_background);
 	building_infantry_image = App->gui->CreateImage({ 26,395 }, App->gui->LoadUIImage(30, "building"), buildings_background);
-	building_infantry_info = App->gui->CreateLabel({ 235,-5 }, "fonts/button_text.ttf", 15, str, { 231,216,145,255 }, 350, building_infantry_image);
+	building_infantry_info = App->gui->CreateLabel({ 235,-5 }, "fonts/quantico.ttf", 20, str, { 231,216,145,255 }, 350, building_infantry_image);
 
 	//Aerial
 	str = "The aerial building is where the helicopters and planes are parked.\n\nConquered: " + std::to_string(((LeveledUpgrade*)App->game_manager->aerial_upgrade)->GetLevel())
 		+ "\nDamage increase: " + std::to_string(((LeveledUpgrade*)App->game_manager->aerial_upgrade)->GetBuffValue("damage")) + "\nHealth increase: " + std::to_string(((LeveledUpgrade*)App->game_manager->aerial_upgrade)->GetBuffValue("health"));
 	building_aerial_button = App->gui->CreateSelectableButton({ 401,685 }, App->gui->LoadUIButton(31, "button"), buildings_background);
 	building_aerial_image = App->gui->CreateImage({ 30,425 }, App->gui->LoadUIImage(31, "building"), buildings_background);
-	building_aerial_info = App->gui->CreateLabel({ 230, -35 }, "fonts/button_text.ttf", 15, str, { 231,216,145,255 }, 300, building_aerial_image);
+	building_aerial_info = App->gui->CreateLabel({ 230, -35 }, "fonts/quantico.ttf", 20, str, { 231,216,145,255 }, 300, building_aerial_image);
 
 	//Land
 	str = "The land building is where the tanks are waiting for the battle.\n\nConquered: " + std::to_string(((LeveledUpgrade*)App->game_manager->land_upgrade)->GetLevel())
 		+ "\nDamage increase: " + std::to_string(((LeveledUpgrade*)App->game_manager->land_upgrade)->GetBuffValue("damage")) + "\nHealth increase: " + std::to_string(((LeveledUpgrade*)App->game_manager->land_upgrade)->GetBuffValue("health"));
 	building_land_button = App->gui->CreateSelectableButton({ 210,652 } , App->gui->LoadUIButton(32, "button"), buildings_background);
 	building_land_image = App->gui->CreateImage({ 26,395 } , App->gui->LoadUIImage(32, "building"), buildings_background);
-	building_land_info = App->gui->CreateLabel({ 235,-5 } , "fonts/button_text.ttf", 15, str, { 231,216,145,255 }, 300, building_land_image);
+	building_land_info = App->gui->CreateLabel({ 235,-5 } , "fonts/quantico.ttf", 20, str, { 231,216,145,255 }, 300, building_land_image);
 
 	//Core
 	core_image = App->gui->CreateImage({ 40, 130 }, { 1538,23,173,114 }, buildings_background);
 
-	core_title = App->gui->CreateLabel({ 20, 15 }, "fonts/button_text.ttf", 43, "CORE", { 242, 222, 70, 255 }, 200, buildings_background);
-	core_info = App->gui->CreateLabel({ 260, 72 }, "fonts/button_text.ttf", 15, "The core travels around the map destroying all the enemies bases.", { 231,216,145,255 }, 300, buildings_background);
+	core_title = App->gui->CreateLabel({ 20, 15 }, "fonts/quantico.ttf", 43, "CORE", { 242, 222, 70, 255 }, 200, buildings_background);
+	core_info = App->gui->CreateLabel({ 260, 72 }, "fonts/quantico.ttf", 18, "The core travels around the map destroying all the enemies bases.", { 231,216,145,255 }, 300, buildings_background);
 
 	str = "Health: " + std::to_string((int)App->game_manager->stats.find("health")->second->GetValue());
-	core_health = App->gui->CreateLabel({ 260, 150 }, "fonts/button_text.ttf", 16, str, { 231,216,145,255 }, 200, buildings_background);
+	core_health = App->gui->CreateLabel({ 260, 140 }, "fonts/button_text.ttf", 16, str, { 231,216,145,255 }, 200, buildings_background);
 
 	str = "Energy: " + std::to_string((int)App->game_manager->stats.find("energy")->second->GetValue());
 	core_energy = App->gui->CreateLabel({ 260, 170 }, "fonts/button_text.ttf", 16, str, { 231,216,145,255 }, 200, buildings_background);
@@ -695,11 +695,11 @@ void StrategyMapScene::InitializeUI()
 
 	//Show Info
 	info_image = App->gui->CreateImage({ 25,37 }, { 636,853,106,106 }, troops_background);
-	health_label = App->gui->CreateLabel({ 135, 40 }, "fonts/button_text.ttf", 12, "Health: -", { 231,216,145,255 }, 120, troops_background);
-	attack_label = App->gui->CreateLabel({ 135, 60 }, "fonts/button_text.ttf", 12, "Attack: -", { 231,216,145,255 }, 120, troops_background);
-	defense_label = App->gui->CreateLabel({ 135, 80 }, "fonts/button_text.ttf", 12, "Defense: -", { 231,216,145,255 }, 120, troops_background);
-	range_label = App->gui->CreateLabel({ 135, 100 }, "fonts/button_text.ttf", 12, "Range: -", { 231,216,145,255 }, 120, troops_background);
-	units_label = App->gui->CreateLabel({ 135, 120 }, "fonts/button_text.ttf", 12, "Units: -", { 231,216,145,255 }, 120, troops_background);
+	health_label = App->gui->CreateLabel({ 135, 30 }, "fonts/quantico.ttf", 20, "Health: -", { 231,216,145,255 }, 120, troops_background);
+	attack_label = App->gui->CreateLabel({ 135, 50 }, "fonts/quantico.ttf", 20, "Attack: -", { 231,216,145,255 }, 120, troops_background);
+	defense_label = App->gui->CreateLabel({ 135, 70 }, "fonts/quantico.ttf", 20, "Defense: -", { 231,216,145,255 }, 120, troops_background);
+	range_label = App->gui->CreateLabel({ 135, 90 }, "fonts/quantico.ttf", 20, "Range: -", { 231,216,145,255 }, 120, troops_background);
+	units_label = App->gui->CreateLabel({ 135, 110 }, "fonts/quantico.ttf", 20, "Units: -", { 231,216,145,255 }, 120, troops_background);
 
 	energy_bar = App->gui->CreateBar({ 8,188 }, { 2897,1780,260,65 }, App->game_manager->GetCardFromCollection(CONSCRIPT)->info.stats.find("energy_cost")->second, BAR_HORITZONTAL, BAR_STATIC, nullptr, troops_background);
 

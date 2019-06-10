@@ -39,6 +39,7 @@ public:
 private:
 	UIImage* menu_background = nullptr;
 	UIImage* optionsbackground = nullptr;
+	UIImage* credits_background = nullptr;
 	UIButtonText* exitbutton = nullptr;
 	UILabel* musiclabel = nullptr;
 	UILabel* fxlabel = nullptr;
@@ -50,9 +51,14 @@ private:
 	UIScrollBar* music_slider = nullptr;
 	UIScrollBar* fx_slider = nullptr;
 
-	bool gameclose = false;
+	//Creditos
+	UIButton* credits_button = nullptr;
+	UIButtonText* team_pages[8] = { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr };
+	UILabel* team_label[8] = { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr };
+	UIButton* social_media[3] = { nullptr, nullptr, nullptr };
+	UIButton* back_credits_button = nullptr;
 
-	int volume = 64;
+	bool gameclose = false;
 };
 
 #endif
