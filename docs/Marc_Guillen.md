@@ -32,7 +32,7 @@
 
 ### Art
 
--**3D model conversion to 2D spritesheets**: Some of the assets provided by the game Comand and Conquer: Red Alert 2 were 3D models, so I took this models and created a 2D spritesheet from them.
+-**3D model conversion to 2D spritesheets**: Some of the assets provided by the game Comand and Conquer: Red Alert 2 were 3D models, so I took this models and created a 2D spritesheet from them by creating an animation in 3DsMax and then packaging every sprite with TexturePacker.
 
 ### Others
 
@@ -40,3 +40,7 @@
 -**Wiki original game page**: created the wiki Original game page. Check it here.
 -**Bug solving**: participed in multiple bug solving of the game.
 -**Alpha and Gold assignement presentation**: participed in the presentation of the Alpha and Gold were me and Alejandro París explained the game and the marketing plan behind the project.
+
+### Lead
+
+As a lead I tried to keep the team united and focused in the project scope, also designed the monetization and the marketing plan of the project. I also organized and directed multiple meetings with the team and stayed communicated with other project leads.
