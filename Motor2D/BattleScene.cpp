@@ -397,7 +397,7 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 		for (int num = 0; num < 3; ++num) {
 			if (element == win_unit[num]) {
 				info_image->SetImage(win_unit[num]->GetAnim()[1]);
-				if (App->game_manager->IsInCollection((EntityType)(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[num]))) {
+				if (App->game_manager->IsInCollection((EntityType)(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[num])) && App->game_manager->GetLevelFromCollection((EntityType)App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[num]) < 5) {
 					str_stat = "Health: " + std::to_string(App->game_manager->GetCardStat((EntityType)(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[num]), "health"));
 					health_label->SetText(str_stat);
 					health_label_upgrade->SetText(" + " + std::to_string(App->game_manager->GetCardUpgrade((EntityType)(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[num]), "health")));
@@ -436,7 +436,7 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 		for (int num = 0; num < 6; ++num) {
 			if (element == store_unit[num]) {
 				info_image->SetImage(store_unit[num]->GetAnim()[0]);
-				if (App->game_manager->IsInCollection(random_store_unit[num])) {
+				if (App->game_manager->IsInCollection(random_store_unit[num]) && App->game_manager->GetLevelFromCollection((EntityType)random_store_unit[num]) < 5) {
 					str_stat = "Health: " + std::to_string(App->game_manager->GetCardStat((EntityType)(random_store_unit[num]), "health"));
 					health_label->SetText(str_stat);
 					health_label_upgrade->SetText(" + " + std::to_string(App->game_manager->GetCardUpgrade((EntityType)(random_store_unit[num]), "health")));
@@ -756,8 +756,14 @@ void BattleScene::StartUI()
 	for (int i = 0; i < 3; ++i) {
 
 		if (App->game_manager->IsInCollection(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[i])) {
-			str[i] = "Upgrade";
-			color[i] = {238,238,0,255};
+			if (App->game_manager->GetLevelFromCollection((EntityType)App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[i]) < 5) {
+				str[i] = "Upgrade";
+				color[i] = { 238,238,0,255 };
+			}
+			else {
+				str[i] = "       Max";
+				color[i] = { 255,0,0,255 };
+			}
 		}
 		else {
 			str[i] = "       New";
@@ -815,8 +821,14 @@ void BattleScene::StartUI()
 		for (int i = 0; i < 6; ++i) {
 
 			if (App->game_manager->IsInCollection(random_store_unit[i])) {
-				str_store[i] = "Upgrade";
-				color_store[i] = { 238,238,0,255 };
+				if (App->game_manager->GetLevelFromCollection((EntityType)random_store_unit[i]) < 5) {
+					str_store[i] = "Upgrade";
+					color_store[i] = { 238,238,0,255 };
+				}
+				else {
+					str_store[i] = "       Max";
+					color_store[i] = { 255,0,0,255 };
+				}
 			}
 			else {
 				str_store[i] = "       New";

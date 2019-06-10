@@ -55,17 +55,17 @@ bool StrategyMapScene::Start()
 	case STAGE_TUTORIAL: 
 		App->map->Load("Tutorial_Nodes_Map.tmx"); 
 		map_camera_limit = { 0, 0, (int)(2000 * App->win->GetScale()), (int)(1692 * App->win->GetScale()) };
-		level_name_str = "Tutorial";
+		level_name_str = "Stage 01";
 		break;
 	case STAGE_01: 
 		App->map->Load("Nodes Map.tmx");
 		map_camera_limit = { 0, 0, (int)(2600 * App->win->GetScale()), (int)(1792 * App->win->GetScale()) };
-		level_name_str = "Stage 01";
+		level_name_str = "Stage 02";
 		break;
 	case STAGE_02: 
 		App->map->Load("Nodes Map Snow.tmx"); 
 		map_camera_limit = { 0, 0, (int)(2600 * App->win->GetScale()), (int)(1992 * App->win->GetScale()) };
-		level_name_str = "Stage 02";
+		level_name_str = "Stage 03";
 		break;
 	default:
 		break;
