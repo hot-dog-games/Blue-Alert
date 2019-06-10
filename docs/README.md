@@ -60,3 +60,15 @@ _The HotDogGames team._
 
 ![gmail100](https://user-images.githubusercontent.com/36154539/53442550-d12cc680-3a09-11e9-933c-e883b41e4b86.png)
 * Gmail: hotdoggamess@gmail.com
+
+# Release
+
+# Trailer
+
+You can check the Blue alert trailer by clicking the link down below.
+
+[Blue Alert cinematic trailer](https://www.youtube.com/watch?v=zwnBUw_HKzo&feature=youtu.be)
+
+# Gameplay video
+
+You can check the Blue alert gameplay video by clicking the link down below.
