@@ -69,7 +69,6 @@ private:
 		LOSE
 	};
 	BattleSceneState state = BattleSceneState::FIGHT;
-	PerfTimer shortcut_timer;
 	std::string nuke_fx = "";
 
 	UIImage*		unit_panel = nullptr;

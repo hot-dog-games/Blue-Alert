@@ -34,7 +34,6 @@
 #include "UIImage.h"
 #include "UILabel.h"
 
-const double HELD_DELAY = 175;
 const double BOMB_CD = 30;
 
 BattleScene::BattleScene() : Scene()
@@ -135,63 +134,6 @@ bool BattleScene::Update(float dt)
 		App->input->GetMousePosition(x, y);
 		iPoint p = App->render->ScreenToWorld(x, y);
 		iPoint tile_p = App->map->WorldToMap(p.x, p.y);
-
-		//-------SHORTCUTS-----------------------//
-		if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN
-			|| App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
-		{
-			shortcut_timer.Start();
-		}
-
-		if ((App->input->GetKey(SDL_SCANCODE_1) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_2) == KEY_REPEAT
-			|| App->input->GetKey(SDL_SCANCODE_3) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_4) == KEY_REPEAT)
-			&& shortcut_timer.ReadMs() > HELD_DELAY)
-		{
-			App->map->SetDrawable("Spawn", 0);
-		}
-
-		if (App->input->GetKey(SDL_SCANCODE_1) == KEY_UP && allied_core->GetCard(CN_FIRST))
-		{
-			App->map->SetDrawable("Spawn", 1);
-			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
-			{
-				if (allied_core->UseCard(CN_FIRST, { float(p.x),float(p.y) }))
-					App->audio->PlayFx(deployment_fx.c_str(), 0);
-			}
-		}
-
-		if (App->input->GetKey(SDL_SCANCODE_2) == KEY_UP && allied_core->GetCard(CN_SECOND))
-		{
-			App->map->SetDrawable("Spawn", 1);
-			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
-			{
-				if (allied_core->UseCard(CN_SECOND, { float(p.x),float(p.y) }))
-					App->audio->PlayFx(deployment_fx.c_str(), 0);
-			}
-		}
-
-		if (App->input->GetKey(SDL_SCANCODE_3) == KEY_UP && allied_core->GetCard(CN_THIRD))
-		{
-			App->map->SetDrawable("Spawn", 1);
-			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
-			{
-				if (allied_core->UseCard(CN_THIRD, { float(p.x),float(p.y) }))
-					App->audio->PlayFx(deployment_fx.c_str(), 0);
-			}
-		}
-
-		if (App->input->GetKey(SDL_SCANCODE_4) == KEY_UP && allied_core->GetCard(CN_FOURTH))
-		{
-			App->map->SetDrawable("Spawn", 1);
-			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
-			{
-				if (allied_core->UseCard(CN_FOURTH, { float(p.x),float(p.y) }))
-					App->audio->PlayFx(deployment_fx.c_str(), 0);
-			}
-		}
-			
-
-		//---------------------------------------//
 
 		if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_UP)
 		{
