@@ -39,7 +39,7 @@
 - **Wiki home page**: created the wiki Home page. Check it here.
 - **Wiki original game page**: created the wiki Original game page. Check it here.
 - **Bug solving**: participed in multiple bug solving of the game.
-- **Alpha and Gold assignement presentation**: participed in the presentation of the Alpha and Gold were me and Alejandro París explained the game and the marketing plan behind the project.
+- **Alpha and Gold assignement presentation**: participed in the presentation of the Alpha and Gold where me and Alejandro París explained the game and the marketing plan behind the project.
 
 ### Lead
 
