@@ -56,9 +56,9 @@ bool DynamicEntity::Start()
 	piercing_fx = App->audio->LoadFx("audio/fx/Ambient_Sounds/Shots/pierce_shot.wav");
 
 
-	App->audio->SetFXVolume(attack_fx.c_str(), 30);
-	App->audio->SetFXVolume(aoe_fx.c_str(), 30);
-	App->audio->SetFXVolume(piercing_fx.c_str(), 30);
+	App->audio->SetFXVolume(attack_fx.c_str(), App->audio->GetFxVolume());
+	App->audio->SetFXVolume(aoe_fx.c_str(), App->audio->GetFxVolume());
+	App->audio->SetFXVolume(piercing_fx.c_str(), App->audio->GetFxVolume());
 
 	health_bar = App->gui->CreateBar(bar_position, { 25, 1503, current_frame.w, 7 }, stats.find("health")->second, BarType::BAR_HORITZONTAL, BAR_DYNAMIC, this, false, true);
 	return true;

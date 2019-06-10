@@ -104,7 +104,7 @@ void ProjectileParticle::SetCollisionEffect(ParticleType effect, float radius, F
 	this->damage = damage;
 
 	fx = App->audio->LoadFx("audio/fx/Ambient_Sounds/Explosions/Explosion2.wav");
-	App->audio->SetFXVolume(fx.c_str(), 30);
+	App->audio->SetFXVolume(fx.c_str(), App->audio->GetFxVolume());
 }
 
 void ProjectileParticle::SetTarget(Entity* target, float damage, bool pierce)
