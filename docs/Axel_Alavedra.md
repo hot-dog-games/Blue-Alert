@@ -56,6 +56,7 @@
 * Adapted the base code to STL.
 * Helped with energy bar
 * Fixed all major bugs and memory leaks
+* Fullscreen resolution adaptation
 * Optimized texture and audio loading.
 * Implemented Video module to the engine from my [research](https://github.com/AxelAlavedra/Video-Player-Research)
 * Helped as much as I could with code issues of other team members
