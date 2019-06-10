@@ -28,7 +28,6 @@
 	* Implemented the 3 different attack types in the game (Basic attack, Piercing attack and AOE attack)
 	* Particles for each type of attack(AOE explosion, bullet for basic and piercing)
 	* Shot particle rotates and moves to enemy position
-	* Player ultimate ability
 	* All damage calculations
 	
 	<img src="Readme_Files/basicattack.gif" width="256" height="384">	<img src="Readme_Files/aoegif.gif" width="256" height="384">	<img src="Readme_Files/penetrating.gif" width="256" height="384">
@@ -49,13 +48,14 @@
 * If player loses, the game recovers the state at which the current stage was started and loads it.
 * Load save file function
 ### Other tasks
+* Player ultimate ability
+* Implemented color change on life bars depending on value
+
+	<img src="Readme_Files/lifebargif.gif" width="320" height="480">
+	
 * Adapted the base code to STL.
 * Helped with energy bar
 * Fixed all major bugs and memory leaks
 * Optimized texture and audio loading.
-* Implemented color change on life bars depending on value
-
-	<img src="Readme_Files/lifebargif.gif" width="320" height="480">
-
 * Implemented Video module to the engine from my [research](https://github.com/AxelAlavedra/Video-Player-Research)
 * Helped as much as I could with code issues of other team members
