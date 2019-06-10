@@ -13,42 +13,42 @@ _The HotDogGames team._
 **Lead: Marc Guillén**
 
 * [GitHub account](https://github.com/Marcgs96)
-* [Individual Contribution](Marc_Guillen.md)
+* [Individual Contribution](https://hot-dog-games.github.io/Blue-Alert/Marc_Guillen)
 
 **Manager: Albert Cayuela**
 
 * [GitHub account](https://github.com/AlbertCayuela)
-* [Individual Contribution](Albert_Cayuela.md)
+* [Individual Contribution](https://hot-dog-games.github.io/Blue-Alert/Albert_Cayuela.md)
 
 **QA: Alexandru Cercel**
 
 * [GitHub account](https://github.com/AlexandruC5)
-* [Individual Contribution](Alexandru_Cercel.md)
+* [Individual Contribution](https://hot-dog-games.github.io/Blue-Alert/Alexandru_Cercel.md)
 
 **Programmer: Axel Alavedra**
 
 * [GitHub account](https://github.com/AxelAlavedra)
-* [Individual Contribution](Axel_Alavedra.md)
+* [Individual Contribution](https://hot-dog-games.github.io/Blue-Alert/Axel_Alavedra.md)
 
 **Game Designer: Alejandro París**
 
 * [GitHub account](https://github.com/AlejandroParis)
-* [Individual Contribution](Alejandro_Paris.md)
+* [Individual Contribution](https://hot-dog-games.github.io/Blue-Alert/Alejandro_Paris.md)
 
 **Artist: Laia Martínez**
 
 * [GitHub account](https://github.com/LaiaMartinezMotis)
-* [Individual Contribution](Laia_Martinez.md)
+* [Individual Contribution](https://hot-dog-games.github.io/Blue-Alert/Laia_Martinez.md)
 
 **UI Programmer: Alex Morales**
 
 * [GitHub account](https://github.com/AlexMG99)
-* [Individual Contribution](Alex_Morales.md)
+* [Individual Contribution](https://hot-dog-games.github.io/Blue-Alert/Alex_Morales.md)
 
 **UI Programmer: Eric Navarro**
 
 * [GitHub account](https://github.com/lakaens)
-* [Individual Contribution](Eric_Navarro.md)
+* [Individual Contribution](https://hot-dog-games.github.io/Blue-Alert/Eric_Navarro.md)
 
 # Social Media
 
