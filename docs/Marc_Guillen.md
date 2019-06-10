@@ -32,7 +32,7 @@
 
 ### Art
 
--**3D model conversion to 2D spritesheets**: Some of the assets provided by the game Comand and Conquer: Red Alert 2 were 3D models, so I took this models and created a 2D spritesheet from them by creating an animation in 3DsMax and then packaging every sprite with TexturePacker.
+**3D model conversion to 2D spritesheets**: Some of the assets provided by the game Comand and Conquer: Red Alert 2 were 3D models, so I took this models and created a 2D spritesheet from them by creating an animation in 3DsMax and then packaging every sprite with TexturePacker.
 
 ### Others
 
