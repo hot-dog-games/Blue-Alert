@@ -1253,95 +1253,95 @@
     <sprite>sprites/Units/LandVehicles/grizzly.png</sprite>
     <animations>
       <animation speed="10.0F" name="idle">
-        <sprite x="175" y="538" w="26" h="45"/>
+        <sprite x="0" y="0" w="26" h="46"/>
       </animation>
       <animation speed="10.0F" name="moving_right">
-        <sprite x="163" y="0" w="52" h="58"/>
+        <sprite x="74" y="16" w="53" h="29"/>
       </animation>
       <animation speed="10.0F" name="moving_left">
-        <sprite x="0" y="0" w="53" h="27"/>
+        <sprite x="147" y="16" w="53" h="27"/>
       </animation>
       <animation speed="10.0F" name="moving_up">
-        <sprite x="175" y="538" w="26" h="45"/>
+        <sprite x="0" y="0" w="26" h="46"/>
       </animation>
       <animation speed="10.0F" name="moving_down">
-        <sprite x="175" y="262" w="27" h="36"/>
+        <sprite x="37" y="9" w="27" h="37"/>
       </animation>
       <animation speed="10.0F" name="moving_up_left">
-        <sprite x="202" y="539" w="39" h="44"/>
+        <sprite x="127" y="54" w="39" h="45"/>
       </animation>
       <animation speed="10.0F" name="moving_up_right">
-        <sprite x="67" y="630" w="35" h="46"/>
+        <sprite x="177" y="54" w="39" h="45"/>
       </animation>
       <animation speed="10.0F" name="moving_down_left">
-        <sprite x="1" y="299" w="41" h="36"/>
+        <sprite x="66" y="59" w="45" h="35"/>
       </animation>
       <animation speed="10.0F" name="moving_down_right">
-        <sprite x="150" y="336" w="40" h="36"/>
+        <sprite x="0" y="58" w="47" h="36"/>
       </animation>
       <animation speed="10.0F" name="attacking_up" loop="false">
-        <sprite x="175" y="538" w="26" h="45"/>
-        <sprite x="175" y="538" w="26" h="45"/>
-        <sprite x="175" y="538" w="26" h="45"/>
-        <sprite x="175" y="538" w="26" h="45"/>
-        <sprite x="175" y="538" w="26" h="45"/>
-        <sprite x="175" y="538" w="26" h="45"/>
+        <sprite x="0" y="109" w="26" h="50"/>
+        <sprite x="0" y="0" w="26" h="46"/>
+        <sprite x="0" y="0" w="26" h="46"/>
+        <sprite x="0" y="0" w="26" h="46"/>
+        <sprite x="0" y="0" w="26" h="46"/>
+        <sprite x="0" y="0" w="26" h="46"/>
       </animation>
       <animation speed="10.0F" name="attacking_down" loop="false">
-        <sprite x="175" y="262" w="27" h="36"/>
-        <sprite x="175" y="262" w="27" h="36"/>
-        <sprite x="175" y="262" w="27" h="36"/>
-        <sprite x="175" y="262" w="27" h="36"/>
-        <sprite x="175" y="262" w="27" h="36"/>
-        <sprite x="175" y="262" w="27" h="36"/>
+        <sprite x="37" y="122" w="27" h="37"/>
+        <sprite x="37" y="9" w="27" h="37"/>
+        <sprite x="37" y="9" w="27" h="37"/>
+        <sprite x="37" y="9" w="27" h="37"/>
+        <sprite x="37" y="9" w="27" h="37"/>
+        <sprite x="37" y="9" w="27" h="37"/>
       </animation>
       <animation speed="10.0F" name="attacking_left" loop="false">
-        <sprite x="0" y="0" w="53" h="27"/>
-        <sprite x="0" y="0" w="53" h="27"/>
-        <sprite x="0" y="0" w="53" h="27"/>
-        <sprite x="0" y="0" w="53" h="27"/>
-        <sprite x="0" y="0" w="53" h="27"/>
-        <sprite x="0" y="0" w="53" h="27"/>
+        <sprite x="142" y="129" w="58" h="27"/>
+        <sprite x="147" y="16" w="53" h="27"/>
+        <sprite x="147" y="16" w="53" h="27"/>
+        <sprite x="147" y="16" w="53" h="27"/>
+        <sprite x="147" y="16" w="53" h="27"/>
+        <sprite x="147" y="16" w="53" h="27"/>
       </animation>
       <animation speed="10.0F" name="attacking_right" loop="false">
-        <sprite x="163" y="0" w="52" h="58"/>
-        <sprite x="163" y="0" w="52" h="58"/>
-        <sprite x="163" y="0" w="52" h="58"/>
-        <sprite x="163" y="0" w="52" h="58"/>
-        <sprite x="163" y="0" w="52" h="58"/>
-        <sprite x="163" y="0" w="52" h="58"/>
+        <sprite x="74" y="129" w="58" h="29"/>
+        <sprite x="74" y="16" w="53" h="29"/>
+        <sprite x="74" y="16" w="53" h="29"/>
+        <sprite x="74" y="16" w="53" h="29"/>
+        <sprite x="74" y="16" w="53" h="29"/>
+        <sprite x="74" y="16" w="53" h="29"/>
       </animation>
       <animation speed="10.0F" name="attacking_up_right" loop="false">
-        <sprite x="67" y="630" w="35" h="46"/>
-        <sprite x="67" y="630" w="35" h="46"/>
-        <sprite x="67" y="630" w="35" h="46"/>
-        <sprite x="67" y="630" w="35" h="46"/>
-        <sprite x="67" y="630" w="35" h="46"/>
-        <sprite x="67" y="630" w="35" h="46"/>
+        <sprite x="177" y="163" w="39" h="49"/>
+        <sprite x="177" y="54" w="39" h="45"/>
+        <sprite x="177" y="54" w="39" h="45"/>
+        <sprite x="177" y="54" w="39" h="45"/>
+        <sprite x="177" y="54" w="39" h="45"/>
+        <sprite x="177" y="54" w="39" h="45"/>
       </animation>
       <animation speed="10.0F" name="attacking_up_left" loop="false">
-        <sprite x="202" y="539" w="39" h="44"/>
-        <sprite x="202" y="539" w="39" h="44"/>
-        <sprite x="202" y="539" w="39" h="44"/>
-        <sprite x="202" y="539" w="39" h="44"/>
-        <sprite x="202" y="539" w="39" h="44"/>
-        <sprite x="202" y="539" w="39" h="44"/>
+        <sprite x="127" y="162" w="39" h="50"/>
+        <sprite x="127" y="54" w="39" h="45"/>
+        <sprite x="127" y="54" w="39" h="45"/>
+        <sprite x="127" y="54" w="39" h="45"/>
+        <sprite x="127" y="54" w="39" h="45"/>
+        <sprite x="127" y="54" w="39" h="45"/>
       </animation>
       <animation speed="10.0F" name="attacking_down_right" loop="false">
-        <sprite x="150" y="336" w="40" h="36"/>
-        <sprite x="150" y="336" w="40" h="36"/>
-        <sprite x="150" y="336" w="40" h="36"/>
-        <sprite x="150" y="336" w="40" h="36"/>
-        <sprite x="150" y="336" w="40" h="36"/>
-        <sprite x="150" y="336" w="40" h="36"/>
+        <sprite x="0" y="171" w="52" h="36"/>
+        <sprite x="0" y="58" w="47" h="36"/>
+        <sprite x="0" y="58" w="47" h="36"/>
+        <sprite x="0" y="58" w="47" h="36"/>
+        <sprite x="0" y="58" w="47" h="36"/>
+        <sprite x="0" y="58" w="47" h="36"/>
       </animation>
       <animation speed="10.0F" name="attacking_down_left" loop="false">
-        <sprite x="1" y="299" w="41" h="36"/>
-        <sprite x="1" y="299" w="41" h="36"/>
-        <sprite x="1" y="299" w="41" h="36"/>
-        <sprite x="1" y="299" w="41" h="36"/>
-        <sprite x="1" y="299" w="41" h="36"/>
-        <sprite x="1" y="299" w="41" h="36"/>
+        <sprite x="62" y="172" w="49" h="35"/>
+        <sprite x="66" y="59" w="45" h="35"/>
+        <sprite x="66" y="59" w="45" h="35"/>
+        <sprite x="66" y="59" w="45" h="35"/>
+        <sprite x="66" y="59" w="45" h="35"/>
+        <sprite x="66" y="59" w="45" h="35"/>
       </animation>
       <animation speed="36.0F" loop="false" name="dying">
         <sprite x="353" y="90" w="72" h="59"/>
@@ -1508,22 +1508,22 @@
         <sprite x="103" y="15" w="43" h="41"/>
       </animation>
       <animation speed="10.0F" name="moving_up">
-        <sprite x="173" y="5" w="41" h="39"/>
+        <sprite x="214" y="19" w="41" h="39"/>
       </animation>
       <animation speed="10.0F" name="moving_down">
         <sprite x="215" y="67" w="40" h="42"/>
       </animation>
       <animation speed="10.0F" name="moving_up_left">
-        <sprite x="58" y="53" w="40" h="40"/>
+        <sprite x="99" y="67" w="40" h="40"/>
       </animation>
       <animation speed="10.0F" name="moving_up_right">
-        <sprite x="0" y="54" w="40" h="43"/>
+        <sprite x="41" y="68" w="40" h="43"/>
       </animation>
       <animation speed="10.0F" name="moving_down_left">
-        <sprite x="7" y="3" w="42" h="39"/>
+        <sprite x="48" y="17" w="42" h="39"/>
       </animation>
       <animation speed="10.0F" name="moving_down_right">
-        <sprite x="115" y="52" w="44" h="42"/>
+        <sprite x="156" y="66" w="44" h="42"/>
       </animation>
       <animation speed="10.0F" name="attacking_up" loop="false">
         <sprite x="233" y="125" w="41" h="43"/>
@@ -1551,43 +1551,43 @@
       </animation>
       <animation speed="10.0F" name="attacking_right" loop="false">
         <sprite x="168" y="126" w="45" h="44"/>
-        <sprite x="0" y="54" w="40" h="43"/>
-        <sprite x="0" y="54" w="40" h="43"/>
-        <sprite x="0" y="54" w="40" h="43"/>
-        <sprite x="0" y="54" w="40" h="43"/>
-        <sprite x="0" y="54" w="40" h="43"/>
+        <sprite x="165" y="14" w="42" h="44"/>
+        <sprite x="165" y="14" w="42" h="44"/>
+        <sprite x="165" y="14" w="42" h="44"/>
+        <sprite x="165" y="14" w="42" h="44"/>
+        <sprite x="165" y="14" w="42" h="44"/>
       </animation>
       <animation speed="10.0F" name="attacking_up_right" loop="false">
         <sprite x="19" y="190" w="42" h="43"/>
-        <sprite x="0" y="54" w="40" h="43"/>
-        <sprite x="0" y="54" w="40" h="43"/>
-        <sprite x="0" y="54" w="40" h="43"/>
-        <sprite x="0" y="54" w="40" h="43"/>
-        <sprite x="0" y="54" w="40" h="43"/>
+        <sprite x="41" y="68" w="40" h="43"/>
+        <sprite x="41" y="68" w="40" h="43"/>
+        <sprite x="41" y="68" w="40" h="43"/>
+        <sprite x="41" y="68" w="40" h="43"/>
+        <sprite x="41" y="68" w="40" h="43"/>
       </animation>
       <animation speed="10.0F" name="attacking_up_left" loop="false">
         <sprite x="95" y="190" w="40" h="40"/>
-        <sprite x="58" y="53" w="40" h="40"/>
-        <sprite x="58" y="53" w="40" h="40"/>
-        <sprite x="58" y="53" w="40" h="40"/>
-        <sprite x="58" y="53" w="40" h="40"/>
-        <sprite x="58" y="53" w="40" h="40"/>
+        <sprite x="99" y="67" w="40" h="40"/>
+        <sprite x="99" y="67" w="40" h="40"/>
+        <sprite x="99" y="67" w="40" h="40"/>
+        <sprite x="99" y="67" w="40" h="40"/>
+        <sprite x="99" y="67" w="40" h="40"/>
       </animation>
       <animation speed="10.0F" name="attacking_down_right" loop="false">
         <sprite x="163" y="191" w="47" h="42"/>
-        <sprite x="115" y="52" w="44" h="42"/>
-        <sprite x="115" y="52" w="44" h="42"/>
-        <sprite x="115" y="52" w="44" h="42"/>
-        <sprite x="115" y="52" w="44" h="42"/>
-        <sprite x="115" y="52" w="44" h="42"/>
+        <sprite x="156" y="66" w="44" h="42"/>
+        <sprite x="156" y="66" w="44" h="42"/>
+        <sprite x="156" y="66" w="44" h="42"/>
+        <sprite x="156" y="66" w="44" h="42"/>
+        <sprite x="156" y="66" w="44" h="42"/>
       </animation>
       <animation speed="10.0F" name="attacking_down_left" loop="false">
         <sprite x="19" y="131" w="45" h="39"/>
-        <sprite x="7" y="3" w="42" h="39"/>
-        <sprite x="7" y="3" w="42" h="39"/>
-        <sprite x="7" y="3" w="42" h="39"/>
-        <sprite x="7" y="3" w="42" h="39"/>
-        <sprite x="7" y="3" w="42" h="39"/>
+        <sprite x="48" y="17" w="42" h="39"/>
+        <sprite x="48" y="17" w="42" h="39"/>
+        <sprite x="48" y="17" w="42" h="39"/>
+        <sprite x="48" y="17" w="42" h="39"/>
+        <sprite x="48" y="17" w="42" h="39"/>
       </animation>
       <animation speed="36.0F" loop="false" name="dying">
         <sprite x="331" y="91" w="72" h="59"/>
