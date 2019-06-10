@@ -23,8 +23,8 @@ bool StrategyBuilding::Update(float dt)
 {
 	int mouse_x, mouse_y;
 	App->input->GetMousePosition(mouse_x, mouse_y);
-	mouse_x -= App->render->scaled_viewport.x;
-	mouse_y -= App->render->scaled_viewport.y;
+	mouse_x -= App->render->scaled_viewport.x / App->win->GetScale();
+	mouse_y -= App->render->scaled_viewport.y / App->win->GetScale();
 
 	iPoint mouse_world = App->render->ScreenToWorld(mouse_x, mouse_y);
 

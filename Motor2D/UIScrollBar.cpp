@@ -17,10 +17,10 @@ UIScrollBar::UIScrollBar(iPoint pos, SDL_Rect rect, SliderType type, int initial
 	slider[1] = { 804,1309,24,50 };
 	slider[2] = { 839,1309,24,50 };
 
-	slider_button = App->gui->CreateButton({ (int)initial_value, -6 }, slider, this);
+	slider_button = App->gui->CreateButton({ (int)initial_value, 0 }, slider, this);
 	SDL_Rect screen_rect = slider_button->GetScreenRect();
 	SDL_Rect parent_rect = GetScreenRect();
-	slider_button->SetScreenPos(LINEAR_INTERPOLATION(initial_value, 0, parent_rect.x, max_value, parent_rect.x + parent_rect.w), screen_rect.y);
+	slider_button->SetScreenPos(LINEAR_INTERPOLATION(initial_value, 0, parent_rect.x, max_value, parent_rect.x + parent_rect.w) / App->win->GetScale() , (parent_rect.y - 4) / App->win->GetScale());
 
 	percentage = initial_value / rect_box.w;
 
@@ -53,29 +53,28 @@ void UIScrollBar::DragSlider()
 	iPoint mouse;
 	App->input->GetMousePosition(mouse.x, mouse.y);
 	SDL_Rect screen_rect = slider_button->GetScreenRect();
+	SDL_Rect parent_rect = GetScreenRect();
 	mouse.x -= App->render->scaled_viewport.x / App->win->GetScale();
 	mouse.y -= App->render->scaled_viewport.y / App->win->GetScale();
 
-	slider_button->SetScreenPos(mouse.x - (screen_rect.w / 2), screen_rect.y);
+	slider_button->SetScreenPos(mouse.x - (screen_rect.w / 2), (parent_rect.y - 4) / App->win->GetScale());
 
 	if (parent_limit && parent)
 	{
-		SDL_Rect element_rect = slider_button->GetScreenRect();
-		SDL_Rect parent_rect = GetScreenRect();
+		screen_rect = slider_button->GetScreenRect();
+		if (screen_rect.x < parent_rect.x)
+			screen_rect.x = parent_rect.x;
+		else if (screen_rect.x + screen_rect.w > parent_rect.x + parent_rect.w)
+			screen_rect.x = (parent_rect.x + parent_rect.w) - screen_rect.w;
+		if (screen_rect.y <= parent_rect.y)
+			screen_rect.y = parent_rect.y;
+		else if (screen_rect.y + screen_rect.h >= parent_rect.y + parent_rect.h)
+			screen_rect.y = (parent_rect.y + parent_rect.h) - screen_rect.h;
 
-		if (element_rect.x < parent_rect.x)
-			element_rect.x = parent_rect.x;
-		else if (element_rect.x + element_rect.w > parent_rect.x + parent_rect.w)
-			element_rect.x = (parent_rect.x + parent_rect.w) - element_rect.w;
-		if (element_rect.y < parent_rect.y)
-			element_rect.y = parent_rect.y;
-		else if (element_rect.y + element_rect.h > parent_rect.y + parent_rect.h)
-			element_rect.y = (parent_rect.y + parent_rect.h) - element_rect.h;
-
-		slider_button->SetScreenPos(element_rect.x, screen_rect.y);
+		slider_button->SetScreenPos(screen_rect.x / App->win->GetScale(), (parent_rect.y - 4) / App->win->GetScale());
 	}
-	SDL_Rect screen_rect_parent = GetScreenRect();
-	current_value = LINEAR_INTERPOLATION(screen_rect.x, screen_rect_parent.x, 0, screen_rect_parent.x + screen_rect_parent.w, max_value);
+	screen_rect = slider_button->GetScreenRect();
+	current_value = LINEAR_INTERPOLATION(screen_rect.x, parent_rect.x, 0, parent_rect.x + parent_rect.w, max_value);
 
 	App->gui->SliderAction(slidertype, this);
 
