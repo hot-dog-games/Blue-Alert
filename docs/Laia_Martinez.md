@@ -14,21 +14,21 @@
  - Created 3 different nodes maps, implementing the terrains and decoration spritesheets and using Tiled as the editing tool.
 
     - Tutorial Map
-    <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Tutorial_Nodes_Map_r.png?raw=true" width="500" height="400">
+    <img src= "Readme_Files/Tutorial_Nodes_Map_r.png" width="500" height="400">
 
     - First Stage Map
-    <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Nodes%20Map_r.png?raw=true" width="575" height="375">
+    <img src= "Readme_Files/Nodes Map_r.png" width="575" height="375">
 
     - Second Stage Map
-   <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Nodes%20Map%20Snow_r.png?raw=true" width="500" height="400">
+   <img src= "Readme_Files/Nodes Map Snow_r.png" width="500" height="400">
 
 - Created 3 different combat maps, implementing the terrains and decoration spritesheets and Tiled as the editing tool.
 
     - Grass Map
-    <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/grass_map_r.png?raw=true" width="350" height="400">
+    <img src= "Readme_Files/grass_map_r.png" width="350" height="400">
    
    - River Map
-    <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/river_map_r.png?raw=true" width="350" height="400">
+    <img src= "Readme_Files/river_map_r.png" width="350" height="400">
     
     - Snow Map
-    <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/snow_map_r.png?raw=true" width="350" height="400">
+    <img src= "Readme_Files/snow_map_r.png" width="350" height="400">
