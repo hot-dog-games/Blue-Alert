@@ -205,7 +205,8 @@ bool BattleScene::Update(float dt)
 		}
 
 		energy_label->SetText(std::to_string(energy_bar->GetValue()));
-		if (bomb_cd_timer < BOMB_CD)
+
+		if (!App->IsPaused() && bomb_cd_timer < BOMB_CD)
 		{
 			bomb_cd_timer += 1 * dt;
 			if (bomb_cd_timer >= BOMB_CD)

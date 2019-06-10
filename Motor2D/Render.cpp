@@ -42,8 +42,10 @@ bool Render::Awake(pugi::xml_node& config)
 	}
 	else
 	{
-		camera.w = App->win->screen_surface->w;
-		camera.h = App->win->screen_surface->h;
+		uint w, h;
+		App->win->GetWindowSize(w, h);
+		camera.w = w * App->win->GetScale();
+		camera.h = h * App->win->GetScale();
 		camera.x = 0;
 		camera.y = 0;
 
