@@ -115,6 +115,75 @@ bool StrategyMapScene::PreUpdate()
 		}
 	}
 
+	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_REPEAT)
+	{
+		App->game_manager->gold += 100;
+		gold_quantity->SetText(std::to_string(App->game_manager->gold));
+	}
+	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN && App->game_manager->GetPlayerDeck()->cards[0])
+	{
+		App->game_manager->GetPlayerDeck()->cards[0]->Upgrade();
+		
+		if (App->game_manager->GetPlayerDeck()->cards[0]->type % 2 == 0) {
+			int index = (int)(App->game_manager->GetPlayerDeck()->cards[0]->type * 0.5f) - 1;
+			collection_buttons_allies[index]->ChangeSprite(App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[0]->type, "upgrade"), (ButtonLevel)App->game_manager->GetPlayerDeck()->cards[0]->level);
+		}
+		else {
+			int index = (int)((App->game_manager->GetPlayerDeck()->cards[0]->type - 1)* 0.5f);
+			collection_buttons_enemies[index]->ChangeSprite(App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[0]->type, "upgrade"), (ButtonLevel)App->game_manager->GetPlayerDeck()->cards[0]->level);
+		}
+
+		deck_buttons[0]->ChangeSprite(App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[0]->type, "upgrade"), (ButtonLevel)App->game_manager->GetPlayerDeck()->cards[0]->level);
+	}
+	if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN && App->game_manager->GetPlayerDeck()->cards[1])
+	{
+		App->game_manager->GetPlayerDeck()->cards[1]->Upgrade();
+		int index = (int)(App->game_manager->GetPlayerDeck()->cards[1]->type * 0.5f) - 1;
+		if (App->game_manager->GetPlayerDeck()->cards[1]->type % 2 == 0)
+		{
+			int index = (int)(App->game_manager->GetPlayerDeck()->cards[1]->type * 0.5f) - 1;
+			collection_buttons_allies[index]->ChangeSprite(App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[1]->type, "upgrade"), (ButtonLevel)App->game_manager->GetPlayerDeck()->cards[1]->level);
+		}		
+		else
+		{
+			int index = (int)((App->game_manager->GetPlayerDeck()->cards[1]->type - 1)* 0.5f);
+			collection_buttons_enemies[index]->ChangeSprite(App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[1]->type, "upgrade"), (ButtonLevel)App->game_manager->GetPlayerDeck()->cards[1]->level);
+		}		
+
+		deck_buttons[1]->ChangeSprite(App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[1]->type, "upgrade"), (ButtonLevel)App->game_manager->GetPlayerDeck()->cards[1]->level);
+	}
+	if (App->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN && App->game_manager->GetPlayerDeck()->cards[2])
+	{
+		App->game_manager->GetPlayerDeck()->cards[2]->Upgrade();
+
+		if (App->game_manager->GetPlayerDeck()->cards[2]->type % 2 == 0) {
+			int index = (int)(App->game_manager->GetPlayerDeck()->cards[2]->type * 0.5f) - 1;
+			collection_buttons_allies[index]->ChangeSprite(App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[2]->type, "upgrade"), (ButtonLevel)App->game_manager->GetPlayerDeck()->cards[2]->level);
+		}
+		else {
+			int index = (int)((App->game_manager->GetPlayerDeck()->cards[2]->type - 1)* 0.5f);
+			collection_buttons_enemies[index]->ChangeSprite(App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[2]->type, "upgrade"), (ButtonLevel)App->game_manager->GetPlayerDeck()->cards[2]->level);
+		}
+
+		deck_buttons[2]->ChangeSprite(App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[2]->type, "upgrade"), (ButtonLevel)App->game_manager->GetPlayerDeck()->cards[2]->level);
+	}
+	if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN && App->game_manager->GetPlayerDeck()->cards[3])
+	{
+		App->game_manager->GetPlayerDeck()->cards[3]->Upgrade();
+
+		if (App->game_manager->GetPlayerDeck()->cards[3]->type % 2 == 0) {
+			int index = (int)(App->game_manager->GetPlayerDeck()->cards[3]->type * 0.5f) - 1;
+			collection_buttons_allies[index]->ChangeSprite(App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[3]->type, "upgrade"), (ButtonLevel)App->game_manager->GetPlayerDeck()->cards[3]->level);
+		}
+		else {
+			int index = (int)((App->game_manager->GetPlayerDeck()->cards[3]->type - 1)* 0.5f);
+			collection_buttons_enemies[index]->ChangeSprite(App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[3]->type, "upgrade"), (ButtonLevel)App->game_manager->GetPlayerDeck()->cards[3]->level);
+		}
+
+		deck_buttons[3]->ChangeSprite(App->gui->LoadUIButton(App->game_manager->GetPlayerDeck()->cards[3]->type, "upgrade"), (ButtonLevel)App->game_manager->GetPlayerDeck()->cards[3]->level);
+	}
+
+
 	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 		App->render->camera.y += 10;
 

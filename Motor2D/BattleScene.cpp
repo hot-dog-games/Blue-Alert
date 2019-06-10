@@ -165,6 +165,14 @@ bool BattleScene::Update(float dt)
 				current_gold->SetText("Your gold: " + std::to_string(App->game_manager->gold) + "g");
 			}
 		}
+		else if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_UP)
+		{
+			state = BattleSceneState::LOSE;
+			App->audio->PlayFx(lose_fx.c_str(), 0);
+			App->PauseGame();
+			App->gui->EnableElement((UIElement*)lose_panel);
+			App->gui->DisableInteractable((UIElement*)unit_panel);
+		}
 			
 		if (!allied_core->IsAlive())
 		{

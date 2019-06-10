@@ -6,7 +6,7 @@
 #include "Stat.h"
 #include "CardManager.h"
 
-#define MAX_LEVEL 6
+#define MAX_LEVEL 5
 
 CardManager::CardManager()
 {
