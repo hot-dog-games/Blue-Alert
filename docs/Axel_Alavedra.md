@@ -11,6 +11,7 @@
 * Implemented card system, a card contains information about unit type and all it's stats like movement speed, attack damage, life, and many others.
 * Card factory that reads card stats from xml and creates card according to type wanted.
 * Deck of cards for the player and the enemy. Collection of cards for the player, which contains all the cards that the player obtains during the game.
+* Card scales stats depending on level
 ### Units
 * Implemented unit spawn through card usage
 * Limited spawn of units inside spawn area
@@ -24,6 +25,7 @@
 	* Particles for each type of attack(AOE explosion, bullet for basic and piercing)
 	* Shot particle rotates and moves to enemy position
 	* Player ultimate ability
+	* All damage calculations
 * Basic AI of units
 	* Unit moves to the enemy Core
 	* If an Entity enters in attack range, starts attacking that unit
