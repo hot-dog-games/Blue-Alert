@@ -166,8 +166,6 @@ bool BattleScene::Update(float dt)
 			}
 		}
 			
-
-
 		if (!allied_core->IsAlive())
 		{
 			state = BattleSceneState::LOSE;
@@ -759,13 +757,13 @@ void BattleScene::StartUI()
 		}
 	}
 
-	App->gui->CreateLabel({ 90, 195 }, "fonts/button_text.ttf", 20, str[0], color[0], 400, win_panel_two);
+	App->gui->CreateLabel({ 70, 195 }, "fonts/button_text.ttf", 20, str[0], color[0], 400, win_panel_two);
 	App->gui->CreateLabel({ 240, 195 }, "fonts/button_text.ttf", 20, str[1], color[1], 400, win_panel_two);
-	App->gui->CreateLabel({ 390, 195 }, "fonts/button_text.ttf", 20, str[2], color[2], 400, win_panel_two);
+	App->gui->CreateLabel({ 410, 195 }, "fonts/button_text.ttf", 20, str[2], color[2], 400, win_panel_two);
 
-	win_unit[0] = App->gui->CreateSelectableButton({ 100, 220 }, App->gui->LoadUIButton(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[0], "upgrade"), win_panel_two);
+	win_unit[0] = App->gui->CreateSelectableButton({ 90, 220 }, App->gui->LoadUIButton(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[0], "upgrade"), win_panel_two);
 	win_unit[1] = App->gui->CreateSelectableButton({ 260, 220 }, App->gui->LoadUIButton(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[1], "upgrade"), win_panel_two);
-	win_unit[2] = App->gui->CreateSelectableButton({ 420, 220 }, App->gui->LoadUIButton(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[2], "upgrade"), win_panel_two);
+	win_unit[2] = App->gui->CreateSelectableButton({ 430, 220 }, App->gui->LoadUIButton(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterRewards()[2], "upgrade"), win_panel_two);
 
 	win_building = App->gui->CreateImage({ 195,240 }, App->gui->LoadUIImage(App->game_manager->GetEncounterTree()->GetFightingNode()->GetEncounterType(), "end_screen"), win_panel_one);
 
