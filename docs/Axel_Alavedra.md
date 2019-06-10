@@ -29,8 +29,10 @@
 	* Shot particle rotates and moves to enemy position
 	* Player ultimate ability
 	* All damage calculations
+	
 <img src="Readme_Files/basicattack.gif" width="320" height="480"><img src="Readme_Files/penetrating.gif" width="320" height="480">
 <img src="Readme_Files/aoegif.gif" width="320" height="480">
+
 * Basic AI of units
 	* Unit moves to the enemy Core
 	* If an Entity enters in attack range, starts attacking that unit
