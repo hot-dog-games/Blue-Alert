@@ -35,7 +35,6 @@
 #include "UIImage.h"
 #include "UILabel.h"
 
-const double HELD_DELAY = 175;
 const double BOMB_CD = 30;
 
 BattleScene::BattleScene() : Scene()
@@ -136,63 +135,6 @@ bool BattleScene::Update(float dt)
 		App->input->GetMousePosition(x, y);
 		iPoint p = App->render->ScreenToWorld(x, y);
 		iPoint tile_p = App->map->WorldToMap(p.x, p.y);
-
-		//-------SHORTCUTS-----------------------//
-		if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN
-			|| App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
-		{
-			shortcut_timer.Start();
-		}
-
-		if ((App->input->GetKey(SDL_SCANCODE_1) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_2) == KEY_REPEAT
-			|| App->input->GetKey(SDL_SCANCODE_3) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_4) == KEY_REPEAT)
-			&& shortcut_timer.ReadMs() > HELD_DELAY)
-		{
-			App->map->SetDrawable("Spawn", 0);
-		}
-
-		if (App->input->GetKey(SDL_SCANCODE_1) == KEY_UP && allied_core->GetCard(CN_FIRST))
-		{
-			App->map->SetDrawable("Spawn", 1);
-			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
-			{
-				if (allied_core->UseCard(CN_FIRST, { float(p.x),float(p.y) }))
-					App->audio->PlayFx(deployment_fx.c_str(), 0);
-			}
-		}
-
-		if (App->input->GetKey(SDL_SCANCODE_2) == KEY_UP && allied_core->GetCard(CN_SECOND))
-		{
-			App->map->SetDrawable("Spawn", 1);
-			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
-			{
-				if (allied_core->UseCard(CN_SECOND, { float(p.x),float(p.y) }))
-					App->audio->PlayFx(deployment_fx.c_str(), 0);
-			}
-		}
-
-		if (App->input->GetKey(SDL_SCANCODE_3) == KEY_UP && allied_core->GetCard(CN_THIRD))
-		{
-			App->map->SetDrawable("Spawn", 1);
-			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
-			{
-				if (allied_core->UseCard(CN_THIRD, { float(p.x),float(p.y) }))
-					App->audio->PlayFx(deployment_fx.c_str(), 0);
-			}
-		}
-
-		if (App->input->GetKey(SDL_SCANCODE_4) == KEY_UP && allied_core->GetCard(CN_FOURTH))
-		{
-			App->map->SetDrawable("Spawn", 1);
-			if (App->map->IsInsideMap(tile_p) && App->map->IsSpawnable(tile_p))
-			{
-				if (allied_core->UseCard(CN_FOURTH, { float(p.x),float(p.y) }))
-					App->audio->PlayFx(deployment_fx.c_str(), 0);
-			}
-		}
-			
-
-		//---------------------------------------//
 
 		if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_UP)
 		{
@@ -406,7 +348,18 @@ bool BattleScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			bomb_cd_timer = 0;
 			bomb_button->SetLocked(false);
 		}
-
+		 
+		if (element == faction_button)
+		{
+			if (!App->IsPaused()) {
+				App->PauseGame();
+				App->gui->EnableElement(counter_panel);
+			}
+			else {
+				App->ResumeGame();
+				App->gui->DisableElement(counter_panel);
+			}
+		}
 
 		if (element == pause_button) {
 			if (!App->IsPaused()) {
@@ -537,11 +490,12 @@ void BattleScene::CreateDrag(int num, int type, UIElement* element)
 
 void BattleScene::ReleaseDrag()
 {
-	int x, y;
-	App->input->GetMousePosition(x, y);
-	x -= App->render->scaled_viewport.x;
-	y -= App->render->scaled_viewport.y;
-	iPoint world_pos = App->render->ScreenToWorld(x, y);
+	iPoint mouse_pos;
+	App->input->GetMousePosition(mouse_pos.x, mouse_pos.y);
+	mouse_pos.x -= App->render->scaled_viewport.x / App->win->GetScale();
+	mouse_pos.y -= App->render->scaled_viewport.y / App->win->GetScale();
+
+	iPoint world_pos = App->render->ScreenToWorld(mouse_pos.x, mouse_pos.y);
 	iPoint map_pos = App->map->WorldToMap(world_pos.x, world_pos.y);
 
 	if (App->map->IsInsideMap(map_pos) && App->map->IsSpawnable(map_pos))
@@ -758,6 +712,9 @@ void BattleScene::StartUI()
 	faction_button_rect[1] = { 1387,1366,39,39 };
 	faction_button_rect[2] = { 1427,1366,39,39 };
 	faction_button = App->gui->CreateButton({ 575, 912 }, faction_button_rect, nullptr);
+
+	counter_panel = App->gui->CreateImage({ 60, 180 }, { 3393,992,518,479 }, nullptr);
+	App->gui->DisableElement(counter_panel);
 
 	health_bar_image = App->gui->CreateImage({ 248, 770 }, { 24,1378,144,16 });
 	enemy_health_bar_image = App->gui->CreateImage({ 248, 30 }, { 24,1455,144,16 });
