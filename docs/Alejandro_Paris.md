@@ -17,6 +17,7 @@ As the member in charge of the development of the design part of the game, I've 
     <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/tabla_tipos.png?raw=true" width="500" height="400">
 
 	- Building buff Design.
+	
 	<img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/building_menu.JPG?raw=true" width="350" height="550"/> 
 
 
