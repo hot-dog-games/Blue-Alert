@@ -59,15 +59,17 @@ So my work here, has been to create them in order to give the player the feeling
 
    - Main Menu and Credits Menu
    
-    <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Vertical%20Main%20Menu.png?raw=true" width="350" height="550"/><img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Credits%20Menu.png?raw=true" width="350" height="550"/>
+   <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Vertical%20Main%20Menu.png?raw=true" width="350" height="550"/><img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Credits%20Menu.png?raw=true" width="350" height="550"/> 
+    
 
    - Troops and Buildings Menu
-     <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Troops%20Menu%20Vertical.png?raw=true" width="350" height="550"/><img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Buildings%20Menu%20Vetical.png?raw=true" width="350" height="550"/> 
+   
+     <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Troops%20Menu%20Vertical.png?raw=true" width="350" height="550"/> <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Buildings%20Menu%20Vetical.png?raw=true" width="350" height="550"/> 
 
    - Store Menu
    <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Vertical%20%20Store.png?raw=true" width="350" height="550"/>
   
-     - Pause and End Game Menu
+   - Pause and End Game Menu
    <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Pause%20Menu%20In%20Game%20vertical.png?raw=truee" width="350" height="550"/><img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/End%20Vertical.png?raw=true" width="350" height="550"/>
 
 ### Interactive Elements
