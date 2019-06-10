@@ -20,6 +20,7 @@
 
 * Unit movement through A* pathfinding
 * Animations
+	* Implemented animations for each unit in the game
 	* Adjust animations pivot for units
 	* Movement and attack animations frame speeds are related to the movement speed and attack speed of the unit
 	* Unit dynamic animations
