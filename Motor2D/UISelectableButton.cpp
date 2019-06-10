@@ -12,6 +12,7 @@ UISelectableButton::~UISelectableButton()
 void UISelectableButton::OnMouseClick()
 {
 	selected = !selected;
+	App->audio->PlayFx(button_fx.c_str(), 0);
 }
 
 void UISelectableButton::OnMouseHover()

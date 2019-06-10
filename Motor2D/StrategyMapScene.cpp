@@ -55,14 +55,17 @@ bool StrategyMapScene::Start()
 	case STAGE_TUTORIAL: 
 		App->map->Load("Tutorial_Nodes_Map.tmx"); 
 		map_camera_limit = { 0, 0, (int)(2000 * App->win->GetScale()), (int)(1692 * App->win->GetScale()) };
+		level_name_str = "Tutorial";
 		break;
 	case STAGE_01: 
 		App->map->Load("Nodes Map.tmx");
 		map_camera_limit = { 0, 0, (int)(2600 * App->win->GetScale()), (int)(1792 * App->win->GetScale()) };
+		level_name_str = "Stage 01";
 		break;
 	case STAGE_02: 
 		App->map->Load("Nodes Map Snow.tmx"); 
 		map_camera_limit = { 0, 0, (int)(2600 * App->win->GetScale()), (int)(1992 * App->win->GetScale()) };
+		level_name_str = "Stage 02";
 		break;
 	default:
 		break;
@@ -220,6 +223,7 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			App->gui->DisableElement(collection_button);
 			App->gui->DisableElement(settings_button);
 			App->gui->DisableElement(buildings_background);
+			App->gui->DisableElement(banner);
 
 			App->game_manager->GetEncounterTree()->is_clickable = false;
 			dragable = false;
@@ -244,6 +248,7 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 
 			App->gui->EnableElement(collection_button);
 			App->gui->EnableElement(settings_button);
+			App->gui->EnableElement(banner);
 
 			App->game_manager->GetEncounterTree()->is_clickable = true;
 			dragable = true;
@@ -535,6 +540,11 @@ void StrategyMapScene::InitializeUI()
 
 	main_panel = App->gui->CreateImage({ 0,0 }, { 0, 0, 0, 0 }, nullptr, false);
 
+	banner = App->gui->CreateImage({ 46,10 }, { 3345,923,547,44 }, main_panel);
+	level_name = App->gui->CreateLabel({150,4 }, "fonts/button_text.ttf", 30, level_name_str, { 255,255,255,255 }, 300, banner);
+	gold_image = App->gui->CreateImage({ 425,8 }, { 3908,924,28,28 }, banner);
+	gold_quantity = App->gui->CreateLabel({ 455, 4 }, "fonts/quantico.ttf", 25, std::to_string(App->game_manager->gold) + " g", { 231,216,145,255 }, 200, banner);
+
 	SDL_Rect small_button_rect[3];
 	small_button_rect[0] = { 753, 497, 41, 40 };
 	small_button_rect[1] = { 753, 538, 41, 40 };
@@ -703,9 +713,6 @@ void StrategyMapScene::InitializeUI()
 
 	energy_bar = App->gui->CreateBar({ 8,188 }, { 2897,1780,260,65 }, App->game_manager->GetCardFromCollection(CONSCRIPT)->info.stats.find("energy_cost")->second, BAR_HORITZONTAL, BAR_STATIC, nullptr, troops_background);
 
-	//Gold
-	str = "Gold: " + std::to_string(App->game_manager->gold) + "g";
-	gold_quantity = App->gui->CreateLabel({ 460, 150 }, "fonts/button_text.ttf", 16, str, { 231,216,145,255 }, 200, buildings_background);
 }
 
 bool StrategyMapScene::IsInsideLimits(int mousemotion_x, int mousemotion_y)
