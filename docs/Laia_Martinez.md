@@ -9,7 +9,7 @@ As the member in charge of the development of the artistic part of the game, I'v
  
  - Created the team's logo, icon and banner, used as our mark in our different social networks.
  
-     - Logo
+     - Logo with the help of [Alexandru Cercel](https://github.com/AlexandruC5)
     <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Logo.png?raw=true" width="400"     height="250">
 
     - Icon
@@ -72,10 +72,12 @@ So my work here, has been to create them in order to give the player the feeling
    - Pause and End Game Menu
    
    <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Pause%20Menu%20In%20Game%20vertical.png?raw=truee" width="350" height="550"/> <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/End%20Vertical.png?raw=true" width="350" height="550"/>
-
 ### Interactive Elements
 
 Blue Alert, as a mobile videogame, has a lot of different interactive elemnets such as buttons or sliders.
+
+   - Nodes States: Idle, on hover, clicked.
+   <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/nodes%20stages.png?raw=true" width="300" height="100"/>
 
    - Troops Buttons used in the combat sceen. Each troop button has 3 states; Idle, on hover, clicked.
    
@@ -84,8 +86,18 @@ Blue Alert, as a mobile videogame, has a lot of different interactive elemnets s
    
    - Troops Buttons used in the Store and in the Troops Menu. Each troop button has 3 states: Idle, on hover, clicked.
    
-   
    <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/troopsmenuicons.png?raw=true" width="1050" height="170"/>
    
    - Buttons used in the ui of the game. Each ui button has 3 states: Idle, on hover, clicked. These in concret are used in the credits secction.
     <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Creditsbuttons.png?raw=true" width="1050" height="600"/>
+    
+   - Different frames for the ranges of the troops 
+   
+<img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/framescircle.png?raw=true" width="600" height="250"/>
+
+### Other Tasks
+
+- Wiki [Art Bible](https://github.com/hot-dog-games/Blue-Alert/wiki/6.--Art-Bible).
+- Wiki [Audio Bible](https://github.com/hot-dog-games/Blue-Alert/wiki/5.--Audio-Bible).
+- Concept Discovery presentation.
+- [Available Licenses](https://github.com/LaiaMartinezMotis/Available-Licenses-Research) Research.
