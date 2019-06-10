@@ -25,6 +25,7 @@
 	* Particles for each type of attack(AOE explosion, bullet for basic and piercing)
 	* Shot particle rotates and moves to enemy position
 	* Player ultimate ability
+	* All damage calculations
 * Basic AI of units
 	* Unit moves to the enemy Core
 	* If an Entity enters in attack range, starts attacking that unit
