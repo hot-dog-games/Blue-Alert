@@ -63,3 +63,4 @@
 * Optimized texture and audio loading.
 * Implemented Video module to the engine from my [research](https://github.com/AxelAlavedra/Video-Player-Research)
 * Helped as much as I could with code issues of other team members
+* Implemented buff system from Jaume Montagut's class [research](https://github.com/JaumeMontagut/CITM_2_Project2_BuffManager)
