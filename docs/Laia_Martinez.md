@@ -62,15 +62,18 @@ As the member in charge of the development of the artistic part of the game, I'v
     
     <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/grass_map_r.png?raw=true" width="350" height="400">
    
+   
    - River Map  
    
    
     <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/river_map_r.png?raw=true" width="350" height="400">
     
+    
    - Snow Map
    
    
     <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/snow_map_r.png?raw=true" width="350" height="400">
+
 
 ### Blue Alert In game Menus
 
@@ -87,16 +90,19 @@ So my work here, has been to create them in order to give the player the feeling
      <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Troops%20Menu%20Vertical.png?raw=true" width="350" height="550"/> <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Buildings%20Menu%20Vetical.png?raw=true" width="350" height="550"/> 
 
    - Store Menu
+   
    <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Vertical%20%20Store.png?raw=true" width="350" height="550"/>
   
    - Pause and End Game Menu
    
    <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Pause%20Menu%20In%20Game%20vertical.png?raw=truee" width="350" height="550"/> <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/End%20Vertical.png?raw=true" width="350" height="550"/>
+   
 ### Interactive Elements
 
 Blue Alert, as a mobile videogame, has a lot of different interactive elemnets such as buttons or sliders.
 
    - Nodes States: Idle, on hover, clicked.
+   
    <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/nodes%20stages.png?raw=true" width="300" height="100"/>
 
    - Troops Buttons used in the combat sceen. Each troop button has 3 states; Idle, on hover, clicked.
@@ -109,6 +115,7 @@ Blue Alert, as a mobile videogame, has a lot of different interactive elemnets s
    <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/troopsmenuicons.png?raw=true" width="1050" height="170"/>
    
    - Buttons used in the ui of the game. Each ui button has 3 states: Idle, on hover, clicked. These in concret are used in the credits secction.
+   
     <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Creditsbuttons.png?raw=true" width="1050" height="600"/>
     
    - Different frames for the ranges of the troops 
