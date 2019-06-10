@@ -70,8 +70,22 @@ So my work here, has been to create them in order to give the player the feeling
    <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Vertical%20%20Store.png?raw=true" width="350" height="550"/>
   
    - Pause and End Game Menu
-   <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Pause%20Menu%20In%20Game%20vertical.png?raw=truee" width="350" height="550"/><img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/End%20Vertical.png?raw=true" width="350" height="550"/>
+   
+   <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Pause%20Menu%20In%20Game%20vertical.png?raw=truee" width="350" height="550"/> <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/End%20Vertical.png?raw=true" width="350" height="550"/>
 
 ### Interactive Elements
 
 Blue Alert, as a mobile videogame, has a lot of different interactive elemnets such as buttons or sliders.
+
+   - Troops Buttons used in the combat sceen. Each troop button has 3 states; Idle, on hover, clicked.
+   
+   <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/UNITS%20BUTTONS.png?raw=true" width="1050" height="290"/>
+   
+   
+   - Troops Buttons used in the Store and in the Troops Menu. Each troop button has 3 states: Idle, on hover, clicked.
+   
+   
+   <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/troopsmenuicons.png?raw=true" width="1050" height="170"/>
+   
+   - Buttons used in the ui of the game. Each ui button has 3 states: Idle, on hover, clicked. These in concret are used in the credits secction.
+    <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Creditsbuttons.png?raw=true" width="1050" height="600"/>
