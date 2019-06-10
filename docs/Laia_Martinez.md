@@ -87,7 +87,10 @@ So my work here, has been to create them in order to give the player the feeling
 
    - Troops and Buildings Menu
    
-     <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Troops Menu Vertical.png?raw=true" width="350" height="550"/> <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Buildings%20Menu%20Vetical.png?raw=true" width="350" height="550"/> 
+     <img align="left" width="350" height="550" src="https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Troops Menu Vertical.png?raw=true"> 
+     <img align="right" width="350" height="550" src="https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Buildings%20Menu%20Vetical.png?raw=true"> 
+
+
 
    - Store Menu
    
@@ -95,7 +98,8 @@ So my work here, has been to create them in order to give the player the feeling
   
    - Pause and End Game Menu
    
-   <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Pause Menu In Game vertical.png?raw=truee" width="350" height="550"/> <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/End%20Vertical.png?raw=true" width="350" height="550"/>
+   <img align="left" width="350" height="550" src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Pause Menu In Game vertical.png?raw=truee"> 
+   <img align="right" width="350" height="550" src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/End%20Vertical.png?raw=true">
    
 ### Interactive Elements
 
@@ -115,7 +119,6 @@ Blue Alert, as a mobile videogame, has a lot of different interactive elemnets s
    <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/troopsmenuicons.png?raw=true" width="1050" height="170"/>
    
    - Buttons used in the ui of the game. Each ui button has 3 states: Idle, on hover, clicked. These in concret are used in the credits secction.
-   
     <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Creditsbuttons.png?raw=true" width="1050" height="600"/>
     
    - Different frames for the ranges of the troops 
