@@ -17,7 +17,7 @@ The second one, the continue button, is going to leave you were you left it the 
 The third one, the options button, contains some adjustments for the game, you are going to see it right after this section.
 The last one, the exit button, makes an obvious behaviour, close the game.
  
-<img src="https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/mainmenu.JPG" >
+<img src="Readme_Files/mainmenu.JPG" >
 
 ## Options Menu
 
@@ -26,11 +26,11 @@ In this scene, there is two simple sliders, the first one serves to adjust the m
 The logic of the sliders was made big part by another team member, Alex Morales, and a small part by me.
 The small part was to sync the movement of the slider with the volume and the FX of the game.
 
-<img src="https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/optionsmenu.JPG" >
+<img src="Readme_Files/optionsmenu.JPG" >
 
 ## Troops Menu
 
 The Troops Menu was a task for few of the members of the team.
 Especially, my task was to put the images corresponding to the image below, were you can see all the troops that you can use, exchange them and see some information of the buildings of the game. Part of my work was also to make part of the logic for the exchange of troops and to make sure it was synchronized visually and internally.
 
-<img src="https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/troopsmenu.JPG" >
+<img src="Readme_Files/troopsmenu.JPG" >
