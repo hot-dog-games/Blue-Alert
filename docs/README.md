@@ -63,6 +63,8 @@ _The HotDogGames team._
 
 # Release
 
+[Release 1.0(Zip and Installer)](https://github.com/hot-dog-games/Blue-Alert/releases/tag/1.0-Installer)
+
 # Trailer
 
 You can check the Blue alert gameplay trailer and the Blue Alert cinematic trailer by clicking the link down below.
