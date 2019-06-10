@@ -489,11 +489,12 @@ void BattleScene::CreateDrag(int num, int type, UIElement* element)
 
 void BattleScene::ReleaseDrag()
 {
-	int x, y;
-	App->input->GetMousePosition(x, y);
-	x -= App->render->scaled_viewport.x;
-	y -= App->render->scaled_viewport.y;
-	iPoint world_pos = App->render->ScreenToWorld(x, y);
+	iPoint mouse_pos;
+	App->input->GetMousePosition(mouse_pos.x, mouse_pos.y);
+	mouse_pos.x -= App->render->scaled_viewport.x / App->win->GetScale();
+	mouse_pos.y -= App->render->scaled_viewport.y / App->win->GetScale();
+
+	iPoint world_pos = App->render->ScreenToWorld(mouse_pos.x, mouse_pos.y);
 	iPoint map_pos = App->map->WorldToMap(world_pos.x, world_pos.y);
 
 	if (App->map->IsInsideMap(map_pos) && App->map->IsSpawnable(map_pos))

@@ -1,6 +1,7 @@
 #include "p2Defs.h"
 #include "p2Log.h"
 #include "j1App.h"
+#include "Window.h"
 #include "Render.h"
 #include "Textures.h"
 #include "Input.h"
@@ -105,9 +106,12 @@ bool Gui::PreUpdate()
 				{
 					iPoint mouse_pos;
 					App->input->GetMousePosition(mouse_pos.x, mouse_pos.y);
-					mouse_pos.x -= App->render->scaled_viewport.x;
-					mouse_pos.y -= App->render->scaled_viewport.y;
-					current_element->SetScreenPos(mouse_pos.x - current_element->GetLocalRect().w / 2, mouse_pos.y - current_element->GetLocalRect().h / 2);
+
+					SDL_Rect screen_rect = current_element->GetScreenRect();
+					mouse_pos.x -= App->render->scaled_viewport.x / App->win->GetScale();
+					mouse_pos.y -= App->render->scaled_viewport.y / App->win->GetScale();
+
+					current_element->SetScreenPos(mouse_pos.x - (screen_rect.w / 2), mouse_pos.y - (screen_rect.h / 2));
 
 					if (current_element->parent_limit && current_element->parent)
 					{
@@ -167,6 +171,7 @@ bool Gui::PostUpdate()
 		}
 
 	}
+
 	return true;
 }
 

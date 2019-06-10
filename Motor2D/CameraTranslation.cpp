@@ -12,7 +12,7 @@ CameraTranslation::CameraTranslation(float transition_time, iPoint destination) 
 	App->win->GetWindowSize(w, h);
 
 	origin = { App->render->camera.x, App->render->camera.y };
-	this->destination = {(int)(-destination.x + w * 0.5), (int)(-destination.y + h * 0.5)};
+	this->destination = {(int)(-destination.x + App->render->scaled_viewport.w * 0.5), (int)(-destination.y + App->render->scaled_viewport.h * 0.5)};
 }
 
 CameraTranslation::~CameraTranslation()
