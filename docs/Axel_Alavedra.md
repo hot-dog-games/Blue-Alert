@@ -56,5 +56,5 @@
 
 	<img src="Readme_Files/lifebargif.gif" width="320" height="480">
 
-* Implemented Video module to the engine from my research (link)
+* Implemented Video module to the engine from my [!research] (https://github.com/AxelAlavedra/Video-Player-Research)
 * Helped as much as I could with code issues of other team members
