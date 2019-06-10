@@ -1,4 +1,4 @@
-# Alejandro París
+# Alejandro ParÃ­s
 
 ## Individual Contribution
 
@@ -17,14 +17,14 @@ As the member in charge of the development of the design part of the game, I've 
     <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/tabla_tipos.png?raw=true" width="500" height="400">
 
 	- Building buff Design
-	<img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Troops%20Menu%20Vertical.png?raw=true" width="350" height="550"/> <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Buildings%20Menu%20Vetical.png?raw=true" width="350" height="550"/> 
+	<img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Troops Menu Vertical.png?raw=true" width="350" height="550"/> <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Buildings Menu Vetical.png?raw=true" width="350" height="550"/> 
 
 	- Tutorial Design
 	<img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Tutorial_Nodes_Map_r.png?raw=true" width="500" height="400">
     - First Stage Design
-    <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Nodes%20Map_r.png?raw=true" width="575" height="375">
+    <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Nodes Map_r.png?raw=true" width="575" height="375">
     - Second Stage Map
-   <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Nodes%20Map%20Snow_r.png?raw=true" width="500" height="400">
+   <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Nodes Map Snow_r.png?raw=true" width="500" height="400">
 
 ### Other Tasks
 
