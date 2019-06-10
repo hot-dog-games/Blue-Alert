@@ -22,7 +22,6 @@ MainMenuScene::~MainMenuScene()
 // Called before the first frame
 bool MainMenuScene::Start()
 {
-
 	//Initialize UI
 	StartUI();
 	App->audio->PlayMusic("audio/music/menu_music.ogg");
@@ -123,6 +122,16 @@ bool MainMenuScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 		else if (element == team_pages[7]) {
 			ShellExecuteA(NULL, "open", "https://github.com/AlejandroParis", NULL, NULL, SW_SHOWNORMAL);
 		}
+
+		if (element == social_media[0]) {
+			ShellExecuteA(NULL, "open", "https://twitter.com/hotdoggames1", NULL, NULL, SW_SHOWNORMAL);
+		}
+		else if(element == social_media[1]) {
+			ShellExecuteA(NULL, "open", "https://www.instagram.com/hotdoggames/", NULL, NULL, SW_SHOWNORMAL);
+		}
+		else if (element == social_media[2]) {
+			ShellExecuteA(NULL, "open", "https://github.com/hot-dog-games/Blue-Alert", NULL, NULL, SW_SHOWNORMAL);
+		}
 		
 	}
 	return true;
@@ -161,9 +170,9 @@ void MainMenuScene::StartUI() {
 
 	//Credits
 	SDL_Rect credits_rect[3];
-	credits_rect[0] = { 2770,1885,27,26 };
-	credits_rect[1] = { 2800,1885,27,26 };
-	credits_rect[2] = { 2830,1885,27,26 };
+	credits_rect[0] = { 494,2048,38,38 };
+	credits_rect[1] = { 494,2088,38,38 };
+	credits_rect[2] = { 494,2129,38,38 };
 
 	SDL_Rect red_button[3];
 	red_button[0] = { 12,1861,225,43 };
@@ -205,10 +214,29 @@ void MainMenuScene::StartUI() {
 	blue_dark_button[1] = { 251,2191,225,43 };
 	blue_dark_button[2] = { 251,2431,225,43 };
 
-	credits_button = App->gui->CreateButton({ 500, 600 }, credits_rect, menu_background);
+	SDL_Rect twitter_rect[3];
+	twitter_rect[0] = { 493,1862,50,41 };
+	twitter_rect[1] = { 493,1913,50,41 };
+	twitter_rect[2] = { 493,1966,50,41 };
+
+	SDL_Rect instagram_rect[3];
+	instagram_rect[0] = { 624,1854,47,47 };
+	instagram_rect[1] = { 624,1914,47,47 };
+	instagram_rect[2] = { 624,1974,47,47 };
+
+	SDL_Rect github_rect[3];
+	github_rect[0] = { 557,1851,52,52 };
+	github_rect[1] = { 557,1910,52,52 };
+	github_rect[2] = { 557,1968,52,52 };
+
+	credits_button = App->gui->CreateButtonText({ 540, 900 }, { 20,0 }, credits_rect, "C", {255,255,255,255}, 22, menu_background);
 
 	credits_background = App->gui->CreateImage({ 0,0 }, { 2056,1220,640,960 }, nullptr);
 	back_credits_button = App->gui->CreateButton({ 520,875 }, back_options_rect, credits_background);
+	
+	social_media[0] = App->gui->CreateButton({ 345, 800 }, twitter_rect, credits_background);
+	social_media[1] = App->gui->CreateButton({ 425, 797 }, instagram_rect, credits_background);
+	social_media[2] = App->gui->CreateButton({ 505, 795 }, github_rect, credits_background);
 
 	team_pages[0] = App->gui->CreateButtonText({ 90,590 }, { 20,0 }, red_button, "Axel Alavedra", {0,0,0,0}, 15, credits_background);
 	team_pages[1] = App->gui->CreateButtonText({ 90,665 }, { 20,0 }, orange_button, "Albert Cayuela", { 0,0,0,0 }, 14, credits_background);
@@ -227,7 +255,6 @@ void MainMenuScene::StartUI() {
 	team_label[5] = App->gui->CreateLabel({ 420, 565 }, "fonts/gunplay.ttf", 17, "UI Lead", { 255,57,151,255 }, 200, credits_background);
 	team_label[6] = App->gui->CreateLabel({ 440, 640 }, "fonts/gunplay.ttf", 17, "UI", { 169,131,180,255 }, 200, credits_background);
 	team_label[7] = App->gui->CreateLabel({ 425, 715 }, "fonts/gunplay.ttf", 17, "Design", { 57,166,255,255 }, 200, credits_background);
-
 
 	App->gui->DisableElement(credits_background);
 }

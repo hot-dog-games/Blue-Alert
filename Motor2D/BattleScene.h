@@ -73,11 +73,8 @@ private:
 	std::string nuke_fx = "";
 
 	UIImage*		unit_panel = nullptr;
-	UIButton*		unit_button_one = nullptr;
+	UIButtonTroops*	unit_button[4] = { nullptr, nullptr, nullptr, nullptr };
 	UIImage*		unit_cooldown[4];
-	UIButton*		unit_button_two = nullptr;
-	UIButton*		unit_button_three = nullptr;
-	UIButton*		unit_button_four = nullptr;
 	UIBar*			energy_bar = nullptr;
 	UIBar*			health_bar = nullptr;
 	UIImage*		health_bar_image = nullptr;

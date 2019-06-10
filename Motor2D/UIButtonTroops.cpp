@@ -102,54 +102,101 @@ void UIButtonTroops::ChangeSprite(SDL_Rect* rect, ButtonLevel level)
 	rect_sprite_mark = mark[interactable ? 0 : 3];
 }
 
-UIButtonTroops::UIButtonTroops(iPoint position, SDL_Rect* sprite_rect, bool is_interactable, ButtonLevel lvl) :UIButton(position, sprite_rect, is_interactable)
+UIButtonTroops::UIButtonTroops(iPoint position, SDL_Rect* sprite_rect, bool is_interactable, ButtonLevel lvl, ButtonTroopType type) :UIButton(position, sprite_rect, is_interactable)
 {
 	level = lvl;
 
 	mark = new SDL_Rect[4];
+	if (type == COLLECTION) {
+		switch (level) {
+		case LVL_1:
+			mark[0] = { 2370,745,100,100 };
+			mark[1] = { 2370,333,100,100 };
+			mark[2] = { 2370,539,100,100 };
+			mark[3] = { 2482,436,100,100 };
+			break;
 
-	switch (level) {
-	case LVL_1:
-		mark[0] = { 2370,745,100,100 };
-		mark[1] = { 2370,333,100,100 };
-		mark[2] = { 2370,539,100,100 };
-		mark[3] = { 2482,436,100,100 };
-		break;
+		case LVL_2:
+			mark[0] = { 2482,745,100,100 };
+			mark[1] = { 2482,333,100,100 };
+			mark[2] = { 2482,539,100,100 };
+			mark[3] = { 2482,436,100,100 };
+			break;
 
-	case LVL_2:
-		mark[0] = { 2482,745,100,100 };
-		mark[1] = { 2482,333,100,100 };
-		mark[2] = { 2482,539,100,100 };
-		mark[3] = { 2482,436,100,100 };
-		break;
+		case LVL_3:
+			mark[0] = { 2594,745,100,100 };
+			mark[1] = { 2594,333,100,100 };
+			mark[2] = { 2594,539,100,100 };
+			mark[3] = { 2482,436,100,100 };
+			break;
 
-	case LVL_3:
-		mark[0] = { 2594,745,100,100 };
-		mark[1] = { 2594,333,100,100 };
-		mark[2] = { 2594,539,100,100 };
-		mark[3] = { 2482,436,100,100 };
-		break;
+		case LVL_4:
+			mark[0] = { 2594,642,100,100 };
+			mark[1] = { 2594,230,100,100 };
+			mark[2] = { 2594,539,100,100 };
+			mark[3] = { 2482,436,100,100 };
+			break;
 
-	case LVL_4:
-		mark[0] = { 2594,642,100,100 };
-		mark[1] = { 2594,230,100,100 };
-		mark[2] = { 2594,539,100,100 };
-		mark[3] = { 2482,436,100,100 };
-		break;
+		case LVL_5:
+			mark[0] = { 2370,642,100,100 };
+			mark[1] = { 2370,230,100,100 };
+			mark[2] = { 2370,436,100,100 };
+			mark[3] = { 2482,436,100,100 };
+			break;
 
-	case LVL_5:
-		mark[0] = { 2370,642,100,100 };
-		mark[1] = { 2370,230,100,100 };
-		mark[2] = { 2370,436,100,100 };
-		mark[3] = { 2482,436,100,100 };
-		break;
+		default:
+			mark[0] = { 2482,436,100,100 };
+			mark[1] = { 2482,436,100,100 };
+			mark[2] = { 2482,436,100,100 };
+			mark[3] = { 2482,436,100,100 };
+			break;
+		}
+	}
+	else if (type == IN_GAME)
+	{
+		switch (level) {
+		case LVL_1:
+			mark[0] = { 1814,362,101,80 };
+			mark[1] = { 2033,362,101,80 };
+			mark[2] = { 2252,362,101,80 };
+			mark[3] = { 2252,529,101,80 };
+			break;
 
-	default:
-		mark[0] = { 2482,436,100,100 };
-		mark[1] = { 2482,436,100,100 };
-		mark[2] = { 2482,436,100,100 };
-		mark[3] = { 2482,436,100,100 };
-		break;
+		case LVL_2:
+			mark[0] = { 1706,445,101,80 };
+			mark[1] = { 1925,445,101,80 };
+			mark[2] = { 2144,445,101,80 };
+			mark[3] = { 2252,529,101,80 };
+			break;
+
+		case LVL_3:
+			mark[0] = { 1706,362,101,80 };
+			mark[1] = { 1925,362,101,80 };
+			mark[2] = { 2144,362,101,80 };
+			mark[3] = { 2252,529,101,80 };
+			break;
+
+		case LVL_4:
+			mark[0] = { 1814,445,101,80 };
+			mark[1] = { 2033,445,101,80 };
+			mark[2] = { 2252,445,101,80 };
+			mark[3] = { 2252,529,101,80 };
+			break;
+
+		case LVL_5:
+			mark[0] = { 1706,529,101,80 };
+			mark[1] = { 1925,529,101,80 };
+			mark[2] = { 2144,529,101,80 };
+			mark[3] = { 2252,529,101,80 };
+			break;
+
+		default:
+			mark[0] = { 2252,529,101,80 };
+			mark[1] = { 2252,529,101,80 };
+			mark[2] = { 2252,529,101,80 };
+			mark[3] = { 2252,529,101,80 };
+			break;
+		}
 	}
 
 	rect_sprite_mark = mark[interactable ? 0 : 3];

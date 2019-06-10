@@ -52,7 +52,7 @@ private:
 	UIScrollBar* fx_slider = nullptr;
 
 	//Creditos
-	UIButton* credits_button = nullptr;
+	UIButtonText* credits_button = nullptr;
 	UIButtonText* team_pages[8] = { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr };
 	UILabel* team_label[8] = { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr };
 	UIButton* social_media[3] = { nullptr, nullptr, nullptr };
