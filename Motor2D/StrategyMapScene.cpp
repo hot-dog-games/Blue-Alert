@@ -118,7 +118,7 @@ bool StrategyMapScene::PreUpdate()
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_REPEAT)
 	{
 		App->game_manager->gold += 100;
-		gold_quantity->SetText(std::to_string(App->game_manager->gold));
+		gold_quantity->SetText(std::to_string(App->game_manager->gold)+"g");
 	}
 	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN && App->game_manager->GetPlayerDeck()->cards[0])
 	{
