@@ -49,6 +49,9 @@
 * Load save file function
 ### Other tasks
 * Player ultimate ability
+
+	<img src="Readme_Files/nuke.gif" width="320" height="480">
+	
 * Implemented color change on life bars depending on value
 
 	<img src="Readme_Files/lifebargif.gif" width="320" height="480">
