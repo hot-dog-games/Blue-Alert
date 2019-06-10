@@ -114,7 +114,7 @@ bool MainMenuScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			ShellExecuteA(NULL, "open", "https://github.com/LaiaMartinezMotis", NULL, NULL, SW_SHOWNORMAL);
 		}
 		else if (element == team_pages[5]) {
-			ShellExecuteA(NULL, "open", "https://github.com/AlexMoralesGarcia", NULL, NULL, SW_SHOWNORMAL);
+			ShellExecuteA(NULL, "open", "https://github.com/AlexMG99", NULL, NULL, SW_SHOWNORMAL);
 		}
 		else if (element == team_pages[6]) {
 			ShellExecuteA(NULL, "open", "https://github.com/lakaens", NULL, NULL, SW_SHOWNORMAL);
