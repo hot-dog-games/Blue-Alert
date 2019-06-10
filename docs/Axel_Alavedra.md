@@ -31,7 +31,7 @@
 	* Player ultimate ability
 	* All damage calculations
 	
-	<img src="Readme_Files/basicattack.gif" width="160" height="240">           <img src="Readme_Files/aoegif.gif" width="160" height="240">           <img src="Readme_Files/penetrating.gif" width="160" height="240">
+	<img src="Readme_Files/basicattack.gif" width="256" height="384">	<img src="Readme_Files/aoegif.gif" width="256" height="384">	<img src="Readme_Files/penetrating.gif" width="256" height="384">
 
 * Basic AI of units
 	* Unit moves to the enemy Core
