@@ -56,6 +56,7 @@ void UIButton::SetLocked(bool value)
 {
 	interactable = value;
 	rect_sprite = anim[interactable ? 0 : 3];
+	hovered = false;
 }
 
 SDL_Rect * UIButton::GetAnim() const

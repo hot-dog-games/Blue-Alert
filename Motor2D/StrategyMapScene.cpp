@@ -267,7 +267,6 @@ bool StrategyMapScene::GUIEvent(UIElement * element, GUI_Event gui_event)
 			building_land_button->interactable = true;
 
 			troops_button->SetLocked(true);
-		
 			buildings_button->SetLocked(false);
 
 		}
