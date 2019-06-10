@@ -59,3 +59,9 @@
 - **Created HotDogGames logo intro:** The logo intro video created with After Effects.
 
 ![enter image description here](https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Intro_logo.gif?raw=true)
+
+## Other tasks
+- Wiki [UI Document](https://github.com/hot-dog-games/Blue-Alert/wiki/4.--User-Interface-Document).
+- Bug solving.
+- Concept Discovery presentation.
+- [Cutscene Manager](https://github.com/AlexMG99/Cutscene-Manager-Research) Research.
