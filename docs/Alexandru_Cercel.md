@@ -21,3 +21,4 @@
 - **Social media updates** ![Twitter Image](https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/twitterimage.jpg)
 ## Code
  - **Added SFX and music to the game** 
+ - **Implemented Brofiler**
