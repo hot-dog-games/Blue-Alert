@@ -29,8 +29,7 @@
 	* Shot particle rotates and moves to enemy position
 	* Player ultimate ability
 	* All damage calculations
-<img src="Readme_Files/basicattack.gif" width="320" height="480">
-<img src="Readme_Files/penetrating.gif" width="320" height="480">
+<img src="Readme_Files/basicattack.gif" width="320" height="480"><img src="Readme_Files/penetrating.gif" width="320" height="480">
 <img src="Readme_Files/aoegif.gif" width="320" height="480">
 * Basic AI of units
 	* Unit moves to the enemy Core
@@ -40,6 +39,7 @@
 * Implemented a basic opponent AI that decides what to play depending on situation.
 * Select appropriate counter to opponent units
 * Prioritizes zone of the map to spawn depending on amount of enemies, damage and proximity to Core.
+
 <img src="Readme_Files/aispawn.gif" width="320" height="480">
 ### Save/Load
 * Game automatically saves each time a battle has finished.
@@ -51,6 +51,8 @@
 * Fixed all major bugs and memory leaks
 * Optimized texture and audio loading.
 * Implemented color change on life bars depending on value
+
 <img src="Readme_Files/lifebargif.gif" width="320" height="480">
+
 * Implemented Video module to the engine from my research (link)
 * Helped as much as I could with code issues of other team members
