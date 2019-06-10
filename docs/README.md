@@ -65,10 +65,13 @@ _The HotDogGames team._
 
 # Trailer
 
-You can check the Blue alert trailer by clicking the link down below.
+You can check the Blue alert gameplay trailer and the Blue Alert cinematic trailer by clicking the link down below.
 
+[Blue Alert gameplay trailer](https://youtu.be/6AY-1Qa2Myc)
 [Blue Alert cinematic trailer](https://www.youtube.com/watch?v=zwnBUw_HKzo&feature=youtu.be)
 
 # Gameplay video
 
 You can check the Blue alert gameplay video by clicking the link down below.
+
+[Blue Alert gameplay](https://www.youtube.com/watch?v=CSQDdZQefPo&t)
