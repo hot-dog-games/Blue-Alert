@@ -1,6 +1,8 @@
 # Marc Guillén
 ## Individual Contribution
 
+### Code
+
  - **EncounterNode class**: In blue alert the player progress by defeating a map of encounters which contains the type of building the encounter is, the difficulty of the encounter, the deck the enemy AI will have and the rewards the player will obtain by defeating the encounter.  This values can be edited by the designer by changing the values of an xml.
 
 ![xml_encounter](Readme_Files/nodes.png)
@@ -17,7 +19,28 @@
 
 ![Blue Alert transition](Readme_Files/transitionmanager.gif)
 
+
+### UI
+
 - **Troop Deploy UI**: With the help of Alex Morales and Laia Martinez we designed and developed the troop deploying UI in the combat scene, this UI is able to show the player cards, the current energy available the cost of each cards and an internal cooldown for each troop depending of their cost and the current energy.
 
 ![Blue Alert combat ui](Readme_Files/combat_bar.gif)
 
+-**Store**: Whit the help of Laia Martinez we designed and developed the Store Menu, a section were the player can spend his gold by buying new troops or upgrading his owned troops.
+
+![Blue Alert combat ui](Readme_Files/store.gif)
+
+### Art
+
+-**3D model conversion to 2D spritesheets**: Some of the assets provided by the game Comand and Conquer: Red Alert 2 were 3D models, so I took this models and created a 2D spritesheet from them by creating an animation in 3DsMax and then packaging every sprite with TexturePacker.
+
+### Others
+
+-**Wiki home page**: created the wiki Home page. Check it here.
+-**Wiki original game page**: created the wiki Original game page. Check it here.
+-**Bug solving**: participed in multiple bug solving of the game.
+-**Alpha and Gold assignement presentation**: participed in the presentation of the Alpha and Gold were me and Alejandro París explained the game and the marketing plan behind the project.
+
+### Lead
+
+As a lead I tried to keep the team united and focused in the project scope, also designed the monetization and the marketing plan of the project. I also organized and directed multiple meetings with the team and stayed communicated with other project leads.
