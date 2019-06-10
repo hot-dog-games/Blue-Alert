@@ -7,10 +7,17 @@
 
 - **EncounterTree class**: it's a factory of EncounterNodes that creates, destroy and it's able to draw a path between them in three different colors blue meaning the available ways to continue progressing, red meaning unaccessible paths and green meaning conquered paths.
 
-![Blue Alert Strategy Map](Readme_Files/strategy.jpg)
+![Blue Alert Strategy Map](Readme_Files/strategymap.jpg)
+
+- **StrategyMap Scene drag movement**: in this scene the player must be able to navigate through it and see the incoming encounter nodes to choose a path and a strategy. So I developed a simple drag movement.
+
+![Blue Alert drag](Readme_Files/drag.gif)
 
 - **Transition Manager**: during this project I did a research about transitions and developed a transition manager that includes multiple ways of transitioning such as fades, dissolves, wipes and camera translations. You can check the research repository [here](https://marcgs96.github.io/Camera-Transitions-Research/). 
+
+![Blue Alert transition](Readme_Files/transitionmanager.gif)
 
 - **Troop Deploy UI**: With the help of Alex Morales and Laia Martinez we designed and developed the troop deploying UI in the combat scene, this UI is able to show the player cards, the current energy available the cost of each cards and an internal cooldown for each troop depending of their cost and the current energy.
 
 ![Blue Alert combat ui](Readme_Files/combat_bar.gif)
+
