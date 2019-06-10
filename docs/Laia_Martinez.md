@@ -10,12 +10,15 @@ As the member in charge of the development of the artistic part of the game, I'v
  - Created the team's logo, icon and banner, used as our mark in our different social networks.
  
      - Logo with the help of [Alexandru Cercel](https://github.com/AlexandruC5)
+     
     <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/Logo.png?raw=true" width="400"     height="250">
 
     - Icon
+    
     <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/icon.jpg?raw=true" width="200"     height="200">
 
     - Banner
+    
    <img src= "https://github.com/hot-dog-games/Blue-Alert/blob/master/docs/Readme_Files/banner.jpg?raw=true" width="420"    height="170">
    
 - Rip of buildings, ui elements and troops sprites from the original game, using XCC Mixer as the ripping tool.
